@@ -59,13 +59,13 @@ public class GTAAMachines {
                     .recipeType(GTRecipeTypes.FUSION_RECIPES)
                     .recipeModifiers(DEFAULT_ENVIRONMENT_REQUIREMENT, FusionReactorMachine::recipeModifier, BATCH_MODE)
                     .tooltips(
-                            Component.literal("Runs fusion recipes up to " + VNF[tier] + "§7, with perfect overclocks"),
-                            Component.literal("§e" + FormattingUtil.formatNumbers(
+                            Component.literal("\u00a77Runs fusion recipes up to " + VNF[tier] + "§7, with perfect overclocks"),
+                            Component.literal("\u00a77§e" + FormattingUtil.formatNumbers(
                                     AdvancedFusionReactorMachine.capacityPerHatch(tier)) +
                                     "§7 EU buffer per Energy Hatch (max 16: §e" +
                                     FormattingUtil.formatNumbers(AdvancedFusionReactorMachine.totalCapacity(tier, 16)) +
                                     "§7 EU)"),
-                            Component.literal("§8Ported from GT New Horizons (GT++)"))
+                            Component.literal("\u00a77§8Ported from GT New Horizons (GT++)"))
                     .appearanceBlock(() -> fusionCasing(tier))
                     .pattern(definition -> {
                         var casing = blocks(fusionCasing(tier));
@@ -117,10 +117,12 @@ public class GTAAMachines {
             .tier(UEV)
             .rotationState(RotationState.ALL)
             .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
-            .tooltips(Component.literal("Holds \u00a7d" + FormattingUtil.formatNumbers(AntimatterHatchPartMachine.CAPACITY) +
+            .tooltips(Component.literal("\u00a77Holds \u00a7d" + FormattingUtil.formatNumbers(AntimatterHatchPartMachine.CAPACITY) +
                             " L\u00a77 of Semi-Stable Antimatter"),
-                    Component.literal("The SASS needs exactly 16, around its inner ring"))
+                    Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"))
             .register();
+
+    private static final Component SEPARATOR = Component.literal("\u00a78\u00a7m                                                            ");
 
     private static Block naquadriaFrame() {
         for (Material m : new Material[] { GTMaterials.Naquadria, GTMaterials.NaquadahAlloy, GTMaterials.Neutronium }) {
@@ -136,14 +138,39 @@ public class GTAAMachines {
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .tooltips(
-                    Component.literal("\u00a7eAntimatter Forge, SASS\u00a77: converts Protomatter into Antimatter"),
-                    Component.literal("Passively uses 10,000,000 + (Antimatter \u00d7 1000)^(1.5 - M) EU/t"),
-                    Component.literal("Uses (Antimatter \u00d7 10,000)^(1.5 - G) EU per cycle; cycles every second"),
-                    Component.literal("Hatches above the lowest lose half the difference each cycle"),
-                    Component.literal("\u00a7cLoses 10% of its antimatter if it runs out of EU or Protomatter"),
-                    Component.literal("Gain per hatch: (1/16) \u00d7 Antimatter^(0.5 + C) \u00d7 N(0.2 + A, 1) - can be negative!"),
-                    Component.literal("Needs a little antimatter to start (from a MK V fusion seed recipe)"),
-                    Component.literal("Stabilizers: Magnetic (M), Gravity (G), Containment (C), Activation (A)"),
+                    Component.literal("\u00a77Machine Type: \u00a7eAntimatter Forge, SSASS"),
+                    Component.literal("\u00a7dDimensions not included!"),
+                    Component.literal("\u00a77Converts protomatter into antimatter"),
+                    Component.literal("\u00a77Passively consumes 10,000,000 + (\u00a7bAntimatter\u00a77 \u00d7 1000)^(1.5 - \u00a7aM\u00a77) EU/t"),
+                    Component.literal("\u00a77The consumption decays by 1% every tick when empty"),
+                    Component.literal("\u00a77Actively uses (\u00a7bAntimatter\u00a77 \u00d7 10,000)^(1.5 - \u00a75G\u00a77) EU per cycle to produce antimatter"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Cycles every second"),
+                    Component.literal("\u00a77Every cycle, the lowest amount of antimatter in the 16 antimatter hatches is recorded"),
+                    Component.literal("\u00a77All hatches with more than the lowest amount \u00a7close half the difference!"),
+                    Component.literal("\u00a7cVoids 10% of antimatter\u00a77 if it runs out of energy/protomatter during a cycle"),
+                    Component.literal("\u00a77Base production per hatch is (1/16) \u00d7 (\u00a7bAntimatter\u00a77^(0.5 + \u00a76C\u00a77)) of antimatter each cycle"),
+                    Component.literal("\u00a77Each hatch multiplies the base production per hatch with a random number pulled from"),
+                    Component.literal("\u00a77a normal distribution with a mean of 0.2 + \u00a7bA\u00a77 and a variance of 1"),
+                    Component.literal("\u00a77The total gain of antimatter can be negative!"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Can be supplied with stabilization fluids to improve antimatter generation"),
+                    Component.literal("\u00a77Each stabilization can only use one of the fluids at a time"),
+                    Component.literal("\u00a7aMagnetic Stabilization\u00a77 (Consumes \u00a7bAntimatter\u00a77^0.5 L of fluid per cycle)"),
+                    Component.literal("\u00a771. Molten Purified Tengam = \u00a7a0.1"),
+                    Component.literal("\u00a772. Tachyon Rich Temporal Fluid = \u00a7a0.2"),
+                    Component.literal("\u00a773. Molten Magmatter = \u00a7a0.3"),
+                    Component.literal("\u00a75Gravity Stabilization\u00a77 (Consumes \u00a7bAntimatter\u00a77^0.5 L of fluid per cycle)"),
+                    Component.literal("\u00a771. Molten SpaceTime = \u00a750.05"),
+                    Component.literal("\u00a772. Spatially Enlarged Fluid = \u00a750.10"),
+                    Component.literal("\u00a773. Molten Eternity = \u00a750.15"),
+                    Component.literal("\u00a76Containment Stabilization\u00a77 (Consumes \u00a7bAntimatter\u00a77^(2/7) L of fluid per cycle)"),
+                    Component.literal("\u00a771. Molten Shirabon = \u00a760.05"),
+                    Component.literal("\u00a772. Molten Magnetohydrodynamically Constrained Star Matter = \u00a760.10"),
+                    Component.literal("\u00a7bActivation Stabilization\u00a77 (Consumes \u00a7bAntimatter\u00a77^(1/3) L of fluid per cycle)"),
+                    Component.literal("\u00a771. Naquadah Based Liquid Fuel MkV (Depleted) = \u00a7b0.05"),
+                    Component.literal("\u00a772. Naquadah Based Liquid Fuel MkVI (Depleted) = \u00a7b0.10"),
+                    SEPARATOR,
                     Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
             .appearanceBlock(GTAABlocks.MAGNETIC_FLUX_CASING)
             .pattern(definition -> GTAAStructures.pattern("antimatter", "antimatter_forge")
@@ -171,14 +198,26 @@ public class GTAAMachines {
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .generator(true)
             .tooltips(
-                    Component.literal("\u00a7eAntimatter Generator, SLAM\u00a77: annihilating antimatter like it's 2205!"),
-                    Component.literal("Reacts Semi-Stable Antimatter with an equal amount of Matter"),
-                    Component.literal("Consumes all inputs every cycle; checks inputs every 5 seconds"),
+                    Component.literal("\u00a77Machine Type: \u00a7eAntimatter Generator, SLAM"),
+                    Component.literal("\u00a77Annihilating Antimatter like it's 2205!"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Generates energy by reacting \u00a7bSemi-Stable Antimatter\u00a77 with \u00a76Matter"),
+                    Component.literal("\u00a77Annihilation uses an equal amount of \u00a7bAntimatter\u00a77 and \u00a76Matter"),
+                    Component.literal("\u00a77Consumes \u00a76all inputs\u00a77 every processing cycle"),
                     Component.literal("\u00a7cVoids any invalid fluid!"),
-                    Component.literal("Efficiency: min(Antimatter / Matter, Matter / Antimatter)"),
-                    Component.literal("EU per cycle: 1e12 \u00d7 Antimatter^E; excess EU is voided"),
-                    Component.literal("E: Molten Copper 1.00, Superconductor Base UIV 1.02, UMV 1.03"),
-                    Component.literal("Outputs through Dynamo or Laser Source Hatches"),
+                    Component.literal("\u00a77A cycle lasts 1 tick; \u00a76inputs\u00a77 are automatically checked every 5 seconds"),
+                    Component.literal("\u00a77An imbalance between \u00a7bAntimatter\u00a77 and \u00a76Matter\u00a77 \u00a7cdecreases efficiency!"),
+                    Component.literal("\u00a77Efficiency formula: Min(\u00a7bAntimatter\u00a77/\u00a76Matter\u00a77, \u00a76Matter\u00a77/\u00a7bAntimatter\u00a77)"),
+                    Component.literal("\u00a77Any excess EU generated will be \u00a7cvoided!"),
+                    Component.literal("\u00a77Cannot produce more than \u00a7a9.22e18\u00a77 EU per cycle"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Energy production formula: \u00a7aA\u00a77 \u00d7 (\u00a7bAntimatter\u00a77 ^ \u00a76E\u00a77) EU/Cycle"),
+                    Component.literal("\u00a7aAntimatter energy\u00a77 base value: \u00a7a1.00e12\u00a77 EU/L"),
+                    Component.literal("\u00a76Energy production boost\u00a77:"),
+                    Component.literal("\u00a771. Molten Copper: \u00a761.00"),
+                    Component.literal("\u00a772. Molten Superconductor Base UIV: \u00a761.02"),
+                    Component.literal("\u00a773. Molten Superconductor Base UMV: \u00a761.03"),
+                    SEPARATOR,
                     Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
             .appearanceBlock(GTAABlocks.MAGNETIC_FLUX_CASING)
             .pattern(definition -> GTAAStructures.pattern("antimatter", "antimatter_generator")
