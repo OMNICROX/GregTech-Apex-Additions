@@ -30,7 +30,6 @@ import java.util.List;
 public class SpaceElevatorCableRenderer implements BlockEntityRenderer<SpaceElevatorCableBlockEntity> {
 
     private static final ResourceLocation CABLE_TEX = GTAA.id("textures/block/space_elevator/cable.png");
-    private static final ResourceLocation CABLE_LIGHT_TEX = GTAA.id("textures/block/space_elevator/cable_light.png");
     private static final ResourceLocation CLIMBER_TEX = GTAA.id("textures/entity/climber.png");
     private static final ResourceLocation CLIMBER_OBJ = GTAA.id("models/obj/climber.obj");
 
@@ -52,17 +51,19 @@ public class SpaceElevatorCableRenderer implements BlockEntityRenderer<SpaceElev
     public void render(SpaceElevatorCableBlockEntity be, float partialTick, PoseStack pose, MultiBufferSource buffers,
                        int light, int overlay) {
         if (!be.shouldRender()) return;
-        renderCable(pose, buffers, CABLE_TEX, 0f, 0.5f);
-        renderCable(pose, buffers, CABLE_LIGHT_TEX, 0.002f, 1f);
+        // Shader-friendly: only cutout render types and real world lighting (no translucent/emissive layers),
+        // so shader packs (Complementary etc.) don't flicker between lit and unlit passes.
+        renderCable(pose, buffers, light);
         renderClimber(be, partialTick, pose, buffers);
     }
 
-    private void renderCable(PoseStack pose, MultiBufferSource buffers, ResourceLocation tex, float grow, float bright) {
-        VertexConsumer vc = buffers.getBuffer(tex == CABLE_TEX ? RenderType.entitySolid(tex) : RenderType.entityTranslucentEmissive(tex));
+    private void renderCable(PoseStack pose, MultiBufferSource buffers, int light) {
+        VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(CABLE_TEX));
         Matrix4f m = pose.last().pose();
         Matrix3f n = pose.last().normal();
-        int fullBright = LightTexture.FULL_BRIGHT;
-        int c = (int) (255 * bright);
+        int fullBright = skyLit(light);
+        int c = 255;
+        float grow = 0f;
         float vMax = CABLE_HEIGHT / 2f; // texture repeats every 2 blocks
         for (int i = 0; i < 8; i++) {
             int j = (i + 1) % 8;
@@ -96,7 +97,7 @@ public class SpaceElevatorCableRenderer implements BlockEntityRenderer<SpaceElev
         VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(CLIMBER_TEX));
         Matrix4f m = pose.last().pose();
         Matrix3f n = pose.last().normal();
-        int light = LightTexture.FULL_BRIGHT;
+        int light = skyLit(LightTexture.FULL_BRIGHT);
         for (int i = 0; i < tris.length; i += 8) {
             vc.vertex(m, tris[i], tris[i + 1], tris[i + 2]).color(255, 255, 255, 255).uv(tris[i + 3], tris[i + 4])
                     .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(n, tris[i + 5], tris[i + 6], tris[i + 7])
@@ -109,6 +110,11 @@ public class SpaceElevatorCableRenderer implements BlockEntityRenderer<SpaceElev
             }
         }
         pose.popPose();
+    }
+
+    /** Up in the sky: full sky light, block light from the cable position. */
+    private static int skyLit(int light) {
+        return LightTexture.pack(LightTexture.block(light), 15);
     }
 
     private static synchronized float[] climber() {
