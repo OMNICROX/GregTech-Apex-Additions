@@ -12,7 +12,7 @@ re-implemented for GregTech CEu Modern; textures marked below are taken from tha
 | Compact Fusion Computer MK I-V *(planned)* | GoodGenerator `MTELargeFusionComputer1-5` | GlodBlock, MIT (`licenses/GoodGenerator-MIT.txt`) |
 | SASS / SLAM antimatter, Antimatter Hatch, antimatter casing textures | GoodGenerator `AntimatterForge`, `AntimatterGenerator` | GlodBlock / GTNH team, MIT + LGPL-3.0 |
 | Draconic Fusion Crafter *(planned)* | KubaTech `MTEDEFusionCrafter` | kuba6000 / GTNH team, LGPL-3.0 via GT5-Unofficial |
-| Space Elevator *(planned)* | GTNH-Intergalactic | Johann Bernhardt, MIT (`licenses/GTNH-Intergalactic-MIT.txt`) |
+| Space Elevator, Space Assembler modules, cable + climber render, elevator textures and climber model | GTNH-Intergalactic (minecraft7771, BlueWeabo; design Sampsa, Jimbno, Adam, Baunti) | Johann Bernhardt, MIT (`licenses/GTNH-Intergalactic-MIT.txt`) |
 
 Texture credit from GT5-Unofficial: Jimbno (UU-Tex contributions to the GTNH base pack) and the GTNH texture
 artists. GTAA does **not** use the separate UU-Tex resource pack.

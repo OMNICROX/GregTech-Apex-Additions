@@ -9,7 +9,16 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.api.pattern.BlockPattern;
+import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
+import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
+import com.google.common.base.Suppliers;
 import com.omnicrox.gtaa.api.GTAAStructures;
+import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorModuleMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorPredicates;
+import java.util.function.Supplier;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterForgeMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterGeneratorMachine;
 import com.omnicrox.gtaa.common.machine.part.AntimatterHatchPartMachine;
@@ -239,6 +248,132 @@ public class GTAAMachines {
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/antimatter_machine_casing"),
                     GTAA.id("block/multiblock/antimatter")))
             .register();
+
+    //////////////////////////////////////
+    // ***** Space Elevator (GTNH-Intergalactic port) *****
+    //////////////////////////////////////
+
+    private static final java.util.List<MultiblockMachineDefinition> SE_MODULES = new java.util.ArrayList<>();
+
+    private static Block[] moduleBlocks() {
+        return SE_MODULES.stream().map(MultiblockMachineDefinition::getBlock).toArray(Block[]::new);
+    }
+
+    private static FactoryBlockPattern elevatorShape(String key, MultiblockMachineDefinition definition) {
+        TraceabilityPredicate base = blocks(GTAABlocks.SE_BASE_CASING.get());
+        return GTAAStructures.pattern("space_elevator", key)
+                .where('~', controller(blocks(definition.getBlock())))
+                .where('E', blocks(GTAABlocks.SE_SUPPORT_STRUCTURE.get()))
+                .where('B', SpaceElevatorPredicates.cable())
+                .where('X', blocks(GTAABlocks.SE_BASE_CASING.get())
+                        .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
+                        .or(abilities(PartAbility.IMPORT_FLUIDS, PartAbility.COMPUTATION_DATA_RECEPTION)))
+                .where('M', SpaceElevatorPredicates.moduleIO())
+                .where('H', blocks(neutroniumFrame()))
+                .where('F', blocks(GTAABlocks.SE_INTERNAL_STRUCTURE.get()))
+                .where('C', SpaceElevatorPredicates.motors())
+                .where('A', blocks(GTAABlocks.SE_CONCRETE_FLOOR.get()))
+                .where('D', base)
+                .where('I', SpaceElevatorPredicates.moduleSlot(GTAAMachines::moduleBlocks))
+                .where('-', air())
+                .where(' ', any());
+    }
+
+    private static Block neutroniumFrame() {
+        Block b = ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Neutronium);
+        return b != null && b != Blocks.AIR ? b : GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get();
+    }
+
+    public static final MultiblockMachineDefinition SPACE_ELEVATOR = REGISTRATE
+            .multiblock("space_elevator", SpaceElevatorMachine::new)
+            .langValue("Space Elevator")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(
+                    Component.literal("Machine Type: \u00a7eSpace Elevator"),
+                    Component.literal("\u00a7oElevates to space"),
+                    Component.literal("Can be equipped with up to \u00a7a12\u00a77 Space Elevator Modules"),
+                    Component.literal("\u00a7fMotor Tier\u00a77 limits module Tier and amount of possible modules"),
+                    Component.literal("Each module has its own space for IO, except energy"),
+                    Component.literal("Energy is supplied to this controller and gets distributed"),
+                    Component.literal("Starting from \u00a7dMotor Mk-III\u00a77 the structure can be expanded to fit \u00a7a24\u00a77 modules"),
+                    Component.literal("Max module amount is \u00a7a6\u00a77/\u00a799\u00a7912\u00a77/\u00a7d15\u00a77/\u00a7618\u00a77/\u00a7c24\u00a77 for \u00a7aMk-I\u00a77/\u00a79Mk-II\u00a77/\u00a7dMk-III\u00a77/\u00a76Mk-IV\u00a77/\u00a7cMk-V\u00a77 motors correspondingly"),
+                    Component.literal("Disabling this controller also pauses all modules"),
+                    Component.literal("Use a screwdriver on the controller to switch to the extended structure"),
+                    Component.literal("\u00a7aSupports Multi-Amp and Laser Hatches!"),
+                    Component.literal("\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
+            .appearanceBlock(GTAABlocks.SE_BASE_CASING)
+            .pattern(definition -> elevatorShape("main", definition).build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/space_elevator/base_casing"),
+                    GTAA.id("block/multiblock/space_elevator")))
+            .register();
+
+    public static final Supplier<BlockPattern> SPACE_ELEVATOR_EXTENDED_PATTERN = Suppliers.memoize(
+            () -> elevatorShape("extended", SPACE_ELEVATOR).build());
+
+    private static long moduleBuffer(int voltageTier, int multiplier) {
+        return 160_008_000L * (2L << (voltageTier - 7)) * multiplier;
+    }
+
+    private static MultiblockMachineDefinition seModule(String id, String name, SpaceElevatorModuleMachine.Stats stats,
+                                                        com.gregtechceu.gtceu.api.recipe.GTRecipeType type,
+                                                        Component... tooltips) {
+        var def = REGISTRATE.multiblock(id, h -> new SpaceElevatorModuleMachine(h, stats))
+                .langValue(name)
+                .rotationState(RotationState.NON_Y_AXIS)
+                .recipeType(type)
+                .recipeModifiers(SpaceElevatorModuleMachine::recipeModifier)
+                .tooltips(tooltips)
+                .tooltips(Component.literal("\u00a77Capacity: \u00a79" + FormattingUtil.formatNumbers(stats.bufferSize()) + " EU"),
+                        Component.literal("\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
+                .appearanceBlock(GTAABlocks.SE_BASE_CASING)
+                .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.LEFT, RelativeDirection.DOWN, RelativeDirection.BACK)
+                        .aisle("H", "~", "H", "H", "H")
+                        .aisle("H", "H", "H", "H", "H")
+                        .where('~', controller(blocks(definition.getBlock())))
+                        .where('H', blocks(GTAABlocks.SE_BASE_CASING.get())
+                                .or(abilities(PartAbility.IMPORT_ITEMS, PartAbility.EXPORT_ITEMS,
+                                        PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
+                                        PartAbility.COMPUTATION_DATA_RECEPTION)))
+                        .build())
+                .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+                .model(createWorkableCasingMachineModel(GTAA.id("block/space_elevator/base_casing"),
+                        GTAA.id("block/multiblock/space_elevator")))
+                .register();
+        SE_MODULES.add(def);
+        return def;
+    }
+
+    public static final MultiblockMachineDefinition SPACE_ASSEMBLER_MK1 = seModule("space_assembler_module_mk1",
+            "Space Assembler Module Mk-I",
+            new SpaceElevatorModuleMachine.Stats(UHV, 1, 1, 4, 1.0f, moduleBuffer(UHV, 4)),
+            GTAARecipeTypes.SPACE_ASSEMBLER,
+            Component.literal("Machine Type: \u00a7eSpace Elevator Module, SPASS"),
+            Component.literal("Module that adds the Space Assembler to the Space Elevator"),
+            Component.literal("\u00a7d\u00a7lWhy do I need to assemble stuff in space again?"),
+            Component.literal("Runs at " + VNF[UHV] + "\u00a77 with up to \u00a764\u00a77 parallels"),
+            Component.literal("Needs at least \u00a7aMotor Mk-I\u00a77 to work"));
+
+    public static final MultiblockMachineDefinition SPACE_ASSEMBLER_MK2 = seModule("space_assembler_module_mk2",
+            "Space Assembler Module Mk-II",
+            new SpaceElevatorModuleMachine.Stats(UIV, 2, 3, 16, 1.5f, moduleBuffer(UIV, 16)),
+            GTAARecipeTypes.SPACE_ASSEMBLER,
+            Component.literal("Machine Type: \u00a7eSpace Elevator Module, SPASS"),
+            Component.literal("Module that adds the Space Assembler to the Space Elevator"),
+            Component.literal("\u00a7d\u00a7lIs this really necessary?"),
+            Component.literal("Runs at " + VNF[UIV] + "\u00a77 at \u00a7a150%\u00a77 speed with up to \u00a7616\u00a77 parallels"),
+            Component.literal("Needs at least \u00a7dMotor Mk-III\u00a77 to work"));
+
+    public static final MultiblockMachineDefinition SPACE_ASSEMBLER_MK3 = seModule("space_assembler_module_mk3",
+            "Space Assembler Module Mk-III",
+            new SpaceElevatorModuleMachine.Stats(UXV, 3, 5, 64, 2.0f, moduleBuffer(UXV, 64)),
+            GTAARecipeTypes.SPACE_ASSEMBLER,
+            Component.literal("Machine Type: \u00a7eSpace Elevator Module, SPASS"),
+            Component.literal("Module that adds the Space Assembler to the Space Elevator"),
+            Component.literal("\u00a7d\u00a7lI guess we'll never know."),
+            Component.literal("Runs at " + VNF[UXV] + "\u00a77 at \u00a7a200%\u00a77 speed with up to \u00a7664\u00a77 parallels"),
+            Component.literal("Needs at least \u00a7cMotor Mk-V\u00a77 to work"));
 
     public static void init() {}
 }

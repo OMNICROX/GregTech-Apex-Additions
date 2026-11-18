@@ -9,6 +9,16 @@
     "gtapexadditions:gravity_stabilization_casing",
     "gtapexadditions:antimatter_containment_casing",
     "gtapexadditions:protomatter_activation_coil",
-    "gtapexadditions:antimatter_annihilation_matrix"
+    "gtapexadditions:antimatter_annihilation_matrix",
+    "gtapexadditions:space_elevator_base_casing",
+    "gtapexadditions:space_elevator_support_structure",
+    "gtapexadditions:space_elevator_internal_structure",
+    "gtapexadditions:ultra_high_strength_concrete_floor",
+    "gtapexadditions:space_elevator_motor_mk1",
+    "gtapexadditions:space_elevator_motor_mk2",
+    "gtapexadditions:space_elevator_motor_mk3",
+    "gtapexadditions:space_elevator_motor_mk4",
+    "gtapexadditions:space_elevator_motor_mk5",
+    "gtapexadditions:space_elevator_cable"
   ]
 }

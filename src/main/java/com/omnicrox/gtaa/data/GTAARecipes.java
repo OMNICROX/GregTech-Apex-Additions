@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAMaterials;
+import com.omnicrox.gtaa.common.data.GTAARecipeTypes;
 import com.omnicrox.gtaa.common.data.GTAAMachines;
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -24,6 +25,7 @@ public class GTAARecipes {
     public static void init(Consumer<FinishedRecipe> provider) {
         fusion(provider);
         antimatter(provider);
+        spaceElevator(provider);
     }
 
     private static void fusion(Consumer<FinishedRecipe> provider) {
@@ -179,5 +181,121 @@ public class GTAARecipes {
                 .inputFluids(GTAAMaterials.NAQUADAH_FUEL_MKV_DEPLETED.getFluid(1000))
                 .outputFluids(GTAAMaterials.NAQUADAH_FUEL_MKVI_DEPLETED.getFluid(1000))
                 .duration(400).EUt(VA[UEV]).save(provider);
+    }
+
+    private static void spaceElevator(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator_base_casing")
+                .inputItems(frameGt, GTMaterials.Neutronium)
+                .inputItems(plate, GTMaterials.Tritanium, 6)
+                .outputItems(GTAABlocks.SE_BASE_CASING.asStack(4))
+                .duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator_support_structure")
+                .inputItems(frameGt, GTMaterials.Neutronium)
+                .inputItems(plate, GTMaterials.NaquadahAlloy, 4)
+                .inputItems(rodLong, GTMaterials.Neutronium, 2)
+                .outputItems(GTAABlocks.SE_SUPPORT_STRUCTURE.asStack(4))
+                .duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator_internal_structure")
+                .inputItems(frameGt, GTMaterials.Tritanium)
+                .inputItems(plate, GTMaterials.Neutronium, 4)
+                .inputItems(gear, GTMaterials.Tritanium, 2)
+                .outputItems(GTAABlocks.SE_INTERNAL_STRUCTURE.asStack(4))
+                .duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:ultra_high_strength_concrete_floor")
+                .inputItems(plate, GTMaterials.Neutronium)
+                .inputFluids(GTMaterials.Concrete.getFluid(L * 8))
+                .outputItems(GTAABlocks.SE_CONCRETE_FLOOR.asStack(8))
+                .duration(100).EUt(VA[UV]).save(provider);
+
+        var motors = new com.tterrag.registrate.util.entry.BlockEntry<?>[] { GTAABlocks.SE_MOTOR_MK1, GTAABlocks.SE_MOTOR_MK2,
+                GTAABlocks.SE_MOTOR_MK3, GTAABlocks.SE_MOTOR_MK4, GTAABlocks.SE_MOTOR_MK5 };
+        var motorItems = java.util.List.of(GTItems.ELECTRIC_MOTOR_UV, GTItems.ELECTRIC_MOTOR_UHV, GTItems.ELECTRIC_MOTOR_UEV,
+                GTItems.ELECTRIC_MOTOR_UIV, GTItems.ELECTRIC_MOTOR_UXV);
+        var circuits = java.util.List.of(CustomTags.UV_CIRCUITS, CustomTags.UHV_CIRCUITS, CustomTags.UEV_CIRCUITS,
+                CustomTags.UIV_CIRCUITS, CustomTags.UXV_CIRCUITS);
+        int[] tiers = { UV, UHV, UEV, UIV, UXV };
+        for (int i = 0; i < 5; i++) {
+            ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator_motor_mk" + (i + 1))
+                    .inputItems(frameGt, GTMaterials.Neutronium)
+                    .inputItems(motorItems.get(i), 4)
+                    .inputItems(circuits.get(i), 2)
+                    .inputItems(wireGtDouble, GTMaterials.RutheniumTriniumAmericiumNeutronate, 4)
+                    .outputItems(motors[i].asStack())
+                    .duration(400).EUt(VA[tiers[i]]).save(provider);
+        }
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator_cable")
+                .inputItems(wireFine, GTMaterials.Neutronium, 64)
+                .inputItems(plateDense, GTMaterials.Neutronium, 16)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 32))
+                .outputItems(GTAABlocks.SPACE_ELEVATOR_CABLE.asStack())
+                .duration(1200).EUt(VA[UHV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_elevator")
+                .inputItems(GTAABlocks.SE_BASE_CASING.asStack(16))
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(GTItems.SENSOR_UHV, 4)
+                .inputItems(GTItems.EMITTER_UHV, 4)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .outputItems(GTAAMachines.SPACE_ELEVATOR.asStack())
+                .duration(2400).EUt(VA[UHV]).save(provider);
+
+        var modules = java.util.List.of(GTAAMachines.SPACE_ASSEMBLER_MK1, GTAAMachines.SPACE_ASSEMBLER_MK2, GTAAMachines.SPACE_ASSEMBLER_MK3);
+        var arms = java.util.List.of(GTItems.ROBOT_ARM_UHV, GTItems.ROBOT_ARM_UIV, GTItems.ROBOT_ARM_UXV);
+        var conveyors = java.util.List.of(GTItems.CONVEYOR_MODULE_UHV, GTItems.CONVEYOR_MODULE_UIV, GTItems.CONVEYOR_MODULE_UXV);
+        var moduleCircuits = java.util.List.of(CustomTags.UHV_CIRCUITS, CustomTags.UIV_CIRCUITS, CustomTags.UXV_CIRCUITS);
+        int[] moduleTiers = { UHV, UIV, UXV };
+        for (int i = 0; i < 3; i++) {
+            var b = ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:space_assembler_module_mk" + (i + 1))
+                    .inputItems(GTAABlocks.SE_BASE_CASING.asStack(4))
+                    .inputItems(arms.get(i), 4)
+                    .inputItems(conveyors.get(i), 4)
+                    .inputItems(moduleCircuits.get(i), 8);
+            if (i > 0) b.inputItems(modules.get(i - 1).asStack());
+            b.inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                    .outputItems(modules.get(i).asStack())
+                    .duration(1200).EUt(VA[moduleTiers[i]]).save(provider);
+        }
+
+        // --- Space Assembler recipes: cheaper bulk versions of late-game parts ---
+        GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:sa/fusion_coil_mk4")
+                .inputItems(GTBlocks.FUSION_COIL.asStack(4))
+                .inputItems(wireGtQuadruple, GTMaterials.RutheniumTriniumAmericiumNeutronate, 8)
+                .inputItems(GTItems.FIELD_GENERATOR_UV, 8)
+                .inputItems(CustomTags.UHV_CIRCUITS, 4)
+                .outputItems(GTAABlocks.FUSION_COIL_MK4.asStack(4))
+                .duration(600).EUt(VA[UHV]).save(provider);
+        GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:sa/protomatter_activation_coil")
+                .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                .inputItems(wireGtQuadruple, GTMaterials.RutheniumTriniumAmericiumNeutronate, 8)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 2)
+                .inputItems(CustomTags.UHV_CIRCUITS, 2)
+                .outputItems(GTAABlocks.PROTOMATTER_ACTIVATION_COIL.asStack(4))
+                .duration(400).EUt(VA[UHV]).save(provider);
+        GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:sa/antimatter_annihilation_matrix")
+                .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                .inputItems(plateDense, GTMaterials.Neutronium, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_UV, 2)
+                .inputItems(GTItems.GRAVI_STAR, 2)
+                .outputItems(GTAABlocks.ANTIMATTER_ANNIHILATION_MATRIX.asStack(4))
+                .duration(300).EUt(VA[UHV]).save(provider);
+        GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:sa/antimatter_hatch")
+                .inputItems(GTMachines.FLUID_EXPORT_HATCH[UHV].asStack(2))
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(plateDense, GTMaterials.Neutronium, 8)
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
+                .outputItems(GTAAMachines.ANTIMATTER_HATCH.asStack(2))
+                .addData(GTAARecipeTypes.MODULE_TIER, 2)
+                .duration(600).EUt(VA[UEV]).save(provider);
+        for (int i = 2; i < 5; i++) {
+            GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:sa/space_elevator_motor_mk" + (i + 1))
+                    .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                    .inputItems(motorItems.get(i), 8)
+                    .inputItems(circuits.get(i), 4)
+                    .inputItems(wireGtDouble, GTMaterials.RutheniumTriniumAmericiumNeutronate, 8)
+                    .outputItems(motors[i].asStack(4))
+                    .addData(GTAARecipeTypes.MODULE_TIER, i - 1)
+                    .duration(400).EUt(VA[tiers[i]]).save(provider);
+        }
     }
 }

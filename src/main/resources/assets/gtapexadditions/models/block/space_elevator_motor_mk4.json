@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gtapexadditions:block/space_elevator/motor",
+    "side": "gtapexadditions:block/space_elevator/motor_t4_side"
+  }
+}

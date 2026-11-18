@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gtapexadditions:block/space_elevator/cable_part",
+    "side": "gtapexadditions:block/space_elevator/cable"
+  }
+}

@@ -16,7 +16,9 @@ them with KubeJS.
 | Shielded Lagrangian Annihilation Matrix (SLAM) | UEV | ✅ in 0.2.0 |
 | Draconic Fusion Crafter | HV-UV | planned (needs Draconic Evolution) |
 | Mystical Cultivation Array | LV-LuV | planned (needs Mystical Agriculture) |
-| Space Elevator + modules | UV+ | planned |
+| Space Elevator (Motor MK-I to V, extendable to 24 modules) | UHV | ✅ in 0.3.0 |
+| Space Assembler Module Mk-I / II / III | UHV / UIV / UXV | ✅ in 0.3.0 |
+| Space Mining / Space Pumping Modules Mk-I to III | UV-UXV | planned |
 
 Fusion MK IV/V use the same ring as GTCEu's MK I-III, with GTNH's energy buffers
 (320M / 1.28B EU per energy hatch) and perfect overclocks.

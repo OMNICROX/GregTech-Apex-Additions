@@ -37,6 +37,7 @@ public class GTAA {
         REGISTRATE.registerRegistrate();
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addGenericListener(com.gregtechceu.gtceu.api.recipe.GTRecipeType.class, this::registerRecipeTypes);
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
         bus.addListener(this::registerMaterialRegistry);
@@ -51,6 +52,10 @@ public class GTAA {
         GTAAMaterials.init();
     }
 
+    private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, com.gregtechceu.gtceu.api.recipe.GTRecipeType> event) {
+        com.omnicrox.gtaa.common.data.GTAARecipeTypes.init();
+    }
+
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         GTAAMachines.init();
     }
@@ -63,6 +68,9 @@ public class GTAA {
                 // dev self-check: build the big JSON patterns once so mistakes show up at startup
                 GTAAMachines.ANTIMATTER_FORGE.getPatternFactory().get();
                 GTAAMachines.ANTIMATTER_GENERATOR.getPatternFactory().get();
+                GTAAMachines.SPACE_ELEVATOR.getPatternFactory().get();
+                GTAAMachines.SPACE_ELEVATOR_EXTENDED_PATTERN.get();
+                GTAAMachines.SPACE_ASSEMBLER_MK1.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });
