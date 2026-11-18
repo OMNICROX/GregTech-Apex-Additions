@@ -10,7 +10,7 @@ re-implemented for GregTech CEu Modern; textures marked below are taken from tha
 | --- | --- | --- |
 | Fusion Reactor MK IV / MK V, Fusion Casing MK IV/V, Advanced/Ultimate Fusion Coil textures | GT++ `MTEAdvFusionMk4`, `MTEAdvFusionMk5`, `miscutils` casing textures | GT++ (Alkalus & GTNH team), LGPL-3.0 via GT5-Unofficial |
 | Compact Fusion Computer MK I-V *(planned)* | GoodGenerator `MTELargeFusionComputer1-5` | GlodBlock, MIT (`licenses/GoodGenerator-MIT.txt`) |
-| SASS / SLAM antimatter *(planned)* | GoodGenerator `AntimatterForge`, `AntimatterGenerator` | GlodBlock / GTNH team, MIT + LGPL-3.0 |
+| SASS / SLAM antimatter, Antimatter Hatch, antimatter casing textures | GoodGenerator `AntimatterForge`, `AntimatterGenerator` | GlodBlock / GTNH team, MIT + LGPL-3.0 |
 | Draconic Fusion Crafter *(planned)* | KubaTech `MTEDEFusionCrafter` | kuba6000 / GTNH team, LGPL-3.0 via GT5-Unofficial |
 | Space Elevator *(planned)* | GTNH-Intergalactic | Johann Bernhardt, MIT (`licenses/GTNH-Intergalactic-MIT.txt`) |
 

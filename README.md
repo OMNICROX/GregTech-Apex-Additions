@@ -12,8 +12,8 @@ them with KubeJS.
 | Fusion Reactor Computer MK IV | UHV | ✅ in 0.1.0 |
 | Fusion Reactor Computer MK V | UEV | ✅ in 0.1.0 |
 | Compact Fusion Computer MK I-V | LuV-UEV | planned |
-| Semi-Stable Antimatter Stabilization Sequencer (SASS) | UEV+ | planned |
-| Shielded Lagrangian Annihilation Matrix (SLAM) | UEV+ | planned |
+| Semi-Stable Antimatter Stabilization Sequencer (SASS) | UEV | ✅ in 0.2.0 |
+| Shielded Lagrangian Annihilation Matrix (SLAM) | UEV | ✅ in 0.2.0 |
 | Draconic Fusion Crafter | HV-UV | planned (needs Draconic Evolution) |
 | Mystical Cultivation Array | LV-LuV | planned (needs Mystical Agriculture) |
 | Space Elevator + modules | UV+ | planned |

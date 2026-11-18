@@ -2,6 +2,9 @@ package com.omnicrox.gtaa;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
+import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
+import com.omnicrox.gtaa.common.data.GTAAMaterials;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
@@ -36,6 +39,16 @@ public class GTAA {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
+        bus.addListener(this::registerMaterialRegistry);
+        bus.addListener(this::registerMaterials);
+    }
+
+    private void registerMaterialRegistry(MaterialRegistryEvent event) {
+        GTCEuAPI.materialManager.createRegistry(MOD_ID);
+    }
+
+    private void registerMaterials(MaterialEvent event) {
+        GTAAMaterials.init();
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
@@ -46,6 +59,12 @@ public class GTAA {
         event.enqueueWork(() -> {
             FusionReactorMachine.registerFusionTier(GTValues.UHV, " (MKIV)");
             FusionReactorMachine.registerFusionTier(GTValues.UEV, " (MKV)");
+            if (!net.minecraftforge.fml.loading.FMLEnvironment.production) {
+                // dev self-check: build the big JSON patterns once so mistakes show up at startup
+                GTAAMachines.ANTIMATTER_FORGE.getPatternFactory().get();
+                GTAAMachines.ANTIMATTER_GENERATOR.getPatternFactory().get();
+                LOGGER.info("[GTAA] antimatter patterns built OK");
+            }
         });
     }
 

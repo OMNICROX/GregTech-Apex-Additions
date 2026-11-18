@@ -22,6 +22,13 @@ public class GTAABlocks {
     public static final BlockEntry<Block> FUSION_CASING_MK5 = casing("fusion_casing_mk5", "Fusion Machine Casing MK V");
     public static final BlockEntry<Block> FUSION_COIL_MK5 = casing("fusion_coil_mk5", "Ultimate Fusion Coil");
 
+    // Antimatter (SASS / SLAM) - textures from GoodGenerator (GT5-Unofficial)
+    public static final BlockEntry<Block> MAGNETIC_FLUX_CASING = casing("magnetic_flux_casing", "Magnetic Flux Casing");
+    public static final BlockEntry<Block> GRAVITY_STABILIZATION_CASING = casing("gravity_stabilization_casing", "Gravity Stabilization Casing");
+    public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = casing("antimatter_containment_casing", "Antimatter Containment Casing");
+    public static final BlockEntry<Block> PROTOMATTER_ACTIVATION_COIL = casing("protomatter_activation_coil", "Protomatter Activation Coil");
+    public static final BlockEntry<Block> ANTIMATTER_ANNIHILATION_MATRIX = casing("antimatter_annihilation_matrix", "Antimatter Annihilation Matrix");
+
     /** Plain casing. Blockstate / models / loot are static files in resources (no datagen needed). */
     public static BlockEntry<Block> casing(String name, String lang) {
         return REGISTRATE.block(name, Block::new)

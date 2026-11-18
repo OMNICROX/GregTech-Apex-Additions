@@ -4,6 +4,11 @@
     "gtapexadditions:fusion_casing_mk4",
     "gtapexadditions:fusion_coil_mk4",
     "gtapexadditions:fusion_casing_mk5",
-    "gtapexadditions:fusion_coil_mk5"
+    "gtapexadditions:fusion_coil_mk5",
+    "gtapexadditions:magnetic_flux_casing",
+    "gtapexadditions:gravity_stabilization_casing",
+    "gtapexadditions:antimatter_containment_casing",
+    "gtapexadditions:protomatter_activation_coil",
+    "gtapexadditions:antimatter_annihilation_matrix"
   ]
 }

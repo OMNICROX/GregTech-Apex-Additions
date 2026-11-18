@@ -1,9 +1,24 @@
 {
+  "block.gtapexadditions.antimatter_annihilation_matrix": "xıɹʇɐW uoıʇɐןıɥıuuⱯ ɹǝʇʇɐɯıʇuⱯ",
+  "block.gtapexadditions.antimatter_containment_casing": "buısɐƆ ʇuǝɯuıɐʇuoƆ ɹǝʇʇɐɯıʇuⱯ",
+  "block.gtapexadditions.antimatter_forge": "ɹǝɔuǝnbǝS uoıʇɐzıןıqɐʇS ɹǝʇʇɐɯıʇuⱯ ǝןqɐʇS-ıɯǝS",
+  "block.gtapexadditions.antimatter_generator": "xıɹʇɐW uoıʇɐןıɥıuuⱯ uɐıbuɐɹbɐꞀ pǝpןǝıɥS",
+  "block.gtapexadditions.antimatter_hatch": "ɥɔʇɐH ɹǝʇʇɐɯıʇuⱯ",
   "block.gtapexadditions.fusion_casing_mk4": "ΛI ʞW buısɐƆ ǝuıɥɔɐW uoısnℲ",
   "block.gtapexadditions.fusion_casing_mk5": "Λ ʞW buısɐƆ ǝuıɥɔɐW uoısnℲ",
   "block.gtapexadditions.fusion_coil_mk4": "ןıoƆ uoısnℲ pǝɔuɐʌpⱯ",
   "block.gtapexadditions.fusion_coil_mk5": "ןıoƆ uoısnℲ ǝʇɐɯıʇן∩",
+  "block.gtapexadditions.gravity_stabilization_casing": "buısɐƆ uoıʇɐzıןıqɐʇS ʎʇıʌɐɹ⅁",
+  "block.gtapexadditions.magnetic_flux_casing": "buısɐƆ xnןℲ ɔıʇǝubɐW",
+  "block.gtapexadditions.protomatter_activation_coil": "ןıoƆ uoıʇɐʌıʇɔⱯ ɹǝʇʇɐɯoʇoɹԀ",
   "block.gtapexadditions.uev_fusion_reactor": "Λ ʞW ɹǝʇndɯoƆ ɹoʇɔɐǝᴚ uoısnℲ",
   "block.gtapexadditions.uhv_fusion_reactor": "ΛI ʞW ɹǝʇndɯoƆ ɹoʇɔɐǝᴚ uoısnℲ",
-  "itemGroup.gtapexadditions.main": "suoıʇıppⱯ xǝdⱯ ɥɔǝ⟘bǝɹ⅁"
+  "itemGroup.gtapexadditions.main": "suoıʇıppⱯ xǝdⱯ ɥɔǝ⟘bǝɹ⅁",
+  "material.gtapexadditions.antimatter": "ɹǝʇʇɐɯıʇuⱯ ǝןqɐʇS-ıɯǝS",
+  "material.gtapexadditions.naquadah_based_liquid_fuel_mkv_depleted": ")pǝʇǝןdǝᗡ( ΛʞW ןǝnℲ pınbıꞀ pǝsɐᗺ ɥɐpɐnbɐN",
+  "material.gtapexadditions.naquadah_based_liquid_fuel_mkvi_depleted": ")pǝʇǝןdǝᗡ( IΛʞW ןǝnℲ pınbıꞀ pǝsɐᗺ ɥɐpɐnbɐN",
+  "material.gtapexadditions.protomatter": "ɹǝʇʇɐɯoʇoɹԀ",
+  "material.gtapexadditions.spacetime": "ǝɯı⟘ǝɔɐdS uǝʇןoW",
+  "material.gtapexadditions.spatially_enlarged_fluid": "pınןℲ pǝbɹɐןuƎ ʎןןɐıʇɐdS",
+  "material.gtapexadditions.tachyon_rich_temporal_fluid": "pınןℲ ןɐɹodɯǝ⟘ ɥɔıᴚ uoʎɥɔɐ⟘"
 }

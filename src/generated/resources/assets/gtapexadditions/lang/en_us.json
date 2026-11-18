@@ -1,9 +1,24 @@
 {
+  "block.gtapexadditions.antimatter_annihilation_matrix": "Antimatter Annihilation Matrix",
+  "block.gtapexadditions.antimatter_containment_casing": "Antimatter Containment Casing",
+  "block.gtapexadditions.antimatter_forge": "Semi-Stable Antimatter Stabilization Sequencer",
+  "block.gtapexadditions.antimatter_generator": "Shielded Lagrangian Annihilation Matrix",
+  "block.gtapexadditions.antimatter_hatch": "Antimatter Hatch",
   "block.gtapexadditions.fusion_casing_mk4": "Fusion Machine Casing MK IV",
   "block.gtapexadditions.fusion_casing_mk5": "Fusion Machine Casing MK V",
   "block.gtapexadditions.fusion_coil_mk4": "Advanced Fusion Coil",
   "block.gtapexadditions.fusion_coil_mk5": "Ultimate Fusion Coil",
+  "block.gtapexadditions.gravity_stabilization_casing": "Gravity Stabilization Casing",
+  "block.gtapexadditions.magnetic_flux_casing": "Magnetic Flux Casing",
+  "block.gtapexadditions.protomatter_activation_coil": "Protomatter Activation Coil",
   "block.gtapexadditions.uev_fusion_reactor": "Fusion Reactor Computer MK V",
   "block.gtapexadditions.uhv_fusion_reactor": "Fusion Reactor Computer MK IV",
-  "itemGroup.gtapexadditions.main": "GregTech Apex Additions"
+  "itemGroup.gtapexadditions.main": "GregTech Apex Additions",
+  "material.gtapexadditions.antimatter": "Semi-Stable Antimatter",
+  "material.gtapexadditions.naquadah_based_liquid_fuel_mkv_depleted": "Naquadah Based Liquid Fuel MkV (Depleted)",
+  "material.gtapexadditions.naquadah_based_liquid_fuel_mkvi_depleted": "Naquadah Based Liquid Fuel MkVI (Depleted)",
+  "material.gtapexadditions.protomatter": "Protomatter",
+  "material.gtapexadditions.spacetime": "Molten SpaceTime",
+  "material.gtapexadditions.spatially_enlarged_fluid": "Spatially Enlarged Fluid",
+  "material.gtapexadditions.tachyon_rich_temporal_fluid": "Tachyon Rich Temporal Fluid"
 }
