@@ -1,5 +1,6 @@
 package com.omnicrox.gtaa.common.data;
 
+import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 import com.omnicrox.gtaa.GTAA;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,7 +12,8 @@ import static com.omnicrox.gtaa.GTAA.REGISTRATE;
 public class GTAACreativeTab {
 
     public static final RegistryEntry<CreativeModeTab> MAIN = REGISTRATE.defaultCreativeTab("main",
-            b -> b.icon(() -> new ItemStack(Items.NETHER_STAR))
+            b -> b.displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator("main", REGISTRATE))
+                    .icon(() -> new ItemStack(Items.NETHER_STAR))
                     .title(REGISTRATE.addLang("itemGroup", GTAA.id("main"), GTAA.NAME))
                     .build())
             .register();
