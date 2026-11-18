@@ -375,5 +375,43 @@ public class GTAAMachines {
             Component.literal("Runs at " + VNF[UXV] + "\u00a77 at \u00a7a200%\u00a77 speed with up to \u00a7664\u00a77 parallels"),
             Component.literal("Needs at least \u00a7cMotor Mk-V\u00a77 to work"));
 
+    private static final Component[] MINING_COMMON = {
+            Component.literal("\u00a77Doesn't use an energy hatch, instead receives energy from the Space Elevator"),
+            Component.literal("\u00a77Requires a plasma to operate (\u00a7e825L Helium\u00a77 / \u00a73550L Nitrogen\u00a77 / \u00a79375L Oxygen\u00a77 / \u00a7f250L Iron\u00a77 / \u00a7c150L Nickel\u00a77)."),
+            Component.literal("\u00a77Higher tier plasmas increase the size of mined asteroids and reduce mining operation time."),
+            Component.literal("\u00a77Needs to be fed with computation to work."),
+            Component.literal("\u00a77Computation is consumed per parallel"),
+            Component.literal("\u00a77Mining Drones must be placed in a regular input bus (they are not used up)."),
+    };
+
+    private static Component[] miningTooltips(String quote, int tier, int parallels, String motor) {
+        java.util.List<Component> list = new java.util.ArrayList<>();
+        list.add(Component.literal("\u00a77Machine Type: \u00a7eSpace Elevator Module"));
+        list.add(Component.literal("\u00a77Module that adds Space Mining Operations to the Space Elevator"));
+        list.add(Component.literal("\u00a7d\u00a7l" + quote));
+        list.addAll(java.util.List.of(MINING_COMMON));
+        list.add(Component.literal("\u00a77Runs at " + VNF[tier] + "\u00a77 with up to \u00a76" + parallels + "\u00a77 parallels"));
+        list.add(Component.literal("\u00a77Needs at least " + motor + "\u00a77 to work"));
+        return list.toArray(Component[]::new);
+    }
+
+    public static final MultiblockMachineDefinition SPACE_MINING_MK1 = seModule("space_mining_module_mk1",
+            "Space Mining Module Mk-I",
+            new SpaceElevatorModuleMachine.Stats(UV, 1, 1, 2, 1.0f, moduleBuffer(UV, 1)),
+            GTAARecipeTypes.SPACE_MINING,
+            miningTooltips("Great treasures beyond your imagination await!", UV, 2, "\u00a7aMotor Mk-I"));
+
+    public static final MultiblockMachineDefinition SPACE_MINING_MK2 = seModule("space_mining_module_mk2",
+            "Space Mining Module Mk-II",
+            new SpaceElevatorModuleMachine.Stats(UHV, 2, 2, 4, 1.0f, moduleBuffer(UHV, 1)),
+            GTAARecipeTypes.SPACE_MINING,
+            miningTooltips("Does this violate drone rights?", UHV, 4, "\u00a79Motor Mk-II"));
+
+    public static final MultiblockMachineDefinition SPACE_MINING_MK3 = seModule("space_mining_module_mk3",
+            "Space Mining Module Mk-III",
+            new SpaceElevatorModuleMachine.Stats(UEV, 3, 3, 8, 1.0f, moduleBuffer(UEV, 1)),
+            GTAARecipeTypes.SPACE_MINING,
+            miningTooltips("This definitely violates drone rights.", UEV, 8, "\u00a7dMotor Mk-III"));
+
     public static void init() {}
 }

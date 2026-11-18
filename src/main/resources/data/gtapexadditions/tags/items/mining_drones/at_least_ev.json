@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "gtapexadditions:mining_drone_ev",
+    "gtapexadditions:mining_drone_iv",
+    "gtapexadditions:mining_drone_luv",
+    "gtapexadditions:mining_drone_zpm",
+    "gtapexadditions:mining_drone_uv",
+    "gtapexadditions:mining_drone_uhv",
+    "gtapexadditions:mining_drone_uev",
+    "gtapexadditions:mining_drone_uiv",
+    "gtapexadditions:mining_drone_uxv",
+    "gtapexadditions:mining_drone_opv"
+  ]
+}

@@ -15,6 +15,7 @@ public class GTAARecipeTypes {
     public static final String MODULE_TIER = "module_tier";
 
     public static GTRecipeType SPACE_ASSEMBLER;
+    public static GTRecipeType SPACE_MINING;
 
     private static GTRecipeType register(String name, String group) {
         var type = new GTRecipeType(GTAA.id(name), group);
@@ -29,6 +30,11 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(16, 1, 4, 0)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ASSEMBLER, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setMaxTooltips(4);
+        SPACE_MINING = register("space_mining", "multiblock")
+                .setMaxIOSize(2, 9, 1, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setMaxTooltips(4);
     }
 }

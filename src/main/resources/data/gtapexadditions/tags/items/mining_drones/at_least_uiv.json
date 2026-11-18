@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "gtapexadditions:mining_drone_uiv",
+    "gtapexadditions:mining_drone_uxv",
+    "gtapexadditions:mining_drone_opv"
+  ]
+}

@@ -34,6 +34,7 @@ public class GTAA {
     public GTAA() {
         GTAACreativeTab.init();
         GTAABlocks.init();
+        com.omnicrox.gtaa.common.data.GTAAItems.init();
         REGISTRATE.registerRegistrate();
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

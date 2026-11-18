@@ -26,6 +26,8 @@ public class GTAARecipes {
         fusion(provider);
         antimatter(provider);
         spaceElevator(provider);
+        GTAASpaceMining.init(provider);
+        drones(provider);
     }
 
     private static void fusion(Consumer<FinishedRecipe> provider) {
@@ -296,6 +298,44 @@ public class GTAARecipes {
                     .outputItems(motors[i].asStack(4))
                     .addData(GTAARecipeTypes.MODULE_TIER, i - 1)
                     .duration(400).EUt(VA[tiers[i]]).save(provider);
+        }
+    }
+
+    private static void drones(Consumer<FinishedRecipe> provider) {
+        com.gregtechceu.gtceu.api.data.chemical.material.Material[] mats = { null, GTMaterials.Steel, GTMaterials.Steel,
+                GTMaterials.Titanium, GTMaterials.Titanium, GTMaterials.TungstenSteel, GTMaterials.TungstenSteel,
+                GTMaterials.Naquadah, GTMaterials.Naquadah, GTMaterials.NaquadahAlloy, GTMaterials.Neutronium,
+                GTMaterials.Neutronium, GTMaterials.Neutronium, GTMaterials.Neutronium };
+        var motors = java.util.List.of(GTItems.ELECTRIC_MOTOR_LV, GTItems.ELECTRIC_MOTOR_LV, GTItems.ELECTRIC_MOTOR_MV,
+                GTItems.ELECTRIC_MOTOR_HV, GTItems.ELECTRIC_MOTOR_EV, GTItems.ELECTRIC_MOTOR_IV, GTItems.ELECTRIC_MOTOR_LuV,
+                GTItems.ELECTRIC_MOTOR_ZPM, GTItems.ELECTRIC_MOTOR_UV, GTItems.ELECTRIC_MOTOR_UHV, GTItems.ELECTRIC_MOTOR_UEV,
+                GTItems.ELECTRIC_MOTOR_UIV, GTItems.ELECTRIC_MOTOR_UXV, GTItems.ELECTRIC_MOTOR_OpV);
+        var sensors = java.util.List.of(GTItems.SENSOR_LV, GTItems.SENSOR_LV, GTItems.SENSOR_MV, GTItems.SENSOR_HV,
+                GTItems.SENSOR_EV, GTItems.SENSOR_IV, GTItems.SENSOR_LuV, GTItems.SENSOR_ZPM, GTItems.SENSOR_UV,
+                GTItems.SENSOR_UHV, GTItems.SENSOR_UEV, GTItems.SENSOR_UIV, GTItems.SENSOR_UXV, GTItems.SENSOR_OpV);
+        for (int tier = LV; tier <= OpV; tier++) {
+            var b = ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mining_drone_" + VN[tier].toLowerCase(java.util.Locale.ROOT))
+                    .inputItems(plate, mats[tier], 6)
+                    .inputItems(motors.get(tier), 4)
+                    .inputItems(sensors.get(tier), 2)
+                    .inputItems(CustomTags.CIRCUITS_ARRAY[tier], 2);
+            if (tier > LV) b.inputItems(com.omnicrox.gtaa.common.data.GTAAItems.MINING_DRONES[tier - 1].asStack());
+            b.outputItems(com.omnicrox.gtaa.common.data.GTAAItems.MINING_DRONES[tier].asStack())
+                    .duration(400).EUt(VA[tier]).save(provider);
+        }
+        var minerModules = java.util.List.of(GTAAMachines.SPACE_MINING_MK1, GTAAMachines.SPACE_MINING_MK2, GTAAMachines.SPACE_MINING_MK3);
+        int[] mt = { UV, UHV, UEV };
+        var pumps = java.util.List.of(GTItems.ELECTRIC_PUMP_UV, GTItems.ELECTRIC_PUMP_UHV, GTItems.ELECTRIC_PUMP_UEV);
+        var circ = java.util.List.of(CustomTags.UV_CIRCUITS, CustomTags.UHV_CIRCUITS, CustomTags.UEV_CIRCUITS);
+        for (int i = 0; i < 3; i++) {
+            var b = (i == 0 ? ASSEMBLER_RECIPES : GTAARecipeTypes.SPACE_ASSEMBLER)
+                    .recipeBuilder("gtapexadditions:space_mining_module_mk" + (i + 1))
+                    .inputItems(GTAABlocks.SE_BASE_CASING.asStack(4))
+                    .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.MINING_DRONES[mt[i]].asStack(2))
+                    .inputItems(pumps.get(i), 4)
+                    .inputItems(circ.get(i), 8);
+            if (i > 0) b.inputItems(minerModules.get(i - 1).asStack()).addData(GTAARecipeTypes.MODULE_TIER, i);
+            b.outputItems(minerModules.get(i).asStack()).duration(1200).EUt(VA[mt[i]]).save(provider);
         }
     }
 }
