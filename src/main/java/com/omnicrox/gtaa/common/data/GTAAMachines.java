@@ -18,6 +18,7 @@ import com.omnicrox.gtaa.api.GTAAStructures;
 import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorModuleMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorPredicates;
+import com.omnicrox.gtaa.common.machine.multiblock.elevator.DysonLaunchSiteMachine;
 import java.util.function.Supplier;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterForgeMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterGeneratorMachine;
@@ -180,6 +181,7 @@ public class GTAAMachines {
                     Component.literal("\u00a771. Naquadah Based Liquid Fuel MkV (Depleted) = \u00a7b0.05"),
                     Component.literal("\u00a772. Naquadah Based Liquid Fuel MkVI (Depleted) = \u00a7b0.10"),
                     SEPARATOR,
+                    Component.literal("\u00a77Use a screwdriver to toggle the antimatter render"),
                     Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
             .appearanceBlock(GTAABlocks.MAGNETIC_FLUX_CASING)
             .pattern(definition -> GTAAStructures.pattern("antimatter", "antimatter_forge")
@@ -197,7 +199,9 @@ public class GTAAMachines {
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/antimatter_machine_casing"),
-                    GTAA.id("block/multiblock/antimatter")))
+                    GTAA.id("block/multiblock/antimatter"))
+                    .andThen(b -> b.addDynamicRenderer(() -> new com.omnicrox.gtaa.client.AntimatterCoreRender())))
+            .hasBER(true)
             .register();
 
     public static final MultiblockMachineDefinition ANTIMATTER_GENERATOR = REGISTRATE
@@ -227,6 +231,9 @@ public class GTAAMachines {
                     Component.literal("\u00a772. Molten Superconductor Base UIV: \u00a761.02"),
                     Component.literal("\u00a773. Molten Superconductor Base UMV: \u00a761.03"),
                     SEPARATOR,
+                    Component.literal("\u00a77Switch the power destination to your wireless network with a screwdriver"),
+                    Component.literal("\u00a77Wireless mode requires \u00a76Molten Superconductor Base UMV\u00a77 to work"),
+                    Component.literal("\u00a77Wireless mode is still limited by hatch capacity"),
                     Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
             .appearanceBlock(GTAABlocks.MAGNETIC_FLUX_CASING)
             .pattern(definition -> GTAAStructures.pattern("antimatter", "antimatter_generator")
@@ -319,23 +326,33 @@ public class GTAAMachines {
     private static MultiblockMachineDefinition seModule(String id, String name, SpaceElevatorModuleMachine.Stats stats,
                                                         com.gregtechceu.gtceu.api.recipe.GTRecipeType type,
                                                         Component... tooltips) {
-        var def = REGISTRATE.multiblock(id, h -> new SpaceElevatorModuleMachine(h, stats))
+        return seModule(id, name, stats, h -> new SpaceElevatorModuleMachine(h, stats),
+                new com.gregtechceu.gtceu.api.recipe.GTRecipeType[] { type }, new PartAbility[0], null, tooltips);
+    }
+
+    private static MultiblockMachineDefinition seModule(String id, String name, SpaceElevatorModuleMachine.Stats stats,
+                                                        java.util.function.Function<com.gregtechceu.gtceu.api.machine.IMachineBlockEntity, ? extends com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine> factory,
+                                                        com.gregtechceu.gtceu.api.recipe.GTRecipeType[] types,
+                                                        PartAbility[] extraAbilities, String credit,
+                                                        Component... tooltips) {
+        PartAbility[] abilities = java.util.stream.Stream.concat(java.util.stream.Stream.of(
+                PartAbility.IMPORT_ITEMS, PartAbility.EXPORT_ITEMS, PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
+                PartAbility.COMPUTATION_DATA_RECEPTION), java.util.stream.Stream.of(extraAbilities)).toArray(PartAbility[]::new);
+        var def = REGISTRATE.multiblock(id, factory::apply)
                 .langValue(name)
                 .rotationState(RotationState.NON_Y_AXIS)
-                .recipeType(type)
+                .recipeTypes(types)
                 .recipeModifiers(SpaceElevatorModuleMachine::recipeModifier)
                 .tooltips(tooltips)
                 .tooltips(Component.literal("\u00a77Capacity: \u00a79" + FormattingUtil.formatNumbers(stats.bufferSize()) + " EU"),
-                        Component.literal("\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
+                        Component.literal(credit != null ? credit : "\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
                 .appearanceBlock(GTAABlocks.SE_BASE_CASING)
                 .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.LEFT, RelativeDirection.DOWN, RelativeDirection.BACK)
                         .aisle("H", "~", "H", "H", "H")
                         .aisle("H", "H", "H", "H", "H")
                         .where('~', controller(blocks(definition.getBlock())))
                         .where('H', blocks(GTAABlocks.SE_BASE_CASING.get())
-                                .or(abilities(PartAbility.IMPORT_ITEMS, PartAbility.EXPORT_ITEMS,
-                                        PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
-                                        PartAbility.COMPUTATION_DATA_RECEPTION)))
+                                .or(abilities(abilities)))
                         .build())
                 .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
                 .model(createWorkableCasingMachineModel(GTAA.id("block/space_elevator/base_casing"),
@@ -413,6 +430,87 @@ public class GTAAMachines {
             new SpaceElevatorModuleMachine.Stats(UEV, 3, 3, 8, 1.0f, moduleBuffer(UEV, 1)),
             GTAARecipeTypes.SPACE_MINING,
             miningTooltips("This definitely violates drone rights.", UEV, 8, "\u00a7dMotor Mk-III"));
+
+    // ---------------- Space Pumping ----------------
+    private static Component[] pumpTooltips(String quote, int tier, int parallels, String motor, String gases) {
+        return new Component[] {
+                Component.literal("\u00a77Machine Type: \u00a7eSpace Elevator Module"),
+                Component.literal("\u00a77Module that adds Space Pumping Operations to the Space Elevator"),
+                Component.literal("\u00a7d\u00a7l" + quote),
+                Component.literal("\u00a77Doesn't use an energy hatch, instead receives energy from the Space Elevator"),
+                Component.literal("\u00a77Pumps gases from other planets. Pick the gas with a \u00a7eProgrammed Circuit\u00a77 (see JEI)."),
+                Component.literal("\u00a77Gases: " + gases),
+                Component.literal("\u00a77Runs at " + VNF[tier] + "\u00a77 with up to \u00a76" + parallels + "\u00a77 parallels"),
+                Component.literal("\u00a77Needs at least " + motor + "\u00a77 to work") };
+    }
+
+    public static final MultiblockMachineDefinition SPACE_PUMP_MK1 = seModule("space_pumping_module_mk1",
+            "Space Pumping Module Mk-I",
+            new SpaceElevatorModuleMachine.Stats(UHV, 1, 1, 4, 1.0f, moduleBuffer(UHV, 4)),
+            GTAARecipeTypes.SPACE_PUMPING,
+            pumpTooltips("Pumping clouds of other worlds", UHV, 4, "\u00a7aMotor Mk-I",
+                    "Hydrogen, Helium, Deuterium, Methane, Nitrogen"));
+
+    public static final MultiblockMachineDefinition SPACE_PUMP_MK2 = seModule("space_pumping_module_mk2",
+            "Space Pumping Module Mk-II",
+            new SpaceElevatorModuleMachine.Stats(UEV, 2, 2, 16, 1.0f, moduleBuffer(UEV, 16)),
+            GTAARecipeTypes.SPACE_PUMPING,
+            pumpTooltips("Gas giants are just big fuel tanks", UEV, 16, "\u00a79Motor Mk-II",
+                    "+ Helium-3, Tritium, Neon, Argon, Krypton, Xenon, Radon"));
+
+    public static final MultiblockMachineDefinition SPACE_PUMP_MK3 = seModule("space_pumping_module_mk3",
+            "Space Pumping Module Mk-III",
+            new SpaceElevatorModuleMachine.Stats(UXV, 3, 4, 64, 1.0f, moduleBuffer(UXV, 64)),
+            GTAARecipeTypes.SPACE_PUMPING,
+            pumpTooltips("Is there anything left to pump?", UXV, 64, "\u00a76Motor Mk-IV",
+                    "+ Fluorine, Oxygen, Liquid Helium, Spatially Enlarged Fluid"));
+
+    // ---------------- our versions of third-party modules (idea credited, no code copied) ----------------
+    public static final MultiblockMachineDefinition RESOURCE_COLLECTION_MODULE = seModule("resource_collection_module",
+            "Resource Collection Module",
+            new SpaceElevatorModuleMachine.Stats(UIV, 3, 4, 32, 1.5f, moduleBuffer(UIV, 32)),
+            h -> new SpaceElevatorModuleMachine(h, new SpaceElevatorModuleMachine.Stats(UIV, 3, 4, 32, 1.5f, moduleBuffer(UIV, 32))),
+            new com.gregtechceu.gtceu.api.recipe.GTRecipeType[] { GTAARecipeTypes.SPACE_MINING, GTAARecipeTypes.SPACE_PUMPING },
+            new PartAbility[0], "\u00a78Idea from GT: Not Leisure (GTNL); GTAA's own implementation",
+            Component.literal("\u00a77Machine Type: \u00a7eSpace Elevator Module, Space Mining / Space Pumping"),
+            Component.literal("\u00a77Mines asteroids and pumps planetary gases in one module"),
+            Component.literal("\u00a7d\u00a7lWhy build two when one will do?"),
+            Component.literal("\u00a77Doesn't use an energy hatch, instead receives energy from the Space Elevator"),
+            Component.literal("\u00a77Runs every Space Mining (Mk-III) and Space Pumping (Mk-III) recipe"),
+            Component.literal("\u00a77Switch between mining and pumping in the controller GUI"),
+            Component.literal("\u00a77Runs at " + VNF[UIV] + "\u00a77 at \u00a7a150%\u00a77 speed with up to \u00a7632\u00a77 parallels"),
+            Component.literal("\u00a77Needs at least \u00a76Motor Mk-IV\u00a77 to work"));
+
+    public static final MultiblockMachineDefinition SPACE_DRILL_MK123 = seModule("space_drill_mk123",
+            "Space Drill MK-123",
+            new SpaceElevatorModuleMachine.Stats(UXV, 3, 5, 256, 2.0f, moduleBuffer(UXV, 256)),
+            h -> new SpaceElevatorModuleMachine(h, new SpaceElevatorModuleMachine.Stats(UXV, 3, 5, 256, 2.0f, moduleBuffer(UXV, 256))),
+            new com.gregtechceu.gtceu.api.recipe.GTRecipeType[] { GTAARecipeTypes.SPACE_MINING },
+            new PartAbility[0], "\u00a78Idea from 123Technology; GTAA's own implementation",
+            Component.literal("\u00a77Machine Type: \u00a7eSpace Elevator Module, Space Mining"),
+            Component.literal("\u00a77Drills straight through whole asteroids"),
+            Component.literal("\u00a7d\u00a7lOne, two, three... gone."),
+            Component.literal("\u00a77Doesn't use an energy hatch, instead receives energy from the Space Elevator"),
+            Component.literal("\u00a77Runs every Space Mining recipe, including Mk-III asteroids"),
+            Component.literal("\u00a77Runs at " + VNF[UXV] + "\u00a77 at \u00a7a200%\u00a77 speed with up to \u00a76256\u00a77 parallels"),
+            Component.literal("\u00a77Needs at least \u00a7cMotor Mk-V\u00a77 to work"));
+
+    public static final MultiblockMachineDefinition DYSON_LAUNCH_SITE = seModule("dyson_sphere_launch_site",
+            "Dyson Sphere Launch Site",
+            DysonLaunchSiteMachine.STATS,
+            DysonLaunchSiteMachine::new,
+            new com.gregtechceu.gtceu.api.recipe.GTRecipeType[] { GTAARecipeTypes.DYSON_LAUNCH },
+            new PartAbility[] { PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER },
+            "\u00a78Idea from Twist Space Technology (TST); GTAA's own implementation",
+            Component.literal("\u00a77Machine Type: \u00a7eSpace Elevator Module, Generator"),
+            Component.literal("\u00a77Launches Dyson Swarm Modules into orbit around the sun"),
+            Component.literal("\u00a7d\u00a7lHarness the power of a star"),
+            Component.literal("\u00a77Launching uses energy from the Space Elevator"),
+            Component.literal("\u00a77Every module in orbit makes \u00a7e" + FormattingUtil.formatNumbers(DysonLaunchSiteMachine.EU_PER_MODULE) + " EU/t\u00a77 through Dynamo or Laser Source hatches"),
+            Component.literal("\u00a77Modules in orbit slowly break: \u00a7c0.1%\u00a77 of the swarm is lost every second"),
+            Component.literal("\u00a77At most \u00a76" + FormattingUtil.formatNumbers(DysonLaunchSiteMachine.MAX_MODULES) + "\u00a77 modules in orbit"),
+            Component.literal("\u00a77Runs at " + VNF[UIV] + "\u00a77 with up to \u00a7664\u00a77 parallel launches"),
+            Component.literal("\u00a77Needs at least \u00a76Motor Mk-IV\u00a77 to work"));
 
     public static void init() {}
 }

@@ -27,5 +27,11 @@ public class GTAAItems {
         }
     }
 
+    /** Launched by the Dyson Sphere Launch Site. */
+    public static final ItemEntry<Item> DYSON_SWARM_MODULE = REGISTRATE.item("dyson_swarm_module", Item::new)
+            .lang("Dyson Swarm Module")
+            .model(NonNullBiConsumer.noop())
+            .register();
+
     public static void init() {}
 }

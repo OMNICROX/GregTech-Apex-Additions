@@ -41,8 +41,13 @@ public class GTAA {
         bus.addGenericListener(com.gregtechceu.gtceu.api.recipe.GTRecipeType.class, this::registerRecipeTypes);
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
+            com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
+                    com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);
+        }
         bus.addListener(this::registerMaterialRegistry);
         bus.addListener(this::registerMaterials);
+        bus.addListener(this::postMaterials);
     }
 
     private void registerMaterialRegistry(MaterialRegistryEvent event) {
@@ -51,6 +56,10 @@ public class GTAA {
 
     private void registerMaterials(MaterialEvent event) {
         GTAAMaterials.init();
+    }
+
+    private void postMaterials(com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent event) {
+        GTAAMaterials.resolveExternal();
     }
 
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, com.gregtechceu.gtceu.api.recipe.GTRecipeType> event) {

@@ -16,8 +16,11 @@ public class GTAARecipeTypes {
 
     public static GTRecipeType SPACE_ASSEMBLER;
     public static GTRecipeType SPACE_MINING;
+    public static GTRecipeType SPACE_PUMPING;
+    public static GTRecipeType DYSON_LAUNCH;
 
-    private static GTRecipeType register(String name, String group) {
+    private static GTRecipeType register(String name, String group, String english) {
+        GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
         var type = new GTRecipeType(GTAA.id(name), group);
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, type.registryName, type);
         GTRegistries.register(BuiltInRegistries.RECIPE_SERIALIZER, type.registryName, new GTRecipeSerializer());
@@ -26,13 +29,23 @@ public class GTAARecipeTypes {
     }
 
     public static void init() {
-        SPACE_ASSEMBLER = register("space_assembler", "multiblock")
+        SPACE_ASSEMBLER = register("space_assembler", "multiblock", "Space Assembler")
                 .setMaxIOSize(16, 1, 4, 0)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ASSEMBLER, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setMaxTooltips(4);
-        SPACE_MINING = register("space_mining", "multiblock")
+        SPACE_MINING = register("space_mining", "multiblock", "Space Mining")
                 .setMaxIOSize(2, 9, 1, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setMaxTooltips(4);
+        SPACE_PUMPING = register("space_pumping", "multiblock", "Space Pumping")
+                .setMaxIOSize(1, 0, 0, 1)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setMaxTooltips(4);
+        DYSON_LAUNCH = register("dyson_launch", "multiblock", "Dyson Swarm Launch")
+                .setMaxIOSize(2, 0, 1, 0)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setMaxTooltips(4);

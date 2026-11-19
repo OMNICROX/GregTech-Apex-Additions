@@ -58,6 +58,29 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         if (!isRemote()) tickSub = subscribeServerTick(tickSub, this::antimatterTick);
     }
 
+    @Persisted @DescSynced private boolean wireless = false;
+
+    public boolean isWireless() {
+        return wireless;
+    }
+
+    @Override
+    protected net.minecraft.world.InteractionResult onScrewdriverClick(net.minecraft.world.entity.player.Player player,
+                                                                         net.minecraft.world.InteractionHand hand,
+                                                                         net.minecraft.core.Direction gridSide,
+                                                                         net.minecraft.world.phys.BlockHitResult hitResult) {
+        if (isRemote()) return net.minecraft.world.InteractionResult.SUCCESS;
+        if (!com.omnicrox.gtaa.api.GTAAWireless.isAvailable()) {
+            player.displayClientMessage(Component.literal("Wireless mode needs GTM Things installed"), true);
+            return net.minecraft.world.InteractionResult.CONSUME;
+        }
+        wireless = !wireless;
+        player.displayClientMessage(Component.literal(wireless ? "Wireless mode enabled" : "Wireless mode disabled"), true);
+        if (wireless) player.displayClientMessage(Component.literal(
+                "Wireless mode needs a UMV superconductor base catalyst; EU goes to your wireless network"), false);
+        return net.minecraft.world.InteractionResult.CONSUME;
+    }
+
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
@@ -126,6 +149,19 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
             if (h instanceof IEnergyContainer c) outputs.add(c);
         }
         if (outputs.isEmpty()) return;
+        // GTNH wireless mode: with a UMV-grade catalyst the EU goes to the owner's wireless network instead,
+        // clamped to what the hatches could hold so wireless can't bypass them
+        if (wireless && modifier >= 1.03f && com.omnicrox.gtaa.api.GTAAWireless.isAvailable()) {
+            long cap = 0;
+            for (IEnergyContainer c : outputs) {
+                cap += c.getEnergyCapacity();
+                if (cap < 0) { cap = Long.MAX_VALUE; break; }
+            }
+            long sent = Math.min(eu, cap);
+            euLastCycle = sent;
+            com.omnicrox.gtaa.api.GTAAWireless.addEU(getOwnerUUID(), sent, this);
+            return;
+        }
         long perHatch = eu / outputs.size();
         for (IEnergyContainer c : outputs) {
             long space = c.getEnergyCapacity() - c.getEnergyStored();
@@ -154,6 +190,8 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
                             .withStyle(ChatFormatting.GOLD));
                     t.add(Component.literal("Efficiency: " + Math.round(efficiency * 100) + "% (avg " +
                             Math.round(avgEfficiency * 100) + "%)").withStyle(ChatFormatting.AQUA));
+                    t.add(Component.literal("Power destination: " + (wireless ? "Wireless network" : "Hatches"))
+                            .withStyle(wireless ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.GRAY));
                 });
     }
 }

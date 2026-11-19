@@ -61,6 +61,7 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
     @Persisted @DescSynced private long guiActive;
     @Persisted @DescSynced private String lastStop = "";
     @DescSynced private final String[] activeStabilizers = { "", "", "", "" };
+    @Persisted @DescSynced private boolean coreRender = true;
 
     private TickableSubscription tickSub;
 
@@ -71,6 +72,30 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
     @Override
     public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
+    }
+
+    public long getGuiAntimatter() {
+        return guiAntimatter;
+    }
+
+    /** Protomatter beam + ring show while the forge is enabled and paying its active cost. */
+    public boolean isProtomatterActive() {
+        return getRecipeLogic().isWorkingEnabled() && guiActive > 0;
+    }
+
+    public boolean isCoreRenderEnabled() {
+        return coreRender;
+    }
+
+    @Override
+    protected net.minecraft.world.InteractionResult onScrewdriverClick(net.minecraft.world.entity.player.Player player,
+                                                                         net.minecraft.world.InteractionHand hand,
+                                                                         net.minecraft.core.Direction gridSide,
+                                                                         net.minecraft.world.phys.BlockHitResult hitResult) {
+        if (isRemote()) return net.minecraft.world.InteractionResult.SUCCESS;
+        coreRender = !coreRender;
+        player.displayClientMessage(Component.literal(coreRender ? "Antimatter render enabled" : "Antimatter render disabled"), true);
+        return net.minecraft.world.InteractionResult.CONSUME;
     }
 
     private static synchronized Map<Fluid, Upgrade> upgrades() {
