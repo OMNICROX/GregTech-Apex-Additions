@@ -85,6 +85,7 @@ public class GTAA {
                 for (var cf : GTAAMachines.COMPACT_FUSION) cf.getPatternFactory().get();
                 GTAAMachines.LARGE_NAQUADAH_REACTOR.getPatternFactory().get();
                 GTAAMachines.NAQUADAH_FUEL_REFINERY.getPatternFactory().get();
+                GTAAMachines.COMPONENT_ASSEMBLY_LINE.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

@@ -682,5 +682,48 @@ public class GTAAMachines {
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
             .register();
 
+    // ---------------- Component Assembly Line (GoodGenerator) ----------------
+    public static final MultiblockMachineDefinition COMPONENT_ASSEMBLY_LINE = REGISTRATE
+            .multiblock("component_assembly_line", com.omnicrox.gtaa.common.machine.multiblock.ComponentAssemblyLineMachine::new)
+            .langValue("Component Assembly Line")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.COMPONENT_ASSEMBLY_LINE)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.ComponentAssemblyLineMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eComponent Assembler"),
+                    Component.literal("\u00a77Assembles basic components (motors, pumps, etc.) in large batches"),
+                    Component.literal("\u00a77The \u00a7bComponent Assembly Line Casing\u00a77 limits the recipes the machine can perform"),
+                    Component.literal("\u00a77Using a higher tier casing than required \u00a7ahalves the recipe time\u00a77 per tier"),
+                    Component.literal("\u00a77Normal overclocks, no tier-skip limit"),
+                    Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
+            .appearanceBlock(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING)
+            .pattern(definition -> {
+                var h = blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get());
+                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
+                        FUSION_GLASS.get(), GTBlocks.CLEANROOM_GLASS.get());
+                return GTAAStructures.pattern("component_assembly_line", "component_assembly_line")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('H', h)
+                        .where('A', glass)
+                        .where('C', blocks(GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX.get()))
+                        .where('D', blocks(GTBlocks.CASING_ASSEMBLY_CONTROL.get()))
+                        .where('G', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                        .where('E', blocks(GTBlocks.CASING_GRATE.get()))
+                        .where('B', com.omnicrox.gtaa.common.machine.multiblock.ComponentAssemblyLineMachine.casings())
+                        .where('J', h.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1)))
+                        .where('N', frames(GTMaterials.TungstenSteel).or(abilities(PartAbility.IMPORT_ITEMS)))
+                        .where('n', frames(GTMaterials.TungstenSteel))
+                        .where('K', h.or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1)))
+                        .where('L', h.or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
+                        .where('I', h.or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('M', h.or(abilities(PartAbility.IMPORT_FLUIDS)))
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/advanced_iridium_plated_casing"),
+                    GTAA.id("block/multiblock/component_assembly_line")))
+            .register();
+
     public static void init() {}
 }

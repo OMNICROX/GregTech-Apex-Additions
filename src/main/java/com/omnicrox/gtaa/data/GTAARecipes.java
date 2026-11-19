@@ -30,6 +30,8 @@ public class GTAARecipes {
         GTAAFusion.init(provider);
         compactFusion(provider);
         GTAANaquadah.init(provider);
+        GTAAComponentAssembly.init(provider);
+        componentAssemblyLine(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
@@ -489,5 +491,44 @@ public class GTAARecipes {
             b.outputItems(GTAAMachines.COMPACT_FUSION[mk - 1].asStack())
                     .duration(2400).EUt(VA[tier]).save(provider);
         }
+    }
+
+    private static void componentAssemblyLine(Consumer<FinishedRecipe> provider) {
+        var plates = new com.gregtechceu.gtceu.api.data.chemical.material.Material[] { null, GTMaterials.Steel,
+                GTMaterials.Aluminium, GTMaterials.StainlessSteel, GTMaterials.Titanium, GTMaterials.TungstenSteel,
+                GTMaterials.RhodiumPlatedPalladium, GTMaterials.NaquadahAlloy, GTMaterials.Darmstadtium,
+                GTMaterials.Neutronium, GTMaterials.Tritanium, GTAAMaterials.METASTABLE_OGANESSON,
+                GTAAMaterials.METASTABLE_OGANESSON, GTAAMaterials.METASTABLE_OGANESSON };
+        var arms = java.util.List.of(GTItems.ROBOT_ARM_LV, GTItems.ROBOT_ARM_LV, GTItems.ROBOT_ARM_MV, GTItems.ROBOT_ARM_HV,
+                GTItems.ROBOT_ARM_EV, GTItems.ROBOT_ARM_IV, GTItems.ROBOT_ARM_LuV, GTItems.ROBOT_ARM_ZPM, GTItems.ROBOT_ARM_UV,
+                GTItems.ROBOT_ARM_UHV, GTItems.ROBOT_ARM_UEV, GTItems.ROBOT_ARM_UIV, GTItems.ROBOT_ARM_UXV, GTItems.ROBOT_ARM_OpV);
+        var conveyors = java.util.List.of(GTItems.CONVEYOR_MODULE_LV, GTItems.CONVEYOR_MODULE_LV, GTItems.CONVEYOR_MODULE_MV,
+                GTItems.CONVEYOR_MODULE_HV, GTItems.CONVEYOR_MODULE_EV, GTItems.CONVEYOR_MODULE_IV, GTItems.CONVEYOR_MODULE_LuV,
+                GTItems.CONVEYOR_MODULE_ZPM, GTItems.CONVEYOR_MODULE_UV, GTItems.CONVEYOR_MODULE_UHV, GTItems.CONVEYOR_MODULE_UEV,
+                GTItems.CONVEYOR_MODULE_UIV, GTItems.CONVEYOR_MODULE_UXV, GTItems.CONVEYOR_MODULE_OpV);
+        for (int t = LV; t <= OpV; t++) {
+            ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:component_assembly_line_casing_" + VN[t].toLowerCase(java.util.Locale.ROOT))
+                    .inputItems(plate, plates[t], 4)
+                    .inputItems(arms.get(t), 2)
+                    .inputItems(conveyors.get(t), 2)
+                    .inputItems(CustomTags.CIRCUITS_ARRAY[t], 2)
+                    .inputItems(frameGt, GTMaterials.TungstenSteel)
+                    .outputItems(new net.minecraft.world.item.ItemStack(GTAABlocks.COAL_CASINGS.get(t).get(), 1))
+                    .duration(400).EUt(VA[t]).save(provider);
+        }
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:advanced_iridium_plated_casing")
+                .inputItems(plate, GTMaterials.Iridium, 6).inputItems(frameGt, GTMaterials.Iridium)
+                .outputItems(new net.minecraft.world.item.ItemStack(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get(), 2))
+                .duration(100).EUt(VA[IV]).save(provider);
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:component_assembly_line")
+                .inputItems(GTMultiMachines.ASSEMBLY_LINE.asStack(4))
+                .inputItems(new net.minecraft.world.item.ItemStack(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get(), 16))
+                .inputItems(GTItems.ROBOT_ARM_IV, 16)
+                .inputItems(GTItems.CONVEYOR_MODULE_IV, 32)
+                .inputItems(CustomTags.IV_CIRCUITS, 16)
+                .inputItems(plateDense, GTMaterials.Iridium, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64), GTMaterials.Lubricant.getFluid(4000))
+                .outputItems(GTAAMachines.COMPONENT_ASSEMBLY_LINE.asStack())
+                .duration(2400).EUt(VA[IV]).save(provider);
     }
 }

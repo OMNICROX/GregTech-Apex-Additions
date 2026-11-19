@@ -55,6 +55,27 @@ public class GTAABlocks {
         return 0;
     }
 
+    // Component Assembly Line - textures from GoodGenerator / GT5-Unofficial
+    public static final BlockEntry<Block> ADVANCED_IRIDIUM_PLATED_CASING = casing("advanced_iridium_plated_casing", "Advanced Iridium Plated Machine Casing");
+    /** index = voltage tier (LV=1 .. OpV=13) */
+    public static final java.util.List<BlockEntry<Block>> COAL_CASINGS = coalCasings();
+
+    private static java.util.List<BlockEntry<Block>> coalCasings() {
+        java.util.List<BlockEntry<Block>> list = new java.util.ArrayList<>();
+        list.add(null);
+        for (int t = com.gregtechceu.gtceu.api.GTValues.LV; t <= com.gregtechceu.gtceu.api.GTValues.OpV; t++) {
+            String vn = com.gregtechceu.gtceu.api.GTValues.VN[t];
+            list.add(casing("component_assembly_line_casing_" + vn.toLowerCase(java.util.Locale.ROOT),
+                    "Component Assembly Line Casing (" + vn + ")"));
+        }
+        return list;
+    }
+
+    public static int coalCasingTier(Block b) {
+        for (int t = 1; t < COAL_CASINGS.size(); t++) if (COAL_CASINGS.get(t).get() == b) return t;
+        return 0;
+    }
+
     public static Block compactFusionCoil(int mk) {
         return switch (mk) {
             case 1 -> COMPACT_FUSION_COIL_MK1.get();

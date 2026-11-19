@@ -20,6 +20,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType DYSON_LAUNCH;
     public static GTRecipeType NAQUADAH_FUEL_REFINERY;
     public static GTRecipeType NAQUADAH_REACTOR;
+    public static GTRecipeType COMPONENT_ASSEMBLY_LINE;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -61,6 +62,12 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(0, 0, 1, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(d -> "Base output: " + com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(d.getLong("lnr_output")) + " EU/t")
+                .setMaxTooltips(4);
+        COMPONENT_ASSEMBLY_LINE = register("component_assembly_line", "multiblock", "Component Assembly Line")
+                .setMaxIOSize(16, 1, 6, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Casing tier: " + com.gregtechceu.gtceu.api.GTValues.VN[Math.max(1, Math.min(13, d.getInt("coal_casing_tier")))])
                 .setMaxTooltips(4);
     }
 }
