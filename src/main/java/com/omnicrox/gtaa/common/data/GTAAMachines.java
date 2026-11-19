@@ -512,5 +512,101 @@ public class GTAAMachines {
             Component.literal("\u00a77Runs at " + VNF[UIV] + "\u00a77 with up to \u00a7664\u00a77 parallel launches"),
             Component.literal("\u00a77Needs at least \u00a76Motor Mk-IV\u00a77 to work"));
 
+    // ---------------- Compact Fusion Computers (GoodGenerator) ----------------
+    private static Block compactFusionCasing(int mk) {
+        return switch (mk) {
+            case 1 -> GTBlocks.MACHINE_CASING_LuV.get();
+            case 2 -> GTBlocks.FUSION_CASING.get();
+            case 3 -> GTBlocks.FUSION_CASING_MK2.get();
+            case 4 -> GTBlocks.FUSION_CASING_MK3.get();
+            default -> GTAABlocks.FUSION_CASING_MK4.get();
+        };
+    }
+
+    private static net.minecraft.resources.ResourceLocation compactFusionCasingTexture(int mk) {
+        return switch (mk) {
+            case 1 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/voltage/luv/side");
+            case 2 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing");
+            case 3 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk2");
+            case 4 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk3");
+            default -> GTAA.id("block/casing/fusion_casing_mk4");
+        };
+    }
+
+    /** First frame material that has a frame block: GTNH uses Naquadah Alloy, Duranium, Neutronium, Infinity Catalyst, Infinity. */
+    private static com.gregtechceu.gtceu.api.data.chemical.material.Material compactFusionFrame(int mk) {
+        java.util.List<com.gregtechceu.gtceu.api.data.chemical.material.Material> options = new java.util.ArrayList<>();
+        switch (mk) {
+            case 1 -> options.add(GTMaterials.NaquadahAlloy);
+            case 2 -> options.add(GTMaterials.Duranium);
+            case 3 -> options.add(GTMaterials.Neutronium);
+            case 4 -> options.add(GTMaterials.Tritanium);
+            default -> {
+                var inf = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:infinity");
+                if (inf != null) options.add(inf);
+            }
+        }
+        options.add(GTMaterials.Neutronium);
+        options.add(GTMaterials.TungstenSteel);
+        for (var m : options) {
+            if (com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper.getBlock(
+                    com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt, m) != null) return m;
+        }
+        return GTMaterials.Steel;
+    }
+
+    private static MultiblockMachineDefinition compactFusion(int mk) {
+        int tier = LuV + mk - 1;
+        String roman = com.omnicrox.gtaa.common.machine.multiblock.CompactFusionMachine.roman(mk);
+        long capacity = com.omnicrox.gtaa.common.machine.multiblock.CompactFusionMachine.capableStartup(mk);
+        String oc = mk >= 4 ? "4/4" : "2/2";
+        return REGISTRATE.multiblock("compact_fusion_mk" + mk,
+                        h -> new com.omnicrox.gtaa.common.machine.multiblock.CompactFusionMachine(h, tier))
+                .langValue("Compact Fusion Computer MK-" + roman)
+                .rotationState(RotationState.ALL)
+                .recipeType(GTRecipeTypes.FUSION_RECIPES)
+                .recipeModifiers(DEFAULT_ENVIRONMENT_REQUIREMENT,
+                        com.omnicrox.gtaa.common.machine.multiblock.CompactFusionMachine::recipeModifier, BATCH_MODE)
+                .tooltips(
+                        Component.literal("\u00a77Machine Type: \u00a7eFusion Reactor"),
+                        Component.literal("\u00a7664\u00a77 + (Machine Tier - Recipe Tier) * \u00a7664\u00a77 Parallels"),
+                        Component.literal("\u00a7a" + FormattingUtil.formatNumbers(V[tier] * 2L * mk) + "\u00a77 EU/t and \u00a7e" +
+                                FormattingUtil.formatNumbers(capacity / 32) + "\u00a77 EU capacity per \u00a7bEnergy Hatch"),
+                        Component.literal("\u00a77The total combined EU capacity must be greater than the recipe start cost to ignite"),
+                        Component.literal("\u00a77Can only run " + VNF[tier] + "\u00a77 recipes and below"),
+                        Component.literal("\u00a77Up to \u00a7e32\u00a77 Energy Hatches (" + VNF[tier] + "\u00a77 or better): \u00a7e" +
+                                FormattingUtil.formatNumbers(capacity) + "\u00a77 EU total"),
+                        Component.literal("\u00a7dPerforms " + oc + " Perfect Overclocks"),
+                        Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
+                .appearanceBlock(() -> compactFusionCasing(mk))
+                .pattern(definition -> {
+                    var casing = blocks(compactFusionCasing(mk));
+                    var glass = blocks(FUSION_GLASS.get());
+                    Block[] energy = java.util.stream.Stream.concat(
+                            PartAbility.INPUT_ENERGY.getBlockRange(tier, MAX).stream(),
+                            PartAbility.INPUT_LASER.getBlockRange(tier, MAX).stream()).toArray(Block[]::new);
+                    return GTAAStructures.pattern("compact_fusion", "compact_fusion")
+                            .where('~', controller(blocks(definition.get())))
+                            .where('C', casing)
+                            .where('D', casing)
+                            .where('H', blocks(GTAABlocks.compactFusionCoil(mk)))
+                            .where('F', frames(compactFusionFrame(mk)))
+                            .where('B', glass)
+                            .where('I', glass.or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(16))
+                                    .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(16))
+                                    .or(abilities(PartAbility.IMPORT_ITEMS)))
+                            .where('E', casing.or(blocks(energy).setMinGlobalLimited(1).setMaxGlobalLimited(32).setPreviewCount(32)))
+                            .where(' ', any())
+                            .build();
+                })
+                .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+                .model(createWorkableCasingMachineModel(compactFusionCasingTexture(mk),
+                        GTAA.id("block/multiblock/compact_fusion_mk" + mk)))
+                .register();
+    }
+
+    public static final MultiblockMachineDefinition[] COMPACT_FUSION = {
+            compactFusion(1), compactFusion(2), compactFusion(3), compactFusion(4), compactFusion(5) };
+
     public static void init() {}
 }

@@ -28,6 +28,7 @@ public class GTAARecipes {
         spaceElevator(provider);
         GTAASpaceMining.init(provider);
         GTAAFusion.init(provider);
+        compactFusion(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
@@ -455,5 +456,48 @@ public class GTAARecipes {
                 .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.DYSON_SWARM_MODULE.asStack())
                 .inputFluids(GTMaterials.RocketFuel.getFluid(1000))
                 .duration(200).EUt(VA[UEV]).save(provider);
+    }
+
+    private static void compactFusion(Consumer<FinishedRecipe> provider) {
+        var plates = new com.gregtechceu.gtceu.api.data.chemical.material.Material[] { null,
+                GTMaterials.NaquadahAlloy, GTMaterials.Duranium, GTMaterials.Tritanium, GTMaterials.Neutronium,
+                GTAAMaterials.METASTABLE_OGANESSON };
+        var wires = new com.gregtechceu.gtceu.api.data.chemical.material.Material[] { null,
+                GTMaterials.IndiumTinBariumTitaniumCuprate, GTMaterials.UraniumRhodiumDinaquadide,
+                GTMaterials.EnrichedNaquadahTriniumEuropiumDuranide, GTMaterials.RutheniumTriniumAmericiumNeutronate,
+                GTMaterials.RutheniumTriniumAmericiumNeutronate };
+        var circuits = java.util.List.of(CustomTags.LuV_CIRCUITS, CustomTags.LuV_CIRCUITS, CustomTags.ZPM_CIRCUITS,
+                CustomTags.UV_CIRCUITS, CustomTags.UHV_CIRCUITS, CustomTags.UEV_CIRCUITS);
+        var fieldGens = java.util.List.of(GTItems.FIELD_GENERATOR_LuV, GTItems.FIELD_GENERATOR_LuV, GTItems.FIELD_GENERATOR_ZPM,
+                GTItems.FIELD_GENERATOR_UV, GTItems.FIELD_GENERATOR_UHV, GTItems.FIELD_GENERATOR_UEV);
+        var fusionComputers = java.util.List.of(GTMultiMachines.FUSION_REACTOR[LuV], GTMultiMachines.FUSION_REACTOR[LuV],
+                GTMultiMachines.FUSION_REACTOR[ZPM], GTMultiMachines.FUSION_REACTOR[UV],
+                GTAAMachines.FUSION_REACTOR[UHV], GTAAMachines.FUSION_REACTOR[UEV]);
+        for (int mk = 1; mk <= 5; mk++) {
+            int tier = LuV + mk - 1;
+            // coils: 560 per reactor, so 2 per craft and fairly cheap
+            var coil = ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:compact_fusion_coil_mk" + mk);
+            if (mk > 1) coil.inputItems(GTAABlocks.compactFusionCoil(mk - 1).asItem(), 2);
+            coil.inputItems(plate, plates[mk], 4)
+                    .inputItems(wireGtSingle, wires[mk], 4)
+                    .inputItems(circuits.get(mk), 1)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(L))
+                    .outputItems(new net.minecraft.world.item.ItemStack(GTAABlocks.compactFusionCoil(mk), 2))
+                    .duration(100).EUt(VA[tier]).save(provider);
+            // controller: the normal fusion computer of the same tier, compressed
+            var b = (mk == 5 ? GTAARecipeTypes.SPACE_ASSEMBLER : ASSEMBLY_LINE_RECIPES)
+                    .recipeBuilder("gtapexadditions:compact_fusion_mk" + mk)
+                    .inputItems(fusionComputers.get(mk).asStack())
+                    .inputItems(new net.minecraft.world.item.ItemStack(GTAABlocks.compactFusionCoil(mk), 16))
+                    .inputItems(fieldGens.get(mk), 4)
+                    .inputItems(circuits.get(mk), 16)
+                    .inputItems(plateDense, plates[mk], 8)
+                    .inputItems(wireGtSingle, wires[mk], 32)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                    .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 16));
+            if (mk == 5) b.addData(GTAARecipeTypes.MODULE_TIER, 1);
+            b.outputItems(GTAAMachines.COMPACT_FUSION[mk - 1].asStack())
+                    .duration(2400).EUt(VA[tier]).save(provider);
+        }
     }
 }

@@ -82,6 +82,7 @@ public class GTAA {
                 GTAAMachines.SPACE_ELEVATOR.getPatternFactory().get();
                 GTAAMachines.SPACE_ELEVATOR_EXTENDED_PATTERN.get();
                 GTAAMachines.SPACE_ASSEMBLER_MK1.getPatternFactory().get();
+                for (var cf : GTAAMachines.COMPACT_FUSION) cf.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

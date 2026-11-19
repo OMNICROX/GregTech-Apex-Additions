@@ -25,6 +25,23 @@ public class GTAABlocks {
     public static final BlockEntry<Block> FUSION_CASING_MK5 = casing("fusion_casing_mk5", "Fusion Machine Casing MK V");
     public static final BlockEntry<Block> FUSION_COIL_MK5 = casing("fusion_coil_mk5", "Ultimate Fusion Coil");
 
+    // Compact Fusion Computers - coil textures from GoodGenerator (GT5-Unofficial)
+    public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK1 = casing("compact_fusion_coil_mk1", "Compact Fusion Coil");
+    public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK2 = casing("compact_fusion_coil_mk2", "Advanced Compact Fusion Coil");
+    public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK3 = casing("compact_fusion_coil_mk3", "Compact Fusion Coil Mk-II Prototype");
+    public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK4 = casing("compact_fusion_coil_mk4", "Compact Fusion Coil Mk-II");
+    public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK5 = casing("compact_fusion_coil_mk5", "Compact Fusion Coil Mk-II Finaltype");
+
+    public static Block compactFusionCoil(int mk) {
+        return switch (mk) {
+            case 1 -> COMPACT_FUSION_COIL_MK1.get();
+            case 2 -> COMPACT_FUSION_COIL_MK2.get();
+            case 3 -> COMPACT_FUSION_COIL_MK3.get();
+            case 4 -> COMPACT_FUSION_COIL_MK4.get();
+            default -> COMPACT_FUSION_COIL_MK5.get();
+        };
+    }
+
     // Antimatter (SASS / SLAM) - textures from GoodGenerator (GT5-Unofficial)
     public static final BlockEntry<Block> MAGNETIC_FLUX_CASING = casing("magnetic_flux_casing", "Magnetic Flux Casing");
     public static final BlockEntry<Block> GRAVITY_STABILIZATION_CASING = casing("gravity_stabilization_casing", "Gravity Stabilization Casing");
