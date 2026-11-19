@@ -33,6 +33,7 @@ public class GTAARecipes {
         GTAAComponentAssembly.init(provider);
         componentAssemblyLine(provider);
         GTAAQft.init(provider);
+        GTAAPurification.init(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);

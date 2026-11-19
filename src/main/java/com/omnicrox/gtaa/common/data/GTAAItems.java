@@ -51,5 +51,10 @@ public class GTAAItems {
         }
     }
 
+    public static final ItemEntry<Item> ACTIVATED_CARBON_FILTER_MESH = REGISTRATE.item("activated_carbon_filter_mesh", Item::new)
+            .lang("Activated Carbon Filter Mesh").model(NonNullBiConsumer.noop()).register();
+    public static final ItemEntry<Item> QUARK_CREATION_CATALYST = REGISTRATE.item("quark_creation_catalyst", Item::new)
+            .lang("Quark Creation Catalyst").model(NonNullBiConsumer.noop()).register();
+
     public static void init() {}
 }

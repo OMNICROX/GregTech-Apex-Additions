@@ -22,6 +22,9 @@ public class GTAARecipeTypes {
     public static GTRecipeType NAQUADAH_REACTOR;
     public static GTRecipeType COMPONENT_ASSEMBLY_LINE;
     public static GTRecipeType QUANTUM_FORCE_TRANSFORMER;
+    /** index 1..8 */
+    public static final GTRecipeType[] PURIFICATION = new GTRecipeType[9];
+    public static GTRecipeType PURIFICATION_PLANT;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -77,5 +80,17 @@ public class GTAARecipeTypes {
                 .addDataInfo(d -> "Manipulator tier " + d.getInt("qft_tier") + ", focus tier " + d.getInt("qft_focus"))
                 .addDataInfo(d -> "Catalyst: " + d.getString("qft_catalyst").replace("gtapexadditions:", ""))
                 .setMaxTooltips(6);
+        String[] unit = { "", "Clarifier", "Ozonation", "Flocculation", "pH Adjustment", "Extreme Temperature Fluctuation",
+                "High Energy Laser Purification", "Residual Decontaminant Degasser", "Absolute Baryonic Perfection" };
+        for (int g = 1; g <= 8; g++) {
+            PURIFICATION[g] = register("purification_grade_" + g, "multiblock", "Purification: " + unit[g])
+                    .setMaxIOSize(9, 4, 4, 2)
+                    .setEUIO(IO.IN)
+                    .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                    .addDataInfo(d -> "Base success chance: " + d.getInt("pur_chance") + "%")
+                    .setMaxTooltips(4);
+        }
+        PURIFICATION_PLANT = register("purification_plant", "multiblock", "Water Purification Plant")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
     }
 }

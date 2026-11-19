@@ -87,6 +87,10 @@ public class GTAA {
                 GTAAMachines.NAQUADAH_FUEL_REFINERY.getPatternFactory().get();
                 GTAAMachines.COMPONENT_ASSEMBLY_LINE.getPatternFactory().get();
                 GTAAMachines.QUANTUM_FORCE_TRANSFORMER.getPatternFactory().get();
+                for (var m : new com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition[] { GTAAMachines.PURIFICATION_PLANT,
+                        GTAAMachines.PURIFICATION_CLARIFIER, GTAAMachines.PURIFICATION_OZONATION, GTAAMachines.PURIFICATION_FLOCCULATION,
+                        GTAAMachines.PURIFICATION_PH, GTAAMachines.PURIFICATION_PLASMA, GTAAMachines.PURIFICATION_UV,
+                        GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC }) m.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

@@ -767,5 +767,189 @@ public class GTAAMachines {
                     GTAA.id("block/multiblock/quantum_force_transformer")))
             .register();
 
+    // ---------------- Water Purification Plant (GT5-Unofficial) ----------------
+    private static TraceabilityPredicate waterOrAir() {
+        return new TraceabilityPredicate(st -> st.getBlockState().isAir() ||
+                st.getBlockState().getFluidState().is(net.minecraft.tags.FluidTags.WATER),
+                () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] {
+                        com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(net.minecraft.world.level.block.Blocks.WATER.defaultBlockState()) });
+    }
+
+    private static TraceabilityPredicate frameOr(com.gregtechceu.gtceu.api.data.chemical.material.Material... mats) {
+        for (var m : mats) {
+            if (m != null && com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper.getBlock(
+                    com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt, m) != null) return frames(m);
+        }
+        return frames(GTMaterials.Steel);
+    }
+
+    public static final MultiblockMachineDefinition PURIFICATION_PLANT = REGISTRATE
+            .multiblock("purification_plant", com.omnicrox.gtaa.common.machine.multiblock.purification.PurificationPlantMachine::new)
+            .langValue("Water Purification Plant")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.PURIFICATION_PLANT)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eWater Purification Plant"),
+                    Component.literal("\u00a77Main controller for the purification units"),
+                    Component.literal("\u00a77Every purification unit within \u00a7e32 blocks\u00a77 links to it automatically"),
+                    Component.literal("\u00a77Powers all linked units from its own energy hatches"),
+                    Component.literal("\u00a77Purified water grades 1-8 are made in the eight units"),
+                    Component.literal("\u00a78Ported from GT New Horizons"))
+            .appearanceBlock(GTAABlocks.PUR_INDUSTRIAL_CASING)
+            .pattern(definition -> GTAAStructures.pattern("purification", "plant")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.PUR_CONCRETE.get()))
+                    .where('B', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()))
+                    .where('C', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('F', waterOrAir())
+                    .where('G', frameOr(GTMaterials.Tungsten))
+                    .where('H', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get())
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
+                            .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/pur_industrial_casing"),
+                    GTAA.id("block/multiblock/purification_plant")))
+            .register();
+
+    private static MultiblockMachineDefinition purUnit(int grade, String id, String name, String key, java.util.function.Supplier<? extends Block> appearance,
+                                                       String texture, String overlay,
+                                                       java.util.function.Function<MultiblockMachineDefinition, com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern> where,
+                                                       Component... extra) {
+        java.util.List<Component> tips = new java.util.ArrayList<>();
+        tips.add(Component.literal("\u00a77Machine Type: \u00a7ePurification Unit (Grade " + grade + ")"));
+        tips.addAll(java.util.List.of(extra));
+        tips.add(Component.literal("\u00a77Must be within \u00a7e32 blocks\u00a77 of a Water Purification Plant, which powers it"));
+        tips.add(Component.literal("\u00a77Water boost: keep some Grade " + (grade + 1) + " water in the input for \u00a7a+15%\u00a77 success"));
+        tips.add(Component.literal("\u00a77Up to \u00a7664\u00a77 parallels"));
+        tips.add(Component.literal("\u00a78Ported from GT New Horizons"));
+        return REGISTRATE.multiblock(id, h -> new com.omnicrox.gtaa.common.machine.multiblock.purification.PurificationUnitMachine(h, grade))
+                .langValue(name)
+                .rotationState(RotationState.NON_Y_AXIS)
+                .recipeType(GTAARecipeTypes.PURIFICATION[grade])
+                .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.purification.PurificationUnitMachine::recipeModifier)
+                .tooltips(tips.toArray(Component[]::new))
+                .appearanceBlock(appearance)
+                .pattern(definition -> where.apply(definition).where(' ', any()).build())
+                .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+                .model(createWorkableCasingMachineModel(GTAA.id("block/casing/" + texture), overlay.contains(":") ?
+                        new net.minecraft.resources.ResourceLocation(overlay) : GTAA.id(overlay)))
+                .register();
+    }
+
+    private static final String LCR = "gtceu:block/multiblock/large_chemical_reactor";
+
+    private static TraceabilityPredicate fluidIO(Block casing) {
+        return blocks(casing).or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
+                .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
+                .or(abilities(PartAbility.IMPORT_ITEMS)).or(abilities(PartAbility.EXPORT_ITEMS));
+    }
+
+    public static final MultiblockMachineDefinition PURIFICATION_CLARIFIER = purUnit(1, "purification_unit_clarifier",
+            "Clarifier Purification Unit", "clarifier", GTAABlocks.PUR_STERILE_CASING, "pur_sterile_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "clarifier")
+                    .where('~', controller(blocks(d.get())))
+                    .where('H', fluidIO(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('A', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('B', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('C', frameOr(GTMaterials.Iridium))
+                    .where('D', frameOr(GTMaterials.DamascusSteel, GTMaterials.Steel))
+                    .where('W', waterOrAir())
+                    .where('F', blocks(GTBlocks.CASING_GRATE.get())),
+            Component.literal("\u00a77Filters water through Activated Carbon Filter Meshes (used up 1 per cycle)"),
+            Component.literal("\u00a77Base success chance \u00a7a70%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_OZONATION = purUnit(2, "purification_unit_ozonation",
+            "Ozonation Purification Unit", "ozonation", GTAABlocks.PUR_OZONE_CASING, "pur_ozone_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "ozonation")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', fluidIO(GTAABlocks.PUR_OZONE_CASING.get()))
+                    .where('B', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()))
+                    .where('C', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('E', frameOr(GTMaterials.TungstenSteel))
+                    .where('O', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+            Component.literal("\u00a77Uses Ozone: \u00a7e128k / 256k / 512k / 1M L\u00a77 per cycle for \u00a7a20 / 40 / 60 / 80%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_FLOCCULATION = purUnit(3, "purification_unit_flocculation",
+            "Flocculation Purification Unit", "flocculation", GTAABlocks.PUR_FLOCCULATION_CASING, "pur_flocculation_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "flocculation")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', blocks(GTBlocks.CASING_GRATE.get()))
+                    .where('B', fluidIO(GTAABlocks.PUR_FLOCCULATION_CASING.get()))
+                    .where('C', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('D', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()))
+                    .where('E', frameOr(GTMaterials.Neutronium))
+                    .where('W', waterOrAir())
+                    .where('G', blocks(GTBlocks.CASING_TEMPERED_GLASS.get())),
+            Component.literal("\u00a77Uses \u00a7e100k L\u00a77 Polyaluminium Chloride per cycle for \u00a7a90%\u00a77 (10% without)"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_PH = purUnit(4, "purification_unit_ph_adjustment",
+            "pH Neutralization Purification Unit", "ph_adjustment", GTAABlocks.PUR_NAQUADAH_CASING, "pur_naquadah_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "ph_adjustment")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', blocks(GTAABlocks.PUR_CORROSION_CASING.get()))
+                    .where('B', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()))
+                    .where('E', frameOr(GTMaterials.NaquadahAlloy))
+                    .where('G', blocks(GTAABlocks.PUR_PH_GLASS.get()))
+                    .where('H', blocks(GTAABlocks.PUR_PH_GLASS.get()))
+                    .where('I', fluidIO(GTAABlocks.PUR_NAQUADAH_CASING.get()))
+                    .where('R', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()))
+                    .where('X', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).or(abilities(PartAbility.IMPORT_ITEMS)))
+                    .where('Y', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+            Component.literal("\u00a77Balances the water with Sodium Hydroxide and Hydrochloric Acid for \u00a7a95%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_PLASMA = purUnit(5, "purification_unit_plasma_heater",
+            "Extreme Temperature Fluctuation Purification Unit", "plasma_heater", GTAABlocks.PUR_PLASMA_HEATING_CASING,
+            "pur_plasma_heating_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "plasma_heater")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
+                    .where('B', fluidIO(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
+                    .where('D', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('E', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('F', any())
+                    .where('G', frameOr(GTMaterials.NaquadahAlloy))
+                    .where('K', blocks(GTAABlocks.PUR_STERILE_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS)))
+                    .where('P', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+            Component.literal("\u00a77Heats with Helium Plasma and cools with Liquid Helium for \u00a7a95%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_UV = purUnit(6, "purification_unit_uv_treatment",
+            "High Energy Laser Purification Unit", "uv_treatment", GTAABlocks.PUR_NAQUADRIA_CASING, "pur_naquadria_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "uv_treatment")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()))
+                    .where('B', blocks(GTAABlocks.PUR_UV_GLASS.get()))
+                    .where('C', blocks(GTAABlocks.PUR_UV_EMITTER.get()))
+                    .where('D', frameOr(GTMaterials.Tritanium, GTMaterials.Neutronium))
+                    .where('L', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()).or(abilities(PartAbility.IMPORT_ITEMS)))
+                    .where('I', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()))
+                    .where('H', fluidIO(GTAABlocks.PUR_NAQUADRIA_CASING.get())),
+            Component.literal("\u00a77Needs all 9 purification lenses in an input bus (not used up) for \u00a7a95%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_DEGASSER = purUnit(7, "purification_unit_degasser",
+            "Residual Decontaminant Degasser Purification Unit", "degasser", GTAABlocks.PUR_PLASMA_HEATING_CASING,
+            "pur_plasma_heating_casing", LCR,
+            d -> GTAAStructures.pattern("purification", "degasser")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', fluidIO(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
+                    .where('B', blocks(GTAABlocks.PUR_INFINITY_GLASS.get()))
+                    .where('C', frameOr(GTMaterials.Neutronium)),
+            Component.literal("\u00a77Flushes out residual gases with noble gases and a superconductor for \u00a7a95%"));
+
+    public static final MultiblockMachineDefinition PURIFICATION_BARYONIC = purUnit(8, "purification_unit_baryonic_perfection",
+            "Absolute Baryonic Perfection Purification Unit", "baryonic_perfection", GTAABlocks.PUR_QUARK_CONTAINMENT,
+            "pur_quark_containment", "block/multiblock/baryonic_perfection",
+            d -> GTAAStructures.pattern("purification", "baryonic_perfection")
+                    .where('~', controller(blocks(d.get())))
+                    .where('A', fluidIO(GTAABlocks.PUR_QUARK_CONTAINMENT.get()))
+                    .where('B', blocks(GTAABlocks.PUR_QUARK_PIPE.get()))
+                    .where('C', blocks(GTAABlocks.PUR_QUARK_RELEASE.get()))
+                    .where('D', blocks(GTAABlocks.PUR_QUARK_GLASS.get()))
+                    .where('E', frameOr(GTMaterials.Neutronium)),
+            Component.literal("\u00a77Uses Quark Creation Catalysts and Molten Neutronium for \u00a7a95%"));
+
     public static void init() {}
 }

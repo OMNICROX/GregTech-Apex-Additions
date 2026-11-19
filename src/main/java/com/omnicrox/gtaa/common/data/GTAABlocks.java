@@ -97,6 +97,26 @@ public class GTAABlocks {
         return new Block[] { QFT_SHIELDING_T1.get(), QFT_SHIELDING_T2.get(), QFT_SHIELDING_T3.get(), QFT_SHIELDING_T4.get() };
     }
 
+    // Purification Plant - textures from GT5-Unofficial
+    public static final BlockEntry<Block> PUR_CONCRETE = casing("pur_concrete", "Industrial Strength Concrete");
+    public static final BlockEntry<Block> PUR_INDUSTRIAL_CASING = casing("pur_industrial_casing", "Industrial Water Plant Casing");
+    public static final BlockEntry<Block> PUR_STERILE_CASING = casing("pur_sterile_casing", "Reinforced Sterile Water Plant Casing");
+    public static final BlockEntry<Block> PUR_FLOCCULATION_CASING = casing("pur_flocculation_casing", "Reinforced Sterile Water Plant Casing (Flocculation)");
+    public static final BlockEntry<Block> PUR_NAQUADAH_CASING = casing("pur_naquadah_casing", "Naquadah Reinforced Water Plant Casing");
+    public static final BlockEntry<Block> PUR_CORROSION_CASING = casing("pur_corrosion_casing", "Extreme Corrosion Resistant Casing");
+    public static final BlockEntry<Block> PUR_PRESSURE_CASING = casing("pur_pressure_casing", "High Pressure Resistant Casing");
+    public static final BlockEntry<Block> PUR_OZONE_CASING = casing("pur_ozone_casing", "Ozonation Casing");
+    public static final BlockEntry<Block> PUR_PLASMA_HEATING_CASING = casing("pur_plasma_heating_casing", "Plasma Heating Casing");
+    public static final BlockEntry<Block> PUR_NAQUADRIA_CASING = casing("pur_naquadria_casing", "Naquadria-Reinforced Water Plant Casing");
+    public static final BlockEntry<Block> PUR_UV_EMITTER = casing("pur_uv_emitter", "UV Backlight Sterilizer Casing");
+    public static final BlockEntry<Block> PUR_QUARK_PIPE = casing("pur_quark_pipe", "Quark Exclusion Casing");
+    public static final BlockEntry<Block> PUR_QUARK_RELEASE = casing("pur_quark_release", "Quark Release Chamber");
+    public static final BlockEntry<Block> PUR_QUARK_CONTAINMENT = casing("pur_quark_containment", "Femtometer-Calibrated Particle Beam Casing");
+    public static final BlockEntry<Block> PUR_PH_GLASS = glass("pur_ph_glass", "pH-Resistant Glass");
+    public static final BlockEntry<Block> PUR_UV_GLASS = glass("pur_uv_glass", "Neutronium-Coated UV-Resistant Glass");
+    public static final BlockEntry<Block> PUR_INFINITY_GLASS = glass("pur_infinity_glass", "Omni-Purpose Infinity Fused Glass");
+    public static final BlockEntry<Block> PUR_QUARK_GLASS = glass("pur_quark_glass", "Quark Containment Glass");
+
     public static Block compactFusionCoil(int mk) {
         return switch (mk) {
             case 1 -> COMPACT_FUSION_COIL_MK1.get();

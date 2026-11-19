@@ -30,6 +30,10 @@ public class GTAAMaterials {
     /** index 1..6 = Mk I..VI */
     public static final Material[] NAQUADAH_FUEL = new Material[7];
     public static final Material[] NAQUADAH_FUEL_DEPLETED = new Material[7];
+    // purification plant (GT5-Unofficial)
+    /** index 1..8 */
+    public static final Material[] PURIFIED_WATER = new Material[9];
+    public static Material OZONE, POLYALUMINIUM_CHLORIDE, FLOCCULATION_WASTE, ACTIVATED_CARBON, PRE_ACTIVATED_CARBON, DIRTY_ACTIVATED_CARBON;
     public static Material NAQUADAH_FUEL_MKV_DEPLETED;
     public static Material NAQUADAH_FUEL_MKVI_DEPLETED;
 
@@ -103,6 +107,21 @@ public class GTAAMaterials {
             if (i <= 4) NAQUADAH_FUEL_DEPLETED[i] = fluid("naquadah_based_liquid_fuel_" + mk[i] + "_depleted",
                     "Naquadah Based Liquid Fuel " + mkName[i] + " (Depleted)", 0x333333 + 0x050505 * i, 300, false);
         }
+        String[] grade = { "", "Filtered", "Ozonated", "Flocculated", "pH Neutralized", "Extreme-Temperature Treated",
+                "Ultraviolet Treated Electrically Neutral", "Degassed Decontaminant-Free", "Subatomically Perfect" };
+        int[] gcol = { 0, 0x3E6FE0, 0x3A8CE0, 0x37A6E0, 0x34C0E0, 0x31D8E0, 0x2EE0C8, 0x2BE0A8, 0xE0E0FF };
+        for (int g = 1; g <= 8; g++) PURIFIED_WATER[g] = fluid("grade_" + g + "_purified_water",
+                "Grade " + g + " Purified Water (" + grade[g] + ")", gcol[g], 300, false);
+        OZONE = new Material.Builder(GTAA.id("ozone")).langValue("Ozone").gas(new FluidBuilder()).color(0x80C0FF)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        POLYALUMINIUM_CHLORIDE = fluid("polyaluminium_chloride", "Polyaluminium Chloride", 0xD0D0B0, 300, false);
+        FLOCCULATION_WASTE = fluid("flocculation_waste", "Flocculation Waste Liquid", 0x6A6A40, 300, false);
+        ACTIVATED_CARBON = new Material.Builder(GTAA.id("activated_carbon")).langValue("Activated Carbon").dust()
+                .color(0x2A2A2A).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        PRE_ACTIVATED_CARBON = new Material.Builder(GTAA.id("pre_activated_carbon")).langValue("Pre-Activated Carbon").dust()
+                .color(0x3A3A2A).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        DIRTY_ACTIVATED_CARBON = new Material.Builder(GTAA.id("dirty_activated_carbon")).langValue("Dirty Activated Carbon").dust()
+                .color(0x4A3A2A).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
         NAQUADAH_FUEL_DEPLETED[5] = NAQUADAH_FUEL_MKV_DEPLETED;
         NAQUADAH_FUEL_DEPLETED[6] = NAQUADAH_FUEL_MKVI_DEPLETED;
     }
