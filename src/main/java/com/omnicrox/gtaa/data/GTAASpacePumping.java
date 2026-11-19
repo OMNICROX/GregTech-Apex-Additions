@@ -56,6 +56,8 @@ public final class GTAASpacePumping {
         gas(provider, 2, VA[UEV], f(Krypton, 32_000));
         gas(provider, 2, VA[UEV], f(Xenon, 32_000));
         gas(provider, 2, VA[UEV], f(Radon, 16_000));
+        // appended last so the circuit numbers of the gases above don't change
+
         // Mk-III
         gas(provider, 3, VA[UXV], f(Fluorine, 256_000));
         gas(provider, 3, VA[UXV], f(Oxygen, 512_000));
@@ -63,5 +65,6 @@ public final class GTAASpacePumping {
             gas(provider, 3, VA[UXV], Helium.getFluid(FluidStorageKeys.LIQUID, 256_000));
         } catch (Throwable ignored) {}
         gas(provider, 3, VA[UXV], f(GTAAMaterials.SPATIALLY_ENLARGED_FLUID, 1_000));
+        gas(provider, 2, VA[UEV], f(Oganesson, 4_000)); // feeds Metastable Oganesson (MK IV / MK V fusion)
     }
 }

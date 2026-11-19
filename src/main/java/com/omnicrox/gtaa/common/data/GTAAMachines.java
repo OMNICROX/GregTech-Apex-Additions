@@ -456,7 +456,7 @@ public class GTAAMachines {
             new SpaceElevatorModuleMachine.Stats(UEV, 2, 2, 16, 1.0f, moduleBuffer(UEV, 16)),
             GTAARecipeTypes.SPACE_PUMPING,
             pumpTooltips("Gas giants are just big fuel tanks", UEV, 16, "\u00a79Motor Mk-II",
-                    "+ Helium-3, Tritium, Neon, Argon, Krypton, Xenon, Radon"));
+                    "+ Helium-3, Tritium, Neon, Argon, Krypton, Xenon, Radon, Oganesson"));
 
     public static final MultiblockMachineDefinition SPACE_PUMP_MK3 = seModule("space_pumping_module_mk3",
             "Space Pumping Module Mk-III",

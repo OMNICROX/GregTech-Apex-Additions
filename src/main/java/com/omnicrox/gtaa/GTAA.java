@@ -59,6 +59,7 @@ public class GTAA {
     }
 
     private void postMaterials(com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent event) {
+        GTAAMaterials.addFusionFluids();
         GTAAMaterials.resolveExternal();
     }
 

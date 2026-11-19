@@ -27,6 +27,7 @@ public class GTAARecipes {
         antimatter(provider);
         spaceElevator(provider);
         GTAASpaceMining.init(provider);
+        GTAAFusion.init(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
@@ -75,6 +76,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
                 .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 32))
+                .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 4))
                 .outputItems(GTAABlocks.FUSION_COIL_MK5.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(600).EUt(VA[UHV]).save(provider);
@@ -85,6 +87,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.FIELD_GENERATOR_UEV, 4)
                 .inputItems(plateDense, GTMaterials.Neutronium, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 16))
                 .outputItems(GTAAMachines.FUSION_REACTOR[UEV].asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(1200).EUt(VA[UEV]).save(provider);
@@ -125,6 +128,7 @@ public class GTAARecipes {
                 .inputItems(plateDense, GTMaterials.Neutronium, 8)
                 .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 16))
+                .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 16))
                 .outputItems(GTAAMachines.ANTIMATTER_HATCH.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(600).EUt(VA[UEV]).save(provider);
@@ -135,6 +139,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.UEV_CIRCUITS, 8)
                 .inputItems(GTItems.GRAVI_STAR, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 64))
                 .outputItems(GTAAMachines.ANTIMATTER_FORGE.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(2400).EUt(VA[UEV]).save(provider);
@@ -145,6 +150,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.UEV_CIRCUITS, 8)
                 .inputItems(GTItems.EMITTER_UEV, 8)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 64))
                 .outputItems(GTAAMachines.ANTIMATTER_GENERATOR.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(2400).EUt(VA[UEV]).save(provider);
