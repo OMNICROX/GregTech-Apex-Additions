@@ -26,6 +26,8 @@ public class GTAARecipeTypes {
     public static final GTRecipeType[] PURIFICATION = new GTRecipeType[9];
     public static GTRecipeType PURIFICATION_PLANT;
     public static GTRecipeType ENTITY_CRUSHER;
+    public static GTRecipeType CULTIVATION;
+    public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -95,5 +97,16 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + ".draconic_fusion_crafter", "Draconic Fusion Crafting");
+        DRACONIC_FUSION = new com.omnicrox.gtaa.api.DefcRecipeType(GTAA.id("draconic_fusion_crafter"), "multiblock");
+        GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, DRACONIC_FUSION.registryName, DRACONIC_FUSION);
+        GTRegistries.register(BuiltInRegistries.RECIPE_SERIALIZER, DRACONIC_FUSION.registryName, new GTRecipeSerializer());
+        GTRegistries.RECIPE_TYPES.register(DRACONIC_FUSION.registryName, DRACONIC_FUSION);
+        DRACONIC_FUSION.setMaxIOSize(18, 1, 0, 0).setEUIO(IO.IN)
+                .setProgressBar(com.gregtechceu.gtceu.api.gui.GuiTextures.PROGRESS_BAR_FUSION,
+                        com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> "Fusion casing tier: " + data.getInt(com.omnicrox.gtaa.api.DefcRecipeType.TIER_KEY));
     }
 }

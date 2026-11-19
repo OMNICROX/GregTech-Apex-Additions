@@ -1039,5 +1039,102 @@ public class GTAAMachines {
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/distillation_tower")))
             .register();
 
+    // ---------------- Draconic Fusion Crafter (KubaTech) ----------------
+    public static final MultiblockMachineDefinition DRACONIC_FUSION_CRAFTER = REGISTRATE
+            .multiblock("draconic_fusion_crafter", com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine::new)
+            .langValue("Draconic Fusion Crafter")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.DRACONIC_FUSION)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine::recipeModifier,
+                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.PARALLEL_HATCH, com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eFusion Crafter"),
+                    Component.literal("\u00a77Runs every \u00a7dDraconic Evolution\u00a77 fusion crafting recipe, no injectors needed"),
+                    Component.literal("\u00a77Core casings set the highest recipe tier: Draconium, Wyvern, Draconic, Chaotic"),
+                    Component.literal("\u00a77Each core tier above the recipe halves its time"),
+                    Component.literal("\u00a77Chaotic cores need \u00a7eFusion Machine Casing MK II"),
+                    Component.literal("\u00a77Accepts a Parallel Hatch"),
+                    Component.literal("\u00a78Ported from GT New Horizons (KubaTech)"))
+            .appearanceBlock(GTAABlocks.DEFC_CASING)
+            .pattern(definition -> {
+                var casing = blocks(GTAABlocks.DEFC_CASING.get());
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("NN~NN", "NNNNN", "NNNNN", "NNNNN", "NNNNN")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("RRRRR", "R F R", "RFfFR", "R F R", "RRRRR")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("RRRRR", "R F R", "RFfFR", "R F R", "RRRRR")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
+                        .aisle("nnnnn", "nnnnn", "nnnnn", "nnnnn", "nnnnn")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('N', casing.or(autoAbilities(definition.getRecipeTypes()))
+                                .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
+                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('n', casing)
+                        .where('f', blocks(GTBlocks.FUSION_COIL.get()))
+                        .where('F', com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine.fusionCasings())
+                        .where('R', com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine.cores())
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/defc_0"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
+            .register();
+
+    // ---------------- Mystical Cultivation Array (KubaTech EIG) ----------------
+    public static final MultiblockMachineDefinition MYSTICAL_CULTIVATION_ARRAY = REGISTRATE
+            .multiblock("mystical_cultivation_array", com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine::new)
+            .langValue("Mystical Cultivation Array")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.CULTIVATION)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eCrop Farm"),
+                    Component.literal("\u00a77Put seeds in an input bus: each seed is one crop and is never used up"),
+                    Component.literal("\u00a77Works with \u00a7dMystical Agriculture\u00a77 seeds and any normal crop"),
+                    Component.literal("\u00a77Every harvest gives \u00a7e4x\u00a77 a normal crop's drops"),
+                    Component.literal("\u00a77Harvests every 5 s at LV, twice as fast each tier, down to 0.25 s at LuV"),
+                    Component.literal("\u00a77Room for 64 crops at LV, doubling each tier (max 8192)"),
+                    Component.literal("\u00a77Uses 1 L of water per 4 crops each second"),
+                    Component.literal("\u00a78Based on the GT New Horizons Extreme Industrial Greenhouse"))
+            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .pattern(definition -> {
+                var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
+                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
+                        GTBlocks.FUSION_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("aaa~aaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa")
+                        .aisle("aaaaaaa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "aaaaaaa")
+                        .aisle("fgggggf", "g     g", "g     g", "g     g", "f     f", "g     g", "g     g", "g     g", "fgggggf")
+                        .aisle("fgggggf", "g     g", "g     g", "g     g", "f     f", "g     g", "g     g", "g     g", "fgggggf")
+                        .aisle("fgggggf", "g     g", "g     g", "g     g", "f     f", "g     g", "g     g", "g     g", "fgggggf")
+                        .aisle(" fgggf ", " g   g ", " g   g ", " g   g ", " flllf ", " g   g ", " g   g ", " g   g ", " fgggf ")
+                        .aisle("  fff  ", "  ggg  ", "  ggg  ", "  ggg  ", "  fff  ", "  ggg  ", "  ggg  ", "  ggg  ", "  fff  ")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('a', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('g', glass)
+                        .where('f', frames(GTMaterials.StainlessSteel))
+                        .where('l', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP))
+                        .where('d', blocks(net.minecraft.world.level.block.Blocks.FARMLAND, net.minecraft.world.level.block.Blocks.DIRT))
+                        .where('w', waterOrAir())
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_clean_stainless_steel"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+            .register();
+
     public static void init() {}
 }

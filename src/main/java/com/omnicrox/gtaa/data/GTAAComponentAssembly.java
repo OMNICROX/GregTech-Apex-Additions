@@ -246,7 +246,7 @@ public final class GTAAComponentAssembly {
         }
     }
 
-    private static FinishedRecipe wrap(ResourceLocation id, JsonObject json) {
+    static FinishedRecipe wrap(ResourceLocation id, JsonObject json) {
         return new FinishedRecipe() {
             @Override
             public void serializeRecipeData(JsonObject out) {

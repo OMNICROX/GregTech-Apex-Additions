@@ -75,6 +75,7 @@ public class GTAA {
         event.enqueueWork(() -> {
             FusionReactorMachine.registerFusionTier(GTValues.UHV, " (MKIV)");
             FusionReactorMachine.registerFusionTier(GTValues.UEV, " (MKV)");
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.DRACONIC_FUSION.linkProxy();
             if (!net.minecraftforge.fml.loading.FMLEnvironment.production) {
                 // dev self-check: build the big JSON patterns once so mistakes show up at startup
                 GTAAMachines.ANTIMATTER_FORGE.getPatternFactory().get();
@@ -91,7 +92,8 @@ public class GTAA {
                         GTAAMachines.PURIFICATION_CLARIFIER, GTAAMachines.PURIFICATION_OZONATION, GTAAMachines.PURIFICATION_FLOCCULATION,
                         GTAAMachines.PURIFICATION_PH, GTAAMachines.PURIFICATION_PLASMA, GTAAMachines.PURIFICATION_UV,
                         GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC, GTAAMachines.MEGA_DISTILLATION_TOWER,
-                        GTAAMachines.EXTREME_ENTITY_CRUSHER }) m.getPatternFactory().get();
+                        GTAAMachines.EXTREME_ENTITY_CRUSHER, GTAAMachines.DRACONIC_FUSION_CRAFTER,
+                        GTAAMachines.MYSTICAL_CULTIVATION_ARRAY }) m.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

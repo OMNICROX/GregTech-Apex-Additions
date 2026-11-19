@@ -172,6 +172,17 @@ public class GTAABlocks {
         return 0;
     }
 
+    // ---------------- Draconic Fusion Crafter (KubaTech DEFC) ----------------
+    public static final BlockEntry<Block> DEFC_CASING = casing("defc_casing", "Naquadah Alloy Fusion Casing");
+    public static final BlockEntry<Block> DEFC_CORE_T1 = casing("defc_core_t1", "Draconium Fusion Casing");
+    public static final BlockEntry<Block> DEFC_CORE_T2 = casing("defc_core_t2", "Wyvern Fusion Casing");
+    public static final BlockEntry<Block> DEFC_CORE_T3 = casing("defc_core_t3", "Awakened Draconium Fusion Casing");
+    public static final BlockEntry<Block> DEFC_CORE_T4 = casing("defc_core_t4", "Chaotic Fusion Casing");
+
+    public static Block[] defcCores() {
+        return new Block[] { DEFC_CORE_T1.get(), DEFC_CORE_T2.get(), DEFC_CORE_T3.get(), DEFC_CORE_T4.get() };
+    }
+
     /** Plain casing. Blockstate / models / loot are static files in resources (no datagen needed). */
     public static BlockEntry<Block> casing(String name, String lang) {
         return REGISTRATE.block(name, Block::new)
