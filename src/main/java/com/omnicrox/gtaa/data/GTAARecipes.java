@@ -29,6 +29,7 @@ public class GTAARecipes {
         GTAASpaceMining.init(provider);
         GTAAFusion.init(provider);
         compactFusion(provider);
+        GTAANaquadah.init(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
@@ -219,18 +220,7 @@ public class GTAARecipes {
                     .duration(400).EUt(VA[UEV]).fusionStartEU(15_000_000_000L).save(provider);
         }
 
-        // --- activation stabilizers (placeholder until the Naquadah reactor line exists) ---
-        MIXER_RECIPES.recipeBuilder("gtapexadditions:naquadah_fuel_mkv_depleted")
-                .inputItems(dust, GTMaterials.Naquadria, 4)
-                .inputItems(dust, GTMaterials.NaquadahEnriched, 4)
-                .inputFluids(GTMaterials.Radon.getFluid(1000))
-                .outputFluids(GTAAMaterials.NAQUADAH_FUEL_MKV_DEPLETED.getFluid(1000))
-                .duration(400).EUt(VA[UHV]).save(provider);
-        MIXER_RECIPES.recipeBuilder("gtapexadditions:naquadah_fuel_mkvi_depleted")
-                .inputItems(dust, GTMaterials.Neutronium, 1)
-                .inputFluids(GTAAMaterials.NAQUADAH_FUEL_MKV_DEPLETED.getFluid(1000))
-                .outputFluids(GTAAMaterials.NAQUADAH_FUEL_MKVI_DEPLETED.getFluid(1000))
-                .duration(400).EUt(VA[UEV]).save(provider);
+        // activation stabilizers: depleted MkV / MkVI now come out of the Large Naquadah Reactor
     }
 
     private static void spaceElevator(Consumer<FinishedRecipe> provider) {

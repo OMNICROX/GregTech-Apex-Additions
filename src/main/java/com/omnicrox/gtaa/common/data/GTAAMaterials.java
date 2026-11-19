@@ -21,6 +21,15 @@ public class GTAAMaterials {
     public static Material SPACETIME;
     public static Material SPATIALLY_ENLARGED_FLUID;
     public static Material METASTABLE_OGANESSON;
+    // naquadah fuel line (GoodGenerator, MIT)
+    public static Material URANIUM_FUEL, URANIUM_FUEL_EXCITED, URANIUM_FUEL_DEPLETED;
+    public static Material THORIUM_FUEL, THORIUM_FUEL_EXCITED, THORIUM_FUEL_DEPLETED;
+    public static Material PLUTONIUM_FUEL, PLUTONIUM_FUEL_EXCITED, PLUTONIUM_FUEL_DEPLETED;
+    public static Material NAQUADAH_SOLUTION, LIGHT_NAQUADAH_FUEL, HEAVY_NAQUADAH_FUEL, NAQUADAH_GAS, NAQUADAH_ASPHALT;
+    public static Material EXTREMELY_UNSTABLE_NAQUADAH, ATOMIC_SEPARATION_CATALYST;
+    /** index 1..6 = Mk I..VI */
+    public static final Material[] NAQUADAH_FUEL = new Material[7];
+    public static final Material[] NAQUADAH_FUEL_DEPLETED = new Material[7];
     public static Material NAQUADAH_FUEL_MKV_DEPLETED;
     public static Material NAQUADAH_FUEL_MKVI_DEPLETED;
 
@@ -61,6 +70,41 @@ public class GTAAMaterials {
                 "Naquadah Based Liquid Fuel MkV (Depleted)", 0x2E3A2E, 300, false);
         NAQUADAH_FUEL_MKVI_DEPLETED = fluid("naquadah_based_liquid_fuel_mkvi_depleted",
                 "Naquadah Based Liquid Fuel MkVI (Depleted)", 0x233023, 300, false);
+
+        URANIUM_FUEL = fluid("uranium_based_liquid_fuel", "Uranium Based Liquid Fuel", 0x00FF00, 300, false);
+        URANIUM_FUEL_EXCITED = fluid("uranium_based_liquid_fuel_excited", "Uranium Based Liquid Fuel (Excited State)", 0x00FF00, 6_000, false);
+        URANIUM_FUEL_DEPLETED = fluid("uranium_based_liquid_fuel_depleted", "Uranium Based Liquid Fuel (Depleted)", 0x6E8C6E, 300, false);
+        THORIUM_FUEL = fluid("thorium_based_liquid_fuel", "Thorium Based Liquid Fuel", 0x50003C, 300, false);
+        THORIUM_FUEL_EXCITED = fluid("thorium_based_liquid_fuel_excited", "Thorium Based Liquid Fuel (Excited State)", 0x50003C, 6_000, false);
+        THORIUM_FUEL_DEPLETED = fluid("thorium_based_liquid_fuel_depleted", "Thorium Based Liquid Fuel (Depleted)", 0x3C2836, 300, false);
+        PLUTONIUM_FUEL = fluid("plutonium_based_liquid_fuel", "Plutonium Based Liquid Fuel", 0xEF1515, 300, false);
+        PLUTONIUM_FUEL_EXCITED = fluid("plutonium_based_liquid_fuel_excited", "Plutonium Based Liquid Fuel (Excited State)", 0xEF1515, 6_000, false);
+        PLUTONIUM_FUEL_DEPLETED = fluid("plutonium_based_liquid_fuel_depleted", "Plutonium Based Liquid Fuel (Depleted)", 0x7A3232, 300, false);
+        NAQUADAH_SOLUTION = fluid("naquadah_solution", "Naquadah Solution", 0x3D3D3D, 300, false);
+        LIGHT_NAQUADAH_FUEL = fluid("light_naquadah_fuel", "Light Naquadah Fuel", 0x92E05A, 300, false);
+        HEAVY_NAQUADAH_FUEL = fluid("heavy_naquadah_fuel", "Heavy Naquadah Fuel", 0x3A7A2B, 300, false);
+        NAQUADAH_GAS = new Material.Builder(GTAA.id("naquadah_gas")).langValue("Naquadah Gas")
+                .gas(new FluidBuilder()).color(0x575757).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        NAQUADAH_ASPHALT = fluid("naquadah_asphalt", "Naquadah Asphalt", 0x1E1E1E, 300, false);
+        EXTREMELY_UNSTABLE_NAQUADAH = new Material.Builder(GTAA.id("extremely_unstable_naquadah"))
+                .langValue("Extremely Unstable Naquadah").dust().color(0x1A2D1A)
+                .iconSet(com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        ATOMIC_SEPARATION_CATALYST = new Material.Builder(GTAA.id("atomic_separation_catalyst"))
+                .langValue("Atomic Separation Catalyst").dust().liquid(new FluidBuilder().temperature(5_000))
+                .color(0xE85AB5).iconSet(com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        String[] mk = { "", "mki", "mkii", "mkiii", "mkiv", "mkv", "mkvi" };
+        String[] mkName = { "", "MkI", "MkII", "MkIII", "MkIV", "MkV", "MkVI" };
+        int[] colors = { 0, 0x3E9100, 0x2B7A00, 0x1A6400, 0x0F4F00, 0x063B00, 0x002A00 };
+        for (int i = 1; i <= 6; i++) {
+            NAQUADAH_FUEL[i] = fluid("naquadah_based_liquid_fuel_" + mk[i], "Naquadah Based Liquid Fuel " + mkName[i],
+                    colors[i], 300 + 1000 * i, false);
+            if (i <= 4) NAQUADAH_FUEL_DEPLETED[i] = fluid("naquadah_based_liquid_fuel_" + mk[i] + "_depleted",
+                    "Naquadah Based Liquid Fuel " + mkName[i] + " (Depleted)", 0x333333 + 0x050505 * i, 300, false);
+        }
+        NAQUADAH_FUEL_DEPLETED[5] = NAQUADAH_FUEL_MKV_DEPLETED;
+        NAQUADAH_FUEL_DEPLETED[6] = NAQUADAH_FUEL_MKVI_DEPLETED;
     }
 
     /** Fluid forms GTCEu doesn't have but the MK IV / MK V fusion recipes need (added in PostMaterialEvent). */
@@ -72,7 +116,8 @@ public class GTAAMaterials {
                 GTMaterials.Lutetium, GTMaterials.Vanadium, GTMaterials.Tellurium, GTMaterials.Zinc,
                 GTMaterials.Osmium, GTMaterials.Silicon, GTMaterials.Manganese, GTMaterials.NaquadahEnriched,
                 GTMaterials.Antimony, GTMaterials.Lithium, GTMaterials.Cobalt, GTMaterials.Magnesium,
-                GTMaterials.Iridium, GTMaterials.Beryllium })
+                GTMaterials.Iridium, GTMaterials.Beryllium, GTMaterials.Praseodymium, GTMaterials.Caesium,
+                GTMaterials.Uranium235, GTMaterials.Naquadah, GTMaterials.Naquadria })
             ensureFluid(m, L);
         for (Material m : new Material[] { GTMaterials.Radon, GTMaterials.Neptunium, GTMaterials.Boron,
                 GTMaterials.Fermium, GTMaterials.Xenon, GTMaterials.Calcium, GTMaterials.Copper, GTMaterials.Bromine,

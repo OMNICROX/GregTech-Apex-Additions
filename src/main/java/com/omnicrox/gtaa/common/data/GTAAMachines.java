@@ -608,5 +608,79 @@ public class GTAAMachines {
     public static final MultiblockMachineDefinition[] COMPACT_FUSION = {
             compactFusion(1), compactFusion(2), compactFusion(3), compactFusion(4), compactFusion(5) };
 
+    // ---------------- Naquadah fuel line (GoodGenerator) ----------------
+    public static final MultiblockMachineDefinition LARGE_NAQUADAH_REACTOR = REGISTRATE
+            .multiblock("large_naquadah_reactor", com.omnicrox.gtaa.common.machine.multiblock.naquadah.LargeNaquadahReactorMachine::new)
+            .langValue("Large Naquadah Reactor")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.NAQUADAH_REACTOR)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.naquadah.LargeNaquadahReactorMachine::recipeModifier)
+            .generator(true)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eNaquadah Reactor"),
+                    Component.literal("\u00a77Generates power from Liquid Nuclear Fuel or Liquid Naquadah Fuel"),
+                    Component.literal("\u00a77Requires \u00a7b2400 L/s Liquid Air\u00a77 to run, otherwise \u00a7cit voids the fuel"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Optionally supply a \u00a79Coolant\u00a77 to increase \u00a7aEfficiency\u00a77:"),
+                    Component.literal("\u00a7920 L/s\u00a77 of \u00a79Tachyon Rich Temporal Fluid\u00a77 : \u00a7a500%"),
+                    Component.literal("\u00a791000 L/s\u00a77 of \u00a79Liquid Helium\u00a77 : \u00a7a275%"),
+                    Component.literal("\u00a791000 L/s\u00a77 of \u00a79Liquid Nitrogen\u00a77 : \u00a7a150%"),
+                    SEPARATOR,
+                    Component.literal("\u00a77Optionally supply a \u00a73Booster\u00a77 to increase \u00a7aOutput Power\u00a77 and \u00a7aFuel Usage\u00a77:"),
+                    Component.literal("\u00a73180 L/s\u00a77 of \u00a73Molten Caesium\u00a77 : \u00a7a2x"),
+                    Component.literal("\u00a73180 L/s\u00a77 of \u00a73Molten Uranium-235\u00a77 : \u00a7a3x"),
+                    Component.literal("\u00a7320 L/s\u00a77 of \u00a73Molten Naquadah\u00a77 : \u00a7a4x"),
+                    Component.literal("\u00a7320 L/s\u00a77 of \u00a73Molten Atomic Separation Catalyst\u00a77 : \u00a7a16x"),
+                    Component.literal("\u00a7320 L/s\u00a77 of \u00a73Spatially Enlarged Fluid\u00a77 : \u00a7a64x"),
+                    Component.literal("\u00a77Needs one Dynamo Hatch or Laser Source Hatch"),
+                    Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
+            .appearanceBlock(GTAABlocks.NAQUADAH_REACTOR_CASING)
+            .pattern(definition -> GTAAStructures.pattern("naquadah", "large_naquadah_reactor")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.NAQUADAH_REACTOR_CASING.get()).setMinGlobalLimited(130)
+                            .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER).setExactLimit(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
+                            .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                    .where('B', blocks(GTAABlocks.FIELD_RESTRICTION_CASING.get()))
+                    .where('C', blocks(GTAABlocks.RADIATION_PROOF_STEEL_FRAME.get()))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_reactor_casing"),
+                    GTAA.id("block/multiblock/naquadah_reactor")))
+            .register();
+
+    public static final MultiblockMachineDefinition NAQUADAH_FUEL_REFINERY = REGISTRATE
+            .multiblock("naquadah_fuel_refinery", com.omnicrox.gtaa.common.machine.multiblock.naquadah.NaquadahFuelRefineryMachine::new)
+            .langValue("Naquadah Fuel Refinery")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.NAQUADAH_FUEL_REFINERY)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.naquadah.NaquadahFuelRefineryMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eNaquadah Fuel Refinery"),
+                    Component.literal("\u00a77Produces Naquadah Fuels"),
+                    Component.literal("\u00a77\u00a764\u00a77 parallels per \u00a7bField Restriction Coil\u00a77 tier"),
+                    SEPARATOR,
+                    Component.literal("\u00a7dPerforms 1 4/4 Perfect Overclock\u00a77 per \u00a7bCoil\u00a77 above \u00a7bRecipe\u00a77 Tier"),
+                    Component.literal("\u00a77All Field Restriction Coils must be the same tier"),
+                    Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
+            .appearanceBlock(GTAABlocks.NAQUADAH_FUEL_REFINERY_CASING)
+            .pattern(definition -> GTAAStructures.pattern("naquadah", "naquadah_fuel_refinery")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.NAQUADAH_FUEL_REFINERY_CASING.get()).setMinGlobalLimited(470)
+                            .or(autoAbilities(definition.getRecipeTypes()))
+                            .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                    .where('B', com.omnicrox.gtaa.common.machine.multiblock.naquadah.NaquadahFuelRefineryMachine.coils())
+                    .where('C', blocks(GTAABlocks.FIELD_RESTRICTION_GLASS.get()))
+                    .where('E', blocks(GTAABlocks.EUROPIUM_RADIATION_PROOF_CASING.get()))
+                    .where('F', blocks(GTAABlocks.RADIATION_PROOF_STEEL_FRAME.get()))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_fuel_refinery_casing"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+            .register();
+
     public static void init() {}
 }

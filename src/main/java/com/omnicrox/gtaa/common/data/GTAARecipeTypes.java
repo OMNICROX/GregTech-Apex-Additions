@@ -18,6 +18,8 @@ public class GTAARecipeTypes {
     public static GTRecipeType SPACE_MINING;
     public static GTRecipeType SPACE_PUMPING;
     public static GTRecipeType DYSON_LAUNCH;
+    public static GTRecipeType NAQUADAH_FUEL_REFINERY;
+    public static GTRecipeType NAQUADAH_REACTOR;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -48,6 +50,17 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(2, 0, 1, 0)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setMaxTooltips(4);
+        NAQUADAH_FUEL_REFINERY = register("naquadah_fuel_refinery", "multiblock", "Naquadah Fuel Refinery")
+                .setMaxIOSize(4, 0, 4, 1)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Needs Field Restriction Coil T" + d.getInt("nfr_coil_tier"))
+                .setMaxTooltips(4);
+        NAQUADAH_REACTOR = register("naquadah_reactor", "multiblock", "Large Naquadah Reactor")
+                .setMaxIOSize(0, 0, 1, 1)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Base output: " + com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(d.getLong("lnr_output")) + " EU/t")
                 .setMaxTooltips(4);
     }
 }

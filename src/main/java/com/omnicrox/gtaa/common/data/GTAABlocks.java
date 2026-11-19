@@ -32,6 +32,29 @@ public class GTAABlocks {
     public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK4 = casing("compact_fusion_coil_mk4", "Compact Fusion Coil Mk-II");
     public static final BlockEntry<Block> COMPACT_FUSION_COIL_MK5 = casing("compact_fusion_coil_mk5", "Compact Fusion Coil Mk-II Finaltype");
 
+    // Naquadah fuel line - textures from GoodGenerator / GT5-Unofficial
+    public static final BlockEntry<Block> NAQUADAH_REACTOR_CASING = casing("naquadah_reactor_casing", "Naquadah Reactor Casing");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_CASING = casing("field_restriction_casing", "Field Restriction Casing");
+    public static final BlockEntry<Block> NAQUADAH_FUEL_REFINERY_CASING = casing("naquadah_fuel_refinery_casing", "Naquadah Fuel Refinery Casing");
+    public static final BlockEntry<Block> EUROPIUM_RADIATION_PROOF_CASING = casing("europium_radiation_proof_casing", "Europium Reinforced Radiation Proof Machine Casing");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_GLASS = glass("field_restriction_glass", "Field Restriction Glass");
+    public static final BlockEntry<Block> RADIATION_PROOF_STEEL_FRAME = glass("radiation_proof_steel_frame", "Radiation Proof Steel Frame Box");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_COIL_T1 = casing("field_restriction_coil_t1", "Field Restriction Coil T1");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_COIL_T2 = casing("field_restriction_coil_t2", "Field Restriction Coil T2");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_COIL_T3 = casing("field_restriction_coil_t3", "Field Restriction Coil T3");
+    public static final BlockEntry<Block> FIELD_RESTRICTION_COIL_T4 = casing("field_restriction_coil_t4", "Field Restriction Coil T4");
+
+    public static Block[] fieldRestrictionCoils() {
+        return new Block[] { FIELD_RESTRICTION_COIL_T1.get(), FIELD_RESTRICTION_COIL_T2.get(),
+                FIELD_RESTRICTION_COIL_T3.get(), FIELD_RESTRICTION_COIL_T4.get() };
+    }
+
+    public static int fieldRestrictionCoilTier(Block b) {
+        Block[] coils = fieldRestrictionCoils();
+        for (int i = 0; i < coils.length; i++) if (coils[i] == b) return i + 1;
+        return 0;
+    }
+
     public static Block compactFusionCoil(int mk) {
         return switch (mk) {
             case 1 -> COMPACT_FUSION_COIL_MK1.get();
@@ -93,6 +116,20 @@ public class GTAABlocks {
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.strength(5.0f, 10.0f).isValidSpawn((s, l, pos, e) -> false))
                 .addLayer(() -> RenderType::solid)
+                .blockstate(NonNullBiConsumer.noop())
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .lang(lang)
+                .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
+                .register();
+    }
+
+    /** see-through casing (glass / frame boxes) */
+    public static BlockEntry<Block> glass(String name, String lang) {
+        return REGISTRATE.block(name, Block::new)
+                .initialProperties(() -> Blocks.GLASS)
+                .properties(p -> p.strength(5.0f, 10.0f).noOcclusion().isValidSpawn((s, l, pos, e) -> false)
+                        .isSuffocating((s, l, pos) -> false).isViewBlocking((s, l, pos) -> false))
+                .addLayer(() -> RenderType::cutout)
                 .blockstate(NonNullBiConsumer.noop())
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
                 .lang(lang)
