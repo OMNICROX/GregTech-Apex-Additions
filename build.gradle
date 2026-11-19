@@ -65,3 +65,13 @@ processResources {
     inputs.properties props
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand props }
 }
+
+// local test only: ./gradlew runServer -Pdevmods  (remaps ../devmods/*.jar into the dev run)
+if (project.hasProperty('devmods')) {
+    repositories { flatDir { dirs '../devmods' } }
+    dependencies {
+        file('../devmods').listFiles().findAll { it.name.endsWith('.jar') }.each { f ->
+            modRuntimeOnly "devmods:${f.name - '.jar'}"
+        }
+    }
+}

@@ -41,6 +41,7 @@ public class GTAA {
         bus.addGenericListener(com.gregtechceu.gtceu.api.recipe.GTRecipeType.class, this::registerRecipeTypes);
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
+        com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
             com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
                     com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);

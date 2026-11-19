@@ -35,16 +35,22 @@ public final class GTAACompatRecipes {
     private static final Item S1 = Items.BARRIER, S2 = Items.STRUCTURE_VOID, S3 = Items.LIGHT, S4 = Items.JIGSAW;
 
     static Consumer<FinishedRecipe> needing(Consumer<FinishedRecipe> provider, String modid, Map<Item, String> swap) {
+        return needing(provider, new String[] { modid }, swap);
+    }
+
+    static Consumer<FinishedRecipe> needing(Consumer<FinishedRecipe> provider, String[] modids, Map<Item, String> swap) {
         return fr -> {
             String text = fr.serializeRecipe().toString();
             for (var e : swap.entrySet())
                 text = text.replace("\"" + BuiltInRegistries.ITEM.getKey(e.getKey()) + "\"", "\"" + e.getValue() + "\"");
             JsonObject json = JsonParser.parseString(text).getAsJsonObject();
             JsonArray conditions = new JsonArray();
-            JsonObject loaded = new JsonObject();
-            loaded.addProperty("type", "forge:mod_loaded");
-            loaded.addProperty("modid", modid);
-            conditions.add(loaded);
+            for (String modid : modids) {
+                JsonObject loaded = new JsonObject();
+                loaded.addProperty("type", "forge:mod_loaded");
+                loaded.addProperty("modid", modid);
+                conditions.add(loaded);
+            }
             json.add("conditions", conditions);
             provider.accept(GTAAComponentAssembly.wrap(fr.getId(), json));
         };
@@ -55,6 +61,24 @@ public final class GTAACompatRecipes {
         cultivation(provider);
         cultivationGuide(provider);
         chaos(provider);
+        angelRing(provider);
+    }
+
+    /** Angel Ring: flight earned in the Aether (Enchanted Gravitite, Golden Feather) plus the ExU Angel Block. */
+    private static void angelRing(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:angel_ring")
+                .inputItems(S1, 4)
+                .inputItems(S2)
+                .inputItems(S3)
+                .inputItems(foil, GTMaterials.Gold, 8)
+                .inputItems(GTItems.EMITTER_HV, 2)
+                .inputItems(CustomTags.HV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.ANGEL_RING.asStack())
+                .duration(600).EUt(VA[HV])
+                .save(needing(provider, new String[] { "aether", "extrautilitiesreborn" }, Map.of(
+                        S1, "aether:enchanted_gravitite", S2, "aether:golden_feather",
+                        S3, "extrautilitiesreborn:angel_block")));
     }
 
     /**
