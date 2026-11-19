@@ -34,6 +34,7 @@ public class GTAARecipes {
         componentAssemblyLine(provider);
         GTAAQft.init(provider);
         GTAAPurification.init(provider);
+        megaAndCrusher(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
@@ -532,5 +533,27 @@ public class GTAARecipes {
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64), GTMaterials.Lubricant.getFluid(4000))
                 .outputItems(GTAAMachines.COMPONENT_ASSEMBLY_LINE.asStack())
                 .duration(2400).EUt(VA[IV]).save(provider);
+    }
+
+    private static void megaAndCrusher(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:mega_distillation_tower")
+                .inputItems(GTMultiMachines.DISTILLATION_TOWER.asStack(16))
+                .inputItems(GTItems.ELECTRIC_PUMP_ZPM, 16)
+                .inputItems(CustomTags.ZPM_CIRCUITS, 16)
+                .inputItems(GTItems.FIELD_GENERATOR_ZPM, 4)
+                .inputItems(plateDense, GTMaterials.NaquadahAlloy, 16)
+                .inputItems(pipeLargeFluid, GTMaterials.Polybenzimidazole, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .outputItems(GTAAMachines.MEGA_DISTILLATION_TOWER.asStack())
+                .duration(2400).EUt(VA[ZPM]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_entity_crusher")
+                .inputItems(GTItems.ELECTRIC_MOTOR_IV, 8)
+                .inputItems(CustomTags.IV_CIRCUITS, 4)
+                .inputItems(net.minecraft.world.item.Items.DIAMOND_SWORD, 4)
+                .inputItems(GTBlocks.CASING_STEEL_SOLID.asItem(), 16)
+                .inputItems(plate, GTMaterials.TungstenSteel, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
+                .outputItems(GTAAMachines.EXTREME_ENTITY_CRUSHER.asStack())
+                .duration(600).EUt(VA[IV]).save(provider);
     }
 }

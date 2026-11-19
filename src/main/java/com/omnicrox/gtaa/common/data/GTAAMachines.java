@@ -951,5 +951,93 @@ public class GTAAMachines {
                     .where('E', frameOr(GTMaterials.Neutronium)),
             Component.literal("\u00a77Uses Quark Creation Catalysts and Molten Neutronium for \u00a7a95%"));
 
+    // ---------------- Mega Distillation Tower (BartWorks) ----------------
+    public static final MultiblockMachineDefinition MEGA_DISTILLATION_TOWER = REGISTRATE
+            .multiblock("mega_distillation_tower", com.gregtechceu.gtceu.common.machine.multiblock.electric.DistillationTowerMachine::new)
+            .langValue("Mega Distillation Tower")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DISTILLATION_RECIPES)
+            .recipeModifiers((m, r) -> {
+                int p = com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic.getParallelAmount(m, r, 256);
+                if (p <= 1) return com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction.IDENTITY;
+                return com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction.builder()
+                        .modifyAllContents(com.gregtechceu.gtceu.api.recipe.content.ContentModifier.multiplier(p))
+                        .eutMultiplier(p).parallels(p).build();
+            }, com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK, BATCH_MODE)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eDistillation Tower"),
+                    Component.literal("\u00a77Up to \u00a76256\u00a77 parallels"),
+                    Component.literal("\u00a77One fluid output hatch per layer, 2 to 13 layers"),
+                    Component.literal("\u00a78Ported from GT New Horizons (BartWorks)"))
+            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .pattern(definition -> {
+                TraceabilityPredicate out = abilities(PartAbility.EXPORT_FLUIDS_1X, PartAbility.EXPORT_FLUIDS).setMaxLayerLimited(1);
+                var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("YYYYYYYSYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY")
+                        .aisle("ZZZZZZZZZZZZZZZ", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "ZZZZZZZZZZZZZZZ")
+                        .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX").setRepeatable(0, 11)
+                        .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
+                        .where('S', controller(blocks(definition.getBlock())))
+                        .where('Y', casing.or(abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
+                                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('Z', casing.or(out))
+                        .where('X', casing.or(out))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_clean_stainless_steel"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/distillation_tower")))
+            .register();
+
+    // ---------------- Extreme Entity Crusher (KubaTech) ----------------
+    public static final MultiblockMachineDefinition EXTREME_ENTITY_CRUSHER = REGISTRATE
+            .multiblock("extreme_entity_crusher", com.omnicrox.gtaa.common.machine.multiblock.ExtremeEntityCrusherMachine::new)
+            .langValue("Extreme Entity Crusher")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.ENTITY_CRUSHER)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eMob Farm"),
+                    Component.literal("\u00a77Put a \u00a7eSpawn Egg\u00a77 in an input bus to choose the mob (not used up)"),
+                    Component.literal("\u00a77A sword in an input bus adds its Looting level (max 4)"),
+                    Component.literal("\u00a77Rolls the mob's loot every 5 seconds"),
+                    Component.literal("\u00a77Uses \u00a7e64 EU/t per point of mob health\u00a77 (at least MV) per mob"),
+                    Component.literal("\u00a77Extra power runs more mobs at once, up to \u00a76256"),
+                    Component.literal("\u00a7cBosses can't be crushed"),
+                    Component.literal("\u00a78Idea from GT New Horizons (KubaTech)"))
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> {
+                var casing = blocks(GTBlocks.CASING_STEEL_SOLID.get());
+                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
+                        net.minecraft.world.level.block.Blocks.GLASS);
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("CCSCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                        .aisle("fgggf", "gsssg", "gsssg", "gsssg", "fgggf")
+                        .aisle("fgggf", "g###g", "g###g", "g###g", "fgggf").setRepeatable(4)
+                        .aisle("ccccc", "ccccc", "ccccc", "ccccc", "ccccc")
+                        .where('S', controller(blocks(definition.getBlock())))
+                        .where('C', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
+                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('c', casing)
+                        .where('g', glass)
+                        .where('f', frames(GTMaterials.Steel))
+                        .where('s', any())
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_solid_steel"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/distillation_tower")))
+            .register();
+
     public static void init() {}
 }

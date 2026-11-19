@@ -90,7 +90,8 @@ public class GTAA {
                 for (var m : new com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition[] { GTAAMachines.PURIFICATION_PLANT,
                         GTAAMachines.PURIFICATION_CLARIFIER, GTAAMachines.PURIFICATION_OZONATION, GTAAMachines.PURIFICATION_FLOCCULATION,
                         GTAAMachines.PURIFICATION_PH, GTAAMachines.PURIFICATION_PLASMA, GTAAMachines.PURIFICATION_UV,
-                        GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC }) m.getPatternFactory().get();
+                        GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC, GTAAMachines.MEGA_DISTILLATION_TOWER,
+                        GTAAMachines.EXTREME_ENTITY_CRUSHER }) m.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

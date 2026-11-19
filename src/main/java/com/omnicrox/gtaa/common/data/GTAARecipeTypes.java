@@ -25,6 +25,7 @@ public class GTAARecipeTypes {
     /** index 1..8 */
     public static final GTRecipeType[] PURIFICATION = new GTRecipeType[9];
     public static GTRecipeType PURIFICATION_PLANT;
+    public static GTRecipeType ENTITY_CRUSHER;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -91,6 +92,8 @@ public class GTAARecipeTypes {
                     .setMaxTooltips(4);
         }
         PURIFICATION_PLANT = register("purification_plant", "multiblock", "Water Purification Plant")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
     }
 }
