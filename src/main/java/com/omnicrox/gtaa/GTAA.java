@@ -42,6 +42,9 @@ public class GTAA {
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
         com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
+        com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
+        net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
+                com.omnicrox.gtaa.common.infernal.InfernalConfig.SPEC, "gtapexadditions-infernal.toml");
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
             com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
                     com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);
