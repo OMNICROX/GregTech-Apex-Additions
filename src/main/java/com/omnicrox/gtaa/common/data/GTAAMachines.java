@@ -382,6 +382,7 @@ public class GTAAMachines {
             Component.literal("\u00a77Needs to be fed with computation to work."),
             Component.literal("\u00a77Computation is consumed per parallel"),
             Component.literal("\u00a77Mining Drones must be placed in a regular input bus (they are not used up)."),
+            Component.literal("\u00a77Pick the asteroid with a \u00a7eProgrammed Circuit\u00a77 (see JEI)."),
     };
 
     private static Component[] miningTooltips(String quote, int tier, int parallels, String motor) {

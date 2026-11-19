@@ -29,6 +29,8 @@ public final class GTAASpaceMining {
 
     private GTAASpaceMining() {}
 
+    private static int circuitCounter = 0;
+
     private record Plasma(Material material, int amount) {}
 
     private static final Plasma[] PLASMAS = {
@@ -38,6 +40,7 @@ public final class GTAASpaceMining {
     /** name, module tier, min drone tier, EU/t, CWU/t, base seconds, base ore count, materials + chances (x100 %) */
     private static void asteroid(Consumer<FinishedRecipe> provider, String name, int moduleTier, int droneTier,
                                  int eut, int cwut, int seconds, int count, Object... matsAndChances) {
+        int circuit = ++circuitCounter;
         for (int p = 0; p < PLASMAS.length; p++) {
             Plasma plasma = PLASMAS[p];
             FluidStack fluid;
@@ -53,6 +56,7 @@ public final class GTAASpaceMining {
                     plasma.material().getName()).toString())
                     .notConsumable(Ingredient.of(ItemTags.create(GTAA.id("mining_drones/at_least_" +
                             VN[droneTier].toLowerCase(Locale.ROOT)))))
+                    .circuitMeta(circuit)
                     .inputFluids(fluid)
                     .duration(Math.max(20, duration)).EUt(eut).CWUt(cwut)
                     .addData(GTAARecipeTypes.MODULE_TIER, moduleTier);
@@ -69,6 +73,7 @@ public final class GTAASpaceMining {
     }
 
     public static void init(Consumer<FinishedRecipe> provider) {
+        circuitCounter = 0;
         // --- Mk-I: Overworld ---
         asteroid(provider, "coal", 1, LV, VA[UV], 16, 10, 32, Coal, 70, Graphite, 20, Diamond, 10);
         asteroid(provider, "iron", 1, LV, VA[UV], 16, 10, 32, Iron, 40, Magnetite, 20, Pyrite, 15, Gold, 10, VanadiumMagnetite, 15);
