@@ -53,6 +53,79 @@ public final class GTAACompatRecipes {
     public static void init(Consumer<FinishedRecipe> provider) {
         draconic(provider);
         cultivation(provider);
+        cultivationGuide(provider);
+        chaos(provider);
+    }
+
+    /**
+     * JEI guide for the Mystical Cultivation Array: one entry per crop seed (vanilla crops and every enabled
+     * Mystical Agriculture / Agradditions crop). Built when recipes load, so it follows the crops in the pack.
+     */
+    private static void cultivationGuide(Consumer<FinishedRecipe> provider) {
+        Map<Item, Object[]> vanilla = Map.of(
+                Items.WHEAT_SEEDS, new Object[] { Items.WHEAT, 1 },
+                Items.CARROT, new Object[] { Items.CARROT, 3 },
+                Items.POTATO, new Object[] { Items.POTATO, 3 },
+                Items.BEETROOT_SEEDS, new Object[] { Items.BEETROOT, 1 });
+        int made = 0;
+        for (Item seed : BuiltInRegistries.ITEM) {
+            if (!(seed instanceof net.minecraft.world.item.BlockItem bi) ||
+                    !(bi.getBlock() instanceof net.minecraft.world.level.block.CropBlock crop)) continue;
+            Item product = null;
+            int amount = 1;
+            Object[] v = vanilla.get(seed);
+            if (v != null) {
+                product = (Item) v[0];
+                amount = (int) v[1];
+            } else {
+                try {
+                    Object c = crop.getClass().getMethod("getCrop").invoke(crop);
+                    if (!(boolean) c.getClass().getMethod("isEnabled").invoke(c)) continue;
+                    product = (Item) c.getClass().getMethod("getEssenceItem").invoke(c);
+                } catch (Throwable ignored) {}
+            }
+            if (product == null || product == Items.AIR) continue;
+            var id = BuiltInRegistries.ITEM.getKey(seed);
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.CULTIVATION
+                    .recipeBuilder("gtapexadditions:cultivation/" + id.getNamespace() + "/" + id.getPath())
+                    .notConsumable(seed)
+                    .inputFluids(GTMaterials.Water.getFluid(25))
+                    .outputItems(new net.minecraft.world.item.ItemStack(product, amount * 4))
+                    .duration(100).EUt(VA[LV]).save(provider);
+            made++;
+        }
+        com.omnicrox.gtaa.GTAA.LOGGER.info("[GTAA] Mystical Cultivation Array guide: {} crops", made);
+    }
+
+    /**
+     * Chaos Shards without fighting the Chaos Guardian every time: an assembly line bootstrap from a Dragon Heart,
+     * and a UEV replicator that grows one shard into two.
+     */
+    private static void chaos(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:chaos_shard")
+                .inputItems(S1)
+                .inputItems(S2, 16)
+                .inputItems(plateDense, GTMaterials.Neutronium, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_UV, 2)
+                .inputItems(CustomTags.UHV_CIRCUITS, 2)
+                .inputItems(Items.NETHER_STAR, 4)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 8))
+                .inputFluids(GTMaterials.Radon.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, 1000))
+                .outputItems(S3)
+                .duration(1200).EUt(VA[UHV])
+                .save(needing(provider, "draconicevolution", Map.of(S1, "draconicevolution:dragon_heart",
+                        S2, "draconicevolution:awakened_draconium_ingot", S3, "draconicevolution:chaos_shard")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:chaos_shard_replication")
+                .inputItems(S1)
+                .inputItems(S2, 8)
+                .inputItems(Items.NETHER_STAR, 2)
+                .inputItems(CustomTags.UEV_CIRCUITS, 1)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 4))
+                .inputFluids(GTMaterials.Radon.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, 500))
+                .outputItems(S1, 2)
+                .duration(600).EUt(VA[UEV])
+                .save(needing(provider, "draconicevolution", Map.of(
+                        S1, "draconicevolution:chaos_shard", S2, "draconicevolution:awakened_draconium_ingot")));
     }
 
     private static void draconic(Consumer<FinishedRecipe> provider) {

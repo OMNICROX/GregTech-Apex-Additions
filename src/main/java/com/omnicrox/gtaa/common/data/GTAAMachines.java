@@ -513,23 +513,24 @@ public class GTAAMachines {
             Component.literal("\u00a77Needs at least \u00a76Motor Mk-IV\u00a77 to work"));
 
     // ---------------- Compact Fusion Computers (GoodGenerator) ----------------
+    /** Compact Fusion MK-n uses Fusion Machine Casing MK n (GTAA adds MK IV / MK V). */
     private static Block compactFusionCasing(int mk) {
         return switch (mk) {
-            case 1 -> GTBlocks.MACHINE_CASING_LuV.get();
-            case 2 -> GTBlocks.FUSION_CASING.get();
-            case 3 -> GTBlocks.FUSION_CASING_MK2.get();
-            case 4 -> GTBlocks.FUSION_CASING_MK3.get();
-            default -> GTAABlocks.FUSION_CASING_MK4.get();
+            case 1 -> GTBlocks.FUSION_CASING.get();
+            case 2 -> GTBlocks.FUSION_CASING_MK2.get();
+            case 3 -> GTBlocks.FUSION_CASING_MK3.get();
+            case 4 -> GTAABlocks.FUSION_CASING_MK4.get();
+            default -> GTAABlocks.FUSION_CASING_MK5.get();
         };
     }
 
     private static net.minecraft.resources.ResourceLocation compactFusionCasingTexture(int mk) {
         return switch (mk) {
-            case 1 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/voltage/luv/side");
-            case 2 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing");
-            case 3 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk2");
-            case 4 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk3");
-            default -> GTAA.id("block/casing/fusion_casing_mk4");
+            case 1 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing");
+            case 2 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk2");
+            case 3 -> new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/fusion/fusion_casing_mk3");
+            case 4 -> GTAA.id("block/casing/fusion_casing_mk4");
+            default -> GTAA.id("block/casing/fusion_casing_mk5");
         };
     }
 
@@ -1097,7 +1098,10 @@ public class GTAAMachines {
                     Component.literal("\u00a77Machine Type: \u00a7eCrop Farm"),
                     Component.literal("\u00a77Put seeds in an input bus: each seed is one crop and is never used up"),
                     Component.literal("\u00a77Works with \u00a7dMystical Agriculture\u00a77 seeds and any normal crop"),
-                    Component.literal("\u00a77Every harvest gives \u00a7e4x\u00a77 a normal crop's drops"),
+                    Component.literal("\u00a77Every harvest gives \u00a7e4x\u00a77 a normal crop's drops on dirt or farmland"),
+                    Component.literal("\u00a77Mystical Agriculture farmland raises it: Inferium 5x, Prudentium 6x, Tertium 7x,"),
+                    Component.literal("\u00a77Imperium 8x, Supremium 10x, Insanium 12x (all soil the same kind)"),
+                    Component.literal("\u00a77Glass limits the voltage: Glass HV, Tempered IV, Laminated LuV, Fusion Glass any"),
                     Component.literal("\u00a77Harvests every 5 s at LV, twice as fast each tier, down to 0.25 s at LuV"),
                     Component.literal("\u00a77Room for 64 crops at LV, doubling each tier (max 8192)"),
                     Component.literal("\u00a77Uses 1 L of water per 4 crops each second"),
@@ -1105,8 +1109,7 @@ public class GTAAMachines {
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .pattern(definition -> {
                 var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
-                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
-                        GTBlocks.FUSION_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
+                var glass = com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine.glass();
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
@@ -1126,7 +1129,7 @@ public class GTAAMachines {
                         .where('g', glass)
                         .where('f', frames(GTMaterials.StainlessSteel))
                         .where('l', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP))
-                        .where('d', blocks(net.minecraft.world.level.block.Blocks.FARMLAND, net.minecraft.world.level.block.Blocks.DIRT))
+                        .where('d', com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine.soil())
                         .where('w', waterOrAir())
                         .where(' ', any())
                         .build();

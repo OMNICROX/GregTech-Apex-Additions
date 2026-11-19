@@ -98,7 +98,9 @@ public class GTAARecipeTypes {
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")
-                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+                .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
+                .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
+                .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + ".draconic_fusion_crafter", "Draconic Fusion Crafting");
         DRACONIC_FUSION = new com.omnicrox.gtaa.api.DefcRecipeType(GTAA.id("draconic_fusion_crafter"), "multiblock");
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, DRACONIC_FUSION.registryName, DRACONIC_FUSION);

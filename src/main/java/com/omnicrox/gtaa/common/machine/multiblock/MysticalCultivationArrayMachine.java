@@ -65,8 +65,82 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
     private final Map<Item, Map<Item, Double>> dropCache = new HashMap<>();
     private final Map<Item, Double> carry = new HashMap<>();
 
+    public static final String CTX_SOIL = "MCASoil";
+    public static final String CTX_GLASS = "MCAGlass";
+    /** soil tier -> yield (plain dirt / farmland, then the Mystical Agriculture farmlands) */
+    public static final int[] SOIL_YIELD = { 4, 5, 6, 7, 8, 10, 12 };
+    public static final String[][] SOILS = {
+            { "minecraft:farmland", "minecraft:dirt" },
+            { "mysticalagriculture:inferium_farmland" }, { "mysticalagriculture:prudentium_farmland" },
+            { "mysticalagriculture:tertium_farmland" }, { "mysticalagriculture:imperium_farmland" },
+            { "mysticalagriculture:supremium_farmland" }, { "mysticalagradditions:insanium_farmland" } };
+    /** glass tier -> highest voltage tier the array runs at */
+    public static final int[] GLASS_CAP = { GTValues.HV, GTValues.IV, GTValues.LuV, GTValues.MAX };
+    public static final String[] GLASS_NAMES = { "Glass", "Tempered Glass", "Laminated Glass", "Fusion Glass" };
+
+    @DescSynced private int soilTier = 1, glassTier = 1;
+
     public MysticalCultivationArrayMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
+    }
+
+    /** the recipes in JEI are only a guide; the array farms through its own loop, never through recipe logic */
+    @Override
+    protected com.gregtechceu.gtceu.api.machine.trait.RecipeLogic createRecipeLogic(Object... args) {
+        return new com.gregtechceu.gtceu.api.machine.trait.RecipeLogic(this) {
+            @Override
+            public void serverTick() {}
+
+            @Override
+            public void findAndHandleRecipe() {}
+        };
+    }
+
+    private static Map<net.minecraft.world.level.block.Block, Integer> tierMap(String[][] ids) {
+        Map<net.minecraft.world.level.block.Block, Integer> map = new LinkedHashMap<>();
+        for (int t = 0; t < ids.length; t++)
+            for (String id : ids[t]) {
+                var b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation(id));
+                if (b != null && b != net.minecraft.world.level.block.Blocks.AIR) map.put(b, t + 1);
+            }
+        return map;
+    }
+
+    private static Map<net.minecraft.world.level.block.Block, Integer> glassMap() {
+        Map<net.minecraft.world.level.block.Block, Integer> map = new LinkedHashMap<>();
+        map.put(net.minecraft.world.level.block.Blocks.GLASS, 1);
+        map.put(com.gregtechceu.gtceu.common.data.GTBlocks.CASING_TEMPERED_GLASS.get(), 2);
+        map.put(com.gregtechceu.gtceu.common.data.GTBlocks.CASING_LAMINATED_GLASS.get(), 3);
+        map.put(com.gregtechceu.gtceu.common.data.GTBlocks.FUSION_GLASS.get(), 4);
+        return map;
+    }
+
+    private static com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate tiered(String ctx,
+            java.util.function.Supplier<Map<net.minecraft.world.level.block.Block, Integer>> tiers, String what) {
+        return new com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate(st -> {
+            Integer t = tiers.get().get(st.getBlockState().getBlock());
+            if (t == null) return false;
+            Object cur = st.getMatchContext().getOrPut(ctx, t);
+            if (!cur.equals(t)) {
+                st.setError(new com.gregtechceu.gtceu.api.pattern.error.PatternStringError(what + " must all be the same tier"));
+                return false;
+            }
+            return true;
+        }, () -> tiers.get().keySet().stream()
+                .map(b -> com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(b.defaultBlockState()))
+                .toArray(com.lowdragmc.lowdraglib.utils.BlockInfo[]::new));
+    }
+
+    public static com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate soil() {
+        return tiered(CTX_SOIL, () -> tierMap(SOILS), "Soil");
+    }
+
+    public static com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate glass() {
+        return tiered(CTX_GLASS, MysticalCultivationArrayMachine::glassMap, "Glass");
+    }
+
+    public int soilYield() {
+        return SOIL_YIELD[Math.max(0, Math.min(SOIL_YIELD.length - 1, soilTier - 1))];
     }
 
     @Override
@@ -78,6 +152,10 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
     public void onStructureFormed() {
         super.onStructureFormed();
         dropCache.clear();
+        Object so = getMultiblockState().getMatchContext().get(CTX_SOIL);
+        Object gl = getMultiblockState().getMatchContext().get(CTX_GLASS);
+        soilTier = so instanceof Integer i ? i : 1;
+        glassTier = gl instanceof Integer i ? i : 1;
         if (!isRemote()) tick = subscribeServerTick(tick, this::work);
     }
 
@@ -177,7 +255,7 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
     private void work() {
         if (!(getLevel() instanceof ServerLevel level) || !isWorkingEnabled()) return;
         IEnergyContainer energy = energy();
-        tier = tierOf(energy.getInputVoltage());
+        tier = Math.min(tierOf(energy.getInputVoltage()), GLASS_CAP[Math.max(0, Math.min(3, glassTier - 1))]);
         if (tier < GTValues.LV) {
             status = "Needs at least an LV energy hatch";
             return;
@@ -233,7 +311,7 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
 
         List<ItemStack> out = new ArrayList<>();
         planted.forEach((seed, count) -> drops(level, seed, blocks.get(seed)).forEach((item, avg) -> {
-            double amount = avg * count * YIELD + carry.getOrDefault(item, 0.0);
+            double amount = avg * count * soilYield() + carry.getOrDefault(item, 0.0);
             long whole = (long) amount;
             carry.put(item, amount - whole);
             while (whole > 0) {
@@ -258,10 +336,13 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
         if (!isFormed()) return;
         textList.add(Component.literal("Crops: " + crops + " / " + maxCrops(tier) + " (" + types + " kinds)")
                 .withStyle(ChatFormatting.GREEN));
-        textList.add(Component.literal("Harvest every " + cycle / 20.0 + " s, " + YIELD + "x yield")
+        textList.add(Component.literal("Harvest every " + cycle / 20.0 + " s, " + soilYield() + "x yield")
                 .withStyle(ChatFormatting.GREEN));
         if (lastEut > 0) textList.add(Component.literal("Using " + FormattingUtil.formatNumbers(lastEut) + " EU/t")
                 .withStyle(ChatFormatting.AQUA));
+        textList.add(Component.literal("Soil tier " + soilTier + ", " + GLASS_NAMES[Math.max(0, Math.min(3, glassTier - 1))] +
+                " (runs up to " + GTValues.VNF[GLASS_CAP[Math.max(0, Math.min(3, glassTier - 1))]] + ChatFormatting.GRAY + ")")
+                .withStyle(ChatFormatting.GRAY));
         if (!status.isEmpty()) textList.add(Component.literal(status).withStyle(ChatFormatting.RED));
     }
 }
