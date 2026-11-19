@@ -76,6 +76,27 @@ public class GTAABlocks {
         return 0;
     }
 
+    // Quantum Force Transformer - textures from GT++ (GT5-Unofficial)
+    public static final BlockEntry<Block> QFT_MANIPULATOR_T1 = casing("qft_manipulator_t1", "Neutron Pulse Manipulator");
+    public static final BlockEntry<Block> QFT_MANIPULATOR_T2 = casing("qft_manipulator_t2", "Cosmic Fabric Manipulator");
+    public static final BlockEntry<Block> QFT_MANIPULATOR_T3 = casing("qft_manipulator_t3", "Infinity Infused Manipulator");
+    public static final BlockEntry<Block> QFT_MANIPULATOR_T4 = casing("qft_manipulator_t4", "SpaceTime Continuum Ripper");
+    public static final BlockEntry<Block> QFT_SHIELDING_T1 = casing("qft_shielding_t1", "Neutron Shielding Core");
+    public static final BlockEntry<Block> QFT_SHIELDING_T2 = casing("qft_shielding_t2", "Cosmic Fabric Shielding Core");
+    public static final BlockEntry<Block> QFT_SHIELDING_T3 = casing("qft_shielding_t3", "Infinity Infused Shielding Core");
+    public static final BlockEntry<Block> QFT_SHIELDING_T4 = casing("qft_shielding_t4", "SpaceTime Bending Core");
+    public static final BlockEntry<Block> FORCE_FIELD_GLASS = glass("force_field_glass", "Force Field Glass");
+    public static final BlockEntry<Block> QFT_COIL = casing("qft_coil", "Quantum Force Conductor");
+    public static final BlockEntry<Block> QFT_CONTAINMENT_CASING = casing("qft_containment_casing", "Particle Containment Casing");
+
+    public static Block[] qftManipulators() {
+        return new Block[] { QFT_MANIPULATOR_T1.get(), QFT_MANIPULATOR_T2.get(), QFT_MANIPULATOR_T3.get(), QFT_MANIPULATOR_T4.get() };
+    }
+
+    public static Block[] qftShieldings() {
+        return new Block[] { QFT_SHIELDING_T1.get(), QFT_SHIELDING_T2.get(), QFT_SHIELDING_T3.get(), QFT_SHIELDING_T4.get() };
+    }
+
     public static Block compactFusionCoil(int mk) {
         return switch (mk) {
             case 1 -> COMPACT_FUSION_COIL_MK1.get();

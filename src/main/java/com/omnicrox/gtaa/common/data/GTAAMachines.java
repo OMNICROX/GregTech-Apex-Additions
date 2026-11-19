@@ -725,5 +725,47 @@ public class GTAAMachines {
                     GTAA.id("block/multiblock/component_assembly_line")))
             .register();
 
+    // ---------------- Quantum Force Transformer (GT++) ----------------
+    public static final MultiblockMachineDefinition QUANTUM_FORCE_TRANSFORMER = REGISTRATE
+            .multiblock("quantum_force_transformer", com.omnicrox.gtaa.common.machine.multiblock.QuantumForceTransformerMachine::new)
+            .langValue("Quantum Force Transformer")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.QUANTUM_FORCE_TRANSFORMER)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.QuantumForceTransformerMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eQuantum Force Transformer"),
+                    Component.literal("\u00a77Allows complex processing lines to be performed instantly in one step"),
+                    Component.literal("\u00a77Every recipe requires a catalyst in an input bus; it is not consumed"),
+                    Component.literal("\u00a77The number of catalysts sets the \u00a76maximum parallels"),
+                    Component.literal("\u00a77Each output has an equal chance; higher focus tiers make the boosts stronger"),
+                    Component.literal("\u00a7bNeptunium Plasma\u00a77 + a \u00a7eProgrammed Circuit\u00a77 focuses one output (circuit 0 = first output)"),
+                    Component.literal("\u00a7bFermium Plasma\u00a77 raises the chance of every output"),
+                    Component.literal("\u00a77Plasma use: focus tier \u00d7 4 \u00d7 \u221aparallels L/s; running out voids the run"),
+                    Component.literal("\u00a77Manipulators set the crafting tier, Shielding Cores set the focus tier"),
+                    Component.literal("\u00a78Ported from GT New Horizons (GT++)"))
+            .appearanceBlock(GTAABlocks.QFT_CONTAINMENT_CASING)
+            .pattern(definition -> {
+                var casing = blocks(GTAABlocks.QFT_CONTAINMENT_CASING.get());
+                return GTAAStructures.pattern("quantum_force_transformer", "quantum_force_transformer")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('A', com.omnicrox.gtaa.common.machine.multiblock.QuantumForceTransformerMachine.tiered(
+                                "QFTCraftTier", GTAABlocks::qftManipulators, "Manipulators"))
+                        .where('B', com.omnicrox.gtaa.common.machine.multiblock.QuantumForceTransformerMachine.tiered(
+                                "QFTFocusTier", GTAABlocks::qftShieldings, "Shielding Cores"))
+                        .where('C', blocks(GTAABlocks.QFT_COIL.get()))
+                        .where('D', casing)
+                        .where('E', blocks(GTAABlocks.FORCE_FIELD_GLASS.get()))
+                        .where('H', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
+                                .or(abilities(PartAbility.IMPORT_FLUIDS))
+                                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
+                        .where('T', casing.or(abilities(PartAbility.EXPORT_ITEMS)).or(abilities(PartAbility.EXPORT_FLUIDS)))
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/qft_containment_casing"),
+                    GTAA.id("block/multiblock/quantum_force_transformer")))
+            .register();
+
     public static void init() {}
 }

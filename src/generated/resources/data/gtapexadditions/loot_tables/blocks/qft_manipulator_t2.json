@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gtapexadditions:qft_manipulator_t2"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gtapexadditions:blocks/qft_manipulator_t2"
+}

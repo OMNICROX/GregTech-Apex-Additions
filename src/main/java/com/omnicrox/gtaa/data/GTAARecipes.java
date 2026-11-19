@@ -32,6 +32,7 @@ public class GTAARecipes {
         GTAANaquadah.init(provider);
         GTAAComponentAssembly.init(provider);
         componentAssemblyLine(provider);
+        GTAAQft.init(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);

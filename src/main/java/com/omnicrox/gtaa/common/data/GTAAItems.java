@@ -33,5 +33,23 @@ public class GTAAItems {
             .model(NonNullBiConsumer.noop())
             .register();
 
+    /** Quantum Force Transformer catalysts (GT++). Not consumed; the stack size sets the parallels. */
+    public static final java.util.Map<String, ItemEntry<Item>> QFT_CATALYSTS = new java.util.LinkedHashMap<>();
+
+    static {
+        String[][] cats = { { "platinum_group", "Platinum Group Catalyst" }, { "plastic_polymer", "Plastic Polymer Catalyst" },
+                { "rubber_polymer", "Rubber Polymer Catalyst" }, { "adhesion_promoter", "Adhesion Promoter Catalyst" },
+                { "tita_tungsten_indium", "Tita-Tungsten Indium Catalyst" }, { "radioactivity", "Radioactivity Catalyst" },
+                { "rare_earth_group", "Rare-Earth Group Catalyst" }, { "simple_naquadah", "Simple Naquadah Catalyst" },
+                { "advanced_naquadah", "Advanced Naquadah Catalyst" }, { "raw_intelligence", "Raw Intelligence Catalyst" },
+                { "ultimate_plastic", "Ultimate Plasticizer Catalyst" },
+                { "biological_intelligence", "Biological Intelligence Catalyst" },
+                { "temporal_harmony", "Temporal Harmonizer Catalyst" } };
+        for (String[] c : cats) {
+            QFT_CATALYSTS.put(c[0], REGISTRATE.item(c[0] + "_catalyst", Item::new)
+                    .lang(c[1]).model(NonNullBiConsumer.noop()).register());
+        }
+    }
+
     public static void init() {}
 }

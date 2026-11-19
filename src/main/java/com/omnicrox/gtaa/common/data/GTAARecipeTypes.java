@@ -21,6 +21,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType NAQUADAH_FUEL_REFINERY;
     public static GTRecipeType NAQUADAH_REACTOR;
     public static GTRecipeType COMPONENT_ASSEMBLY_LINE;
+    public static GTRecipeType QUANTUM_FORCE_TRANSFORMER;
 
     private static GTRecipeType register(String name, String group, String english) {
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + "." + name, english);
@@ -69,5 +70,12 @@ public class GTAARecipeTypes {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(d -> "Casing tier: " + com.gregtechceu.gtceu.api.GTValues.VN[Math.max(1, Math.min(13, d.getInt("coal_casing_tier")))])
                 .setMaxTooltips(4);
+        QUANTUM_FORCE_TRANSFORMER = register("quantum_force_transformer", "multiblock", "Quantum Force Transformer")
+                .setMaxIOSize(6, 6, 6, 6)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Manipulator tier " + d.getInt("qft_tier") + ", focus tier " + d.getInt("qft_focus"))
+                .addDataInfo(d -> "Catalyst: " + d.getString("qft_catalyst").replace("gtapexadditions:", ""))
+                .setMaxTooltips(6);
     }
 }
