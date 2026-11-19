@@ -164,14 +164,53 @@ public class GTAARecipes {
                     .outputFluids(GTAAMaterials.SPACETIME.getFluid(L))
                     .duration(200).EUt(VA[UEV]).fusionStartEU(12_000_000_000L).save(provider);
         }
-        FUSION_RECIPES.recipeBuilder("gtapexadditions:protomatter")
-                .inputFluids(GTMaterials.Neutronium.getFluid(L), GTMaterials.Helium3.getFluid(1000))
-                .outputFluids(GTAAMaterials.PROTOMATTER.getFluid(1000))
-                .duration(100).EUt(VA[UEV]).fusionStartEU(10_000_000_000L).save(provider);
-        FUSION_RECIPES.recipeBuilder("gtapexadditions:antimatter_seed")
-                .inputFluids(GTAAMaterials.PROTOMATTER.getFluid(1000), GTAAMaterials.SPACETIME.getFluid(L))
-                .outputFluids(GTAAMaterials.ANTIMATTER.getFluid(16))
-                .duration(400).EUt(VA[UEV]).fusionStartEU(15_000_000_000L).save(provider);
+        // --- protomatter + the first antimatter ---
+        var gtna = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
+        var dtr = GTAAMaterials.externalFluids() ? gtna.getMaterial("gtna:dimensionally_transcendent_residue") : null;
+        var primordial = GTAAMaterials.externalFluids() ? gtna.getMaterial("gtna:primordial_matter") : null;
+        var transcendent = GTAAMaterials.externalFluids() ? gtna.getMaterial("gtna:transcendent_metal") : null;
+        if (dtr != null && primordial != null) {
+            // GTNH (NewHorizonsCoreMod LaserEngraverRecipes): fluid-only, cleanroom, 10 s.
+            // GTNH UMV / UXV are GTCEu UXV / OpV.
+            LASER_ENGRAVER_RECIPES.recipeBuilder("gtapexadditions:protomatter_from_dtr")
+                    .inputFluids(dtr.getFluid(100))
+                    .outputFluids(GTAAMaterials.PROTOMATTER.getFluid(100))
+                    .duration(200).EUt(VA[UIV])
+                    .cleanroom(com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType.CLEANROOM).save(provider);
+            LASER_ENGRAVER_RECIPES.recipeBuilder("gtapexadditions:protomatter_from_spacetime")
+                    .inputFluids(GTAAMaterials.SPACETIME.getFluid(100))
+                    .outputFluids(GTAAMaterials.PROTOMATTER.getFluid(1000))
+                    .duration(200).EUt(VA[UXV])
+                    .cleanroom(com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType.CLEANROOM).save(provider);
+            LASER_ENGRAVER_RECIPES.recipeBuilder("gtapexadditions:protomatter_from_primordial_matter")
+                    .inputFluids(primordial.getFluid(100))
+                    .outputFluids(GTAAMaterials.PROTOMATTER.getFluid(10000))
+                    .duration(200).EUt(VA[OpV])
+                    .cleanroom(com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType.CLEANROOM).save(provider);
+            // GTNH bootstrap: superdense Hot Proto-Halkonite + 100 L protomatter -> 1 L antimatter, 10,000 s at UIV.
+            // Proto-Halkonite doesn't exist here, gtna's Transcendent Metal stands in.
+            var b = LASER_ENGRAVER_RECIPES.recipeBuilder("gtapexadditions:antimatter_bootstrap");
+            if (transcendent != null && !com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper.get(plateDense, transcendent).isEmpty())
+                b.inputItems(plateDense, transcendent, 8);
+            else if (transcendent != null && !com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper.get(ingot, transcendent).isEmpty())
+                b.inputItems(ingot, transcendent, 64);
+            else
+                b.inputItems(plateDense, GTMaterials.Neutronium, 64);
+            b.inputFluids(GTAAMaterials.PROTOMATTER.getFluid(100))
+                    .outputFluids(GTAAMaterials.ANTIMATTER.getFluid(1))
+                    .duration(10_000 * 20).EUt(VA[UIV])
+                    .cleanroom(com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType.CLEANROOM).save(provider);
+        } else {
+            // without gtna: fusion stand-ins
+            FUSION_RECIPES.recipeBuilder("gtapexadditions:protomatter")
+                    .inputFluids(GTMaterials.Neutronium.getFluid(L), GTMaterials.Helium3.getFluid(1000))
+                    .outputFluids(GTAAMaterials.PROTOMATTER.getFluid(1000))
+                    .duration(100).EUt(VA[UEV]).fusionStartEU(10_000_000_000L).save(provider);
+            FUSION_RECIPES.recipeBuilder("gtapexadditions:antimatter_seed")
+                    .inputFluids(GTAAMaterials.PROTOMATTER.getFluid(1000), GTAAMaterials.SPACETIME.getFluid(L))
+                    .outputFluids(GTAAMaterials.ANTIMATTER.getFluid(16))
+                    .duration(400).EUt(VA[UEV]).fusionStartEU(15_000_000_000L).save(provider);
+        }
 
         // --- activation stabilizers (placeholder until the Naquadah reactor line exists) ---
         MIXER_RECIPES.recipeBuilder("gtapexadditions:naquadah_fuel_mkv_depleted")
