@@ -1,7 +1,8 @@
 // priority: -90
 // Apex Ascension 1.2 - purified water in high-tier wafers (GregTech Apex Additions)
 // Cutting Naquadah boules needs Grade 3 purified water, Neutronium boules Grade 5 (the GTCA grades when GTCA is
-// installed, otherwise GTAA's own). The water / distilled water / lubricant variants collapse into one recipe.
+// installed, otherwise GTAA's own). With GTCA its own purified water recipes are kept and the water / distilled
+// water / lubricant variants are removed; without GTCA they collapse into one GTAA purified water recipe.
 
 const APEX_PW_BOULES = { 'gtceu:naquadah_boule': 3, 'gtceu:neutronium_boule': 5 }
 const APEX_PW_FLUIDS = ['minecraft:water', 'gtceu:distilled_water', 'gtceu:lubricant']
@@ -39,7 +40,9 @@ ServerEvents.recipes(event => {
       if (text.indexOf('"' + boule + '"') < 0) return
       let id = String(r.getId())
       let json = JSON.parse(text)
+      if (apexPwSwap(JSON.parse(text).inputs, 'x') == 0) return // already purified water (GTCA's own)
       event.remove({ id: id })
+      if (Platform.isLoaded('gtca')) return // GTCA adds its own purified water recipe for this boule
       if (done) return
       if (apexPwSwap(json.inputs, apexPwId(grade)) > 0) {
         event.custom(json)
