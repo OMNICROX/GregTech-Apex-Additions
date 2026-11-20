@@ -1,0 +1,50 @@
+{
+ "name": "Superman Beyond: Man of Steel",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "e9f6b55e-ca14-572e-96ed-490d87839690"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "d88e08de-404b-550c-ab54-ee672c1e0b27"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +50%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "20dda4e9-c462-5976-aaa8-3196b41831f3"
+  },
+  "palladium_damage_immunityno_fall_damage": {
+   "type": "palladium:damage_immunity",
+   "title": "No Fall Damage",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:fall"
+   ]
+  }
+ }
+}

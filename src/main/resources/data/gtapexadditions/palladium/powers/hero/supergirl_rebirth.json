@@ -1,0 +1,50 @@
+{
+ "name": "Supergirl Rebirth: Man of Steel",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "4b11c814-3567-5210-afc0-3e7c79e35042"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "b1a21882-dd92-57fd-9374-81a41f52f88d"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +50%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "eba70527-4d87-51ac-8fc0-f46b80cb9299"
+  },
+  "palladium_damage_immunityno_fall_damage": {
+   "type": "palladium:damage_immunity",
+   "title": "No Fall Damage",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:fall"
+   ]
+  }
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "name": "Zatana: Sorcerer",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "87fa09a1-a362-55a1-af06-bc5de2138e79"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +2",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "effb1f98-d59b-553f-aca4-26deea9645f8"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +40",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 40,
+   "operation": 0,
+   "uuid": "024d7f8a-264e-522f-a20f-6f6129c97cb0"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  },
+  "forge_entity_reach": {
+   "type": "palladium:attribute_modifier",
+   "title": "Reach +1",
+   "icon": "minecraft:stick",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:entity_reach",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "6b23732e-95ce-5101-ac37-6fd85075fc15"
+  }
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "name": "Raven: Sorcerer",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "e2013266-cfbf-5362-b2f3-d6cf1d441b8e"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +2",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "08becb5d-4f4a-5186-9b6d-41466ede404c"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +40",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 40,
+   "operation": 0,
+   "uuid": "0ecce941-6acd-54b4-8d14-1adba1e9c2f4"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  },
+  "forge_entity_reach": {
+   "type": "palladium:attribute_modifier",
+   "title": "Reach +1",
+   "icon": "minecraft:stick",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:entity_reach",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "651ce25f-477f-5226-bae6-ae87dfb86b45"
+  }
+ }
+}

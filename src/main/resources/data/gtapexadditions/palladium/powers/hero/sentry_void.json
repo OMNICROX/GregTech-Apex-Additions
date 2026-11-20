@@ -1,0 +1,94 @@
+{
+ "name": "Sentry Void: Cosmic Flier + Godlike",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "palladium_flight_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Flight",
+   "icon": "minecraft:elytra",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:flight_speed",
+   "amount": 0.3,
+   "operation": 0,
+   "uuid": "4abbc249-32f7-5239-b378-47a34467be6f"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +6",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 6,
+   "operation": 0,
+   "uuid": "ac896407-9fa5-5fc2-b3fc-53823eab03d0"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +5 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 10,
+   "operation": 0,
+   "uuid": "a3496de6-4df4-5172-a692-c0960e71db7a"
+  },
+  "palladium_punch_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Punch +4",
+   "icon": "minecraft:iron_ingot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:punch_damage",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "95056a90-71d1-5c9f-81cc-d932ba17ccad"
+  },
+  "palladium_damage_immunityno_fall_damage": {
+   "type": "palladium:damage_immunity",
+   "title": "No Fall Damage",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:fall"
+   ]
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +50%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "48dee9ca-5739-5188-a05e-e01a50e0da97"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +60",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 60,
+   "operation": 0,
+   "uuid": "cd8ab9ec-1ff8-53d3-9fc8-7aeb8373fd31"
+  },
+  "minecraft_generic_armor_toughness": {
+   "type": "palladium:attribute_modifier",
+   "title": "Toughness +2",
+   "icon": "minecraft:diamond_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor_toughness",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "81606f54-88ea-500c-a58e-ef1b2ce7c7ae"
+  }
+ }
+}

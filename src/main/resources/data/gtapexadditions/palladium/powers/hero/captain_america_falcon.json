@@ -1,0 +1,84 @@
+{
+ "name": "Captain America Falcon: Super Soldier",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +3 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 6,
+   "operation": 0,
+   "uuid": "eb866ae6-ceb2-5cb4-84ff-db7234210761"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "d85aa93f-7ec4-5132-8584-24bbed7da161"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +3",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 3,
+   "operation": 0,
+   "uuid": "c6fd98f4-57e9-545c-aecf-df0ee72c216f"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +20%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.02,
+   "operation": 0,
+   "uuid": "76a36021-a339-5628-98a2-eb2695b049f4"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +30%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.3,
+   "operation": 0,
+   "uuid": "d23aa8be-41a3-5be1-9d90-3e1485fa95d3"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +15",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 15,
+   "operation": 0,
+   "uuid": "65736b1f-6df7-5d62-8927-30e5b9acb5bd"
+  },
+  "palladium_jump_power": {
+   "type": "palladium:attribute_modifier",
+   "title": "Jump Boost +0.5",
+   "icon": "minecraft:rabbit_foot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:jump_power",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "10c3fa70-2153-5b33-84fd-40d38334e695"
+  }
+ }
+}

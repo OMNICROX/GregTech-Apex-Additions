@@ -1,0 +1,62 @@
+{
+ "name": "Godspeed: Negative Speed",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +65%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.065,
+   "operation": 0,
+   "uuid": "3e066ee8-30da-599f-b531-457bc85d0b25"
+  },
+  "forge_step_height_addition": {
+   "type": "palladium:attribute_modifier",
+   "title": "Step Assist +1",
+   "icon": "minecraft:oak_stairs",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:step_height_addition",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "d0fa901d-1043-5a90-a6af-c2dc83599b64"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +30",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 30,
+   "operation": 0,
+   "uuid": "335d767d-1105-5d93-9fb4-b813ce2b7058"
+  },
+  "minecraft_generic_attack_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack Speed +2",
+   "icon": "minecraft:golden_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_speed",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "7a5e9142-4e2b-5282-b5ff-aad5a31f8668"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +3",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 3,
+   "operation": 0,
+   "uuid": "82d057db-c93b-52d7-92e9-31ca1feba1d4"
+  }
+ }
+}

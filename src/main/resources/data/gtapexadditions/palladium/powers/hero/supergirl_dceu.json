@@ -1,0 +1,50 @@
+{
+ "name": "Supergirl Dceu: Man of Steel",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "98708048-09c7-5d71-b09a-5672d78bab33"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "02c5b679-5a44-5fd1-bdbe-1c6ea4c20eaa"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +50%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "150e23ce-d303-545c-8e4d-f6f08818150d"
+  },
+  "palladium_damage_immunityno_fall_damage": {
+   "type": "palladium:damage_immunity",
+   "title": "No Fall Damage",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:fall"
+   ]
+  }
+ }
+}

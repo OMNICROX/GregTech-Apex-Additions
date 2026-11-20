@@ -1,0 +1,87 @@
+{
+ "name": "Daredevil: Vigilante",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "c11be8a7-fb09-5f42-9435-15e40e7c92dc"
+  },
+  "minecraft_generic_armor_toughness": {
+   "type": "palladium:attribute_modifier",
+   "title": "Toughness +2",
+   "icon": "minecraft:diamond_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor_toughness",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "47234974-2e86-56c8-bfd0-32b72fbf623e"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +2",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "06978378-ce70-55a4-b9c8-0ad29390fdb4"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +15%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.015,
+   "operation": 0,
+   "uuid": "68db0b1f-dba4-5d80-9714-6f22b5a650e9"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +20",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 20,
+   "operation": 0,
+   "uuid": "494a4299-c101-537f-acfe-986573e54665"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +20%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.2,
+   "operation": 0,
+   "uuid": "f9f4b125-de39-5a3d-8a3f-e0affd2365df"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  }
+ }
+}

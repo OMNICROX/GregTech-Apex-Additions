@@ -1,0 +1,76 @@
+{
+ "name": "Deathstroke Teen Titans: Assassin",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +4",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "cf80cd9f-8008-5e6d-b51a-de7b51ba2591"
+  },
+  "minecraft_generic_attack_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack Speed +1",
+   "icon": "minecraft:golden_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_speed",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "e472729e-b98e-5209-be3c-92080aff80b4"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +25%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.025,
+   "operation": 0,
+   "uuid": "0393bc65-2b75-517a-a27d-22fd295869a0"
+  },
+  "palladium_jump_power": {
+   "type": "palladium:attribute_modifier",
+   "title": "Jump Boost +0.5",
+   "icon": "minecraft:rabbit_foot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:jump_power",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "1bc57047-b5f4-5f6c-a647-79bcb48cf2fc"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +20",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 20,
+   "operation": 0,
+   "uuid": "3511aef1-4d16-54c3-b184-227a5f8cf495"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  }
+ }
+}

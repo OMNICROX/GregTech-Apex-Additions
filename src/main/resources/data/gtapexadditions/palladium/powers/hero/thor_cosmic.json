@@ -1,0 +1,73 @@
+{
+ "name": "Thor Cosmic: Godlike",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +5 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 10,
+   "operation": 0,
+   "uuid": "32f5b259-fe85-585d-859c-7012d5c2463a"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +6",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 6,
+   "operation": 0,
+   "uuid": "0c40e3a1-91dc-5dc1-aa07-976a9b335268"
+  },
+  "palladium_punch_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Punch +4",
+   "icon": "minecraft:iron_ingot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:punch_damage",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "b325d540-9224-5e4d-bf7a-bd1b477b10d7"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +50%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "179dd4fb-88cc-5f1c-962a-739497d7485a"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +60",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 60,
+   "operation": 0,
+   "uuid": "71a40d99-3d66-5091-87ea-1194270d7a54"
+  },
+  "minecraft_generic_armor_toughness": {
+   "type": "palladium:attribute_modifier",
+   "title": "Toughness +2",
+   "icon": "minecraft:diamond_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor_toughness",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "d9a1ae71-94da-58ad-8a3b-8def0a4d1973"
+  }
+ }
+}

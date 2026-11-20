@@ -1,0 +1,79 @@
+{
+ "name": "Aqualad Young Justice: Child of Atlantis",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "forge_swim_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Swim Speed +150%",
+   "icon": "minecraft:prismarine_shard",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:swim_speed",
+   "amount": 1.5,
+   "operation": 0,
+   "uuid": "fd688fa6-21cd-5c29-823d-bfcdd5793966"
+  },
+  "palladium_commandwater_breathing": {
+   "type": "palladium:command",
+   "title": "Water Breathing",
+   "icon": "minecraft:pufferfish",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:water_breathing infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:water_breathing"
+   ],
+   "commands": []
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +2",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "74142135-0bab-556e-afc1-fe5ea6ef5915"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "8ae4fce5-fa6c-507b-a556-f03cd9b3e20f"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +2",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "6759ccf8-f928-5ac8-a1bc-3d2ea44cca66"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  }
+ }
+}

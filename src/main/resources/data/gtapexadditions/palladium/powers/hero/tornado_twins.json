@@ -1,0 +1,73 @@
+{
+ "name": "Tornado Twins: Speedster",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +60%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.06,
+   "operation": 0,
+   "uuid": "68b49ec0-440e-516b-b7cf-2579a6f93df6"
+  },
+  "forge_step_height_addition": {
+   "type": "palladium:attribute_modifier",
+   "title": "Step Assist +1",
+   "icon": "minecraft:oak_stairs",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:step_height_addition",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "7836d803-d170-5d77-ae5a-3de90330cbb0"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +30",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 30,
+   "operation": 0,
+   "uuid": "9d24e70a-0360-52d0-ba5e-69caaa517673"
+  },
+  "minecraft_generic_attack_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack Speed +1.5",
+   "icon": "minecraft:golden_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_speed",
+   "amount": 1.5,
+   "operation": 0,
+   "uuid": "eecc7a5f-288e-50d0-adbf-a8ed0c7d0b15"
+  },
+  "palladium_jump_power": {
+   "type": "palladium:attribute_modifier",
+   "title": "Jump Boost +0.5",
+   "icon": "minecraft:rabbit_foot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:jump_power",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "768ff0c5-0d95-5e30-8cc5-30683682ea2b"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +2",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "e41b9e1e-90f9-53ad-b49f-a1f58d153697"
+  }
+ }
+}

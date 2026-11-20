@@ -1,0 +1,87 @@
+{
+ "name": "Spiderwoman Gwen: Spider-Sense",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +30%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.03,
+   "operation": 0,
+   "uuid": "0cf77bfc-b9c6-574a-a8f1-7886b829ed5d"
+  },
+  "palladium_jump_power": {
+   "type": "palladium:attribute_modifier",
+   "title": "Jump Boost +1",
+   "icon": "minecraft:rabbit_foot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:jump_power",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "b50c3034-f2b9-5a83-a076-f97f8b771441"
+  },
+  "palladium_leaping": {
+   "type": "palladium:attribute_modifier",
+   "title": "Leaping +2",
+   "icon": "minecraft:slime_ball",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:leaping",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "603c01ce-b33a-5322-b118-ab584b438cb4"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +60",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 60,
+   "operation": 0,
+   "uuid": "281a8f27-3e59-511d-ba37-825b9893c717"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +2",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "7514eefa-6e72-50a3-80c5-b13b41d4d173"
+  },
+  "forge_step_height_addition": {
+   "type": "palladium:attribute_modifier",
+   "title": "Step Assist +1",
+   "icon": "minecraft:oak_stairs",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:step_height_addition",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "378abe1e-b554-5b94-8868-7bf67b834fa6"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  }
+ }
+}

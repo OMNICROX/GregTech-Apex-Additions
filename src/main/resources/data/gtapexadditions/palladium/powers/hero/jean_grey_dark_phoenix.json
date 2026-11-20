@@ -1,0 +1,86 @@
+{
+ "name": "Jean Grey Dark Phoenix: Psychic + Cosmic Flier",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "d25ed23e-2da0-5c38-a3d7-c6945f16c8f0"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +30",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 30,
+   "operation": 0,
+   "uuid": "a2f1e014-eda6-5b84-b463-0973c1b4249d"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +4",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "6de5237a-265e-53c7-9b78-9d9031967d3c"
+  },
+  "palladium_flight_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Flight",
+   "icon": "minecraft:elytra",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:flight_speed",
+   "amount": 0.3,
+   "operation": 0,
+   "uuid": "0bb3d295-ce45-5241-b03f-5699662b3aa3"
+  },
+  "palladium_punch_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Punch +3",
+   "icon": "minecraft:iron_ingot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:punch_damage",
+   "amount": 3,
+   "operation": 0,
+   "uuid": "f05f125c-ee22-52bc-b85b-26db9c544eb0"
+  },
+  "palladium_damage_immunityno_fall_damage": {
+   "type": "palladium:damage_immunity",
+   "title": "No Fall Damage",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:fall"
+   ]
+  }
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "name": "Falcon: Winged",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "palladium_flight_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Flight",
+   "icon": "minecraft:elytra",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:flight_speed",
+   "amount": 0.35,
+   "operation": 0,
+   "uuid": "70952277-0304-5f58-98aa-316996de9024"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +60",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 60,
+   "operation": 0,
+   "uuid": "6deecf23-f551-53a1-8618-ec75be17b6bc"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +10%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.01,
+   "operation": 0,
+   "uuid": "524f4fe3-37ec-5ced-8bf8-8451bd667948"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "suit_set": "fsang:atom_eve",
+ "power": [
+  "gtapexadditions:hero/atom_eve",
+  "fsang:matter_absorption"
+ ]
+}

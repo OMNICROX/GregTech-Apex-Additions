@@ -1,0 +1,117 @@
+{
+ "name": "Ghost Rider Robbie: Living Flame + Unkillable Mercenary",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "palladium_damage_immunityfireproof": {
+   "type": "palladium:damage_immunity",
+   "title": "Fireproof",
+   "icon": "minecraft:magma_cream",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:in_fire",
+    "minecraft:on_fire",
+    "minecraft:lava",
+    "minecraft:hot_floor"
+   ]
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +4",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "be37a601-2c4c-521e-b938-8e523c289805"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +2",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "ee3790b4-af17-5026-905e-647b1eacce90"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +25%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.025,
+   "operation": 0,
+   "uuid": "2b354ee7-e149-55df-ad6a-755bd29b5cea"
+  },
+  "palladium_healinghealing_factor": {
+   "type": "palladium:healing",
+   "title": "Healing Factor",
+   "icon": "minecraft:golden_apple",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "frequency": 30,
+   "amount": 1
+  },
+  "palladium_jump_power": {
+   "type": "palladium:attribute_modifier",
+   "title": "Jump Boost +1",
+   "icon": "minecraft:rabbit_foot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:jump_power",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "a4b28c34-d720-549a-8c8e-fdbed7a2fc5f"
+  },
+  "palladium_leaping": {
+   "type": "palladium:attribute_modifier",
+   "title": "Leaping +1",
+   "icon": "minecraft:slime_ball",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:leaping",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "78903183-5b5b-50cb-bab0-a90b5f9bb331"
+  },
+  "palladium_fall_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Fall Resistance +30",
+   "icon": "minecraft:feather",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:fall_resistance",
+   "amount": 30,
+   "operation": 0,
+   "uuid": "fe28a45d-9004-59b3-b9e3-a45f171e3f14"
+  },
+  "minecraft_generic_armor_toughness": {
+   "type": "palladium:attribute_modifier",
+   "title": "Toughness +2",
+   "icon": "minecraft:diamond_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor_toughness",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "3ee307af-a611-5abb-86d3-23ac7da816df"
+  },
+  "minecraft_generic_attack_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack Speed +0.5",
+   "icon": "minecraft:golden_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_speed",
+   "amount": 0.5,
+   "operation": 0,
+   "uuid": "37b6bec0-1579-51d0-bb49-1af23a8817d3"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "suit_set": "fsang:static_shock",
+ "power": [
+  "gtapexadditions:hero/static_shock",
+  "fsang:electrokinesis"
+ ]
+}

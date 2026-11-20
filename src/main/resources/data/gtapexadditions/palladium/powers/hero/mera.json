@@ -1,0 +1,79 @@
+{
+ "name": "Mera: Child of Atlantis",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "forge_swim_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Swim Speed +150%",
+   "icon": "minecraft:prismarine_shard",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "forge:swim_speed",
+   "amount": 1.5,
+   "operation": 0,
+   "uuid": "eb892b1c-bda6-5bac-8dc2-f8e9e66b9f9d"
+  },
+  "palladium_commandwater_breathing": {
+   "type": "palladium:command",
+   "title": "Water Breathing",
+   "icon": "minecraft:pufferfish",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:water_breathing infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:water_breathing"
+   ],
+   "commands": []
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +2",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "30e61856-5ffa-5092-b45e-19faacbc7b28"
+  },
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +2 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "b4e1429b-ac4b-52d7-832b-bad5efbad40d"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +2",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "fa59ed96-b330-5cca-9c4e-d72c2fad7f36"
+  },
+  "palladium_commandnight_vision": {
+   "type": "palladium:command",
+   "title": "Night Vision",
+   "icon": "minecraft:spider_eye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "first_tick_commands": [
+    "effect give @s minecraft:night_vision infinite 0 true"
+   ],
+   "last_tick_commands": [
+    "effect clear @s minecraft:night_vision"
+   ],
+   "commands": []
+  }
+ }
+}

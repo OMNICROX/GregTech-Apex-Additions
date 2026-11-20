@@ -1,0 +1,7 @@
+{
+ "suit_set": "fsang:ghost_mcu",
+ "power": [
+  "gtapexadditions:hero/ghost_mcu",
+  "fsang:phasing"
+ ]
+}

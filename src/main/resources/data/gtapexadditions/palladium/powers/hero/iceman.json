@@ -1,0 +1,50 @@
+{
+ "name": "Iceman: Ice Cold",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "palladium_damage_immunitycold_immunity": {
+   "type": "palladium:damage_immunity",
+   "title": "Cold Immunity",
+   "icon": "minecraft:powder_snow_bucket",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "damage_sources": [
+    "minecraft:freeze"
+   ]
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +3",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 3,
+   "operation": 0,
+   "uuid": "8d0e0a71-ebcb-503e-b977-d57858232aec"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +10%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": 0.01,
+   "operation": 0,
+   "uuid": "573776bf-dd02-5069-9ca8-4a459afbbc82"
+  },
+  "minecraft_generic_attack_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Attack +1",
+   "icon": "minecraft:iron_sword",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.attack_damage",
+   "amount": 1,
+   "operation": 0,
+   "uuid": "7040e7df-ad1e-54e4-a5a1-9afe65e78cb5"
+  }
+ }
+}

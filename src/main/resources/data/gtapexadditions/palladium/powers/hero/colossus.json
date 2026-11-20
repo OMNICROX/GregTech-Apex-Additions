@@ -1,0 +1,84 @@
+{
+ "name": "Colossus: Unstoppable Brute",
+ "background": "minecraft:textures/block/gray_concrete.png",
+ "icon": "minecraft:nether_star",
+ "abilities": {
+  "minecraft_generic_max_health": {
+   "type": "palladium:attribute_modifier",
+   "title": "Health +6 hearts",
+   "icon": "minecraft:red_dye",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.max_health",
+   "amount": 12,
+   "operation": 0,
+   "uuid": "885ed81c-862f-5594-8e62-6cca17c56979"
+  },
+  "minecraft_generic_armor": {
+   "type": "palladium:attribute_modifier",
+   "title": "Armor +6",
+   "icon": "minecraft:iron_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor",
+   "amount": 6,
+   "operation": 0,
+   "uuid": "0c3f9460-e375-56a6-8c8f-aa232965e80d"
+  },
+  "minecraft_generic_armor_toughness": {
+   "type": "palladium:attribute_modifier",
+   "title": "Toughness +4",
+   "icon": "minecraft:diamond_chestplate",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.armor_toughness",
+   "amount": 4,
+   "operation": 0,
+   "uuid": "9ebbfce5-3f35-5a73-8f29-56070ae35b65"
+  },
+  "palladium_punch_damage": {
+   "type": "palladium:attribute_modifier",
+   "title": "Punch +6",
+   "icon": "minecraft:iron_ingot",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:punch_damage",
+   "amount": 6,
+   "operation": 0,
+   "uuid": "c495ada9-9ef4-5bff-8e38-dfd8c9b1291b"
+  },
+  "minecraft_generic_knockback_resistance": {
+   "type": "palladium:attribute_modifier",
+   "title": "Knockback Resistance +70%",
+   "icon": "minecraft:anvil",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.knockback_resistance",
+   "amount": 0.7,
+   "operation": 0,
+   "uuid": "c4d1925e-b040-5d11-8c50-adcc861c23a2"
+  },
+  "palladium_destroy_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Mining Speed +2",
+   "icon": "minecraft:iron_pickaxe",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "palladium:destroy_speed",
+   "amount": 2,
+   "operation": 0,
+   "uuid": "447a708b-0a1f-541b-b6d2-fc8109ac3132"
+  },
+  "minecraft_generic_movement_speed": {
+   "type": "palladium:attribute_modifier",
+   "title": "Speed +-10%",
+   "icon": "minecraft:sugar",
+   "hidden": false,
+   "hidden_in_bar": true,
+   "attribute": "minecraft:generic.movement_speed",
+   "amount": -0.01,
+   "operation": 0,
+   "uuid": "bdfacca2-b363-5579-9b0b-fe35a32ddcc6"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "suit_set": "fsang:respawn",
+ "power": [
+  "gtapexadditions:hero/respawn",
+  "fsang:spawn"
+ ]
+}
