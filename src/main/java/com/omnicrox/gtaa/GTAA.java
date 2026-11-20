@@ -43,6 +43,7 @@ public class GTAA {
         bus.addListener(this::commonSetup);
         com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
         com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
+        com.omnicrox.gtaa.common.item.StructureUpgrader.registerEvents();
         net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
                 com.omnicrox.gtaa.common.infernal.InfernalConfig.SPEC, "gtapexadditions-infernal.toml");
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {

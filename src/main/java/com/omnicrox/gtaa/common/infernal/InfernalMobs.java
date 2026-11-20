@@ -380,8 +380,8 @@ public final class InfernalMobs {
     /** /gtapexadditions infernal [elite|ultra|infernal]: makes the nearest mob within 10 blocks infernal (ops). */
     @SubscribeEvent
     public static void onCommands(net.minecraftforge.event.RegisterCommandsEvent event) {
-        var root = net.minecraft.commands.Commands.literal("gtapexadditions").requires(s -> s.hasPermission(2));
-        var cmd = net.minecraft.commands.Commands.literal("infernal");
+        var root = net.minecraft.commands.Commands.literal("gtapexadditions");
+        var cmd = net.minecraft.commands.Commands.literal("infernal").requires(s -> s.hasPermission(2));
         for (Rank rank : Rank.values()) {
             cmd = cmd.then(net.minecraft.commands.Commands.literal(rank.name().toLowerCase(java.util.Locale.ROOT)).executes(ctx -> {
                 var src = ctx.getSource();

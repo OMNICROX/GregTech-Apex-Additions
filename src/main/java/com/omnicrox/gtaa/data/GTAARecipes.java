@@ -547,6 +547,14 @@ public class GTAARecipes {
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
                 .outputItems(GTAAMachines.MEGA_DISTILLATION_TOWER.asStack())
                 .duration(2400).EUt(VA[ZPM]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:structure_upgrader")
+                .inputItems(GTItems.TERMINAL.asStack())
+                .inputItems(GTItems.ROBOT_ARM_MV, 2)
+                .inputItems(GTItems.CONVEYOR_MODULE_MV, 2)
+                .inputItems(CustomTags.MV_CIRCUITS, 2)
+                .inputItems(plate, GTMaterials.Aluminium, 4)
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.STRUCTURE_UPGRADER.asStack())
+                .duration(400).EUt(VA[MV]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_entity_crusher")
                 .inputItems(GTItems.ELECTRIC_MOTOR_IV, 8)
                 .inputItems(CustomTags.IV_CIRCUITS, 4)

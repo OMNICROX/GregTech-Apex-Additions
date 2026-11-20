@@ -56,6 +56,9 @@ public class GTAAItems {
     public static final ItemEntry<com.omnicrox.gtaa.common.item.AngelRingItem> ANGEL_RING = REGISTRATE
             .item("angel_ring", com.omnicrox.gtaa.common.item.AngelRingItem::new)
             .lang("Angel Ring").model(NonNullBiConsumer.noop()).register();
+    public static final ItemEntry<com.omnicrox.gtaa.common.item.StructureUpgrader> STRUCTURE_UPGRADER = REGISTRATE
+            .item("structure_upgrader", com.omnicrox.gtaa.common.item.StructureUpgrader::new)
+            .lang("Structure Upgrader").model(NonNullBiConsumer.noop()).register();
     public static final ItemEntry<Item> QUARK_CREATION_CATALYST = REGISTRATE.item("quark_creation_catalyst", Item::new)
             .lang("Quark Creation Catalyst").model(NonNullBiConsumer.noop()).register();
 

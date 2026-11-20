@@ -131,6 +131,14 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
                 .toArray(com.lowdragmc.lowdraglib.utils.BlockInfo[]::new));
     }
 
+    public static Map<net.minecraft.world.level.block.Block, Integer> soilTiers() {
+        return tierMap(SOILS);
+    }
+
+    public static Map<net.minecraft.world.level.block.Block, Integer> glassTiers() {
+        return glassMap();
+    }
+
     public static com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate soil() {
         return tiered(CTX_SOIL, () -> tierMap(SOILS), "Soil");
     }
