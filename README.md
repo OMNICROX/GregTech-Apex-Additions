@@ -51,7 +51,8 @@ the Aether) only get their recipes when that mod is installed.
 
 `tools/kubejs` holds the KubeJS scripts Apex Ascension ships with this mod: suit station bench removal, Ad Astra
 gated by GT tiers (Moon HV, Mars EV, Venus/Mercury IV, Glacio LuV, GT rocket fuel), purified water in high-tier
-wafers, Extra Utilities generators off. `tools/hero_kits.py` and `tools/extra_suits.py` regenerate the hero kits
+wafers, Extra Utilities generators off, Avaritia neutronium / infinity unified with GregTech's, Tinkers' Avaritia as
+the one Avaritia Tinkers material set. `tools/hero_kits.py` and `tools/extra_suits.py` regenerate the hero kits
 and the station suit list.
 
 ## Requirements
