@@ -42,6 +42,11 @@ public class GTAAMaterials {
         return ModList.get().isLoaded("gtna");
     }
 
+    /** true when GT Community Additions supplies the purified water grades. */
+    public static boolean externalWater() {
+        return ModList.get().isLoaded("gtca");
+    }
+
     private static Material fluid(String id, String lang, int color, int temperature, boolean texture) {
         FluidBuilder fb = new FluidBuilder().temperature(temperature);
         if (texture) fb.customStill().disableColor();
@@ -61,8 +66,8 @@ public class GTAAMaterials {
             SPACETIME = fluid("space_time", "Molten SpaceTime", 0x15123A, 100_000_000, false);
             SPATIALLY_ENLARGED_FLUID = fluid("spatial_fluid", "Spatially Enlarged Fluid", 0x2E9BD6, 1, true);
         }
-        // GoodGenerator (MIT): made in MK IV fusion, cheap in MK V
-        METASTABLE_OGANESSON = new Material.Builder(GTAA.id("metastable_oganesson"))
+        // GoodGenerator (MIT): made in MK IV fusion, cheap in MK V. gtna has its own; use that one when present.
+        if (!externalFluids()) METASTABLE_OGANESSON = new Material.Builder(GTAA.id("metastable_oganesson"))
                 .langValue("Metastable Oganesson")
                 .ingot().liquid(new FluidBuilder().temperature(10_380))
                 .color(0xE61C24).secondaryColor(0x5A0A0A)
@@ -94,7 +99,7 @@ public class GTAAMaterials {
                 .langValue("Extremely Unstable Naquadah").dust().color(0x1A2D1A)
                 .iconSet(com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
-        ATOMIC_SEPARATION_CATALYST = new Material.Builder(GTAA.id("atomic_separation_catalyst"))
+        if (!externalFluids()) ATOMIC_SEPARATION_CATALYST = new Material.Builder(GTAA.id("atomic_separation_catalyst"))
                 .langValue("Atomic Separation Catalyst").dust().liquid(new FluidBuilder().temperature(5_000))
                 .color(0xE85AB5).iconSet(com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
@@ -110,14 +115,13 @@ public class GTAAMaterials {
         String[] grade = { "", "Filtered", "Ozonated", "Flocculated", "pH Neutralized", "Extreme-Temperature Treated",
                 "Ultraviolet Treated Electrically Neutral", "Degassed Decontaminant-Free", "Subatomically Perfect" };
         int[] gcol = { 0, 0x3E6FE0, 0x3A8CE0, 0x37A6E0, 0x34C0E0, 0x31D8E0, 0x2EE0C8, 0x2BE0A8, 0xE0E0FF };
-        for (int g = 1; g <= 8; g++) PURIFIED_WATER[g] = fluid("grade_" + g + "_purified_water",
+        if (!externalWater()) for (int g = 1; g <= 8; g++) PURIFIED_WATER[g] = fluid("grade_" + g + "_purified_water",
                 "Grade " + g + " Purified Water (" + grade[g] + ")", gcol[g], 300, false);
         OZONE = new Material.Builder(GTAA.id("ozone")).langValue("Ozone").gas(new FluidBuilder()).color(0x80C0FF)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
         POLYALUMINIUM_CHLORIDE = fluid("polyaluminium_chloride", "Polyaluminium Chloride", 0xD0D0B0, 300, false);
         FLOCCULATION_WASTE = fluid("flocculation_waste", "Flocculation Waste Liquid", 0x6A6A40, 300, false);
-        ACTIVATED_CARBON = new Material.Builder(GTAA.id("activated_carbon")).langValue("Activated Carbon").dust()
-                .color(0x2A2A2A).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
+        ACTIVATED_CARBON = GTMaterials.ActivatedCarbon; // GTCEu's own
         PRE_ACTIVATED_CARBON = new Material.Builder(GTAA.id("pre_activated_carbon")).langValue("Pre-Activated Carbon").dust()
                 .color(0x3A3A2A).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
         DIRTY_ACTIVATED_CARBON = new Material.Builder(GTAA.id("dirty_activated_carbon")).langValue("Dirty Activated Carbon").dust()
@@ -164,9 +168,44 @@ public class GTAAMaterials {
         }
     }
 
+    private static Material external(String id) {
+        Material m = GTCEuAPI.materialManager.getMaterial(id);
+        if (m == null) GTAA.LOGGER.error("[GTAA] expected material {} was not found", id);
+        return m;
+    }
+
+    private static void ensureDust(Material m) {
+        if (m != null && !m.hasProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.DUST))
+            m.setProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.DUST,
+                    new com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty());
+    }
+
     /** Called after every addon registered its materials. */
     public static void resolveExternal() {
+        var L = com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.LIQUID;
+        if (externalWater()) {
+            for (int g = 1; g <= 8; g++) {
+                PURIFIED_WATER[g] = external("gtca:purified_water_grade_" + g);
+                if (PURIFIED_WATER[g] != null) ensureFluid(PURIFIED_WATER[g], L);
+            }
+        }
+        ensureDust(ACTIVATED_CARBON);
         if (!externalFluids()) return;
+        // gtna's versions replace GTAA's; make sure they have the forms GTAA's recipes use
+        METASTABLE_OGANESSON = external("gtna:metastable_oganesson");
+        if (METASTABLE_OGANESSON != null) {
+            ensureDust(METASTABLE_OGANESSON);
+            if (!METASTABLE_OGANESSON.hasProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.INGOT))
+                METASTABLE_OGANESSON.setProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.INGOT,
+                        new com.gregtechceu.gtceu.api.data.chemical.material.properties.IngotProperty());
+            METASTABLE_OGANESSON.addFlags(MaterialFlags.GENERATE_PLATE);
+            ensureFluid(METASTABLE_OGANESSON, L);
+        }
+        ATOMIC_SEPARATION_CATALYST = external("gtna:atomic_separation_catalyst");
+        if (ATOMIC_SEPARATION_CATALYST != null) {
+            ensureDust(ATOMIC_SEPARATION_CATALYST);
+            ensureFluid(ATOMIC_SEPARATION_CATALYST, L);
+        }
         TACHYON_RICH_TEMPORAL_FLUID = GTCEuAPI.materialManager.getMaterial("gtna:temporal_fluid");
         SPACETIME = GTCEuAPI.materialManager.getMaterial("gtna:space_time");
         SPATIALLY_ENLARGED_FLUID = GTCEuAPI.materialManager.getMaterial("gtna:spatial_fluid");

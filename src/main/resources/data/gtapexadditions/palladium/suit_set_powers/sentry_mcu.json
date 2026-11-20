@@ -1,7 +1,0 @@
-{
- "suit_set": "fsang:sentry_mcu",
- "power": [
-  "gtapexadditions:hero/sentry_mcu",
-  "fsang:sentry"
- ]
-}

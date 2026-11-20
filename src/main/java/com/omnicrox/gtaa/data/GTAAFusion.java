@@ -63,7 +63,9 @@ public final class GTAAFusion {
     public static void init(Consumer<FinishedRecipe> provider) {
         // ---- feeders (MK II / MK III): plasmas GTCEu has no recipe for ----
         fusion(provider, "radon_plasma", f(Iridium, L, 144), f(Fluorine, 500), f(Radon, P, 144), 32, VA[LuV], 450_000_000L);
-        fusion(provider, "calcium_plasma", f(Magnesium, L, 128), f(Oxygen, 128), f(Calcium, P, 16), 128, VA[IV], 120_000_000L);
+        // GT Community Additions already has this one
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("gtca"))
+            fusion(provider, "calcium_plasma", f(Magnesium, L, 128), f(Oxygen, 128), f(Calcium, P, 16), 128, VA[IV], 120_000_000L);
         fusion(provider, "boron_plasma", f(Beryllium, L, 16), f(Hydrogen, 125), f(Boron, P, 16), 32, VA[LuV], 300_000_000L);
         fusion(provider, "copper_plasma", f(Cobalt, L, 144), f(Helium, 250), f(Copper, P, 144), 32, VA[ZPM], 480_000_000L);
         fusion(provider, "xenon_plasma", f(Antimony, L, 144), f(Lithium, L, 144), f(Xenon, P, 144), 32, VA[ZPM], 500_000_000L);

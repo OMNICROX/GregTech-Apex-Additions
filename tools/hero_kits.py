@@ -230,6 +230,19 @@ for e in entries:
 for g in groups.values():
     if len(g) > 1:
         for n, e in enumerate(g, 1): e['circuit'] = n
+# suits the station can't make (multiversal variants etc.) get no kit
+made = {e['suit'] for e in entries}
+dropped = 0
+for sid, info in station.items():
+    if info['archs'] == ['own'] or sid in made: continue
+    short = sid.split(':')[1]
+    for f in (f'{pdir}/{short}.json', f'{sdir}/{short}.json'):
+        if os.path.exists(f): os.remove(f)
+    rows[:] = [r for r in rows if r[0] != short]
+    dropped += 1
+with open(sys.argv[3], 'w', newline='') as f:
+    w = csv.writer(f); w.writerow(['suit_set', 'kit', 'origin_power', 'kit_abilities']); w.writerows(rows)
+print('no kit (not made in the station):', dropped)
 os.makedirs(f'{OUT}/gtapexadditions', exist_ok=True)
 json.dump(entries, open(f'{OUT}/gtapexadditions/suit_station.json', 'w'), indent=1)
 moved = [e['recipe'] for e in entries if e['tier'] >= 2]
