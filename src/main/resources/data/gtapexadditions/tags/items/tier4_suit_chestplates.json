@@ -1,0 +1,121 @@
+{
+ "replace": false,
+ "values": [
+  {
+   "id": "fsang:beta_ray_bill_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:blue_marvel_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:homelander_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:invincible2_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:invincible_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:invincible_girl_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:invincible_homemade_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:kid_omniman2_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:kid_omniman_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:mighty_thor_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:omniman_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:scarlet_witch_mcu_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:sentry_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:sentry_void_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:superboy_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:superboy_new_52_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:superboy_super_sons_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:supergirl_rebirth_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:superman_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:superman_shazam_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:thanos_mcu_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:thor_cosmic_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:thor_infinity_war_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite2_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite3_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite4_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite5_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite6_chestplate",
+   "required": false
+  },
+  {
+   "id": "fsang:viltrumite_chestplate",
+   "required": false
+  }
+ ]
+}
