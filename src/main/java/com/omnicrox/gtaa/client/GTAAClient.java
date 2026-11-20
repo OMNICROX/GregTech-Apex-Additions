@@ -61,17 +61,6 @@ public final class GTAAClient {
                 retexture(GTAAMaterials.TACHYON_RICH_TEMPORAL_FLUID, "temporal_fluid");
             });
         }
-
-        @SubscribeEvent
-        public static void addPacks(AddPackFindersEvent event) {
-            if (event.getPackType() != PackType.CLIENT_RESOURCES) return;
-            Path path = ModList.get().getModFileById(GTAA.MOD_ID).getFile().findResource("resourcepacks/gtnh_textures");
-            Pack pack = Pack.readMetaAndCreate("builtin/gtapexadditions_gtnh_textures",
-                    Component.literal("GTAA: GTNH Textures"), true,
-                    id -> new PathPackResources(id, path, true),
-                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN);
-            if (pack != null) event.addRepositorySource(consumer -> consumer.accept(pack));
-        }
     }
 
     private static void retexture(Material material, String texture) {

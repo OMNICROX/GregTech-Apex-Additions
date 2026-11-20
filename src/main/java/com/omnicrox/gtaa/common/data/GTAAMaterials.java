@@ -49,7 +49,8 @@ public class GTAAMaterials {
 
     private static Material fluid(String id, String lang, int color, int temperature, boolean texture) {
         FluidBuilder fb = new FluidBuilder().temperature(temperature);
-        if (texture) fb.customStill().disableColor();
+        // every GTAA fluid has its own animated texture (tools/fluid_textures.py), not GT's tinted default
+        fb.customStill().disableColor();
         return new Material.Builder(GTAA.id(id))
                 .langValue(lang)
                 .liquid(fb)
