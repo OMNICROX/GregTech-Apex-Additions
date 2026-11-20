@@ -36,6 +36,7 @@ public class GTAARecipes {
         GTAAPurification.init(provider);
         megaAndCrusher(provider);
         GTAACompatRecipes.init(provider);
+        GTAASuitStation.init(provider);
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);

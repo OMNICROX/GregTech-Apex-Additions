@@ -1,0 +1,9789 @@
+[
+ {
+  "suit": "fsang:a_train_show",
+  "name": "A Train Show",
+  "recipe": "fsang:a_train_show",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedster_chem",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:a_train_show_helmet",
+   "fsang:a_train_show_chestplate",
+   "fsang:a_train_show_leggings",
+   "fsang:a_train_show_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "minecraft:blue_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:all_might_young",
+  "name": "All Might Young",
+  "recipe": "fsang:all_might_young",
+  "tier": 3,
+  "kit": "One For All",
+  "origin": null,
+  "abilities": [
+   "Punch +8",
+   "Speed +30%",
+   "Jump Boost +2",
+   "Leaping +2",
+   "Fall Resistance +100",
+   "Health +3 hearts"
+  ],
+  "armor": [
+   "fsang:all_might_young_chestplate",
+   "fsang:all_might_young_leggings",
+   "fsang:all_might_young_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:aqualad_young_justice",
+  "name": "Aqualad Young Justice",
+  "recipe": "fsang:aqualad_young_justice",
+  "tier": 2,
+  "kit": "Child of Atlantis",
+  "origin": "atlantean",
+  "abilities": [
+   "Swim Speed +150%",
+   "Water Breathing",
+   "Armor +2",
+   "Health +2 hearts",
+   "Attack +2",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:aqualad_young_justice_chestplate",
+   "fsang:aqualad_young_justice_leggings"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   },
+   {
+    "item": "fsang:nth_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:aquaman",
+  "name": "Aquaman",
+  "recipe": "fsang:aquaman",
+  "tier": 2,
+  "kit": "Child of Atlantis",
+  "origin": "atlantean",
+  "abilities": [
+   "Swim Speed +150%",
+   "Water Breathing",
+   "Armor +2",
+   "Health +2 hearts",
+   "Attack +2",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:aquaman_chestplate",
+   "fsang:aquaman_leggings",
+   "fsang:aquaman_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_green2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_orange2",
+    "count": 6
+   },
+   {
+    "item": "fsang:nth_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:aquaman_young_justice",
+  "name": "Aquaman Young Justice",
+  "recipe": "fsang:aquaman_young_justice",
+  "tier": 2,
+  "kit": "Child of Atlantis",
+  "origin": "atlantean",
+  "abilities": [
+   "Swim Speed +150%",
+   "Water Breathing",
+   "Armor +2",
+   "Health +2 hearts",
+   "Attack +2",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:aquaman_young_justice_chestplate",
+   "fsang:aquaman_young_justice_leggings",
+   "fsang:aquaman_young_justice_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_green2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_orange2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 2
+   },
+   {
+    "item": "fsang:nth_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:arkham_knight",
+  "name": "Arkham Knight",
+  "recipe": "fsang:arkham_knight",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:arkham_knight_helmet",
+   "fsang:arkham_knight_chestplate",
+   "fsang:arkham_knight_leggings",
+   "fsang:arkham_knight_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue3",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:asgardian",
+  "name": "Asgardian",
+  "recipe": "fsang:asgardian",
+  "tier": 3,
+  "kit": "Godlike + Sorcerer",
+  "origin": "asgardian",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:asgardian_helmet",
+   "fsang:asgardian_chestplate",
+   "fsang:asgardian_leggings",
+   "fsang:asgardian_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:atlantean",
+  "name": "Atlantean",
+  "recipe": "fsang:atlantean",
+  "tier": 2,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:atlantean_helmet",
+   "fsang:atlantean_chestplate",
+   "fsang:atlantean_leggings",
+   "fsang:atlantean_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:nth_template",
+    "count": 1
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:prismarine_shard",
+    "count": 8
+   },
+   {
+    "item": "minecraft:heart_of_the_sea",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:atom_eve",
+  "name": "Atom Eve",
+  "recipe": "fsang:atom_eve",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": "matter_absorption",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:atom_eve_chestplate",
+   "fsang:atom_eve_leggings",
+   "fsang:atom_eve_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:pink_fabrics",
+    "count": 8
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:azrael",
+  "name": "Azrael",
+  "recipe": "fsang:azrael",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:azrael_helmet",
+   "fsang:azrael_chestplate",
+   "fsang:azrael_leggings",
+   "fsang:azrael_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:babel",
+  "name": "Babel",
+  "recipe": "fsang:babel",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:babel_helmet",
+   "fsang:babel_chestplate",
+   "fsang:babel_leggings",
+   "fsang:babel_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_light_blue2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batgirl_cain",
+  "name": "Batgirl Cain",
+  "recipe": "fsang:batgirl_cain",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batgirl_cain_helmet",
+   "fsang:batgirl_cain_chestplate",
+   "fsang:batgirl_cain_leggings",
+   "fsang:batgirl_cain_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 6
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batgirl_sb",
+  "name": "Batgirl Sb",
+  "recipe": "fsang:batgirl_sb",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batgirl_sb_helmet",
+   "fsang:batgirl_sb_chestplate",
+   "fsang:batgirl_sb_leggings",
+   "fsang:batgirl_sb_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:purple_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman",
+  "name": "Batman",
+  "recipe": "fsang:batman",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_helmet",
+   "fsang:batman_chestplate",
+   "fsang:batman_leggings",
+   "fsang:batman_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_beyond",
+  "name": "Batman Beyond",
+  "recipe": "fsang:batman_beyond",
+  "tier": 2,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:batman_beyond_helmet",
+   "fsang:batman_beyond_chestplate",
+   "fsang:batman_beyond_leggings",
+   "fsang:batman_beyond_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red3",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 6
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_dk",
+  "name": "Batman Dk",
+  "recipe": "fsang:batman_dk",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_dk_helmet",
+   "fsang:batman_dk_chestplate",
+   "fsang:batman_dk_leggings",
+   "fsang:batman_dk_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_knightfight_damian",
+  "name": "Batman Knightfight Damian",
+  "recipe": "fsang:batman_knightfight_damian",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_knightfight_damian_helmet",
+   "fsang:batman_knightfight_damian_chestplate",
+   "fsang:batman_knightfight_damian_leggings",
+   "fsang:batman_knightfight_damian_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:robin_damian_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_damian_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_damian_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_damian_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_knightfight_drake",
+  "name": "Batman Knightfight Drake",
+  "recipe": "fsang:batman_knightfight_drake",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_knightfight_drake_helmet",
+   "fsang:batman_knightfight_drake_chestplate",
+   "fsang:batman_knightfight_drake_leggings",
+   "fsang:batman_knightfight_drake_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:robin_tim_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_tim_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_tim_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_tim_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_knightfight_grayson",
+  "name": "Batman Knightfight Grayson",
+  "recipe": "fsang:batman_knightfight_grayson",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_knightfight_grayson_helmet",
+   "fsang:batman_knightfight_grayson_chestplate",
+   "fsang:batman_knightfight_grayson_leggings",
+   "fsang:batman_knightfight_grayson_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:nightwing_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:nightwing_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:nightwing_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:nightwing_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_knightfight_todd",
+  "name": "Batman Knightfight Todd",
+  "recipe": "fsang:batman_knightfight_todd",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_knightfight_todd_helmet",
+   "fsang:batman_knightfight_todd_chestplate",
+   "fsang:batman_knightfight_todd_leggings",
+   "fsang:batman_knightfight_todd_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:redhood_rebirth_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:redhood_rebirth_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:redhood_rebirth_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:redhood_rebirth_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_kryptonite",
+  "name": "Batman Kryptonite",
+  "recipe": "fsang:batman_kryptonite",
+  "tier": 2,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:batman_kryptonite_helmet",
+   "fsang:batman_kryptonite_chestplate",
+   "fsang:batman_kryptonite_leggings",
+   "fsang:batman_kryptonite_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:kryptonite_block",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:titanium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:batman_pre52",
+  "name": "Batman Pre52",
+  "recipe": "fsang:batman_pre52",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:batman_pre52_helmet",
+   "fsang:batman_pre52_chestplate",
+   "fsang:batman_pre52_leggings",
+   "fsang:batman_pre52_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 6
+   },
+   {
+    "item": "fsang:batman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:batman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:beta_ray_bill",
+  "name": "Beta Ray Bill",
+  "recipe": "fsang:beta_ray_bill",
+  "tier": 4,
+  "kit": "Godlike",
+  "origin": "thor",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:beta_ray_bill_helmet",
+   "fsang:beta_ray_bill_chestplate",
+   "fsang:beta_ray_bill_leggings",
+   "fsang:beta_ray_bill_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_orange3",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 6
+   },
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:blue_beetle_classic",
+  "name": "Blue Beetle Classic",
+  "recipe": "fsang:blue_beetle_classic",
+  "tier": 3,
+  "kit": "High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Armor +5",
+   "Toughness +2",
+   "Flight",
+   "Fall Resistance +40",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:blue_beetle_classic_helmet",
+   "fsang:blue_beetle_classic_chestplate",
+   "fsang:blue_beetle_classic_leggings",
+   "fsang:blue_beetle_classic_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:yellow_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:blue_beetle_ted",
+  "name": "Blue Beetle Ted",
+  "recipe": "fsang:blue_beetle_ted",
+  "tier": 3,
+  "kit": "High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Armor +5",
+   "Toughness +2",
+   "Flight",
+   "Fall Resistance +40",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:blue_beetle_ted_helmet",
+   "fsang:blue_beetle_ted_chestplate",
+   "fsang:blue_beetle_ted_leggings",
+   "fsang:blue_beetle_ted_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_blue2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:yellow_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "fsang:blue_beetle_classic_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:blue_beetle_classic_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:blue_beetle_classic_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:blue_beetle_classic_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:blue_marvel",
+  "name": "Blue Marvel",
+  "recipe": "fsang:blue_marvel",
+  "tier": 4,
+  "kit": "Cosmic Flier + Godlike",
+  "origin": "anti_matter",
+  "abilities": [
+   "Flight",
+   "Armor +6",
+   "Health +5 hearts",
+   "Punch +4",
+   "No Fall Damage",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:blue_marvel_chestplate",
+   "fsang:blue_marvel_leggings",
+   "fsang:blue_marvel_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_light_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:booster_gold",
+  "name": "Booster Gold",
+  "recipe": "fsang:booster_gold",
+  "tier": 3,
+  "kit": "High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Armor +5",
+   "Toughness +2",
+   "Flight",
+   "Fall Resistance +40",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:booster_gold_helmet",
+   "fsang:booster_gold_chestplate",
+   "fsang:booster_gold_leggings",
+   "fsang:booster_gold_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:yellow_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:captain_america",
+  "name": "Captain America",
+  "recipe": "fsang:captain_america",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:captain_america_helmet",
+   "fsang:captain_america_chestplate",
+   "fsang:captain_america_leggings",
+   "fsang:captain_america_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:captain_america_brave_new_world",
+  "name": "Captain America Brave New World",
+  "recipe": "fsang:captain_america_brave_new_world",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:captain_america_brave_new_world_helmet",
+   "fsang:captain_america_brave_new_world_chestplate",
+   "fsang:captain_america_brave_new_world_leggings",
+   "fsang:captain_america_brave_new_world_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:vibranium_template",
+    "count": 1
+   },
+   {
+    "item": "palladium:vibranium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue3",
+    "count": 4
+   },
+   {
+    "item": "fsang:captain_america_falcon_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_falcon_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_falcon_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_falcon_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:captain_america_falcon",
+  "name": "Captain America Falcon",
+  "recipe": "fsang:captain_america_falcon",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:captain_america_falcon_helmet",
+   "fsang:captain_america_falcon_chestplate",
+   "fsang:captain_america_falcon_leggings",
+   "fsang:captain_america_falcon_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "fsang:falcon_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:falcon_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:falcon_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:falcon_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:captain_america_winter_soldier",
+  "name": "Captain America Winter Soldier",
+  "recipe": "fsang:captain_america_ws",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:captain_america_ws_helmet",
+   "fsang:captain_america_ws_chestplate",
+   "fsang:captain_america_ws_leggings",
+   "fsang:captain_america_ws_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:captain_america_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:captain_america_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:captain_marvel",
+  "name": "Captain Marvel",
+  "recipe": "fsang:captain_marvel",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": "kree_hybrid",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:captain_marvel_chestplate",
+   "fsang:captain_marvel_leggings",
+   "fsang:captain_marvel_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:ms_marvel_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:ms_marvel_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:ms_marvel_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:ms_marvel_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:colossus",
+  "name": "Colossus",
+  "recipe": "fsang:colossus",
+  "tier": 3,
+  "kit": "Unstoppable Brute",
+  "origin": "colossus",
+  "abilities": [
+   "Health +6 hearts",
+   "Armor +6",
+   "Toughness +4",
+   "Punch +6",
+   "Knockback Resistance +70%",
+   "Mining Speed +2",
+   "Speed +-10%"
+  ],
+  "armor": [
+   "fsang:colossus_chestplate",
+   "fsang:colossus_leggings",
+   "fsang:colossus_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:x_men_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:x_men_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:x_men_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:constantine",
+  "name": "Constantine",
+  "recipe": "fsang:constantine",
+  "tier": 2,
+  "kit": "Sorcerer",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +2",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:constantine_chestplate",
+   "fsang:constantine_leggings",
+   "fsang:constantine_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:cop_blue",
+  "name": "Cop Blue",
+  "recipe": "fsang:cop_blue",
+  "tier": 1,
+  "kit": "Hero Costume",
+  "origin": null,
+  "abilities": [
+   "Armor +2",
+   "Speed +10%",
+   "Fall Resistance +10"
+  ],
+  "armor": [
+   "fsang:cop_blue_chestplate",
+   "fsang:cop_blue_leggings",
+   "fsang:cop_blue_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:cop_red",
+  "name": "Cop Red",
+  "recipe": "fsang:cop_red",
+  "tier": 1,
+  "kit": "Hero Costume",
+  "origin": null,
+  "abilities": [
+   "Armor +2",
+   "Speed +10%",
+   "Fall Resistance +10"
+  ],
+  "armor": [
+   "fsang:cop_red_chestplate",
+   "fsang:cop_red_leggings",
+   "fsang:cop_red_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:cyclops2",
+  "name": "Cyclops2",
+  "recipe": "fsang:cyclops",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": "cyclops",
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:cyclops_helmet",
+   "fsang:cyclops_chestplate",
+   "fsang:cyclops_leggings",
+   "fsang:cyclops_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:cyclops_visor",
+    "count": 1
+   },
+   {
+    "item": "fsang:x_men_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:x_men_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:x_men_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:cyclops_phoenix",
+  "name": "Cyclops Phoenix",
+  "recipe": "fsang:cyclops_phoenix",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": "cyclops",
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:cyclops_phoenix_helmet",
+   "fsang:cyclops_phoenix_chestplate",
+   "fsang:cyclops_phoenix_leggings",
+   "fsang:cyclops_phoenix_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:cyclops_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:cyclops_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:cyclops_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:cyclops_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:daredevil",
+  "name": "Daredevil",
+  "recipe": "fsang:daredevil",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": "daredevil",
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:daredevil_helmet",
+   "fsang:daredevil_chestplate",
+   "fsang:daredevil_leggings",
+   "fsang:daredevil_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:red_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "fsang:daredevil_starter_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:daredevil_starter",
+  "name": "Daredevil Starter",
+  "recipe": "fsang:daredevil_starter",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": "daredevil",
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:daredevil_starter_helmet",
+   "fsang:daredevil_starter_chestplate",
+   "fsang:daredevil_starter_leggings",
+   "fsang:daredevil_starter_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:deadpool",
+  "name": "Deadpool",
+  "recipe": "fsang:deadpool",
+  "tier": 3,
+  "kit": "Unkillable Mercenary",
+  "origin": "regenerative_healing",
+  "abilities": [
+   "Healing Factor",
+   "Speed +25%",
+   "Attack +4",
+   "Jump Boost +1",
+   "Leaping +1",
+   "Fall Resistance +30",
+   "Toughness +2",
+   "Attack Speed +0.5"
+  ],
+  "armor": [
+   "fsang:deadpool_helmet",
+   "fsang:deadpool_chestplate",
+   "fsang:deadpool_leggings",
+   "fsang:deadpool_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:deathstroke_teen_titans",
+  "name": "Deathstroke Teen Titans",
+  "recipe": "fsang:deathstroke_teen_titans",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:deathstroke_teen_titans_helmet",
+   "fsang:deathstroke_teen_titans_chestplate",
+   "fsang:deathstroke_teen_titans_leggings",
+   "fsang:deathstroke_teen_titans_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_orange2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:deku_zeta",
+  "name": "Deku Zeta",
+  "recipe": "fsang:deku_zeta",
+  "tier": 3,
+  "kit": "One For All",
+  "origin": null,
+  "abilities": [
+   "Punch +8",
+   "Speed +30%",
+   "Jump Boost +2",
+   "Leaping +2",
+   "Fall Resistance +100",
+   "Health +3 hearts"
+  ],
+  "armor": [
+   "fsang:deku_zeta_helmet",
+   "fsang:deku_zeta_chestplate",
+   "fsang:deku_zeta_leggings",
+   "fsang:deku_zeta_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:dog_welder",
+  "name": "Dog Welder",
+  "recipe": "fsang:dog_welder",
+  "tier": 3,
+  "kit": "High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Armor +5",
+   "Toughness +2",
+   "Flight",
+   "Fall Resistance +40",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:dog_welder_helmet",
+   "fsang:dog_welder_chestplate",
+   "fsang:dog_welder_leggings",
+   "fsang:dog_welder_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:light_blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:dr_doom",
+  "name": "Dr Doom",
+  "recipe": "fsang:dr_doom",
+  "tier": 3,
+  "kit": "Sorcerer + High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +5",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1",
+   "Toughness +2",
+   "Flight",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:dr_doom_helmet",
+   "fsang:dr_doom_chestplate",
+   "fsang:dr_doom_leggings",
+   "fsang:dr_doom_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_green3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray3",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_ingot",
+    "count": 4
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:dr_doom_god",
+  "name": "Dr Doom God",
+  "recipe": "fsang:dr_doom_god",
+  "tier": 3,
+  "kit": "Sorcerer + High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +5",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1",
+   "Toughness +2",
+   "Flight",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:dr_doom_god_helmet",
+   "fsang:dr_doom_god_chestplate",
+   "fsang:dr_doom_god_leggings",
+   "fsang:dr_doom_god_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 12
+   },
+   {
+    "item": "fsang:dr_doom_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:dr_doom_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:dr_doom_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:dr_doom_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:elektra",
+  "name": "Elektra",
+  "recipe": "fsang:elektra",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:elektra_helmet",
+   "fsang:elektra_chestplate",
+   "fsang:elektra_leggings",
+   "fsang:elektra_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:daredevil_starter_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:daredevil_starter_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:falcon",
+  "name": "Falcon",
+  "recipe": "fsang:falcon",
+  "tier": 2,
+  "kit": "Winged",
+  "origin": null,
+  "abilities": [
+   "Flight",
+   "Fall Resistance +60",
+   "Speed +10%"
+  ],
+  "armor": [
+   "fsang:falcon_helmet",
+   "fsang:falcon_chestplate",
+   "fsang:falcon_leggings",
+   "fsang:falcon_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:red_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:fantastic_four",
+  "name": "Fantastic Four",
+  "recipe": "fsang:fantastic_four",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": null,
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:fantastic_four_chestplate",
+   "fsang:fantastic_four_leggings",
+   "fsang:fantastic_four_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:fantastic_four_ff",
+  "name": "Fantastic Four Ff",
+  "recipe": "fsang:fantastic_four_ff",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": null,
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:fantastic_four_ff_chestplate",
+   "fsang:fantastic_four_ff_leggings",
+   "fsang:fantastic_four_ff_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:fantastic_four_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:fantastic_four_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:fantastic_four_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:flash_classic",
+  "name": "Flash Classic",
+  "recipe": "fsang:flash_classic",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:flash_classic_helmet",
+   "fsang:flash_classic_chestplate",
+   "fsang:flash_classic_leggings",
+   "fsang:flash_classic_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:gold_ingot",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:flash_jay",
+  "name": "Flash Jay",
+  "recipe": "fsang:flash_jay",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:flash_jay_helmet",
+   "fsang:flash_jay_chestplate",
+   "fsang:flash_jay_leggings",
+   "fsang:flash_jay_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:flash_rebirth",
+  "name": "Flash Rebirth",
+  "recipe": "fsang:flash_rebirth",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:flash_rebirth_helmet",
+   "fsang:flash_rebirth_chestplate",
+   "fsang:flash_rebirth_leggings",
+   "fsang:flash_rebirth_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "fsang:flash_wally_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_wally_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_wally_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_wally_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:flash_wally",
+  "name": "Flash Wally",
+  "recipe": "fsang:flash_wally",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:flash_wally_helmet",
+   "fsang:flash_wally_chestplate",
+   "fsang:flash_wally_leggings",
+   "fsang:flash_wally_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:flash_year_one_future",
+  "name": "Flash Year One Future",
+  "recipe": "fsang:flash_year_one_future",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:flash_year_one_future_chestplate",
+   "fsang:flash_year_one_future_leggings",
+   "fsang:flash_year_one_future_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:flash_classic_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_classic_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_classic_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:formal_red",
+  "name": "Formal Red",
+  "recipe": "fsang:formal_red",
+  "tier": 1,
+  "kit": "Hero Costume",
+  "origin": null,
+  "abilities": [
+   "Armor +2",
+   "Speed +10%",
+   "Fall Resistance +10"
+  ],
+  "armor": [
+   "fsang:formal_red_chestplate",
+   "fsang:formal_red_leggings",
+   "fsang:formal_red_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:orange_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:gambit",
+  "name": "Gambit",
+  "recipe": "fsang:gambit",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": "gambit",
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:gambit_helmet",
+   "fsang:gambit_chestplate",
+   "fsang:gambit_leggings",
+   "fsang:gambit_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_purple2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:ghost_mcu",
+  "name": "Ghost Mcu",
+  "recipe": "fsang:ghost_mcu",
+  "tier": 2,
+  "kit": "Spectral",
+  "origin": "phasing",
+  "abilities": [
+   "Speed +20%",
+   "Fall Resistance +50",
+   "Night Vision",
+   "Armor +2"
+  ],
+  "armor": [
+   "fsang:ghost_mcu_helmet",
+   "fsang:ghost_mcu_chestplate",
+   "fsang:ghost_mcu_leggings",
+   "fsang:ghost_mcu_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:ghost_rider_robbie",
+  "name": "Ghost Rider Robbie",
+  "recipe": "fsang:ghost_rider_robbie",
+  "tier": 3,
+  "kit": "Living Flame + Unkillable Mercenary",
+  "origin": "spirit_of_vengence_contract",
+  "abilities": [
+   "Fireproof",
+   "Attack +4",
+   "Armor +2",
+   "Speed +25%",
+   "Healing Factor",
+   "Jump Boost +1",
+   "Leaping +1",
+   "Fall Resistance +30",
+   "Toughness +2",
+   "Attack Speed +0.5"
+  ],
+  "armor": [
+   "fsang:ghost_rider_robbie_chestplate",
+   "fsang:ghost_rider_robbie_leggings",
+   "fsang:ghost_rider_robbie_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:godspeed",
+  "name": "Godspeed",
+  "recipe": "fsang:godspeed",
+  "tier": 3,
+  "kit": "Negative Speed",
+  "origin": "speedforce_negative",
+  "abilities": [
+   "Speed +65%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +2",
+   "Attack +3"
+  ],
+  "armor": [
+   "fsang:godspeed_helmet",
+   "fsang:godspeed_chestplate",
+   "fsang:godspeed_leggings",
+   "fsang:godspeed_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:goku",
+  "name": "Goku",
+  "recipe": "fsang:goku",
+  "tier": 3,
+  "kit": "Saiyan",
+  "origin": null,
+  "abilities": [
+   "Punch +6",
+   "Flight",
+   "Speed +30%",
+   "Health +3 hearts",
+   "Armor +2"
+  ],
+  "armor": [
+   "fsang:goku_chestplate",
+   "fsang:goku_leggings",
+   "fsang:goku_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:orange_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:green_arrow",
+  "name": "Green Arrow",
+  "recipe": "fsang:green_arrow",
+  "tier": 2,
+  "kit": "Marksman",
+  "origin": null,
+  "abilities": [
+   "Speed +15%",
+   "Fall Resistance +15",
+   "Armor +2",
+   "Night Vision",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:green_arrow_helmet",
+   "fsang:green_arrow_chestplate",
+   "fsang:green_arrow_leggings",
+   "fsang:green_arrow_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:lime_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:green_arrow_modern",
+  "name": "Green Arrow Modern",
+  "recipe": "fsang:green_arrow_modern",
+  "tier": 2,
+  "kit": "Marksman",
+  "origin": null,
+  "abilities": [
+   "Speed +15%",
+   "Fall Resistance +15",
+   "Armor +2",
+   "Night Vision",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:green_arrow_modern_helmet",
+   "fsang:green_arrow_modern_chestplate",
+   "fsang:green_arrow_modern_leggings",
+   "fsang:green_arrow_modern_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:lime_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:green_arrow_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:green_arrow_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:green_arrow_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:green_arrow_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:green_goblin",
+  "name": "Green Goblin",
+  "recipe": "fsang:green_goblin",
+  "tier": 3,
+  "kit": "Super Soldier + Winged",
+  "origin": "super_soldier_goblin",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +60",
+   "Jump Boost +0.5",
+   "Flight"
+  ],
+  "armor": [
+   "fsang:green_goblin_helmet",
+   "fsang:green_goblin_chestplate",
+   "fsang:green_goblin_leggings",
+   "fsang:green_goblin_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:purple_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:green_lantern_hal",
+  "name": "Green Lantern Hal",
+  "recipe": "fsang:green_lantern_hal",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": null,
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:green_lantern_hal_helmet",
+   "fsang:green_lantern_hal_chestplate",
+   "fsang:green_lantern_hal_leggings",
+   "fsang:green_lantern_hal_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:green_lantern_kyle",
+  "name": "Green Lantern Kyle",
+  "recipe": "fsang:green_lantern_kyle",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": null,
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:green_lantern_kyle_helmet",
+   "fsang:green_lantern_kyle_chestplate",
+   "fsang:green_lantern_kyle_leggings",
+   "fsang:green_lantern_kyle_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:homelander",
+  "name": "Homelander",
+  "recipe": "fsang:homelander",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "homelander",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:homelander_chestplate",
+   "fsang:homelander_leggings",
+   "fsang:homelander_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iceman",
+  "name": "Iceman",
+  "recipe": "fsang:iceman",
+  "tier": 2,
+  "kit": "Ice Cold",
+  "origin": "cryokinesis",
+  "abilities": [
+   "Cold Immunity",
+   "Armor +3",
+   "Speed +10%",
+   "Attack +1"
+  ],
+  "armor": [
+   "fsang:iceman_chestplate",
+   "fsang:iceman_leggings"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:impulse",
+  "name": "Impulse",
+  "recipe": "fsang:impulse",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:impulse_helmet",
+   "fsang:impulse_chestplate",
+   "fsang:impulse_leggings",
+   "fsang:impulse_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:invincible",
+  "name": "Invincible",
+  "recipe": "fsang:invincible",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:invincible_helmet",
+   "fsang:invincible_chestplate",
+   "fsang:invincible_leggings",
+   "fsang:invincible_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:invincible_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_homemade_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:invincible2",
+  "name": "Invincible2",
+  "recipe": "fsang:invincible2",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:invincible2_helmet",
+   "fsang:invincible2_chestplate",
+   "fsang:invincible2_leggings",
+   "fsang:invincible2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:invincible_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:invincible_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:invincible_girl",
+  "name": "Invincible Girl",
+  "recipe": "fsang:invincible_girl",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:invincible_girl_helmet",
+   "fsang:invincible_girl_chestplate",
+   "fsang:invincible_girl_leggings",
+   "fsang:invincible_girl_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:light_blue_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:invincible_homemade",
+  "name": "Invincible Homemade",
+  "recipe": "fsang:invincible_homemade",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:invincible_homemade_helmet",
+   "fsang:invincible_homemade_chestplate",
+   "fsang:invincible_homemade_leggings",
+   "fsang:invincible_homemade_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_fist",
+  "name": "Iron Fist",
+  "recipe": "fsang:iron_fist",
+  "tier": 3,
+  "kit": "Assassin + Unstoppable Brute",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Health +6 hearts",
+   "Armor +6",
+   "Toughness +4",
+   "Punch +6",
+   "Knockback Resistance +70%",
+   "Mining Speed +2"
+  ],
+  "armor": [
+   "fsang:iron_fist_helmet",
+   "fsang:iron_fist_chestplate",
+   "fsang:iron_fist_leggings",
+   "fsang:iron_fist_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_fist_undead",
+  "name": "Iron Fist Undead",
+  "recipe": "fsang:iron_fist_undead",
+  "tier": 3,
+  "kit": "Assassin + Unstoppable Brute",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Health +6 hearts",
+   "Armor +6",
+   "Toughness +4",
+   "Punch +6",
+   "Knockback Resistance +70%",
+   "Mining Speed +2"
+  ],
+  "armor": [
+   "fsang:iron_fist_undead_helmet",
+   "fsang:iron_fist_undead_chestplate",
+   "fsang:iron_fist_undead_leggings",
+   "fsang:iron_fist_undead_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:gold_ingot",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_heart_model_2",
+  "name": "Iron Heart Model 2",
+  "recipe": "fsang:iron_heart_model_2",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_heart_model_2_helmet",
+   "fsang:iron_heart_model_2_chestplate",
+   "fsang:iron_heart_model_2_leggings",
+   "fsang:iron_heart_model_2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_heart_model_3",
+  "name": "Iron Heart Model 3",
+  "recipe": "fsang:iron_heart_model_3",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_heart_model_3_helmet",
+   "fsang:iron_heart_model_3_chestplate",
+   "fsang:iron_heart_model_3_leggings",
+   "fsang:iron_heart_model_3_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_pink2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_1",
+  "name": "Iron Man Model 1",
+  "recipe": "fsang:iron_man_model_1",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_mk1_helmet",
+   "fsang:iron_man_mk1_chestplate",
+   "fsang:iron_man_mk1_leggings",
+   "fsang:iron_man_mk1_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_13",
+  "name": "Iron Man Model 13",
+  "recipe": "fsang:iron_man_model_13",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_13_helmet",
+   "fsang:iron_man_model_13_chestplate",
+   "fsang:iron_man_model_13_leggings",
+   "fsang:iron_man_model_13_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 8
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:iron_man_model_14",
+  "name": "Iron Man Model 14",
+  "recipe": "fsang:iron_man_model_14",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_14_helmet",
+   "fsang:iron_man_model_14_chestplate",
+   "fsang:iron_man_model_14_leggings",
+   "fsang:iron_man_model_14_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 8
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_16",
+  "name": "Iron Man Model 16",
+  "recipe": "fsang:iron_man_model_16",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_16_helmet",
+   "fsang:iron_man_model_16_chestplate",
+   "fsang:iron_man_model_16_leggings",
+   "fsang:iron_man_model_16_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 8
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:iron_man_model_1_mk_3",
+  "name": "Iron Man Model 1 Mk 3",
+  "recipe": "fsang:iron_man_model_1_mk3",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_1_mk_3_helmet",
+   "fsang:iron_man_model_1_mk_3_chestplate",
+   "fsang:iron_man_model_1_mk_3_leggings",
+   "fsang:iron_man_model_1_mk_3_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 1
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_mk1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_mk1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_mk1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_mk1_boots",
+    "count": 1
+   },
+   {
+    "item": "minecraft:gold_ingot",
+    "count": 12
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_2",
+  "name": "Iron Man Model 2",
+  "recipe": "fsang:iron_man_model_2",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_2_helmet",
+   "fsang:iron_man_model_2_chestplate",
+   "fsang:iron_man_model_2_leggings",
+   "fsang:iron_man_model_2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:iron_man_model_22",
+  "name": "Iron Man Model 22",
+  "recipe": "fsang:iron_man_model_22",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_22_helmet",
+   "fsang:iron_man_model_22_chestplate",
+   "fsang:iron_man_model_22_leggings",
+   "fsang:iron_man_model_22_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 8
+   },
+   {
+    "item": "minecraft:nether_star",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_25",
+  "name": "Iron Man Model 25",
+  "recipe": "fsang:iron_man_model_25",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_25_helmet",
+   "fsang:iron_man_model_25_chestplate",
+   "fsang:iron_man_model_25_leggings",
+   "fsang:iron_man_model_25_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 8
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "fsang:iron_man_model_29",
+  "name": "Iron Man Model 29",
+  "recipe": "fsang:iron_man_model_29",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_29_helmet",
+   "fsang:iron_man_model_29_chestplate",
+   "fsang:iron_man_model_29_leggings",
+   "fsang:iron_man_model_29_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_3",
+  "name": "Iron Man Model 3",
+  "recipe": "fsang:iron_man_model_3",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_3_helmet",
+   "fsang:iron_man_model_3_chestplate",
+   "fsang:iron_man_model_3_leggings",
+   "fsang:iron_man_model_3_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:iron_man_model_4",
+  "name": "Iron Man Model 4",
+  "recipe": "fsang:iron_man_model_4",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_4_helmet",
+   "fsang:iron_man_model_4_chestplate",
+   "fsang:iron_man_model_4_leggings",
+   "fsang:iron_man_model_4_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "fsang:iron_man_model_42",
+  "name": "Iron Man Model 42",
+  "recipe": "fsang:iron_man_model_42",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_42_helmet",
+   "fsang:iron_man_model_42_chestplate",
+   "fsang:iron_man_model_42_leggings",
+   "fsang:iron_man_model_42_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_45",
+  "name": "Iron Man Model 45",
+  "recipe": "fsang:iron_man_model_45",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_45_helmet",
+   "fsang:iron_man_model_45_chestplate",
+   "fsang:iron_man_model_45_leggings",
+   "fsang:iron_man_model_45_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:conduit",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_51",
+  "name": "Iron Man Model 51",
+  "recipe": "fsang:iron_man_model_51",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_51_helmet",
+   "fsang:iron_man_model_51_chestplate",
+   "fsang:iron_man_model_51_leggings",
+   "fsang:iron_man_model_51_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 5
+   },
+   {
+    "item": "fsang:tri_polymer_green2",
+    "count": 5
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 5
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_51_doom",
+  "name": "Iron Man Model 51 Doom",
+  "recipe": "fsang:iron_man_model_51_doom",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_51_doom_helmet",
+   "fsang:iron_man_model_51_doom_chestplate",
+   "fsang:iron_man_model_51_doom_leggings",
+   "fsang:iron_man_model_51_doom_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_model_51_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_model_51_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_model_51_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_model_51_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_green2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_56",
+  "name": "Iron Man Model 56",
+  "recipe": "fsang:iron_man_model_56",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_56_helmet",
+   "fsang:iron_man_model_56_chestplate",
+   "fsang:iron_man_model_56_leggings",
+   "fsang:iron_man_model_56_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 3
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_59",
+  "name": "Iron Man Model 59",
+  "recipe": "fsang:iron_man_model_59",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_59_helmet",
+   "fsang:iron_man_model_59_chestplate",
+   "fsang:iron_man_model_59_leggings",
+   "fsang:iron_man_model_59_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_6",
+  "name": "Iron Man Model 6",
+  "recipe": "fsang:iron_man_model_6",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_6_helmet",
+   "fsang:iron_man_model_6_chestplate",
+   "fsang:iron_man_model_6_leggings",
+   "fsang:iron_man_model_6_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:iron_man_model_7",
+  "name": "Iron Man Model 7",
+  "recipe": "fsang:iron_man_model_7",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_7_helmet",
+   "fsang:iron_man_model_7_chestplate",
+   "fsang:iron_man_model_7_leggings",
+   "fsang:iron_man_model_7_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:light_gray_fabrics",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_70",
+  "name": "Iron Man Model 70",
+  "recipe": "fsang:iron_man_model_70",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_70_helmet",
+   "fsang:iron_man_model_70_chestplate",
+   "fsang:iron_man_model_70_leggings",
+   "fsang:iron_man_model_70_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:titanium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_3_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_72",
+  "name": "Iron Man Model 72",
+  "recipe": "fsang:iron_man_model_72",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_72_helmet",
+   "fsang:iron_man_model_72_chestplate",
+   "fsang:iron_man_model_72_leggings",
+   "fsang:iron_man_model_72_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:netherite_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:titanium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_4_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_4_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_4_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_4_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 3
+   },
+   {
+    "item": "fsang:mysterium_ingot",
+    "count": 24
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_74_improvised",
+  "name": "Iron Man Model 74 Improvised",
+  "recipe": "fsang:iron_man_model_74_improvised",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_74_improvised_helmet",
+   "fsang:iron_man_model_74_improvised_chestplate",
+   "fsang:iron_man_model_74_improvised_leggings",
+   "fsang:iron_man_model_74_improvised_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:iron_sword",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_8",
+  "name": "Iron Man Model 8",
+  "recipe": "fsang:iron_man_model_8",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_8_helmet",
+   "fsang:iron_man_model_8_chestplate",
+   "fsang:iron_man_model_8_leggings",
+   "fsang:iron_man_model_8_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 3
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 3
+   },
+   {
+    "item": "minecraft:copper_ingot",
+    "count": 12
+   },
+   {
+    "item": "minecraft:glass",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_9",
+  "name": "Iron Man Model 9",
+  "recipe": "fsang:iron_man_model_9",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_9_helmet",
+   "fsang:iron_man_model_9_chestplate",
+   "fsang:iron_man_model_9_leggings",
+   "fsang:iron_man_model_9_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 4
+ },
+ {
+  "suit": "fsang:iron_man_model_dragon_slayer",
+  "name": "Iron Man Model Dragon Slayer",
+  "recipe": "fsang:iron_man_model_dragon_slayer",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_dragon_slayer_helmet",
+   "fsang:iron_man_model_dragon_slayer_chestplate",
+   "fsang:iron_man_model_dragon_slayer_leggings",
+   "fsang:iron_man_model_dragon_slayer_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_3_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_3_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:ender_eye",
+    "count": 16
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_nil",
+  "name": "Iron Man Model Nil",
+  "recipe": "fsang:iron_man_model_nil",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_nil_helmet",
+   "fsang:iron_man_model_nil_chestplate",
+   "fsang:iron_man_model_nil_leggings",
+   "fsang:iron_man_model_nil_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_man_model_thdr",
+  "name": "Iron Man Model Thdr",
+  "recipe": "fsang:iron_man_model_thdr",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_man_model_thdr_helmet",
+   "fsang:iron_man_model_thdr_chestplate",
+   "fsang:iron_man_model_thdr_leggings",
+   "fsang:iron_man_model_thdr_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 2
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_patriot_model_1",
+  "name": "Iron Patriot Model 1",
+  "recipe": "fsang:iron_patriot_model_1",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_patriot_model_1_helmet",
+   "fsang:iron_patriot_model_1_chestplate",
+   "fsang:iron_patriot_model_1_leggings",
+   "fsang:iron_patriot_model_1_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_spider_model_1",
+  "name": "Iron Spider Model 1",
+  "recipe": "fsang:iron_spider_model_1",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_spider_model_1_helmet",
+   "fsang:iron_spider_model_1_chestplate",
+   "fsang:iron_spider_model_1_leggings",
+   "fsang:iron_spider_model_1_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 8
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:web_shooters3",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:iron_spider_model_1_miles",
+  "name": "Iron Spider Model 1 Miles",
+  "recipe": "fsang:iron_spider_model_1_miles",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:iron_spider_model_1_miles_helmet",
+   "fsang:iron_spider_model_1_miles_chestplate",
+   "fsang:iron_spider_model_1_miles_leggings",
+   "fsang:iron_spider_model_1_miles_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 8
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:web_shooters3",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:jean_grey",
+  "name": "Jean Grey",
+  "recipe": "fsang:jean_grey",
+  "tier": 3,
+  "kit": "Psychic + Cosmic Flier",
+  "origin": "telekinesis",
+  "abilities": [
+   "Health +2 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +4",
+   "Flight",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:jean_grey_helmet",
+   "fsang:jean_grey_chestplate",
+   "fsang:jean_grey_leggings",
+   "fsang:jean_grey_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:lime_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:jean_grey_dark_phoenix",
+  "name": "Jean Grey Dark Phoenix",
+  "recipe": "fsang:jean_grey_dark_phoenix",
+  "tier": 3,
+  "kit": "Psychic + Cosmic Flier",
+  "origin": "telekinesis",
+  "abilities": [
+   "Health +2 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +4",
+   "Flight",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:jean_grey_dark_phoenix_chestplate",
+   "fsang:jean_grey_dark_phoenix_leggings",
+   "fsang:jean_grey_dark_phoenix_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:jean_grey_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:jean_grey_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:jean_grey_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:jean_grey_phoenix",
+  "name": "Jean Grey Phoenix",
+  "recipe": "fsang:jean_grey_phoenix",
+  "tier": 3,
+  "kit": "Psychic + Cosmic Flier",
+  "origin": "telekinesis",
+  "abilities": [
+   "Health +2 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +4",
+   "Flight",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:jean_grey_phoenix_chestplate",
+   "fsang:jean_grey_phoenix_leggings",
+   "fsang:jean_grey_phoenix_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_green2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:jean_grey_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:jean_grey_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:jean_grey_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:jewel",
+  "name": "Jewel",
+  "recipe": "fsang:jewel",
+  "tier": 2,
+  "kit": "Psychic",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +2"
+  ],
+  "armor": [
+   "fsang:jewel_chestplate",
+   "fsang:jewel_leggings",
+   "fsang:jewel_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:light_gray_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:amethyst_shard",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:kid_flash_young_justice",
+  "name": "Kid Flash Young Justice",
+  "recipe": "fsang:kid_flash_young_justice",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:kid_flash_young_justice_helmet",
+   "fsang:kid_flash_young_justice_chestplate",
+   "fsang:kid_flash_young_justice_leggings",
+   "fsang:kid_flash_young_justice_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:kid_omniman",
+  "name": "Kid Omniman",
+  "recipe": "fsang:kid_omniman",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:kid_omniman_helmet",
+   "fsang:kid_omniman_chestplate",
+   "fsang:kid_omniman_leggings",
+   "fsang:kid_omniman_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:kid_omniman2",
+  "name": "Kid Omniman2",
+  "recipe": "fsang:kid_omniman2",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:kid_omniman2_helmet",
+   "fsang:kid_omniman2_chestplate",
+   "fsang:kid_omniman2_leggings",
+   "fsang:kid_omniman2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:kid_omniman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:kid_omniman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:kid_omniman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:kid_omniman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:killer_frost",
+  "name": "Killer Frost",
+  "recipe": "fsang:killer_frost",
+  "tier": 2,
+  "kit": "Ice Cold",
+  "origin": "cryokinesis",
+  "abilities": [
+   "Cold Immunity",
+   "Armor +3",
+   "Speed +10%",
+   "Attack +1"
+  ],
+  "armor": [
+   "fsang:killer_frost_chestplate",
+   "fsang:killer_frost_leggings",
+   "fsang:killer_frost_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:light_blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:ld_corp",
+  "name": "Ld Corp",
+  "recipe": "fsang:ld_corp",
+  "tier": 1,
+  "kit": "Hero Costume",
+  "origin": null,
+  "abilities": [
+   "Armor +2",
+   "Speed +10%",
+   "Fall Resistance +10"
+  ],
+  "armor": [
+   "fsang:ld_corp_helmet",
+   "fsang:ld_corp_chestplate",
+   "fsang:ld_corp_leggings",
+   "fsang:ld_corp_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:loki_god_of_stories",
+  "name": "Loki God Of Stories",
+  "recipe": "fsang:loki_god_of_stories",
+  "tier": 3,
+  "kit": "Godlike + Sorcerer",
+  "origin": "asgardian",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:loki_god_of_stories_helmet",
+   "fsang:loki_god_of_stories_chestplate",
+   "fsang:loki_god_of_stories_leggings",
+   "fsang:loki_god_of_stories_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:magik",
+  "name": "Magik",
+  "recipe": "fsang:magik",
+  "tier": 2,
+  "kit": "Sorcerer + Assassin",
+  "origin": "portal_creator",
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +2",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1",
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:magik_helmet",
+   "fsang:magik_chestplate",
+   "fsang:magik_leggings",
+   "fsang:magik_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:gold_ingot",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:magneto",
+  "name": "Magneto",
+  "recipe": "fsang:magneto",
+  "tier": 3,
+  "kit": "Master of Magnetism",
+  "origin": "magnetism",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Knockback Resistance +40%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:magneto_chestplate",
+   "fsang:magneto_leggings",
+   "fsang:magneto_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:purple_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:magneto_black",
+  "name": "Magneto Black",
+  "recipe": "fsang:magneto_black",
+  "tier": 3,
+  "kit": "Master of Magnetism",
+  "origin": "magnetism",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Knockback Resistance +40%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:magneto_black_chestplate",
+   "fsang:magneto_black_leggings",
+   "fsang:magneto_black_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:magneto_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:magneto_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:magneto_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:martian_manhunter_young_justice",
+  "name": "Martian Manhunter Young Justice",
+  "recipe": "fsang:martian_manhunter_young_justice",
+  "tier": 3,
+  "kit": "Cosmic Flier + Psychic",
+  "origin": "martian_green",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage",
+   "Fall Resistance +30",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:martian_manhunter_young_justice_chestplate",
+   "fsang:martian_manhunter_young_justice_leggings",
+   "fsang:martian_manhunter_young_justice_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:mera",
+  "name": "Mera",
+  "recipe": "fsang:mera",
+  "tier": 2,
+  "kit": "Child of Atlantis",
+  "origin": "atlantean",
+  "abilities": [
+   "Swim Speed +150%",
+   "Water Breathing",
+   "Armor +2",
+   "Health +2 hearts",
+   "Attack +2",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:mera_helmet",
+   "fsang:mera_chestplate",
+   "fsang:mera_leggings",
+   "fsang:mera_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:nth_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:mighty_thor",
+  "name": "Mighty Thor",
+  "recipe": "fsang:mighty_thor",
+  "tier": 4,
+  "kit": "Godlike",
+  "origin": "thor",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:mighty_thor_helmet",
+   "fsang:mighty_thor_chestplate",
+   "fsang:mighty_thor_leggings",
+   "fsang:mighty_thor_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:light_gray_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:mimic",
+  "name": "Mimic",
+  "recipe": "fsang:mimic",
+  "tier": 3,
+  "kit": "Psychic + Super Soldier",
+  "origin": "mimicry",
+  "abilities": [
+   "Health +3 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:mimic_helmet",
+   "fsang:mimic_chestplate",
+   "fsang:mimic_leggings",
+   "fsang:mimic_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:mine_labs",
+  "name": "Mine Labs",
+  "recipe": "fsang:mine_labs",
+  "tier": 1,
+  "kit": "Hero Costume",
+  "origin": null,
+  "abilities": [
+   "Armor +2",
+   "Speed +10%",
+   "Fall Resistance +10"
+  ],
+  "armor": [
+   "fsang:mine_labs_chestplate",
+   "fsang:mine_labs_leggings",
+   "fsang:mine_labs_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:miss_martian_young_justice",
+  "name": "Miss Martian Young Justice",
+  "recipe": "fsang:miss_martian_young_justice",
+  "tier": 3,
+  "kit": "Cosmic Flier + Psychic",
+  "origin": "martian_green",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage",
+   "Fall Resistance +30",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:miss_martian_young_justice_chestplate",
+   "fsang:miss_martian_young_justice_leggings",
+   "fsang:miss_martian_young_justice_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:moon_knight",
+  "name": "Moon Knight",
+  "recipe": "fsang:moon_knight",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:moon_knight_helmet",
+   "fsang:moon_knight_chestplate",
+   "fsang:moon_knight_leggings",
+   "fsang:moon_knight_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue3",
+    "count": 4
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:ms_marvel",
+  "name": "Ms Marvel",
+  "recipe": "fsang:ms_marvel",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": "kree_hybrid",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:ms_marvel_helmet",
+   "fsang:ms_marvel_chestplate",
+   "fsang:ms_marvel_leggings",
+   "fsang:ms_marvel_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:namor_mcu",
+  "name": "Namor Mcu",
+  "recipe": "fsang:namor_mcu",
+  "tier": 2,
+  "kit": "Child of Atlantis",
+  "origin": "atlantean",
+  "abilities": [
+   "Swim Speed +150%",
+   "Water Breathing",
+   "Armor +2",
+   "Health +2 hearts",
+   "Attack +2",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:namor_mcu_chestplate",
+   "fsang:namor_mcu_leggings",
+   "fsang:namor_mcu_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:gold_nugget",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:nightcrawler",
+  "name": "Nightcrawler",
+  "recipe": "fsang:nightcrawler",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": "teleportation",
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:nightcrawler_chestplate",
+   "fsang:nightcrawler_leggings",
+   "fsang:nightcrawler_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:nightwing",
+  "name": "Nightwing",
+  "recipe": "fsang:nightwing",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:nightwing_helmet",
+   "fsang:nightwing_chestplate",
+   "fsang:nightwing_leggings",
+   "fsang:nightwing_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:omniman",
+  "name": "Omniman",
+  "recipe": "fsang:omniman",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:omniman_chestplate",
+   "fsang:omniman_leggings",
+   "fsang:omniman_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:picotech_suit",
+  "name": "Picotech Suit",
+  "recipe": "fsang:picotech",
+  "tier": 3,
+  "kit": "High-Tech Gear",
+  "origin": null,
+  "abilities": [
+   "Armor +5",
+   "Toughness +2",
+   "Flight",
+   "Fall Resistance +40",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:picotech_chestplate"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:titanium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:professor_x_hellfire_gala",
+  "name": "Professor X Hellfire Gala",
+  "recipe": "fsang:professor_x_hellfire_gala",
+  "tier": 2,
+  "kit": "Psychic",
+  "origin": "telepathy",
+  "abilities": [
+   "Health +2 hearts",
+   "Fall Resistance +30",
+   "Night Vision",
+   "Armor +2"
+  ],
+  "armor": [
+   "fsang:professor_x_hellfire_gala_helmet",
+   "fsang:professor_x_hellfire_gala_chestplate",
+   "fsang:professor_x_hellfire_gala_leggings",
+   "fsang:professor_x_hellfire_gala_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:light_blue_stained_glass_pane",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:punisher",
+  "name": "Punisher",
+  "recipe": "fsang:punisher",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:punisher_chestplate",
+   "fsang:punisher_leggings",
+   "fsang:punisher_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:raven",
+  "name": "Raven",
+  "recipe": "fsang:raven",
+  "tier": 2,
+  "kit": "Sorcerer",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +2",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:raven_helmet",
+   "fsang:raven_chestplate",
+   "fsang:raven_leggings",
+   "fsang:raven_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:purple_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:red_hood_rebirth",
+  "name": "Red Hood Rebirth",
+  "recipe": "fsang:redhood_rebirth",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:redhood_rebirth_helmet",
+   "fsang:redhood_rebirth_chestplate",
+   "fsang:redhood_rebirth_leggings",
+   "fsang:redhood_rebirth_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:red_rush",
+  "name": "Red Rush",
+  "recipe": "fsang:red_rush",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:red_rush_helmet",
+   "fsang:red_rush_chestplate",
+   "fsang:red_rush_leggings",
+   "fsang:red_rush_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 8
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:red_x",
+  "name": "Red X",
+  "recipe": "fsang:red_x",
+  "tier": 2,
+  "kit": "Assassin",
+  "origin": null,
+  "abilities": [
+   "Attack +4",
+   "Attack Speed +1",
+   "Speed +25%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:red_x_helmet",
+   "fsang:red_x_chestplate",
+   "fsang:red_x_leggings",
+   "fsang:red_x_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:robin_young_justice_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_young_justice_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_young_justice_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:robin_young_justice_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:rescue_model_5",
+  "name": "Rescue Model 5",
+  "recipe": "fsang:rescue_model_5",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:rescue_model_5_helmet",
+   "fsang:rescue_model_5_chestplate",
+   "fsang:rescue_model_5_leggings",
+   "fsang:rescue_model_5_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_2_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_2_boots",
+    "count": 1
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 6
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 6
+   }
+  ]
+ },
+ {
+  "suit": "fsang:respawn",
+  "name": "Respawn",
+  "recipe": "fsang:respawn",
+  "tier": 3,
+  "kit": "Unkillable Mercenary + Sorcerer",
+  "origin": "spawn",
+  "abilities": [
+   "Healing Factor",
+   "Speed +25%",
+   "Attack +4",
+   "Jump Boost +1",
+   "Leaping +1",
+   "Fall Resistance +40",
+   "Toughness +2",
+   "Attack Speed +0.5",
+   "Health +2 hearts",
+   "Armor +2",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:respawn_helmet",
+   "fsang:respawn_chestplate",
+   "fsang:respawn_leggings",
+   "fsang:respawn_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:orange_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:deathstroke_teen_titans_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:deathstroke_teen_titans_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:deathstroke_teen_titans_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:deathstroke_teen_titans_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:reverse_flash_classic",
+  "name": "Reverse Flash Classic",
+  "recipe": "fsang:reverse_flash_classic",
+  "tier": 3,
+  "kit": "Negative Speed",
+  "origin": "speedforce_negative",
+  "abilities": [
+   "Speed +65%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +2",
+   "Attack +3"
+  ],
+  "armor": [
+   "fsang:reverse_flash_classic_helmet",
+   "fsang:reverse_flash_classic_chestplate",
+   "fsang:reverse_flash_classic_leggings",
+   "fsang:reverse_flash_classic_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:rexsplode",
+  "name": "Rexsplode",
+  "recipe": "fsang:rexsplode",
+  "tier": 3,
+  "kit": "Unkillable Mercenary",
+  "origin": "self_detonation",
+  "abilities": [
+   "Healing Factor",
+   "Speed +25%",
+   "Attack +4",
+   "Jump Boost +1",
+   "Leaping +1",
+   "Fall Resistance +30",
+   "Toughness +2",
+   "Attack Speed +0.5"
+  ],
+  "armor": [
+   "fsang:rexsplode_helmet",
+   "fsang:rexsplode_chestplate",
+   "fsang:rexsplode_leggings",
+   "fsang:rexsplode_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:robin_damian",
+  "name": "Robin Damian",
+  "recipe": "fsang:robin_damian",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:robin_damian_helmet",
+   "fsang:robin_damian_chestplate",
+   "fsang:robin_damian_leggings",
+   "fsang:robin_damian_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:robin_tim",
+  "name": "Robin Tim",
+  "recipe": "fsang:robin_tim",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:robin_tim_helmet",
+   "fsang:robin_tim_chestplate",
+   "fsang:robin_tim_leggings",
+   "fsang:robin_tim_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:green_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:sabretooth",
+  "name": "Sabretooth",
+  "recipe": "fsang:sabretooth",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "sabretooth",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:sabretooth_helmet",
+   "fsang:sabretooth_chestplate",
+   "fsang:sabretooth_leggings",
+   "fsang:sabretooth_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:savitar",
+  "name": "Savitar",
+  "recipe": "fsang:savitar",
+  "tier": 2,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:savitar_helmet",
+   "fsang:savitar_chestplate",
+   "fsang:savitar_leggings",
+   "fsang:savitar_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:titanium_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:flash_classic_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_classic_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_classic_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:flash_classic_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:scarlet_witch_mcu",
+  "name": "Scarlet Witch Mcu",
+  "recipe": "fsang:scarlet_witch_mcu",
+  "tier": 4,
+  "kit": "Sorcerer",
+  "origin": "reality_warping",
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +2",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:scarlet_witch_mcu_helmet",
+   "fsang:scarlet_witch_mcu_chestplate",
+   "fsang:scarlet_witch_mcu_leggings",
+   "fsang:scarlet_witch_mcu_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:sentry",
+  "name": "Sentry",
+  "recipe": "fsang:sentry",
+  "tier": 4,
+  "kit": "Cosmic Flier + Godlike",
+  "origin": "sentry",
+  "abilities": [
+   "Flight",
+   "Armor +6",
+   "Health +5 hearts",
+   "Punch +4",
+   "No Fall Damage",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:sentry_chestplate",
+   "fsang:sentry_leggings",
+   "fsang:sentry_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:sentry_void",
+  "name": "Sentry Void",
+  "recipe": "fsang:sentry_void",
+  "tier": 4,
+  "kit": "Cosmic Flier + Godlike",
+  "origin": "sentry",
+  "abilities": [
+   "Flight",
+   "Armor +6",
+   "Health +5 hearts",
+   "Punch +4",
+   "No Fall Damage",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:sentry_void_chestplate",
+   "fsang:sentry_void_leggings",
+   "fsang:sentry_void_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:sentry_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:sentry_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:sentry_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:shield_agent",
+  "name": "Shield Agent",
+  "recipe": "fsang:shield_agent",
+  "tier": 2,
+  "kit": "Vigilante",
+  "origin": null,
+  "abilities": [
+   "Armor +4",
+   "Toughness +2",
+   "Attack +2",
+   "Speed +15%",
+   "Fall Resistance +20",
+   "Knockback Resistance +20%",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:shield_agent_chestplate",
+   "fsang:shield_agent_leggings",
+   "fsang:shield_agent_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman",
+  "name": "Spiderman",
+  "recipe": "fsang:spiderman",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_helmet",
+   "fsang:spiderman_chestplate",
+   "fsang:spiderman_leggings",
+   "fsang:spiderman_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_ff",
+  "name": "Spiderman Ff",
+  "recipe": "fsang:spiderman_ff",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_ff_helmet",
+   "fsang:spiderman_ff_chestplate",
+   "fsang:spiderman_ff_leggings",
+   "fsang:spiderman_ff_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:spiderman_ff2",
+  "name": "Spiderman Ff2",
+  "recipe": "fsang:spiderman_ff2",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_ff2_helmet",
+   "fsang:spiderman_ff2_chestplate",
+   "fsang:spiderman_ff2_leggings",
+   "fsang:spiderman_ff2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 4
+   },
+   {
+    "item": "fsang:diamond_circuit",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:spiderman_ffh",
+  "name": "Spiderman Ffh",
+  "recipe": "fsang:spiderman_ffh",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_ffh_helmet",
+   "fsang:spiderman_ffh_chestplate",
+   "fsang:spiderman_ffh_leggings",
+   "fsang:spiderman_ffh_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_ffh2",
+  "name": "Spiderman Ffh2",
+  "recipe": "fsang:spiderman_ffh2",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_ffh2_helmet",
+   "fsang:spiderman_ffh2_chestplate",
+   "fsang:spiderman_ffh2_leggings",
+   "fsang:spiderman_ffh2_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_ffh_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_ffh_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_ffh_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_ffh_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_hellfire_gala",
+  "name": "Spiderman Hellfire Gala",
+  "recipe": "fsang:spiderman_hellfire_gala",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_hellfire_gala_helmet",
+   "fsang:spiderman_hellfire_gala_chestplate",
+   "fsang:spiderman_hellfire_gala_leggings",
+   "fsang:spiderman_hellfire_gala_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_homemade",
+  "name": "Spiderman Homemade",
+  "recipe": "fsang:spiderman_homemade",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_homemade_helmet",
+   "fsang:spiderman_homemade_chestplate",
+   "fsang:spiderman_homemade_leggings",
+   "fsang:spiderman_homemade_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_jessica",
+  "name": "Spiderman Jessica",
+  "recipe": "fsang:spiderman_jessica",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman_jessica",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_jessica_helmet",
+   "fsang:spiderman_jessica_chestplate",
+   "fsang:spiderman_jessica_leggings",
+   "fsang:spiderman_jessica_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_kaine",
+  "name": "Spiderman Kaine",
+  "recipe": "fsang:spiderman_kaine",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman_kaine",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_kaine_helmet",
+   "fsang:spiderman_kaine_chestplate",
+   "fsang:spiderman_kaine_leggings",
+   "fsang:spiderman_kaine_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:spiderman_miles",
+  "name": "Spiderman Miles",
+  "recipe": "fsang:spiderman_miles",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman_miles",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_miles_helmet",
+   "fsang:spiderman_miles_chestplate",
+   "fsang:spiderman_miles_leggings",
+   "fsang:spiderman_miles_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:spiderman_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:spiderman_scarlet",
+  "name": "Spiderman Scarlet",
+  "recipe": "fsang:spiderman_scarlet",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_scarlet_helmet",
+   "fsang:spiderman_scarlet_chestplate",
+   "fsang:spiderman_scarlet_leggings",
+   "fsang:spiderman_scarlet_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_sensational",
+  "name": "Spiderman Sensational",
+  "recipe": "fsang:spiderman_sensational",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_sensational_helmet",
+   "fsang:spiderman_sensational_chestplate",
+   "fsang:spiderman_sensational_leggings",
+   "fsang:spiderman_sensational_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_scarlet_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_scarlet_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_scarlet_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_scarlet_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_silk",
+  "name": "Spiderman Silk",
+  "recipe": "fsang:spiderman_silk",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman_silk",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_silk_helmet",
+   "fsang:spiderman_silk_chestplate",
+   "fsang:spiderman_silk_leggings",
+   "fsang:spiderman_silk_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_homemade_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_homemade_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:spiderman_superior",
+  "name": "Spiderman Superior",
+  "recipe": "fsang:spiderman_superior",
+  "tier": 2,
+  "kit": "Spider-Sense",
+  "origin": "spiderman",
+  "abilities": [
+   "Speed +30%",
+   "Jump Boost +1",
+   "Leaping +2",
+   "Fall Resistance +60",
+   "Attack +2",
+   "Step Assist +1",
+   "Night Vision"
+  ],
+  "armor": [
+   "fsang:spiderman_superior_helmet",
+   "fsang:spiderman_superior_chestplate",
+   "fsang:spiderman_superior_leggings",
+   "fsang:spiderman_superior_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:spiderman_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:spiderman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:static_shock",
+  "name": "Static Shock",
+  "recipe": "fsang:static_shock",
+  "tier": 2,
+  "kit": "Living Current",
+  "origin": "electrokinesis",
+  "abilities": [
+   "Speed +30%",
+   "Attack +3",
+   "Armor +2",
+   "Fall Resistance +20",
+   "Shockproof"
+  ],
+  "armor": [
+   "fsang:static_shock_helmet",
+   "fsang:static_shock_chestplate",
+   "fsang:static_shock_leggings",
+   "fsang:static_shock_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:storm",
+  "name": "Storm",
+  "recipe": "fsang:storm",
+  "tier": 3,
+  "kit": "Cosmic Flier",
+  "origin": "storm",
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:storm_helmet",
+   "fsang:storm_chestplate",
+   "fsang:storm_leggings",
+   "fsang:storm_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:gold_nugget",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superboy",
+  "name": "Superboy",
+  "recipe": "fsang:superboy",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:superboy_chestplate",
+   "fsang:superboy_leggings",
+   "fsang:superboy_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superboy_new_52",
+  "name": "Superboy New 52",
+  "recipe": "fsang:superboy_new_52",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:superboy_new_52_chestplate",
+   "fsang:superboy_new_52_leggings",
+   "fsang:superboy_new_52_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:superboy_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:superboy_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:superboy_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superboy_super_sons",
+  "name": "Superboy Super Sons",
+  "recipe": "fsang:superboy_super_sons",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:superboy_super_sons_chestplate",
+   "fsang:superboy_super_sons_leggings",
+   "fsang:superboy_super_sons_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:light_blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:supergirl_rebirth",
+  "name": "Supergirl Rebirth",
+  "recipe": "fsang:supergirl_rebirth",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:supergirl_rebirth_chestplate",
+   "fsang:supergirl_rebirth_leggings",
+   "fsang:supergirl_rebirth_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:light_blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superman",
+  "name": "Superman",
+  "recipe": "fsang:superman",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:superman_chestplate",
+   "fsang:superman_leggings",
+   "fsang:superman_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superman_black",
+  "name": "Superman Black",
+  "recipe": "fsang:superman_black",
+  "tier": 2,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:superman_black_chestplate",
+   "fsang:superman_black_leggings",
+   "fsang:superman_black_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray3",
+    "count": 4
+   },
+   {
+    "item": "fsang:netherite_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:superman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:superman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:superman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:superman_shazam",
+  "name": "Superman Shazam",
+  "recipe": "fsang:superman_shazam",
+  "tier": 4,
+  "kit": "Man of Steel",
+  "origin": "kryptonian",
+  "abilities": [
+   "Armor +4",
+   "Health +2 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:superman_shazam_chestplate",
+   "fsang:superman_shazam_leggings",
+   "fsang:superman_shazam_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "fsang:superman_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:superman_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:superman_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:thanos_mcu",
+  "name": "Thanos Mcu",
+  "recipe": "fsang:thanos_mcu",
+  "tier": 4,
+  "kit": "Cosmic Tyrant",
+  "origin": "apocalypse",
+  "abilities": [
+   "Health +8 hearts",
+   "Armor +8",
+   "Toughness +4",
+   "Punch +6",
+   "Knockback Resistance +80%",
+   "No Fall Damage"
+  ],
+  "armor": [
+   "fsang:thanos_mcu_helmet",
+   "fsang:thanos_mcu_chestplate",
+   "fsang:thanos_mcu_leggings",
+   "fsang:thanos_mcu_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:gold_ingot",
+    "count": 12
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:thor_cosmic",
+  "name": "Thor Cosmic",
+  "recipe": "fsang:thor_cosmic",
+  "tier": 4,
+  "kit": "Godlike",
+  "origin": "thor",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:thor_cosmic_chestplate",
+   "fsang:thor_cosmic_leggings",
+   "fsang:thor_cosmic_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white3",
+    "count": 4
+   },
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:thor_infinity_war",
+  "name": "Thor Infinity War",
+  "recipe": "fsang:thor_infinity_war",
+  "tier": 4,
+  "kit": "Godlike",
+  "origin": "thor",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:thor_infinity_war_chestplate",
+   "fsang:thor_infinity_war_leggings",
+   "fsang:thor_infinity_war_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black3",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_gray3",
+    "count": 4
+   },
+   {
+    "item": "fsang:uru_template",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:tornado_twins",
+  "name": "Tornado Twins",
+  "recipe": "fsang:tornado_twins",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:tornado_twins_chestplate",
+   "fsang:tornado_twins_leggings",
+   "fsang:tornado_twins_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_purple2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:usagent",
+  "name": "Usagent",
+  "recipe": "fsang:usagent",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:usagent_helmet",
+   "fsang:usagent_chestplate",
+   "fsang:usagent_leggings",
+   "fsang:usagent_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "fsang:viltrumite",
+  "name": "Viltrumite",
+  "recipe": "fsang:viltrumite",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite_chestplate",
+   "fsang:viltrumite_leggings",
+   "fsang:viltrumite_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "fsang:viltrumite2",
+  "name": "Viltrumite2",
+  "recipe": "fsang:viltrumite2",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite2_chestplate",
+   "fsang:viltrumite2_leggings",
+   "fsang:viltrumite2_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:viltrumite3",
+  "name": "Viltrumite3",
+  "recipe": "fsang:viltrumite3",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite3_chestplate",
+   "fsang:viltrumite3_leggings",
+   "fsang:viltrumite3_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:viltrumite4",
+  "name": "Viltrumite4",
+  "recipe": "fsang:viltrumite4",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite4_chestplate",
+   "fsang:viltrumite4_leggings",
+   "fsang:viltrumite4_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:viltrumite5",
+  "name": "Viltrumite5",
+  "recipe": "fsang:viltrumite5",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite5_chestplate",
+   "fsang:viltrumite5_leggings",
+   "fsang:viltrumite5_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_white2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "fsang:viltrumite6",
+  "name": "Viltrumite6",
+  "recipe": "fsang:viltrumite6",
+  "tier": 4,
+  "kit": "Viltrumite",
+  "origin": "viltrumite",
+  "abilities": [
+   "Armor +4",
+   "Health +3 hearts",
+   "Knockback Resistance +50%",
+   "No Fall Damage",
+   "Punch +2"
+  ],
+  "armor": [
+   "fsang:viltrumite6_chestplate",
+   "fsang:viltrumite6_leggings",
+   "fsang:viltrumite6_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 2
+   },
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:vulcan",
+  "name": "Vulcan",
+  "recipe": "fsang:vulcan",
+  "tier": 3,
+  "kit": "Cosmic Flier + Living Flame",
+  "origin": null,
+  "abilities": [
+   "Flight",
+   "Armor +4",
+   "Health +2 hearts",
+   "Punch +3",
+   "No Fall Damage",
+   "Fireproof",
+   "Attack +2",
+   "Speed +10%"
+  ],
+  "armor": [
+   "fsang:vulcan_chestplate",
+   "fsang:vulcan_leggings",
+   "fsang:vulcan_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_yellow2",
+    "count": 4
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:war_machine_model_1",
+  "name": "War Machine Model 1",
+  "recipe": "fsang:war_machine_model_1",
+  "tier": 3,
+  "kit": "Built-in powers",
+  "origin": null,
+  "abilities": [],
+  "armor": [
+   "fsang:war_machine_model_1_helmet",
+   "fsang:war_machine_model_1_chestplate",
+   "fsang:war_machine_model_1_leggings",
+   "fsang:war_machine_model_1_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:iron_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:golden_circuit",
+    "count": 2
+   },
+   {
+    "item": "fsang:iron_man_base_1_helmet",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_chestplate",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_leggings",
+    "count": 1
+   },
+   {
+    "item": "fsang:iron_man_base_1_boots",
+    "count": 1
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 6
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 6
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:winter_soldier",
+  "name": "Winter Soldier",
+  "recipe": "fsang:winter_soldier",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": "super_soldier_winter_soldier",
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:winter_soldier_helmet",
+   "fsang:winter_soldier_chestplate",
+   "fsang:winter_soldier_leggings",
+   "fsang:winter_soldier_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:gray_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:wolverine",
+  "name": "Wolverine",
+  "recipe": "fsang:wolverine",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "wolverine",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wolverine_helmet",
+   "fsang:wolverine_chestplate",
+   "fsang:wolverine_leggings",
+   "fsang:wolverine_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wolverine_br",
+  "name": "Wolverine Br",
+  "recipe": "fsang:wolverine_br",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "wolverine",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wolverine_br_helmet",
+   "fsang:wolverine_br_chestplate",
+   "fsang:wolverine_br_leggings",
+   "fsang:wolverine_br_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wolverine_classic",
+  "name": "Wolverine Classic",
+  "recipe": "fsang:wolverine_classic",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "wolverine",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wolverine_classic_helmet",
+   "fsang:wolverine_classic_chestplate",
+   "fsang:wolverine_classic_leggings",
+   "fsang:wolverine_classic_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wolverine_x23",
+  "name": "Wolverine X23",
+  "recipe": "fsang:wolverine_x23",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "wolverine",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wolverine_x23_helmet",
+   "fsang:wolverine_x23_chestplate",
+   "fsang:wolverine_x23_leggings",
+   "fsang:wolverine_x23_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:red_fabrics",
+    "count": 2
+   },
+   {
+    "tag": "palladium:brown_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wolverine_x23_hellfire_gala",
+  "name": "Wolverine X23 Hellfire Gala",
+  "recipe": "fsang:wolverine_x23_hellfire_gala",
+  "tier": 3,
+  "kit": "Feral Healer",
+  "origin": "wolverine",
+  "abilities": [
+   "Healing Factor",
+   "Attack +5",
+   "Speed +20%",
+   "Jump Boost +0.5",
+   "Fall Resistance +20",
+   "Night Vision",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wolverine_x23_hellfire_gala_chestplate",
+   "fsang:wolverine_x23_hellfire_gala_leggings",
+   "fsang:wolverine_x23_hellfire_gala_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 2
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wonder_woman",
+  "name": "Wonder Woman",
+  "recipe": "fsang:wonder_woman",
+  "tier": 3,
+  "kit": "Godlike",
+  "origin": "amazon",
+  "abilities": [
+   "Health +5 hearts",
+   "Armor +6",
+   "Punch +4",
+   "Knockback Resistance +50%",
+   "Fall Resistance +60",
+   "Toughness +2"
+  ],
+  "armor": [
+   "fsang:wonder_woman_helmet",
+   "fsang:wonder_woman_chestplate",
+   "fsang:wonder_woman_leggings",
+   "fsang:wonder_woman_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_blue2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:wonder_woman_flashpoint",
+  "name": "Wonder Woman Flashpoint",
+  "recipe": "fsang:wonder_woman_flashpoint",
+  "tier": 2,
+  "kit": "Speedster",
+  "origin": "speedforce",
+  "abilities": [
+   "Speed +60%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +1.5",
+   "Jump Boost +0.5",
+   "Attack +2"
+  ],
+  "armor": [
+   "fsang:wonder_woman_flashpoint_helmet",
+   "fsang:wonder_woman_flashpoint_chestplate",
+   "fsang:wonder_woman_flashpoint_leggings",
+   "fsang:wonder_woman_flashpoint_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_red2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_blue2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_light_gray2",
+    "count": 2
+   },
+   {
+    "item": "minecraft:iron_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:iron_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:x_men",
+  "name": "X Men",
+  "recipe": "fsang:x_men",
+  "tier": 3,
+  "kit": "Super Soldier",
+  "origin": null,
+  "abilities": [
+   "Health +3 hearts",
+   "Armor +4",
+   "Attack +3",
+   "Speed +20%",
+   "Knockback Resistance +30%",
+   "Fall Resistance +15",
+   "Jump Boost +0.5"
+  ],
+  "armor": [
+   "fsang:x_men_chestplate",
+   "fsang:x_men_leggings",
+   "fsang:x_men_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:blue_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:yellow_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ]
+ },
+ {
+  "suit": "fsang:zatana",
+  "name": "Zatana",
+  "recipe": "fsang:zatana",
+  "tier": 2,
+  "kit": "Sorcerer",
+  "origin": null,
+  "abilities": [
+   "Health +2 hearts",
+   "Armor +2",
+   "Fall Resistance +40",
+   "Night Vision",
+   "Reach +1"
+  ],
+  "armor": [
+   "fsang:zatana_chestplate",
+   "fsang:zatana_leggings",
+   "fsang:zatana_boots"
+  ],
+  "ingredients": [
+   {
+    "tag": "palladium:black_fabrics",
+    "count": 4
+   },
+   {
+    "tag": "palladium:white_fabrics",
+    "count": 4
+   },
+   {
+    "item": "minecraft:leather_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:leather_boots",
+    "count": 1
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "fsang:zoom_cw",
+  "name": "Zoom Cw",
+  "recipe": "fsang:zoom_cw",
+  "tier": 3,
+  "kit": "Negative Speed",
+  "origin": "speedforce_negative",
+  "abilities": [
+   "Speed +65%",
+   "Step Assist +1",
+   "Fall Resistance +30",
+   "Attack Speed +2",
+   "Attack +3"
+  ],
+  "armor": [
+   "fsang:zoom_cw_helmet",
+   "fsang:zoom_cw_chestplate",
+   "fsang:zoom_cw_leggings",
+   "fsang:zoom_cw_boots"
+  ],
+  "ingredients": [
+   {
+    "item": "fsang:tri_polymer_black2",
+    "count": 4
+   },
+   {
+    "item": "fsang:tri_polymer_gray2",
+    "count": 6
+   },
+   {
+    "item": "minecraft:diamond_helmet",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_chestplate",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_leggings",
+    "count": 1
+   },
+   {
+    "item": "minecraft:diamond_boots",
+    "count": 1
+   }
+  ]
+ }
+]

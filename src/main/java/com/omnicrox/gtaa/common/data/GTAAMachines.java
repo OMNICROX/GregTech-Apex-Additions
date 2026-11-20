@@ -1139,5 +1139,53 @@ public class GTAAMachines {
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
             .register();
 
+    // ---------------- Suit Fabrication Station ----------------
+    public static final MultiblockMachineDefinition SUIT_FABRICATION_STATION = REGISTRATE
+            .multiblock("suit_fabrication_station", com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine::new)
+            .langValue("Suit Fabrication Station")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.SUIT_FABRICATION)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine::recipeModifier,
+                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eHero Suit Fabricator"),
+                    Component.literal("\u00a77Makes hero suits; every suit comes with its own \u00a7dhero kit\u00a77 of powers"),
+                    Component.literal("\u00a77Casing tier sets which suits it can make:"),
+                    Component.literal("\u00a77 1 Steel Booth (MV), 2 Showcase Pod (EV),"),
+                    Component.literal("\u00a77 3 Holo Chamber (LuV), 4 Ascension Forge (UHV)"),
+                    Component.literal("\u00a77Same building for every tier: swap the casings to upgrade"),
+                    Component.literal("\u00a77Use an ME Input Bus + a pattern to autocraft missing parts"))
+            .appearanceBlock(GTAABlocks.SUIT_CASING_T1)
+            .pattern(definition -> {
+                var casing = com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine.casings();
+                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
+                        GTBlocks.FUSION_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
+                var monitor = blocks(GTAABlocks.SUIT_MONITOR.get());
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("CC~CC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                        .aisle("cgggc", "c###c", "c#p#c", "c###c", "ccccc")
+                        .aisle("cgggc", "c###c", "c###c", "c###c", "ccccc")
+                        .aisle("cgggc", "c###c", "c###c", "c###c", "ccccc")
+                        .aisle("cmmmc", "m###m", "m###m", "m###m", "cmmmc")
+                        .aisle("ccccc", "ccccc", "ccLcc", "ccccc", "ccccc")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', casing.or(autoAbilities(definition.getRecipeTypes()))
+                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('c', casing)
+                        .where('g', glass)
+                        .where('m', monitor)
+                        .where('p', any())
+                        .where('L', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP, net.minecraft.world.level.block.Blocks.GLOWSTONE,
+                                net.minecraft.world.level.block.Blocks.SEA_LANTERN))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/suit_casing_t1"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+            .register();
+
     public static void init() {}
 }

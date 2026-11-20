@@ -98,7 +98,7 @@ public class GTAA {
                         GTAAMachines.PURIFICATION_PH, GTAAMachines.PURIFICATION_PLASMA, GTAAMachines.PURIFICATION_UV,
                         GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC, GTAAMachines.MEGA_DISTILLATION_TOWER,
                         GTAAMachines.EXTREME_ENTITY_CRUSHER, GTAAMachines.DRACONIC_FUSION_CRAFTER,
-                        GTAAMachines.MYSTICAL_CULTIVATION_ARRAY }) m.getPatternFactory().get();
+                        GTAAMachines.MYSTICAL_CULTIVATION_ARRAY, GTAAMachines.SUIT_FABRICATION_STATION }) m.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

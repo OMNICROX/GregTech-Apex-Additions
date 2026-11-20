@@ -27,6 +27,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType PURIFICATION_PLANT;
     public static GTRecipeType ENTITY_CRUSHER;
     public static GTRecipeType CULTIVATION;
+    public static GTRecipeType SUIT_FABRICATION;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
@@ -101,6 +102,11 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
+        SUIT_FABRICATION = register("suit_fabrication", "multiblock", "Suit Fabrication")
+                .setMaxIOSize(16, 4, 0, 0).setEUIO(IO.IN)
+                .addDataInfo(data -> "Station tier: " + data.getInt("station_tier"))
+                .addDataInfo(data -> data.getString("suit_kit").isEmpty() ? "" : "Kit: " + data.getString("suit_kit"))
+                .addDataInfo(data -> data.getString("suit_origin").isEmpty() ? "" : "Power: " + data.getString("suit_origin"));
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + ".draconic_fusion_crafter", "Draconic Fusion Crafting");
         DRACONIC_FUSION = new com.omnicrox.gtaa.api.DefcRecipeType(GTAA.id("draconic_fusion_crafter"), "multiblock");
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, DRACONIC_FUSION.registryName, DRACONIC_FUSION);
