@@ -28,9 +28,11 @@ ServerEvents.recipes(event => {
   Object.keys(APEX_PW_BOULES).forEach(boule => {
     let grade = APEX_PW_BOULES[boule]
     let done = false
-    event.forEachRecipe({ type: 'gtceu:cutter', input: boule }, r => {
+    event.forEachRecipe({ type: 'gtceu:cutter' }, r => {
+      let text = String(r.json.toString())
+      if (text.indexOf('"' + boule + '"') < 0) return
       let id = String(r.getId())
-      let json = JSON.parse(String(r.json.toString()))
+      let json = JSON.parse(text)
       event.remove({ id: id })
       if (done) return
       if (apexPwSwap(json.inputs, apexPwId(grade)) > 0) {
