@@ -1787,8 +1787,7 @@
     "item": "minecraft:iron_boots",
     "count": 1
    }
-  ],
-  "circuit": 1
+  ]
  },
  {
   "suit": "fsang:cyclops2",
@@ -1984,8 +1983,7 @@
     "item": "minecraft:leather_boots",
     "count": 1
    }
-  ],
-  "circuit": 1
+  ]
  },
  {
   "suit": "fsang:deadpool",
@@ -5649,8 +5647,7 @@
     "item": "minecraft:leather_boots",
     "count": 1
    }
-  ],
-  "circuit": 1
+  ]
  },
  {
   "suit": "fsang:kid_omniman2",
@@ -6805,8 +6802,7 @@
     "item": "minecraft:leather_boots",
     "count": 1
    }
-  ],
-  "circuit": 2
+  ]
  },
  {
   "suit": "fsang:red_rush",
@@ -7167,8 +7163,7 @@
     "item": "minecraft:leather_boots",
     "count": 1
    }
-  ],
-  "circuit": 2
+  ]
  },
  {
   "suit": "fsang:robin_tim",
@@ -8869,7 +8864,7 @@
     "count": 1
    }
   ],
-  "circuit": 3
+  "circuit": 2
  },
  {
   "suit": "fsang:viltrumite",
@@ -8996,8 +8991,7 @@
     "item": "minecraft:iron_boots",
     "count": 1
    }
-  ],
-  "circuit": 2
+  ]
  },
  {
   "suit": "fsang:viltrumite4",
@@ -9273,8 +9267,7 @@
     "item": "minecraft:leather_boots",
     "count": 1
    }
-  ],
-  "circuit": 2
+  ]
  },
  {
   "suit": "fsang:wolverine",
@@ -9785,5 +9778,3415 @@
     "count": 1
    }
   ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_05/main",
+  "name": "War machine Mark 5      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_05/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_05/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:crossbow"
+   },
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:tnt"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_02/main",
+  "name": "War machine Mark 2      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_02/main",
+  "tier": 1,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_02/main"
+  ],
+  "ingredients": [
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:marks/mark_22/bracelet"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_01/mark_01_black_suit",
+  "name": "War machine Mark 1      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_01/mark_01_black_suit",
+  "tier": 1,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_01/mark_01_black_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 32,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:black_suit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:crossbow"
+   },
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:tnt"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_04/main",
+  "name": "War machine Mark 4      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_04/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_04/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:crossbow"
+   },
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:tnt"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_03/main",
+  "name": "War machine Mark 3      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_03/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_03/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:crossbow"
+   },
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:tnt"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:war_hammer"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:additamens/sonic_disruptor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:war_machine/marks/mark_06/main",
+  "name": "War machine Mark 6      ",
+  "recipe": "satsu_iron_man_addon:war_machine/marks/mark_06/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:war_machine/marks/mark_06/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 2,
+    "item": "minecraft:bow"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:clothes/quantum_suit"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:big_shot/main",
+  "name": "Big Shot Suit",
+  "recipe": "satsu_iron_man_addon:big_shot/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:blue_tuxedo_with_weapons"
+  ],
+  "ingredients": [
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:blue_tuxedo"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:prehensyle_suit/main",
+  "name": "Mark 01      ",
+  "recipe": "satsu_iron_man_addon:prehensyle_suit/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:prehensyle_suit/main"
+  ],
+  "ingredients": [
+   {
+    "count": 6,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:wires/copper"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_75/main",
+  "name": "Model 75",
+  "recipe": "satsu_iron_man_addon:marks/model_75/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_75/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_38/main",
+  "name": "Mark 38 (igor)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_38/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_38/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy_block"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_05/main",
+  "name": "Mark 05      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_05/main",
+  "tier": 1,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_05/briefcase"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   },
+   {
+    "count": 32,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_extremis/main",
+  "name": "Mark Extremis      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_extremis/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_extremis/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_36/main",
+  "name": "Mark 36 (Peacemaker)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_36/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_36/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_81/main",
+  "name": "Mark 81      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_81/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_81/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_10/main",
+  "name": "Mark 10      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_10/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_10/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_08/main",
+  "name": "Mark 08      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_08/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_08/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_45/main",
+  "name": "Mark 45      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_45/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_45/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_14/main",
+  "name": "Mark 14      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_14/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_14/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_33/main",
+  "name": "Mark 33 (Silver Centurion)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_33/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_33/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 2,
+    "item": "satsu_iron_man_addon:additamens/vibranium_blades"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_19/main",
+  "name": "Mark 19 (Tiger)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_19/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_19/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 4
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_02/mark_02_black_suit",
+  "name": "Mark 02      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_02/mark_02_black_suit",
+  "tier": 1,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_02/mark_02_black_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   },
+   {
+    "count": 32,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:black_suit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_01/main",
+  "name": "Mark 01      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_01/main",
+  "tier": 1,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_01/mark_01_head",
+   "satsu_iron_man_addon:marks/mark_01/mark_01_chest",
+   "satsu_iron_man_addon:marks/mark_01/mark_01_legs",
+   "satsu_iron_man_addon:marks/mark_01/mark_01_feet"
+  ],
+  "ingredients": [
+   {
+    "count": 32,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:wires/copper"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_37_iron_destroyer/main",
+  "name": "Model 37 (iron destroyer)      ",
+  "recipe": "satsu_iron_man_addon:marks/model_37_iron_destroyer/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_37_iron_destroyer/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/iron_legion_prototype/main",
+  "name": "Iron Legion Prototype",
+  "recipe": "satsu_iron_man_addon:marks/iron_legion_prototype/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/iron_legion_prototype/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 5
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/modular_armor/main",
+  "name": "Model 13 (Modular Armor)      ",
+  "recipe": "satsu_iron_man_addon:marks/modular_armor/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/modular_armor/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:modular/modular_armor_2"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_23/main",
+  "name": "Mark 23 (Shades)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_23/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_23/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_17/main",
+  "name": "Mark 17 (Heartbreaker)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_17/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_17/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:reinforced_rt"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_37/main",
+  "name": "Mark 37 (Hammerhead)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_37/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_37/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 6
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_27/main",
+  "name": "Mark 27 (Disco)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_27/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_27/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_43/main",
+  "name": "Mark 43 (Prodigal son Plus)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_43/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_43/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_44/main",
+  "name": "Mark 44      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_44/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_44/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy_block"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_24/main",
+  "name": "Mark 24 (Tank)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_24/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_24/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:reinforced_rt"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_22/main",
+  "name": "Mark 22 (Hotrod)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_22/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_22/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 7
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_28/main",
+  "name": "Mark 28 (Jack)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_28/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_28/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 8
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_04/mark_04_black_suit",
+  "name": "Mark 04      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_04/mark_04_black_suit",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_04/mark_04_black_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:black_suit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_25/main",
+  "name": "Mark 25 (Striker)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_25/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_25/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 2,
+    "item": "satsu_iron_man_addon:additamens/prehnsyle_hammers"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_18/main",
+  "name": "Mark 18 (Cassanova)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_18/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_18/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:reinforced_rt"
+   },
+   {
+    "count": 11,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 11,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_taken/main",
+  "name": "Mark Taken      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_taken/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_taken/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_15/main",
+  "name": "Mark 15 (Sneaky)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_15/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_15/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_35/main",
+  "name": "Mark 35 (Red Snapper)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_35/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_35/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 9
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_11/main",
+  "name": "Mark 11      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_11/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_11/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_47/main",
+  "name": "Mark 47      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_47/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_47/briefcase"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 1
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_50/main",
+  "name": "Mark 50      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_50/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_50/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_80/main",
+  "name": "Mark 80      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_80/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_80/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_86/main",
+  "name": "Mark 86      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_86/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_86/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 12,
+    "item": "satsu_iron_man_addon:pym_particle_red"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_85/main",
+  "name": "Mark 85      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_85/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_85/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_48/main",
+  "name": "Mark 48      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_48/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_48/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_21/main",
+  "name": "Mark 21 (midas)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_21/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_21/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 16,
+    "item": "minecraft:gold_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_03/mark_03_black_suit",
+  "name": "Mark 03      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_03/mark_03_black_suit",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_03/mark_03_black_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:black_suit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_40/main",
+  "name": "Mark 40 (Shotgun)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_40/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_40/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 10
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_06/main",
+  "name": "Mark 06      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_06/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_06/mark_06_black_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:black_suit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_07/main",
+  "name": "Mark 07      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_07/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_07/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 11
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/infamous/main",
+  "name": "Model Prime (Infamous)",
+  "recipe": "satsu_iron_man_addon:marks/infamous/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/infamous/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 4
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_20/main",
+  "name": "Mark 20 (Python)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_20/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_20/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 12
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_31/main",
+  "name": "Mark 31 (Piston)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_31/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_31/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 13
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_09/main",
+  "name": "Mark 09      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_09/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_09/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 14
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_prime/main",
+  "name": "Model Prime",
+  "recipe": "satsu_iron_man_addon:marks/model_prime/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_prime/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 5
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_46/main",
+  "name": "Mark 46      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_46/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_46/briefcase"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_42/main",
+  "name": "Mark 42 (Prodigal son)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_42/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_42/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 4
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_72/main",
+  "name": "Model 72",
+  "recipe": "satsu_iron_man_addon:marks/model_72/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_72/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 64,
+    "item": "satsu_iron_man_addon:mysterium/ingot"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_49/main",
+  "name": "Mark 49      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_49/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_49/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_34/main",
+  "name": "Mark 34 (Southpaw)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_34/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_34/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 15
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_16/main",
+  "name": "Mark 16 (Nightclub)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_16/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_16/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_32/main",
+  "name": "Mark 32 (Romeo)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_32/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_32/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:reinforced_rt"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 3
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_blooded/main",
+  "name": "Mark Blood Border      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_blooded/main",
+  "tier": 3,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_blooded/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 6
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_26/main",
+  "name": "Mark 26 (Gamma)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_26/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_26/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 2,
+    "item": "satsu_iron_man_addon:additamens/prehnsyle_hammers"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_82/main",
+  "name": "Mark 82      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_82/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_82/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_41/main",
+  "name": "Mark 41 (Bones)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_41/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_41/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_1873_nano/main",
+  "name": "Mark 1873 (Steampunk)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_1873_nano/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_1873_nano/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 4
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_29/main",
+  "name": "Mark 29 (Fiddler)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_29/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_29/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:reinforced_rt"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:additamens/prehnsyle_hammers"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_12/main",
+  "name": "Mark 12      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_12/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_12/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:high_density_carbon"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_50/main",
+  "name": "Mark model 50      ",
+  "recipe": "satsu_iron_man_addon:marks/model_50/main",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_50/main"
+  ],
+  "ingredients": [
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 6,
+    "item": "satsu_iron_man_addon:symbiote_metalized"
+   },
+   {
+    "count": 20,
+    "item": "satsu_iron_man_addon:nanoparticle"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:nano_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_30/main",
+  "name": "Mark 30 (Blue Steel)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_30/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_30/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 2,
+    "item": "satsu_iron_man_addon:additamens/vibranium_blades"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_39/main",
+  "name": "Mark 39 (Starboost)      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_39/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_39/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 16
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/mark_13/main",
+  "name": "Mark 13      ",
+  "recipe": "satsu_iron_man_addon:marks/mark_13/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/mark_13/bracelet"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ],
+  "circuit": 17
+ },
+ {
+  "suit": "satsu_iron_man_addon:marks/model_nil/main",
+  "name": "Model NIL      ",
+  "recipe": "satsu_iron_man_addon:marks/model_nil/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:marks/model_nil/briefcase"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit_advanced/feet"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:retro_reflective_panels"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 64,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:arc_reactor"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:prototype_suit/main",
+  "name": "Mark 01      ",
+  "recipe": "satsu_iron_man_addon:prototype_suit/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:prototype_suit/prototype_suit_chest",
+   "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+  ],
+  "ingredients": [
+   {
+    "count": 8,
+    "item": "minecraft:iron_ingot"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:basic_circuit"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:wires/copper"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:advanced_suit/main",
+  "name": "Mark 01      ",
+  "recipe": "satsu_iron_man_addon:advanced_suit/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:prototype_suit_advanced/chest",
+   "satsu_iron_man_addon:prototype_suit_advanced/feet"
+  ],
+  "ingredients": [
+   {
+    "count": 6,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:repulsor"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:medium_circuit"
+   },
+   {
+    "count": 8,
+    "item": "satsu_iron_man_addon:wires/copper"
+   }
+  ],
+  "circuit": 2
+ },
+ {
+  "suit": "satsu_iron_man_addon:iron_heart/marks/mark_01/main",
+  "name": "Iron heart (Mark 1)",
+  "recipe": "satsu_iron_man_addon:iron_heart/marks/mark_01/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:iron_heart/marks/mark_01/main"
+  ],
+  "ingredients": [
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:steel_ingot"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 16,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   }
+  ]
+ },
+ {
+  "suit": "satsu_iron_man_addon:iron_heart/marks/mark_03/main",
+  "name": "Iron heart (Mark 3)",
+  "recipe": "satsu_iron_man_addon:iron_heart/marks/mark_03/main",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Iron Man (Satsu): powers come with the suit"
+  ],
+  "armor": [
+   "satsu_iron_man_addon:iron_heart/marks/mark_03/main"
+  ],
+  "ingredients": [
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prehensyle_suit/main"
+   },
+   {
+    "count": 32,
+    "item": "satsu_iron_man_addon:steel_gold_refined_alloy"
+   },
+   {
+    "count": 10,
+    "item": "satsu_iron_man_addon:advanced_circuit"
+   },
+   {
+    "count": 4,
+    "item": "satsu_iron_man_addon:wires/copper"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_chest"
+   },
+   {
+    "count": 1,
+    "item": "satsu_iron_man_addon:prototype_suit/prototype_suit_feet"
+   }
+  ]
+ },
+ {
+  "suit": "powerborne:captain_america_suit_tailoring",
+  "name": "Captain America Suit",
+  "recipe": "powerborne:captain_america_suit_tailoring",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Powerborne Heroes: powers come with the suit"
+  ],
+  "armor": [
+   "powerborne:captain_america_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 16,
+    "item": "palladium:light_blue_fabric"
+   },
+   {
+    "count": 8,
+    "item": "palladium:red_fabric"
+   },
+   {
+    "count": 6,
+    "item": "palladium:white_fabric"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:leather"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:iron_ingot"
+   }
+  ],
+  "armor_nbt": {
+   "powerborne:captain_america_suit": {
+    "cosmetic": 1
+   }
+  }
+ },
+ {
+  "suit": "powerborne:sentry_suit_tailoring",
+  "name": "Sentry Suit",
+  "recipe": "powerborne:sentry_suit_tailoring",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Powerborne Heroes: powers come with the suit"
+  ],
+  "armor": [
+   "powerborne:sentry_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 16,
+    "item": "minecraft:gold_ingot"
+   },
+   {
+    "count": 12,
+    "item": "palladium:yellow_fabric"
+   },
+   {
+    "count": 12,
+    "item": "palladium:blue_fabric"
+   }
+  ],
+  "armor_nbt": {
+   "powerborne:sentry_suit": {
+    "cosmetic": 1
+   }
+  }
+ },
+ {
+  "suit": "powerborne:spiderman_suit_tailoring",
+  "name": "Spider-Man Suit",
+  "recipe": "powerborne:spiderman_suit_tailoring",
+  "tier": 2,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Powerborne Heroes: powers come with the suit"
+  ],
+  "armor": [
+   "powerborne:spiderman_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 16,
+    "item": "palladium:red_fabric"
+   },
+   {
+    "count": 12,
+    "item": "palladium:blue_fabric"
+   },
+   {
+    "count": 4,
+    "item": "palladium:black_fabric"
+   },
+   {
+    "count": 4,
+    "item": "palladium:white_fabric"
+   },
+   {
+    "count": 4,
+    "item": "minecraft:cobweb"
+   },
+   {
+    "count": 1,
+    "item": "powerborne:radioactive_silk"
+   }
+  ],
+  "armor_nbt": {
+   "powerborne:spiderman_suit": {
+    "cosmetic": 1
+   }
+  }
+ },
+ {
+  "suit": "powerborne:superman_suit_tailoring",
+  "name": "Superman Suit",
+  "recipe": "powerborne:superman_suit_tailoring",
+  "tier": 4,
+  "kit": "Suit powers built in",
+  "origin": null,
+  "abilities": [
+   "Powerborne Heroes: powers come with the suit"
+  ],
+  "armor": [
+   "powerborne:superman_suit"
+  ],
+  "ingredients": [
+   {
+    "count": 16,
+    "item": "palladium:red_fabric"
+   },
+   {
+    "count": 16,
+    "item": "palladium:light_blue_fabric"
+   },
+   {
+    "count": 2,
+    "item": "palladium:yellow_fabric"
+   },
+   {
+    "count": 1,
+    "item": "powerborne:sunstone_shard"
+   }
+  ],
+  "armor_nbt": {
+   "powerborne:superman_suit": {
+    "cosmetic": 1
+   }
+  }
  }
 ]

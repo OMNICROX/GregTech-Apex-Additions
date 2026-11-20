@@ -116,6 +116,54 @@
   {
    "id": "fsang:viltrumite_chestplate",
    "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_extremis/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_81/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/modular_armor/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_80/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_86/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_85/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/model_72/bracelet",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_82/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/mark_1873_nano/main",
+   "required": false
+  },
+  {
+   "id": "satsu_iron_man_addon:marks/model_50/main",
+   "required": false
+  },
+  {
+   "id": "powerborne:sentry_suit",
+   "required": false
+  },
+  {
+   "id": "powerborne:superman_suit",
+   "required": false
   }
  ]
 }

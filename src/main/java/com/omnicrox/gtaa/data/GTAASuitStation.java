@@ -119,10 +119,17 @@ public final class GTAASuitStation {
                 builder.inputItems(TagKey.create(Registries.ITEM, new ResourceLocation(i.get("tag").getAsString())), count);
             } else return false;
         }
+        JsonObject nbt = s.has("armor_nbt") ? s.getAsJsonObject("armor_nbt") : null;
         for (JsonElement ae : s.getAsJsonArray("armor")) {
             Item it = item(ae.getAsString());
             if (it == null) return false;
-            builder.outputItems(new ItemStack(it));
+            ItemStack stack = new ItemStack(it);
+            if (nbt != null && nbt.has(ae.getAsString())) {
+                try {
+                    stack.setTag(net.minecraft.nbt.TagParser.parseTag(nbt.get(ae.getAsString()).toString()));
+                } catch (Exception ignored) {}
+            }
+            builder.outputItems(stack);
         }
         switch (tier) {
             case 1 -> builder.inputItems(CustomTags.MV_CIRCUITS, 1).inputItems(plate, GTMaterials.Steel, 4);
