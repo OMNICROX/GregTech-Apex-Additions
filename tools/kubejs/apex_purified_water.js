@@ -5,6 +5,7 @@
 
 const APEX_PW_BOULES = { 'gtceu:naquadah_boule': 3, 'gtceu:neutronium_boule': 5 }
 const APEX_PW_FLUIDS = ['minecraft:water', 'gtceu:distilled_water', 'gtceu:lubricant']
+const APEX_PW_TAGS = ['minecraft:water', 'forge:water', 'forge:distilled_water', 'forge:lubricant']
 
 function apexPwId(grade) {
   return Platform.isLoaded('gtca') ? `gtca:purified_water_grade_${grade}` : `gtapexadditions:grade_${grade}_purified_water`
@@ -15,6 +16,11 @@ function apexPwSwap(node, to) {
   let n = 0
   if (node == null || typeof node !== 'object') return 0
   if (Array.isArray(node)) { node.forEach(c => { n += apexPwSwap(c, to) }); return n }
+  if (typeof node.tag === 'string' && APEX_PW_TAGS.indexOf(node.tag) >= 0) {
+    delete node.tag
+    node.fluid = to
+    return 1
+  }
   Object.keys(node).forEach(k => {
     let v = node[k]
     if ((k === 'fluid' || k === 'value') && typeof v === 'string' && APEX_PW_FLUIDS.indexOf(v) >= 0) { node[k] = to; n++ }
