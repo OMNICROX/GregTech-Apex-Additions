@@ -32,20 +32,21 @@ const APEX_DUR = {
 
 ServerEvents.recipes(event => {
   let changed = 0, failed = 0, powered = 0, biggest = null
-  const T = APEX_DUR.THRESHOLD_TICKS
+  let T = APEX_DUR.THRESHOLD_TICKS
 
-  const euEntries = (json, key) => {
+  let euEntries = (json, key) => {
     if (!json.has(key)) return null
-    const m = json.get(key)
+    let m = json.get(key)
     if (!m.isJsonObject() || !m.getAsJsonObject().has('eu')) return null
     return m.getAsJsonObject().get('eu').getAsJsonArray()
   }
 
   event.forEachRecipe({}, r => {
-    const json = r.json
+    let json = r.json
     if (!json || !json.has('duration')) return
     if (!(json.has('tickInputs') || json.has('tickOutputs') || json.has('inputs'))) return
-    const type = String(r.type)
+    let type = ''
+    try { type = String(r.json.get('type').getAsString()) } catch (e) { type = '' }
     if (APEX_DUR.SKIP_TYPES.indexOf(type) >= 0) return
     if (euEntries(json, 'tickOutputs') || euEntries(json, 'outputs')) return // generator: skip
 
@@ -53,26 +54,26 @@ ServerEvents.recipes(event => {
     try { old = json.get('duration').getAsInt() } catch (e) { return }
     if (old <= T) return
 
-    const nd = Math.max(T, Math.round(T * (1 + APEX_DUR.K * Math.log(old / T))))
-    const ampMult = Math.min(APEX_DUR.MAX_AMP_MULT, Math.max(1, Math.ceil(Math.pow(old / nd, APEX_DUR.EU_EXP))))
+    let nd = Math.max(T, Math.round(T * (1 + APEX_DUR.K * Math.log(old / T))))
+    let ampMult = Math.min(APEX_DUR.MAX_AMP_MULT, Math.max(1, Math.ceil(Math.pow(old / nd, APEX_DUR.EU_EXP))))
 
     try {
       // power: multiply amperage of every EU/t input, keep voltage (= keep tier)
       let euNote = ''
-      const eu = euEntries(json, 'tickInputs')
+      let eu = euEntries(json, 'tickInputs')
       if (eu && ampMult > 1) {
         for (let i = 0; i < eu.size(); i++) {
-          const entry = eu.get(i).getAsJsonObject()
-          const c = entry.get('content')
+          let entry = eu.get(i).getAsJsonObject()
+          let c = entry.get('content')
           let volt, amps
-          if (c.isJsonPrimitive()) { volt = c.getAsLong(); amps = 1 }
+          if (c.isJsonPrimitive()) { volt = Math.round(c.getAsDouble()); amps = 1 }
           else {
-            const o = c.getAsJsonObject()
-            volt = o.has('voltage') ? o.get('voltage').getAsLong() : 0
-            amps = o.has('amperage') ? o.get('amperage').getAsLong() : 1
+            let o = c.getAsJsonObject()
+            volt = o.has('voltage') ? Math.round(o.get('voltage').getAsDouble()) : 0
+            amps = o.has('amperage') ? Math.round(o.get('amperage').getAsDouble()) : 1
           }
           if (volt <= 0) continue
-          const stack = new ApexDurJsonObject()
+          let stack = new ApexDurJsonObject()
           stack.addProperty('voltage', volt)
           stack.addProperty('amperage', amps * ampMult)
           entry.add('content', stack)

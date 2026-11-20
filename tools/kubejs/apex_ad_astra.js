@@ -59,7 +59,7 @@ const APEX_AA_ROCKETS = [
 
 ServerEvents.tags('item', event => {
   // Avaritia's infinity armor works in space (same as the Re-Avaritia space patch, for AvaritiaNeo)
-  const inf = ['avaritia:infinity_helmet', 'avaritia:infinity_chestplate', 'avaritia:infinity_leggings',
+  let inf = ['avaritia:infinity_helmet', 'avaritia:infinity_chestplate', 'avaritia:infinity_leggings',
     'avaritia:infinity_pants', 'avaritia:infinity_boots'].filter(id => Item.exists(id))
   ;['ad_astra:space_resistant_armor', 'ad_astra:oxygen_supplying_armor', 'ad_astra:heat_resistant_armor',
     'ad_astra:freeze_resistant_armor'].forEach(tag => inf.forEach(id => event.add(tag, id)))

@@ -62,7 +62,9 @@ public final class GTAAFusion {
 
     public static void init(Consumer<FinishedRecipe> provider) {
         // ---- feeders (MK II / MK III): plasmas GTCEu has no recipe for ----
-        fusion(provider, "radon_plasma", f(Iridium, L, 144), f(Fluorine, 500), f(Radon, P, 144), 32, VA[LuV], 450_000_000L);
+        // GT: New Age ships the same radon and thorium plasma recipes
+        boolean gtna = net.minecraftforge.fml.ModList.get().isLoaded("gtna");
+        if (!gtna) fusion(provider, "radon_plasma", f(Iridium, L, 144), f(Fluorine, 500), f(Radon, P, 144), 32, VA[LuV], 450_000_000L);
         // GT Community Additions already has this one
         if (!net.minecraftforge.fml.ModList.get().isLoaded("gtca"))
             fusion(provider, "calcium_plasma", f(Magnesium, L, 128), f(Oxygen, 128), f(Calcium, P, 16), 128, VA[IV], 120_000_000L);
@@ -82,7 +84,7 @@ public final class GTAAFusion {
         // ---- MK V (UEV, 6B start) ----
         fusion(provider, "plutonium241_plasma", f(Lutetium, L, 576), f(Vanadium, L, 576), f(Plutonium241, P, 576), 4, VA[UEV] / 2, 6_000_000_000L);
         fusion(provider, "lead_plasma", f(Tellurium, L, 576), f(Zinc, L, 576), f(Lead, P, 576), 4, VA[UEV] / 2, 6_000_000_000L);
-        fusion(provider, "thorium_plasma", f(Osmium, L, 576), f(Silicon, L, 576), f(Thorium, P, 576), 4, VA[UEV] / 2, 6_000_000_000L);
+        if (!gtna) fusion(provider, "thorium_plasma", f(Osmium, L, 576), f(Silicon, L, 576), f(Thorium, P, 576), 4, VA[UEV] / 2, 6_000_000_000L);
         fusion(provider, "neptunium_plasma_mk5", f(Xenon, P, 576), f(Yttrium, L, 576), f(Neptunium, P, 576), 32, VA[UEV], 6_000_000_000L);
         fusion(provider, "fermium_plasma_mk5", f(Americium, P, 576), f(Rubidium, L, 576), f(Fermium, P, 576), 32, VA[UEV], 6_000_000_000L);
         fusion(provider, "metastable_oganesson_mk5", f(Copper, P, 576), f(Oganesson, L, 1000),

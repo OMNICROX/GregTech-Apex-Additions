@@ -37,7 +37,10 @@ legacyForge {
             jvmArguments.addAll('-Xmx4G')
             if (project.hasProperty('quickplay')) programArguments.addAll('--quickPlaySingleplayer', project.quickplay)
         }
-        server { server() }
+        server {
+            server()
+            jvmArguments.addAll('-Xmx5G')
+        }
         data {
             data()
             programArguments.addAll('--mod', project.mod_id, '--all',

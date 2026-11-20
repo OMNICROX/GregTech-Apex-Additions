@@ -24,30 +24,52 @@ const APEX_NO_OUTPUT = ['avaritia:neutron_pile', 'avaritia:neutron_nugget', 'ava
 const APEX_DROP_IDS = ['avaritia:infinity', 'avaritia:infinity_block', 'avaritia:un_infinity_block', 'avaritia:infinity_nugget',
   'avaritia:infinity_ingot_from_nuggets', 'avaritia:un_infinity_ingot']
 
+const ApexUnifyJsonParser = Java.loadClass('com.google.gson.JsonParser')
+// Adds a recipe from raw JSON with a fixed id. GT-format recipes go through GT's own builder: event.custom()
+// on a GT recipe type can't take an id and registers the recipe twice (kjs/<out> and <type>/<out>).
+function apexUnifyAdd(event, json, id) {
+  let t = String(json.type || '').split(':')
+  if (json.duration !== undefined && (json.inputs || json.tickInputs) && t.length === 2) {
+    try {
+      // GT puts the type in front of the path itself
+      let gid = String(id).replace(`:${t[1]}/`, ':')
+      let b = event.recipes[t[0]][t[1]](gid)
+      b.merge(ApexUnifyJsonParser.parseString(JSON.stringify(json)).getAsJsonObject())
+      return
+    } catch (e) { console.warn(`GT builder failed for ${id}, using custom: ${e}`) }
+  }
+  let r = event.custom(json)
+  try { r.id(id) } catch (e) { }
+}
+
 ServerEvents.recipes(event => {
-  const has = id => { try { return Item.exists(id) } catch (e) { return false } }
-  const swap = {}
+  let has = id => { try { return Item.exists(id) } catch (e) { return false } }
+  let swap = {}
   Object.keys(APEX_SWAP).forEach(av => { if (has(APEX_SWAP[av])) swap[av] = APEX_SWAP[av]; else console.warn(`[APEX-UNIFY] missing ${APEX_SWAP[av]}, ${av} left alone`) })
-  const avIds = Object.keys(swap)
+  let avIds = Object.keys(swap)
 
   APEX_NO_OUTPUT.forEach(av => event.remove({ output: av }))
   APEX_DROP_IDS.forEach(id => event.remove({ id: id }))
 
-  const todo = []
+  let todo = []
   event.forEachRecipe({}, r => {
-    const id = String(r.getId())
+    let id = String(r.getId())
     if (APEX_DROP_IDS.indexOf(id) >= 0) return
-    const s = String(r.json.toString())
+    let s = String(r.json.toString())
     if (avIds.some(av => s.indexOf(`"${av}"`) >= 0)) todo.push({ id: id, s: s })
   })
+  let recycled = 0
   todo.forEach(t => {
     let s = t.s
     avIds.forEach(av => { s = s.split(`"${av}"`).join(`"${swap[av]}"`) })
     try {
-      const json = JSON.parse(s)
+      let json = JSON.parse(s)
       event.remove({ id: t.id })
-      event.custom(json).id(`apex:gt_unify/${t.id.replace(':', '/')}`)
+      // GT's own recycling (macerator, arc furnace, extractor) of Avaritia ingots: GT already has the same
+      // recipes for its own neutronium / infinity, so the Avaritia copies just go
+      if (json.duration !== undefined && json.inputs && /^gtceu:(macerator|arc_furnace|liquefaction_furnace|extractor|fluid_extractor)\//.test(t.id)) { recycled++; return }
+      apexUnifyAdd(event, json, `apex:gt_unify/${t.id.replace(':', '/')}`)
     } catch (e) { console.error(`[APEX-UNIFY] failed ${t.id}: ${e}`) }
   })
-  console.info(`[APEX-UNIFY] ${todo.length} recipes now use GregTech Neutronium / Infinity`)
+  console.info(`[APEX-UNIFY] ${todo.length - recycled} recipes now use GregTech Neutronium / Infinity (${recycled} duplicate GT recycling recipes dropped)`)
 })
