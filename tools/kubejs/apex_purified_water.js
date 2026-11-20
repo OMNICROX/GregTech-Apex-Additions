@@ -42,7 +42,7 @@ ServerEvents.recipes(event => {
       event.remove({ id: id })
       if (done) return
       if (apexPwSwap(json.inputs, apexPwId(grade)) > 0) {
-        event.custom(json).id(`gtapexadditions:apex_pw/${boule.split(':')[1]}`)
+        event.custom(json)
         done = true
         made++
       }
