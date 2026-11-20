@@ -81,6 +81,11 @@
     "gtapexadditions:defc_core_t1",
     "gtapexadditions:defc_core_t2",
     "gtapexadditions:defc_core_t3",
-    "gtapexadditions:defc_core_t4"
+    "gtapexadditions:defc_core_t4",
+    "gtapexadditions:suit_casing_t1",
+    "gtapexadditions:suit_casing_t2",
+    "gtapexadditions:suit_casing_t3",
+    "gtapexadditions:suit_casing_t4",
+    "gtapexadditions:suit_monitor"
   ]
 }

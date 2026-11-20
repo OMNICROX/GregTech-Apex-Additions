@@ -125,7 +125,7 @@ public class StructureUpgrader extends Item {
         out.add(new Family("coal_casings", "Component Assembly Casings", single(coal.toArray(Block[]::new))));
         out.add(new Family("suit_casings", "Suit Station Casings", single(GTAABlocks.suitCasings())));
         out.add(new Family("mca_soil", "Cultivation Soil", grouped(MysticalCultivationArrayMachine.soilTiers())));
-        out.add(new Family("mca_glass", "Cultivation Glass", grouped(MysticalCultivationArrayMachine.glassTiers())));
+        out.add(new Family("mca_glass", "Tiered Glass", grouped(MysticalCultivationArrayMachine.glassTiers())));
         return out;
     }
 
@@ -153,12 +153,78 @@ public class StructureUpgrader extends Item {
         return p.getX() + " " + p.getY() + " " + p.getZ();
     }
 
+    public static void promptForTest(ServerPlayer player, IMultiController controller) {
+        prompt(player, controller);
+    }
+
     static void prompt(ServerPlayer player, IMultiController controller) {
-        BlockPos cpos = controller.self().getPos();
         if (!controller.isFormed()) {
             player.sendSystemMessage(Component.literal("That multiblock isn't formed yet.").withStyle(ChatFormatting.RED));
             return;
         }
+        if (com.omnicrox.gtaa.common.network.GTAANetwork.CHANNEL.isRemotePresent(player.connection.connection)) {
+            screen(player, controller);
+            return;
+        }
+        chatPrompt(player, controller);
+    }
+
+    private static String itemId(net.minecraft.world.level.ItemLike item) {
+        return net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item.asItem()).toString();
+    }
+
+    /** Same choices as the chat prompt, shown in the Structure Upgrader screen. */
+    private static void screen(ServerPlayer player, IMultiController controller) {
+        BlockPos cpos = controller.self().getPos();
+        Level level = controller.self().getLevel();
+        var cache = controller.getMultiblockState().getCache();
+        List<com.omnicrox.gtaa.common.network.GTAANetwork.Row> rows = new ArrayList<>();
+        for (Family fam : families()) {
+            Map<Integer, Integer> count = new LinkedHashMap<>();
+            for (BlockPos p : cache) {
+                int t = fam.tierOf(level.getBlockState(p).getBlock());
+                if (t > 0) count.merge(t, 1, Integer::sum);
+            }
+            if (count.isEmpty()) continue;
+            int total = count.values().stream().mapToInt(i -> i).sum();
+            int cur = count.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+            List<com.omnicrox.gtaa.common.network.GTAANetwork.Choice> choices = new ArrayList<>();
+            for (int t = 1; t <= fam.tiers.size(); t++) {
+                if (t == cur && count.size() == 1) continue;
+                Block b = fam.block(t);
+                int have = player.isCreative() ? total : countItem(player, b.asItem());
+                choices.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice(b.getName().getString(),
+                        "/gtapexadditions upgrade " + posArg(cpos) + " family " + fam.id + " " + t,
+                        "Swap all " + total + " to " + b.getName().getString() + " (you have " + have + ")",
+                        have >= total, itemId(b)));
+            }
+            Block curBlock = fam.block(cur);
+            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row(fam.name + " \u00d7" + total,
+                    curBlock.getName().getString(), itemId(curBlock), choices));
+        }
+        List<IMultiPart> upgradable = new ArrayList<>();
+        for (IMultiPart part : controller.getParts()) {
+            MachineDefinition next = nextTier(part, player);
+            if (next == null) continue;
+            upgradable.add(part);
+            BlockPos pp = part.self().getPos();
+            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row("Hatch",
+                    part.self().getDefinition().getBlock().getName().getString(), itemId(part.self().getDefinition().getBlock()),
+                    List.of(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice("\u2192 " + next.getBlock().getName().getString(),
+                            "/gtapexadditions upgrade " + posArg(cpos) + " hatch " + posArg(pp),
+                            "Replace this hatch. Its contents drop on the ground.", true, itemId(next.getBlock())))));
+        }
+        if (upgradable.size() > 1)
+            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row("All hatches", upgradable.size() + " upgradable", "",
+                    List.of(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice("Upgrade all " + upgradable.size(),
+                            "/gtapexadditions upgrade " + posArg(cpos) + " hatches", "Replace every listed hatch", true, ""))));
+        com.omnicrox.gtaa.common.network.GTAANetwork.send(player, new com.omnicrox.gtaa.common.network.GTAANetwork.UpgraderScreenPacket(
+                controller.self().getDefinition().getBlock().getName().getString(), rows,
+                "Blocks come from your inventory; old ones go back to it."));
+    }
+
+    private static void chatPrompt(ServerPlayer player, IMultiController controller) {
+        BlockPos cpos = controller.self().getPos();
         Level level = controller.self().getLevel();
         var cache = controller.getMultiblockState().getCache();
         player.sendSystemMessage(Component.literal("Structure Upgrader: ").withStyle(ChatFormatting.GOLD)

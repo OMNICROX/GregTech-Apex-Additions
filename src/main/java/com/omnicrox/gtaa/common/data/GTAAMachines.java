@@ -1184,7 +1184,9 @@ public class GTAAMachines {
             })
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/suit_casing_t1"),
-                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor"))
+                    .andThen(b -> b.addDynamicRenderer(() -> new com.omnicrox.gtaa.client.SuitHologramRender())))
+            .hasBER(true)
             .register();
 
     public static void init() {}

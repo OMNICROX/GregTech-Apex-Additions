@@ -1,0 +1,217 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "apex_heroes"
+	group: ""
+	icon: { Count: 1b, id: "gtapexadditions:suit_fabrication_station" }
+	id: "F48D97FBE89BEE32"
+	order_index: 99
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["The Suit Fabrication Station is one building in four tiers. Start with Steel Booth Casings (MV assembler)."]
+			id: "F608EB181590FA96"
+			tasks: [
+				{ count: 16L, id: "343C3D638D801CBC", item: { Count: 1b, id: "gtapexadditions:suit_casing_t1" }, type: "item" }
+			]
+			title: "Steel Booth"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F608EB181590FA96"]
+			description: ["5x5x6 booth: casing floor and roof, glass on the front, Suit Display Monitors in the top ring and a lamp in the roof centre. The controller goes in the middle of the front floor row." "" "Open the &dSuit Picker&r tab to browse every suit with its hero kit, pick one and press &6Fabricate&r."]
+			id: "1077F15AC014A668"
+			shape: "hexagon"
+			size: 1.5d
+			tasks: [
+				{ count: 1L, id: "56250562A19E176C", item: { Count: 1b, id: "gtapexadditions:suit_fabrication_station" }, type: "item" }
+			]
+			title: "Suit Fabrication Station"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1077F15AC014A668"]
+			description: ["Twelve of them ring the top of the booth."]
+			id: "2DE7917B023E5DC1"
+			tasks: [
+				{ count: 12L, id: "C8E9ECC8D75AF79B", item: { Count: 1b, id: "gtapexadditions:suit_monitor" }, type: "item" }
+			]
+			title: "Suit Display Monitors"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1077F15AC014A668"]
+			description: ["Make any suit in the station. Each one comes with its own hero kit of powers: speedsters run, fliers fly, bruisers hit hard."]
+			id: "F8275FED7DF5F0A2"
+			tasks: [
+				{ id: "4D557CDAD867A7F0", type: "checkmark" }
+			]
+			title: "Suit Up"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F8275FED7DF5F0A2"]
+			description: ["Put an ME Input Bus on the station. Fabricate then sets the bus to pull the suit parts and asks your crafting CPUs for any part that is short."]
+			id: "F4E491DFD8EFF9AA"
+			tasks: [
+				{ count: 1L, id: "A5FCF1446BC66558", item: { Count: 1b, id: "gtceu:me_input_bus" }, type: "item" }
+			]
+			title: "Autocraft the Parts"
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["F8275FED7DF5F0A2"]
+			description: ["Tier II casings (EV) unlock the bigger hero suits. Same building: swap the casings (the Structure Upgrader does it in one click)."]
+			id: "D77CAA11F999115E"
+			tasks: [
+				{ count: 16L, id: "8ACB57A6BEBE7257", item: { Count: 1b, id: "gtapexadditions:suit_casing_t2" }, type: "item" }
+			]
+			title: "Showcase Pod"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["D77CAA11F999115E"]
+			description: ["Tier III casings (LuV)."]
+			id: "52C04FAC0732E2F5"
+			tasks: [
+				{ count: 16L, id: "EAB7578E2DDE43A3", item: { Count: 1b, id: "gtapexadditions:suit_casing_t3" }, type: "item" }
+			]
+			title: "Holo Chamber"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["52C04FAC0732E2F5"]
+			description: ["Tier IV casings (UHV): Kryptonians, Viltrumites and cosmic heroes."]
+			id: "CCA36E1353AFC00F"
+			shape: "hexagon"
+			tasks: [
+				{ count: 16L, id: "C109B04C0F05101F", item: { Count: 1b, id: "gtapexadditions:suit_casing_t4" }, type: "item" }
+			]
+			title: "Ascension Forge"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["CCA36E1353AFC00F"]
+			description: ["Break a tier IV hero suit chestplate down into a Hero Core in the Ascension Forge."]
+			id: "70D71F1911FB91BA"
+			tasks: [
+				{ count: 1L, id: "29C0ADD94D5A0018", item: { Count: 1b, id: "gtapexadditions:hero_core" }, type: "item" }
+			]
+			title: "Hero Core"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["70D71F1911FB91BA"]
+			description: ["The final suit. Twelve Hero Cores, UEV parts and Grade 8 purified water." "" "Full set: flight, regeneration, night vision, immune to fire, falls, drowning, wither and poison, and +50% damage against infernal mobs."]
+			id: "CDF477EC6E178596"
+			shape: "gear"
+			size: 2.0d
+			tasks: [
+				{ count: 1L, id: "051B62E3201168F2", item: { Count: 1b, id: "gtapexadditions:apex_helmet" }, type: "item" }
+				{ count: 1L, id: "38C03D14AF8FB652", item: { Count: 1b, id: "gtapexadditions:apex_chestplate" }, type: "item" }
+				{ count: 1L, id: "91F2EDA2B01C5A7D", item: { Count: 1b, id: "gtapexadditions:apex_leggings" }, type: "item" }
+				{ count: 1L, id: "EC85D4C033FFE2C8", item: { Count: 1b, id: "gtapexadditions:apex_boots" }, type: "item" }
+			]
+			title: "Apex Ascension"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			description: ["Some hostile spawns are &eElite&r, &6Ultra&r or &4Infernal&r: more health, nasty modifiers and much better loot. Kill one."]
+			id: "7F6F7A9C43F17EE4"
+			tasks: [
+				{ id: "F320CDE3BD243A3F", type: "checkmark" }
+			]
+			title: "Infernal Mobs"
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7F6F7A9C43F17EE4"]
+			description: ["A spawn egg in an input bus picks the mob; a sword sets looting. No more mob towers."]
+			id: "5A672980EEF519C7"
+			tasks: [
+				{ count: 1L, id: "CF7D9B5ABD767818", item: { Count: 1b, id: "gtapexadditions:extreme_entity_crusher" }, type: "item" }
+			]
+			title: "Extreme Entity Crusher"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5A672980EEF519C7"]
+			description: ["Put a sigil in an input bus of the crusher to crush that rank of the mob: loot x3, bonus drops, more power."]
+			id: "CF1E9B2504EAECBF"
+			tasks: [
+				{ count: 1L, id: "492BDF75FD8B6A89", item: { Count: 1b, id: "gtapexadditions:elite_sigil" }, type: "item" }
+			]
+			title: "Elite Sigil"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["CF1E9B2504EAECBF"]
+			description: ["Loot x5."]
+			id: "05A4F84EE65545DC"
+			tasks: [
+				{ count: 1L, id: "78A0EBABFE63F91A", item: { Count: 1b, id: "gtapexadditions:ultra_sigil" }, type: "item" }
+			]
+			title: "Ultra Sigil"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["05A4F84EE65545DC"]
+			description: ["Loot x9. An infernal witch crusher pays for itself."]
+			id: "63ABEB87BAFC5062"
+			shape: "hexagon"
+			tasks: [
+				{ count: 1L, id: "2C85735803A2C804", item: { Count: 1b, id: "gtapexadditions:infernal_sigil" }, type: "item" }
+			]
+			title: "Infernal Sigil"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			description: ["Shift + right-click a formed controller: upgrade every coil or tiered casing at once from your inventory, and hatches if you carry better ones."]
+			id: "C22BB5D74BEC5EA0"
+			tasks: [
+				{ count: 1L, id: "F3F81C28B4BB356F", item: { Count: 1b, id: "gtapexadditions:structure_upgrader" }, type: "item" }
+			]
+			title: "Structure Upgrader"
+			x: 0.0d
+			y: 7.0d
+		}
+		{
+			description: ["Golden aerclouds centrifuge into Helium-3, enchanted gravitite doubles Gravi Stars."]
+			id: "C91E657BF40B5184"
+			tasks: [
+				{ id: "F96A7435EDE6E3B7", type: "checkmark" }
+			]
+			title: "Into the Aether"
+			x: 2.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["C91E657BF40B5184"]
+			description: ["Flight from the sky itself: enchanted gravitite, a golden feather and an angel block."]
+			id: "94A96A82E6F13C29"
+			shape: "hexagon"
+			tasks: [
+				{ count: 1L, id: "D595B8907C348921", item: { Count: 1b, id: "gtapexadditions:angel_ring" }, type: "item" }
+			]
+			title: "Angel Ring"
+			x: 4.0d
+			y: 7.0d
+		}
+	]
+	title: "Heroes & Infernals"
+}

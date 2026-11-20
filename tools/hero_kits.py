@@ -245,6 +245,13 @@ with open(sys.argv[3], 'w', newline='') as f:
 print('no kit (not made in the station):', dropped)
 os.makedirs(f'{OUT}/gtapexadditions', exist_ok=True)
 json.dump(entries, open(f'{OUT}/gtapexadditions/suit_station.json', 'w'), indent=1)
+# tier-IV suit chestplates: broken down into Hero Cores for the Apex Ascension Suit
+tdir = f'{OUT}/data/gtapexadditions/tags/items'
+os.makedirs(tdir, exist_ok=True)
+t4 = sorted({a for e in entries if e['tier'] == 4 for a in e['armor'] if a.endswith('chestplate')})
+json.dump({'replace': False, 'values': [{'id': a, 'required': False} for a in t4]},
+          open(f'{tdir}/tier4_suit_chestplates.json', 'w'), indent=1)
+print('tier-IV chestplates for Hero Cores:', len(t4))
 moved = [e['recipe'] for e in entries if e['tier'] >= 2]
 js = """// priority: -95
 // Apex Ascension 1.2 - Suit Fabrication Station (GregTech Apex Additions)

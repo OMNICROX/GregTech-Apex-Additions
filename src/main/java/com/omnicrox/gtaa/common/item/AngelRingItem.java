@@ -87,7 +87,7 @@ public class AngelRingItem extends Item {
         Player player = event.player;
         if (player.tickCount % 10 != 0) return;
         boolean granted = player.getPersistentData().getBoolean(TAG);
-        boolean has = hasRing(player);
+        boolean has = hasRing(player) || ApexSuitItem.fullSet(player);
         if (has && !player.getAbilities().mayfly) {
             player.getAbilities().mayfly = true;
             player.onUpdateAbilities();

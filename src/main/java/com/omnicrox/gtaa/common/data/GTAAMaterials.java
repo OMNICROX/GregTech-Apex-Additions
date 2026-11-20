@@ -212,4 +212,10 @@ public class GTAAMaterials {
         if (SPACETIME == null || SPATIALLY_ENLARGED_FLUID == null || TACHYON_RICH_TEMPORAL_FLUID == null)
             GTAA.LOGGER.error("[GTAA] gtna is loaded but its SpaceTime/Spatial/Temporal fluids were not found");
     }
+
+    /** Purified water of a grade (GTCA's when installed); distilled water if the grade isn't there. */
+    public static net.minecraftforge.fluids.FluidStack pw(int grade, int mb) {
+        Material m = PURIFIED_WATER[grade];
+        return m == null || m.isNull() ? com.gregtechceu.gtceu.common.data.GTMaterials.DistilledWater.getFluid(mb) : m.getFluid(mb);
+    }
 }

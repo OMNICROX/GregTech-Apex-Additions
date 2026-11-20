@@ -103,7 +103,7 @@ public class GTAARecipeTypes {
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
         SUIT_FABRICATION = register("suit_fabrication", "multiblock", "Suit Fabrication")
-                .setMaxIOSize(16, 4, 0, 0).setEUIO(IO.IN)
+                .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Station tier: " + data.getInt("station_tier"))
                 .addDataInfo(data -> data.getString("suit_kit").isEmpty() ? "" : "Kit: " + data.getString("suit_kit"))
                 .addDataInfo(data -> data.getString("suit_origin").isEmpty() ? "" : "Power: " + data.getString("suit_origin"));

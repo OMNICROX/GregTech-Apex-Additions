@@ -356,7 +356,7 @@ public final class InfernalMobs {
         if (!bonus.isEmpty()) event.getDrops().add(new ItemEntity(level, mob.getX(), mob.getY(), mob.getZ(), bonus));
     }
 
-    private static ItemStack bonus(Rank rank, RandomSource r) {
+    public static ItemStack bonus(Rank rank, RandomSource r) {
         ItemStack[] pool = switch (rank) {
             case ELITE -> new ItemStack[] { new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.GOLD_INGOT, 3),
                     new ItemStack(Items.REDSTONE, 12), new ItemStack(Items.LAPIS_LAZULI, 8), new ItemStack(Items.GLOWSTONE_DUST, 8),

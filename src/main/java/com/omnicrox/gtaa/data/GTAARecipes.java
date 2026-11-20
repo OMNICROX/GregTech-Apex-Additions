@@ -86,6 +86,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 32))
                 .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 4))
+                .inputFluids(GTAAMaterials.pw(5, 4000))
                 .outputItems(GTAABlocks.FUSION_COIL_MK5.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(600).EUt(VA[UHV]).save(provider);
@@ -97,6 +98,7 @@ public class GTAARecipes {
                 .inputItems(plateDense, GTMaterials.Neutronium, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
                 .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 16))
+                .inputFluids(GTAAMaterials.pw(6, 8000))
                 .outputItems(GTAAMachines.FUSION_REACTOR[UEV].asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(1200).EUt(VA[UEV]).save(provider);
@@ -138,6 +140,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputFluids(GTMaterials.Polybenzimidazole.getFluid(L * 16))
                 .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 16))
+                .inputFluids(GTAAMaterials.pw(6, 4000))
                 .outputItems(GTAAMachines.ANTIMATTER_HATCH.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(600).EUt(VA[UEV]).save(provider);
@@ -149,6 +152,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.GRAVI_STAR, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
                 .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.pw(7, 16000))
                 .outputItems(GTAAMachines.ANTIMATTER_FORGE.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(2400).EUt(VA[UEV]).save(provider);
@@ -160,6 +164,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.EMITTER_UEV, 8)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
                 .inputFluids(GTAAMaterials.METASTABLE_OGANESSON.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.pw(7, 16000))
                 .outputItems(GTAAMachines.ANTIMATTER_GENERATOR.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(2400).EUt(VA[UEV]).save(provider);
@@ -411,6 +416,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.ROBOT_ARM_UIV, 8)
                 .inputItems(CustomTags.UIV_CIRCUITS, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.pw(5, 8000))
                 .outputItems(GTAAMachines.RESOURCE_COLLECTION_MODULE.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 2)
                 .duration(2400).EUt(VA[UIV]).save(provider);
@@ -424,6 +430,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.UXV_CIRCUITS, 16)
                 .inputItems(plateDense, GTMaterials.Neutronium, 32)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .inputFluids(GTAAMaterials.pw(5, 8000))
                 .outputItems(GTAAMachines.SPACE_DRILL_MK123.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 3)
                 .duration(4800).EUt(VA[UXV]).save(provider);
@@ -436,6 +443,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.ELECTRIC_PISTON_UIV, 16)
                 .inputItems(CustomTags.UIV_CIRCUITS, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.pw(8, 16000))
                 .outputItems(GTAAMachines.DYSON_LAUNCH_SITE.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 2)
                 .duration(2400).EUt(VA[UIV]).save(provider);
@@ -446,6 +454,7 @@ public class GTAARecipes {
                 .inputItems(GTItems.SENSOR_UHV, 2)
                 .inputItems(CustomTags.UHV_CIRCUITS, 4)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 4))
+                .inputFluids(GTAAMaterials.pw(6, 2000))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.DYSON_SWARM_MODULE.asStack(4))
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(200).EUt(VA[UEV]).save(provider);
@@ -533,6 +542,7 @@ public class GTAARecipes {
                 .inputItems(CustomTags.IV_CIRCUITS, 16)
                 .inputItems(plateDense, GTMaterials.Iridium, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64), GTMaterials.Lubricant.getFluid(4000))
+                .inputFluids(GTAAMaterials.pw(3, 8000))
                 .outputItems(GTAAMachines.COMPONENT_ASSEMBLY_LINE.asStack())
                 .duration(2400).EUt(VA[IV]).save(provider);
     }
@@ -546,6 +556,7 @@ public class GTAARecipes {
                 .inputItems(plateDense, GTMaterials.NaquadahAlloy, 16)
                 .inputItems(pipeLargeFluid, GTMaterials.Polybenzimidazole, 16)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTAAMaterials.pw(2, 8000))
                 .outputItems(GTAAMachines.MEGA_DISTILLATION_TOWER.asStack())
                 .duration(2400).EUt(VA[ZPM]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:structure_upgrader")
@@ -565,5 +576,31 @@ public class GTAARecipes {
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
                 .outputItems(GTAAMachines.EXTREME_ENTITY_CRUSHER.asStack())
                 .duration(600).EUt(VA[IV]).save(provider);
+
+        // infernal mode sigils for the crusher (not used up)
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:elite_sigil")
+                .inputItems(plate, GTMaterials.RoseGold, 4)
+                .inputItems(net.minecraft.world.item.Items.BLAZE_ROD, 8)
+                .inputItems(net.minecraft.world.item.Items.GHAST_TEAR, 4)
+                .inputItems(CustomTags.IV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Blaze.getFluid(L * 4))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.ELITE_SIGIL.asStack())
+                .duration(400).EUt(VA[IV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:ultra_sigil")
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.ELITE_SIGIL.asStack())
+                .inputItems(plate, GTMaterials.Osmiridium, 4)
+                .inputItems(net.minecraft.world.item.Items.WITHER_SKELETON_SKULL, 4)
+                .inputItems(CustomTags.LuV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Blaze.getFluid(L * 8))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.ULTRA_SIGIL.asStack())
+                .duration(600).EUt(VA[LuV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:infernal_sigil")
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.ULTRA_SIGIL.asStack())
+                .inputItems(plate, GTMaterials.Naquadria, 4)
+                .inputItems(net.minecraft.world.item.Items.NETHER_STAR, 2)
+                .inputItems(CustomTags.ZPM_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Blaze.getFluid(L * 16))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.INFERNAL_SIGIL.asStack())
+                .duration(800).EUt(VA[ZPM]).save(provider);
     }
 }

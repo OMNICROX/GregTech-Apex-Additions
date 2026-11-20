@@ -34,6 +34,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
+import com.omnicrox.gtaa.common.infernal.InfernalMobs;
+import com.omnicrox.gtaa.common.item.InfernalSigilItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,8 @@ import java.util.List;
  * Extreme Entity Crusher. Port of KubaTech's MTEExtremeEntityCrusher idea (GTNH, LGPL-3.0), simplified:
  * a spawn egg in an input bus picks the mob; every cycle the mob's loot table is rolled (with the looting level
  * of a sword in an input bus), many times in parallel. Power scales with the mob's health. Bosses are refused.
+ * Infernal mode: an Elite / Ultra / Infernal Sigil in an input bus crushes that rank of the mob instead - its
+ * health (and power) times the rank, loot rolled 3 / 5 / 9 times, and a quarter of them drop an infernal bonus.
  */
 public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachine {
 
@@ -54,6 +59,7 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
     @DescSynced private String mobName = "";
     @DescSynced private int lastParallel;
     @DescSynced private long lastEut;
+    @DescSynced private int infernalRank = -1;
     private TickableSubscription tick;
 
     public ExtremeEntityCrusherMachine(IMachineBlockEntity holder, Object... args) {
@@ -113,13 +119,17 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
         if (!(getLevel() instanceof ServerLevel level) || !isWorkingEnabled()) return;
         EntityType<?> type = null;
         ItemStack weapon = ItemStack.EMPTY;
+        InfernalMobs.Rank rank = null;
         for (NotifiableItemStackHandler inv : handlers(IO.IN)) {
             for (int i = 0; i < inv.getSlots(); i++) {
                 ItemStack s = inv.getStackInSlot(i);
                 if (type == null && s.getItem() instanceof SpawnEggItem egg) type = egg.getType(s.getTag());
                 if (weapon.isEmpty() && s.getItem() instanceof SwordItem) weapon = s;
+                if (s.getItem() instanceof InfernalSigilItem sigil && (rank == null || sigil.rank.ordinal() > rank.ordinal()))
+                    rank = sigil.rank;
             }
         }
+        infernalRank = rank == null ? -1 : rank.ordinal();
         if (type == null || isBoss(type)) {
             mobName = type == null ? "" : "Bosses can't be crushed";
             progress = 0;
@@ -132,7 +142,9 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
         }
         mobName = type.getDescription().getString();
         float health = Math.max(1, living.getMaxHealth());
-        long baseEut = Math.max(GTValues.VA[GTValues.MV], (long) (health * 64));
+        // infernal mode: the mob has the rank's health, so it costs that much more to crush
+        if (rank != null) health *= rank.mult;
+        long baseEut = Math.max(GTValues.VA[rank == null ? GTValues.MV : GTValues.HV + rank.ordinal()], (long) (health * 64));
         IEnergyContainer energy = energy();
         long budget = energy.getInputVoltage() * Math.max(1, energy.getInputAmperage());
         int parallel = (int) Math.max(1, Math.min(MAX_PARALLEL, budget / baseEut));
@@ -162,7 +174,13 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
                 .withLuck(looting)
                 .create(LootContextParamSets.ENTITY);
         List<ItemStack> drops = new ArrayList<>();
-        for (int i = 0; i < parallel; i++) table.getRandomItems(params, drops::add);
+        int rolls = rank == null ? 1 : 1 + rank.mult;
+        for (int i = 0; i < parallel * rolls; i++) table.getRandomItems(params, drops::add);
+        if (rank != null) {
+            // bonus drop for one in four infernals, like the ones that spawn in the world
+            for (int i = 0; i < parallel; i++)
+                if (level.random.nextInt(4) == 0) drops.add(InfernalMobs.bonus(rank, level.random));
+        }
         if (living instanceof Mob) {
             // equipment-free mobs only; GT doesn't simulate armor drops
         }
@@ -183,6 +201,11 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
         if (!isFormed()) return;
         textList.add(Component.literal("Mob: " + (mobName.isEmpty() ? "put a spawn egg in an input bus" : mobName))
                 .withStyle(ChatFormatting.GOLD));
+        if (infernalRank >= 0) {
+            var r = InfernalMobs.Rank.values()[infernalRank];
+            textList.add(Component.literal("Infernal mode: " + r.title + " (loot x" + (1 + r.mult) + ", bonus drops)")
+                    .withStyle(r.color));
+        }
         if (lastEut > 0) textList.add(Component.literal("Using " + FormattingUtil.formatNumbers(lastEut) + " EU/t, " +
                 lastParallel + " mobs per cycle").withStyle(ChatFormatting.AQUA));
     }

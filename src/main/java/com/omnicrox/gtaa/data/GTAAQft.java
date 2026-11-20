@@ -169,6 +169,7 @@ public final class GTAAQft {
                 .inputItems(GTItems.FIELD_GENERATOR_UHV, 8).inputItems(GTItems.EMITTER_UHV, 8)
                 .inputItems(CustomTags.UHV_CIRCUITS, 16).inputItems(plateDense, Neutronium, 16)
                 .inputFluids(SolderingAlloy.getFluid(144 * 64), Polybenzimidazole.getFluid(144 * 32))
+                .inputFluids(GTAAMaterials.pw(4, 8000))
                 .outputItems(GTAAMachines.QUANTUM_FORCE_TRANSFORMER.asStack())
                 .duration(4800).EUt(VA[UHV]).save(provider);
     }

@@ -62,6 +62,32 @@ public final class GTAACompatRecipes {
         cultivationGuide(provider);
         chaos(provider);
         angelRing(provider);
+        aether(provider);
+    }
+
+    /**
+     * Aether tie-ins: aerclouds centrifuge into helium (golden ones into helium-3, an early fusion fuel), and
+     * enchanted gravitite doubles Gravi Star output.
+     */
+    private static void aether(Consumer<FinishedRecipe> provider) {
+        CENTRIFUGE_RECIPES.recipeBuilder("gtapexadditions:aether/cold_aercloud")
+                .inputItems(S1)
+                .outputFluids(GTMaterials.Helium.getFluid(250))
+                .duration(100).EUt(VA[MV]).save(needing(provider, "aether", Map.of(S1, "aether:cold_aercloud")));
+        CENTRIFUGE_RECIPES.recipeBuilder("gtapexadditions:aether/blue_aercloud")
+                .inputItems(S1)
+                .outputFluids(GTMaterials.Helium.getFluid(500))
+                .duration(100).EUt(VA[MV]).save(needing(provider, "aether", Map.of(S1, "aether:blue_aercloud")));
+        CENTRIFUGE_RECIPES.recipeBuilder("gtapexadditions:aether/golden_aercloud")
+                .inputItems(S1)
+                .outputFluids(GTMaterials.Helium3.getFluid(100), GTMaterials.Helium.getFluid(250))
+                .duration(200).EUt(VA[HV]).save(needing(provider, "aether", Map.of(S1, "aether:golden_aercloud")));
+        AUTOCLAVE_RECIPES.recipeBuilder("gtapexadditions:aether/gravi_star")
+                .inputItems(Items.NETHER_STAR)
+                .inputItems(S1, 4)
+                .inputFluids(GTMaterials.Tritanium.getFluid(L))
+                .outputItems(GTItems.GRAVI_STAR, 2)
+                .duration(480).EUt(VA[UV]).save(needing(provider, "aether", Map.of(S1, "aether:enchanted_gravitite")));
     }
 
     /** Angel Ring: flight earned in the Aether (Enchanted Gravitite, Golden Feather) plus the ExU Angel Block. */
