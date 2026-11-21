@@ -28,6 +28,8 @@ public final class GTAANetwork {
     public static void register() {
         CHANNEL.registerMessage(0, UpgraderScreenPacket.class, UpgraderScreenPacket::write, UpgraderScreenPacket::read,
                 UpgraderScreenPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(1, AscensionPacket.class, AscensionPacket::write, AscensionPacket::read,
+                AscensionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 
     public static void send(ServerPlayer player, Object msg) {
@@ -98,6 +100,30 @@ public final class GTAANetwork {
         void handle(Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
                     () -> () -> com.omnicrox.gtaa.client.StructureUpgraderScreen.open(this)));
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Ascension Gate credits; celebrate = the gate just opened (pink glow for a minute) */
+    public record AscensionPacket(boolean celebrate, List<String> lines) {
+
+        void write(FriendlyByteBuf buf) {
+            buf.writeBoolean(celebrate);
+            buf.writeVarInt(lines.size());
+            for (String l : lines) buf.writeUtf(l);
+        }
+
+        static AscensionPacket read(FriendlyByteBuf buf) {
+            boolean c = buf.readBoolean();
+            int n = buf.readVarInt();
+            List<String> l = new ArrayList<>();
+            for (int i = 0; i < n; i++) l.add(buf.readUtf());
+            return new AscensionPacket(c, l);
+        }
+
+        void handle(Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> com.omnicrox.gtaa.client.AscensionClient.show(this)));
             ctx.get().setPacketHandled(true);
         }
     }
