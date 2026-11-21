@@ -14,6 +14,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
 import com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine;
+import com.omnicrox.gtaa.common.network.GTAANetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
@@ -162,7 +163,7 @@ public class StructureUpgrader extends Item {
             player.sendSystemMessage(Component.literal("That multiblock isn't formed yet.").withStyle(ChatFormatting.RED));
             return;
         }
-        if (com.omnicrox.gtaa.common.network.GTAANetwork.CHANNEL.isRemotePresent(player.connection.connection)) {
+        if (GTAANetwork.CHANNEL.isRemotePresent(player.connection.connection)) {
             screen(player, controller);
             return;
         }
@@ -173,54 +174,107 @@ public class StructureUpgrader extends Item {
         return net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item.asItem()).toString();
     }
 
-    /** Same choices as the chat prompt, shown in the Structure Upgrader screen. */
+    /** Tier counts of one family in this structure: tier -> blocks. */
+    private static Map<Integer, Integer> census(Family fam, Level level, Iterable<BlockPos> cache) {
+        Map<Integer, Integer> count = new LinkedHashMap<>();
+        for (BlockPos p : cache) {
+            int t = fam.tierOf(level.getBlockState(p).getBlock());
+            if (t > 0) count.merge(t, 1, Integer::sum);
+        }
+        return count;
+    }
+
+    /**
+     * The Structure Upgrader screen: a status line for the machine, then every tiered block family and every hatch
+     * you carry a better version of, each saying what it does here, whether it's needed (recipes locked) or only
+     * makes the machine faster, and what each tier changes.
+     */
     private static void screen(ServerPlayer player, IMultiController controller) {
         BlockPos cpos = controller.self().getPos();
         Level level = controller.self().getLevel();
         var cache = controller.getMultiblockState().getCache();
-        List<com.omnicrox.gtaa.common.network.GTAANetwork.Row> rows = new ArrayList<>();
+        UpgradeAdvisor advisor = new UpgradeAdvisor(controller);
+        List<GTAANetwork.Row> rows = new ArrayList<>();
+        List<String> needs = new ArrayList<>();
+
+        List<GTAANetwork.Row> familyRows = new ArrayList<>();
         for (Family fam : families()) {
-            Map<Integer, Integer> count = new LinkedHashMap<>();
-            for (BlockPos p : cache) {
-                int t = fam.tierOf(level.getBlockState(p).getBlock());
-                if (t > 0) count.merge(t, 1, Integer::sum);
-            }
+            Map<Integer, Integer> count = census(fam, level, cache);
             if (count.isEmpty()) continue;
             int total = count.values().stream().mapToInt(i -> i).sum();
             int cur = count.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
-            List<com.omnicrox.gtaa.common.network.GTAANetwork.Choice> choices = new ArrayList<>();
-            for (int t = 1; t <= fam.tiers.size(); t++) {
-                if (t == cur && count.size() == 1) continue;
+            boolean mixed = count.size() > 1;
+            UpgradeAdvisor.FamilyAdvice adv = advisor.family(fam, cur);
+            List<GTAANetwork.Choice> choices = new ArrayList<>();
+            // upgrades first (recommended one stands out), downgrades last
+            List<Integer> order = new ArrayList<>();
+            for (int t = cur + 1; t <= fam.tiers.size(); t++) order.add(t);
+            if (mixed) order.add(cur);
+            for (int t = cur - 1; t >= 1; t--) order.add(t);
+            for (int t : order) {
                 Block b = fam.block(t);
                 int have = player.isCreative() ? total : countItem(player, b.asItem());
-                choices.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice(b.getName().getString(),
+                String detail = adv.details().get(t - 1) + "\nSwaps all " + total + " blocks; you have " + have + ".";
+                choices.add(new GTAANetwork.Choice(b.getName().getString(),
                         "/gtapexadditions upgrade " + posArg(cpos) + " family " + fam.id + " " + t,
-                        "Swap all " + total + " to " + b.getName().getString() + " (you have " + have + ")",
-                        have >= total, itemId(b)));
+                        detail, have >= total, itemId(b), adv.tags().get(t - 1)));
             }
+            String verdictText = (mixed ? "Mixed tiers: the structure uses its lowest. " : "") + adv.verdictText();
+            if (adv.verdict() == UpgradeAdvisor.NEEDED) needs.add(fam.name);
             Block curBlock = fam.block(cur);
-            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row(fam.name + " \u00d7" + total,
-                    curBlock.getName().getString(), itemId(curBlock), choices));
+            familyRows.add(new GTAANetwork.Row(fam.name + " \u00d7" + total, curBlock.getName().getString(), itemId(curBlock),
+                    choices, adv.info(), adv.verdict(), verdictText));
         }
+
+        List<GTAANetwork.Row> partRows = new ArrayList<>();
         List<IMultiPart> upgradable = new ArrayList<>();
         for (IMultiPart part : controller.getParts()) {
             MachineDefinition next = nextTier(part, player);
             if (next == null) continue;
             upgradable.add(part);
             BlockPos pp = part.self().getPos();
-            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row("Hatch",
-                    part.self().getDefinition().getBlock().getName().getString(), itemId(part.self().getDefinition().getBlock()),
-                    List.of(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice("\u2192 " + next.getBlock().getName().getString(),
+            int nextTier = next.getTier();
+            UpgradeAdvisor.PartAdvice adv = advisor.part(part, nextTier);
+            if (adv.verdict() == UpgradeAdvisor.NEEDED && !needs.contains("Energy hatches")) needs.add("Energy hatches");
+            partRows.add(new GTAANetwork.Row("Hatch", part.self().getDefinition().getBlock().getName().getString(),
+                    itemId(part.self().getDefinition().getBlock()),
+                    List.of(new GTAANetwork.Choice(next.getBlock().getName().getString(),
                             "/gtapexadditions upgrade " + posArg(cpos) + " hatch " + posArg(pp),
-                            "Replace this hatch. Its contents drop on the ground.", true, itemId(next.getBlock())))));
+                            adv.detail(), true, itemId(next.getBlock()), adv.tag())),
+                    adv.info(), adv.verdict(), adv.verdictText()));
         }
+
+        // status first: what this machine can't run right now and why
+        List<String> status = new ArrayList<>();
+        int locked = advisor.powerLocked();
+        if (advisor.recipeCount() > 0) status.add(advisor.recipeCount() + " recipes in this machine" +
+                (advisor.maxVoltage() > 0 ? "; your energy hatches give up to " +
+                        com.gregtechceu.gtceu.api.GTValues.VN[voltageTier(advisor.maxVoltage())] + "." : "."));
+        if (locked > 0) status.add(locked + " of them need more power than that.");
+        String verdict = needs.isEmpty() ? "Nothing here is required. Everything listed only makes it faster or bigger."
+                : "To unlock locked recipes: " + String.join(", ", needs) + ".";
+        rows.add(new GTAANetwork.Row("Status", "", "", List.of(), status,
+                needs.isEmpty() ? UpgradeAdvisor.OPTIONAL : UpgradeAdvisor.NEEDED, verdict));
+        familyRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
+        partRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
+        rows.addAll(familyRows);
+        rows.addAll(partRows);
         if (upgradable.size() > 1)
-            rows.add(new com.omnicrox.gtaa.common.network.GTAANetwork.Row("All hatches", upgradable.size() + " upgradable", "",
-                    List.of(new com.omnicrox.gtaa.common.network.GTAANetwork.Choice("Upgrade all " + upgradable.size(),
-                            "/gtapexadditions upgrade " + posArg(cpos) + " hatches", "Replace every listed hatch", true, ""))));
-        com.omnicrox.gtaa.common.network.GTAANetwork.send(player, new com.omnicrox.gtaa.common.network.GTAANetwork.UpgraderScreenPacket(
+            rows.add(new GTAANetwork.Row("All hatches", upgradable.size() + " upgradable", "",
+                    List.of(new GTAANetwork.Choice("Upgrade all " + upgradable.size(),
+                            "/gtapexadditions upgrade " + posArg(cpos) + " hatches",
+                            "Replace every listed hatch with the best one you carry. Old hatches and their contents drop on the ground.",
+                            true, "", "")),
+                    List.of(), UpgradeAdvisor.OPTIONAL, ""));
+        GTAANetwork.send(player, new GTAANetwork.UpgraderScreenPacket(
                 controller.self().getDefinition().getBlock().getName().getString(), rows,
-                "Blocks come from your inventory; old ones go back to it."));
+                "Hover a button for details. Blocks come from your inventory; old ones go back to it."));
+    }
+
+    private static int voltageTier(long v) {
+        for (int t = 0; t < com.gregtechceu.gtceu.api.GTValues.V.length; t++)
+            if (com.gregtechceu.gtceu.api.GTValues.V[t] >= v) return t;
+        return com.gregtechceu.gtceu.api.GTValues.MAX;
     }
 
     private static void chatPrompt(ServerPlayer player, IMultiController controller) {
@@ -251,6 +305,9 @@ public class StructureUpgrader extends Item {
                         have >= total ? ChatFormatting.GREEN : ChatFormatting.GRAY)).append(" ");
             }
             player.sendSystemMessage(line);
+            UpgradeAdvisor.FamilyAdvice adv = new UpgradeAdvisor(controller).family(fam, cur);
+            player.sendSystemMessage(Component.literal("   " + adv.verdictText()).withStyle(
+                    adv.verdict() == UpgradeAdvisor.NEEDED ? ChatFormatting.RED : ChatFormatting.DARK_GRAY));
         }
         List<IMultiPart> upgradable = new ArrayList<>();
         for (IMultiPart part : controller.getParts()) {
@@ -295,7 +352,7 @@ public class StructureUpgrader extends Item {
         if (!player.getInventory().add(stack)) player.drop(stack, false);
     }
 
-    /** Next-higher tier definition of the same hatch type that the player carries (or any, in creative). */
+    /** The next tier up of the same hatch type that the player carries (creative: simply the next tier). */
     @Nullable
     private static MachineDefinition nextTier(IMultiPart part, Player player) {
         if (!(part instanceof ITieredMachine tiered)) return null;
@@ -304,7 +361,7 @@ public class StructureUpgrader extends Item {
         String cur = GTValues.VN[tiered.getTier()].toLowerCase(Locale.ROOT) + "_";
         if (!path.startsWith(cur)) return null;
         String rest = path.substring(cur.length());
-        for (int t = GTValues.MAX; t > tiered.getTier(); t--) {
+        for (int t = tiered.getTier() + 1; t <= GTValues.MAX; t++) {
             MachineDefinition def = GTRegistries.MACHINES.get(new ResourceLocation(id.getNamespace(),
                     GTValues.VN[t].toLowerCase(Locale.ROOT) + "_" + rest));
             if (def == null) continue;
