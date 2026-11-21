@@ -259,7 +259,7 @@ public class GTAAMachines {
                     Component.literal("\u00a77A cycle lasts 1 tick; \u00a76inputs\u00a77 are automatically checked every 5 seconds"),
                     Component.literal("\u00a77An imbalance between \u00a7bAntimatter\u00a77 and \u00a76Matter\u00a77 \u00a7cdecreases efficiency!"),
                     Component.literal("\u00a77Efficiency formula: Min(\u00a7bAntimatter\u00a77/\u00a76Matter\u00a77, \u00a76Matter\u00a77/\u00a7bAntimatter\u00a77)"),
-                    Component.literal("\u00a77Any excess EU generated will be \u00a7cvoided!"),
+                    Component.literal("\u00a77Each burst is released into the hatches over the next 5 s; what they can't take by then is \u00a7cvoided!"),
                     Component.literal("\u00a77Cannot produce more than \u00a7a9.22e18\u00a77 EU per cycle"),
                     SEPARATOR,
                     Component.literal("\u00a77Energy production formula: \u00a7aA\u00a77 \u00d7 (\u00a7bAntimatter\u00a77 ^ \u00a76E\u00a77) EU/Cycle"),

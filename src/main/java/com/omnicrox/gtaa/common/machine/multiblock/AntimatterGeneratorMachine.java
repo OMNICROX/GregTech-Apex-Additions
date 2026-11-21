@@ -51,6 +51,10 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
     // last cycle, for the UI (the SLAM works in 5-second bursts, so these stay up between them)
     @Persisted @DescSynced private long euLastCycle;
     @Persisted @DescSynced private long euVoidedLastCycle;
+    /** EU of the current burst still waiting to go into the hatches (released over the 5 s, not in one tick) */
+    @Persisted private long pending;
+    @Persisted @DescSynced private long sentLastCycle;
+    @Persisted @DescSynced private long sentThisCycle;
     @Persisted @DescSynced private long antimatterLastCycle;
     @Persisted @DescSynced private long matterLastCycle;
     @Persisted @DescSynced private String matterNameLastCycle = "";
@@ -127,8 +131,24 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         long t = getOffsetTimer();
         ticksToCycle = (int) (CYCLE_TICKS - t % CYCLE_TICKS);
         if (t % 20 == 0) refreshLive();
+        if (pending > 0) release();
         if (!getRecipeLogic().isWorkingEnabled()) return;
         if (t % CYCLE_TICKS == 0) cycle();
+    }
+
+    /** push as much of the burst as the hatches take this tick; they empty themselves every tick, so it spreads out */
+    private void release() {
+        List<IEnergyContainer> outs = outputs();
+        long left = pending;
+        for (int i = 0; i < outs.size() && left > 0; i++) {
+            IEnergyContainer c = outs.get(i);
+            long share = left / (outs.size() - i) + (left % (outs.size() - i) > 0 ? 1 : 0);
+            long space = c.getEnergyCapacity() - c.getEnergyStored();
+            long put = Math.min(space, share);
+            if (put > 0) left -= c.changeEnergy(put);
+        }
+        sentThisCycle = sat(sentThisCycle, pending - left);
+        pending = left;
     }
 
     private static Fluid antimatterFluid() {
@@ -193,6 +213,16 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
     private void cycle() {
         Fluid am = antimatterFluid();
         if (am == null) return;
+        // whatever of the last burst the hatches couldn't take in 5 s is gone
+        long undelivered = pending;
+        pending = 0;
+        sentLastCycle = sentThisCycle;
+        sentThisCycle = 0;
+        if (undelivered > 0) {
+            euVoidedLastCycle = undelivered;
+            problem = "The hatches couldn't take a whole burst in 5 s: " + FormattingUtil.formatNumbers(undelivered) +
+                    " EU voided. Add more / bigger dynamo or laser hatches";
+        }
         List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
         if (inputs.isEmpty()) return; // nothing in: keep showing the last burst
         Map<Fluid, Long> fluids = byFluid(inputs);
@@ -207,7 +237,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         matterLastCycle = matterAmount;
         matterNameLastCycle = name(matter);
         euLastCycle = 0;
-        euVoidedLastCycle = 0;
+        if (undelivered == 0) euVoidedLastCycle = 0;
         boostLastCycle = 0;
 
         if (antimatter <= 0) fail("No antimatter: everything in the hatches was voided");
@@ -263,16 +293,9 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
                 return;
             }
         }
-        long left = eu;
-        for (int i = 0; i < outs.size() && left > 0; i++) {
-            IEnergyContainer c = outs.get(i);
-            long share = left / (outs.size() - i) + (left % (outs.size() - i) > 0 ? 1 : 0);
-            long space = c.getEnergyCapacity() - c.getEnergyStored();
-            long put = Math.min(space, share);
-            if (put > 0) left -= c.changeEnergy(put);
-        }
-        euVoidedLastCycle = Math.max(0, left);
-        if (left > 0) problem = "Hatches were full: " + FormattingUtil.formatNumbers(left) + " EU voided. Add more / bigger hatches";
+        // released into the hatches over the next 5 s (see release())
+        pending = eu;
+        release();
     }
 
     private void updateEfficiency(float value) {
@@ -316,6 +339,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
                     if (boostLastCycle > 0) t.add(line(" Boost: ", "x^" + boostLastCycle, ChatFormatting.YELLOW));
                     t.add(line(" Efficiency: ", Math.round(efficiency * 100) + "% (avg " + Math.round(avgEfficiency * 100) + "%)",
                             efficiency >= 0.999f ? ChatFormatting.GREEN : ChatFormatting.RED));
+                    if (!wireless) t.add(line(" Delivered: ", eu(sentThisCycle) + " (" + FormattingUtil.formatNumbers(sentThisCycle / CYCLE_TICKS) + " EU/t)", ChatFormatting.GREEN));
                     if (euVoidedLastCycle > 0) t.add(line(" Voided: ", eu(euVoidedLastCycle), ChatFormatting.RED));
 
                     t.add(Component.literal("Inputs").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
@@ -331,7 +355,8 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
                             wireless ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.WHITE));
                     t.add(line(" Hatches: ", hatchCount + ", hold " + eu(hatchCapacity) + " (" + eu(hatchStored) + " stored)",
                             ChatFormatting.WHITE));
-                    if (euLastCycle > hatchCapacity && hatchCount > 0)
+                    if (!wireless && pending > 0) t.add(line(" Releasing: ", eu(pending) + " still to go", ChatFormatting.YELLOW));
+                    if (wireless && euLastCycle > hatchCapacity && hatchCount > 0)
                         t.add(Component.literal(" Last burst was bigger than the hatches can hold").withStyle(ChatFormatting.RED));
                     if (wireless && !wirelessStored.isEmpty()) t.add(line(" Network: ", wirelessStored + " EU", ChatFormatting.LIGHT_PURPLE));
                     t.add(Component.literal(" Screwdriver the controller: switch hatches / wireless").withStyle(ChatFormatting.DARK_GRAY));
