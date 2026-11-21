@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-/** GTAA's packets: the Structure Upgrader screen. */
+/** GTAA's packets: the Structure Upgrader screen, Ascension credits, infernal mob data. */
 public final class GTAANetwork {
 
     private GTAANetwork() {}
@@ -30,6 +30,8 @@ public final class GTAANetwork {
                 UpgraderScreenPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(1, AscensionPacket.class, AscensionPacket::write, AscensionPacket::read,
                 AscensionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(2, InfernalPacket.class, InfernalPacket::write, InfernalPacket::read,
+                InfernalPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 
     public static void send(ServerPlayer player, Object msg) {
@@ -124,6 +126,32 @@ public final class GTAANetwork {
         void handle(Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
                     () -> () -> com.omnicrox.gtaa.client.AscensionClient.show(this)));
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** An infernal mob's modifier names and title words, for the boss bar and particles */
+    public record InfernalPacket(int entityId, List<String> mods, String prefix, String suffix) {
+
+        void write(FriendlyByteBuf buf) {
+            buf.writeVarInt(entityId);
+            buf.writeVarInt(mods.size());
+            for (String m : mods) buf.writeUtf(m);
+            buf.writeUtf(prefix);
+            buf.writeUtf(suffix);
+        }
+
+        static InfernalPacket read(FriendlyByteBuf buf) {
+            int id = buf.readVarInt();
+            int n = buf.readVarInt();
+            List<String> m = new ArrayList<>();
+            for (int i = 0; i < n; i++) m.add(buf.readUtf());
+            return new InfernalPacket(id, m, buf.readUtf(), buf.readUtf());
+        }
+
+        void handle(Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> com.omnicrox.gtaa.client.InfernalClient.receive(this)));
             ctx.get().setPacketHandled(true);
         }
     }

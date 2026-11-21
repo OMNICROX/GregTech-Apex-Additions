@@ -49,8 +49,12 @@ the Aether) only get their recipes when that mod is installed.
 - **Apex Ascension Suit**: the UEV capstone (it is the gate's UEV chevron). Twelve Hero Cores (broken-down tier IV hero suits) plus UEV parts and
   Grade 8 purified water. Full set: flight, regeneration, night vision, immunity to fire / falls / drowning /
   wither / poison, +50% damage to infernal mobs.
-- **Infernal mobs**: hostile spawns can be Elite, Ultra or Infernal, with modifiers and better loot. Configurable
-  in `gtapexadditions-infernal.toml`.
+- **Infernal mobs** (GT New Horizons parity): 1 in 20 hostile spawns rolls 2-5 of the 27 classic modifiers
+  (1 in 10 of those 5-10, 1 in 7 of those 8-15); blazes, ghasts, magma cubes and witches always do. Rank by count:
+  Rare / Ultra / Infernal. Health = base x modifiers x 1.8. Look at one for its boss bar (title + modifier list);
+  they trail spell particles and drop 25 xp plus one enchanted item per 5 modifiers. Ender, Lifesteal, Ninja,
+  Rust and Sticky are off like in GTNH. Config: `gtapexadditions-infernal.toml`. Ops:
+  `/gtapexadditions infernal rare|ultra|infernal` or `... infernal mods Choke Storm Vengeance`.
 - **GT crops**: 125 CropsNH-style GregTech material crops (Mystical Customization files in `tools/mysticalcustomization`).
   Seeds come only from the **Seed Synthesizer** (LV-UHV): 32 blocks of the material at the crop's tier, halving
   per Synthesizer tier above (floor 1/8). 24 essence -> 1 dust in a GT extractor.
