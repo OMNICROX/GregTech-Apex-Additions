@@ -83,7 +83,7 @@ ServerEvents.recipes(event => {
   event.remove({ output: 'minecraft:lava_bucket', mod: 'mysticalagriculture' })
   if (Item.exists('mysticalagriculture:fire_essence')) {
     try {
-      event.recipes.gtceu.fluid_extractor('apex:lava/fire_essence')
+      event.recipes.gtceu.extractor('apex:lava/fire_essence')
         .itemInputs('mysticalagriculture:fire_essence')
         .outputFluids('minecraft:lava 50')
         .duration(80).EUt(30)
@@ -92,5 +92,5 @@ ServerEvents.recipes(event => {
   // Cyclic Melter: obsidian + stone -> 1000 lava is an infinite loop with a GT Rock Breaker making obsidian
   event.remove({ id: 'cyclic:melter/melter_obslava' })
   event.remove({ id: 'cyclic:melter/melter_obslava1' })
-  console.info('[APEX-1.2] lava sources limited (MA fire essence -> 50 mB in extractor; Cyclic obsidian melting removed)')
+  console.info('[APEX-1.2] lava sources limited (MA fire essence -> 50 mB in a GT extractor; Cyclic obsidian melting removed)')
 })
