@@ -1,0 +1,18 @@
+{
+  "name": "Enriched Naquadah",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:5",
+  "ingredient": {
+    "tag": "forge:ingots/enriched_naquadah"
+  },
+  "color": "#3C3C3C",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_ingot",
+    "flower": "mysticalagriculture:block/flower_ingot"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

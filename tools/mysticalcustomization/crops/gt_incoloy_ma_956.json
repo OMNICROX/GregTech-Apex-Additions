@@ -1,0 +1,18 @@
+{
+  "name": "Incoloy MA-956",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:4",
+  "ingredient": {
+    "tag": "forge:ingots/incoloy_ma_956"
+  },
+  "color": "#2D9B66",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_ingot",
+    "flower": "mysticalagriculture:block/flower_ingot"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

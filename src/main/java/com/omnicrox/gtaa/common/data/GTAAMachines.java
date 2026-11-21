@@ -132,6 +132,29 @@ public class GTAAMachines {
                     Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"))
             .register();
 
+    /** Seed Hatch: the Mystical Cultivation Array only reads seeds from these. */
+    public static final PartAbility SEED_HATCH_ABILITY = new PartAbility("gtapexadditions_seed_hatch");
+
+    public static final MachineDefinition[] SEED_HATCH = com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerTieredMachines(
+            REGISTRATE, "seed_hatch", com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine::new,
+            (tier, builder) -> builder
+                    .langValue(VNF[tier] + "\u00a7r Seed Hatch")
+                    .rotationState(RotationState.ALL)
+                    .abilities(SEED_HATCH_ABILITY)
+                    .colorOverlayTieredHullModel(com.gregtechceu.gtceu.common.data.models.GTMachineModels.OVERLAY_ITEM_HATCH_INPUT,
+                            null, "overlay_pipe_in_emissive")
+                    .tooltips(Component.literal("\u00a77Seeds for the \u00a7dMystical Cultivation Array\u00a77, put in by hand"),
+                            Component.literal("\u00a77Holds \u00a7e" + com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine.slots(tier) +
+                                    "\u00a77 seed types, up to \u00a7e256\u00a77 seeds each"),
+                            Component.literal("\u00a78Pipes, hoppers and ME can't insert or take seeds"))
+                    .register(),
+            LV, MV, HV, EV, IV, LuV);
+
+    public static final MachineDefinition[] SEED_SYNTHESIZER = com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerSimpleMachines(
+            REGISTRATE, "seed_synthesizer", GTAARecipeTypes.SEED_SYNTHESIS,
+            com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.defaultTankSizeFunction, true,
+            LV, MV, HV, EV, IV, LuV, ZPM, UV, UHV);
+
     private static final Component SEPARATOR = Component.literal("\u00a78\u00a7m                                                            ");
 
     private static Block naquadriaFrame() {
@@ -1096,7 +1119,8 @@ public class GTAAMachines {
             .recipeType(GTAARecipeTypes.CULTIVATION)
             .tooltips(
                     Component.literal("\u00a77Machine Type: \u00a7eCrop Farm"),
-                    Component.literal("\u00a77Put seeds in an input bus: each seed is one crop and is never used up"),
+                    Component.literal("\u00a77Put seeds in its \u00a7eSeed Hatches\u00a77 (up to 2): each seed is one crop and is never used up"),
+                    Component.literal("\u00a77Output bus spot also takes an \u00a7bME Output Bus"),
                     Component.literal("\u00a77Works with \u00a7dMystical Agriculture\u00a77 seeds and any normal crop"),
                     Component.literal("\u00a77Every harvest gives \u00a7e4x\u00a77 a normal crop's drops on dirt or farmland"),
                     Component.literal("\u00a77Mystical Agriculture farmland raises it: Inferium 5x, Prudentium 6x, Tertium 7x,"),
@@ -1113,7 +1137,7 @@ public class GTAAMachines {
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("aaa~aaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa")
+                        .aisle("EsS~OWe", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaamaaa")
                         .aisle("aaaaaaa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "awdddwa", "aaaaaaa")
                         .aisle("fgggggf", "g     g", "g     g", "g     g", "f     f", "g     g", "g     g", "g     g", "fgggggf")
                         .aisle("fgggggf", "g     g", "g     g", "g     g", "f     f", "g     g", "g     g", "g     g", "fgggggf")
@@ -1121,11 +1145,16 @@ public class GTAAMachines {
                         .aisle(" fgggf ", " g   g ", " g   g ", " g   g ", " flllf ", " g   g ", " g   g ", " g   g ", " fgggf ")
                         .aisle("  fff  ", "  ggg  ", "  ggg  ", "  ggg  ", "  fff  ", "  ggg  ", "  ggg  ", "  ggg  ", "  fff  ")
                         .where('~', controller(blocks(definition.get())))
-                        .where('a', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        // fixed hatch spots (front row: Energy, Seed, Seed/casing, controller, Output, Water,
+                        // Energy/casing; maintenance at the back), casing everywhere else
+                        .where('a', casing)
+                        .where('E', abilities(PartAbility.INPUT_ENERGY))
+                        .where('e', casing.or(abilities(PartAbility.INPUT_ENERGY)))
+                        .where('s', abilities(SEED_HATCH_ABILITY))
+                        .where('S', casing.or(abilities(SEED_HATCH_ABILITY)))
+                        .where('O', abilities(PartAbility.EXPORT_ITEMS))
+                        .where('W', abilities(PartAbility.IMPORT_FLUIDS))
+                        .where('m', casing.or(abilities(PartAbility.MAINTENANCE)))
                         .where('g', glass)
                         .where('f', frames(GTMaterials.StainlessSteel))
                         .where('l', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP))

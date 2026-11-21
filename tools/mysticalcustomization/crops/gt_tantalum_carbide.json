@@ -1,0 +1,18 @@
+{
+  "name": "Tantalum Carbide",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:4",
+  "ingredient": {
+    "tag": "forge:ingots/tantalum_carbide"
+  },
+  "color": "#999900",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_ingot",
+    "flower": "mysticalagriculture:block/flower_ingot"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

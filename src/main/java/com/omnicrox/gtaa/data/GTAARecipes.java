@@ -23,6 +23,7 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 public class GTAARecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
+        seedMachines(provider);
         fusion(provider);
         antimatter(provider);
         spaceElevator(provider);
@@ -40,6 +41,37 @@ public class GTAARecipes {
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
+    }
+
+    /** Seed Hatch (LV-LuV) and Seed Synthesizer (LV-UHV) for the Mystical Cultivation Array's GT seeds. */
+    private static void seedMachines(Consumer<FinishedRecipe> provider) {
+        var fieldGens = new com.tterrag.registrate.util.entry.ItemEntry<?>[] { null, GTItems.FIELD_GENERATOR_LV,
+                GTItems.FIELD_GENERATOR_MV, GTItems.FIELD_GENERATOR_HV, GTItems.FIELD_GENERATOR_EV, GTItems.FIELD_GENERATOR_IV,
+                GTItems.FIELD_GENERATOR_LuV, GTItems.FIELD_GENERATOR_ZPM, GTItems.FIELD_GENERATOR_UV, GTItems.FIELD_GENERATOR_UHV };
+        var arms = new com.tterrag.registrate.util.entry.ItemEntry<?>[] { null, GTItems.ROBOT_ARM_LV, GTItems.ROBOT_ARM_MV,
+                GTItems.ROBOT_ARM_HV, GTItems.ROBOT_ARM_EV, GTItems.ROBOT_ARM_IV, GTItems.ROBOT_ARM_LuV, GTItems.ROBOT_ARM_ZPM,
+                GTItems.ROBOT_ARM_UV, GTItems.ROBOT_ARM_UHV };
+        for (var def : GTAAMachines.SEED_HATCH) {
+            if (def == null) continue;
+            int t = def.getTier();
+            var b = ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:seed_hatch_" + VN[t].toLowerCase())
+                    .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.ITEM_IMPORT_BUS[t].asStack())
+                    .inputItems(CustomTags.CIRCUITS_ARRAY[t], 2)
+                    .inputItems(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.WHEAT_SEEDS, 16));
+            if (t > LV) b.inputItems(GTAAMachines.SEED_HATCH[t - 1].asStack());
+            b.outputItems(def.asStack()).duration(200).EUt(VA[t]).save(provider);
+        }
+        for (var def : GTAAMachines.SEED_SYNTHESIZER) {
+            if (def == null) continue;
+            int t = def.getTier();
+            ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:seed_synthesizer_" + VN[t].toLowerCase())
+                    .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[t].asStack())
+                    .inputItems(fieldGens[t].asStack())
+                    .inputItems(arms[t].asStack(), 2)
+                    .inputItems(CustomTags.CIRCUITS_ARRAY[t], 4)
+                    .inputItems(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.WHEAT_SEEDS, 32))
+                    .outputItems(def.asStack()).duration(400).EUt(VA[t]).save(provider);
+        }
     }
 
     private static void fusion(Consumer<FinishedRecipe> provider) {

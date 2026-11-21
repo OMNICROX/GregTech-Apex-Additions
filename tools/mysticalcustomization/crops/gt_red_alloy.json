@@ -1,0 +1,18 @@
+{
+  "name": "Red Alloy",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:ingots/red_alloy"
+  },
+  "color": "#C55252",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_ingot",
+    "flower": "mysticalagriculture:block/flower_ingot"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

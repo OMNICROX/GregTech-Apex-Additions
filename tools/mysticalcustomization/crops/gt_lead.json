@@ -1,0 +1,18 @@
+{
+  "name": "Lead",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:ingots/lead"
+  },
+  "color": "#7E6F82",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_ingot",
+    "flower": "mysticalagriculture:block/flower_ingot"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

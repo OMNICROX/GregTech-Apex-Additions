@@ -57,6 +57,8 @@ final class UpgradeAdvisor {
                 } catch (Exception ignored) {}
             }
         }
+        // the Cultivation Array's recipes are only a JEI guide; it farms through its own loop
+        if (controller instanceof MysticalCultivationArrayMachine) recipes.clear();
         maxVoltage = controller instanceof WorkableElectricMultiblockMachine w ? w.getMaxVoltage() : 0;
         List<ICoilType> coils = new ArrayList<>(GTCEuAPI.HEATING_COILS.keySet());
         coils.sort(Comparator.comparingInt(ICoilType::getTier));
@@ -305,7 +307,18 @@ final class UpgradeAdvisor {
             info.add("Energy input: sets the voltage the machine runs at. Recipes above it can't start; recipes below it overclock (2× speed for 4× power per tier).");
             detail = "Up to " + GTValues.V[nextTier] + " EU/t per amp (" + vn(nextTier) + ")" +
                     (gain > 0 ? "; with all your energy hatches at this tier, " + gain + " more recipes can run" : "");
-            if (locked > 0) {
+            if (controller instanceof MysticalCultivationArrayMachine) {
+                long v = 0;
+                if (controller.self() instanceof WorkableElectricMultiblockMachine w && w.getEnergyContainer() != null)
+                    v = w.getEnergyContainer().getInputVoltage();
+                info.set(0, "Energy input: the array runs at this voltage (capped by its glass). Each tier harvests twice as fast, up to LuV, and doubles the crops it can grow.");
+                if (v < GTValues.V[GTValues.LV]) {
+                    verdict = NEEDED;
+                    verdictText = "The array needs at least an LV energy hatch to run.";
+                } else {
+                    verdictText = "Optional: faster harvests and room for more crops.";
+                }
+            } else if (locked > 0) {
                 verdict = NEEDED;
                 verdictText = locked + " recipes need more power than your hatches give" +
                         (gain > 0 ? "; this tier unlocks " + gain + " of them (upgrade every energy hatch)." : ".");
@@ -316,6 +329,19 @@ final class UpgradeAdvisor {
             info.add("Energy output: how much EU/t this generator can push out.");
             detail = "Up to " + GTValues.V[nextTier] + " EU/t per amp";
             verdictText = "Only needed if the generator makes more than the hatch can carry.";
+        } else if (path.contains("seed_hatch")) {
+            int now = com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine.slots(tier);
+            int next = com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine.slots(nextTier);
+            boolean full = part instanceof com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine h && h.census()[1] >= now;
+            info.add("Seed Hatch: how many different crops you can plant (256 seeds per type).");
+            detail = now + " \u2192 " + next + " seed types";
+            tag += "  +" + (next - now);
+            if (full) {
+                verdict = NEEDED;
+                verdictText = "This hatch is full: every slot has a crop in it.";
+            } else {
+                verdictText = "Not needed: this hatch still has free slots.";
+            }
         } else if (path.contains("input_bus") || path.contains("output_bus")) {
             int now = (1 + Math.min(9, tier)) * (1 + Math.min(9, tier));
             int next = (1 + Math.min(9, nextTier)) * (1 + Math.min(9, nextTier));

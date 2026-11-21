@@ -1,0 +1,83 @@
+{
+  "mysticalagradditions:nether_star": {
+    "enabled": false
+  },
+  "mysticalagradditions:dragon_egg": {
+    "enabled": false
+  },
+  "mysticalagradditions:neutronium": {
+    "enabled": false
+  },
+  "mysticalagriculture:titanium": {
+    "enabled": false
+  },
+  "mysticalagriculture:tungsten": {
+    "enabled": false
+  },
+  "mysticalagriculture:iridium": {
+    "enabled": false
+  },
+  "mysticalagriculture:platinum": {
+    "enabled": false
+  },
+  "mysticalagriculture:chrome": {
+    "enabled": false
+  },
+  "mysticalagriculture:osmium": {
+    "enabled": false
+  },
+  "mysticalagriculture:uranium": {
+    "enabled": false
+  },
+  "mysticalagriculture:aluminum": {
+    "enabled": false
+  },
+  "mysticalagriculture:tin": {
+    "enabled": false
+  },
+  "mysticalagriculture:lead": {
+    "enabled": false
+  },
+  "mysticalagriculture:silver": {
+    "enabled": false
+  },
+  "mysticalagriculture:nickel": {
+    "enabled": false
+  },
+  "mysticalagriculture:zinc": {
+    "enabled": false
+  },
+  "mysticalagriculture:cobalt": {
+    "enabled": false
+  },
+  "mysticalagriculture:bronze": {
+    "enabled": false
+  },
+  "mysticalagriculture:brass": {
+    "enabled": false
+  },
+  "mysticalagriculture:invar": {
+    "enabled": false
+  },
+  "mysticalagriculture:electrum": {
+    "enabled": false
+  },
+  "mysticalagriculture:steel": {
+    "enabled": false
+  },
+  "mysticalagriculture:ruby": {
+    "enabled": false
+  },
+  "mysticalagriculture:sapphire": {
+    "enabled": false
+  },
+  "mysticalagriculture:apatite": {
+    "enabled": false
+  },
+  "mysticalagriculture:silicon": {
+    "enabled": false
+  },
+  "mysticalagriculture:constantan": {
+    "enabled": false
+  }
+}

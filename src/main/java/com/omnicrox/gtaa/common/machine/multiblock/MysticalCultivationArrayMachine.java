@@ -42,7 +42,7 @@ import java.util.Map;
  * Mystical Cultivation Array. Based on KubaTech's Extreme Industrial Greenhouse (GTNH, LGPL-3.0), made for
  * Mystical Agriculture (works with any crop seed):
  * <ul>
- * <li>seeds in input buses are planted (one crop per seed, not used up); each harvest gives 4x a normal crop's
+ * <li>seeds in its Seed Hatches (up to 2) are planted (one crop per seed, not used up); each harvest gives 4x a normal crop's
  * drops</li>
  * <li>a harvest every 5 s at LV, twice as fast per voltage tier, down to 0.25 s at LuV</li>
  * <li>room for 64 crops at LV, doubling per tier (max 8192)</li>
@@ -58,7 +58,7 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
     private static final int SAMPLES = 64;
 
     @Persisted private int progress;
-    @DescSynced private int crops, types, cycle, tier;
+    @DescSynced private int crops, types, cycle, tier, seedsHeld, seedTypes, seedSlots;
     @DescSynced private long lastEut;
     @DescSynced private String status = "";
     private TickableSubscription tick;
@@ -199,6 +199,19 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
         return out;
     }
 
+    /** seeds only come from Seed Hatches */
+    private List<NotifiableItemStackHandler> seedInventories() {
+        List<NotifiableItemStackHandler> out = new ArrayList<>();
+        int slots = 0;
+        for (IMultiPart part : getParts())
+            if (part instanceof com.omnicrox.gtaa.common.machine.part.SeedHatchPartMachine hatch) {
+                out.add(hatch.getInventory());
+                slots += hatch.getInventory().getSlots();
+            }
+        seedSlots = slots;
+        return out;
+    }
+
     private List<NotifiableFluidTank> tanks() {
         List<NotifiableFluidTank> out = new ArrayList<>();
         for (IMultiPart part : getParts())
@@ -275,7 +288,14 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
         Map<Item, Integer> planted = new LinkedHashMap<>();
         Map<Item, CropBlock> blocks = new HashMap<>();
         int total = 0;
-        for (NotifiableItemStackHandler inv : items(IO.IN)) {
+        int held = 0, heldTypes = 0;
+        for (NotifiableItemStackHandler inv : seedInventories()) {
+            for (int i = 0; i < inv.getSlots(); i++) {
+                ItemStack s = inv.getStackInSlot(i);
+                if (crop(s) == null) continue;
+                held += s.getCount();
+                heldTypes++;
+            }
             for (int i = 0; i < inv.getSlots() && total < room; i++) {
                 ItemStack s = inv.getStackInSlot(i);
                 CropBlock c = crop(s);
@@ -288,8 +308,10 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
         }
         crops = total;
         types = planted.size();
+        seedsHeld = held;
+        seedTypes = heldTypes;
         if (total == 0) {
-            status = "Put seeds in an input bus";
+            status = "Put seeds in a Seed Hatch";
             lastEut = 0;
             return;
         }
@@ -342,8 +364,10 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        textList.add(Component.literal("Crops: " + crops + " / " + maxCrops(tier) + " (" + types + " kinds)")
+        textList.add(Component.literal("Crops growing: " + crops + " / " + maxCrops(tier) + " (" + types + " kinds)")
                 .withStyle(ChatFormatting.GREEN));
+        textList.add(Component.literal("Seed Hatches: " + seedTypes + " / " + seedSlots + " types, " + seedsHeld + " seeds")
+                .withStyle(seedSlots > 0 && seedTypes >= seedSlots ? ChatFormatting.YELLOW : ChatFormatting.GRAY));
         textList.add(Component.literal("Harvest every " + cycle / 20.0 + " s, " + soilYield() + "x yield")
                 .withStyle(ChatFormatting.GREEN));
         if (lastEut > 0) textList.add(Component.literal("Using " + FormattingUtil.formatNumbers(lastEut) + " EU/t")

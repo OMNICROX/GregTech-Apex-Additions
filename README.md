@@ -29,7 +29,7 @@ the Aether) only get their recipes when that mod is installed.
 | Mega Distillation Tower | ZPM | |
 | Extreme Entity Crusher | IV | Mob farm from a spawn egg; Elite / Ultra / Infernal Sigils crush infernal ranks for 3x / 5x / 9x loot |
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
-| Mystical Cultivation Array | EV+ | Needs Mystical Agriculture; tiered soil and glass, every enabled crop |
+| Mystical Cultivation Array | EV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |
 
 ## Systems and items
@@ -41,6 +41,9 @@ the Aether) only get their recipes when that mod is installed.
   wither / poison, +50% damage to infernal mobs.
 - **Infernal mobs**: hostile spawns can be Elite, Ultra or Infernal, with modifiers and better loot. Configurable
   in `gtapexadditions-infernal.toml`.
+- **GT crops**: 125 CropsNH-style GregTech material crops (Mystical Customization files in `tools/mysticalcustomization`).
+  Seeds come only from the **Seed Synthesizer** (LV-UHV): 32 blocks of the material at the crop's tier, halving
+  per Synthesizer tier above (floor 1/8). 24 essence -> 1 dust in a GT extractor.
 - **Structure Upgrader**: shift-use a formed controller to swap every coil or tiered casing at once, and hatches
   you carry better versions of.
 - **Angel Ring**: flight from the Aether (enchanted gravitite, golden feather) and an Extra Utilities angel block.

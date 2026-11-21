@@ -11,7 +11,7 @@ ServerEvents.recipes(event => {
     ['lightning_dragonsteel', 'iceandfire:dragonsteel_lightning_ingot', 1, true]
   ]
   CROPS.forEach(c => {
-    let ess = `mysticalcustomization:${c[0]}_essence`
+    let ess = `mysticalagriculture:${c[0]}_essence` // Mystical Customization crops live under mysticalagriculture:
     let out = c[1]
     if (!has(out) && c[0] === 'ardite') out = 'tinkers_thinking:ardite_ingot'
     if (!has(ess) || !has(out)) { console.warn(`[APEX-MA] skipped ${c[0]}`); return }

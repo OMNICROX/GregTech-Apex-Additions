@@ -1,0 +1,18 @@
+{
+  "name": "Almandine",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:gems/almandine"
+  },
+  "color": "#A21717",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_gem",
+    "flower": "mysticalagriculture:block/flower_rock"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

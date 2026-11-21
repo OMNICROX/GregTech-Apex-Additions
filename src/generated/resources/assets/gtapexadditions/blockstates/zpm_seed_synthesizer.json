@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gtapexadditions:block/machine/zpm_seed_synthesizer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gtapexadditions:block/machine/zpm_seed_synthesizer"
+    },
+    "facing=south": {
+      "model": "gtapexadditions:block/machine/zpm_seed_synthesizer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gtapexadditions:block/machine/zpm_seed_synthesizer",
+      "y": 270
+    }
+  }
+}

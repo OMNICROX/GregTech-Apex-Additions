@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "gtapexadditions:block/machine/iv_seed_hatch",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "gtapexadditions:block/machine/iv_seed_hatch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gtapexadditions:block/machine/iv_seed_hatch"
+    },
+    "facing=south": {
+      "model": "gtapexadditions:block/machine/iv_seed_hatch",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "gtapexadditions:block/machine/iv_seed_hatch",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "gtapexadditions:block/machine/iv_seed_hatch",
+      "y": 270
+    }
+  }
+}

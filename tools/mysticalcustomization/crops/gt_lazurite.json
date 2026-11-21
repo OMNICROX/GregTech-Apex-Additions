@@ -1,0 +1,18 @@
+{
+  "name": "Lazurite",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:gems/lazurite"
+  },
+  "color": "#2836F1",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_gem",
+    "flower": "mysticalagriculture:block/flower_rock"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

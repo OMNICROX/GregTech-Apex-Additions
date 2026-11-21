@@ -1,0 +1,18 @@
+{
+  "name": "Ruby",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:gems/ruby"
+  },
+  "color": "#D72310",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_gem",
+    "flower": "mysticalagriculture:block/flower_rock"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}

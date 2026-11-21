@@ -28,6 +28,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType ENTITY_CRUSHER;
     public static GTRecipeType CULTIVATION;
     public static GTRecipeType SUIT_FABRICATION;
+    public static GTRecipeType SEED_SYNTHESIS;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
@@ -102,6 +103,10 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
+        SEED_SYNTHESIS = register("seed_synthesizer", "electric", "Seed Synthesizer")
+                .setMaxIOSize(9, 1, 0, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setSound(com.gregtechceu.gtceu.common.data.GTSoundEntries.SCIENCE);
         SUIT_FABRICATION = register("suit_fabrication", "multiblock", "Suit Fabrication")
                 .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Station tier: " + data.getInt("station_tier"))

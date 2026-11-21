@@ -1,0 +1,18 @@
+{
+  "name": "Sodalite",
+  "type": "mysticalagriculture:resource",
+  "tier": "mysticalagriculture:2",
+  "ingredient": {
+    "tag": "forge:gems/sodalite"
+  },
+  "color": "#3D54FF",
+  "textures": {
+    "essence": "mysticalagriculture:item/essence_gem",
+    "flower": "mysticalagriculture:block/flower_rock"
+  },
+  "recipes": {
+    "crafting": false,
+    "infusion": false,
+    "reprocessor": false
+  }
+}
