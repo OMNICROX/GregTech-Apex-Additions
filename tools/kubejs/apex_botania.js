@@ -6,7 +6,7 @@
 //   HV     : Elven Gateway Core, Mana Battery, Alfheim Market, Mechanical Brewery
 //   EV     : Gaia Pylon, Industrial Agglomeration Factory, Mana Infuser (Mythic Botany)
 //   IV     : Alfsteel Pylon, Elven Altar, Dreaming Mana Pool (Botanic Additions)
-//   LuV    : Gaia Agglomeration Plate, Mana Tesseract, Terra Catalyst, Gaiasteel Pylon
+//   LuV    : Gaia Agglomeration Plate, Mana Tesseract, Terra Catalyst, Gaiasteel Pylon (+ Avaritia Crystal Matrix)
 // The item keeps its own ingredients and is made in a GT assembler with that tier's circuits and parts.
 // Exploits removed: Orechid / Orechid Ignem (stone -> ores skips GT veins), Elven Mana Fluxfield (mana -> FE).
 // Also the Mana Nexus' own blocks (they need Botania items, so they live here instead of the GTAA jar).
@@ -38,10 +38,10 @@ const APEX_BOT_GATED = {
   'mythicbotany:alfsteel_pylon':                     ['iv',  ['plates', 'field'], 60],
   'botanicadds:elven_altar':                         ['iv',  ['hull', 'field'], 60],
   'botanicadds:dreaming_pool':                       ['iv',  ['hull', 'pump'], 60],
-  'botanicadds:gaia_plate':                          ['luv', ['plates', 'field'], 80],
-  'botanicadds:mana_tesseract':                      ['luv', ['hull', 'field'], 80],
-  'botanicadds:terra_catalyst':                      ['luv', ['field'], 80],
-  'botanicadds:gaiasteel_pylon':                     ['luv', ['plates', 'field'], 80]
+  'botanicadds:gaia_plate':                          ['luv', ['plates', 'field', 'matrix4'], 80],
+  'botanicadds:mana_tesseract':                      ['luv', ['hull', 'field', 'matrix2'], 80],
+  'botanicadds:terra_catalyst':                      ['luv', ['field', 'matrix2'], 80],
+  'botanicadds:gaiasteel_pylon':                     ['luv', ['plates', 'field', 'matrix2'], 80]
 }
 
 // Botanic Additions adds its crafting recipes through HammerLib, out of KubeJS' reach; GTAA removes them
@@ -103,6 +103,8 @@ ServerEvents.recipes(event => {
       if (x === 'pump') inputs.push(`1x ${t.pump}`)
       if (x === 'hull') inputs.push(`1x gtceu:${spec[0]}_machine_hull`)
       if (x === 'field') inputs.push(`1x gtceu:${spec[0]}_field_generator`)
+      // Botania's last tier sits behind Avaritia's first boss gate (Crystal Matrix needs the Extreme Crafting Table)
+      if (x.indexOf('matrix') === 0) inputs.push(`${x.substring(6)}x avaritia:crystal_matrix_ingot`)
     })
     inputs.push(`2x #gtceu:circuits/${spec[0]}`)
     event.remove({ output: out, type: 'minecraft:crafting_shaped' })
@@ -130,7 +132,7 @@ ServerEvents.recipes(event => {
   gt('core_t2', ['1x botania:terrasteel_block', '1x gtapexadditions:mana_core_t1', '2x #gtceu:circuits/mv'], '1x gtapexadditions:mana_core_t2', 120, 15)
   gt('core_t3', ['1x botania:elementium_block', '1x botania:pixie_dust', '1x gtapexadditions:mana_core_t2', '2x #gtceu:circuits/ev'], '1x gtapexadditions:mana_core_t3', 1920, 20)
   gt('core_t4', ['1x mythicbotany:alfsteel_block', '1x gtapexadditions:mana_core_t3', '2x #gtceu:circuits/iv'], '1x gtapexadditions:mana_core_t4', 7680, 30)
-  gt('core_t5', ['1x botanicadds:gaiasteel_block', '1x botania:life_essence', '1x gtapexadditions:mana_core_t4', '2x #gtceu:circuits/luv'], '1x gtapexadditions:mana_core_t5', 30720, 40)
+  gt('core_t5', ['1x botanicadds:gaiasteel_block', '1x botania:life_essence', '4x avaritia:crystal_matrix_ingot', '1x gtapexadditions:mana_core_t4', '2x #gtceu:circuits/luv'], '1x gtapexadditions:mana_core_t5', 30720, 40)
 
   console.info(`[APEX-BOTANIA] ${gated} Botania items moved to GT assemblers, ${nexus} Mana Nexus recipes, Orechid / Fluxfield removed` +
     (missing.length ? `; skipped: ${missing.join(', ')}` : ''))

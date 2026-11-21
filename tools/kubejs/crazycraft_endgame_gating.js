@@ -71,8 +71,9 @@ ServerEvents.recipes(function (event) {
   // Neutron Collector removed: GregTech Neutronium replaces Avaritia's (apex_gt_neutronium.js)
 
   gate('neutronium compressor', firstOf('avaritia:neutronium_compressor', ['avaritia:neutron_compressor', 'avaritia:neutronium_compressor']), /^avaritia:neutron(ium)?_compressor$/,
-    ['TNE', 'NPN', 'ENT'],
-    { T: THORN, E: EYE, N: BLOCK, P: 'minecraft:piston' })
+    ['TNE', 'SPS', 'ENT'],
+    // Terrasteel (Botania, MV terra plate) makes Botania matter to Avaritia from mid-game on
+    { T: THORN, E: EYE, N: BLOCK, P: 'minecraft:piston', S: has('botania:terrasteel_block') ? 'botania:terrasteel_block' : BLOCK })
 
   // ---- Infinity Catalyst: NOT replaced. Avaritia's own Extreme Crafting recipe (the full singularity chain)
   //      stays, so the catalyst still needs every singularity / the Eternal Singularity. ----
