@@ -92,6 +92,9 @@
     "gtapexadditions:suit_casing_t2",
     "gtapexadditions:suit_casing_t3",
     "gtapexadditions:suit_casing_t4",
-    "gtapexadditions:suit_monitor"
+    "gtapexadditions:suit_monitor",
+    "gtapexadditions:gate_ring",
+    "gtapexadditions:gate_base",
+    "gtapexadditions:gate_chevron"
   ]
 }

@@ -1184,6 +1184,53 @@ public class GTAAMachines {
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/assembly_line")))
             .register();
 
+    // ---------------- Ascension Gate: the finale ----------------
+    public static final MultiblockMachineDefinition ASCENSION_GATE = REGISTRATE
+            .multiblock("ascension_gate", com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine::new)
+            .langValue("Ascension Gate")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(
+                    Component.literal("\u00a7dThe end of Apex Ascension."),
+                    Component.literal("\u00a77A ring of \u00a7e15 chevrons\u00a77, one for each tier from ULV to MAX"),
+                    Component.literal("\u00a77Put a chevron's milestone items in an input bus to lock it; the gate also needs"),
+                    Component.literal("\u00a77 an energy hatch of that chevron's tier (32 amps' worth of buffer, capped at UHV)"),
+                    Component.literal("\u00a77Shift-right-click the controller with an empty hand to see what's next"),
+                    Component.literal("\u00a77With all 15 locked, shift-right-click again to \u00a7ddial\u00a77..."),
+                    Component.literal("\u00a78Something will come through. It will be completely useless. It will be perfect."))
+            .appearanceBlock(GTAABlocks.GATE_BASE)
+            .pattern(definition -> {
+                var base = blocks(GTAABlocks.GATE_BASE.get());
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK)
+                        // bottom up: base row (input bus, energy, controller, more buses, maintenance), then the ring
+                        .aisle("biIE~Embb",
+                                "  RVRVR  ",
+                                " V     V ",
+                                "V       V",
+                                "R       R",
+                                "V       V",
+                                "R       R",
+                                "V       V",
+                                " V     V ",
+                                "  VRVRV  ")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('b', base)
+                        .where('I', abilities(PartAbility.IMPORT_ITEMS))
+                        .where('i', base.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
+                        .where('E', base.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)))
+                        .where('m', base.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
+                        .where('R', blocks(GTAABlocks.GATE_RING.get()))
+                        .where('V', blocks(GTAABlocks.GATE_CHEVRON.get()))
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/gate_base"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
+            .register();
+
     public static final MultiblockMachineDefinition MYSTICAL_CULTIVATION_ARRAY = REGISTRATE
             .multiblock("mystical_cultivation_array", com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine::new)
             .langValue("Mystical Cultivation Array")

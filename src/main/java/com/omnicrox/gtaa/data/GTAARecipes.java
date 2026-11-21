@@ -41,6 +41,34 @@ public class GTAARecipes {
         GTAASpacePumping.init(provider);
         extraModules(provider);
         drones(provider);
+        ascensionGate(provider);
+    }
+
+    /** Ascension Gate: built at MV so it can track the whole run, one chevron per tier. */
+    private static void ascensionGate(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:gate_base")
+                .inputItems(plate, GTMaterials.Steel, 4).inputItems(frameGt, GTMaterials.Steel)
+                .outputItems(GTAABlocks.GATE_BASE.asStack(2))
+                .duration(100).EUt(VA[LV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:gate_ring")
+                .inputItems(plate, GTMaterials.Aluminium, 4).inputItems(frameGt, GTMaterials.Steel)
+                .outputItems(GTAABlocks.GATE_RING.asStack(2))
+                .duration(100).EUt(VA[MV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:gate_chevron")
+                .inputItems(GTAABlocks.GATE_RING.asStack())
+                .inputItems(dust, GTMaterials.Glowstone, 2)
+                .inputItems(GTItems.EMITTER_LV)
+                .inputItems(CustomTags.MV_CIRCUITS)
+                .outputItems(GTAABlocks.GATE_CHEVRON.asStack())
+                .duration(200).EUt(VA[MV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:ascension_gate")
+                .inputItems(GTMachines.HULL[MV].asStack())
+                .inputItems(GTAABlocks.GATE_CHEVRON.asStack(4))
+                .inputItems(GTItems.EMITTER_MV, 2)
+                .inputItems(GTItems.SENSOR_MV, 2)
+                .inputItems(CustomTags.MV_CIRCUITS, 4)
+                .outputItems(GTAAMachines.ASCENSION_GATE.asStack())
+                .duration(1200).EUt(VA[MV]).save(provider);
     }
 
     /** Seed Hatch (LV-LuV) and Seed Synthesizer (LV-UHV) for the Mystical Cultivation Array's GT seeds. */

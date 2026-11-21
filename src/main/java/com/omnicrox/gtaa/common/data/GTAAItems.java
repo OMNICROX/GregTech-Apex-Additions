@@ -96,5 +96,9 @@ public class GTAAItems {
     public static final ItemEntry<Item> QUARK_CREATION_CATALYST = REGISTRATE.item("quark_creation_catalyst", Item::new)
             .lang("Quark Creation Catalyst").model(NonNullBiConsumer.noop()).register();
 
+    public static final ItemEntry<com.omnicrox.gtaa.common.item.MaxwellItem> MAXWELL = REGISTRATE
+            .item("maxwell", com.omnicrox.gtaa.common.item.MaxwellItem::new)
+            .lang("Maxwell").model(NonNullBiConsumer.noop()).register();
+
     public static void init() {}
 }

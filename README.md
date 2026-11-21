@@ -31,13 +31,19 @@ the Aether) only get their recipes when that mod is installed.
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
 | Mystical Cultivation Array | EV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
 | Mana Nexus | LV-LuV | Needs Botania; stores 10M-2B mana (Mana Hatch for spreaders/sparks, liquid mana from Mana Fluid), does every Botania altar craft (pool, runic altar, terra plate, elven trade, daisy, apothecary, Mythic Botany infuser/rituals); Manasteel to Gaiasteel cores |
+| Ascension Gate | MV-MAX | The finale. A ring of 15 chevrons, one per tier ULV to MAX; each locks when its milestone items are in an input bus and the gate has power at that tier. All 15 locked: dial it, and Maxwell comes through |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |
 
 ## Systems and items
 
 - **Hero kits**: every suit made in the Suit Fabrication Station comes with its own power kit (speed, strength,
   flight, regeneration, ...). Covers FSang's Heroes, Satsu's Iron Man Addon and Powerborne Heroes.
-- **Apex Ascension Suit**: the final suit. Twelve Hero Cores (broken-down tier IV hero suits) plus UEV parts and
+- **Ascension Gate and Maxwell**: the end of the pack. Build the gate at MV and it tracks your whole run; chevron
+  milestones include Terrasteel, a rocket, Alfsteel, Gaiasteel, Naquadah seeds, Hero Cores, the full Apex suit and
+  an Eternal Singularity. Dialing opens an event horizon, announces the player to the server, sets off fireworks,
+  tints the sky pink for a minute and rolls credits with the player's stats. Maxwell, a tuxedo cat, walks out as a
+  pet and also arrives as an item. He does nothing. Any sitting cat named Maxwell spins.
+- **Apex Ascension Suit**: the UEV capstone (it is the gate's UEV chevron). Twelve Hero Cores (broken-down tier IV hero suits) plus UEV parts and
   Grade 8 purified water. Full set: flight, regeneration, night vision, immunity to fire / falls / drowning /
   wither / poison, +50% damage to infernal mobs.
 - **Infernal mobs**: hostile spawns can be Elite, Ultra or Infernal, with modifiers and better loot. Configurable

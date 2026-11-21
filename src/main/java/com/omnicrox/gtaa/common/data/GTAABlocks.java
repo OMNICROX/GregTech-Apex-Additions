@@ -235,5 +235,26 @@ public class GTAABlocks {
                 .register();
     }
 
+    // ---------------- Ascension Gate (the finale) ----------------
+    public static final BlockEntry<Block> GATE_RING = casing("gate_ring", "Ascension Gate Ring");
+    public static final BlockEntry<Block> GATE_BASE = casing("gate_base", "Ascension Gate Base");
+    public static final BlockEntry<com.omnicrox.gtaa.common.block.GateChevronBlock> GATE_CHEVRON = REGISTRATE
+            .block("gate_chevron", com.omnicrox.gtaa.common.block.GateChevronBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.strength(5.0f, 10.0f).isValidSpawn((s, l, pos, e) -> false))
+            .addLayer(() -> RenderType::solid)
+            .blockstate(NonNullBiConsumer.noop())
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .lang("Ascension Gate Chevron")
+            .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
+            .register();
+    public static final BlockEntry<com.omnicrox.gtaa.common.block.EventHorizonBlock> EVENT_HORIZON = REGISTRATE
+            .block("event_horizon", com.omnicrox.gtaa.common.block.EventHorizonBlock::new)
+            .initialProperties(() -> Blocks.GLASS)
+            .addLayer(() -> RenderType::translucent)
+            .blockstate(NonNullBiConsumer.noop())
+            .lang("Event Horizon")
+            .register();
+
     public static void init() {}
 }
