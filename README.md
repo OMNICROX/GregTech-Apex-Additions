@@ -41,18 +41,21 @@ the Aether) only get their recipes when that mod is installed.
 | Hyper / Advanced Hyper Naquadah Reactor | UHV / UIV | After GT Not Leisure: naquadah fuel + catalyst reactions with a fixed EU/t per parallel (UV for MkI + hydrogen up to 64x MAX for MkVI + quark-gluon plasma); 4 / 16 parallels, x4 with Naquadah Gas / SpaceTime boost (plus x8 / x16 power, x4 speed) |
 | Fuel Refining Complex | UHV-MAX | After GT Not Leisure: bulk Naquadah Fuel MkI-MkVI from light / heavy naquadah fuel + atomic separation catalyst; heating coils (EBF heat) + Field Restriction Coils |
 | Lightning Spire | LuV | After Twist Space Technology: up to 512 Spire Lightning Rods, 28M EU per rod every 12.8 s; coolant + molten iron per strike |
-| Ascension Gate | MV-MAX | The finale. A ring of 15 chevrons, one per tier ULV to MAX; each locks when its milestone items are in an input bus and the gate has power at that tier. All 15 locked: dial it, and Maxwell comes through |
+| Ascension Gate | Endgame | The finale: a pedestal under the Apex Stargate frame (Stargate Journey's Pegasus gate in the Retrogate skin). The finished frame becomes the gate; every gate stays sealed until this one is charged with 9.22 Qn EU. Then it opens one way, Maxwell spins out of the horizon, and the credits roll |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |
 
 ## Systems and items
 
 - **Hero kits**: every suit made in the Suit Fabrication Station comes with its own power kit (speed, strength,
   flight, regeneration, ...). Covers FSang's Heroes, Satsu's Iron Man Addon and Powerborne Heroes.
-- **Ascension Gate and Maxwell**: the end of the pack. Build the gate at MV and it tracks your whole run; chevron
-  milestones include Terrasteel, a rocket, Alfsteel, Gaiasteel, Naquadah seeds, Hero Cores, the full Apex suit and
-  an Eternal Singularity. Dialing opens an event horizon, announces the player to the server, sets off fireworks,
-  tints the sky pink for a minute and rolls credits with the player's stats. Maxwell, a tuxedo cat, walks out as a
-  pet and also arrives as an item. He does nothing. Any sitting cat named Maxwell spins.
+- **Ascension Gate and Maxwell**: the end of the pack. Stargate Journey's own gates are gone (cut out of its
+  structures, which stay), all Stargate Journey / More Gates recipes are off, and its planets are Ad Astra
+  destinations (Milky Way worlds: tier 5 rocket, Pegasus worlds: tier 6). The only gate is the Apex Stargate: build
+  the Ascension Gate pedestal and the frame on top (base, 9 chevrons, 14 rings in the gate's exact shape - or
+  right-click a lone frame's base) and it becomes the Retrogate. Charging it with 9.22 Qn EU from hatches or the
+  owner's wireless networks (10 minutes at best) wakes every gate in the world: a one-way horizon opens, Maxwell spins
+  out of it and lands as a Placeable Maxwell, fireworks go off and the credits roll. Built in a data pack inside
+  the jar (tools/gen_apex_stargate_pack.py).
 - **Apex Ascension Suit**: the UEV capstone (it is the gate's UEV chevron). Twelve Hero Cores (broken-down tier IV hero suits) plus UEV parts and
   Grade 8 purified water. Full set: flight, regeneration, night vision, immunity to fire / falls / drowning /
   wither / poison, +50% damage to infernal mobs.

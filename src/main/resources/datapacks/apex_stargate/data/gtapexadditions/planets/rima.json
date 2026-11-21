@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:rima",
+  "gravity": 9.1,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": 28,
+  "tier": 5
+}

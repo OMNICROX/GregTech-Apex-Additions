@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:unitas",
+  "gravity": 8.6,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": 8,
+  "tier": 5
+}

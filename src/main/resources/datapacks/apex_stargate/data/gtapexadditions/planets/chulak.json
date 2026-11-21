@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:chulak",
+  "gravity": 9.807,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": 22,
+  "tier": 5
+}

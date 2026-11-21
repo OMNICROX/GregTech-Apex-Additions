@@ -1,101 +1,81 @@
 package com.omnicrox.gtaa.common.machine.multiblock;
 
-import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
-import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
-import com.gregtechceu.gtceu.api.machine.feature.IInteractedMachine;
-import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
-import com.gregtechceu.gtceu.api.machine.trait.NotifiableItemStackHandler;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.omnicrox.gtaa.common.block.GateChevronBlock;
+import com.lowdragmc.lowdraglib.utils.BlockInfo;
+import com.omnicrox.gtaa.api.GTAAWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
+import com.omnicrox.gtaa.common.entity.AscendingMaxwellEntity;
 import com.omnicrox.gtaa.common.item.MaxwellItem;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
+import com.omnicrox.gtaa.common.stargate.ApexStargate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.CatVariant;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.FireworkRocketItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- * Ascension Gate: the end of Apex Ascension. A ring with 15 chevrons, one per tier from ULV to MAX. Each chevron
- * locks when its milestone items are in an input bus (and the gate has the energy); with all 15 locked,
- * shift-right-click the controller with an empty hand to dial. The gate opens, everyone hears about it,
- * fireworks go off, the sky glows pink, and Maxwell walks out. He does nothing. He is perfect.
+ * Ascension Gate: the end of Apex Ascension. A pedestal (this controller, energy / laser hatches) under the Apex
+ * Stargate's frame. Complete the frame and it becomes the Retrogate (Stargate Journey's Pegasus gate in More Gates'
+ * Retrogate skin); every gate in the world stays sealed until this one is charged with 9.22 Qn EU (Long.MAX_VALUE,
+ * the most a GregTech number can hold). Power comes from the hatches and the owner's wireless networks (GTM Things
+ * and gtna's Nexus, where the Artificial Star sends its power), at most ~768 T EU/t so it takes 10 minutes at best.
+ * Fully charged, the gate opens one way, just once: Maxwell comes through, the credits roll, and every gate wakes.
  */
-public class AscensionGateMachine extends WorkableElectricMultiblockMachine implements IInteractedMachine {
+public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             AscensionGateMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
 
-    /** one milestone item: candidate ids (first that exists; '#' = tag) and how many */
-    public record Need(int count, String... ids) {}
+    public static final long REQUIRED = Long.MAX_VALUE;
+    /** fastest charge: 10 minutes */
+    public static final long MAX_PER_TICK = REQUIRED / (20L * 60 * 10);
+    public static final int INTRO_TICKS = 1200;
 
-    public record Chevron(String tier, Need... needs) {}
-
-    public static final Chevron[] ADDRESS = {
-            new Chevron("ULV", new Need(16, "gtceu:bronze_gear", "minecraft:copper_block")),
-            new Chevron("LV", new Need(16, "#gtceu:circuits/lv")),
-            new Chevron("MV", new Need(4, "botania:terrasteel_block", "gtceu:aluminium_block")),
-            new Chevron("HV", new Need(1, "ad_astra:tier_1_rocket", "gtceu:stainless_steel_block")),
-            new Chevron("EV", new Need(8, "botania:life_essence", "gtceu:titanium_block")),
-            new Chevron("IV", new Need(4, "mythicbotany:alfsteel_block", "gtceu:tungsten_steel_block")),
-            new Chevron("LuV", new Need(4, "botanicadds:gaiasteel_block", "gtceu:hssg_block")),
-            new Chevron("ZPM", new Need(16, "mysticalagriculture:gt_naquadah_seeds", "gtceu:naquadah_alloy_block")),
-            new Chevron("UV", new Need(16, "gtna:infinity_ingot", "gtceu:tritanium_block")),
-            new Chevron("UHV", new Need(4, "gtapexadditions:hero_core")),
-            new Chevron("UEV", new Need(1, "gtapexadditions:apex_helmet"), new Need(1, "gtapexadditions:apex_chestplate"),
-                    new Need(1, "gtapexadditions:apex_leggings"), new Need(1, "gtapexadditions:apex_boots")),
-            new Chevron("UIV", new Need(4, "gtceu:uiv_field_generator", "gtceu:uev_field_generator")),
-            new Chevron("UXV", new Need(1, "avaritia:infinity_catalyst", "gtceu:uxv_field_generator")),
-            new Chevron("OpV", new Need(4, "gtceu:opv_field_generator", "gtceu:uxv_field_generator")),
-            new Chevron("MAX", new Need(1, "avaritia:eternal_singularity", "avaritia:infinity_catalyst"),
-                    new Need(64, "gtceu:neutronium_block")),
-    };
-
-    @Persisted @DescSynced private int locked;
-    @Persisted @DescSynced private boolean open;
+    @Persisted @DescSynced private long charge;
+    @Persisted @DescSynced private boolean ascendedHere;
     @Persisted @DescSynced private String ascendedBy = "";
-    @DescSynced private String status = "";
-    /** where the horizon and chevrons were, so they can be cleaned up after the ring breaks (the cache is gone then) */
+    @Persisted private int intro = -1;
     @Persisted private long[] horizonCells = new long[0];
-    private List<BlockPos> chevronCells = new ArrayList<>();
+    @DescSynced private long rate;
+    @DescSynced private boolean gateFormed;
+    @DescSynced private boolean worldAscended;
+    @DescSynced private String status = "";
+    private long secondCharge;
     private int celebrateTicks;
     private TickableSubscription tick;
+    private ServerBossEvent bar;
 
     public AscensionGateMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -106,306 +86,200 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine impl
         return MANAGED_FIELD_HOLDER;
     }
 
-    public int getLocked() {
-        return locked;
-    }
-
-    public boolean isOpen() {
-        return open;
-    }
-
     //////////////////////////////////////
-    // ***** milestones *****
+    // ***** structure *****
     //////////////////////////////////////
 
-    private static Object resolve(String id) {
-        if (id.startsWith("#")) return TagKey.create(net.minecraft.core.registries.Registries.ITEM, new ResourceLocation(id.substring(1)));
-        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(id));
-        return item == null || item == Items.AIR ? null : item;
+    /** frame block, or the formed gate's block in its place */
+    public static TraceabilityPredicate gatePart(java.util.function.Supplier<Block> frame, ResourceLocation formed) {
+        return new TraceabilityPredicate(s -> {
+            Block b = s.getBlockState().getBlock();
+            return b == frame.get() || BuiltInRegistries.BLOCK.getKey(b).equals(formed);
+        }, () -> new BlockInfo[] { BlockInfo.fromBlockState(frame.get().defaultBlockState()) });
     }
 
-    /** the item or tag a Need asks for in this pack (first candidate that exists) */
-    private static Object pick(Need need) {
-        for (String id : need.ids()) {
-            Object o = resolve(id);
-            if (o != null) return o;
-        }
-        return null;
+    private BlockPos base() {
+        return getPos().above();
     }
 
-    @SuppressWarnings("unchecked")
-    private static boolean matches(Object want, ItemStack s) {
-        if (s.isEmpty() || want == null) return false;
-        if (want instanceof Item i) return s.is(i);
-        return s.is((TagKey<Item>) want);
+    private Direction facing() {
+        return getFrontFacing().getAxis().isHorizontal() ? getFrontFacing() : Direction.NORTH;
     }
-
-    @SuppressWarnings("unchecked")
-    public static String describe(Need need) {
-        Object o = pick(need);
-        String name = o instanceof Item i ? i.getDescription().getString() :
-                o instanceof TagKey<?> t ? "any " + t.location().getPath().replace("circuits/", "").toUpperCase() + " circuit" : "?";
-        return need.count() + "x " + name;
-    }
-
-    public static String describe(Chevron c) {
-        List<String> parts = new ArrayList<>();
-        for (Need n : c.needs()) parts.add(describe(n));
-        return String.join(", ", parts);
-    }
-
-    private List<NotifiableItemStackHandler> inputs() {
-        List<NotifiableItemStackHandler> out = new ArrayList<>();
-        for (IMultiPart part : getParts())
-            for (var handler : part.getRecipeHandlers())
-                if (handler.getHandlerIO() == IO.IN)
-                    for (var h : handler.getCapability(ItemRecipeCapability.CAP))
-                        if (h instanceof NotifiableItemStackHandler inv) out.add(inv);
-        return out;
-    }
-
-    private int count(List<NotifiableItemStackHandler> invs, Object want) {
-        int n = 0;
-        for (var inv : invs)
-            for (int i = 0; i < inv.getSlots(); i++) if (matches(want, inv.getStackInSlot(i))) n += inv.getStackInSlot(i).getCount();
-        return n;
-    }
-
-    private void take(List<NotifiableItemStackHandler> invs, Object want, int amount) {
-        for (var inv : invs)
-            for (int i = 0; i < inv.getSlots() && amount > 0; i++)
-                if (matches(want, inv.getStackInSlot(i))) amount -= inv.extractItemInternal(i, amount, false).getCount();
-    }
-
-    /** half of one energy hatch of that tier's buffer: you need power at the chevron's tier to lock it */
-    public static long lockCost(int index) {
-        return GTValues.V[Math.min(GTValues.UHV, index)] * 32L;
-    }
-
-    //////////////////////////////////////
-    // ***** ring geometry *****
-    //////////////////////////////////////
-
-    /** the ring's chevron positions, clockwise from the top */
-    private List<BlockPos> chevronPositions() {
-        List<BlockPos> chev = new ArrayList<>();
-        Level level = getLevel();
-        if (level == null) return chev;
-        for (BlockPos p : getMultiblockState().getCache())
-            if (level.getBlockState(p).getBlock() instanceof GateChevronBlock) chev.add(p.immutable());
-        if (chev.isEmpty()) return chev;
-        boolean alongX = chev.stream().mapToInt(BlockPos::getX).distinct().count() > 1;
-        double cx = chev.stream().mapToDouble(p -> alongX ? p.getX() : p.getZ()).average().orElse(0);
-        double cy = chev.stream().mapToDouble(BlockPos::getY).average().orElse(0);
-        chev.sort(Comparator.comparingDouble(p -> {
-            double h = (alongX ? p.getX() : p.getZ()) - cx, v = p.getY() - cy;
-            double a = Math.atan2(h, v);
-            return a < 0 ? a + 2 * Math.PI : a;
-        }));
-        return chev;
-    }
-
-    /** the air inside the ring */
-    private List<BlockPos> interior() {
-        List<BlockPos> ring = new ArrayList<>();
-        Level level = getLevel();
-        List<BlockPos> out = new ArrayList<>();
-        if (level == null) return out;
-        for (BlockPos p : getMultiblockState().getCache()) {
-            var b = level.getBlockState(p).getBlock();
-            if (b instanceof GateChevronBlock || b == GTAABlocks.GATE_RING.get()) ring.add(p.immutable());
-        }
-        if (ring.isEmpty()) return out;
-        boolean alongX = ring.stream().mapToInt(BlockPos::getX).distinct().count() > 1;
-        int fixed = alongX ? ring.get(0).getZ() : ring.get(0).getX();
-        int minY = ring.stream().mapToInt(BlockPos::getY).min().getAsInt();
-        int maxY = ring.stream().mapToInt(BlockPos::getY).max().getAsInt();
-        for (int y = minY + 1; y < maxY; y++) {
-            final int yy = y;
-            int lo = ring.stream().filter(p -> p.getY() == yy).mapToInt(p -> alongX ? p.getX() : p.getZ()).min().orElse(0);
-            int hi = ring.stream().filter(p -> p.getY() == yy).mapToInt(p -> alongX ? p.getX() : p.getZ()).max().orElse(0);
-            for (int h = lo + 1; h < hi; h++) out.add(alongX ? new BlockPos(h, y, fixed) : new BlockPos(fixed, y, h));
-        }
-        return out;
-    }
-
-    private void setChevron(BlockPos p, boolean lit) {
-        Level level = getLevel();
-        if (level == null) return;
-        BlockState s = level.getBlockState(p);
-        if (s.getBlock() instanceof GateChevronBlock && s.getValue(GateChevronBlock.LIT) != lit)
-            level.setBlock(p, s.setValue(GateChevronBlock.LIT, lit), 3);
-    }
-
-    private void showChevrons() {
-        List<BlockPos> chev = chevronPositions();
-        chevronCells = chev;
-        for (int i = 0; i < chev.size(); i++) setChevron(chev.get(i), open || i < locked);
-    }
-
-    private void setHorizon(boolean on) {
-        Level level = getLevel();
-        if (level == null) return;
-        BlockState horizon = GTAABlocks.EVENT_HORIZON.get().defaultBlockState();
-        if (on) {
-            List<BlockPos> cells = interior();
-            horizonCells = cells.stream().mapToLong(BlockPos::asLong).toArray();
-            for (BlockPos p : cells) if (level.getBlockState(p).isAir()) level.setBlock(p, horizon, 3);
-        } else {
-            for (long l : horizonCells) {
-                BlockPos p = BlockPos.of(l);
-                if (level.getBlockState(p).is(GTAABlocks.EVENT_HORIZON.get())) level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
-            }
-            horizonCells = new long[0];
-        }
-    }
-
-    //////////////////////////////////////
-    // ***** lifecycle *****
-    //////////////////////////////////////
 
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        if (!isRemote()) {
-            showChevrons();
-            if (open) setHorizon(true);
-            tick = subscribeServerTick(tick, this::gateTick);
-        }
+        if (!isRemote()) tick = subscribeServerTick(tick, this::gateTick);
     }
 
     @Override
     public void onStructureInvalid() {
-        if (!isRemote()) {
-            setHorizon(false);
-            for (BlockPos p : chevronCells) setChevron(p, false);
-            chevronCells = new ArrayList<>();
-        }
         super.onStructureInvalid();
         if (tick != null) {
             tick.unsubscribe();
             tick = null;
         }
+        if (bar != null) bar.removeAllPlayers();
     }
+
+    //////////////////////////////////////
+    // ***** charging *****
+    //////////////////////////////////////
 
     private void gateTick() {
         if (!(getLevel() instanceof ServerLevel level)) return;
         if (celebrateTicks > 0) celebrate(level);
-        // the gate edits blocks inside its own ring, so it double-checks itself instead of waiting on GT's async check
-        if (getOffsetTimer() % 40 == 0 && !checkPattern()) {
-            onStructureInvalid();
+        if (intro >= 0) {
+            introTick(level);
+            updateBar(level);
             return;
         }
-        if (open || getOffsetTimer() % 20 != 0) return;
-        if (locked >= ADDRESS.length) {
-            status = "All 15 chevrons locked. Shift-right-click with an empty hand to dial.";
+        worldAscended = ApexStargate.ascended(level.getServer());
+        gateFormed = ApexStargate.isGate(level, base());
+        if (!gateFormed) {
+            if (getOffsetTimer() % 20 == 0 && ApexStargate.frameComplete(level, base(), facing())) {
+                if (ApexStargate.form(level, base(), facing(), null)) gateFormed = true;
+                else status = "Stargate Journey isn't installed";
+            } else status = "Complete the frame above the pedestal";
+            updateBar(level);
             return;
         }
-        Chevron c = ADDRESS[locked];
-        var invs = inputs();
-        for (Need n : c.needs()) {
-            Object want = pick(n);
-            if (want == null || count(invs, want) < n.count()) {
-                status = "";
-                return;
+        if (worldAscended && !ascendedHere) {
+            status = "This world has already ascended - every gate is awake";
+            updateBar(level);
+            return;
+        }
+        if (ascendedHere) {
+            status = "";
+            updateBar(level);
+            return;
+        }
+        if (charge >= REQUIRED) {
+            startIntro(level);
+            updateBar(level);
+            return;
+        }
+        long need = Math.min(MAX_PER_TICK, REQUIRED - charge);
+        long got = 0;
+        if (need > 0 && energyContainer != null) {
+            long take = Math.min(need, energyContainer.getEnergyStored());
+            if (take > 0) got += energyContainer.removeEnergy(take);
+        }
+        UUID owner = getOwnerUUID();
+        if (got < need && owner != null) got += GTAAWireless.drawNexusEU(level, owner, need - got);
+        if (got < need && owner != null) got += GTAAWireless.drawEU(owner, need - got);
+        charge = charge > REQUIRED - got ? REQUIRED : charge + got;
+        secondCharge += got;
+        if (getOffsetTimer() % 20 == 0) {
+            rate = secondCharge / 20;
+            secondCharge = 0;
+        }
+        status = got > 0 ? "" : "Waiting for power (hatches, or the owner's wireless network)";
+        if (charge >= REQUIRED) startIntro(level);
+        updateBar(level);
+    }
+
+    private void updateBar(ServerLevel level) {
+        boolean show = gateFormed && !ascendedHere && !worldAscended || intro >= 0;
+        if (bar == null) {
+            bar = new ServerBossEvent(Component.literal("Ascension"), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_10);
+        }
+        if (getOffsetTimer() % 10 != 0) return;
+        if (!show) {
+            bar.removeAllPlayers();
+            return;
+        }
+        float frac = intro >= 0 ? 1f : (float) ((double) charge / REQUIRED);
+        bar.setProgress(Math.max(0, Math.min(1, frac)));
+        bar.setName(Component.literal(intro >= 0 ? "✦ The gate is open ✦" :
+                String.format("Ascension charge: %.3f%%", frac * 100)).withStyle(ChatFormatting.LIGHT_PURPLE));
+        Vec3 c = ApexStargate.center(base());
+        Set<ServerPlayer> near = new HashSet<>();
+        for (ServerPlayer p : level.players()) if (p.position().distanceTo(c) < 48) near.add(p);
+        for (ServerPlayer p : new ArrayList<>(bar.getPlayers())) if (!near.contains(p)) bar.removePlayer(p);
+        for (ServerPlayer p : near) bar.addPlayer(p);
+    }
+
+    //////////////////////////////////////
+    // ***** the one-way opening *****
+    //////////////////////////////////////
+
+    private String ownerName(ServerLevel level) {
+        UUID owner = getOwnerUUID();
+        ServerPlayer p = owner == null ? null : level.getServer().getPlayerList().getPlayer(owner);
+        if (p != null) return p.getGameProfile().getName();
+        var near = level.getNearestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 64, false);
+        return near != null ? near.getGameProfile().getName() : "Someone";
+    }
+
+    private void startIntro(ServerLevel level) {
+        intro = 0;
+        ascendedHere = true;
+        ascendedBy = ownerName(level);
+        ApexStargate.setAscended(level.getServer(), ascendedBy);
+    }
+
+    /** the Maxwell open: horizon, Maxwell through the gate, credits, then it closes after a minute */
+    private void introTick(ServerLevel level) {
+        BlockPos base = base();
+        Vec3 c = ApexStargate.center(base);
+        if (intro == 0) {
+            List<Long> cells = new ArrayList<>();
+            for (BlockPos p : ApexStargate.interior(base, facing())) {
+                if (level.getBlockState(p).isAir()) {
+                    level.setBlock(p, GTAABlocks.EVENT_HORIZON.get().defaultBlockState(), 3);
+                    cells.add(p.asLong());
+                }
+            }
+            horizonCells = cells.stream().mapToLong(Long::longValue).toArray();
+            level.playSound(null, base.above(3), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 3f, 0.8f);
+            level.playSound(null, base.above(3), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 3f, 0.6f);
+            level.getServer().getPlayerList().broadcastSystemMessage(Component.literal("✦ " + ascendedBy +
+                    " has opened the Apex Stargate. ✦").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD), false);
+        }
+        if (intro < 40 && intro % 4 == 0)
+            level.sendParticles(ParticleTypes.REVERSE_PORTAL, c.x, c.y, c.z, 60, 1.5, 1.5, 1.5, 0.3);
+        if (intro == 40) {
+            Direction f = facing();
+            Vec3 start = c.add(f.getStepX() * 0.3, 0, f.getStepZ() * 0.3);
+            level.addFreshEntity(AscendingMaxwellEntity.create(level, start, f));
+            level.playSound(null, base.above(3), SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, 0.6f, 1.6f);
+        }
+        if (intro == 120) {
+            celebrateTicks = 200;
+            level.playSound(null, base.above(3), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 3f, 1f);
+            for (ServerPlayer p : level.players()) {
+                if (p.position().distanceTo(c) > 64) continue;
+                GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, MaxwellItem.stats(p)));
+                if (p.getGameProfile().getName().equals(ascendedBy)) {
+                    ItemStack prize = new ItemStack(GTAAItems.MAXWELL.get());
+                    if (!p.getInventory().add(prize)) p.drop(prize, false);
+                }
             }
         }
-        long cost = lockCost(locked);
-        if (energyContainer == null || energyContainer.getEnergyStored() < cost) {
-            status = "Needs " + String.format("%,d", cost) + " EU stored to lock this chevron";
-            return;
+        if (++intro >= INTRO_TICKS) {
+            for (long l : horizonCells) {
+                BlockPos p = BlockPos.of(l);
+                if (level.getBlockState(p).is(GTAABlocks.EVENT_HORIZON.get())) level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
+            }
+            horizonCells = new long[0];
+            intro = -1;
+            level.playSound(null, base.above(3), SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 3f, 0.7f);
         }
-        energyContainer.removeEnergy(cost);
-        for (Need n : c.needs()) take(invs, pick(n), n.count());
-        locked++;
-        status = "";
-        showChevrons();
-        BlockPos at = getPos();
-        level.playSound(null, at, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.5f, 0.6f + locked * 0.05f);
-        List<BlockPos> chev = chevronPositions();
-        if (locked - 1 < chev.size()) {
-            BlockPos p = chev.get(locked - 1);
-            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, 30, 0.4, 0.4, 0.4, 0.1);
-        }
-        if (locked == ADDRESS.length)
-            level.playSound(null, at, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 2f, 0.8f);
     }
 
-    //////////////////////////////////////
-    // ***** dialing *****
-    //////////////////////////////////////
-
-    @Override
-    public InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!player.isShiftKeyDown() || !player.getItemInHand(hand).isEmpty() || !isFormed()) return InteractionResult.PASS;
-        if (world.isClientSide) return InteractionResult.SUCCESS;
-        if (open) {
-            player.displayClientMessage(Component.literal("The gate is open. " + ascendedBy + " ascended here. Maxwell is pleased.")
-                    .withStyle(ChatFormatting.LIGHT_PURPLE), true);
-        } else if (locked < ADDRESS.length) {
-            player.displayClientMessage(Component.literal("Chevron " + (locked + 1) + " (" + ADDRESS[locked].tier() + ") needs " +
-                    describe(ADDRESS[locked]) + " in an input bus").withStyle(ChatFormatting.YELLOW), true);
-        } else if (player instanceof ServerPlayer sp) {
-            dial(sp);
-        }
-        return InteractionResult.CONSUME;
-    }
-
-    /** for tests */
-    public void dialForTest(ServerPlayer player) {
-        locked = ADDRESS.length;
-        dial(player);
-    }
-
-    private void dial(ServerPlayer player) {
-        if (!(getLevel() instanceof ServerLevel level)) return;
-        open = true;
-        ascendedBy = player.getGameProfile().getName();
-        showChevrons();
-        setHorizon(true);
-        BlockPos at = getPos();
-        level.playSound(null, at, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 2f, 1.2f);
-        level.playSound(null, at, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 2f, 1f);
-        level.getServer().getPlayerList().broadcastSystemMessage(Component.literal("✦ " + ascendedBy + " has Ascended. ✦")
-                .withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD), false);
-
-        // Maxwell steps out of the gate
-        List<BlockPos> inside = interior();
-        BlockPos spawn = inside.isEmpty() ? at.above() : inside.get(inside.size() / 2);
-        Cat maxwell = EntityType.CAT.create(level);
-        if (maxwell != null) {
-            var variant = level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.CAT_VARIANT)
-                    .getHolder(CatVariant.BLACK);
-            variant.ifPresent(v -> maxwell.setVariant(v.value()));
-            maxwell.moveTo(spawn.getX() + 0.5, spawn.getY(), spawn.getZ() + 0.5, 0, 0);
-            maxwell.tame(player);
-            maxwell.setCustomName(Component.literal("Maxwell").withStyle(ChatFormatting.LIGHT_PURPLE));
-            maxwell.setCustomNameVisible(true);
-            maxwell.setInvulnerable(true);
-            maxwell.setPersistenceRequired();
-            maxwell.setCollarColor(DyeColor.PINK);
-            level.addFreshEntity(maxwell);
-            level.sendParticles(ParticleTypes.HEART, spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, 12, 0.5, 0.5, 0.5, 0);
-            level.playSound(null, spawn, SoundEvents.CAT_AMBIENT, SoundSource.NEUTRAL, 1.5f, 1f);
-        }
-        ItemStack prize = new ItemStack(GTAAItems.MAXWELL.get());
-        if (!player.getInventory().add(prize)) player.drop(prize, false);
-        GTAANetwork.send(player, new GTAANetwork.AscensionPacket(true, MaxwellItem.stats(player)));
-        celebrateTicks = 200;
-    }
-
-    /** ten seconds of fireworks around the ring */
+    /** ten seconds of fireworks around the gate */
     private void celebrate(ServerLevel level) {
         celebrateTicks--;
         if (celebrateTicks % 8 != 0) return;
-        List<BlockPos> chev = chevronPositions();
-        if (chev.isEmpty()) return;
-        BlockPos p = chev.get(level.random.nextInt(chev.size()));
+        List<BlockPos> ring = new ArrayList<>();
+        for (ApexStargate.Part p : ApexStargate.PARTS) ring.add(ApexStargate.partPos(base(), facing(), p));
+        BlockPos p = ring.get(level.random.nextInt(ring.size()));
         ItemStack rocket = new ItemStack(Items.FIREWORK_ROCKET);
         CompoundTag fw = new CompoundTag();
         CompoundTag star = new CompoundTag();
         star.putByte("Type", (byte) level.random.nextInt(5));
-        star.putIntArray("Colors", new int[] { 0xFF9AD5, 0xFFC94A, 0x5FF3FF, 0xC77DFF });
+        star.putIntArray("Colors", new int[] { 0x7A2CFF, 0x00C8FF, 0xFF6E14, 0xC77DFF });
         star.putBoolean("Twinkle", true);
         ListTag ex = new ListTag();
         ex.add(star);
@@ -415,25 +289,56 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine impl
         level.addFreshEntity(new FireworkRocketEntity(level, p.getX() + 0.5, p.getY() + 1, p.getZ() + 0.5, rocket));
     }
 
+    /** for tests: fill the charge */
+    public void chargeForTest() {
+        charge = REQUIRED;
+    }
+
+    public long getCharge() {
+        return charge;
+    }
+
+    public boolean isIntroRunning() {
+        return intro >= 0;
+    }
+
     //////////////////////////////////////
     // ***** display *****
     //////////////////////////////////////
+
+    private static String big(long v) {
+        if (v < 1_000_000_000_000L) return FormattingUtil.formatNumbers(v);
+        String[] units = { "T", "Qa", "Qn" };
+        double d = v / 1e12;
+        int u = 0;
+        while (d >= 1000 && u < units.length - 1) {
+            d /= 1000;
+            u++;
+        }
+        return String.format("%.2f %s", d, units[u]);
+    }
 
     @Override
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        if (open) {
-            textList.add(Component.literal("✦ The gate is open ✦").withStyle(ChatFormatting.LIGHT_PURPLE));
-            textList.add(Component.literal(ascendedBy + " ascended here.").withStyle(ChatFormatting.GRAY));
+        if (ascendedHere) {
+            textList.add(Component.literal("✦ " + ascendedBy + " ascended here ✦").withStyle(ChatFormatting.LIGHT_PURPLE));
+            textList.add(Component.literal("The Retrogate is awake: dial anywhere").withStyle(ChatFormatting.GRAY));
             return;
         }
-        textList.add(Component.literal("Chevrons locked: " + locked + " / " + ADDRESS.length).withStyle(ChatFormatting.GOLD));
-        if (locked < ADDRESS.length) {
-            Chevron c = ADDRESS[locked];
-            textList.add(Component.literal("Next: chevron " + (locked + 1) + " (" + c.tier() + ")").withStyle(ChatFormatting.AQUA));
-            textList.add(Component.literal("  " + describe(c)).withStyle(ChatFormatting.WHITE));
-            textList.add(Component.literal("  + " + String.format("%,d", lockCost(locked)) + " EU").withStyle(ChatFormatting.GRAY));
+        if (!gateFormed) {
+            textList.add(Component.literal("Build the Apex Stargate frame on the pedestal:").withStyle(ChatFormatting.GOLD));
+            textList.add(Component.literal(" Ascension Gate Base in the middle, 9 Chevrons, 14 Rings").withStyle(ChatFormatting.WHITE));
+        } else if (!worldAscended) {
+            double frac = (double) charge / REQUIRED;
+            textList.add(Component.literal(String.format("Ascension charge: %.4f%%", frac * 100)).withStyle(ChatFormatting.LIGHT_PURPLE));
+            textList.add(Component.literal(big(charge) + " / 9.22 Qn EU").withStyle(ChatFormatting.AQUA));
+            if (rate > 0) {
+                long secs = (REQUIRED - charge) / Math.max(1, rate * 20);
+                textList.add(Component.literal("Charging at " + big(rate) + " EU/t, " + (secs / 60) + " min " + (secs % 60) + " s left")
+                        .withStyle(ChatFormatting.GRAY));
+            }
         }
         if (!status.isEmpty()) textList.add(Component.literal(status).withStyle(ChatFormatting.YELLOW));
     }

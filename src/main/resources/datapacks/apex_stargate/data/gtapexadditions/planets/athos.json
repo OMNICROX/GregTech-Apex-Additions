@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:athos",
+  "gravity": 9.807,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:pegasus",
+  "temperature": 14,
+  "tier": 6
+}

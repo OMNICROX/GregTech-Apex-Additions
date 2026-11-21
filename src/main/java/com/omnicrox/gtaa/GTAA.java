@@ -44,6 +44,8 @@ public class GTAA {
         com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
         com.omnicrox.gtaa.common.item.ApexSuitItem.registerEvents();
         com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
+        com.omnicrox.gtaa.common.entity.GTAAEntities.register(bus);
+        com.omnicrox.gtaa.common.stargate.ApexStargate.registerEvents();
         com.omnicrox.gtaa.common.network.GTAANetwork.register();
         com.omnicrox.gtaa.common.item.StructureUpgrader.registerEvents();
         com.omnicrox.gtaa.common.item.MaxwellItem.registerEvents();

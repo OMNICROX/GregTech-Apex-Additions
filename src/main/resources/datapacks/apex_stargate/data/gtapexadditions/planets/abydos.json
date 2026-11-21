@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:abydos",
+  "gravity": 9.807,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": 45,
+  "tier": 5
+}

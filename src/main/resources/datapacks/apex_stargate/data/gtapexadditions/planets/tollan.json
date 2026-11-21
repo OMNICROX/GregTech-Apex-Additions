@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:tollan",
+  "gravity": 9.807,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": 16,
+  "tier": 5
+}

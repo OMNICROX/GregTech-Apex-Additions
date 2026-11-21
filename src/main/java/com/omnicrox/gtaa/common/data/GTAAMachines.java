@@ -1359,43 +1359,43 @@ public class GTAAMachines {
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .tooltips(
                     Component.literal("\u00a7dThe end of Apex Ascension."),
-                    Component.literal("\u00a77A ring of \u00a7e15 chevrons\u00a77, one for each tier from ULV to MAX"),
-                    Component.literal("\u00a77Put a chevron's milestone items in an input bus to lock it; the gate also needs"),
-                    Component.literal("\u00a77 an energy hatch of that chevron's tier (32 amps' worth of buffer, capped at UHV)"),
-                    Component.literal("\u00a77Shift-right-click the controller with an empty hand to see what's next"),
-                    Component.literal("\u00a77With all 15 locked, shift-right-click again to \u00a7ddial\u00a77..."),
+                    Component.literal("\u00a77The pedestal of the \u00a75Apex Stargate\u00a77: build its frame on top"),
+                    Component.literal("\u00a77 (Ascension Gate Base above this controller, 9 Chevrons, 14 Rings)"),
+                    Component.literal("\u00a77The finished frame becomes the \u00a75Retrogate\u00a77 - sealed, like every gate,"),
+                    Component.literal("\u00a77 until it is charged with \u00a7b9.22 Qn EU\u00a77 (9,223,372,036,854,775,807)"),
+                    Component.literal("\u00a77Takes power from energy / laser hatches and the owner's wireless networks"),
+                    Component.literal("\u00a77 (GTM Things, gtna Nexus) - at most ~768 T EU/t, so 10 minutes at best"),
                     Component.literal("\u00a78Something will come through. It will be completely useless. It will be perfect."))
-            .appearanceBlock(GTAABlocks.GATE_BASE)
+            .appearanceBlock(GTAABlocks.GATE_PEDESTAL)
             .pattern(definition -> {
-                var base = blocks(GTAABlocks.GATE_BASE.get());
+                var pedestal = blocks(GTAABlocks.GATE_PEDESTAL.get());
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK)
-                        // bottom up: base row (input bus, energy, controller, more buses, maintenance), then the ring
-                        .aisle("biIE~Embb",
-                                "  RVRVR  ",
+                        // the pedestal, then the gate's frame (Stargate Journey's ring positions), bottom up
+                        .aisle("PPPP~PPPP",
+                                "  RVBVR  ",
+                                " VR   RV ",
+                                " R     R ",
+                                " R     R ",
                                 " V     V ",
-                                "V       V",
-                                "R       R",
-                                "V       V",
-                                "R       R",
-                                "V       V",
-                                " V     V ",
+                                " RR   RR ",
                                 "  VRVRV  ")
                         .where('~', controller(blocks(definition.get())))
-                        .where('b', base)
-                        .where('I', abilities(PartAbility.IMPORT_ITEMS))
-                        .where('i', base.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
-                        .where('E', base.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)))
-                        .where('m', base.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
-                        .where('R', blocks(GTAABlocks.GATE_RING.get()))
-                        .where('V', blocks(GTAABlocks.GATE_CHEVRON.get()))
+                        .where('P', pedestal.setMinGlobalLimited(4)
+                                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setPreviewCount(1)))
+                        .where('B', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(GTAABlocks.GATE_BASE::get,
+                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_GATE))
+                        .where('R', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(GTAABlocks.GATE_RING::get,
+                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_RING))
+                        .where('V', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(() -> GTAABlocks.GATE_CHEVRON.get(),
+                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_RING))
                         .where(' ', any())
                         .build();
             })
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/gate_base"),
-                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/gate_pedestal"),
+                    GTAA.id("block/multiblock/ascension_gate")))
             .register();
 
     public static final MultiblockMachineDefinition MYSTICAL_CULTIVATION_ARRAY = REGISTRATE

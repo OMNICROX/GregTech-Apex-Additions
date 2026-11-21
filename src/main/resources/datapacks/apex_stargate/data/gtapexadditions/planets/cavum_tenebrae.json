@@ -1,0 +1,9 @@
+{
+  "dimension": "sgjourney:cavum_tenebrae",
+  "gravity": 11.2,
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "gtapexadditions:milky_way",
+  "temperature": -15,
+  "tier": 5
+}

@@ -1,0 +1,1 @@
+{"parent":"minecraft:block/cube_bottom_top","render_type":"minecraft:solid","textures":{"side":"gtapexadditions:block/casing/gate_pedestal","bottom":"gtapexadditions:block/casing/gate_pedestal","top":"gtapexadditions:block/casing/gate_pedestal_top"}}
