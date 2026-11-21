@@ -130,7 +130,8 @@ public class GTAABlocks {
     // Antimatter (SASS / SLAM) - textures from GoodGenerator (GT5-Unofficial)
     public static final BlockEntry<Block> MAGNETIC_FLUX_CASING = casing("magnetic_flux_casing", "Magnetic Flux Casing");
     public static final BlockEntry<Block> GRAVITY_STABILIZATION_CASING = casing("gravity_stabilization_casing", "Gravity Stabilization Casing");
-    public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = casing("antimatter_containment_casing", "Antimatter Containment Casing");
+    // see-through texture: must be glass, or the game culls the blocks behind it and you see through the world
+    public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = glass("antimatter_containment_casing", "Antimatter Containment Casing");
     public static final BlockEntry<Block> PROTOMATTER_ACTIVATION_COIL = casing("protomatter_activation_coil", "Protomatter Activation Coil");
     public static final BlockEntry<Block> ANTIMATTER_ANNIHILATION_MATRIX = casing("antimatter_annihilation_matrix", "Antimatter Annihilation Matrix");
 
@@ -221,7 +222,8 @@ public class GTAABlocks {
 
     /** see-through casing (glass / frame boxes) */
     public static BlockEntry<Block> glass(String name, String lang) {
-        return REGISTRATE.block(name, Block::new)
+        // GlassBlock: faces between two of the same glass are skipped, light passes through
+        return REGISTRATE.<Block>block(name, p -> new net.minecraft.world.level.block.GlassBlock(p))
                 .initialProperties(() -> Blocks.GLASS)
                 .properties(p -> p.strength(5.0f, 10.0f).noOcclusion().isValidSpawn((s, l, pos, e) -> false)
                         .isSuffocating((s, l, pos) -> false).isViewBlocking((s, l, pos) -> false))

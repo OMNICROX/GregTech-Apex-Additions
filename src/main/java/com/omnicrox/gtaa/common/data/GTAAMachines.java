@@ -102,9 +102,9 @@ public class GTAAMachines {
                                                 .setMinGlobalLimited(1).setPreviewCount(16)))
                                 .where('C', casing)
                                 .where('K', blocks(fusionCoil(tier)))
-                                .where('O', casing.or(abilities(PartAbility.EXPORT_FLUIDS)))
+                                .where('O', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_FLUIDS)))
                                 .where('A', air())
-                                .where('I', casing.or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(2)))
+                                .where('I', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(2)))
                                 .where('#', any())
                                 .build();
                     })
@@ -229,9 +229,9 @@ public class GTAAMachines {
                     .where('C', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()))
                     .where('D', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()))
                     .where('E', blocks(ANTIMATTER_HATCH.getBlock()))
-                    .where('F', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get())
+                    .where('F', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)))
-                    .where('H', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get())
+                    .where('H', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
                     .where(' ', any())
                     .build())
@@ -283,9 +283,9 @@ public class GTAAMachines {
                     .where('E', blocks(GTBlocks.FILTER_CASING.get()))
                     .where('F', blocks(naquadriaFrame()))
                     .where('G', blocks(GTAABlocks.ANTIMATTER_ANNIHILATION_MATRIX.get()))
-                    .where('H', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get())
+                    .where('H', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.OUTPUT_LASER, PartAbility.OUTPUT_ENERGY).setMinGlobalLimited(1)))
-                    .where('I', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get())
+                    .where('I', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)))
                     .where(' ', any())
                     .build())
@@ -310,7 +310,7 @@ public class GTAAMachines {
                 .where('~', controller(blocks(definition.getBlock())))
                 .where('E', blocks(GTAABlocks.SE_SUPPORT_STRUCTURE.get()))
                 .where('B', SpaceElevatorPredicates.cable())
-                .where('X', blocks(GTAABlocks.SE_BASE_CASING.get())
+                .where('X', blocks(GTAABlocks.SE_BASE_CASING.get()).setMinGlobalLimited(1)
                         .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
                         .or(abilities(PartAbility.IMPORT_FLUIDS, PartAbility.COMPUTATION_DATA_RECEPTION)))
                 .where('M', SpaceElevatorPredicates.moduleIO())
@@ -389,7 +389,7 @@ public class GTAAMachines {
                         .aisle("H", "~", "H", "H", "H")
                         .aisle("H", "H", "H", "H", "H")
                         .where('~', controller(blocks(definition.getBlock())))
-                        .where('H', blocks(GTAABlocks.SE_BASE_CASING.get())
+                        .where('H', blocks(GTAABlocks.SE_BASE_CASING.get()).setMinGlobalLimited(1)
                                 .or(abilities(abilities)))
                         .build())
                 .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
@@ -631,7 +631,7 @@ public class GTAAMachines {
                             .where('H', blocks(GTAABlocks.compactFusionCoil(mk)))
                             .where('F', frames(compactFusionFrame(mk)))
                             .where('B', glass)
-                            .where('I', glass.or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(16))
+                            .where('I', glass.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(16))
                                     .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(16))
                                     .or(abilities(PartAbility.IMPORT_ITEMS)))
                             .where('E', casing.or(blocks(energy).setMinGlobalLimited(1).setMaxGlobalLimited(32).setPreviewCount(32)))
@@ -749,13 +749,13 @@ public class GTAAMachines {
                         .where('G', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                         .where('E', blocks(GTBlocks.CASING_GRATE.get()))
                         .where('B', com.omnicrox.gtaa.common.machine.multiblock.ComponentAssemblyLineMachine.casings())
-                        .where('J', h.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1)))
+                        .where('J', h.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1)))
                         .where('N', frames(GTMaterials.TungstenSteel).or(abilities(PartAbility.IMPORT_ITEMS)))
                         .where('n', frames(GTMaterials.TungstenSteel))
-                        .where('K', h.or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1)))
-                        .where('L', h.or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
-                        .where('I', h.or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
-                        .where('M', h.or(abilities(PartAbility.IMPORT_FLUIDS)))
+                        .where('K', h.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1)))
+                        .where('L', h.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
+                        .where('I', h.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
+                        .where('M', h.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
                         .where(' ', any())
                         .build();
             })
@@ -794,10 +794,10 @@ public class GTAAMachines {
                         .where('C', blocks(GTAABlocks.QFT_COIL.get()))
                         .where('D', casing)
                         .where('E', blocks(GTAABlocks.FORCE_FIELD_GLASS.get()))
-                        .where('H', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
+                        .where('H', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
                                 .or(abilities(PartAbility.IMPORT_FLUIDS))
                                 .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1)))
-                        .where('T', casing.or(abilities(PartAbility.EXPORT_ITEMS)).or(abilities(PartAbility.EXPORT_FLUIDS)))
+                        .where('T', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS)).or(abilities(PartAbility.EXPORT_FLUIDS)))
                         .where(' ', any())
                         .build();
             })
@@ -843,7 +843,7 @@ public class GTAAMachines {
                     .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
                     .where('F', waterOrAir())
                     .where('G', frameOr(GTMaterials.Tungsten))
-                    .where('H', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get())
+                    .where('H', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
                             .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
                     .where(' ', any())
@@ -881,7 +881,7 @@ public class GTAAMachines {
     private static final String LCR = "gtceu:block/multiblock/large_chemical_reactor";
 
     private static TraceabilityPredicate fluidIO(Block casing) {
-        return blocks(casing).or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
+        return blocks(casing).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
                 .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1))
                 .or(abilities(PartAbility.IMPORT_ITEMS)).or(abilities(PartAbility.EXPORT_ITEMS));
     }
@@ -909,7 +909,7 @@ public class GTAAMachines {
                     .where('C', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                     .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
                     .where('E', frameOr(GTMaterials.TungstenSteel))
-                    .where('O', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+                    .where('O', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS))),
             Component.literal("\u00a77Uses Ozone: \u00a7e128k / 256k / 512k / 1M L\u00a77 per cycle for \u00a7a20 / 40 / 60 / 80%"));
 
     public static final MultiblockMachineDefinition PURIFICATION_FLOCCULATION = purUnit(3, "purification_unit_flocculation",
@@ -936,8 +936,8 @@ public class GTAAMachines {
                     .where('H', blocks(GTAABlocks.PUR_PH_GLASS.get()))
                     .where('I', fluidIO(GTAABlocks.PUR_NAQUADAH_CASING.get()))
                     .where('R', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()))
-                    .where('X', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).or(abilities(PartAbility.IMPORT_ITEMS)))
-                    .where('Y', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+                    .where('X', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
+                    .where('Y', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS))),
             Component.literal("\u00a77Balances the water with Sodium Hydroxide and Hydrochloric Acid for \u00a7a95%"));
 
     public static final MultiblockMachineDefinition PURIFICATION_PLASMA = purUnit(5, "purification_unit_plasma_heater",
@@ -951,8 +951,8 @@ public class GTAAMachines {
                     .where('E', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
                     .where('F', any())
                     .where('G', frameOr(GTMaterials.NaquadahAlloy))
-                    .where('K', blocks(GTAABlocks.PUR_STERILE_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS)))
-                    .where('P', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS))),
+                    .where('K', blocks(GTAABlocks.PUR_STERILE_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
+                    .where('P', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS))),
             Component.literal("\u00a77Heats with Helium Plasma and cools with Liquid Helium for \u00a7a95%"));
 
     public static final MultiblockMachineDefinition PURIFICATION_UV = purUnit(6, "purification_unit_uv_treatment",
@@ -963,7 +963,7 @@ public class GTAAMachines {
                     .where('B', blocks(GTAABlocks.PUR_UV_GLASS.get()))
                     .where('C', blocks(GTAABlocks.PUR_UV_EMITTER.get()))
                     .where('D', frameOr(GTMaterials.Tritanium, GTMaterials.Neutronium))
-                    .where('L', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()).or(abilities(PartAbility.IMPORT_ITEMS)))
+                    .where('L', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
                     .where('I', blocks(GTAABlocks.PUR_NAQUADRIA_CASING.get()))
                     .where('H', fluidIO(GTAABlocks.PUR_NAQUADRIA_CASING.get())),
             Component.literal("\u00a77Needs all 9 purification lenses in an input bus (not used up) for \u00a7a95%"));
@@ -1020,7 +1020,7 @@ public class GTAAMachines {
                         .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX").setRepeatable(0, 11)
                         .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
                         .where('S', controller(blocks(definition.getBlock())))
-                        .where('Y', casing.or(abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
+                        .where('Y', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
                                 .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
                                 .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
                                 .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
@@ -1062,7 +1062,7 @@ public class GTAAMachines {
                         .aisle("fgggf", "g###g", "g###g", "g###g", "fgggf").setRepeatable(4)
                         .aisle("ccccc", "ccccc", "ccccc", "ccccc", "ccccc")
                         .where('S', controller(blocks(definition.getBlock())))
-                        .where('C', casing.or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
+                        .where('C', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
                                 .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
                                 .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
                                 .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
@@ -1111,7 +1111,7 @@ public class GTAAMachines {
                         .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
                         .aisle("nnnnn", "nnnnn", "nnnnn", "nnnnn", "nnnnn")
                         .where('~', controller(blocks(definition.get())))
-                        .where('N', casing.or(autoAbilities(definition.getRecipeTypes()))
+                        .where('N', casing.setMinGlobalLimited(1).or(autoAbilities(definition.getRecipeTypes()))
                                 .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
                                 .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
                         .where('n', casing)
@@ -1165,15 +1165,15 @@ public class GTAAMachines {
                         .where('~', controller(blocks(definition.get())))
                         .where('a', casing)
                         .where('I', abilities(PartAbility.IMPORT_ITEMS))
-                        .where('i', casing.or(abilities(PartAbility.IMPORT_ITEMS)))
+                        .where('i', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
                         .where('E', abilities(PartAbility.INPUT_ENERGY))
-                        .where('e', casing.or(abilities(PartAbility.INPUT_ENERGY)))
+                        .where('e', casing.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY)))
                         .where('M', abilities(MANA_HATCH_ABILITY))
-                        .where('m', casing.or(abilities(MANA_HATCH_ABILITY)))
+                        .where('m', casing.setMinGlobalLimited(1).or(abilities(MANA_HATCH_ABILITY)))
                         .where('O', abilities(PartAbility.EXPORT_ITEMS))
-                        .where('o', casing.or(abilities(PartAbility.EXPORT_ITEMS)))
-                        .where('w', casing.or(abilities(PartAbility.IMPORT_FLUIDS)))
-                        .where('n', casing.or(abilities(PartAbility.MAINTENANCE)))
+                        .where('o', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS)))
+                        .where('w', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
+                        .where('n', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
                         .where('g', glass)
                         .where('c', cores)
                         .where(' ', any())
@@ -1221,12 +1221,12 @@ public class GTAAMachines {
                         // Energy/casing; maintenance at the back), casing everywhere else
                         .where('a', casing)
                         .where('E', abilities(PartAbility.INPUT_ENERGY))
-                        .where('e', casing.or(abilities(PartAbility.INPUT_ENERGY)))
+                        .where('e', casing.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY)))
                         .where('s', abilities(SEED_HATCH_ABILITY))
-                        .where('S', casing.or(abilities(SEED_HATCH_ABILITY)))
+                        .where('S', casing.setMinGlobalLimited(1).or(abilities(SEED_HATCH_ABILITY)))
                         .where('O', abilities(PartAbility.EXPORT_ITEMS))
                         .where('W', abilities(PartAbility.IMPORT_FLUIDS))
-                        .where('m', casing.or(abilities(PartAbility.MAINTENANCE)))
+                        .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
                         .where('g', glass)
                         .where('f', frames(GTMaterials.StainlessSteel))
                         .where('l', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP))
@@ -1272,7 +1272,7 @@ public class GTAAMachines {
                         .aisle("cmmmc", "m###m", "m###m", "m###m", "cmmmc")
                         .aisle("ccccc", "ccccc", "ccLcc", "ccccc", "ccccc")
                         .where('~', controller(blocks(definition.get())))
-                        .where('C', casing.or(autoAbilities(definition.getRecipeTypes()))
+                        .where('C', casing.setMinGlobalLimited(1).or(autoAbilities(definition.getRecipeTypes()))
                                 .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
                         .where('c', casing)
                         .where('g', glass)

@@ -45,6 +45,8 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
     private static final double DECAY = 0.99d;
     private static final int GROWTH = 1000;
     private static final int CYCLE_TICKS = 20;
+    /** an empty forge grows as if it held this much antimatter */
+    private static final long START_AMOUNT = 1600;
 
     private record Upgrade(int id, int tier) {}
     private static Map<Fluid, Upgrade> UPGRADES;
@@ -159,7 +161,14 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
         List<AntimatterHatchPartMachine> hatches = hatches();
         long total = 0;
         for (AntimatterHatchPartMachine h : hatches) total += h.getAmount();
-        if (!hatches.isEmpty()) drainEnergy(containmentCost(total));
+        // containment only costs anything while there is antimatter to hold; failing it loses 10% and stops
+        long passive = containmentCost(total);
+        if (!hatches.isEmpty() && total > 0 && !drainEnergy(passive)) {
+            decimate(hatches);
+            stop("Containment failed: not enough energy (" + FormattingUtil.formatNumbers(passive) + " EU/t)");
+            guiAntimatter = total;
+            return;
+        }
         if (!getRecipeLogic().isWorkingEnabled()) {
             guiAntimatter = total;
             return;
@@ -173,6 +182,10 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
 
     private void cycle(List<AntimatterHatchPartMachine> hatches) {
         if (hatches.isEmpty() || GTAAMaterials.ANTIMATTER == null) return;
+        if (hatches.size() < 16) {
+            stop("Needs all 16 Antimatter Hatches (has " + hatches.size() + ")");
+            return;
+        }
         long total = 0, min = Long.MAX_VALUE;
         for (AntimatterHatchPartMachine h : hatches) {
             long a = h.getAmount();
@@ -260,7 +273,8 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
 
     /** Base gain per hatch (1/16) * antimatter^(0.5 + C), times a normal roll with mean 0.2 + A. */
     private long distribute(List<AntimatterHatchPartMachine> hatches, long total) {
-        double coeff = Math.pow(total, 0.5 + modifiers[CONTAINMENT]);
+        // an empty forge seeds itself as if it held START_AMOUNT, otherwise sqrt(0) = 0 and it never starts
+        double coeff = Math.pow(Math.max(total, START_AMOUNT), 0.5 + modifiers[CONTAINMENT]);
         long difference = 0;
         for (AntimatterHatchPartMachine h : hatches) {
             int change = (int) Math.ceil((random.nextGaussian() + BASE_SKEW + modifiers[ACTIVATION]) * (coeff / 16));
