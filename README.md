@@ -15,7 +15,7 @@ the Aether) only get their recipes when that mod is installed.
 | Large Naquadah Reactor | IV+ | Burns the naquadah, uranium, thorium and plutonium liquid fuels |
 | Naquadah Fuel Refinery | UV | Makes Naquadah Based Liquid Fuel MkI-VI |
 | Semi-Stable Antimatter Stabilization Sequencer (SASS) | UEV | Antimatter Forge with GoodGenerator's animated antimatter core render |
-| Shielded Lagrangian Annihilation Matrix (SLAM) | UEV | Antimatter generator; Antimatter Hatch, wireless mode |
+| Shielded Lagrangian Annihilation Matrix (SLAM) | UEV | Antimatter generator: antimatter + one matter (Molten Copper, Superconductor Base UIV / UMV) in its 2 fluid hatches, burst every 5 s; screwdriver for wireless mode (GTM Things, UMV base, capped by hatch capacity, ignores the wireless rate limit); full burst readout in the UI. GTAA makes the UIV / UMV base fluids in the EBF |
 | Space Elevator | UHV | Motors MK-I to V, extendable to 24 modules, cable and climber render |
 | Space Assembler Module Mk-I / II / III | UHV / UIV / UXV | Space Elevator module |
 | Space Mining Module Mk-I / II / III | UV-UXV | Space Elevator module |
@@ -29,7 +29,7 @@ the Aether) only get their recipes when that mod is installed.
 | Mega Distillation Tower | ZPM | |
 | Extreme Entity Crusher | IV | Mob farm from a spawn egg; Elite / Ultra / Infernal Sigils crush infernal ranks for 3x / 5x / 9x loot |
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
-| Mystical Cultivation Array | EV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
+| Mystical Cultivation Array | LV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
 | Mana Nexus | LV-LuV | Needs Botania; stores 10M-2B mana (Mana Hatch for spreaders/sparks, liquid mana from Mana Fluid), does every Botania altar craft (pool, runic altar, terra plate, elven trade, daisy, apothecary, Mythic Botany infuser/rituals); Manasteel to Gaiasteel cores |
 | Ascension Gate | MV-MAX | The finale. A ring of 15 chevrons, one per tier ULV to MAX; each locks when its milestone items are in an input bus and the gate has power at that tier. All 15 locked: dial it, and Maxwell comes through |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |

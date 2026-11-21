@@ -13,20 +13,32 @@ import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+import com.omnicrox.gtaa.api.GTAAWireless;
 import com.omnicrox.gtaa.common.data.GTAAMaterials;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterMachineHelper.StoredFluid;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Shielded Lagrangian Annihilation Matrix (SLAM / Antimatter Generator).
  * Logic ported from GoodGenerator's AntimatterGenerator (GT5-Unofficial / GT New Horizons):
- * every 5 seconds it annihilates ALL fluid in its input hatches; with exactly antimatter + one matter fluid it
- * makes A * antimatter^E EU (A = 1e12 EU/L) scaled by min(AM/M, M/AM). Invalid fluids are voided.
+ * every 5 seconds it annihilates ALL fluid in its input hatches; with antimatter + exactly one kind of matter it
+ * makes A * antimatter^E EU (A = 1e12 EU/L) scaled by min(AM/M, M/AM). Anything else is voided.
+ * Matter: Molten Copper (E 1.00), Molten Superconductor Base UIV (1.02) / UMV (1.03).
+ * Wireless mode (screwdriver, needs GTM Things and UMV base): EU goes to the owner's wireless network instead of
+ * the hatches, still capped at what the hatches could hold.
  */
 public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachine {
 
@@ -34,11 +46,31 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
             AntimatterGeneratorMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     public static final double ANTIMATTER_FUEL_VALUE = 1e12;
-    private static final int CYCLE_TICKS = 100;
+    public static final int CYCLE_TICKS = 100;
 
+    // last cycle, for the UI (the SLAM works in 5-second bursts, so these stay up between them)
     @Persisted @DescSynced private long euLastCycle;
+    @Persisted @DescSynced private long euVoidedLastCycle;
+    @Persisted @DescSynced private long antimatterLastCycle;
+    @Persisted @DescSynced private long matterLastCycle;
+    @Persisted @DescSynced private String matterNameLastCycle = "";
+    @Persisted @DescSynced private float boostLastCycle;
     @Persisted @DescSynced private float efficiency;
     @Persisted @DescSynced private float avgEfficiency;
+    @Persisted @DescSynced private String problem = "";
+    @Persisted @DescSynced private boolean wireless = false;
+    // live, refreshed every second
+    @DescSynced private long antimatterStored;
+    @DescSynced private long matterStored;
+    @DescSynced private String matterStoredName = "";
+    @DescSynced private int fluidKinds;
+    @DescSynced private long hatchCapacity;
+    @DescSynced private long hatchStored;
+    @DescSynced private int hatchCount;
+    @DescSynced private int inputHatches;
+    @DescSynced private String wirelessStored = "";
+    @DescSynced private int ticksToCycle;
+
     private final List<Float> history = new ArrayList<>();
     private int historyIndex;
     private TickableSubscription tickSub;
@@ -52,33 +84,14 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         return MANAGED_FIELD_HOLDER;
     }
 
-    @Override
-    public void onStructureFormed() {
-        super.onStructureFormed();
-        if (!isRemote()) tickSub = subscribeServerTick(tickSub, this::antimatterTick);
-    }
-
-    @Persisted @DescSynced private boolean wireless = false;
-
     public boolean isWireless() {
         return wireless;
     }
 
     @Override
-    protected net.minecraft.world.InteractionResult onScrewdriverClick(net.minecraft.world.entity.player.Player player,
-                                                                         net.minecraft.world.InteractionHand hand,
-                                                                         net.minecraft.core.Direction gridSide,
-                                                                         net.minecraft.world.phys.BlockHitResult hitResult) {
-        if (isRemote()) return net.minecraft.world.InteractionResult.SUCCESS;
-        if (!com.omnicrox.gtaa.api.GTAAWireless.isAvailable()) {
-            player.displayClientMessage(Component.literal("Wireless mode needs GTM Things installed"), true);
-            return net.minecraft.world.InteractionResult.CONSUME;
-        }
-        wireless = !wireless;
-        player.displayClientMessage(Component.literal(wireless ? "Wireless mode enabled" : "Wireless mode disabled"), true);
-        if (wireless) player.displayClientMessage(Component.literal(
-                "Wireless mode needs a UMV superconductor base catalyst; EU goes to your wireless network"), false);
-        return net.minecraft.world.InteractionResult.CONSUME;
+    public void onStructureFormed() {
+        super.onStructureFormed();
+        if (!isRemote()) tickSub = subscribeServerTick(tickSub, this::antimatterTick);
     }
 
     @Override
@@ -90,83 +103,176 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         }
     }
 
+    @Override
+    protected InteractionResult onScrewdriverClick(Player player, InteractionHand hand, Direction gridSide, BlockHitResult hitResult) {
+        if (isRemote()) return InteractionResult.SUCCESS;
+        if (!GTAAWireless.isAvailable()) {
+            player.displayClientMessage(Component.literal("Wireless mode needs GTM Things installed"), true);
+            return InteractionResult.CONSUME;
+        }
+        wireless = !wireless;
+        player.displayClientMessage(Component.literal(wireless ?
+                "SLAM: wireless mode ON (needs Molten Superconductor Base UMV as matter)" :
+                "SLAM: wireless mode OFF (power goes to the dynamo / laser hatches)")
+                .withStyle(wireless ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.GRAY), true);
+        return InteractionResult.CONSUME;
+    }
+
+    //////////////////////////////////////
+    // ***** logic *****
+    //////////////////////////////////////
+
     private void antimatterTick() {
-        if (!isFormed() || !getRecipeLogic().isWorkingEnabled()) return;
-        if (getOffsetTimer() % CYCLE_TICKS == 0) cycle();
+        if (!isFormed()) return;
+        long t = getOffsetTimer();
+        ticksToCycle = (int) (CYCLE_TICKS - t % CYCLE_TICKS);
+        if (t % 20 == 0) refreshLive();
+        if (!getRecipeLogic().isWorkingEnabled()) return;
+        if (t % CYCLE_TICKS == 0) cycle();
+    }
+
+    private static Fluid antimatterFluid() {
+        return GTAAMaterials.ANTIMATTER == null ? null : GTAAMaterials.ANTIMATTER.getFluid();
+    }
+
+    private List<IEnergyContainer> outputs() {
+        List<IEnergyContainer> out = new ArrayList<>();
+        for (IRecipeHandler<?> h : getCapabilitiesFlat(IO.OUT, EURecipeCapability.CAP))
+            if (h instanceof IEnergyContainer c) out.add(c);
+        return out;
+    }
+
+    /** total by fluid, in the order found */
+    private static Map<Fluid, Long> byFluid(List<StoredFluid> inputs) {
+        Map<Fluid, Long> m = new LinkedHashMap<>();
+        for (StoredFluid f : inputs) m.merge(f.stack().getFluid(), (long) f.stack().getAmount(), Long::sum);
+        return m;
+    }
+
+    private static String name(Fluid f) {
+        return f == null ? "" : new FluidStack(f, 1).getDisplayName().getString();
+    }
+
+    private void refreshLive() {
+        Fluid am = antimatterFluid();
+        Map<Fluid, Long> fluids = byFluid(AntimatterMachineHelper.inputFluids(this));
+        fluidKinds = fluids.size();
+        antimatterStored = am == null ? 0 : fluids.getOrDefault(am, 0L);
+        matterStored = 0;
+        matterStoredName = "";
+        for (var e : fluids.entrySet()) {
+            if (e.getKey() == am) continue;
+            matterStored += e.getValue();
+            matterStoredName = matterStoredName.isEmpty() ? name(e.getKey()) : matterStoredName + ", " + name(e.getKey());
+        }
+        List<IEnergyContainer> outs = outputs();
+        hatchCount = outs.size();
+        long cap = 0, stored = 0;
+        for (IEnergyContainer c : outs) {
+            cap = sat(cap, c.getEnergyCapacity());
+            stored = sat(stored, c.getEnergyStored());
+        }
+        hatchCapacity = cap;
+        hatchStored = stored;
+        int in = 0;
+        for (var part : getParts())
+            for (var list : part.getRecipeHandlers())
+                if (list.isValid(IO.IN) && !list.getCapability(com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability.CAP).isEmpty()) {
+                    in++;
+                    break;
+                }
+        inputHatches = in;
+        wirelessStored = wireless ? GTAAWireless.storedText(getOwnerUUID()) : "";
+    }
+
+    private static long sat(long a, long b) {
+        long r = a + b;
+        return r < 0 ? Long.MAX_VALUE : r;
     }
 
     private void cycle() {
-        if (GTAAMaterials.ANTIMATTER == null) return;
-        Fluid antimatterFluid = GTAAMaterials.ANTIMATTER.getFluid();
+        Fluid am = antimatterFluid();
+        if (am == null) return;
         List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
-        long antimatter = 0;
-        StoredFluid catalyst = null;
-        long catalystAmount = 0;
-        int count = 0;
-        for (StoredFluid f : inputs) {
-            if (f.stack().getFluid() == antimatterFluid) antimatter += f.stack().getAmount();
-            else {
-                catalyst = f;
-                catalystAmount = f.stack().getAmount();
-            }
-            count++;
-        }
-        Fluid catalystFluid = catalyst == null ? null : catalyst.stack().getFluid();
+        if (inputs.isEmpty()) return; // nothing in: keep showing the last burst
+        Map<Fluid, Long> fluids = byFluid(inputs);
         // everything is annihilated, valid or not
         for (StoredFluid f : inputs) AntimatterMachineHelper.drainAll(f);
 
-        if (count == 2 && antimatter > 0 && catalystFluid != null) {
-            createEU(antimatter, catalystFluid, catalystAmount);
-        } else if (count > 0) {
-            euLastCycle = 0;
-            updateEfficiency(0f);
-        }
+        long antimatter = fluids.getOrDefault(am, 0L);
+        Fluid matter = null;
+        long matterAmount = 0;
+        for (var e : fluids.entrySet()) if (e.getKey() != am) { matter = e.getKey(); matterAmount = e.getValue(); }
+        antimatterLastCycle = antimatter;
+        matterLastCycle = matterAmount;
+        matterNameLastCycle = name(matter);
+        euLastCycle = 0;
+        euVoidedLastCycle = 0;
+        boostLastCycle = 0;
+
+        if (antimatter <= 0) fail("No antimatter: everything in the hatches was voided");
+        else if (matter == null) fail("No matter: add Molten Copper or a Molten Superconductor Base (UIV / UMV)");
+        else if (fluids.size() > 2) fail("More than one kind of matter: everything was voided");
+        else if (modifierFor(matter) == 0f) fail(name(matter) + " isn't valid matter and was voided");
+        else createEU(antimatter, matter, matterAmount);
+        refreshLive();
     }
 
-    private static float modifierFor(Fluid fluid) {
+    private void fail(String why) {
+        problem = why;
+        updateEfficiency(0f);
+    }
+
+    public static float modifierFor(Fluid fluid) {
+        if (fluid == null) return 0f;
         if (fluid == GTMaterials.Copper.getFluid()) return 1.00f;
         if (fluid == AntimatterMachineHelper.fluidOf("gtna:superconductor_uiv_base")) return 1.02f;
         if (fluid == AntimatterMachineHelper.fluidOf("gtna:superconductor_umv_base")) return 1.03f;
         return 0f;
     }
 
-    private void createEU(long antimatter, Fluid catalyst, long catalystAmount) {
-        float modifier = modifierFor(catalyst);
-        if (modifier == 0f) {
-            euLastCycle = 0;
-            updateEfficiency(0f);
-            return;
-        }
-        float eff = Math.min((float) antimatter / catalystAmount, (float) catalystAmount / antimatter);
+    private void createEU(long antimatter, Fluid matter, long matterAmount) {
+        float modifier = modifierFor(matter);
+        boostLastCycle = modifier;
+        float eff = Math.min((float) antimatter / matterAmount, (float) matterAmount / antimatter);
         updateEfficiency(eff);
         double raw = Math.pow(antimatter, modifier) * ANTIMATTER_FUEL_VALUE * eff;
         long eu = raw >= Long.MAX_VALUE || Double.isNaN(raw) ? Long.MAX_VALUE : (long) raw;
         euLastCycle = eu;
+        problem = eff < 0.999f ? "Antimatter and matter aren't 1:1, so efficiency dropped" : "";
 
-        // split across the dynamo / laser source hatches; anything they can't hold is voided
-        List<IEnergyContainer> outputs = new ArrayList<>();
-        for (IRecipeHandler<?> h : getCapabilitiesFlat(IO.OUT, EURecipeCapability.CAP)) {
-            if (h instanceof IEnergyContainer c) outputs.add(c);
-        }
-        if (outputs.isEmpty()) return;
-        // GTNH wireless mode: with a UMV-grade catalyst the EU goes to the owner's wireless network instead,
-        // clamped to what the hatches could hold so wireless can't bypass them
-        if (wireless && modifier >= 1.03f && com.omnicrox.gtaa.api.GTAAWireless.isAvailable()) {
-            long cap = 0;
-            for (IEnergyContainer c : outputs) {
-                cap += c.getEnergyCapacity();
-                if (cap < 0) { cap = Long.MAX_VALUE; break; }
-            }
-            long sent = Math.min(eu, cap);
-            euLastCycle = sent;
-            com.omnicrox.gtaa.api.GTAAWireless.addEU(getOwnerUUID(), sent, this);
+        List<IEnergyContainer> outs = outputs();
+        if (outs.isEmpty()) {
+            euVoidedLastCycle = eu;
+            problem = "No dynamo / laser source hatch: all of it was voided";
             return;
         }
-        long perHatch = eu / outputs.size();
-        for (IEnergyContainer c : outputs) {
-            long space = c.getEnergyCapacity() - c.getEnergyStored();
-            if (space > 0) c.changeEnergy(Math.min(space, perHatch));
+        if (wireless) {
+            if (!GTAAWireless.isAvailable()) {
+                problem = "Wireless mode needs GTM Things; sent to the hatches instead";
+            } else if (getOwnerUUID() == null) {
+                problem = "This controller has no owner (placed by a machine?): break and place it yourself. Sent to the hatches instead";
+            } else if (modifier < 1.03f) {
+                problem = "Wireless mode needs Molten Superconductor Base UMV; sent to the hatches instead";
+            } else {
+                long cap = 0;
+                for (IEnergyContainer c : outs) cap = sat(cap, c.getEnergyCapacity());
+                long sent = GTAAWireless.addEU(getOwnerUUID(), Math.min(eu, cap), this, true);
+                euVoidedLastCycle = eu - sent;
+                if (eu > cap) problem = "Over the hatches' capacity: the rest was voided (wireless is still capped by hatches)";
+                return;
+            }
         }
+        long left = eu;
+        for (int i = 0; i < outs.size() && left > 0; i++) {
+            IEnergyContainer c = outs.get(i);
+            long share = left / (outs.size() - i) + (left % (outs.size() - i) > 0 ? 1 : 0);
+            long space = c.getEnergyCapacity() - c.getEnergyStored();
+            long put = Math.min(space, share);
+            if (put > 0) left -= c.changeEnergy(put);
+        }
+        euVoidedLastCycle = Math.max(0, left);
+        if (left > 0) problem = "Hatches were full: " + FormattingUtil.formatNumbers(left) + " EU voided. Add more / bigger hatches";
     }
 
     private void updateEfficiency(float value) {
@@ -181,17 +287,56 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         avgEfficiency = history.isEmpty() ? 0 : sum / history.size();
     }
 
+    //////////////////////////////////////
+    // ***** UI *****
+    //////////////////////////////////////
+
+    private static Component line(String label, String value, ChatFormatting color) {
+        return Component.literal(label).withStyle(ChatFormatting.GRAY).append(Component.literal(value).withStyle(color));
+    }
+
+    private static String eu(long v) {
+        return FormattingUtil.formatNumbers(v) + " EU";
+    }
+
     @Override
     public void addDisplayText(List<Component> textList) {
         MultiblockDisplayText.builder(textList, isFormed())
                 .setWorkingStatus(getRecipeLogic().isWorkingEnabled(), getRecipeLogic().isWorkingEnabled() && isFormed())
                 .addCustom(t -> {
-                    t.add(Component.literal("Last cycle: " + FormattingUtil.formatNumbers(euLastCycle) + " EU")
-                            .withStyle(ChatFormatting.GOLD));
-                    t.add(Component.literal("Efficiency: " + Math.round(efficiency * 100) + "% (avg " +
-                            Math.round(avgEfficiency * 100) + "%)").withStyle(ChatFormatting.AQUA));
-                    t.add(Component.literal("Power destination: " + (wireless ? "Wireless network" : "Hatches"))
-                            .withStyle(wireless ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.GRAY));
+                    if (!isFormed()) return;
+                    t.add(line("Next burst in ", String.format("%.1f s", ticksToCycle / 20f), ChatFormatting.WHITE));
+
+                    t.add(Component.literal("Last burst").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
+                    t.add(line(" Generated: ", eu(euLastCycle), ChatFormatting.GREEN));
+                    t.add(line(" Average: ", FormattingUtil.formatNumbers(euLastCycle / CYCLE_TICKS) + " EU/t", ChatFormatting.GREEN));
+                    t.add(line(" Used: ", FormattingUtil.formatNumbers(antimatterLastCycle) + " L antimatter + " +
+                            FormattingUtil.formatNumbers(matterLastCycle) + " L " +
+                            (matterNameLastCycle.isEmpty() ? "matter" : matterNameLastCycle), ChatFormatting.AQUA));
+                    if (boostLastCycle > 0) t.add(line(" Boost: ", "x^" + boostLastCycle, ChatFormatting.YELLOW));
+                    t.add(line(" Efficiency: ", Math.round(efficiency * 100) + "% (avg " + Math.round(avgEfficiency * 100) + "%)",
+                            efficiency >= 0.999f ? ChatFormatting.GREEN : ChatFormatting.RED));
+                    if (euVoidedLastCycle > 0) t.add(line(" Voided: ", eu(euVoidedLastCycle), ChatFormatting.RED));
+
+                    t.add(Component.literal("Inputs").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
+                    t.add(line(" Fluid hatches: ", String.valueOf(inputHatches), ChatFormatting.WHITE));
+                    t.add(line(" Antimatter: ", FormattingUtil.formatNumbers(antimatterStored) + " L", ChatFormatting.AQUA));
+                    t.add(line(" Matter: ", FormattingUtil.formatNumbers(matterStored) + " L" +
+                            (matterStoredName.isEmpty() ? "" : " (" + matterStoredName + ")"), ChatFormatting.AQUA));
+                    if (fluidKinds > 2) t.add(Component.literal(" More than 2 fluids: the next burst will be voided!")
+                            .withStyle(ChatFormatting.RED));
+
+                    t.add(Component.literal("Output").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
+                    t.add(line(" Destination: ", wireless ? "Wireless network" : "Dynamo / laser hatches",
+                            wireless ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.WHITE));
+                    t.add(line(" Hatches: ", hatchCount + ", hold " + eu(hatchCapacity) + " (" + eu(hatchStored) + " stored)",
+                            ChatFormatting.WHITE));
+                    if (euLastCycle > hatchCapacity && hatchCount > 0)
+                        t.add(Component.literal(" Last burst was bigger than the hatches can hold").withStyle(ChatFormatting.RED));
+                    if (wireless && !wirelessStored.isEmpty()) t.add(line(" Network: ", wirelessStored + " EU", ChatFormatting.LIGHT_PURPLE));
+                    t.add(Component.literal(" Screwdriver the controller: switch hatches / wireless").withStyle(ChatFormatting.DARK_GRAY));
+
+                    if (!problem.isEmpty()) t.add(Component.literal(problem).withStyle(ChatFormatting.RED));
                 });
     }
 }

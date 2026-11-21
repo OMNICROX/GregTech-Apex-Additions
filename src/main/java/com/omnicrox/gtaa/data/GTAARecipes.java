@@ -44,6 +44,44 @@ public class GTAARecipes {
         ascensionGate(provider);
     }
 
+    /** a gtna material if it's installed and has the given form */
+    private static com.gregtechceu.gtceu.api.data.chemical.material.Material gtna(String id,
+            com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey<?> key) {
+        var m = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:" + id);
+        return m == null || m.isNull() || !m.hasProperty(key) ? null : m;
+    }
+
+    /**
+     * SLAM matter: Molten Superconductor Base UIV / UMV. GT Nexus Additions registers the fluids but nothing makes
+     * them; GTAA makes them in the Electric Blast Furnace. 1 L of base pairs with 1 L of antimatter.
+     */
+    private static void slamMatter(Consumer<FinishedRecipe> provider) {
+        var DUST = com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.DUST;
+        var FLUID = com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.FLUID;
+        var uiv = gtna("superconductor_uiv_base", FLUID);
+        var umv = gtna("superconductor_umv_base", FLUID);
+        if (uiv == null || umv == null) return;
+        var infinity = gtna("infinity", DUST);
+        var transcendent = gtna("transcendent_metal", DUST);
+
+        // EBF: 3 items, 1 fluid in. Tritanium coils reach both (10,800 K + 100 K per voltage tier over MV)
+        // UIV: the UHV superconductor base, upgraded with neutronium and infinity
+        BLAST_RECIPES.recipeBuilder("gtapexadditions:superconductor_uiv_base")
+                .inputItems(dust, GTMaterials.RutheniumTriniumAmericiumNeutronate, 6)
+                .inputItems(dust, GTMaterials.Neutronium, 3)
+                .inputItems(dust, infinity != null ? infinity : GTMaterials.Tritanium, 1)
+                .outputFluids(uiv.getFluid(L * 10))
+                .blastFurnaceTemp(10_800).duration(800).EUt(VA[UEV]).save(provider);
+
+        // UMV: UIV base folded with transcendent metal
+        BLAST_RECIPES.recipeBuilder("gtapexadditions:superconductor_umv_base")
+                .inputFluids(uiv.getFluid(L * 8))
+                .inputItems(dust, transcendent != null ? transcendent : GTMaterials.Naquadria, 1)
+                .inputItems(dust, GTMaterials.Neutronium, 1)
+                .outputFluids(umv.getFluid(L * 10))
+                .blastFurnaceTemp(11_500).duration(800).EUt(VA[UIV]).save(provider);
+    }
+
     /** Ascension Gate: built at MV so it can track the whole run, one chevron per tier. */
     private static void ascensionGate(Consumer<FinishedRecipe> provider) {
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:gate_base")
@@ -228,6 +266,8 @@ public class GTAARecipes {
                 .outputItems(GTAAMachines.ANTIMATTER_GENERATOR.asStack())
                 .addData(GTAARecipeTypes.MODULE_TIER, 1)
                 .duration(2400).EUt(VA[UEV]).save(provider);
+
+        slamMatter(provider);
 
         // --- fluids: MK IV / MK V fusion ---
         if (!GTAAMaterials.externalFluids()) {

@@ -222,17 +222,18 @@ public final class GTAACompatRecipes {
     }
 
     private static void cultivation(Consumer<FinishedRecipe> provider) {
+        // LV: you'll want crops early
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mystical_cultivation_array")
-                .inputItems(GTBlocks.CASING_STAINLESS_CLEAN.asStack(4))
-                .inputItems(GTItems.ELECTRIC_PUMP_EV, 2)
-                .inputItems(GTItems.ROBOT_ARM_EV, 2)
-                .inputItems(CustomTags.EV_CIRCUITS, 4)
+                .inputItems(GTBlocks.CASING_STEEL_SOLID.asStack(4))
+                .inputItems(GTItems.ELECTRIC_PUMP_LV, 2)
+                .inputItems(GTItems.ROBOT_ARM_LV, 2)
+                .inputItems(CustomTags.LV_CIRCUITS, 4)
                 .inputItems(S3, 4)
                 .inputItems(S4, 8)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 4))
+                .inputFluids(GTMaterials.Tin.getFluid(L * 4))
                 .outputItems(GTAAMachines.MYSTICAL_CULTIVATION_ARRAY.asStack())
-                .duration(600).EUt(VA[EV])
+                .duration(600).EUt(VA[LV])
                 .save(needing(provider, "mysticalagriculture", Map.of(
-                        S3, "mysticalagriculture:prudentium_ingot", S4, "mysticalagriculture:prudentium_essence")));
+                        S3, "mysticalagriculture:inferium_ingot", S4, "mysticalagriculture:inferium_essence")));
     }
 }

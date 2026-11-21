@@ -269,6 +269,7 @@ public class GTAAMachines {
                     Component.literal("\u00a772. Molten Superconductor Base UIV: \u00a761.02"),
                     Component.literal("\u00a773. Molten Superconductor Base UMV: \u00a761.03"),
                     SEPARATOR,
+                    Component.literal("\u00a77Needs \u00a7b2 fluid input hatches\u00a77 (the two side spots): antimatter and matter"),
                     Component.literal("\u00a77Switch the power destination to your wireless network with a screwdriver"),
                     Component.literal("\u00a77Wireless mode requires \u00a76Molten Superconductor Base UMV\u00a77 to work"),
                     Component.literal("\u00a77Wireless mode is still limited by hatch capacity"),
@@ -285,8 +286,8 @@ public class GTAAMachines {
                     .where('G', blocks(GTAABlocks.ANTIMATTER_ANNIHILATION_MATRIX.get()))
                     .where('H', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()).setMinGlobalLimited(1)
                             .or(abilities(PartAbility.OUTPUT_LASER, PartAbility.OUTPUT_ENERGY).setMinGlobalLimited(1)))
-                    .where('I', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()).setMinGlobalLimited(1)
-                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1)))
+                    // both side spots are fluid input hatches (any kind, ME too): one for antimatter, one for matter
+                    .where('I', abilities(PartAbility.IMPORT_FLUIDS))
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
@@ -1249,9 +1250,10 @@ public class GTAAMachines {
                     Component.literal("\u00a77Room for 64 crops at LV, doubling each tier (max 8192)"),
                     Component.literal("\u00a77Uses 1 L of water per 4 crops each second"),
                     Component.literal("\u00a78Based on the GT New Horizons Extreme Industrial Greenhouse"))
-            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> {
-                var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
+                // Solid Steel (LV build) or Clean Stainless (older builds keep working)
+                var casing = blocks(GTBlocks.CASING_STEEL_SOLID.get(), GTBlocks.CASING_STAINLESS_CLEAN.get());
                 var glass = com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine.glass();
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
@@ -1275,7 +1277,7 @@ public class GTAAMachines {
                         .where('W', abilities(PartAbility.IMPORT_FLUIDS))
                         .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
                         .where('g', glass)
-                        .where('f', frames(GTMaterials.StainlessSteel))
+                        .where('f', frames(GTMaterials.Steel, GTMaterials.StainlessSteel))
                         .where('l', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP))
                         .where('d', com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine.soil())
                         .where('w', waterOrAir())
@@ -1283,7 +1285,7 @@ public class GTAAMachines {
                         .build();
             })
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_clean_stainless_steel"),
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_solid_steel"),
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
             .register();
 
