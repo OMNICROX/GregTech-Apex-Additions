@@ -1,0 +1,318 @@
+package com.omnicrox.gtaa.common.data;
+
+import com.gregtechceu.gtceu.api.data.RotationState;
+import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
+import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
+import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
+import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
+import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.omnicrox.gtaa.GTAA;
+import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.BlackHoleCompressorMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.CircuitAssemblyLineMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.ElectricImplosionCompressorMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.MiracleTopMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.NanochipAssemblyComplexMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.gtnh.PlasmaForgePrototypeMachine;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+
+import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
+import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
+import static com.omnicrox.gtaa.GTAA.REGISTRATE;
+
+/** Non-power multis ported from GT New Horizons 2.9 and its addons (Twist Space Technology). */
+public final class GTAAGTNHMachines {
+
+    private GTAAGTNHMachines() {}
+
+    private static ResourceLocation gt(String path) {
+        return new ResourceLocation("gtceu", path);
+    }
+
+    private static TraceabilityPredicate io(TraceabilityPredicate casing, int minCasing) {
+        return casing.setMinGlobalLimited(minCasing)
+                .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1));
+    }
+
+    // ---------------- Industrial Rock Breaker (GT++) ----------------
+    public static final MultiblockMachineDefinition INDUSTRIAL_ROCK_BREAKER = REGISTRATE
+            .multiblock("industrial_rock_breaker", WorkableElectricMultiblockMachine::new)
+            .langValue("Industrial Rock Breaker")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.INDUSTRIAL_ROCK_BREAKER)
+            .recipeModifiers(GTAAModifiers.parallel(m -> 8 * Math.max(1, GTAAModifiers.tier(m)), m -> 1.0 / 3.0, 1.0),
+                    GTRecipeModifiers.OC_NON_PERFECT)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eRock Breaker"),
+                    Component.literal("§7Use a §eProgrammed Circuit§7 to pick the block:"),
+                    Component.literal("§61§7 Cobblestone, §62§7 Stone, §63§7 Obsidian (uses Redstone), §64§7 Basalt"),
+                    Component.literal("§65§7 Deepslate, §66§7 Netherrack, §67§7 End Stone (needs one of the block)"),
+                    Component.literal("§b8 parallels§7 per voltage tier, §a200% faster"),
+                    Component.literal("§8Ported from GT New Horizons (GT++)"))
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                    .aisle("CCC", "CCC", "CCC")
+                    .aisle("C~C", "C#C", "CCC")
+                    .aisle("CCC", "CCC", "CCC")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('C', io(blocks(GTBlocks.CASING_STEEL_SOLID.get()), 12))
+                    .where('#', air())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_solid_steel"),
+                    GTAA.id("block/multiblock/industrial_rock_breaker")))
+            .register();
+
+    // ---------------- Electric Implosion Compressor (GT5-Unofficial) ----------------
+    public static final MultiblockMachineDefinition ELECTRIC_IMPLOSION_COMPRESSOR = REGISTRATE
+            .multiblock("electric_implosion_compressor", ElectricImplosionCompressorMachine::new)
+            .langValue("Electric Implosion Compressor")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.ELECTRIC_IMPLOSION)
+            .recipeModifiers(GTAAModifiers.parallel(ElectricImplosionCompressorMachine::maxParallel, m -> 1.0, 1.0),
+                    GTRecipeModifiers.OC_NON_PERFECT)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eImplosion Compressor"),
+                    Component.literal("§7Runs every Implosion Compressor recipe §awithout explosives"),
+                    Component.literal("§7The 27 containment blocks set the parallels:"),
+                    Component.literal("§fNeutronium§7 1, §cInfinity§7 4, §8Transcendent Metal§7 16,"),
+                    Component.literal("§5Spacetime§7 64, §3Universium§7 256"),
+                    Component.literal("§8Ported from GT New Horizons"))
+            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                        .aisle("CC~CC", "CXXXC", "CXXXC", "CXXXC", "CCCCC")
+                        .aisle("CGGGC", "GXXXG", "GXXXG", "GXXXG", "CGGGC")
+                        .aisle("CCCCC", "CXXXC", "CXXXC", "CXXXC", "CCCCC")
+                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', io(c, 40))
+                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                        .where('X', ElectricImplosionCompressorMachine.containmentPredicate())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
+                    gt("block/multiblock/implosion_compressor")))
+            .register();
+
+    // ---------------- Black Hole Compressor (GT5-Unofficial 2.9) ----------------
+    public static final MultiblockMachineDefinition BLACK_HOLE_COMPRESSOR = REGISTRATE
+            .multiblock("black_hole_compressor", BlackHoleCompressorMachine::new)
+            .langValue("Pseudostable Black Hole Containment Field")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.COMPRESSOR_RECIPES, GTAARecipeTypes.NEUTRONIUM_COMPRESSION)
+            .recipeModifiers(BlackHoleCompressorMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eCompressor, Neutronium Compressor"),
+                    Component.literal("§dUses the immense power of the event horizon to compress things"),
+                    Component.literal("§7Insert a §eBlack Hole Seed§7 to open a black hole at §b100§7 stability"),
+                    Component.literal("§7Stability decays §b1/s§7; at §c0§7 it voids outputs and closes after a minute"),
+                    Component.literal("§7Feed §5Spacetime§7 to halt decay: 1 L/s, doubling every 30 s it is held"),
+                    Component.literal("§7A §eBlack Hole Collapser§7 closes it (open a new one to reset)"),
+                    Component.literal("§7Neutronium Compressor mode (Avaritia singularities) needs an open black hole"),
+                    Component.literal("§b8 parallels§7 per voltage tier, §a500% speed§7, §a70% EU"),
+                    Component.literal("§7Parallels §bx2 / x4§7 below 50 / 20 stability (compressor uncapped below 20)"),
+                    Component.literal("§8Ported from GT New Horizons"))
+            .appearanceBlock(GTAABlocks.EXTREME_DENSITY_CASING)
+            .pattern(definition -> {
+                var d = blocks(GTAABlocks.EXTREME_DENSITY_CASING.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD")
+                        .aisle("DDD~DDD", "DRRRRRD", "DR###RD", "DR###RD", "DR###RD", "DRRRRRD", "DDDDDDD")
+                        .aisle("DDHHHDD", "D#####D", "H#####H", "H#####H", "H#####H", "D#####D", "DDHHHDD")
+                        .aisle("DDDDDDD", "DRRRRRD", "DR###RD", "DR###RD", "DR###RD", "DRRRRRD", "DDDDDDD")
+                        .aisle("DDDDDDD", "DDDDDDD", "DDHHHDD", "DDHHHDD", "DDHHHDD", "DDDDDDD", "DDDDDDD")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('D', io(d, 80))
+                        .where('R', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()))
+                        .where('H', blocks(GTAABlocks.HAWKING_GLASS.get()))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/extreme_density_casing"),
+                    GTAA.id("block/multiblock/black_hole_compressor")))
+            .register();
+
+    // ---------------- DTPF Prototype MK-II (Twist Space Technology) ----------------
+    private static GTRecipeType plasmaForge() {
+        for (String id : new String[] { "gtceu:plasma_forge", "gtna:plasma_forge" }) {
+            GTRecipeType t = GTRegistries.RECIPE_TYPES.get(new ResourceLocation(id));
+            if (t != null) return t;
+        }
+        return GTRecipeTypes.BLAST_RECIPES;
+    }
+
+    public static final MultiblockMachineDefinition PLASMA_FORGE_PROTOTYPE = REGISTRATE
+            .multiblock("plasma_forge_prototype_mk2", PlasmaForgePrototypeMachine::new)
+            .langValue("Dimensionally Transcendent Matter Plasma Forge Prototype MK-II")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(plasmaForge())
+            .recipeModifiers(PlasmaForgePrototypeMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §ePlasma Forge"),
+                    Component.literal("§9§oIf the facts don't fit the theory, change the facts."),
+                    Component.literal("§7The prototype of the Dimensionally Transcendent Plasma Forge; runs its recipes"),
+                    Component.literal("§7Better at continuous long-term operation and mass production:"),
+                    Component.literal("§7after §c24 h§7 of continuous running it uses §b75%§7 less catalyst fuel"),
+                    Component.literal("§7Once stopped, the discount falls back to §b0%§7 within §c1 h"),
+                    Component.literal("§b16 parallels§7; coil heat and overclocks like the Electric Blast Furnace"),
+                    Component.literal("§8After Twist Space Technology (GTNH addon)"))
+            .appearanceBlock(GTBlocks.FUSION_CASING_MK3)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.FUSION_CASING_MK3.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .aisle("CCC~CCC", "CKKKKKC", "CK###KC", "CK###KC", "CK###KC", "CKKKKKC", "CCCCCCC")
+                        .aisle("CGGGGGC", "GKKKKKG", "GK###KG", "GK###KG", "GK###KG", "GKKKKKG", "CGGGGGC")
+                        .aisle("CCCCCCC", "CKKKKKC", "CK###KC", "CK###KC", "CK###KC", "CKKKKKC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', io(c, 80))
+                        .where('K', heatingCoils())
+                        .where('G', blocks(GTBlocks.FUSION_GLASS.get()))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
+    // ---------------- Circuit Assembly Line (GT5-Unofficial) ----------------
+    public static final MultiblockMachineDefinition CIRCUIT_ASSEMBLY_LINE = REGISTRATE
+            .multiblock("circuit_assembly_line", CircuitAssemblyLineMachine::new)
+            .langValue("Circuit Assembly Line")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES)
+            .recipeModifiers(CircuitAssemblyLineMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eCircuit Assembler"),
+                    Component.literal("§6Circuit Assembly Line§7 mode:"),
+                    Component.literal("§7- Imprinted by the §efirst circuit§7 it makes; §cimprints are permanent"),
+                    Component.literal("§7- Only makes that circuit, §b4 parallels§7 per slice (5-16 slices)"),
+                    Component.literal("§6Circuit Assembler§7 mode: any circuit, recipe tier up to energy hatch tier - 1"),
+                    Component.literal("§7Screwdriver the controller to change mode"),
+                    Component.literal("§aPerforms 4/4 perfect overclocks"),
+                    Component.literal("§7Break and replace the controller to clear the imprint"),
+                    Component.literal("§8Ported from GT New Horizons"))
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.CASING_STEEL_SOLID.get());
+                var glass = blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.FUSION_GLASS.get());
+                var energy = c.setMinGlobalLimited(10).or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER)
+                        .setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                        .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1));
+                return FactoryBlockPattern.start(RelativeDirection.BACK, RelativeDirection.UP, RelativeDirection.RIGHT)
+                        .aisle("CIC", "~AG", "CTC")
+                        .aisle("CIC", "GAG", "CTC").setRepeatable(3, 14)
+                        .aisle("COC", "GAG", "CTC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', energy)
+                        .where('I', abilities(PartAbility.IMPORT_ITEMS).or(blocks(GTBlocks.CASING_STEEL_SOLID.get())))
+                        .where('O', abilities(PartAbility.EXPORT_ITEMS))
+                        .where('A', blocks(GTBlocks.CASING_ASSEMBLY_LINE.get()))
+                        .where('T', GTAAModifiers.counted(CircuitAssemblyLineMachine.CTX,
+                                () -> new Block[] { GTBlocks.CASING_ASSEMBLY_CONTROL.get() }))
+                        .where('G', glass)
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_solid_steel"),
+                    gt("block/multiblock/assembly_line")))
+            .register();
+
+    // ---------------- Miracle Top (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition MIRACLE_TOP = REGISTRATE
+            .multiblock("miracle_top", MiracleTopMachine::new)
+            .langValue("Miracle Top")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES)
+            .recipeModifiers(MiracleTopMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eCircuit Assembler"),
+                    Component.literal("§dI never think about the future because it will come sooner or later."),
+                    Component.literal("§7A ring section and a conveying section; §62-16§7 rings"),
+                    Component.literal("§b128 parallels§7 per ring, §a400% speed§7 per ring"),
+                    Component.literal("§aPerfect overclocks§7 with 8 or more rings"),
+                    Component.literal("§8After Twist Space Technology (GTNH addon)"))
+            .appearanceBlock(GTBlocks.FUSION_CASING_MK2)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.FUSION_CASING_MK2.get());
+                return FactoryBlockPattern.start(RelativeDirection.BACK, RelativeDirection.UP, RelativeDirection.RIGHT)
+                        .aisle("CCCCC", "CCCCC", "~CCCC", "CCCCC", "CCCCC")
+                        .aisle("PPPPP", "P###P", "P###P", "P###P", "PPRPP").setRepeatable(2, 16)
+                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', io(c, 20))
+                        .where('P', blocks(GTBlocks.FUSION_CASING_MK3.get()))
+                        .where('R', GTAAModifiers.counted(MiracleTopMachine.CTX, () -> new Block[] { GTBlocks.FUSION_COIL.get() }))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk2"),
+                    gt("block/multiblock/gcym/large_circuit_assembler")))
+            .register();
+
+    // ---------------- Nanochip Assembly Complex (GT5-Unofficial 2.9) ----------------
+    public static final MultiblockMachineDefinition NANOCHIP_ASSEMBLY_COMPLEX = REGISTRATE
+            .multiblock("nanochip_assembly_complex", NanochipAssemblyComplexMachine::new)
+            .langValue("Nanochip Assembly Complex")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES, GTRecipeTypes.ASSEMBLY_LINE_RECIPES)
+            .recipeModifiers(NanochipAssemblyComplexMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eNanochip Assembly Complex"),
+                    Component.literal("§7Handles all your circuit assembling needs: every circuit recipe from the"),
+                    Component.literal("§7 Circuit Assembler and the Assembly Line (circuits only)"),
+                    Component.literal("§7Install §dmodules§7 in the 3x3 bay on the roof (Firewall Casing = empty):"),
+                    Component.literal("§7 Assembly Matrix (required), Board Processor, Cutting Chamber, Wire Tracer,"),
+                    Component.literal("§7 Etching Array, Biological Coordination, Optical Organizer, Encasement Wrapper,"),
+                    Component.literal("§7 Part Processor - each unlocks a circuit family (see the controller)"),
+                    Component.literal("§b32 parallels§7 per installed module, §aperfect overclocks"),
+                    Component.literal("§8Ported from GT New Horizons 2.9 (condensed)"))
+            .appearanceBlock(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING)
+            .pattern(definition -> {
+                var m = blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM")
+                        .aisle("RMM~MMR", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "RMMMMMR")
+                        .aisle("RGGGGGR", "GXXXXXG", "GXXXXXG", "GXXXXXG", "GXXXXXG", "GXXXXXG", "RGGGGGR")
+                        .aisle("RMMMMMR", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "RMMMMMR")
+                        .aisle("RRRRRRR", "RMMMMMR", "RMSSSMR", "RMSSSMR", "RMSSSMR", "RMMMMMR", "RRRRRRR")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('M', io(m, 60).or(abilities(PartAbility.DATA_ACCESS).setMaxGlobalLimited(2)))
+                        .where('R', blocks(GTAABlocks.NANOCHIP_REINFORCEMENT_CASING.get()))
+                        .where('X', blocks(GTAABlocks.NANOCHIP_COMPUTATIONAL_MATRIX_CASING.get()))
+                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get()))
+                        .where('S', NanochipAssemblyComplexMachine.moduleSlot())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/nanochip_mesh_interface_casing"),
+                    GTAA.id("block/multiblock/nanochip_assembly_complex")))
+            .register();
+
+    public static void init() {}
+}

@@ -1,0 +1,1 @@
+{"parent": "minecraft:block/cube_all", "render_type": "minecraft:solid", "textures": {"all": "gtapexadditions:block/casing/nac_module_part_processor"}}

@@ -1206,18 +1206,21 @@ public class GTAAMachines {
             .recipeType(GTAARecipeTypes.ENTITY_CRUSHER)
             .tooltips(
                     Component.literal("\u00a77Machine Type: \u00a7eMob Farm"),
-                    Component.literal("\u00a77Put a \u00a7eSpawn Egg\u00a77 in an input bus to choose the mob (not used up)"),
+                    Component.literal("\u00a77Put a \u00a7eSpawn Egg\u00a77 or \u00a7eHostile Neural Networks Data Model\u00a77 in an input bus (not used up)"),
+                    Component.literal("\u00a77Data model tier adds bonus loot rolls: \u00a7aBasic 5%\u00a77 .. \u00a76Self Aware 99.5%"),
                     Component.literal("\u00a77A sword in an input bus adds its Looting level (max 4)"),
                     Component.literal("\u00a77Rolls the mob's loot every 5 seconds"),
-                    Component.literal("\u00a77Uses \u00a7e64 EU/t per point of mob health\u00a77 (at least MV) per mob"),
+                    Component.literal("\u00a77Uses \u00a7e4 EU/t per point of mob health\u00a77 (at least LV) per mob"),
                     Component.literal("\u00a77Extra power runs more mobs at once, up to \u00a76256"),
+                    Component.literal("\u00a7cHostile mobs can be infernal\u00a77 (1 in 20, like in the world) and drop infernal loot"),
+                    Component.literal("\u00a77Sigils make every mob infernal: \u00a7eRare\u00a77 normal odds, \u00a76Ultra\u00a77 / \u00a7cInfernal\u00a77 better rank odds"),
                     Component.literal("\u00a7cBosses can't be crushed"),
                     Component.literal("\u00a78Idea from GT New Horizons (KubaTech)"))
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> {
                 var casing = blocks(GTBlocks.CASING_STEEL_SOLID.get());
                 var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
-                        net.minecraft.world.level.block.Blocks.GLASS);
+                        GTBlocks.FUSION_GLASS.get(), GTBlocks.CLEANROOM_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
@@ -1502,5 +1505,7 @@ public class GTAAMachines {
             .hasBER(true)
             .register();
 
-    public static void init() {}
+    public static void init() {
+        GTAAGTNHMachines.init();
+    }
 }

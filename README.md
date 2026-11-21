@@ -27,7 +27,14 @@ the Aether) only get their recipes when that mod is installed.
 | Quantum Force Transformer | UHV | Tiered manipulators and shielding |
 | Water Purification Plant + 8 units | LuV+ | Clarifier, Ozonation, Flocculation, pH Neutralization, Plasma Heater, UV Treatment, Degasser, Baryonic Perfection; Grade 1-8 purified water (GTCA's when installed) |
 | Mega Distillation Tower | ZPM | |
-| Extreme Entity Crusher | IV | Mob farm from a spawn egg; Elite / Ultra / Infernal Sigils crush infernal ranks for 3x / 5x / 9x loot |
+| Extreme Entity Crusher | MV | Mob farm from a spawn egg or Hostile Neural Networks data model (tier = bonus loot); hostile mobs roll infernal like in the world, Rare / Ultra / Infernal Sigils make every mob infernal with better rank odds |
+| Industrial Rock Breaker | MV | GT++: cobble / stone / obsidian / basalt / deepslate / netherrack / end stone by circuit, 8 parallels per tier |
+| Circuit Assembly Line | LuV | GTNH: imprinted to one circuit (4 parallels per slice) or Circuit Assembler mode; perfect overclocks |
+| Electric Implosion Compressor | UV | GTNH: implosion recipes without explosives; containment block = 1-256 parallels |
+| Nanochip Assembly Complex | UV | GTNH 2.9 (condensed): all circuit recipes; 9 roof modules unlock circuit families, 32 parallels each |
+| Miracle Top | UHV | TST: circuit assembler, 2-16 rings, 128 parallels and +400% speed per ring |
+| Pseudostable Black Hole Containment Field | UHV | GTNH 2.9 Black Hole Compressor: compressor + Avaritia neutronium compressor, black hole stability / spacetime |
+| DTMPF Prototype MK-II | UEV | TST: runs DTPF recipes, up to 75% catalyst discount after 24 h of running |
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
 | Mystical Cultivation Array | LV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
 | Mana Nexus | LV-LuV | Needs Botania; stores 10M-2B mana (Mana Hatch for spreaders/sparks, liquid mana from Mana Fluid), does every Botania altar craft (pool, runic altar, terra plate, elven trade, daisy, apothecary, Mythic Botany infuser/rituals); Manasteel to Gaiasteel cores |

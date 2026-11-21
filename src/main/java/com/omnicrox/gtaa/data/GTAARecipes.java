@@ -42,6 +42,7 @@ public class GTAARecipes {
         extraModules(provider);
         drones(provider);
         ascensionGate(provider);
+        GTAAGTNHRecipes.init(provider);
         GTAAHyperNaquadah.init(provider);
     }
 
@@ -669,39 +670,39 @@ public class GTAARecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.STRUCTURE_UPGRADER.asStack())
                 .duration(400).EUt(VA[MV]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_entity_crusher")
-                .inputItems(GTItems.ELECTRIC_MOTOR_IV, 8)
-                .inputItems(CustomTags.IV_CIRCUITS, 4)
-                .inputItems(net.minecraft.world.item.Items.DIAMOND_SWORD, 4)
-                .inputItems(GTBlocks.CASING_STEEL_SOLID.asItem(), 16)
-                .inputItems(plate, GTMaterials.TungstenSteel, 16)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
+                .inputItems(GTItems.ELECTRIC_MOTOR_MV, 4)
+                .inputItems(CustomTags.MV_CIRCUITS, 4)
+                .inputItems(net.minecraft.world.item.Items.IRON_SWORD, 4)
+                .inputItems(GTBlocks.CASING_STEEL_SOLID.asItem(), 8)
+                .inputItems(plate, GTMaterials.Steel, 8)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 2))
                 .outputItems(GTAAMachines.EXTREME_ENTITY_CRUSHER.asStack())
-                .duration(600).EUt(VA[IV]).save(provider);
+                .duration(400).EUt(VA[MV]).save(provider);
 
-        // infernal mode sigils for the crusher (not used up)
+        // sigils for the crusher (not used up): Rare = every hostile infernal, Ultra / Infernal = better rank odds
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:elite_sigil")
-                .inputItems(plate, GTMaterials.RoseGold, 4)
-                .inputItems(net.minecraft.world.item.Items.BLAZE_ROD, 8)
-                .inputItems(net.minecraft.world.item.Items.GHAST_TEAR, 4)
-                .inputItems(CustomTags.IV_CIRCUITS, 2)
-                .inputFluids(GTMaterials.Blaze.getFluid(L * 4))
+                .inputItems(plate, GTMaterials.Gold, 4)
+                .inputItems(net.minecraft.world.item.Items.BLAZE_ROD, 4)
+                .inputItems(net.minecraft.world.item.Items.GHAST_TEAR, 1)
+                .inputItems(CustomTags.MV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Redstone.getFluid(L * 4))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.ELITE_SIGIL.asStack())
-                .duration(400).EUt(VA[IV]).save(provider);
+                .duration(300).EUt(VA[MV]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:ultra_sigil")
                 .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.ELITE_SIGIL.asStack())
-                .inputItems(plate, GTMaterials.Osmiridium, 4)
-                .inputItems(net.minecraft.world.item.Items.WITHER_SKELETON_SKULL, 4)
-                .inputItems(CustomTags.LuV_CIRCUITS, 2)
-                .inputFluids(GTMaterials.Blaze.getFluid(L * 8))
+                .inputItems(plate, GTMaterials.RoseGold, 4)
+                .inputItems(net.minecraft.world.item.Items.WITHER_SKELETON_SKULL, 1)
+                .inputItems(CustomTags.HV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Blaze.getFluid(L * 4))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.ULTRA_SIGIL.asStack())
-                .duration(600).EUt(VA[LuV]).save(provider);
+                .duration(400).EUt(VA[HV]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:infernal_sigil")
                 .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.ULTRA_SIGIL.asStack())
-                .inputItems(plate, GTMaterials.Naquadria, 4)
-                .inputItems(net.minecraft.world.item.Items.NETHER_STAR, 2)
-                .inputItems(CustomTags.ZPM_CIRCUITS, 2)
-                .inputFluids(GTMaterials.Blaze.getFluid(L * 16))
+                .inputItems(plate, GTMaterials.Titanium, 4)
+                .inputItems(net.minecraft.world.item.Items.NETHER_STAR, 1)
+                .inputItems(CustomTags.EV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Blaze.getFluid(L * 8))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.INFERNAL_SIGIL.asStack())
-                .duration(800).EUt(VA[ZPM]).save(provider);
+                .duration(600).EUt(VA[EV]).save(provider);
     }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gtapexadditions:nac_module_board_processor"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gtapexadditions:blocks/nac_module_board_processor"
+}

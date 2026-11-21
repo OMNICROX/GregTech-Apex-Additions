@@ -28,6 +28,9 @@ public class GTAARecipeTypes {
     public static final GTRecipeType[] PURIFICATION = new GTRecipeType[9];
     public static GTRecipeType PURIFICATION_PLANT;
     public static GTRecipeType ENTITY_CRUSHER;
+    public static GTRecipeType INDUSTRIAL_ROCK_BREAKER;
+    public static GTRecipeType ELECTRIC_IMPLOSION;
+    public static GTRecipeType NEUTRONIUM_COMPRESSION;
     public static GTRecipeType CULTIVATION;
     public static GTRecipeType SUIT_FABRICATION;
     public static GTRecipeType SEED_SYNTHESIS;
@@ -113,6 +116,20 @@ public class GTAARecipeTypes {
         }
         PURIFICATION_PLANT = register("purification_plant", "multiblock", "Water Purification Plant")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        INDUSTRIAL_ROCK_BREAKER = register("industrial_rock_breaker", "multiblock", "Industrial Rock Breaker")
+                .setMaxIOSize(2, 1, 0, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
+        ELECTRIC_IMPLOSION = register("electric_implosion", "multiblock", "Electric Implosion Compressor")
+                .setMaxIOSize(6, 2, 1, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.ElectricImplosionLogic.INSTANCE);
+        NEUTRONIUM_COMPRESSION = register("neutronium_compression", "multiblock", "Neutronium Compressor")
+                .setMaxIOSize(1, 1, 0, 0)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.NeutroniumCompressionLogic.INSTANCE);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")

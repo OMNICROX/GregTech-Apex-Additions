@@ -25,9 +25,13 @@ public class InfernalSigilItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("Extreme Entity Crusher: crushes " + rank.title + " mobs").withStyle(rank.color));
-        tooltip.add(Component.literal("Loot x" + (1 + rank.mult) + ", infernal bonus drops, x" + rank.mult + " power")
-                .withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Extreme Entity Crusher: every hostile mob crushed is infernal").withStyle(rank.color));
+        tooltip.add(Component.literal(switch (rank) {
+            case ELITE -> "Normal rank odds (Ultra 1 in 10, Infernal 1 in 70)";
+            case ULTRA -> "Better rank odds (Ultra 1 in 3, Infernal 1 in 21)";
+            case INFERNAL -> "Best rank odds (Ultra 1 in 2, Infernal 1 in 6)";
+        }).withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Rare-rank drops still roll, so lower ranks stay useful").withStyle(ChatFormatting.DARK_GRAY));
         tooltip.add(Component.literal("Put it in an input bus; it isn't used up").withStyle(ChatFormatting.DARK_GRAY));
     }
 

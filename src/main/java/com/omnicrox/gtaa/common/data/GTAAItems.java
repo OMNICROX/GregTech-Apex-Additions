@@ -59,7 +59,7 @@ public class GTAAItems {
     public static final ItemEntry<com.omnicrox.gtaa.common.item.StructureUpgrader> STRUCTURE_UPGRADER = REGISTRATE
             .item("structure_upgrader", com.omnicrox.gtaa.common.item.StructureUpgrader::new)
             .lang("Structure Upgrader").model(NonNullBiConsumer.noop()).register();
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.InfernalSigilItem> ELITE_SIGIL = sigil("elite_sigil", "Elite Sigil",
+    public static final ItemEntry<com.omnicrox.gtaa.common.item.InfernalSigilItem> ELITE_SIGIL = sigil("elite_sigil", "Rare Sigil",
             com.omnicrox.gtaa.common.infernal.InfernalMobs.Rank.ELITE);
     public static final ItemEntry<com.omnicrox.gtaa.common.item.InfernalSigilItem> ULTRA_SIGIL = sigil("ultra_sigil", "Ultra Sigil",
             com.omnicrox.gtaa.common.infernal.InfernalMobs.Rank.ULTRA);
@@ -102,6 +102,11 @@ public class GTAAItems {
 
     public static final ItemEntry<Item> SPIRE_LIGHTNING_ROD = REGISTRATE.item("spire_lightning_rod", Item::new)
             .lang("Spire Lightning Rod").model(NonNullBiConsumer.noop()).register();
+
+    public static final ItemEntry<Item> BLACK_HOLE_SEED = REGISTRATE.item("black_hole_seed", Item::new)
+            .lang("Black Hole Seed").model(NonNullBiConsumer.noop()).register();
+    public static final ItemEntry<Item> BLACK_HOLE_COLLAPSER = REGISTRATE.item("black_hole_collapser", Item::new)
+            .lang("Black Hole Collapser").model(NonNullBiConsumer.noop()).register();
 
     public static void init() {}
 }

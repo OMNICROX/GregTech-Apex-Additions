@@ -778,6 +778,41 @@ public final class InfernalMobs {
         }
     }
 
+    /** Modifier count for one mob: 1 in ultraRarity rolls Ultra counts, 1 in infernoRarity of those Infernal counts */
+    public static int rollModCount(RandomSource r, int ultraRarity, int infernoRarity) {
+        Rank rank = Rank.ELITE;
+        if (r.nextInt(Math.max(1, ultraRarity)) == 0) {
+            rank = Rank.ULTRA;
+            if (r.nextInt(Math.max(1, infernoRarity)) == 0) rank = Rank.INFERNAL;
+        }
+        int lo = Math.min(rank.min(), rank.max()), hi = Math.max(rank.min(), rank.max());
+        int enabled = 0;
+        for (InfernalModifier m : InfernalModifier.values()) if (enabled(m)) enabled++;
+        return Math.max(1, Math.min(enabled, lo + r.nextInt(hi - lo + 1)));
+    }
+
+    /** The items an infernal mob with this many modifiers drops when a player kills it (one per 5 modifiers) */
+    public static List<ItemStack> infernalLoot(int mods, RandomSource r) {
+        List<ItemStack> out = new ArrayList<>();
+        Rank rank = Rank.of(mods);
+        int modStr = mods;
+        while (modStr > 0) {
+            ItemStack stack = randomItem(rank, r, Math.min(5, modStr));
+            if (stack.isEmpty()) {
+                modStr--;
+                continue;
+            }
+            out.add(stack);
+            modStr -= 5;
+        }
+        return out;
+    }
+
+    /** Whether this entity type spawns infernal on its own every time (GTNH's always-infernal list) */
+    public static boolean alwaysInfernal(EntityType<?> type) {
+        return InfernalConfig.ALWAYS_INFERNAL.get().contains(String.valueOf(EntityType.getKey(type)));
+    }
+
     private static List<? extends String> list(Rank rank) {
         return switch (rank) {
             case ELITE -> InfernalConfig.DROPS_ELITE.get();

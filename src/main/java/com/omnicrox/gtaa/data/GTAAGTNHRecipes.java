@@ -1,0 +1,185 @@
+package com.omnicrox.gtaa.data;
+
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTItems;
+import com.gregtechceu.gtceu.common.data.GTMachines;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
+import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.omnicrox.gtaa.common.data.GTAABlocks;
+import com.omnicrox.gtaa.common.data.GTAAGTNHMachines;
+import com.omnicrox.gtaa.common.data.GTAAItems;
+import com.omnicrox.gtaa.common.data.GTAARecipeTypes;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Items;
+
+import java.util.function.Consumer;
+
+import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
+
+/** Recipes for the GTNH-port multis and their parts. */
+public final class GTAAGTNHRecipes {
+
+    private GTAAGTNHRecipes() {}
+
+    public static void init(Consumer<FinishedRecipe> provider) {
+        rockBreaker(provider);
+        controllers(provider);
+        parts(provider);
+    }
+
+    private static void rockBreaker(Consumer<FinishedRecipe> provider) {
+        var t = GTAARecipeTypes.INDUSTRIAL_ROCK_BREAKER;
+        t.recipeBuilder("gtapexadditions:irb_cobblestone").circuitMeta(1).outputItems(Items.COBBLESTONE)
+                .duration(16).EUt(VA[LV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_stone").circuitMeta(2).outputItems(Items.STONE)
+                .duration(16).EUt(VA[LV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_obsidian").circuitMeta(3).inputItems(dust, GTMaterials.Redstone)
+                .outputItems(Items.OBSIDIAN).duration(128).EUt(VA[MV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_basalt").circuitMeta(4).outputItems(Items.BASALT)
+                .duration(16).EUt(VA[MV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_deepslate").circuitMeta(5).outputItems(Items.COBBLED_DEEPSLATE)
+                .duration(16).EUt(VA[MV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_netherrack").circuitMeta(6).notConsumable(Items.NETHERRACK)
+                .outputItems(Items.NETHERRACK).duration(16).EUt(VA[MV]).save(provider);
+        t.recipeBuilder("gtapexadditions:irb_end_stone").circuitMeta(7).notConsumable(Items.END_STONE)
+                .outputItems(Items.END_STONE).duration(16).EUt(VA[HV]).save(provider);
+    }
+
+    private static void controllers(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:industrial_rock_breaker")
+                .inputItems(GTMachines.ROCK_CRUSHER[MV].asStack(2))
+                .inputItems(GTItems.ELECTRIC_PISTON_MV, 4)
+                .inputItems(CustomTags.MV_CIRCUITS, 2)
+                .inputItems(GTBlocks.CASING_STEEL_SOLID.asItem(), 4)
+                .inputItems(gear, GTMaterials.Steel, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 2))
+                .outputItems(GTAAGTNHMachines.INDUSTRIAL_ROCK_BREAKER.asStack())
+                .duration(400).EUt(VA[MV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:circuit_assembly_line")
+                .inputItems(GTMultiMachines.ASSEMBLY_LINE.asStack())
+                .inputItems(GTMachines.CIRCUIT_ASSEMBLER[LuV].asStack(2))
+                .inputItems(GTItems.ROBOT_ARM_LuV, 4)
+                .inputItems(GTItems.CONVEYOR_MODULE_LuV, 4)
+                .inputItems(CustomTags.LuV_CIRCUITS, 4)
+                .inputItems(plateDense, GTMaterials.HSSS, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                .outputItems(GTAAGTNHMachines.CIRCUIT_ASSEMBLY_LINE.asStack())
+                .duration(1200).EUt(VA[LuV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:electric_implosion_compressor")
+                .inputItems(GTMultiMachines.IMPLOSION_COMPRESSOR.asStack(4))
+                .inputItems(GTItems.FIELD_GENERATOR_UV, 4)
+                .inputItems(GTItems.EMITTER_UV, 4)
+                .inputItems(CustomTags.UV_CIRCUITS, 4)
+                .inputItems(plateDense, GTMaterials.Neutronium, 4)
+                .inputItems(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.asItem(), 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .outputItems(GTAAGTNHMachines.ELECTRIC_IMPLOSION_COMPRESSOR.asStack())
+                .duration(1600).EUt(VA[UV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nanochip_assembly_complex")
+                .inputItems(GTMachines.CIRCUIT_ASSEMBLER[UV].asStack(4))
+                .inputItems(GTItems.ROBOT_ARM_UV, 8)
+                .inputItems(GTItems.SENSOR_UV, 4)
+                .inputItems(CustomTags.UHV_CIRCUITS, 4)
+                .inputItems(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.asItem(), 16)
+                .inputItems(plateDense, GTMaterials.Neutronium, 8)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .outputItems(GTAAGTNHMachines.NANOCHIP_ASSEMBLY_COMPLEX.asStack())
+                .duration(2400).EUt(VA[UV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:miracle_top")
+                .inputItems(GTMachines.CIRCUIT_ASSEMBLER[UV].asStack(8))
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(GTItems.EMITTER_UHV, 8)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(GTBlocks.FUSION_COIL.asItem(), 16)
+                .inputItems(GTItems.GRAVI_STAR, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .outputItems(GTAAGTNHMachines.MIRACLE_TOP.asStack())
+                .duration(3200).EUt(VA[UHV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:black_hole_compressor")
+                .inputItems(GTMachines.COMPRESSOR[UV].asStack(8))
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 8)
+                .inputItems(GTItems.GRAVI_STAR, 8)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(GTAABlocks.EXTREME_DENSITY_CASING.asItem(), 32)
+                .inputItems(plateDense, GTMaterials.Neutronium, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .outputItems(GTAAGTNHMachines.BLACK_HOLE_COMPRESSOR.asStack())
+                .duration(3200).EUt(VA[UHV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:plasma_forge_prototype_mk2")
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 16)
+                .inputItems(GTItems.EMITTER_UHV, 16)
+                .inputItems(CustomTags.UEV_CIRCUITS, 8)
+                .inputItems(GTBlocks.FUSION_CASING_MK3.asItem(), 64)
+                .inputItems(GTItems.QUANTUM_STAR, 16)
+                .inputItems(plateDense, GTMaterials.Neutronium, 32)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 256))
+                .outputItems(GTAAGTNHMachines.PLASMA_FORGE_PROTOTYPE.asStack())
+                .duration(6000).EUt(VA[UEV]).save(provider);
+    }
+
+    private static void parts(Consumer<FinishedRecipe> provider) {
+        // Nanochip casings and modules
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nanochip_mesh_interface_casing")
+                .inputItems(plate, GTMaterials.Naquadria, 6).inputItems(frameGt, GTMaterials.NaquadahAlloy)
+                .inputItems(CustomTags.ZPM_CIRCUITS).circuitMeta(6)
+                .outputItems(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.asStack(2)).duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nanochip_reinforcement_casing")
+                .inputItems(plate, GTMaterials.Tritanium, 6).inputItems(frameGt, GTMaterials.NaquadahAlloy).circuitMeta(6)
+                .outputItems(GTAABlocks.NANOCHIP_REINFORCEMENT_CASING.asStack(2)).duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nanochip_computational_matrix_casing")
+                .inputItems(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.asItem()).inputItems(CustomTags.LuV_CIRCUITS, 2)
+                .inputItems(wireFine, GTMaterials.Europium, 8).circuitMeta(7)
+                .outputItems(GTAABlocks.NANOCHIP_COMPUTATIONAL_MATRIX_CASING.asStack()).duration(100).EUt(VA[UV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nanochip_firewall_projection_casing")
+                .inputItems(GTAABlocks.NANOCHIP_REINFORCEMENT_CASING.asItem()).inputItems(GTItems.FIELD_GENERATOR_ZPM)
+                .circuitMeta(8)
+                .outputItems(GTAABlocks.NANOCHIP_FIREWALL_PROJECTION_CASING.asStack()).duration(100).EUt(VA[UV]).save(provider);
+        Object[][] moduleParts = {
+                { GTMachines.CIRCUIT_ASSEMBLER[UV].asStack(), CustomTags.UV_CIRCUITS },   // assembly matrix
+                { GTItems.ROBOT_ARM_UV.asStack(2), CustomTags.ZPM_CIRCUITS },              // part processor
+                { GTMachines.CIRCUIT_ASSEMBLER[ZPM].asStack(), CustomTags.ZPM_CIRCUITS },  // board processor
+                { GTMachines.LASER_ENGRAVER[UV].asStack(), CustomTags.UV_CIRCUITS },        // etching array
+                { GTMachines.CUTTER[UV].asStack(), CustomTags.ZPM_CIRCUITS },               // cutting chamber
+                { GTMachines.WIREMILL[UV].asStack(), CustomTags.ZPM_CIRCUITS },             // wire tracer
+                { GTItems.EMITTER_UV.asStack(4), CustomTags.UV_CIRCUITS },                  // optical organizer
+                { GTItems.SENSOR_UV.asStack(4), CustomTags.UV_CIRCUITS },                   // biological coordination
+                { GTMachines.PACKER[UV].asStack(), CustomTags.ZPM_CIRCUITS } };             // encasement wrapper
+        for (int i = 0; i < GTAABlocks.NAC_MODULES.length; i++) {
+            ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:nac_module_" + GTAABlocks.NAC_MODULE_IDS[i][0])
+                    .inputItems(GTAABlocks.NANOCHIP_COMPUTATIONAL_MATRIX_CASING.asItem())
+                    .inputItems((net.minecraft.world.item.ItemStack) moduleParts[i][0])
+                    .inputItems((net.minecraft.tags.TagKey<net.minecraft.world.item.Item>) moduleParts[i][1], 2)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
+                    .outputItems(GTAABlocks.NAC_MODULES[i].asStack()).duration(400).EUt(VA[UV]).save(provider);
+        }
+        // Black hole compressor
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_density_casing")
+                .inputItems(plate, GTMaterials.Neutronium, 6).inputItems(frameGt, GTMaterials.Tritanium).circuitMeta(6)
+                .outputItems(GTAABlocks.EXTREME_DENSITY_CASING.asStack(2)).duration(100).EUt(VA[UHV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:radiation_absorbent_casing")
+                .inputItems(plate, GTMaterials.Lead, 6).inputItems(plate, GTMaterials.Neutronium, 2)
+                .inputItems(frameGt, GTMaterials.Tritanium).circuitMeta(6)
+                .outputItems(GTAABlocks.RADIATION_ABSORBENT_CASING.asStack(2)).duration(100).EUt(VA[UHV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:hawking_glass")
+                .inputItems(GTBlocks.FUSION_GLASS.asItem(), 2).inputItems(GTItems.GRAVI_STAR).circuitMeta(6)
+                .outputItems(GTAABlocks.HAWKING_GLASS.asStack(2)).duration(100).EUt(VA[UHV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:black_hole_seed")
+                .inputItems(GTItems.GRAVI_STAR, 4).inputItems(dust, GTMaterials.Neutronium, 16)
+                .inputItems(CustomTags.UHV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 8))
+                .outputItems(GTAAItems.BLACK_HOLE_SEED.asStack()).duration(1200).EUt(VA[UHV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:black_hole_collapser")
+                .inputItems(GTItems.GRAVI_STAR, 1).inputItems(plate, GTMaterials.Neutronium, 8)
+                .inputItems(CustomTags.UV_CIRCUITS, 2)
+                .outputItems(GTAAItems.BLACK_HOLE_COLLAPSER.asStack()).duration(400).EUt(VA[UV]).save(provider);
+    }
+}

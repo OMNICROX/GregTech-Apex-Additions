@@ -208,6 +208,36 @@ public class GTAABlocks {
     }
 
     /** Plain casing. Blockstate / models / loot are static files in resources (no datagen needed). */
+    // ---- Nanochip Assembly Complex (GT5-Unofficial 2.9 textures) ----
+    public static final BlockEntry<Block> NANOCHIP_MESH_INTERFACE_CASING = casing("nanochip_mesh_interface_casing", "Nanochip Mesh Interface Casing");
+    public static final BlockEntry<Block> NANOCHIP_REINFORCEMENT_CASING = casing("nanochip_reinforcement_casing", "Nanochip Reinforcement Casing");
+    public static final BlockEntry<Block> NANOCHIP_COMPUTATIONAL_MATRIX_CASING = casing("nanochip_computational_matrix_casing", "Nanochip Computational Matrix Casing");
+    public static final BlockEntry<Block> NANOCHIP_FIREWALL_PROJECTION_CASING = casing("nanochip_firewall_projection_casing", "Nanochip Firewall Projection Casing");
+    /** NAC modules, in the order of com.omnicrox.gtaa.common.machine.multiblock.NanochipAssemblyComplexMachine.Module */
+    public static final String[][] NAC_MODULE_IDS = {
+            { "assembly_matrix", "Assembly Matrix" }, { "part_processor", "Part Processor" },
+            { "board_processor", "Board Processor" }, { "etching_array", "Etching Array" },
+            { "cutting_chamber", "Cutting Chamber" }, { "wire_tracer", "Wire Tracer" },
+            { "optical_organizer", "Optical Organizer" }, { "biological_coordination", "Biological Coordination" },
+            { "encasement_wrapper", "Encasement Wrapper" } };
+    @SuppressWarnings("unchecked")
+    public static final BlockEntry<Block>[] NAC_MODULES = new BlockEntry[NAC_MODULE_IDS.length];
+    static {
+        for (int i = 0; i < NAC_MODULE_IDS.length; i++)
+            NAC_MODULES[i] = casing("nac_module_" + NAC_MODULE_IDS[i][0], "Nanochip Module: " + NAC_MODULE_IDS[i][1]);
+    }
+
+    public static Block[] nacModules() {
+        Block[] out = new Block[NAC_MODULES.length];
+        for (int i = 0; i < out.length; i++) out[i] = NAC_MODULES[i].get();
+        return out;
+    }
+
+    // ---- Black Hole Compressor (GT5-Unofficial 2.9 textures) ----
+    public static final BlockEntry<Block> EXTREME_DENSITY_CASING = casing("extreme_density_casing", "Extreme Density Space-Bending Casing");
+    public static final BlockEntry<Block> RADIATION_ABSORBENT_CASING = casing("radiation_absorbent_casing", "Background Radiation Absorbent Casing");
+    public static final BlockEntry<Block> HAWKING_GLASS = glass("hawking_glass", "Hawking Radiation Realignment Focus");
+
     public static BlockEntry<Block> casing(String name, String lang) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
