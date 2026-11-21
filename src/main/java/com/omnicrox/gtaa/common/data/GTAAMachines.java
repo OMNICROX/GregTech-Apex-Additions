@@ -155,6 +155,21 @@ public class GTAAMachines {
             com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.defaultTankSizeFunction, true,
             LV, MV, HV, EV, IV, LuV, ZPM, UV, UHV);
 
+    /** Mana Hatch: spreaders and sparks put mana in, the Mana Nexus takes it. */
+    public static final PartAbility MANA_HATCH_ABILITY = new PartAbility("gtapexadditions_mana_hatch");
+
+    public static final MachineDefinition MANA_HATCH = REGISTRATE
+            .machine("mana_hatch", com.omnicrox.gtaa.common.machine.part.ManaHatchPartMachine::new)
+            .langValue("Mana Hatch")
+            .tier(LV)
+            .rotationState(RotationState.ALL)
+            .abilities(MANA_HATCH_ABILITY)
+            .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
+            .tooltips(Component.literal("\u00a77Aim \u00a7bMana Spreaders\u00a77 at it or put a \u00a7bMana Spark\u00a77 on it"),
+                    Component.literal("\u00a77Holds 1,000,000 mana; the \u00a7dMana Nexus\u00a77 pulls it in"),
+                    Component.literal("\u00a78Right-click with an empty hand to see how much it holds"))
+            .register();
+
     private static final Component SEPARATOR = Component.literal("\u00a78\u00a7m                                                            ");
 
     private static Block naquadriaFrame() {
@@ -1112,6 +1127,63 @@ public class GTAAMachines {
             .register();
 
     // ---------------- Mystical Cultivation Array (KubaTech EIG) ----------------
+    private static Block botaniaBlock(String id, Block fallback) {
+        Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation("botania", id));
+        return b == null || b == Blocks.AIR ? fallback : b;
+    }
+
+    public static final MultiblockMachineDefinition MANA_NEXUS = REGISTRATE
+            .multiblock("mana_nexus", com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::new)
+            .langValue("Mana Nexus")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MANA_NEXUS)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::recipeModifier,
+                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7dBotanical Altar"),
+                    Component.literal("\u00a77Stores mana and does every \u00a7dBotania\u00a77 altar craft with it:"),
+                    Component.literal("\u00a77 mana pool, runic altar, terra plate, elven trade, pure daisy, apothecary,"),
+                    Component.literal("\u00a77 Mythic Botany's Mana Infuser and rune rituals (elven trades: circuit 3)"),
+                    Component.literal("\u00a77Mana in: \u00a7bMana Hatches\u00a77 (spreaders, sparks) or liquid mana (1 mB = 100 mana)"),
+                    Component.literal("\u00a77Mana Cores set the tier: Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel"),
+                    Component.literal("\u00a77 10M / 50M / 250M / 1B / 2B mana; 1 / 2 / 4 / 8 / 16 crafts at once"),
+                    Component.literal("\u00a78GTAA's own multiblock, built for Botania + addons"))
+            .appearanceBlock(GTAABlocks.MANA_NEXUS_CASING)
+            .pattern(definition -> {
+                var casing = blocks(GTAABlocks.MANA_NEXUS_CASING.get());
+                var glass = blocks(botaniaBlock("mana_glass", Blocks.GLASS), botaniaBlock("elf_glass", Blocks.GLASS));
+                var cores = com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores();
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        // front row: Item in, Item in/casing, Energy, controller, Mana Hatch, Mana Hatch/casing,
+                        // Energy/casing; back row: Output, Output/casing, liquid mana in x2, maintenance
+                        .aisle("IiE~Mme", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aOowwan")
+                        .aisle("ggggggg", "g     g", "g ccc g", "g ccc g", "g ccc g", "g     g", "ggggggg")
+                        .aisle("ggggggg", "g     g", "g     g", "g  c  g", "g     g", "g     g", "ggggggg")
+                        .aisle("aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('a', casing)
+                        .where('I', abilities(PartAbility.IMPORT_ITEMS))
+                        .where('i', casing.or(abilities(PartAbility.IMPORT_ITEMS)))
+                        .where('E', abilities(PartAbility.INPUT_ENERGY))
+                        .where('e', casing.or(abilities(PartAbility.INPUT_ENERGY)))
+                        .where('M', abilities(MANA_HATCH_ABILITY))
+                        .where('m', casing.or(abilities(MANA_HATCH_ABILITY)))
+                        .where('O', abilities(PartAbility.EXPORT_ITEMS))
+                        .where('o', casing.or(abilities(PartAbility.EXPORT_ITEMS)))
+                        .where('w', casing.or(abilities(PartAbility.IMPORT_FLUIDS)))
+                        .where('n', casing.or(abilities(PartAbility.MAINTENANCE)))
+                        .where('g', glass)
+                        .where('c', cores)
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/mana_nexus_casing"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/assembly_line")))
+            .register();
+
     public static final MultiblockMachineDefinition MYSTICAL_CULTIVATION_ARRAY = REGISTRATE
             .multiblock("mystical_cultivation_array", com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine::new)
             .langValue("Mystical Cultivation Array")

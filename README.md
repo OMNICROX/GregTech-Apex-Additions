@@ -30,6 +30,7 @@ the Aether) only get their recipes when that mod is installed.
 | Extreme Entity Crusher | IV | Mob farm from a spawn egg; Elite / Ultra / Infernal Sigils crush infernal ranks for 3x / 5x / 9x loot |
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
 | Mystical Cultivation Array | EV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
+| Mana Nexus | LV-LuV | Needs Botania; stores 10M-2B mana (Mana Hatch for spreaders/sparks, liquid mana from Mana Fluid), does every Botania altar craft (pool, runic altar, terra plate, elven trade, daisy, apothecary, Mythic Botany infuser/rituals); Manasteel to Gaiasteel cores |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |
 
 ## Systems and items
@@ -54,7 +55,7 @@ the Aether) only get their recipes when that mod is installed.
 
 `tools/kubejs` holds the KubeJS scripts Apex Ascension ships with this mod: suit station bench removal, Ad Astra
 gated by GT tiers (Moon HV, Mars EV, Venus/Mercury IV, Glacio LuV, GT rocket fuel), purified water in high-tier
-wafers, Extra Utilities generators off, Avaritia neutronium / infinity unified with GregTech's, Tinkers' Avaritia as
+wafers, Extra Utilities generators off, Botania gated LV-LuV (Orechid and the mana->FE Fluxfield removed), Avaritia neutronium / infinity unified with GregTech's, Tinkers' Avaritia as
 the one Avaritia Tinkers material set. `tools/hero_kits.py` and `tools/extra_suits.py` regenerate the hero kits
 and the station suit list.
 

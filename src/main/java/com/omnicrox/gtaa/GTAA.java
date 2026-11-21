@@ -46,6 +46,8 @@ public class GTAA {
         com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
         com.omnicrox.gtaa.common.network.GTAANetwork.register();
         com.omnicrox.gtaa.common.item.StructureUpgrader.registerEvents();
+        if (net.minecraftforge.fml.ModList.get().isLoaded("botania")) com.omnicrox.gtaa.common.compat.BotaniaCompat.init();
+        if (net.minecraftforge.fml.ModList.get().isLoaded("botanicadds")) com.omnicrox.gtaa.common.compat.BotanicAdditionsCompat.init(bus);
         net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
                 com.omnicrox.gtaa.common.infernal.InfernalConfig.SPEC, "gtapexadditions-infernal.toml");
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {

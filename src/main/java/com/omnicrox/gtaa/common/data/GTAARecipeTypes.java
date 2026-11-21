@@ -29,6 +29,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType CULTIVATION;
     public static GTRecipeType SUIT_FABRICATION;
     public static GTRecipeType SEED_SYNTHESIS;
+    public static GTRecipeType MANA_NEXUS;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
@@ -103,6 +104,12 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
+        MANA_NEXUS = register("mana_nexus", "multiblock", "Mana Nexus")
+                .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + String.format("%,d", data.getLong("mana")) : "")
+                .addDataInfo(data -> "Mana Cores: " + com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.CORE_NAMES[
+                        Math.max(1, Math.min(5, data.getInt("nexus_tier")))] + " or better");
         SEED_SYNTHESIS = register("seed_synthesizer", "electric", "Seed Synthesizer")
                 .setMaxIOSize(9, 1, 0, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)

@@ -57,6 +57,7 @@ dependencies {
     modImplementation "com.tterrag.registrate:Registrate:${project.registrate_version}"
     modImplementation "dev.toma.configuration:configuration-forge-1.20.1:${project.configuration_version}"
     modCompileOnly "appeng:appliedenergistics2-forge:15.4.10"
+    modCompileOnly "vazkii.botania:Botania:1.20.1-456-FORGE"     // Mana Nexus: mana receiver / spark API (optional at runtime)
     compileOnly 'org.jetbrains:annotations:26.0.1'
     compileOnly 'org.projectlombok:lombok:1.18.38'
     annotationProcessor 'org.projectlombok:lombok:1.18.38'

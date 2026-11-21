@@ -184,6 +184,18 @@ public class GTAABlocks {
     }
 
     // ---------------- Suit Fabrication Station ----------------
+    // Mana Nexus - GTAA's own textures
+    public static final BlockEntry<Block> MANA_NEXUS_CASING = casing("mana_nexus_casing", "Livingrock Nexus Casing");
+    public static final BlockEntry<Block> MANA_CORE_T1 = casing("mana_core_t1", "Manasteel Mana Core");
+    public static final BlockEntry<Block> MANA_CORE_T2 = casing("mana_core_t2", "Terrasteel Mana Core");
+    public static final BlockEntry<Block> MANA_CORE_T3 = casing("mana_core_t3", "Elementium Mana Core");
+    public static final BlockEntry<Block> MANA_CORE_T4 = casing("mana_core_t4", "Alfsteel Mana Core");
+    public static final BlockEntry<Block> MANA_CORE_T5 = casing("mana_core_t5", "Gaiasteel Mana Core");
+
+    public static Block[] manaCores() {
+        return new Block[] { MANA_CORE_T1.get(), MANA_CORE_T2.get(), MANA_CORE_T3.get(), MANA_CORE_T4.get(), MANA_CORE_T5.get() };
+    }
+
     public static final BlockEntry<Block> SUIT_CASING_T1 = casing("suit_casing_t1", "Steel Booth Casing");
     public static final BlockEntry<Block> SUIT_CASING_T2 = casing("suit_casing_t2", "Showcase Pod Casing");
     public static final BlockEntry<Block> SUIT_CASING_T3 = casing("suit_casing_t3", "Holo Chamber Casing");
