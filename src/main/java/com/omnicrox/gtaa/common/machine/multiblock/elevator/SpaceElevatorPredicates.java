@@ -19,6 +19,8 @@ public final class SpaceElevatorPredicates {
     public static final String CTX_MOTOR = "SEMotorTier";
     public static final String CTX_MODULES = "SEModules";
     public static final String CTX_CABLE = "SECable";
+    /** every module slot (base casing or module), so modules placed later are found without a re-form */
+    public static final String CTX_SLOTS = "SESlots";
 
     private SpaceElevatorPredicates() {}
 
@@ -48,8 +50,11 @@ public final class SpaceElevatorPredicates {
     /** Module slot: base casing, or a Space Elevator module controller (position recorded). */
     public static TraceabilityPredicate moduleSlot(Supplier<Block[]> moduleBlocks) {
         return new TraceabilityPredicate(s -> {
-            if (isBase(s.getBlockState())) return true;
-            if (MetaMachine.getMachine(s.getWorld(), s.getPos()) instanceof SpaceElevatorModuleMachine) {
+            boolean base = isBase(s.getBlockState());
+            boolean module = !base && MetaMachine.getMachine(s.getWorld(), s.getPos()) instanceof SpaceElevatorModuleMachine;
+            if (base || module) s.getMatchContext().getOrCreate(CTX_SLOTS, LongOpenHashSet::new).add(s.getPos().asLong());
+            if (base) return true;
+            if (module) {
                 s.getMatchContext().getOrCreate(CTX_MODULES, LongOpenHashSet::new).add(s.getPos().asLong());
                 return true;
             }

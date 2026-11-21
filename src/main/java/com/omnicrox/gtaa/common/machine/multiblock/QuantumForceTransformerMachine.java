@@ -143,7 +143,7 @@ public class QuantumForceTransformerMachine extends WorkableElectricMultiblockMa
     private boolean hasFluid(FluidStack stack) {
         if (stack.isEmpty()) return false;
         for (IFluidHandler t : inputTanks())
-            if (t.drain(stack, IFluidHandler.FluidAction.SIMULATE).getAmount() > 0) return true;
+            if (((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(stack, IFluidHandler.FluidAction.SIMULATE).getAmount() > 0) return true;
         return false;
     }
 
@@ -151,13 +151,13 @@ public class QuantumForceTransformerMachine extends WorkableElectricMultiblockMa
         if (stack.isEmpty()) return false;
         int left = stack.getAmount();
         for (IFluidHandler t : inputTanks()) {
-            left -= t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE).getAmount();
+            left -= ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE).getAmount();
             if (left <= 0) break;
         }
         if (left > 0) return false;
         left = stack.getAmount();
         for (IFluidHandler t : inputTanks()) {
-            left -= t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE).getAmount();
+            left -= ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE).getAmount();
             if (left <= 0) break;
         }
         return true;

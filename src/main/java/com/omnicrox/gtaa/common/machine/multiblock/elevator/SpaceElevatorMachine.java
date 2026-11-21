@@ -45,6 +45,7 @@ public class SpaceElevatorMachine extends WorkableElectricMultiblockMachine {
     @DescSynced private int moduleCount;
     @DescSynced private boolean tooManyModules;
     private final List<BlockPos> modulePositions = new ArrayList<>();
+    private final List<BlockPos> slotPositions = new ArrayList<>();
     private BlockPos cablePos;
     private TickableSubscription tickSub;
 
@@ -59,6 +60,19 @@ public class SpaceElevatorMachine extends WorkableElectricMultiblockMachine {
 
     public static int moduleSlots(int motorTier) {
         return motorTier < 1 || motorTier > MODULE_SLOTS.length ? 0 : MODULE_SLOTS[motorTier - 1];
+    }
+
+    public List<BlockPos> getSlotPositions() {
+        return slotPositions;
+    }
+
+    public List<BlockPos> getModulePositions() {
+        return modulePositions;
+    }
+
+    /** the elevator's middle (the cable), to face modules outward */
+    public BlockPos getCenter() {
+        return cablePos != null ? cablePos : getPos();
     }
 
     public int getMotorTier() {
@@ -78,6 +92,8 @@ public class SpaceElevatorMachine extends WorkableElectricMultiblockMachine {
         LongSet modules = ctx.getOrDefault(SpaceElevatorPredicates.CTX_MODULES, new LongOpenHashSet());
         modulePositions.clear();
         for (long l : modules) modulePositions.add(BlockPos.of(l));
+        slotPositions.clear();
+        for (long l : ctx.getOrDefault(SpaceElevatorPredicates.CTX_SLOTS, new LongOpenHashSet())) slotPositions.add(BlockPos.of(l));
         moduleCount = modulePositions.size();
         tooManyModules = moduleCount > moduleSlots(motorTier) || (extensionEnabled && motorTier < 3 && moduleCount > 12);
         cablePos = ctx.getOrDefault(SpaceElevatorPredicates.CTX_CABLE, null);
@@ -108,8 +124,28 @@ public class SpaceElevatorMachine extends WorkableElectricMultiblockMachine {
         }
     }
 
+    /**
+     * GT doesn't re-form a structure that is still valid, so a module placed into (or removed from) a slot of an
+     * already formed elevator never reached onStructureFormed. Look at the slots directly instead.
+     */
+    private void rescanModules() {
+        if (getLevel() == null || slotPositions.isEmpty()) return;
+        List<BlockPos> found = new ArrayList<>();
+        for (BlockPos p : slotPositions)
+            if (getLevel().isLoaded(p) && MetaMachine.getMachine(getLevel(), p) instanceof SpaceElevatorModuleMachine) found.add(p);
+        if (found.equals(modulePositions)) return;
+        for (BlockPos p : modulePositions)
+            if (!found.contains(p) && MetaMachine.getMachine(getLevel(), p) instanceof SpaceElevatorModuleMachine m) m.disconnect();
+        modulePositions.clear();
+        modulePositions.addAll(found);
+        moduleCount = found.size();
+        tooManyModules = moduleCount > moduleSlots(motorTier) || (extensionEnabled && motorTier < 3 && moduleCount > 12);
+        if (cable() != null) cable().setShouldRender(!tooManyModules);
+    }
+
     private void elevatorTick() {
         if (!isFormed()) return;
+        if (getOffsetTimer() % CHARGE_INTERVAL == 0) rescanModules();
         if (!getRecipeLogic().isWorkingEnabled() || tooManyModules) {
             forEachModule(SpaceElevatorModuleMachine::disconnect);
             return;

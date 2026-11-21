@@ -119,14 +119,14 @@ public class PurificationUnitMachine extends WorkableElectricMultiblockMachine {
     private boolean drain(FluidStack stack, boolean simulate) {
         int left = stack.getAmount();
         for (IFluidHandler t : inputTanks()) {
-            left -= t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE).getAmount();
+            left -= ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE).getAmount();
             if (left <= 0) break;
         }
         if (left > 0) return false;
         if (simulate) return true;
         left = stack.getAmount();
         for (IFluidHandler t : inputTanks()) {
-            left -= t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE).getAmount();
+            left -= ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE).getAmount();
             if (left <= 0) break;
         }
         return true;

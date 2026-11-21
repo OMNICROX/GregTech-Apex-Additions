@@ -42,6 +42,7 @@ public class GTAARecipes {
         extraModules(provider);
         drones(provider);
         ascensionGate(provider);
+        GTAAHyperNaquadah.init(provider);
     }
 
     /** a gtna material if it's installed and has the given form */

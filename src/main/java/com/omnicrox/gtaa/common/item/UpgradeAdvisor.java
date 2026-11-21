@@ -201,6 +201,7 @@ final class UpgradeAdvisor {
             case "suit_casings" -> info.add("Decides which suits the station can make (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge).");
             case "mca_soil" -> info.add("Yield: how much essence each crop gives per harvest. Higher soil = more output, nothing is locked.");
             case "mca_glass" -> info.add("Caps the voltage the array runs at. Higher voltage = faster harvests (up to LuV) and more crops.");
+            case "se_motors" -> info.add("Decides how many modules the elevator powers (6 / 12 / 15 / 18 / 24) and the highest module Mk it runs. Modules above the motor tier sit disconnected.");
             default -> info.add("Tiered blocks of this structure.");
         }
         return info;
@@ -276,6 +277,8 @@ final class UpgradeAdvisor {
                     case "mca_soil" -> "Yield " + MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, t - 1)] + " per crop (now " +
                             MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, Math.max(0, cur - 1))] + ")";
                     case "mca_glass" -> "Runs at up to " + vn(MysticalCultivationArrayMachine.GLASS_CAP[Math.min(3, t - 1)]);
+                    case "se_motors" -> "Mk-" + roman(t) + ": up to " + com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorMachine.moduleSlots(t) +
+                            " modules, runs every module that needs Motor Mk-" + roman(t) + " or lower";
                     default -> "Tier " + t;
                 };
                 if (gain > 0) {
@@ -371,5 +374,9 @@ final class UpgradeAdvisor {
         }
         detail += ". The old hatch and its contents drop on the ground.";
         return new PartAdvice(info, verdict, verdictText, tag, detail);
+    }
+
+    private static String roman(int t) {
+        return switch (t) { case 1 -> "I"; case 2 -> "II"; case 3 -> "III"; case 4 -> "IV"; case 5 -> "V"; default -> String.valueOf(t); };
     }
 }

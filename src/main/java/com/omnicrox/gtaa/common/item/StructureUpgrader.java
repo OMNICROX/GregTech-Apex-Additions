@@ -14,6 +14,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
 import com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.elevator.SpaceElevatorMachine;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
@@ -128,6 +129,8 @@ public class StructureUpgrader extends Item {
         out.add(new Family("mana_cores", "Mana Cores", single(GTAABlocks.manaCores())));
         out.add(new Family("mca_soil", "Cultivation Soil", grouped(MysticalCultivationArrayMachine.soilTiers())));
         out.add(new Family("mca_glass", "Tiered Glass", grouped(MysticalCultivationArrayMachine.glassTiers())));
+        out.add(new Family("se_motors", "Space Elevator Motors", single(GTAABlocks.SE_MOTOR_MK1.get(), GTAABlocks.SE_MOTOR_MK2.get(),
+                GTAABlocks.SE_MOTOR_MK3.get(), GTAABlocks.SE_MOTOR_MK4.get(), GTAABlocks.SE_MOTOR_MK5.get())));
         return out;
     }
 
@@ -245,6 +248,8 @@ public class StructureUpgrader extends Item {
                     adv.info(), adv.verdict(), adv.verdictText()));
         }
 
+        List<GTAANetwork.Row> moduleRows = controller instanceof SpaceElevatorMachine se ? moduleRows(player, se) : List.of();
+
         // status first: what this machine can't run right now and why
         List<String> status = new ArrayList<>();
         int locked = advisor.powerLocked();
@@ -259,6 +264,7 @@ public class StructureUpgrader extends Item {
         familyRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
         partRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
         rows.addAll(familyRows);
+        rows.addAll(moduleRows);
         rows.addAll(partRows);
         if (upgradable.size() > 1)
             rows.add(new GTAANetwork.Row("All hatches", upgradable.size() + " upgradable", "",
@@ -467,6 +473,143 @@ public class StructureUpgrader extends Item {
         return n;
     }
 
+
+    // ------------------------------------------------------------------ Space Elevator modules
+
+    private static java.util.List<MachineDefinition> moduleDefs() {
+        java.util.List<MachineDefinition> out = new ArrayList<>();
+        for (MachineDefinition d : GTRegistries.MACHINES)
+            if (d.getId().getNamespace().equals("gtapexadditions") && d.getId().getPath().matches(".*_module_mk\\d+")) out.add(d);
+        out.sort(Comparator.comparing(d -> d.getId().getPath()));
+        return out;
+    }
+
+    /** the next Mk of the same module the player carries (or any, in creative) */
+    private static MachineDefinition nextModule(MachineDefinition cur, Player player) {
+        String path = cur.getId().getPath();
+        int mk = Integer.parseInt(path.replaceAll(".*_mk(\\d+)$", "$1"));
+        String base = path.replaceAll("_mk\\d+$", "_mk");
+        for (int m = mk + 1; m <= 9; m++) {
+            MachineDefinition d = GTRegistries.MACHINES.get(new ResourceLocation(cur.getId().getNamespace(), base + m));
+            if (d != null && (player.isCreative() || countItem(player, d.getItem()) > 0)) return d;
+        }
+        return null;
+    }
+
+    private static List<GTAANetwork.Row> moduleRows(ServerPlayer player, SpaceElevatorMachine se) {
+        List<GTAANetwork.Row> rows = new ArrayList<>();
+        BlockPos cpos = se.getPos();
+        Level level = se.getLevel();
+        int free = 0;
+        for (BlockPos p : se.getSlotPositions()) if (level.getBlockState(p).is(GTAABlocks.SE_BASE_CASING.get())) free++;
+        int slots = SpaceElevatorMachine.moduleSlots(se.getMotorTier());
+        int installed = se.getModulePositions().size();
+        List<GTAANetwork.Choice> place = new ArrayList<>();
+        for (MachineDefinition d : moduleDefs()) {
+            int have = player.isCreative() ? 1 : countItem(player, d.getItem());
+            if (have <= 0) continue;
+            int needMotor = com.omnicrox.gtaa.common.data.GTAAMachines.SE_MODULE_MOTOR.getOrDefault(d.getId().getPath(), 1);
+            place.add(new GTAANetwork.Choice("Place " + d.getBlock().getName().getString(),
+                    "/gtapexadditions upgrade " + posArg(cpos) + " module " + d.getId().getPath(),
+                    "Puts this module in the next free slot, facing outward, and builds its casing/hatch frame from your inventory." +
+                            (needMotor > se.getMotorTier() ? "\nNeeds Motor Mk-" + needMotor + "; it stays disconnected until then." : ""),
+                    free > 0 && installed < slots, itemId(d.getBlock()), ""));
+        }
+        List<String> info = new ArrayList<>();
+        info.add(installed + " of " + slots + " module slots used (motor tier " + se.getMotorTier() + "), " + free + " free slot spots in the base.");
+        if (place.isEmpty()) info.add("Carry a module controller to place it from here.");
+        rows.add(new GTAANetwork.Row("Modules", installed + " / " + slots, "", place, info, UpgradeAdvisor.OPTIONAL,
+                installed >= slots ? "All motor slots used: better motors give more." : ""));
+        for (BlockPos p : se.getModulePositions()) {
+            if (!(MetaMachine.getMachine(level, p) instanceof IMultiController m)) continue;
+            MachineDefinition cur = m.self().getDefinition();
+            MachineDefinition next = nextModule(cur, player);
+            if (next == null) continue;
+            rows.add(new GTAANetwork.Row("Module", cur.getBlock().getName().getString(), itemId(cur.getBlock()),
+                    List.of(new GTAANetwork.Choice(next.getBlock().getName().getString(),
+                            "/gtapexadditions upgrade " + posArg(cpos) + " moduleup " + posArg(p),
+                            "Swaps this module for the next Mk you carry; its hatches stay. The old controller goes back to you.",
+                            true, itemId(next.getBlock()), "")),
+                    List.of("Higher Mk modules run more parallels and higher-tier recipes."), UpgradeAdvisor.OPTIONAL, ""));
+        }
+        return rows;
+    }
+
+    private static BlockState facing(MachineDefinition d, net.minecraft.core.Direction dir) {
+        BlockState st = d.getBlock().defaultBlockState();
+        for (Property<?> prop : st.getProperties())
+            if (prop instanceof net.minecraft.world.level.block.state.properties.DirectionProperty dp && dp.getPossibleValues().contains(dir))
+                return st.setValue(dp, dir);
+        return st;
+    }
+
+    private static net.minecraft.core.Direction outward(SpaceElevatorMachine se, BlockPos p) {
+        BlockPos c = se.getCenter();
+        int dx = p.getX() - c.getX(), dz = p.getZ() - c.getZ();
+        if (Math.abs(dx) >= Math.abs(dz)) return dx >= 0 ? net.minecraft.core.Direction.EAST : net.minecraft.core.Direction.WEST;
+        return dz >= 0 ? net.minecraft.core.Direction.SOUTH : net.minecraft.core.Direction.NORTH;
+    }
+
+    private static void finishModule(ServerPlayer player, BlockPos p) {
+        if (MetaMachine.getMachine(player.level(), p) instanceof IMultiController m) {
+            m.self().setOwnerUUID(player.getUUID());
+            if (!m.isFormed()) m.getPattern().autoBuild(player, m.getMultiblockState());
+        }
+    }
+
+    private static int placeModule(ServerPlayer player, BlockPos cpos, String path) {
+        if (!(controllerFor(player, cpos) instanceof SpaceElevatorMachine se)) return 0;
+        MachineDefinition d = GTRegistries.MACHINES.get(new ResourceLocation("gtapexadditions", path));
+        if (d == null) return 0;
+        if (se.getModulePositions().size() >= SpaceElevatorMachine.moduleSlots(se.getMotorTier())) {
+            player.sendSystemMessage(Component.literal("Every slot this motor tier allows is used.").withStyle(ChatFormatting.RED));
+            return 0;
+        }
+        ServerLevel level = player.serverLevel();
+        // nearest free slot to the player
+        BlockPos best = null;
+        for (BlockPos p : se.getSlotPositions())
+            if (level.getBlockState(p).is(GTAABlocks.SE_BASE_CASING.get()) && allowed(player, p) &&
+                    (best == null || p.distSqr(player.blockPosition()) < best.distSqr(player.blockPosition()))) best = p;
+        if (best == null) {
+            player.sendSystemMessage(Component.literal("No free module slot.").withStyle(ChatFormatting.RED));
+            return 0;
+        }
+        if (!take(player, d.getItem())) {
+            player.sendSystemMessage(Component.literal("You don't carry that module.").withStyle(ChatFormatting.RED));
+            return 0;
+        }
+        BlockState old = level.getBlockState(best);
+        // a module's frame sits on the elevator base behind it: use the facing whose frame fits (inward, normally)
+        net.minecraft.core.Direction dir = outward(se, best).getOpposite();
+        for (net.minecraft.core.Direction d2 : java.util.List.of(dir, dir.getOpposite(), dir.getClockWise(), dir.getCounterClockWise())) {
+            level.setBlock(best, facing(d, d2), Block.UPDATE_ALL);
+            if (MetaMachine.getMachine(level, best) instanceof IMultiController mc && mc.checkPattern()) {
+                dir = d2;
+                break;
+            }
+        }
+        level.setBlock(best, facing(d, dir), Block.UPDATE_ALL);
+        give(player, new ItemStack(old.getBlock().asItem()));
+        finishModule(player, best);
+        player.sendSystemMessage(Component.literal("Placed " + d.getBlock().getName().getString() + ".").withStyle(ChatFormatting.GREEN));
+        return 1;
+    }
+
+    private static int upgradeModule(ServerPlayer player, BlockPos cpos, BlockPos mpos) {
+        if (!(controllerFor(player, cpos) instanceof SpaceElevatorMachine se) || !se.getModulePositions().contains(mpos)) return 0;
+        if (!(MetaMachine.getMachine(player.level(), mpos) instanceof IMultiController m)) return 0;
+        MachineDefinition next = nextModule(m.self().getDefinition(), player);
+        if (next == null || !allowed(player, mpos) || !take(player, next.getItem())) return 0;
+        ServerLevel level = player.serverLevel();
+        BlockState old = level.getBlockState(mpos);
+        level.destroyBlock(mpos, !player.isCreative(), player);
+        level.setBlock(mpos, copyProps(old, next.getBlock().defaultBlockState()), Block.UPDATE_ALL);
+        finishModule(player, mpos);
+        player.sendSystemMessage(Component.literal("Module upgraded to " + next.getBlock().getName().getString() + ".").withStyle(ChatFormatting.GREEN));
+        return 1;
+    }
+
     @SubscribeEvent
     public static void onCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("gtapexadditions").then(Commands.literal("upgrade")
@@ -482,6 +625,12 @@ public class StructureUpgrader extends Item {
                                         BlockPosArgument.getLoadedBlockPos(ctx, "controller"),
                                         BlockPosArgument.getLoadedBlockPos(ctx, "hatch")))))
                         .then(Commands.literal("hatches").executes(ctx -> upgradeAllHatches(ctx.getSource().getPlayerOrException(),
-                                BlockPosArgument.getLoadedBlockPos(ctx, "controller")))))));
+                                BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
+                        .then(Commands.literal("module").then(Commands.argument("module", StringArgumentType.word()).executes(ctx ->
+                                placeModule(ctx.getSource().getPlayerOrException(), BlockPosArgument.getLoadedBlockPos(ctx, "controller"),
+                                        StringArgumentType.getString(ctx, "module")))))
+                        .then(Commands.literal("moduleup").then(Commands.argument("module", BlockPosArgument.blockPos()).executes(ctx ->
+                                upgradeModule(ctx.getSource().getPlayerOrException(), BlockPosArgument.getLoadedBlockPos(ctx, "controller"),
+                                        BlockPosArgument.getLoadedBlockPos(ctx, "module"))))))));
     }
 }

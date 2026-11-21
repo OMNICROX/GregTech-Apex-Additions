@@ -114,7 +114,7 @@ public class LargeNaquadahReactorMachine extends com.gregtechceu.gtceu.api.machi
         int left = stack.getAmount();
         List<IFluidHandler> tanks = inputTanks();
         for (IFluidHandler t : tanks) {
-            FluidStack d = t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE);
+            FluidStack d = ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.SIMULATE);
             left -= d.getAmount();
             if (left <= 0) break;
         }
@@ -122,7 +122,7 @@ public class LargeNaquadahReactorMachine extends com.gregtechceu.gtceu.api.machi
         if (simulate) return true;
         left = stack.getAmount();
         for (IFluidHandler t : tanks) {
-            FluidStack d = t.drain(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE);
+            FluidStack d = ((com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank) t).drainInternal(new FluidStack(stack, left), IFluidHandler.FluidAction.EXECUTE);
             left -= d.getAmount();
             if (left <= 0) break;
         }

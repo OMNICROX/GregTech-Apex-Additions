@@ -20,6 +20,8 @@ public class GTAARecipeTypes {
     public static GTRecipeType DYSON_LAUNCH;
     public static GTRecipeType NAQUADAH_FUEL_REFINERY;
     public static GTRecipeType NAQUADAH_REACTOR;
+    public static GTRecipeType HYPER_NAQUADAH_REACTOR;
+    public static GTRecipeType FUEL_REFINING_COMPLEX;
     public static GTRecipeType COMPONENT_ASSEMBLY_LINE;
     public static GTRecipeType QUANTUM_FORCE_TRANSFORMER;
     /** index 1..8 */
@@ -72,6 +74,19 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(0, 0, 1, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(d -> "Base output: " + com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(d.getLong("lnr_output")) + " EU/t")
+                .setMaxTooltips(4);
+        HYPER_NAQUADAH_REACTOR = register("hyper_naquadah_reactor", "multiblock", "Hyper Naquadah Reaction")
+                .setMaxIOSize(0, 0, 2, 1)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Output: " + com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(d.getLong("hnr_power")) + " EU/t per parallel")
+                .addDataInfo(d -> d.getInt("hnr_tier") >= 2 ? "Needs the Advanced Hyper Naquadah Reactor" : "Hyper or Advanced Hyper Naquadah Reactor")
+                .setMaxTooltips(4);
+        FUEL_REFINING_COMPLEX = register("fuel_refining_complex", "multiblock", "Fuel Refining Complex")
+                .setMaxIOSize(3, 0, 8, 1)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(d -> "Heat: " + com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(d.getInt("frc_heat")) + " K")
+                .addDataInfo(d -> "Needs Field Restriction Coil T" + d.getInt("nfr_coil_tier"))
                 .setMaxTooltips(4);
         COMPONENT_ASSEMBLY_LINE = register("component_assembly_line", "multiblock", "Component Assembly Line")
                 .setMaxIOSize(16, 1, 6, 0)

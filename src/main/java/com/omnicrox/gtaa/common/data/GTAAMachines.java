@@ -300,6 +300,8 @@ public class GTAAMachines {
     //////////////////////////////////////
 
     private static final java.util.List<MultiblockMachineDefinition> SE_MODULES = new java.util.ArrayList<>();
+    /** module id -> the motor tier it needs */
+    public static final java.util.Map<String, Integer> SE_MODULE_MOTOR = new java.util.HashMap<>();
 
     private static Block[] moduleBlocks() {
         return SE_MODULES.stream().map(MultiblockMachineDefinition::getBlock).toArray(Block[]::new);
@@ -383,7 +385,9 @@ public class GTAAMachines {
                 .recipeTypes(types)
                 .recipeModifiers(SpaceElevatorModuleMachine::recipeModifier)
                 .tooltips(tooltips)
-                .tooltips(Component.literal("\u00a77Capacity: \u00a79" + FormattingUtil.formatNumbers(stats.bufferSize()) + " EU"),
+                .tooltips(Component.literal("\u00a77Goes in a Space Elevator module slot, front facing the elevator"),
+                        Component.literal("\u00a77 (or let the Structure Upgrader place it and build its frame)"),
+                        Component.literal("\u00a77Capacity: \u00a79" + FormattingUtil.formatNumbers(stats.bufferSize()) + " EU"),
                         Component.literal(credit != null ? credit : "\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
                 .appearanceBlock(GTAABlocks.SE_BASE_CASING)
                 .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.LEFT, RelativeDirection.DOWN, RelativeDirection.BACK)
@@ -398,6 +402,7 @@ public class GTAAMachines {
                         GTAA.id("block/multiblock/space_elevator")))
                 .register();
         SE_MODULES.add(def);
+        SE_MODULE_MOTOR.put(id, stats.neededMotorTier());
         return def;
     }
 
@@ -720,6 +725,164 @@ public class GTAAMachines {
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_fuel_refinery_casing"),
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+            .register();
+
+    // ---------------- Hyper Naquadah Reactors + Fuel Refining Complex (after GT Not Leisure) ----------------
+    private static net.minecraftforge.fluids.FluidStack safeFluid(com.gregtechceu.gtceu.api.data.chemical.material.Material m, int amt) {
+        try {
+            return m == null ? net.minecraftforge.fluids.FluidStack.EMPTY : m.getFluid(amt);
+        } catch (Throwable t) {
+            return net.minecraftforge.fluids.FluidStack.EMPTY;
+        }
+    }
+
+    private static MultiblockMachineDefinition hyperReactor(String id, String name,
+                                                            com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine.Spec spec,
+                                                            java.util.function.Supplier<Block> core, String boostName) {
+        return REGISTRATE.multiblock(id, h -> new com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine(h, spec))
+                .langValue(name)
+                .rotationState(RotationState.NON_Y_AXIS)
+                .recipeType(GTAARecipeTypes.HYPER_NAQUADAH_REACTOR)
+                .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine::recipeModifier)
+                .generator(true)
+                .tooltips(
+                        Component.literal("\u00a77Machine Type: \u00a7eNaquadah Reactor"),
+                        Component.literal("\u00a77Burns Naquadah Fuel with a catalyst for a fixed EU/t per parallel"),
+                        Component.literal("\u00a77" + (spec.tier() >= 2 ? "Runs every Hyper reaction (MkI-MkVI)" : "Runs MkI-MkIV reactions; MkV / MkVI need the Advanced reactor")),
+                        Component.literal("\u00a77Parallels: \u00a7a" + spec.parallels() + "\u00a77, or \u00a7d" + spec.boostedParallels() +
+                                "\u00a77 with \u00a7d" + boostName + "\u00a77 at the start of a run"),
+                        Component.literal("\u00a77Boost also gives \u00a7dx" + spec.boostPowerMult() + "\u00a77 power and \u00a7dx" + spec.boostSpeedMult() + "\u00a77 speed"),
+                        Component.literal("\u00a77Power the hatches can't take is lost"),
+                        Component.literal("\u00a78After GT Not Leisure (GTNH addon), tuned for Apex"))
+                .appearanceBlock(GTAABlocks.NAQUADAH_REACTOR_CASING)
+                .pattern(definition -> {
+                    var casing = blocks(GTAABlocks.NAQUADAH_REACTOR_CASING.get());
+                    return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                    com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                    com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                            .aisle("AIOEA", "AAAAA", "AAAAA", "AAAAA", "AAmAA")
+                            .aisle("AA~AA", "G   G", "G C G", "G   G", "AGGGA")
+                            .aisle("AGGGA", "G   G", "G C G", "G   G", "AGGGA")
+                            .aisle("AGGGA", "G   G", "G C G", "G   G", "AGGGA")
+                            .aisle("AAAAA", "AAAAA", "AACAA", "AAAAA", "AAAAA")
+                            .where('~', controller(blocks(definition.get())))
+                            .where('A', casing.setMinGlobalLimited(40).or(abilities(PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
+                                    PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER)))
+                            .where('I', abilities(PartAbility.IMPORT_FLUIDS))
+                            .where('O', abilities(PartAbility.EXPORT_FLUIDS))
+                            .where('E', abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER))
+                            .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
+                            .where('G', blocks(GTAABlocks.FIELD_RESTRICTION_GLASS.get()))
+                            .where('C', blocks(core.get()))
+                            .where(' ', any())
+                            .build();
+                })
+                .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+                .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_reactor_casing"),
+                        new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
+                .register();
+    }
+
+    public static final MultiblockMachineDefinition HYPER_NAQUADAH_REACTOR = hyperReactor("hyper_naquadah_reactor", "Hyper Naquadah Reactor",
+            new com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine.Spec(1, 4, 16,
+                    () -> safeFluid(GTAAMaterials.NAQUADAH_GAS, 50), 8, 4),
+            GTAABlocks.FUSION_COIL_MK4::get, "50 L/s Naquadah Gas");
+
+    public static final MultiblockMachineDefinition ADVANCED_HYPER_NAQUADAH_REACTOR = hyperReactor("advanced_hyper_naquadah_reactor",
+            "Advanced Hyper Naquadah Reactor",
+            new com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine.Spec(2, 16, 64,
+                    () -> safeFluid(GTAAMaterials.SPACETIME, 100), 16, 4),
+            GTAABlocks.FUSION_COIL_MK5::get, "100 L/s Molten SpaceTime");
+
+    public static final MultiblockMachineDefinition FUEL_REFINING_COMPLEX = REGISTRATE
+            .multiblock("fuel_refining_complex", com.omnicrox.gtaa.common.machine.multiblock.naquadah.FuelRefiningComplexMachine::new)
+            .langValue("Fuel Refining Complex")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.FUEL_REFINING_COMPLEX)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.naquadah.FuelRefiningComplexMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eFuel Refinery"),
+                    Component.literal("\u00a77Refines Light + Heavy Naquadah Fuel and Atomic Separation Catalyst"),
+                    Component.literal("\u00a77 straight into Naquadah Fuel MkI-MkVI"),
+                    Component.literal("\u00a77Heat = coil temperature + 100 K per voltage tier above MV"),
+                    Component.literal("\u00a77Every 900 K above a recipe's heat: one perfect overclock"),
+                    Component.literal("\u00a77Field Restriction Coils set the fuel tier; 4 parallels per coil tier"),
+                    Component.literal("\u00a78After GT Not Leisure (GTNH addon)"))
+            .appearanceBlock(GTAABlocks.NAQUADAH_FUEL_REFINERY_CASING)
+            .pattern(definition -> {
+                var casing = blocks(GTAABlocks.NAQUADAH_FUEL_REFINERY_CASING.get());
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("bIEOA", "AAAAA", "AAAAA", "AAAAA", "AAmAA")
+                        .aisle("AA~AA", "AHHHA", "AHFHA", "AHHHA", "AAAAA")
+                        .aisle("AGGGA", "GHHHG", "GHFHG", "GHHHG", "AGGGA")
+                        .aisle("AGGGA", "GHHHG", "GHFHG", "GHHHG", "AGGGA")
+                        .aisle("AAAAA", "AAAAA", "AAAAA", "AAAAA", "AAAAA")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('A', casing.setMinGlobalLimited(40).or(abilities(PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS,
+                                PartAbility.EXPORT_FLUIDS, PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER)))
+                        .where('b', abilities(PartAbility.IMPORT_ITEMS))
+                        .where('I', abilities(PartAbility.IMPORT_FLUIDS))
+                        .where('E', abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER))
+                        .where('O', abilities(PartAbility.EXPORT_FLUIDS))
+                        .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
+                        .where('H', heatingCoils())
+                        .where('F', com.omnicrox.gtaa.common.machine.multiblock.naquadah.NaquadahFuelRefineryMachine.coils())
+                        .where('G', blocks(GTAABlocks.FIELD_RESTRICTION_GLASS.get()))
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_fuel_refinery_casing"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
+            .register();
+
+    // ---------------- Lightning Spire (after Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition LIGHTNING_SPIRE = REGISTRATE
+            .multiblock("lightning_spire", com.omnicrox.gtaa.common.machine.multiblock.LightningSpireMachine::new)
+            .langValue("Lightning Spire")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .generator(true)
+            .tooltips(
+                    Component.literal("\u00a77Machine Type: \u00a7eLightning Generator"),
+                    Component.literal("\u00a7o\"Thunder is God's cannon. But now we will control the thunder.\""),
+                    Component.literal("\u00a77Holds up to \u00a7e512 Spire Lightning Rods\u00a77 (feed them through an input bus)"),
+                    Component.literal("\u00a77Every 12.8 s: \u00a7e28,000,000 EU\u00a77 per rod into its buffer (280,000,000 EU per rod)"),
+                    Component.literal("\u00a77Each strike costs 128 L coolant (Cryotheum, else Liquid Helium) + 72 L Molten Iron per rod"),
+                    Component.literal("\u00a77The buffer empties into Dynamo / Laser hatches. Weather doesn't matter"),
+                    Component.literal("\u00a77Breaking the controller drops its rods. Screwdriver: lightning visuals on/off"),
+                    Component.literal("\u00a78After Twist Space Technology (GTNH addon)"))
+            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
+            .pattern(definition -> {
+                var casing = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
+                var frame = frames(GTMaterials.TungstenSteel);
+                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
+                        .aisle("AbIEA", "AAAAA", "AAAAA", "AAAAA", "AAmAA")
+                        .aisle("AA~AA", "A   A", "A F A", "A   A", "AAAAA")
+                        .aisle("     ", " F F ", "  F  ", " F F ", "     ")
+                        .aisle("     ", "     ", "  F  ", "     ", "     ")
+                        .aisle("     ", "     ", "  F  ", "     ", "     ")
+                        .aisle("     ", "     ", "  F  ", "     ", "     ")
+                        .aisle("     ", "     ", "  F  ", "     ", "     ")
+                        .aisle("     ", "     ", "  T  ", "     ", "     ")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('A', casing.setMinGlobalLimited(20).or(abilities(PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS,
+                                PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER)))
+                        .where('b', abilities(PartAbility.IMPORT_ITEMS))
+                        .where('I', abilities(PartAbility.IMPORT_FLUIDS))
+                        .where('E', abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER))
+                        .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
+                        .where('F', frame)
+                        .where('T', blocks(Blocks.LIGHTNING_ROD))
+                        .where(' ', any())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_robust_tungstensteel"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/implosion_compressor")))
             .register();
 
     // ---------------- Component Assembly Line (GoodGenerator) ----------------

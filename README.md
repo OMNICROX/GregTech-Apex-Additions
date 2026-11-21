@@ -31,6 +31,9 @@ the Aether) only get their recipes when that mod is installed.
 | Draconic Fusion Crafter | LuV-UHV | Needs Draconic Evolution; tiered DE cores |
 | Mystical Cultivation Array | LV+ | Needs Mystical Agriculture; tiered soil and glass, fixed hatch layout, up to 2 Seed Hatches (16-50 seed types, 256 each), ME Output Bus support |
 | Mana Nexus | LV-LuV | Needs Botania; stores 10M-2B mana (Mana Hatch for spreaders/sparks, liquid mana from Mana Fluid), does every Botania altar craft (pool, runic altar, terra plate, elven trade, daisy, apothecary, Mythic Botany infuser/rituals); Manasteel to Gaiasteel cores |
+| Hyper / Advanced Hyper Naquadah Reactor | UHV / UIV | After GT Not Leisure: naquadah fuel + catalyst reactions with a fixed EU/t per parallel (UV for MkI + hydrogen up to 64x MAX for MkVI + quark-gluon plasma); 4 / 16 parallels, x4 with Naquadah Gas / SpaceTime boost (plus x8 / x16 power, x4 speed) |
+| Fuel Refining Complex | UHV-MAX | After GT Not Leisure: bulk Naquadah Fuel MkI-MkVI from light / heavy naquadah fuel + atomic separation catalyst; heating coils (EBF heat) + Field Restriction Coils |
+| Lightning Spire | LuV | After Twist Space Technology: up to 512 Spire Lightning Rods, 28M EU per rod every 12.8 s; coolant + molten iron per strike |
 | Ascension Gate | MV-MAX | The finale. A ring of 15 chevrons, one per tier ULV to MAX; each locks when its milestone items are in an input bus and the gate has power at that tier. All 15 locked: dial it, and Maxwell comes through |
 | Suit Fabrication Station | MV-UHV | Hero suits with their hero kits; four casing tiers (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge); Suit Picker tab with 3D preview, ME autocraft of missing parts, in-booth suit hologram |
 
@@ -52,7 +55,10 @@ the Aether) only get their recipes when that mod is installed.
   Seeds come only from the **Seed Synthesizer** (LV-UHV): 32 blocks of the material at the crop's tier, halving
   per Synthesizer tier above (floor 1/8). 24 essence -> 1 dust in a GT extractor.
 - **Structure Upgrader**: shift-use a formed controller to swap every coil or tiered casing at once, and hatches
-  you carry better versions of.
+  you carry better versions of. On the Space Elevator it also swaps motors, places module controllers you carry into
+  free slots (facing the right way, frame built from your inventory) and upgrades modules to the next Mk.
+- **Forge of the Gods** (GT Nexus Additions): boots on Re-Avaritia's Star Fuel (GTAA makes it from Neutronium Blocks
+  in an assembler); Star Fuel also extracts into Raw Star Matter, its second running fuel.
 - **Angel Ring**: flight from the Aether (enchanted gravitite, golden feather) and an Extra Utilities angel block.
 - **Aether**: aerclouds centrifuge into helium and helium-3; enchanted gravitite doubles Gravi Stars.
 - Own animated textures for every GTAA fluid; uses GT Nexus Additions and GTCA materials when those are installed.

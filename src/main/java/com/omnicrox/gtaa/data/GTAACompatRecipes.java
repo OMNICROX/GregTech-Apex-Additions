@@ -63,6 +63,29 @@ public final class GTAACompatRecipes {
         chaos(provider);
         angelRing(provider);
         aether(provider);
+        godforge(provider);
+    }
+
+    /**
+     * Forge of the Gods (GT Nexus Additions): it boots on Star Fuel (Re-Avaritia's item, see ForgeOfGodsStarFuelMixin),
+     * made here from Neutronium Blocks, and Star Fuel also melts into Raw Star Matter, the Forge's second running fuel,
+     * which nothing else made.
+     */
+    private static void godforge(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:godforge/star_fuel")
+                .inputItems(net.minecraft.world.item.Item.byBlock(com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper.getBlock(
+                        com.gregtechceu.gtceu.api.data.tag.TagPrefix.block, GTMaterials.Neutronium)))
+                .inputItems(S1)
+                .outputItems(S2)
+                .duration(200).EUt(VA[UHV])
+                .save(needing(provider, "avaritia", Map.of(S1, "avaritia:refined_coal_block", S2, "avaritia:star_fuel")));
+        var rawStar = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:raw_star_matter");
+        if (rawStar != null && !rawStar.isNull() && rawStar.hasProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.FLUID))
+            EXTRACTOR_RECIPES.recipeBuilder("gtapexadditions:godforge/raw_star_matter")
+                    .inputItems(S1)
+                    .outputFluids(rawStar.getFluid(250))
+                    .duration(100).EUt(VA[UEV])
+                    .save(needing(provider, "avaritia", Map.of(S1, "avaritia:star_fuel")));
     }
 
     /**

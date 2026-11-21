@@ -100,5 +100,8 @@ public class GTAAItems {
             .item("maxwell", com.omnicrox.gtaa.common.item.MaxwellItem::new)
             .lang("Maxwell").model(NonNullBiConsumer.noop()).register();
 
+    public static final ItemEntry<Item> SPIRE_LIGHTNING_ROD = REGISTRATE.item("spire_lightning_rod", Item::new)
+            .lang("Spire Lightning Rod").model(NonNullBiConsumer.noop()).register();
+
     public static void init() {}
 }
