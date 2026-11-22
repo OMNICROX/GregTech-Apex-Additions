@@ -129,7 +129,9 @@ public class GTAAMachines {
             .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
             .tooltips(Component.literal("\u00a77Holds \u00a7d" + FormattingUtil.formatNumbers(AntimatterHatchPartMachine.CAPACITY) +
                             " L\u00a77 of Semi-Stable Antimatter"),
-                    Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"))
+                    Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"),
+                    Component.literal("\u00a77Keeps \u00a7d1,000,000 L\u00a77 inside; only the surplus can leave (auto-output, ME, pipes)"),
+                    Component.literal("\u00a77Screwdriver: change the keep level for all 16 hatches (0 - 16M L)"))
             .register();
 
     /** Seed Hatch: the Mystical Cultivation Array only reads seeds from these. */
