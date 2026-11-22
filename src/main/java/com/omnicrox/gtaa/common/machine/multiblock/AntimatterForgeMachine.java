@@ -186,6 +186,7 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
             stop("Needs all 16 Antimatter Hatches (has " + hatches.size() + ")");
             return;
         }
+        refillFromInputs(hatches);
         long total = 0, min = Long.MAX_VALUE;
         for (AntimatterHatchPartMachine h : hatches) {
             long a = h.getAmount();
@@ -265,6 +266,29 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
         long value = (long) Math.pow((double) antimatter * ACTIVE_BASE_MULT, ACTIVE_BASE_EXP + modifiers[GRAVITY]);
         guiActive = value;
         return value;
+    }
+
+    /**
+     * Each hatch gets a random gain (it can be negative), so after the surplus has left, the hatches that rolled low
+     * sit under their keep level. Before the balancing check, those are topped back up to the keep level with
+     * antimatter from the forge's own input hatches (GTNH's buffer tanks, built in): feed an input hatch with the
+     * antimatter the SASS made and all 16 stay level.
+     */
+    private void refillFromInputs(List<AntimatterHatchPartMachine> hatches) {
+        Fluid am = GTAAMaterials.ANTIMATTER.getFluid();
+        List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
+        long available = AntimatterMachineHelper.amountOf(inputs, am);
+        if (available <= 0) return;
+        for (AntimatterHatchPartMachine h : hatches) {
+            long want = h.keepLevel() - h.getAmount();
+            if (want <= 0) continue;
+            int take = (int) Math.min(want, available);
+            if (take <= 0) break;
+            if (!AntimatterMachineHelper.deplete(inputs, am, take)) break;
+            h.fillAntimatter(take);
+            available -= take;
+            inputs = AntimatterMachineHelper.inputFluids(this);
+        }
     }
 
     private void decimate(List<AntimatterHatchPartMachine> hatches) {
