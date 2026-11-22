@@ -132,7 +132,7 @@ public class GTAAMachines {
                     Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"),
                     Component.literal("\u00a77Keeps \u00a7d1,000,000 L\u00a77 inside; only the surplus can leave (auto-output, ME, pipes)"),
                     Component.literal("\u00a77Screwdriver: change the keep level for all 16 hatches (0 - 16M L)"),
-                    Component.literal("\u00a77Hatches under it are topped up from antimatter in the forge's input hatches"))
+                    Component.literal("\u00a77The SASS evens out its 16 hatches each cycle, topping them up to the keep level from antimatter in its input hatches"))
             .register();
 
     /** Seed Hatch: the Mystical Cultivation Array only reads seeds from these. */

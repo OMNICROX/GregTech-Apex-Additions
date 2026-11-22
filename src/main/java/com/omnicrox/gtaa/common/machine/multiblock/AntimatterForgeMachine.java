@@ -269,25 +269,30 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
     }
 
     /**
-     * Each hatch gets a random gain (it can be negative), so after the surplus has left, the hatches that rolled low
-     * sit under their keep level. Before the balancing check, those are topped back up to the keep level with
-     * antimatter from the forge's own input hatches (GTNH's buffer tanks, built in): feed an input hatch with the
-     * antimatter the SASS made and all 16 stay level.
+     * Each hatch gets a random gain (it can be negative), so the 16 drift apart every cycle. GTNH evens them out
+     * with a buffer tank and two regulators per hatch; here the hatch front can't take covers and nothing can be
+     * pumped in, so the forge does it itself before the balancing check: it pools all 16 hatches and splits the
+     * pool evenly, first topping the pool up to 16 x the keep level with antimatter from its own input hatches.
+     * The surplus over the keep level still leaves through each hatch's front.
      */
     private void refillFromInputs(List<AntimatterHatchPartMachine> hatches) {
         Fluid am = GTAAMaterials.ANTIMATTER.getFluid();
-        List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
-        long available = AntimatterMachineHelper.amountOf(inputs, am);
-        if (available <= 0) return;
-        for (AntimatterHatchPartMachine h : hatches) {
-            long want = h.keepLevel() - h.getAmount();
-            if (want <= 0) continue;
-            int take = (int) Math.min(want, available);
-            if (take <= 0) break;
-            if (!AntimatterMachineHelper.deplete(inputs, am, take)) break;
-            h.fillAntimatter(take);
-            available -= take;
-            inputs = AntimatterMachineHelper.inputFluids(this);
+        int n = hatches.size();
+        long pool = 0;
+        for (AntimatterHatchPartMachine h : hatches) pool += h.getAmount();
+        long keepTotal = (long) hatches.get(0).keepLevel() * n;
+        if (pool < keepTotal) {
+            List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
+            long take = Math.min(keepTotal - pool, AntimatterMachineHelper.amountOf(inputs, am));
+            if (take > 0 && AntimatterMachineHelper.deplete(inputs, am, take)) pool += take;
+        }
+        long each = pool / n, extra = pool % n;
+        for (int i = 0; i < n; i++) {
+            AntimatterHatchPartMachine h = hatches.get(i);
+            long target = each + (i < extra ? 1 : 0);
+            long diff = target - h.getAmount();
+            if (diff > 0) h.fillAntimatter((int) diff);
+            else if (diff < 0) h.drainAntimatter((int) -diff);
         }
     }
 
