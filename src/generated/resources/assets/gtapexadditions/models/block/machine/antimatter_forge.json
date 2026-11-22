@@ -8,14 +8,14 @@
   "loader": "gtceu:machine",
   "machine": "gtapexadditions:antimatter_forge",
   "texture_overrides": {
-    "all": "gtapexadditions:block/casing/antimatter_machine_casing"
+    "all": "gtapexadditions:block/casing/magnetic_flux_casing"
   },
   "variants": {
     "is_formed=false,recipe_logic_status=idle": {
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_emissive"
         }
@@ -25,7 +25,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_emissive"
         }
@@ -35,7 +35,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front_active",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_active_emissive"
         }
@@ -45,7 +45,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front_active",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_active_emissive"
         }
@@ -55,7 +55,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_emissive"
         }
@@ -65,7 +65,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_emissive"
         }
@@ -75,7 +75,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front_active",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_active_emissive"
         }
@@ -85,7 +85,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "gtapexadditions:block/casing/antimatter_machine_casing",
+          "all": "gtapexadditions:block/casing/magnetic_flux_casing",
           "overlay_front": "gtapexadditions:block/multiblock/antimatter/overlay_front_active",
           "overlay_front_emissive": "gtapexadditions:block/multiblock/antimatter/overlay_front_active_emissive"
         }

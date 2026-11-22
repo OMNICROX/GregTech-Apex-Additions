@@ -239,7 +239,7 @@ public class GTAAMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/antimatter_machine_casing"),
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/magnetic_flux_casing"),
                     GTAA.id("block/multiblock/antimatter"))
                     .andThen(b -> b.addDynamicRenderer(() -> new com.omnicrox.gtaa.client.AntimatterCoreRender())))
             .hasBER(true)
@@ -294,7 +294,7 @@ public class GTAAMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/antimatter_machine_casing"),
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/magnetic_flux_casing"),
                     GTAA.id("block/multiblock/antimatter")))
             .register();
 
