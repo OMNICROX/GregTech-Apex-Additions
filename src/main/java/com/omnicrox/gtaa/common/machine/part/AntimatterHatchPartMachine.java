@@ -103,7 +103,7 @@ public class AntimatterHatchPartMachine extends FluidHatchPartMachine {
                     h.keepIndex = keepIndex;
                     synced++;
                 }
-        player.displayClientMessage(Component.literal("Keeps " + FormattingUtil.formatNumbers(keepLevel()) +
+        player.displayClientMessage(Component.literal("Keeps " + com.omnicrox.gtaa.api.GTAAFormat.num(keepLevel()) +
                 " L of antimatter in each hatch (" + synced + " hatches); only the surplus leaves").withStyle(ChatFormatting.LIGHT_PURPLE), true);
         return InteractionResult.CONSUME;
     }

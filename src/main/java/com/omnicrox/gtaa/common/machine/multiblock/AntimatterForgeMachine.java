@@ -165,7 +165,7 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
         long passive = containmentCost(total);
         if (!hatches.isEmpty() && total > 0 && !drainEnergy(passive)) {
             decimate(hatches);
-            stop("Containment failed: not enough energy (" + FormattingUtil.formatNumbers(passive) + " EU/t)");
+            stop("Containment failed: not enough energy (" + com.omnicrox.gtaa.api.GTAAFormat.num(passive) + " EU/t)");
             guiAntimatter = total;
             return;
         }
@@ -225,7 +225,7 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
         long energyCost = activeCost(total);
         if (!drainEnergy(energyCost)) {
             decimate(hatches);
-            stop("Not enough energy for the cycle (" + FormattingUtil.formatNumbers(energyCost) + " EU)");
+            stop("Not enough energy for the cycle (" + com.omnicrox.gtaa.api.GTAAFormat.num(energyCost) + " EU)");
             return;
         }
         for (int i = 0; i < 4; i++) {
@@ -328,14 +328,14 @@ public class AntimatterForgeMachine extends WorkableElectricMultiblockMachine {
         MultiblockDisplayText.builder(textList, isFormed())
                 .setWorkingStatus(getRecipeLogic().isWorkingEnabled(), getRecipeLogic().isWorkingEnabled() && isFormed())
                 .addCustom(t -> {
-                    t.add(Component.literal("Antimatter: " + FormattingUtil.formatNumbers(guiAntimatter) + " L")
+                    t.add(Component.literal("Antimatter: " + com.omnicrox.gtaa.api.GTAAFormat.num(guiAntimatter) + " L")
                             .withStyle(ChatFormatting.LIGHT_PURPLE));
                     t.add(Component.literal("Last change: " + (guiChange >= 0 ? "+" : "") +
-                            FormattingUtil.formatNumbers(guiChange) + " L/cycle")
+                            com.omnicrox.gtaa.api.GTAAFormat.num(guiChange) + " L/cycle")
                             .withStyle(guiChange >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED));
-                    t.add(Component.literal("Passive: " + FormattingUtil.formatNumbers(guiPassive) + " EU/t")
+                    t.add(Component.literal("Passive: " + com.omnicrox.gtaa.api.GTAAFormat.num(guiPassive) + " EU/t")
                             .withStyle(ChatFormatting.YELLOW));
-                    t.add(Component.literal("Active: " + FormattingUtil.formatNumbers(guiActive / CYCLE_TICKS) + " EU/t")
+                    t.add(Component.literal("Active: " + com.omnicrox.gtaa.api.GTAAFormat.num(guiActive / CYCLE_TICKS) + " EU/t")
                             .withStyle(ChatFormatting.YELLOW));
                     String[] names = { "Magnetic", "Gravity", "Containment", "Activation" };
                     for (int i = 0; i < 4; i++) {

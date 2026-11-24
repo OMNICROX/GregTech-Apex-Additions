@@ -60,8 +60,8 @@ public class ManaHatchPartMachine extends MultiblockPartMachine implements com.g
     public InteractionResult onUse(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level world,
                                    net.minecraft.core.BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide && player.getItemInHand(hand).isEmpty()) {
-            player.displayClientMessage(Component.literal("Mana Hatch: " + String.format("%,d", mana) + " / " +
-                    String.format("%,d", CAPACITY) + " mana"), true);
+            player.displayClientMessage(Component.literal("Mana Hatch: " + com.omnicrox.gtaa.api.GTAAFormat.num(mana) + " / " +
+                    com.omnicrox.gtaa.api.GTAAFormat.num(CAPACITY) + " mana"), true);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

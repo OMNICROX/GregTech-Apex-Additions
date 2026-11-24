@@ -155,7 +155,7 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
         int max = PARALLELS[Math.max(1, Math.min(5, nexus.coreTier))];
         if (mana > 0) {
             long affordable = nexus.storedMana / mana;
-            if (affordable <= 0) return ModifierFunction.cancel(Component.literal("Needs " + String.format("%,d", mana) + " mana"));
+            if (affordable <= 0) return ModifierFunction.cancel(Component.literal("Needs " + com.omnicrox.gtaa.api.GTAAFormat.num(mana) + " mana"));
             max = (int) Math.min(max, affordable);
         }
         int parallels = ParallelLogic.getParallelAmount(machine, recipe, max);
@@ -179,7 +179,7 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
         super.addDisplayText(textList);
         if (!isFormed()) return;
         int t = Math.max(0, Math.min(5, coreTier));
-        textList.add(Component.literal("Mana: " + String.format("%,d", storedMana) + " / " + String.format("%,d", capacity()))
+        textList.add(Component.literal("Mana: " + com.omnicrox.gtaa.api.GTAAFormat.num(storedMana) + " / " + com.omnicrox.gtaa.api.GTAAFormat.num(capacity()))
                 .withStyle(ChatFormatting.AQUA));
         textList.add(Component.literal("Cores: " + CORE_NAMES[t] + " (tier " + t + "), up to " + PARALLELS[t] + " crafts at once")
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -190,7 +190,7 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
     public static List<String> coreInfo(int tier) {
         List<String> l = new ArrayList<>();
         int t = Math.max(1, Math.min(5, tier));
-        l.add(String.format("%,d", CAPACITY[t]) + " mana, " + PARALLELS[t] + " crafts at once; " + TIER_CRAFTS[t]);
+        l.add(com.omnicrox.gtaa.api.GTAAFormat.num(CAPACITY[t]) + " mana, " + PARALLELS[t] + " crafts at once; " + TIER_CRAFTS[t]);
         return l;
     }
 }

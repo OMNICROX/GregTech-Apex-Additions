@@ -307,15 +307,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
     //////////////////////////////////////
 
     private static String big(long v) {
-        if (v < 1_000_000_000_000L) return FormattingUtil.formatNumbers(v);
-        String[] units = { "T", "Qa", "Qn" };
-        double d = v / 1e12;
-        int u = 0;
-        while (d >= 1000 && u < units.length - 1) {
-            d /= 1000;
-            u++;
-        }
-        return String.format("%.2f %s", d, units[u]);
+        return com.omnicrox.gtaa.api.GTAAFormat.num(v);
     }
 
     @Override
@@ -333,7 +325,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
         } else if (!worldAscended) {
             double frac = (double) charge / REQUIRED;
             textList.add(Component.literal(String.format("Ascension charge: %.4f%%", frac * 100)).withStyle(ChatFormatting.LIGHT_PURPLE));
-            textList.add(Component.literal(big(charge) + " / 9.22 Qn EU").withStyle(ChatFormatting.AQUA));
+            textList.add(Component.literal(big(charge) + " / 9.22E18 EU").withStyle(ChatFormatting.AQUA));
             if (rate > 0) {
                 long secs = (REQUIRED - charge) / Math.max(1, rate * 20);
                 textList.add(Component.literal("Charging at " + big(rate) + " EU/t, " + (secs / 60) + " min " + (secs % 60) + " s left")

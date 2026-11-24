@@ -90,7 +90,7 @@ public class FuelRefiningComplexMachine extends CoilWorkableElectricMultiblockMa
         super.addDisplayText(textList);
         if (!isFormed()) return;
         heat = currentHeat();
-        textList.add(Component.literal("Heat: " + FormattingUtil.formatNumbers(heat) + " K").withStyle(ChatFormatting.RED));
+        textList.add(Component.literal("Heat: " + com.omnicrox.gtaa.api.GTAAFormat.num(heat) + " K").withStyle(ChatFormatting.RED));
         textList.add(Component.literal("Field Restriction Coil: T" + fieldTier + " (" + 4 * Math.max(1, fieldTier) + " parallels)")
                 .withStyle(ChatFormatting.AQUA));
     }

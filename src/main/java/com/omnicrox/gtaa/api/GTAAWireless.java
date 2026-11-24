@@ -119,9 +119,7 @@ public final class GTAAWireless {
         if (owner == null || !isAvailable()) return "";
         try {
             java.math.BigInteger b = (java.math.BigInteger) getStorage.invoke(getOrCreate.invoke(null, owner));
-            if (b.bitLength() < 63) return com.gregtechceu.gtceu.utils.FormattingUtil.formatNumbers(b.longValue());
-            String d = b.toString();
-            return d.charAt(0) + "." + d.substring(1, 4) + "e" + (d.length() - 1);
+            return GTAAFormat.num(b);
         } catch (Throwable t) {
             return "";
         }

@@ -291,7 +291,7 @@ public class ExtremeEntityCrusherMachine extends WorkableElectricMultiblockMachi
             };
             textList.add(Component.literal(r.title + " Sigil: " + odds).withStyle(r.color));
         }
-        if (lastEut > 0) textList.add(Component.literal("Using " + FormattingUtil.formatNumbers(lastEut) + " EU/t, " +
+        if (lastEut > 0) textList.add(Component.literal("Using " + com.omnicrox.gtaa.api.GTAAFormat.num(lastEut) + " EU/t, " +
                 lastParallel + " mobs per cycle" + (lastInfernals > 0 ? ", " + lastInfernals + " infernal last cycle" : ""))
                 .withStyle(ChatFormatting.AQUA));
     }

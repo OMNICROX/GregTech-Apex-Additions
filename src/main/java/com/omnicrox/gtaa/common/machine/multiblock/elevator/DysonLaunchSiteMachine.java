@@ -116,11 +116,11 @@ public class DysonLaunchSiteMachine extends SpaceElevatorModuleMachine {
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        textList.add(Component.literal("Dyson Swarm Modules in orbit: " + FormattingUtil.formatNumbers(modules))
+        textList.add(Component.literal("Dyson Swarm Modules in orbit: " + com.omnicrox.gtaa.api.GTAAFormat.num(modules))
                 .withStyle(ChatFormatting.GOLD));
-        textList.add(Component.literal("Swarm output: " + FormattingUtil.formatNumbers(modules * EU_PER_MODULE) + " EU/t")
+        textList.add(Component.literal("Swarm output: " + com.omnicrox.gtaa.api.GTAAFormat.num(modules * EU_PER_MODULE) + " EU/t")
                 .withStyle(ChatFormatting.AQUA));
-        textList.add(Component.literal("Sent to hatches: " + FormattingUtil.formatNumbers(lastOutput) + " EU/t")
+        textList.add(Component.literal("Sent to hatches: " + com.omnicrox.gtaa.api.GTAAFormat.num(lastOutput) + " EU/t")
                 .withStyle(ChatFormatting.GRAY));
     }
 }

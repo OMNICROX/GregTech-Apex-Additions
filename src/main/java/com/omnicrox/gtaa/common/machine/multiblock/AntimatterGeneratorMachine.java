@@ -220,7 +220,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         sentThisCycle = 0;
         if (undelivered > 0) {
             euVoidedLastCycle = undelivered;
-            problem = "The hatches couldn't take a whole burst in 5 s: " + FormattingUtil.formatNumbers(undelivered) +
+            problem = "The hatches couldn't take a whole burst in 5 s: " + com.omnicrox.gtaa.api.GTAAFormat.num(undelivered) +
                     " EU voided. Add more / bigger dynamo or laser hatches";
         }
         List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
@@ -319,7 +319,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
     }
 
     private static String eu(long v) {
-        return FormattingUtil.formatNumbers(v) + " EU";
+        return com.omnicrox.gtaa.api.GTAAFormat.num(v) + " EU";
     }
 
     @Override
@@ -332,20 +332,20 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
 
                     t.add(Component.literal("Last burst").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
                     t.add(line(" Generated: ", eu(euLastCycle), ChatFormatting.GREEN));
-                    t.add(line(" Average: ", FormattingUtil.formatNumbers(euLastCycle / CYCLE_TICKS) + " EU/t", ChatFormatting.GREEN));
-                    t.add(line(" Used: ", FormattingUtil.formatNumbers(antimatterLastCycle) + " L antimatter + " +
-                            FormattingUtil.formatNumbers(matterLastCycle) + " L " +
+                    t.add(line(" Average: ", com.omnicrox.gtaa.api.GTAAFormat.num(euLastCycle / CYCLE_TICKS) + " EU/t", ChatFormatting.GREEN));
+                    t.add(line(" Used: ", com.omnicrox.gtaa.api.GTAAFormat.num(antimatterLastCycle) + " L antimatter + " +
+                            com.omnicrox.gtaa.api.GTAAFormat.num(matterLastCycle) + " L " +
                             (matterNameLastCycle.isEmpty() ? "matter" : matterNameLastCycle), ChatFormatting.AQUA));
                     if (boostLastCycle > 0) t.add(line(" Boost: ", "x^" + boostLastCycle, ChatFormatting.YELLOW));
                     t.add(line(" Efficiency: ", Math.round(efficiency * 100) + "% (avg " + Math.round(avgEfficiency * 100) + "%)",
                             efficiency >= 0.999f ? ChatFormatting.GREEN : ChatFormatting.RED));
-                    if (!wireless) t.add(line(" Delivered: ", eu(sentThisCycle) + " (" + FormattingUtil.formatNumbers(sentThisCycle / CYCLE_TICKS) + " EU/t)", ChatFormatting.GREEN));
+                    if (!wireless) t.add(line(" Delivered: ", eu(sentThisCycle) + " (" + com.omnicrox.gtaa.api.GTAAFormat.num(sentThisCycle / CYCLE_TICKS) + " EU/t)", ChatFormatting.GREEN));
                     if (euVoidedLastCycle > 0) t.add(line(" Voided: ", eu(euVoidedLastCycle), ChatFormatting.RED));
 
                     t.add(Component.literal("Inputs").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
                     t.add(line(" Fluid hatches: ", String.valueOf(inputHatches), ChatFormatting.WHITE));
-                    t.add(line(" Antimatter: ", FormattingUtil.formatNumbers(antimatterStored) + " L", ChatFormatting.AQUA));
-                    t.add(line(" Matter: ", FormattingUtil.formatNumbers(matterStored) + " L" +
+                    t.add(line(" Antimatter: ", com.omnicrox.gtaa.api.GTAAFormat.num(antimatterStored) + " L", ChatFormatting.AQUA));
+                    t.add(line(" Matter: ", com.omnicrox.gtaa.api.GTAAFormat.num(matterStored) + " L" +
                             (matterStoredName.isEmpty() ? "" : " (" + matterStoredName + ")"), ChatFormatting.AQUA));
                     if (fluidKinds > 2) t.add(Component.literal(" More than 2 fluids: the next burst will be voided!")
                             .withStyle(ChatFormatting.RED));

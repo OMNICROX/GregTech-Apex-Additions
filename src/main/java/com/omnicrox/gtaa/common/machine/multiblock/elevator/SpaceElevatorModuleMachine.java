@@ -121,8 +121,8 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
                 .addCustom(t -> {
                     t.add(Component.literal(connected ? "Connected to a Space Elevator" : "Not connected to a Space Elevator")
                             .withStyle(connected ? ChatFormatting.GREEN : ChatFormatting.RED));
-                    t.add(Component.literal("Stored: " + FormattingUtil.formatNumbers(buffer.getEnergyStored()) + " / " +
-                            FormattingUtil.formatNumbers(buffer.getEnergyCapacity()) + " EU").withStyle(ChatFormatting.YELLOW));
+                    t.add(Component.literal("Stored: " + com.omnicrox.gtaa.api.GTAAFormat.num(buffer.getEnergyStored()) + " / " +
+                            com.omnicrox.gtaa.api.GTAAFormat.num(buffer.getEnergyCapacity()) + " EU").withStyle(ChatFormatting.YELLOW));
                     t.add(Component.literal("Runs at " + GTValues.VNF[stats.voltageTier()] + "§r with up to " +
                             stats.maxParallels() + " parallels"));
                 })

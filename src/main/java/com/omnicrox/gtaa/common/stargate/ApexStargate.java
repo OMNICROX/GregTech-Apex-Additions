@@ -215,7 +215,7 @@ public final class ApexStargate {
                     if (level == null || pos == null) return;
                     for (ServerPlayer p : level.players())
                         if (p.position().distanceTo(pos) < 24)
-                            p.displayClientMessage(Component.literal("The gate is sealed. Charge it with 9.22 Qn EU from its Ascension Gate controller.")
+                            p.displayClientMessage(Component.literal("The gate is sealed. Charge it with 9.22E18 EU from its Ascension Gate controller.")
                                     .withStyle(ChatFormatting.LIGHT_PURPLE), true);
                 } catch (Throwable ignored) {}
             });
