@@ -2,12 +2,27 @@
 Usage: python3 convert.py  (writes src/main/resources/data/gtapexadditions/structures/sylvan_arbiter.txt)"""
 import nbtlib, os
 HERE = os.path.dirname(os.path.abspath(__file__))
+# Create isn't in the pack: its limestone and glass become Quark's, its deepslate pillars Chipped's
+REPLACE = {
+    'create:cut_limestone_bricks': 'quark:limestone_bricks',
+    'create:limestone_pillar': 'quark:limestone_pillar',
+    'create:cut_limestone_brick_stairs': 'quark:limestone_bricks_stairs',
+    'create:cut_limestone_brick_slab': 'quark:limestone_bricks_slab',
+    'create:cut_limestone_brick_wall': 'quark:limestone_bricks_wall',
+    'create:polished_cut_limestone_stairs': 'quark:polished_limestone_stairs',
+    'create:polished_cut_limestone_slab': 'quark:polished_limestone_slab',
+    'create:vertical_framed_glass': 'quark:framed_glass',
+    'create:deepslate_pillar': 'chipped:deepslate_pillar',
+    'create:polished_cut_deepslate_stairs': 'minecraft:polished_deepslate_stairs',
+}
+# blocks that may also be something else (gravel falls if anything under it is missing)
+ALTS = {'minecraft:gravel': 'minecraft:gravel|minecraft:coarse_dirt'}
 n = nbtlib.load(os.path.join(HERE, 'botania_sanctuary.nbt')); pal = n['palette']
 X, Y, Z = [int(v) for v in n['size']]
 G = {}
 for b in n['blocks']:
     p = tuple(int(v) for v in b['pos']); s = pal[int(b['state'])]
-    G[p] = (str(s['Name']), ','.join(f'{k}={v}' for k, v in sorted(s.get('Properties', {}).items())))
+    G[p] = (REPLACE.get(str(s['Name']), str(s['Name'])), ','.join(f'{k}={v}' for k, v in sorted(s.get('Properties', {}).items())))
 
 CONTROLLER = (24, 5, 14)
 INSIDE = lambda x, z: 11 <= x <= 37 and 12 <= z <= 38
@@ -31,6 +46,7 @@ for p, (name, props) in G.items():
     k, _ = kind(p, name)
     key = (k, '' if k in ('controller', 'core', 'pool', 'leaves', 'glass') else name,
            '' if k in ('controller', 'core', 'pool', 'leaves', 'glass') else props)
+    if key[1] in ALTS: key = (key[0], ALTS[key[1]], key[2])
     if key not in legend:
         legend[key] = chr(nxt[0]); nxt[0] += 1
     grid[p] = legend[key]
@@ -59,7 +75,13 @@ for b in n['blocks']:
     if k in SWAP:
         name, props = SWAP[k]
     else:
-        name, props = str(s['Name']), {str(a): str(v) for a, v in s.get('Properties', {}).items()}
+        name, props = REPLACE.get(str(s['Name']), str(s['Name'])), {str(a): str(v) for a, v in s.get('Properties', {}).items()}
+        if name.startswith('quark:limestone_pillar') or name == 'chipped:deepslate_pillar':
+            props = {k: v for k, v in props.items() if k == 'axis'}
+        elif name.endswith('_wall'):
+            props = {k: v for k, v in props.items() if k in ('up', 'waterlogged')}
+        elif name == 'quark:framed_glass':
+            props = {}
     key = (name, tuple(sorted(props.items())))
     if key not in index:
         index[key] = len(newpal)

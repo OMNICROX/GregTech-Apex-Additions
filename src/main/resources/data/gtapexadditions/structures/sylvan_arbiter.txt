@@ -1,12 +1,12 @@
 SIZE 50 45 48
 CONTROLLER 24 5 14
 K	19968	block	minecraft:stone	
-K	19969	block	minecraft:gravel	
+K	19969	block	minecraft:gravel|minecraft:coarse_dirt	
 K	19970	block	minecraft:cobblestone	
 K	19971	block	minecraft:moss_block	
 K	19972	leaves		
 K	19973	hatch	minecraft:stone	
-K	19974	block	create:cut_limestone_bricks	
+K	19974	block	quark:limestone_bricks	
 K	19975	block	quark:waxed_blue_corundum	
 K	19976	block	botania:livingrock	
 K	19977	block	botania:glimmering_stripped_livingwood_log	axis=y
@@ -15,44 +15,44 @@ K	19979	block	botania:glimmering_stripped_livingwood	axis=z
 K	19980	block	botania:stripped_livingwood	axis=z
 K	19981	block	botania:chiseled_livingrock_bricks	
 K	19982	block	botania:stripped_livingwood_log	axis=y
-K	19983	block	create:limestone_pillar	axis=y,east=false,north=false,south=false,west=false
+K	19983	block	quark:limestone_pillar	axis=y,east=false,north=false,south=false,west=false
 K	19984	block	chipped:spruce_planks_mosaic	
 K	19985	block	botania:livingwood_planks	
 K	19986	block	chipped:thick_inlayed_glowstone	
-K	19987	hatch	create:cut_limestone_bricks	
+K	19987	hatch	quark:limestone_bricks	
 K	19988	block	minecraft:lapis_block	
-K	19989	block	create:limestone_pillar	axis=z,east=false,north=false,south=false,west=false
+K	19989	block	quark:limestone_pillar	axis=z,east=false,north=false,south=false,west=false
 K	19990	block	botania:mossy_livingwood_planks	
 K	19991	block	botania:livingwood_log	axis=y
-K	19992	block	create:deepslate_pillar	axis=y,east=false,north=false,south=false,west=false
-K	19993	block	create:vertical_framed_glass	
-K	19994	block	create:limestone_pillar	axis=y,east=true,north=false,south=true,west=false
-K	19995	block	create:limestone_pillar	axis=y,east=true,north=true,south=true,west=false
-K	19996	block	create:limestone_pillar	axis=y,east=true,north=true,south=false,west=false
-K	19997	block	create:limestone_pillar	axis=y,east=true,north=false,south=true,west=true
-K	19998	block	create:limestone_pillar	axis=y,east=true,north=true,south=true,west=true
-K	19999	block	create:limestone_pillar	axis=y,east=true,north=true,south=false,west=true
-K	20000	block	create:limestone_pillar	axis=y,east=false,north=false,south=true,west=true
-K	20001	block	create:limestone_pillar	axis=y,east=false,north=true,south=true,west=true
-K	20002	block	create:limestone_pillar	axis=y,east=false,north=true,south=false,west=true
+K	19992	block	chipped:deepslate_pillar	axis=y,east=false,north=false,south=false,west=false
+K	19993	block	quark:framed_glass	
+K	19994	block	quark:limestone_pillar	axis=y,east=true,north=false,south=true,west=false
+K	19995	block	quark:limestone_pillar	axis=y,east=true,north=true,south=true,west=false
+K	19996	block	quark:limestone_pillar	axis=y,east=true,north=true,south=false,west=false
+K	19997	block	quark:limestone_pillar	axis=y,east=true,north=false,south=true,west=true
+K	19998	block	quark:limestone_pillar	axis=y,east=true,north=true,south=true,west=true
+K	19999	block	quark:limestone_pillar	axis=y,east=true,north=true,south=false,west=true
+K	20000	block	quark:limestone_pillar	axis=y,east=false,north=false,south=true,west=true
+K	20001	block	quark:limestone_pillar	axis=y,east=false,north=true,south=true,west=true
+K	20002	block	quark:limestone_pillar	axis=y,east=false,north=true,south=false,west=true
 K	20003	block	chipped:nether_engraved_glowstone	
-K	20004	block	create:deepslate_pillar	axis=z,east=false,north=false,south=false,west=false
+K	20004	block	chipped:deepslate_pillar	axis=z,east=false,north=false,south=false,west=false
 K	20005	block	botania:light_blue_petal_block	
-K	20006	block	create:limestone_pillar	axis=y,east=false,north=false,south=true,west=false
-K	20007	block	create:limestone_pillar	axis=y,east=false,north=true,south=true,west=false
-K	20008	block	create:limestone_pillar	axis=y,east=false,north=true,south=false,west=false
-K	20009	block	create:limestone_pillar	axis=y,east=true,north=false,south=false,west=false
-K	20010	block	create:limestone_pillar	axis=y,east=false,north=false,south=false,west=true
-K	20011	block	create:deepslate_pillar	axis=x,east=false,north=false,south=false,west=false
-K	20012	block	create:deepslate_pillar	axis=y,east=true,north=false,south=false,west=false
-K	20013	block	create:limestone_pillar	axis=y,east=true,north=false,south=false,west=true
-K	20014	block	create:deepslate_pillar	axis=y,east=false,north=false,south=false,west=true
-K	20015	block	create:deepslate_pillar	axis=y,east=true,north=false,south=false,west=true
+K	20006	block	quark:limestone_pillar	axis=y,east=false,north=false,south=true,west=false
+K	20007	block	quark:limestone_pillar	axis=y,east=false,north=true,south=true,west=false
+K	20008	block	quark:limestone_pillar	axis=y,east=false,north=true,south=false,west=false
+K	20009	block	quark:limestone_pillar	axis=y,east=true,north=false,south=false,west=false
+K	20010	block	quark:limestone_pillar	axis=y,east=false,north=false,south=false,west=true
+K	20011	block	chipped:deepslate_pillar	axis=x,east=false,north=false,south=false,west=false
+K	20012	block	chipped:deepslate_pillar	axis=y,east=true,north=false,south=false,west=false
+K	20013	block	quark:limestone_pillar	axis=y,east=true,north=false,south=false,west=true
+K	20014	block	chipped:deepslate_pillar	axis=y,east=false,north=false,south=false,west=true
+K	20015	block	chipped:deepslate_pillar	axis=y,east=true,north=false,south=false,west=true
 K	20016	block	botania:livingwood_planks_slab	type=double,waterlogged=false
 K	20017	block	chipped:pegged_yellow_concrete	
 K	20018	block	chipped:creeper_yellow_concrete	
-K	20019	block	create:polished_cut_limestone_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
-K	20020	block	create:polished_cut_limestone_slab	type=bottom,waterlogged=false
+K	20019	block	quark:polished_limestone_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
+K	20020	block	quark:polished_limestone_slab	type=bottom,waterlogged=false
 K	20021	block	botania:white_pavement_slab	type=bottom,waterlogged=false
 K	20022	block	botania:white_pavement_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
 K	20023	block	botania:stripped_livingwood_slab	type=bottom,waterlogged=false
@@ -62,7 +62,7 @@ K	20026	optional	minecraft:wall_torch	facing=east
 K	20027	optional	minecraft:grass	
 K	20028	optional	minecraft:wall_torch	facing=north
 K	20029	optional	botania:pink_mystical_flower	
-K	20030	block	create:polished_cut_limestone_slab	type=top,waterlogged=false
+K	20030	block	quark:polished_limestone_slab	type=top,waterlogged=false
 K	20031	optional	quark:blue_corundum_cluster	facing=up,waterlogged=false
 K	20032	optional	minecraft:wall_torch	facing=south
 K	20033	optional	minecraft:tall_grass	half=lower
@@ -76,24 +76,24 @@ K	20040	optional	botania:magenta_mystical_flower
 K	20041	optional	botania:purple_mystical_flower	
 K	20042	optional	minecraft:water	level=0
 K	20043	optional	minecraft:tall_grass	half=upper
-K	20044	block	create:cut_limestone_brick_wall	east=none,north=low,south=none,up=true,waterlogged=false,west=low
-K	20045	block	create:cut_limestone_brick_wall	east=none,north=none,south=low,up=true,waterlogged=false,west=low
+K	20044	block	quark:limestone_bricks_wall	east=none,north=low,south=none,up=true,waterlogged=false,west=low
+K	20045	block	quark:limestone_bricks_wall	east=none,north=none,south=low,up=true,waterlogged=false,west=low
 K	20046	optional	minecraft:lantern	hanging=false,waterlogged=false
 K	20047	block	botania:polished_livingrock_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
 K	20048	block	botania:polished_livingrock_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
 K	20049	block	botania:polished_livingrock_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
 K	20050	block	botania:polished_livingrock_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
 K	20051	block	botania:polished_livingrock_stairs	facing=east,half=top,shape=straight,waterlogged=false
-K	20052	block	create:cut_limestone_brick_wall	east=none,north=low,south=none,up=true,waterlogged=false,west=none
+K	20052	block	quark:limestone_bricks_wall	east=none,north=low,south=none,up=true,waterlogged=false,west=none
 K	20053	glass		
-K	20054	block	create:polished_cut_limestone_slab	type=top,waterlogged=true
+K	20054	block	quark:polished_limestone_slab	type=top,waterlogged=true
 K	20055	block	minecraft:spruce_trapdoor	facing=south,half=bottom,open=true,powered=false,waterlogged=false
 K	20056	block	botania:polished_livingrock_stairs	facing=south,half=top,shape=straight,waterlogged=false
 K	20057	block	botania:polished_livingrock_stairs	facing=north,half=top,shape=straight,waterlogged=false
-K	20058	block	create:cut_limestone_brick_wall	east=low,north=none,south=low,up=true,waterlogged=false,west=none
+K	20058	block	quark:limestone_bricks_wall	east=low,north=none,south=low,up=true,waterlogged=false,west=none
 K	20059	block	botania:polished_livingrock_stairs	facing=west,half=top,shape=straight,waterlogged=false
 K	20060	optional	botania:lime_mystical_flower	
-K	20061	block	create:cut_limestone_brick_wall	east=low,north=low,south=none,up=true,waterlogged=false,west=none
+K	20061	block	quark:limestone_bricks_wall	east=low,north=low,south=none,up=true,waterlogged=false,west=none
 K	20062	optional	minecraft:lantern	hanging=true,waterlogged=false
 K	20063	block	botania:livingwood_fence	east=true,north=false,south=false,waterlogged=false,west=false
 K	20064	block	botania:livingwood_fence	east=false,north=false,south=true,waterlogged=false,west=false
@@ -113,8 +113,8 @@ K	20077	optional	minecraft:chain	axis=y,waterlogged=false
 K	20078	block	botania:livingrock_bricks_wall	east=none,north=none,south=none,up=true,waterlogged=false,west=none
 K	20079	controller		
 K	20080	optional	botania:red_mystical_flower	
-K	20081	block	create:cut_limestone_brick_stairs	facing=north,half=top,shape=straight,waterlogged=false
-K	20082	block	create:cut_limestone_brick_stairs	facing=south,half=top,shape=straight,waterlogged=false
+K	20081	block	quark:limestone_bricks_stairs	facing=north,half=top,shape=straight,waterlogged=false
+K	20082	block	quark:limestone_bricks_stairs	facing=south,half=top,shape=straight,waterlogged=false
 K	20083	block	botania:livingwood_fence	east=false,north=false,south=false,waterlogged=false,west=true
 K	20084	optional	botania:light_gray_mystical_flower	
 K	20085	block	minecraft:dark_oak_trapdoor	facing=south,half=bottom,open=true,powered=false,waterlogged=false
@@ -122,18 +122,18 @@ K	20086	optional	botania:white_mystical_flower
 K	20087	block	botania:livingwood_planks_stairs	facing=west,half=top,shape=straight,waterlogged=false
 K	20088	block	botania:livingwood_planks_stairs	facing=east,half=top,shape=straight,waterlogged=false
 K	20089	optional	botania:light_blue_mystical_flower	
-K	20090	block	create:cut_limestone_brick_stairs	facing=west,half=top,shape=straight,waterlogged=false
-K	20091	block	create:cut_limestone_brick_stairs	facing=east,half=top,shape=straight,waterlogged=false
+K	20090	block	quark:limestone_bricks_stairs	facing=west,half=top,shape=straight,waterlogged=false
+K	20091	block	quark:limestone_bricks_stairs	facing=east,half=top,shape=straight,waterlogged=false
 K	20092	block	botania:polished_livingrock_slab	type=top,waterlogged=false
 K	20093	block	botania:livingwood_planks_slab	type=top,waterlogged=false
 K	20094	block	botania:livingwood_planks_stairs	facing=south,half=top,shape=straight,waterlogged=false
-K	20095	block	create:polished_cut_limestone_stairs	facing=north,half=top,shape=straight,waterlogged=false
-K	20096	block	create:polished_cut_limestone_stairs	facing=west,half=top,shape=straight,waterlogged=false
-K	20097	block	create:polished_cut_limestone_stairs	facing=south,half=top,shape=straight,waterlogged=false
-K	20098	block	create:cut_limestone_brick_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
-K	20099	block	create:cut_limestone_brick_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
-K	20100	block	create:polished_cut_limestone_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
-K	20101	block	create:polished_cut_limestone_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
+K	20095	block	quark:polished_limestone_stairs	facing=north,half=top,shape=straight,waterlogged=false
+K	20096	block	quark:polished_limestone_stairs	facing=west,half=top,shape=straight,waterlogged=false
+K	20097	block	quark:polished_limestone_stairs	facing=south,half=top,shape=straight,waterlogged=false
+K	20098	block	quark:limestone_bricks_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
+K	20099	block	quark:limestone_bricks_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
+K	20100	block	quark:polished_limestone_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
+K	20101	block	quark:polished_limestone_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
 K	20102	block	botania:livingrock_bricks_wall	east=low,north=none,south=low,up=true,waterlogged=false,west=none
 K	20103	block	botania:livingrock_bricks_wall	east=none,north=low,south=none,up=true,waterlogged=false,west=none
 K	20104	block	botania:livingrock_bricks_wall	east=none,north=none,south=low,up=true,waterlogged=false,west=none
@@ -146,28 +146,28 @@ K	20110	block	botania:livingrock_bricks_wall	east=none,north=low,south=low,up=tr
 K	20111	block	botania:livingrock_bricks_wall	east=none,north=none,south=none,up=true,waterlogged=false,west=low
 K	20112	block	botania:livingrock_bricks_wall	east=low,north=low,south=low,up=true,waterlogged=false,west=none
 K	20113	block	botania:livingrock_bricks_wall	east=low,north=none,south=low,up=true,waterlogged=false,west=low
-K	20114	block	create:polished_cut_limestone_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
-K	20115	block	create:cut_limestone_brick_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
-K	20116	block	create:cut_limestone_brick_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
-K	20117	block	create:cut_limestone_brick_slab	type=top,waterlogged=false
+K	20114	block	quark:polished_limestone_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
+K	20115	block	quark:limestone_bricks_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
+K	20116	block	quark:limestone_bricks_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
+K	20117	block	quark:limestone_bricks_slab	type=top,waterlogged=false
 K	20118	block	botania:livingwood_fence	east=false,north=true,south=false,waterlogged=false,west=false
 K	20119	block	botania:livingrock_bricks_wall	east=tall,north=tall,south=none,up=true,waterlogged=false,west=none
 K	20120	block	botania:livingrock_bricks_wall	east=tall,north=none,south=tall,up=true,waterlogged=false,west=none
 K	20121	block	botania:livingwood_fence	east=true,north=true,south=false,waterlogged=false,west=false
 K	20122	block	botania:livingwood_fence	east=true,north=false,south=true,waterlogged=false,west=false
-K	20123	block	create:cut_limestone_brick_slab	type=bottom,waterlogged=false
+K	20123	block	quark:limestone_bricks_slab	type=bottom,waterlogged=false
 K	20124	block	botania:livingwood_fence	east=false,north=false,south=true,waterlogged=false,west=true
 K	20125	block	botania:livingwood_fence	east=false,north=true,south=false,waterlogged=false,west=true
-K	20126	block	create:polished_cut_deepslate_stairs	facing=south,half=top,shape=straight,waterlogged=false
-K	20127	block	create:polished_cut_deepslate_stairs	facing=north,half=top,shape=straight,waterlogged=false
-K	20128	block	create:polished_cut_deepslate_stairs	facing=east,half=top,shape=straight,waterlogged=false
-K	20129	block	create:polished_cut_deepslate_stairs	facing=west,half=top,shape=straight,waterlogged=false
-K	20130	block	create:polished_cut_limestone_stairs	facing=east,half=top,shape=straight,waterlogged=false
-K	20131	block	create:polished_cut_deepslate_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
-K	20132	block	create:polished_cut_deepslate_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
+K	20126	block	minecraft:polished_deepslate_stairs	facing=south,half=top,shape=straight,waterlogged=false
+K	20127	block	minecraft:polished_deepslate_stairs	facing=north,half=top,shape=straight,waterlogged=false
+K	20128	block	minecraft:polished_deepslate_stairs	facing=east,half=top,shape=straight,waterlogged=false
+K	20129	block	minecraft:polished_deepslate_stairs	facing=west,half=top,shape=straight,waterlogged=false
+K	20130	block	quark:polished_limestone_stairs	facing=east,half=top,shape=straight,waterlogged=false
+K	20131	block	minecraft:polished_deepslate_stairs	facing=south,half=bottom,shape=straight,waterlogged=false
+K	20132	block	minecraft:polished_deepslate_stairs	facing=north,half=bottom,shape=straight,waterlogged=false
 K	20133	block	botania:livingrock_bricks_wall	east=none,north=low,south=low,up=false,waterlogged=false,west=none
-K	20134	block	create:polished_cut_deepslate_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
-K	20135	block	create:polished_cut_deepslate_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
+K	20134	block	minecraft:polished_deepslate_stairs	facing=east,half=bottom,shape=straight,waterlogged=false
+K	20135	block	minecraft:polished_deepslate_stairs	facing=west,half=bottom,shape=straight,waterlogged=false
 K	20136	block	botania:livingrock_bricks_wall	east=low,north=none,south=none,up=false,waterlogged=false,west=low
 K	20137	block	botania:livingwood_fence_gate	facing=north,in_wall=false,open=false,powered=false
 K	20138	block	botania:livingwood_fence	east=true,north=false,south=false,waterlogged=false,west=true

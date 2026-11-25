@@ -1340,9 +1340,15 @@ public class GTAAMachines {
      * use the state in the schematic. A block from a mod that isn't installed is skipped. Optional ones (grass,
      * flowers, torches...) may also be air, water or anything you could place over.
      */
-    private static TraceabilityPredicate sanctuaryBlock(String id, String props, boolean optional) {
-        Block block = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation(id));
-        if (block == null || block == Blocks.AIR) return any();
+    private static TraceabilityPredicate sanctuaryBlock(String ids, String props, boolean optional) {
+        // "a|b": either block counts, the first one is shown
+        java.util.List<Block> accepted = new java.util.ArrayList<>();
+        for (String id : ids.split("\\|")) {
+            Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation(id));
+            if (b != null && b != Blocks.AIR) accepted.add(b);
+        }
+        if (accepted.isEmpty()) return any();
+        Block block = accepted.get(0);
         net.minecraft.world.level.block.state.BlockState state = block.defaultBlockState();
         if (props != null && !props.isEmpty()) for (String kv : props.split(",")) {
             String[] p = kv.split("=", 2);
@@ -1352,7 +1358,8 @@ public class GTAAMachines {
         final var shown = state;
         return new TraceabilityPredicate(ms -> {
             var st = ms.getBlockState();
-            return st.is(block) || (optional && (st.isAir() || st.canBeReplaced() || !st.getFluidState().isEmpty()));
+            for (Block b : accepted) if (st.is(b)) return true;
+            return optional && (st.isAir() || st.canBeReplaced() || !st.getFluidState().isEmpty());
         }, () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] { com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(shown) });
     }
 

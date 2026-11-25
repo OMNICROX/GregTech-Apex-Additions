@@ -37,7 +37,7 @@ ServerEvents.recipes(event => {
   todo.forEach(t => {
     try {
       event.remove({ id: t.id })
-      event.custom(t.json).id('apex:steam/' + t.id.replace(':', '/'))
+      event.custom(t.json) // GT recipe objects have no .id() here; KubeJS names it
       lava++
     } catch (e) { console.warn('[APEX-STEAM] lava ' + t.id + ': ' + e) }
   })
