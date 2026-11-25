@@ -1,5 +1,15 @@
 package com.omnicrox.gtaa.common.item;
 
+import com.gregtechceu.gtceu.api.pattern.BlockPattern;
+import com.gregtechceu.gtceu.api.pattern.MultiblockState;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
+import com.gregtechceu.gtceu.api.pattern.error.PatternError;
+import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
+import com.lowdragmc.lowdraglib.utils.BlockInfo;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.block.ICoilType;
@@ -74,8 +84,8 @@ public class StructureUpgrader extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("Shift + Right-Click a formed multiblock controller").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("Upgrades coils, tiered casings and (if you choose) hatches").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Shift + Right-Click any multiblock controller (formed or not)").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Upgrades tiered blocks of any multi and hatches; unformed: shows what's wrong and can build it").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("Uses blocks from your inventory and gives the old ones back").withStyle(ChatFormatting.DARK_GRAY));
     }
 
@@ -134,6 +144,78 @@ public class StructureUpgrader extends Item {
         return out;
     }
 
+    /**
+     * Families for this machine: the hand-made ones above, plus every tiered slot of its own pattern (any mod's
+     * multi): a pattern position that accepts several different blocks, none of them a machine, counts its
+     * candidates in the order the pattern lists them (GregTech and addons list tiered blocks lowest first).
+     */
+    public static List<Family> families(@Nullable IMultiController controller) {
+        List<Family> out = families();
+        if (controller == null) return out;
+        Set<Set<Block>> known = new HashSet<>();
+        for (Family f : out) {
+            Set<Block> all = new HashSet<>();
+            f.tiers().forEach(all::addAll);
+            known.add(all);
+        }
+        int n = 0;
+        for (List<Block> cands : patternTierLists(controller)) {
+            Set<Block> set = new HashSet<>(cands);
+            boolean dup = false;
+            for (Set<Block> k : known) if (k.containsAll(set)) { dup = true; break; }
+            if (dup) continue;
+            known.add(set);
+            List<List<Block>> tiers = new ArrayList<>();
+            for (Block b : cands) tiers.add(List.of(b));
+            out.add(new Family("p" + n++, familyName(cands), tiers));
+        }
+        return out;
+    }
+
+    private static String familyName(List<Block> cands) {
+        String a = cands.get(0).getName().getString(), b = cands.get(cands.size() - 1).getName().getString();
+        // the words every tier shares make a decent name ("Ring Casing", "Glass"...)
+        Set<String> common = new LinkedHashSet<>(Arrays.asList(a.split(" ")));
+        common.retainAll(Arrays.asList(b.split(" ")));
+        String name = String.join(" ", common).trim();
+        return (name.isEmpty() ? a + " .. " + b : name) + " (" + cands.size() + " tiers)";
+    }
+
+    /** every distinct multi-block candidate list of the controller's pattern, in pattern order */
+    private static List<List<Block>> patternTierLists(IMultiController controller) {
+        List<List<Block>> out = new ArrayList<>();
+        try {
+            BlockPattern pattern = controller.getPattern();
+            if (pattern == null) return out;
+            java.lang.reflect.Field f = BlockPattern.class.getDeclaredField("blockMatches");
+            f.setAccessible(true);
+            TraceabilityPredicate[][][] matches = (TraceabilityPredicate[][][]) f.get(pattern);
+            Set<List<Block>> seen = new HashSet<>();
+            for (TraceabilityPredicate[][] a : matches) for (TraceabilityPredicate[] b : a) for (TraceabilityPredicate tp : b) {
+                if (tp == null || tp.isController) continue;
+                List<SimplePredicate> preds = new ArrayList<>(tp.common);
+                preds.addAll(tp.limited);
+                for (SimplePredicate sp : preds) {
+                    if (sp.candidates == null) continue;
+                    List<Block> blocks = new ArrayList<>();
+                    boolean machine = false;
+                    for (BlockInfo bi : sp.candidates.get()) {
+                        if (bi == null || bi.getBlockState() == null) continue;
+                        Block blk = bi.getBlockState().getBlock();
+                        if (blk instanceof com.gregtechceu.gtceu.api.block.MetaMachineBlock) { machine = true; break; }
+                        if (blk.defaultBlockState().isAir() || blocks.contains(blk)) continue;
+                        blocks.add(blk);
+                    }
+                    if (machine || blocks.size() < 2) continue;
+                    if (seen.add(blocks)) out.add(blocks);
+                }
+            }
+        } catch (Throwable t) {
+            com.omnicrox.gtaa.GTAA.LOGGER.debug("[GTAA] Structure Upgrader couldn't read a pattern: {}", t.toString());
+        }
+        return out;
+    }
+
     // ------------------------------------------------------------------ use
 
     @Override
@@ -164,7 +246,7 @@ public class StructureUpgrader extends Item {
 
     static void prompt(ServerPlayer player, IMultiController controller) {
         if (!controller.isFormed()) {
-            player.sendSystemMessage(Component.literal("That multiblock isn't formed yet.").withStyle(ChatFormatting.RED));
+            diagnose(player, controller);
             return;
         }
         if (GTAANetwork.CHANNEL.isRemotePresent(player.connection.connection)) {
@@ -202,7 +284,7 @@ public class StructureUpgrader extends Item {
         List<String> needs = new ArrayList<>();
 
         List<GTAANetwork.Row> familyRows = new ArrayList<>();
-        for (Family fam : families()) {
+        for (Family fam : families(controller)) {
             Map<Integer, Integer> count = census(fam, level, cache);
             if (count.isEmpty()) continue;
             int total = count.values().stream().mapToInt(i -> i).sum();
@@ -214,7 +296,8 @@ public class StructureUpgrader extends Item {
             List<Integer> order = new ArrayList<>();
             for (int t = cur + 1; t <= fam.tiers.size(); t++) order.add(t);
             if (mixed) order.add(cur);
-            for (int t = cur - 1; t >= 1; t--) order.add(t);
+            // downgrades only when nothing is above (keeps the screen short)
+            if (order.isEmpty()) for (int t = cur - 1; t >= 1; t--) order.add(t);
             for (int t : order) {
                 Block b = fam.block(t);
                 int have = player.isCreative() ? total : countItem(player, b.asItem());
@@ -261,6 +344,14 @@ public class StructureUpgrader extends Item {
                 : "To unlock locked recipes: " + String.join(", ", needs) + ".";
         rows.add(new GTAANetwork.Row("Status", "", "", List.of(), status,
                 needs.isEmpty() ? UpgradeAdvisor.OPTIONAL : UpgradeAdvisor.NEEDED, verdict));
+        if (!familyRows.isEmpty() || !upgradable.isEmpty())
+            rows.add(new GTAANetwork.Row("Everything", "best you can afford", "",
+                    List.of(new GTAANetwork.Choice("Upgrade all to max",
+                            "/gtapexadditions upgrade " + posArg(cpos) + " max",
+                            "Every tiered block family goes to the highest tier you carry enough of for the whole structure" +
+                                    (player.isCreative() ? " (creative: the top tier)" : "") +
+                                    ", then every hatch to the best one you carry.", true, "", "★")),
+                    List.of(), UpgradeAdvisor.OPTIONAL, ""));
         familyRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
         partRows.sort(Comparator.comparingInt((GTAANetwork.Row r) -> -r.verdict()));
         rows.addAll(familyRows);
@@ -275,7 +366,7 @@ public class StructureUpgrader extends Item {
                     List.of(), UpgradeAdvisor.OPTIONAL, ""));
         GTAANetwork.send(player, new GTAANetwork.UpgraderScreenPacket(
                 controller.self().getDefinition().getBlock().getName().getString(), rows,
-                "Hover a button for details. Blocks come from your inventory; old ones go back to it."));
+                "Hover a row or button for details  |  blocks come from your inventory, old ones go back"));
     }
 
     private static int voltageTier(long v) {
@@ -291,7 +382,7 @@ public class StructureUpgrader extends Item {
         player.sendSystemMessage(Component.literal("Structure Upgrader: ").withStyle(ChatFormatting.GOLD)
                 .append(controller.self().getDefinition().getBlock().getName().copy().withStyle(ChatFormatting.WHITE)));
         boolean any = false;
-        for (Family fam : families()) {
+        for (Family fam : families(controller)) {
             Map<Integer, Integer> count = new LinkedHashMap<>();
             for (BlockPos p : cache) {
                 int t = fam.tierOf(level.getBlockState(p).getBlock());
@@ -409,7 +500,7 @@ public class StructureUpgrader extends Item {
     private static int upgradeFamily(ServerPlayer player, BlockPos cpos, String famId, int tier) {
         IMultiController c = controllerFor(player, cpos);
         if (c == null) return 0;
-        Family fam = families().stream().filter(f -> f.id.equals(famId)).findFirst().orElse(null);
+        Family fam = families(c).stream().filter(f -> f.id.equals(famId)).findFirst().orElse(null);
         if (fam == null || tier < 1 || tier > fam.tiers.size()) return 0;
         ServerLevel level = player.serverLevel();
         Block target = fam.block(tier);
@@ -473,6 +564,130 @@ public class StructureUpgrader extends Item {
         return n;
     }
 
+
+    /** every family to the highest tier the player can swap the whole structure to, then every hatch */
+    private static int upgradeMax(ServerPlayer player, BlockPos cpos) {
+        IMultiController c = controllerFor(player, cpos);
+        if (c == null) return 0;
+        Level level = c.self().getLevel();
+        int changed = 0;
+        for (Family fam : families(c)) {
+            Map<Integer, Integer> count = census(fam, level, c.getMultiblockState().getCache());
+            if (count.isEmpty()) continue;
+            int total = count.values().stream().mapToInt(i -> i).sum();
+            int cur = count.keySet().stream().min(Integer::compare).orElse(1);
+            int best = 0;
+            for (int t = fam.tiers().size(); t > cur; t--) {
+                if (player.isCreative() || countItem(player, fam.block(t).asItem()) >= total) { best = t; break; }
+            }
+            if (best > 0) changed += upgradeFamily(player, cpos, fam.id(), best);
+        }
+        changed += upgradeAllHatches(player, cpos);
+        if (changed == 0) player.sendSystemMessage(Component.literal("Nothing to upgrade with what you carry.").withStyle(ChatFormatting.YELLOW));
+        return changed;
+    }
+
+    /**
+     * An unformed multi: check its pattern and say exactly what's wrong (the first block that doesn't fit, where it
+     * is relative to the controller, and what it accepts), mark the spot with particles, and offer to build the
+     * missing blocks from your inventory.
+     */
+    private static void diagnose(ServerPlayer player, IMultiController controller) {
+        BlockPos cpos = controller.self().getPos();
+        ServerLevel level = player.serverLevel();
+        String name = controller.self().getDefinition().getBlock().getName().getString();
+        BlockPattern pattern = controller.getPattern();
+        if (pattern == null) {
+            player.sendSystemMessage(Component.literal(name + " has no structure to check.").withStyle(ChatFormatting.RED));
+            return;
+        }
+        MultiblockState state = controller.getMultiblockState();
+        boolean ok;
+        try {
+            ok = pattern.checkPatternAt(state, false);
+        } catch (Throwable t) {
+            ok = false;
+        }
+        player.sendSystemMessage(Component.literal("Structure Upgrader: ").withStyle(ChatFormatting.GOLD)
+                .append(Component.literal(name).withStyle(ChatFormatting.WHITE))
+                .append(Component.literal(ok ? "  structure is complete, it forms on the next check" : "  not formed").withStyle(
+                        ok ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        if (!ok && state.error != null) {
+            PatternError err = state.error;
+            BlockPos at = null;
+            try { at = err.getPos(); } catch (Throwable ignored) {}
+            if (at != null) {
+                BlockState found = level.getBlockState(at);
+                player.sendSystemMessage(Component.literal(" Wrong block at " + posArg(at) + " (" + relative(cpos, at, controller) + ")")
+                        .withStyle(ChatFormatting.YELLOW));
+                player.sendSystemMessage(Component.literal("  found: ").withStyle(ChatFormatting.GRAY)
+                        .append((found.isAir() ? Component.literal("nothing") : found.getBlock().getName().copy()).withStyle(ChatFormatting.WHITE)));
+                mark(player, level, at);
+            }
+            try {
+                MutableComponent want = Component.literal("  needs: ").withStyle(ChatFormatting.GRAY);
+                int shown = 0;
+                for (List<ItemStack> group : err.getCandidates()) for (ItemStack st : group) {
+                    if (st.isEmpty() || shown >= 8) continue;
+                    if (shown++ > 0) want.append(Component.literal(" / ").withStyle(ChatFormatting.DARK_GRAY));
+                    want.append(st.getHoverName().copy().withStyle(ChatFormatting.AQUA));
+                }
+                if (shown > 0) player.sendSystemMessage(want);
+            } catch (Throwable ignored) {}
+            try {
+                Component info = err.getErrorInfo();
+                if (info != null) player.sendSystemMessage(Component.literal("  ").append(info).withStyle(ChatFormatting.DARK_GRAY));
+            } catch (Throwable ignored) {}
+        }
+        player.sendSystemMessage(Component.literal(" ").append(button("Build missing blocks",
+                "/gtapexadditions upgrade " + posArg(cpos) + " build",
+                "Places every missing block of the structure from your inventory (creative: free), like a GregTech Terminal.",
+                ChatFormatting.GREEN)).append(Component.literal("  ")).append(button("Check again",
+                "/gtapexadditions upgrade " + posArg(cpos) + " check", "Re-check the structure", ChatFormatting.AQUA)));
+    }
+
+    /** "3 left, 1 up, 2 behind" from the controller's point of view */
+    private static String relative(BlockPos c, BlockPos p, IMultiController controller) {
+        net.minecraft.core.Direction front = controller.self().getFrontFacing();
+        if (!front.getAxis().isHorizontal()) front = net.minecraft.core.Direction.NORTH;
+        net.minecraft.core.Direction right = front.getCounterClockWise();
+        int dx = p.getX() - c.getX(), dy = p.getY() - c.getY(), dz = p.getZ() - c.getZ();
+        int r = dx * right.getStepX() + dz * right.getStepZ();
+        int f = dx * front.getStepX() + dz * front.getStepZ();
+        List<String> parts = new ArrayList<>();
+        if (r != 0) parts.add(Math.abs(r) + (r > 0 ? " right" : " left"));
+        if (dy != 0) parts.add(Math.abs(dy) + (dy > 0 ? " up" : " down"));
+        if (f != 0) parts.add(Math.abs(f) + (f > 0 ? " in front" : " behind"));
+        return parts.isEmpty() ? "the controller" : String.join(", ", parts) + " of the controller, looking at its face";
+    }
+
+    /** a column of particles on the wrong block, visible from far away */
+    private static void mark(ServerPlayer player, ServerLevel level, BlockPos at) {
+        for (int i = 0; i < 12; i++) {
+            double y = at.getY() + 0.5 + i * 0.35;
+            level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.END_ROD, true,
+                    at.getX() + 0.5, y, at.getZ() + 0.5, 3, 0.15, 0.05, 0.15, 0.0);
+        }
+        level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.FLAME, true,
+                at.getX() + 0.5, at.getY() + 0.5, at.getZ() + 0.5, 30, 0.35, 0.35, 0.35, 0.0);
+    }
+
+    private static int build(ServerPlayer player, BlockPos cpos) {
+        if (!(MetaMachine.getMachine(player.level(), cpos) instanceof IMultiController c)) return 0;
+        if (!allowed(player, cpos)) return 0;
+        BlockPattern pattern = c.getPattern();
+        if (pattern == null) return 0;
+        try {
+            pattern.autoBuild(player, c.getMultiblockState());
+        } catch (Throwable t) {
+            player.sendSystemMessage(Component.literal("Couldn't build it: " + t.getMessage()).withStyle(ChatFormatting.RED));
+            return 0;
+        }
+        c.checkPatternWithLock();
+        if (!c.isFormed()) diagnose(player, c);
+        else player.sendSystemMessage(Component.literal("Formed.").withStyle(ChatFormatting.GREEN));
+        return 1;
+    }
 
     // ------------------------------------------------------------------ Space Elevator modules
 
@@ -626,6 +841,16 @@ public class StructureUpgrader extends Item {
                                         BlockPosArgument.getLoadedBlockPos(ctx, "hatch")))))
                         .then(Commands.literal("hatches").executes(ctx -> upgradeAllHatches(ctx.getSource().getPlayerOrException(),
                                 BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
+                        .then(Commands.literal("max").executes(ctx -> upgradeMax(ctx.getSource().getPlayerOrException(),
+                                BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
+                        .then(Commands.literal("build").executes(ctx -> build(ctx.getSource().getPlayerOrException(),
+                                BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
+                        .then(Commands.literal("check").executes(ctx -> {
+                            ServerPlayer pl = ctx.getSource().getPlayerOrException();
+                            if (MetaMachine.getMachine(pl.level(), BlockPosArgument.getLoadedBlockPos(ctx, "controller")) instanceof IMultiController mc)
+                                prompt(pl, mc);
+                            return 1;
+                        }))
                         .then(Commands.literal("module").then(Commands.argument("module", StringArgumentType.word()).executes(ctx ->
                                 placeModule(ctx.getSource().getPlayerOrException(), BlockPosArgument.getLoadedBlockPos(ctx, "controller"),
                                         StringArgumentType.getString(ctx, "module")))))

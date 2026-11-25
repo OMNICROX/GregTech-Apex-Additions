@@ -59,13 +59,14 @@ public class StructureUpgraderScreen extends Screen {
         int y = 0;
         for (int r = 0; r < n; r++) {
             GTAANetwork.Row row = data.rows().get(r);
+            boolean status = row.title().equals("Status");
             List<FormattedCharSequence> info = new ArrayList<>();
-            for (String s : row.info()) info.addAll(font.split(FormattedText.of(s), textW));
-            List<FormattedCharSequence> verdict = row.verdictText().isEmpty() ? List.of() :
+            if (status) for (String s : row.info()) info.addAll(font.split(FormattedText.of(s), textW));
+            List<FormattedCharSequence> verdict = row.verdictText().isEmpty() || !(status || row.verdict() == 2) ? List.of() :
                     font.split(FormattedText.of(row.verdictText()), textW);
             infoLines.add(info);
             verdictLines.add(verdict);
-            int h = 15 + (info.size() + verdict.size()) * LINE;
+            int h = 13 + (info.size() + verdict.size()) * LINE;
             btnTop[r] = h;
             int x = 26, line = 0;
             for (GTAANetwork.Choice c : row.choices()) {
@@ -79,8 +80,8 @@ public class StructureUpgraderScreen extends Screen {
             }
             if (!row.choices().isEmpty()) h += (line + 1) * (BTN_H + 2) + 2;
             rowTop[r] = y;
-            rowHeight[r] = h + 4;
-            y += rowHeight[r] + 3;
+            rowHeight[r] = h + 2;
+            y += rowHeight[r] + 2;
         }
         height2 = Math.min(height - 20, 30 + Math.max(30, y) + 24);
         left = (width - W) / 2;
@@ -128,6 +129,7 @@ public class StructureUpgraderScreen extends Screen {
         int clipTop = top + 20, clipBottom = top + height2 - 22;
         g.enableScissor(left + 2, clipTop, left + W - 2, clipBottom);
         Btn hovered = null;
+        int hoverRow = -1;
         for (int r = 0; r < data.rows().size(); r++) {
             int y = rowY(r);
             int rh = rowHeight[r];
@@ -139,6 +141,7 @@ public class StructureUpgraderScreen extends Screen {
             ItemStack icon = stack(row.itemId());
             if (!icon.isEmpty()) g.renderItem(icon, left + 7, y + 4);
             g.drawString(font, row.title(), left + 26, y + 3, status ? GOLD : CYAN, false);
+            if (mx >= left + 4 && mx < left + W - 4 && my >= y && my < y + 12 && my > clipTop && my < clipBottom) hoverRow = r;
             String b = badge(row.verdict());
             int bw = font.width(b) + 6;
             if (!row.verdictText().isEmpty()) {
@@ -148,7 +151,7 @@ public class StructureUpgraderScreen extends Screen {
             int maxCur = W - 50 - font.width(row.title()) - bw;
             g.drawString(font, font.plainSubstrByWidth(row.current(), Math.max(0, maxCur)),
                     left + 30 + font.width(row.title()), y + 3, MUTED, false);
-            int ly = y + 15;
+            int ly = y + 13;
             for (FormattedCharSequence line : infoLines.get(r)) {
                 g.drawString(font, line, left + 26, ly, TEXT, false);
                 ly += LINE;
@@ -182,6 +185,13 @@ public class StructureUpgraderScreen extends Screen {
         }
         g.drawString(font, font.plainSubstrByWidth(data.footer(), W - 12), left + 6, top + height2 - 14, MUTED, false);
         super.render(g, mx, my, pt);
+        if (hovered == null && hoverRow >= 0) {
+            GTAANetwork.Row row = data.rows().get(hoverRow);
+            List<FormattedCharSequence> tip = new ArrayList<>();
+            for (String s : row.info()) tip.addAll(font.split(FormattedText.of(s), 240));
+            if (!row.verdictText().isEmpty()) tip.addAll(font.split(FormattedText.of(row.verdictText()), 240));
+            if (!tip.isEmpty()) g.renderTooltip(font, tip, mx, my);
+        }
         if (hovered != null) {
             List<FormattedCharSequence> tip = new ArrayList<>();
             for (String s : hovered.choice.hover().split("\n")) tip.addAll(font.split(FormattedText.of(s), 220));
