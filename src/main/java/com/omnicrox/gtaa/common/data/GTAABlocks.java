@@ -266,8 +266,8 @@ public class GTAABlocks {
     }
 
     // ---------------- Mana Nexus: the Great Mana Tree's canopy ----------------
-    public static final BlockEntry<Block> MANA_BLOOM_LEAVES = REGISTRATE
-            .block("mana_bloom_leaves", Block::new)
+    public static final BlockEntry<com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock> MANA_BLOOM_LEAVES = REGISTRATE
+            .block("mana_bloom_leaves", com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock::new)
             .initialProperties(() -> Blocks.AZALEA_LEAVES)
             .properties(p -> p.strength(0.6f).noOcclusion().lightLevel(s -> 6).isValidSpawn((s, l, pos, e) -> false)
                     .isSuffocating((s, l, pos) -> false).isViewBlocking((s, l, pos) -> false))

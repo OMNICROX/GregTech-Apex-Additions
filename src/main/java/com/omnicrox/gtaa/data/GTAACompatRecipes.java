@@ -382,11 +382,11 @@ public final class GTAACompatRecipes {
     /** Mana Bloom Leaves: the Great Mana Tree's canopy in the Mana Nexus */
     private static void manaBloom(Consumer<FinishedRecipe> provider) {
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mana_bloom_leaves")
-                .inputItems(net.minecraft.tags.ItemTags.LEAVES, 8)
-                .inputItems(S1, 2)
-                .inputItems(S2, 4)
-                .outputItems(GTAABlocks.MANA_BLOOM_LEAVES.asStack(8))
-                .duration(200).EUt(VA[LV])
+                .inputItems(net.minecraft.tags.ItemTags.LEAVES, 32)
+                .inputItems(S1, 1)
+                .inputItems(S2, 2)
+                .outputItems(GTAABlocks.MANA_BLOOM_LEAVES.asStack(32))
+                .duration(160).EUt(VA[LV])
                 .save(needing(provider, "botania", Map.of(S1, "botania:mana_powder", S2, "botania:pink_petal")));
     }
 }

@@ -54,6 +54,19 @@ public final class GTAAClient {
     @Mod.EventBusSubscriber(modid = GTAA.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {
 
+        /** the Sylvan Arbiter's leaves take its tier's colour */
+        @SubscribeEvent
+        public static void blockColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Block event) {
+            event.register((state, level, pos, tint) -> com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.color(pos),
+                    com.omnicrox.gtaa.common.data.GTAABlocks.MANA_BLOOM_LEAVES.get());
+        }
+
+        @SubscribeEvent
+        public static void itemColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Item event) {
+            event.register((stack, tint) -> com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.COLORS[2],
+                    com.omnicrox.gtaa.common.data.GTAABlocks.MANA_BLOOM_LEAVES.get());
+        }
+
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {

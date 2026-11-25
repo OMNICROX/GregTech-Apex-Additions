@@ -1304,41 +1304,61 @@ public class GTAAMachines {
         return b == null || b == Blocks.AIR ? fallback : b;
     }
 
-    /** one growth stage of the Mana Nexus (see ManaNexusShapes) */
+    /** one growth stage of the Sylvan Arbiter (howester84's Botania Sanctuary, see ManaNexusShapes) */
     public static FactoryBlockPattern nexusStage(MultiblockMachineDefinition definition, int stage) {
-        var casing = blocks(GTAABlocks.MANA_NEXUS_CASING.get());
-        String[] colors = { "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray",
-                "cyan", "purple", "blue", "brown", "green", "red", "black" };
-        Block[] petals = new Block[colors.length];
-        for (int i = 0; i < colors.length; i++) petals[i] = botaniaBlock(colors[i] + "_petal_block", Blocks.PINK_WOOL);
-        var b = FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+        var b = FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.LEFT,
                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP);
         for (String[] aisle : com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.aisles(stage)) b.aisle(aisle);
-        return b.where('~', controller(blocks(definition.get())))
-                .where('a', casing)
-                .where('I', abilities(PartAbility.IMPORT_ITEMS))
-                .where('i', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
-                .where('E', abilities(PartAbility.INPUT_ENERGY))
-                .where('e', casing.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY)))
-                .where('M', abilities(MANA_HATCH_ABILITY))
-                .where('m', casing.setMinGlobalLimited(1).or(abilities(MANA_HATCH_ABILITY)))
-                .where('O', abilities(PartAbility.EXPORT_ITEMS))
-                .where('o', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS)))
-                .where('w', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
-                .where('n', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
-                .where('b', blocks(botaniaBlock("livingrock_bricks", Blocks.STONE_BRICKS)))
-                .where('L', blocks(botaniaBlock("livingwood_log", Blocks.OAK_LOG)))
-                .where('l', blocks(GTAABlocks.MANA_BLOOM_LEAVES.get()))
-                .where('c', com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores())
-                .where('f', blocks(petals))
-                .where('p', blocks(botaniaBlock("mana_pool", Blocks.CAULDRON), botaniaBlock("diluted_pool", Blocks.CAULDRON),
-                        botaniaBlock("fabulous_pool", Blocks.CAULDRON), botaniaBlock("creative_pool", Blocks.CAULDRON)))
-                .where('P', blocks(botaniaBlock("mana_pylon", Blocks.BEACON), botaniaBlock("natura_pylon", Blocks.BEACON),
-                        botaniaBlock("gaia_pylon", Blocks.BEACON)))
-                .where('G', blocks(botaniaBlock("gaia_pylon", Blocks.BEACON)))
-                .where('h', blocks(botaniaBlock("elf_glass", Blocks.GLASS)))
-                .where(' ', any());
+        // hatches go in the floor under the dome or the back wall; all of them share these limits
+        var hatches = abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1)
+                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1))
+                .or(abilities(MANA_HATCH_ABILITY).setPreviewCount(1))
+                .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1));
+        var pools = blocks(botaniaBlock("mana_pool", Blocks.CAULDRON), botaniaBlock("diluted_pool", Blocks.CAULDRON),
+                botaniaBlock("fabulous_pool", Blocks.CAULDRON), botaniaBlock("creative_pool", Blocks.CAULDRON));
+        for (var sym : com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.legend().values()) {
+            TraceabilityPredicate pred = switch (sym.kind()) {
+                case "controller" -> controller(blocks(definition.get()));
+                case "core" -> com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores();
+                case "pool" -> pools;
+                case "glass" -> blocks(botaniaBlock("mana_glass", Blocks.GLASS));
+                case "leaves" -> blocks(GTAABlocks.MANA_BLOOM_LEAVES.get());
+                case "optional" -> sanctuaryBlock(sym.block(), sym.props(), true);
+                case "hatch" -> sanctuaryBlock(sym.block(), sym.props(), false).or(hatches);
+                default -> sanctuaryBlock(sym.block(), sym.props(), false);
+            };
+            b.where(sym.c(), pred);
+        }
+        return b.where(' ', any());
+    }
+
+    /**
+     * a block from the schematic: any state of it counts (stairs can face either way), but the preview and auto-build
+     * use the state in the schematic. A block from a mod that isn't installed is skipped. Optional ones (grass,
+     * flowers, torches...) may also be air, water or anything you could place over.
+     */
+    private static TraceabilityPredicate sanctuaryBlock(String id, String props, boolean optional) {
+        Block block = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation(id));
+        if (block == null || block == Blocks.AIR) return any();
+        net.minecraft.world.level.block.state.BlockState state = block.defaultBlockState();
+        if (props != null && !props.isEmpty()) for (String kv : props.split(",")) {
+            String[] p = kv.split("=", 2);
+            var prop = block.getStateDefinition().getProperty(p[0]);
+            if (prop != null && p.length == 2) state = withValue(state, prop, p[1]);
+        }
+        final var shown = state;
+        return new TraceabilityPredicate(ms -> {
+            var st = ms.getBlockState();
+            return st.is(block) || (optional && (st.isAir() || st.canBeReplaced() || !st.getFluidState().isEmpty()));
+        }, () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] { com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(shown) });
+    }
+
+    private static <T extends Comparable<T>> net.minecraft.world.level.block.state.BlockState withValue(
+            net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.block.state.properties.Property<T> prop, String value) {
+        return prop.getValue(value).map(v -> state.setValue(prop, v)).orElse(state);
     }
 
     public static final MultiblockMachineDefinition MANA_NEXUS = REGISTRATE
@@ -1355,10 +1375,12 @@ public class GTAAMachines {
                     Component.literal("\u00a77 mana pool, runic altar, terra plate, elven trade, pure daisy, apothecary,"),
                     Component.literal("\u00a77 Mythic Botany's Mana Infuser and rune rituals (elven trades: circuit 3)"),
                     Component.literal("\u00a77Mana in: \u00a7bMana Hatches\u00a77 (spreaders, sparks) or liquid mana (1 mB = 100 mana)"),
-                    Component.literal("\u00a77Grows in 5 stages around a \u00a7aGreat Mana Tree\u00a77: Grove, Pools, Pylons, Halo, Gaia"),
-                    Component.literal("\u00a77Tier = the lower of the stage and the Mana Cores in the canopy"),
-                    Component.literal("\u00a77 (Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel)"),
+                    Component.literal("\u00a77Grows a floor at a time inside the \u00a7aBotania Sanctuary\u00a77: Roots, Gallery, Terrace, Canopy, Crown"),
+                    Component.literal("\u00a77Tier = the lower of the floors built and the 8 Mana Cores round the tree"),
+                    Component.literal("\u00a77 (Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel); its leaves show the tier"),
                     Component.literal("\u00a77 10M / 50M / 250M / 1B / 2B mana; 1 / 2 / 4 / 8 / 16 crafts at once"),
+                    Component.literal("\u00a77Hatches go in the floor under the dome or the back wall"),
+                    Component.literal("\u00a7bBuild by howester84"),
                     Component.literal("\u00a78GTAA's own multiblock, built for Botania + addons"))
             .appearanceBlock(GTAABlocks.MANA_NEXUS_CASING)
             .pattern(definition -> nexusStage(definition, 1).build())

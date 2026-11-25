@@ -49,12 +49,14 @@ public final class FormedPartRefresh {
         if (level == null || mc.player == null) {
             FORMED.clear();
             AGAIN.clear();
+            com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.ARBITERS.clear();
             lastLevel = null;
             return;
         }
         if (level != lastLevel) {
             FORMED.clear();
             AGAIN.clear();
+            com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.ARBITERS.clear();
             lastLevel = level;
         }
         ticks++;
@@ -81,6 +83,8 @@ public final class FormedPartRefresh {
                     BlockPos p = be.getBlockPos().immutable();
                     seen.add(p);
                     boolean formed = ctrl.isFormed();
+                    if (ctrl instanceof com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine arbiter)
+                        arbiterTier(mc, p, formed ? arbiter.tier() : 0);
                     Boolean before = FORMED.put(p, formed);
                     if (before == null ? formed : before != formed) {
                         redrawParts(level, p);
@@ -90,6 +94,24 @@ public final class FormedPartRefresh {
             }
         }
         FORMED.keySet().retainAll(seen);
+        var arbiters = com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.ARBITERS;
+        for (BlockPos gone : new ArrayList<>(arbiters.keySet()))
+            if (!seen.contains(gone)) {
+                arbiters.remove(gone);
+                redrawLeaves(mc, gone);
+            }
+    }
+
+    /** the Sylvan Arbiter's leaves are tinted by its tier: redraw them when it changes */
+    private static void arbiterTier(Minecraft mc, BlockPos p, int tier) {
+        Integer before = com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.ARBITERS.put(p, tier);
+        if (before == null || before != tier) redrawLeaves(mc, p);
+    }
+
+    private static void redrawLeaves(Minecraft mc, BlockPos p) {
+        int r = com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.REACH_XZ;
+        mc.levelRenderer.setBlocksDirty(p.getX() - r, p.getY() - com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.REACH_DOWN,
+                p.getZ() - r, p.getX() + r, p.getY() + com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock.REACH_UP, p.getZ() + r);
     }
 
     private static void redrawParts(ClientLevel level, BlockPos controller) {

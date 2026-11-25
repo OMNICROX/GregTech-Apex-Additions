@@ -158,6 +158,8 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine implemen
         if (!isRemote()) tick = subscribeServerTick(tick, this::pullMana);
     }
 
+
+
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();

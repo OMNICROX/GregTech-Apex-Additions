@@ -1,96 +1,111 @@
 package com.omnicrox.gtaa.common.machine.multiblock;
 
+import com.omnicrox.gtaa.GTAA;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * The Mana Nexus grows in five stages around a Great Mana Tree (aisles bottom-up, rows front to back, columns left
- * to right; the controller is in the middle of the front edge of the platform).
+ * The Sylvan Arbiter is the Botania Sanctuary, a glass-domed conservatory around a great tree. Build by howester84.
+ * The shape comes from his schematic (tools/sanctuary/convert.py turns it into
+ * data/gtapexadditions/structures/sylvan_arbiter.txt), hill and all. It grows a floor at a time:
  * <ol>
- * <li>Grove: 9x9 platform, a ring of petal blocks around a livingwood tree whose canopy holds the Mana Cores.</li>
- * <li>Pools: the platform widens to 13x13 and eight mana pools ring the tree.</li>
- * <li>Pylons: four tall livingrock pillars topped with pylons stand at the corners.</li>
- * <li>Halo: a floating ring of elven glass circles the canopy.</li>
- * <li>Gaia: 15x15, an outer ring of petals, and the pylons must be Gaia Pylons.</li>
+ * <li>Roots: the hill, the ground floor and its 4 lower Mana Cores (up to y10).</li>
+ * <li>Gallery: the second floor and the 4 upper Mana Cores (up to y21).</li>
+ * <li>Terrace: the third floor with its petal ring (up to y29).</li>
+ * <li>Canopy: the tree's crown and the dome walls (up to y37).</li>
+ * <li>Crown: the top of the dome (everything).</li>
  * </ol>
- * Symbols: ~ controller, a casing, I i E e M m O o w n hatch slots (as before), b livingrock bricks, L livingwood
- * log, l Mana Bloom Leaves, c Mana Core, f petal block, p mana pool, P any pylon, G gaia pylon, h elven glass.
+ * Aisles are bottom-up, rows front (the door) to back, columns as in the schematic (LEFT, tested: not mirrored).
  */
 public final class ManaNexusShapes {
 
     private ManaNexusShapes() {}
 
     public static final int STAGES = 5;
-    public static final String[] STAGE_NAMES = { "", "Grove", "Pools", "Pylons", "Halo", "Gaia" };
+    public static final String[] STAGE_NAMES = { "", "Roots", "Gallery", "Terrace", "Canopy", "Crown" };
     public static final String[] STAGE_ADDS = { "",
-            "the tree, its canopy of Mana Cores and a ring of petals",
-            "8 mana pools around the tree (platform 13x13)",
-            "4 livingrock pillars with pylons at the corners",
-            "a floating ring of elven glass around the canopy",
-            "15x15, an outer ring of petals, Gaia Pylons on the pillars" };
+            "the hill, the ground floor and the 4 lower Mana Cores",
+            "the second floor and the 4 upper Mana Cores",
+            "the third floor and its ring of petals",
+            "the tree's canopy and the dome walls",
+            "the top of the dome" };
+    /** the highest layer (schematic y) each stage needs */
+    private static final int[] TOP = { 0, 10, 21, 29, 37, 99 };
 
-    public static int radius(int stage) {
-        return stage >= 5 ? 7 : stage >= 2 ? 6 : 4;
-    }
+    public record Symbol(char c, String kind, String block, String props) {}
 
-    public static int height(int stage) {
-        return stage >= 4 ? 11 : 10;
-    }
+    private static int sx, sy, sz;
+    private static List<String[]> layers;
+    private static Map<Character, Symbol> legend;
 
-    /** aisles for a stage: aisle y, then rows z (front -R .. back +R), then columns x (-R .. R) */
-    public static List<String[]> aisles(int stage) {
-        int r = radius(stage), size = 2 * r + 1;
-        List<String[]> out = new ArrayList<>();
-        for (int y = 0; y < height(stage); y++) {
-            String[] rows = new String[size];
-            for (int zi = 0; zi < size; zi++) {
-                int z = zi - r;
-                StringBuilder sb = new StringBuilder();
-                for (int xi = 0; xi < size; xi++) sb.append(at(stage, r, xi - r, y, z));
-                rows[zi] = sb.toString();
+    private static synchronized void load() {
+        if (layers != null) return;
+        Map<Character, Symbol> lg = new LinkedHashMap<>();
+        List<String> rows = new ArrayList<>();
+        String path = "/data/gtapexadditions/structures/sylvan_arbiter.txt";
+        try (InputStream in = ManaNexusShapes.class.getResourceAsStream(path)) {
+            if (in == null) throw new IllegalStateException("missing " + path);
+            BufferedReader r = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+            boolean grid = false;
+            for (String line; (line = r.readLine()) != null;) {
+                if (grid) { rows.add(line); continue; }
+                if (line.equals("GRID")) { grid = true; continue; }
+                String[] p = line.split("\t", -1);
+                if (line.startsWith("SIZE ")) {
+                    String[] s = line.split(" ");
+                    sx = Integer.parseInt(s[1]); sy = Integer.parseInt(s[2]); sz = Integer.parseInt(s[3]);
+                } else if (p[0].equals("K")) {
+                    char c = (char) Integer.parseInt(p[1]);
+                    lg.put(c, new Symbol(c, p[2], p[3], p[4]));
+                }
             }
-            out.add(rows);
+        } catch (Exception e) {
+            GTAA.LOGGER.error("Sylvan Arbiter: could not read its structure", e);
+            sx = sy = sz = 1;
+            rows.clear();
+            rows.add("");
+            lg.clear();
         }
-        return out;
+        List<String[]> ls = new ArrayList<>();
+        for (int y = 0; y < sy; y++) {
+            String[] aisle = new String[sz];
+            for (int z = 0; z < sz; z++) {
+                int i = y * sz + z;
+                String row = i < rows.size() ? rows.get(i) : "";
+                if (row.equals(".")) row = "";
+                StringBuilder b = new StringBuilder(row);
+                while (b.length() < sx) b.append(' ');
+                aisle[z] = b.toString();
+            }
+            ls.add(aisle);
+        }
+        legend = lg;
+        layers = ls;
     }
 
-    private static final String FRONT = "IiE~Mme", BACK = "aOowwan";
-
-    private static char at(int stage, int r, int x, int y, int z) {
-        int cheb = Math.max(Math.abs(x), Math.abs(z));
-        if (y == 0) {
-            if (z == -r && Math.abs(x) <= 3) return FRONT.charAt(x + 3);
-            if (z == r && Math.abs(x) <= 3) return BACK.charAt(x + 3);
-            return 'a';
-        }
-        // corner pillars and pylons (stage 3+)
-        if (stage >= 3 && Math.abs(x) == r - 1 && Math.abs(z) == r - 1) {
-            if (y <= 5) return 'b';
-            if (y == 6) return stage >= 5 ? 'G' : 'P';
-        }
-        // the tree: trunk up to y7, a wide canopy with the Mana Cores in its lowest layer
-        if (x == 0 && z == 0 && y <= 7) return 'L';
-        if (y == 1) {
-            if (cheb == r) return 'b';
-            if (cheb == 2) return 'f';
-            if (stage >= 2 && isPool(x, z)) return 'p';
-            if (stage >= 5 && cheb == r - 1 && !(Math.abs(x) == r - 1 && Math.abs(z) == r - 1)) return 'f';
-            return ' ';
-        }
-        boolean corner3 = Math.abs(x) == 3 && Math.abs(z) == 3;
-        if (y == 5) {
-            if ((Math.abs(x) == 2 && z == 0) || (Math.abs(z) == 2 && x == 0)) return 'c';
-            if (cheb <= 2) return 'l';
-        }
-        if (y == 6 && cheb <= 3 && !corner3) return 'l';
-        if (y == 7 && cheb <= 2) return 'l';
-        if (y == 8 && cheb <= 1) return 'l';
-        if (y == 9 && (Math.abs(x) + Math.abs(z)) <= 1) return 'l';
-        if (y == 10 && stage >= 4 && cheb == 4) return 'h';
-        return ' ';
+    public static Map<Character, Symbol> legend() {
+        load();
+        return legend;
     }
 
-    private static boolean isPool(int x, int z) {
-        return (Math.abs(x) == 4 && z == 0) || (Math.abs(z) == 4 && x == 0) || (Math.abs(x) == 3 && Math.abs(z) == 3);
+    /** aisles for a stage: aisle y (bottom up), rows z (front to back), columns x */
+    public static List<String[]> aisles(int stage) {
+        load();
+        int top = Math.min(sy - 1, TOP[Math.max(1, Math.min(STAGES, stage))]);
+        // trim empty layers at the top so every stage ends on something real
+        while (top > 0 && isEmpty(layers.get(top))) top--;
+        return new ArrayList<>(layers.subList(0, top + 1));
+    }
+
+    private static boolean isEmpty(String[] aisle) {
+        for (String row : aisle) if (!row.isBlank()) return false;
+        return true;
     }
 }
