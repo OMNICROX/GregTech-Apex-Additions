@@ -99,6 +99,8 @@ ServerEvents.recipes(event => {
   // ---------- 1. free power ----------
   let removed = 0
   APEX_V13.REMOVE.forEach(id => { if (has(id)) { event.remove({ output: id }); removed++ } })
+  // Maxwell and his friends are the second final goal: only GTAA's assembly line recipes make them
+  event.remove({ mod: 'placeablemaxwell' })
 
   // ---------- 2. metals GregTech already has ----------
   let metals = 0

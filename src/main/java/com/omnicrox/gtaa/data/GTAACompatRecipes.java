@@ -32,7 +32,9 @@ public final class GTAACompatRecipes {
     private GTAACompatRecipes() {}
 
     // stand-ins, never used in real recipes
-    private static final Item S1 = Items.BARRIER, S2 = Items.STRUCTURE_VOID, S3 = Items.LIGHT, S4 = Items.JIGSAW;
+    private static final Item S1 = Items.BARRIER, S2 = Items.STRUCTURE_VOID, S3 = Items.LIGHT, S4 = Items.JIGSAW,
+            S5 = Items.COMMAND_BLOCK, S6 = Items.CHAIN_COMMAND_BLOCK, S7 = Items.REPEATING_COMMAND_BLOCK,
+            S8 = Items.DEBUG_STICK, S9 = Items.KNOWLEDGE_BOOK, S10 = Items.COMMAND_BLOCK_MINECART;
 
     static Consumer<FinishedRecipe> needing(Consumer<FinishedRecipe> provider, String modid, Map<Item, String> swap) {
         return needing(provider, new String[] { modid }, swap);
@@ -64,6 +66,8 @@ public final class GTAACompatRecipes {
         angelRing(provider);
         aether(provider);
         godforge(provider);
+        apexGate(provider);
+        maxwellCats(provider);
     }
 
     /**
@@ -258,5 +262,119 @@ public final class GTAACompatRecipes {
                 .duration(600).EUt(VA[LV])
                 .save(needing(provider, "mysticalagriculture", Map.of(
                         S3, "mysticalagriculture:inferium_ingot", S4, "mysticalagriculture:inferium_essence")));
+    }
+
+    /**
+     * Apex Stargate frame: the final gate. 14 rings (UHV), 9 chevrons (UEV, each built on a ring) and the base (UIV).
+     * The world's first finished gate then charges itself with 9.22E18 EU (ApexGateCharge).
+     */
+    private static void apexGate(Consumer<FinishedRecipe> provider) {
+        String[] mods = { "gtna", "draconicevolution" };
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/ring")
+                .inputItems(frameGt, GTMaterials.Neutronium)
+                .inputItems(plateDense, GTMaterials.Neutronium, 2)
+                .inputItems(S1, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV)
+                .inputItems(CustomTags.UHV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 4))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 4))
+                .outputItems(GTAABlocks.GATE_RING.asStack())
+                .duration(600).EUt(VA[UHV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/chevron")
+                .inputItems(GTAABlocks.GATE_RING.asStack())
+                .inputItems(GTItems.EMITTER_UEV, 2)
+                .inputItems(GTItems.SENSOR_UEV)
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
+                .inputItems(S1, 8)
+                .inputItems(Items.NETHER_STAR, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 8))
+                .outputItems(GTAABlocks.GATE_CHEVRON.asStack())
+                .duration(900).EUt(VA[UEV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/base")
+                .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                .inputItems(S1, 4)
+                .inputItems(S2, 2)
+                .inputItems(S3, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 4)
+                .inputItems(CustomTags.UIV_CIRCUITS, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 16))
+                .outputItems(GTAABlocks.GATE_BASE.asStack())
+                .duration(2400).EUt(VA[UIV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_block", S2, "draconicevolution:chaotic_core",
+                        S3, "gtna:magmatter_ingot")));
+    }
+
+    /**
+     * The other final goal (like Twist Space Technology's): Placeable Maxwell's cats. Mars, Poomba, Valenok and
+     * Vasilisa are one per tier from UHV to UXV; Maxwell himself needs all four at OpV.
+     */
+    private static void maxwellCats(Consumer<FinishedRecipe> provider) {
+        String[] mods = { "placeablemaxwell", "gtna", "avaritia", "draconicevolution" };
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/mars")
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(GTItems.ROBOT_ARM_UHV, 4)
+                .inputItems(GTItems.ELECTRIC_MOTOR_UHV, 4)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(S1, 16)
+                .inputItems(Items.NETHER_STAR, 16)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 32))
+                .outputItems(S10)
+                .duration(6000).EUt(VA[UHV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot", S10, "placeablemaxwell:mars")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/poomba")
+                .inputItems(GTItems.FIELD_GENERATOR_UEV, 4)
+                .inputItems(GTItems.EMITTER_UEV, 4)
+                .inputItems(GTItems.SENSOR_UEV, 4)
+                .inputItems(CustomTags.UEV_CIRCUITS, 8)
+                .inputItems(S1, 4)
+                .inputItems(S2)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+                .outputItems(S10)
+                .duration(8000).EUt(VA[UEV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_block", S2, "draconicevolution:chaotic_core",
+                        S10, "placeablemaxwell:poomba")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/valenok")
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 4)
+                .inputItems(GTItems.ROBOT_ARM_UIV, 4)
+                .inputItems(CustomTags.UIV_CIRCUITS, 8)
+                .inputItems(S1, 4)
+                .inputItems(S2)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+                .outputItems(S10)
+                .duration(10000).EUt(VA[UIV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot", S2, "avaritia:eternal_singularity",
+                        S10, "placeablemaxwell:valenok")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/vasilisa")
+                .inputItems(GTItems.FIELD_GENERATOR_UXV, 4)
+                .inputItems(GTItems.EMITTER_UXV, 4)
+                .inputItems(CustomTags.UXV_CIRCUITS, 8)
+                .inputItems(S1, 16)
+                .inputItems(S2, 4)
+                .inputItems(S3, 16)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 96))
+                .outputItems(S10)
+                .duration(12000).EUt(VA[UXV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot", S2, "avaritia:eternal_singularity",
+                        S3, "avaritia:infinity_ingot", S10, "placeablemaxwell:vasilisa")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/maxwell")
+                .inputItems(S5)
+                .inputItems(S6)
+                .inputItems(S7)
+                .inputItems(S8)
+                .inputItems(GTItems.FIELD_GENERATOR_OpV, 8)
+                .inputItems(CustomTags.OpV_CIRCUITS, 16)
+                .inputItems(S1, 4)
+                .inputItems(S2, 16)
+                .inputItems(S3, 4)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 144))
+                .outputItems(S10)
+                .duration(20000).EUt(VA[OpV])
+                .save(needing(provider, mods, Map.of(S5, "placeablemaxwell:mars", S6, "placeablemaxwell:poomba",
+                        S7, "placeablemaxwell:valenok", S8, "placeablemaxwell:vasilisa", S1, "gtna:magmatter_block",
+                        S2, "avaritia:eternal_singularity", S3, "avaritia:infinity_catalyst", S10, "placeablemaxwell:maxwell")));
     }
 }

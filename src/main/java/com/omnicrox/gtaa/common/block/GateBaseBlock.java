@@ -15,7 +15,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 /**
  * Ascension Gate Base: goes where the gate's base goes. With the whole frame around it (9 chevrons, 14 rings),
- * right-clicking it turns the frame into the Warpgate, like Stargate Journey's classic gate base.
+ * right-clicking it turns the frame into the Warpgate, like Stargate Journey's classic gate base. The world's first
+ * one then charges itself from the player's wireless network (ApexGateCharge).
  */
 public class GateBaseBlock extends Block {
 
@@ -35,9 +36,11 @@ public class GateBaseBlock extends Block {
         if (facing.isEmpty()) {
             player.displayClientMessage(Component.literal("The frame isn't complete: 9 Ascension Gate Chevrons and 14 Rings in the gate's shape")
                     .withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(com.omnicrox.gtaa.common.stargate.ApexGateCharge.status(level.getServer()), false);
             return InteractionResult.CONSUME;
         }
-        ApexStargate.form((ServerLevel) level, pos, facing.get(), player);
+        if (ApexStargate.form((ServerLevel) level, pos, facing.get(), player))
+            com.omnicrox.gtaa.common.stargate.ApexGateCharge.onFormed((ServerLevel) level, pos, facing.get(), player);
         return InteractionResult.CONSUME;
     }
 }
