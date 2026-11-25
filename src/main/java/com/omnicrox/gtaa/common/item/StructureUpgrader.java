@@ -344,6 +344,19 @@ public class StructureUpgrader extends Item {
                 : "To unlock locked recipes: " + String.join(", ", needs) + ".";
         rows.add(new GTAANetwork.Row("Status", "", "", List.of(), status,
                 needs.isEmpty() ? UpgradeAdvisor.OPTIONAL : UpgradeAdvisor.NEEDED, verdict));
+        if (controller instanceof com.omnicrox.gtaa.api.IStagedMulti sm) {
+            int cur = sm.currentStage();
+            List<GTAANetwork.Choice> grow = new ArrayList<>();
+            for (int st = cur + 1; st <= sm.stageCount(); st++)
+                grow.add(new GTAANetwork.Choice("Build " + sm.stageName(st), "/gtapexadditions upgrade " + posArg(cpos) + " stage " + st,
+                        "Stage " + st + " adds " + sm.stageAdds(st) + ".\nPlaces what's missing from your inventory (creative: free).",
+                        true, "", st == cur + 1 ? "★" : ""));
+            List<String> info = new ArrayList<>();
+            for (int st = 1; st <= sm.stageCount(); st++) info.add(st + ". " + sm.stageName(st) + ": " + sm.stageAdds(st));
+            rows.add(new GTAANetwork.Row("Growth stage", cur + "/" + sm.stageCount() + " " + sm.stageName(Math.max(1, cur)), "",
+                    grow, info, cur >= sm.stageCount() ? UpgradeAdvisor.MAXED : UpgradeAdvisor.OPTIONAL,
+                    cur >= sm.stageCount() ? "Fully grown." : "Each stage raises what it can do (up to its core tier)."));
+        }
         if (!familyRows.isEmpty() || !upgradable.isEmpty())
             rows.add(new GTAANetwork.Row("Everything", "best you can afford", "",
                     List.of(new GTAANetwork.Choice("Upgrade all to max",
@@ -689,6 +702,39 @@ public class StructureUpgrader extends Item {
         return 1;
     }
 
+    /** staged multis: build stage N from the inventory and say what's still missing */
+    private static int buildStage(ServerPlayer player, BlockPos cpos, int st) {
+        if (!(MetaMachine.getMachine(player.level(), cpos) instanceof IMultiController c)) return 0;
+        if (!(c instanceof com.omnicrox.gtaa.api.IStagedMulti sm) || !allowed(player, cpos)) return 0;
+        BlockPattern pattern = sm.stagePattern(st);
+        try {
+            pattern.autoBuild(player, c.getMultiblockState());
+        } catch (Throwable t) {
+            player.sendSystemMessage(Component.literal("Couldn't build it: " + t.getMessage()).withStyle(ChatFormatting.RED));
+            return 0;
+        }
+        MultiblockState state = c.getMultiblockState();
+        boolean ok = pattern.checkPatternAt(state, false);
+        if (!ok && state.error != null) {
+            BlockPos at = null;
+            try { at = state.error.getPos(); } catch (Throwable ignored) {}
+            MutableComponent msg = Component.literal(sm.stageName(st) + " stage isn't complete").withStyle(ChatFormatting.YELLOW);
+            if (at != null) {
+                msg.append(Component.literal(": " + posArg(at) + " (" + relative(cpos, at, c) + ") needs ").withStyle(ChatFormatting.GRAY));
+                try {
+                    var cands = state.error.getCandidates();
+                    if (!cands.isEmpty() && !cands.get(0).isEmpty())
+                        msg.append(cands.get(0).get(0).getHoverName().copy().withStyle(ChatFormatting.AQUA));
+                } catch (Throwable ignored) {}
+                mark(player, player.serverLevel(), at);
+            }
+            player.sendSystemMessage(msg);
+        }
+        c.checkPatternWithLock();
+        if (ok) player.sendSystemMessage(Component.literal(sm.stageName(st) + " stage built.").withStyle(ChatFormatting.GREEN));
+        return ok ? 1 : 0;
+    }
+
     // ------------------------------------------------------------------ Space Elevator modules
 
     private static java.util.List<MachineDefinition> moduleDefs() {
@@ -845,6 +891,9 @@ public class StructureUpgrader extends Item {
                                 BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
                         .then(Commands.literal("build").executes(ctx -> build(ctx.getSource().getPlayerOrException(),
                                 BlockPosArgument.getLoadedBlockPos(ctx, "controller"))))
+                        .then(Commands.literal("stage").then(Commands.argument("stage", IntegerArgumentType.integer(1, 16)).executes(ctx ->
+                                buildStage(ctx.getSource().getPlayerOrException(), BlockPosArgument.getLoadedBlockPos(ctx, "controller"),
+                                        IntegerArgumentType.getInteger(ctx, "stage")))))
                         .then(Commands.literal("check").executes(ctx -> {
                             ServerPlayer pl = ctx.getSource().getPlayerOrException();
                             if (MetaMachine.getMachine(pl.level(), BlockPosArgument.getLoadedBlockPos(ctx, "controller")) instanceof IMultiController mc)

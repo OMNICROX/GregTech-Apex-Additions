@@ -67,6 +67,7 @@ public final class GTAACompatRecipes {
         aether(provider);
         godforge(provider);
         apexGate(provider);
+        manaBloom(provider);
         maxwellCats(provider);
     }
 
@@ -376,5 +377,16 @@ public final class GTAACompatRecipes {
                 .save(needing(provider, mods, Map.of(S5, "placeablemaxwell:mars", S6, "placeablemaxwell:poomba",
                         S7, "placeablemaxwell:valenok", S8, "placeablemaxwell:vasilisa", S1, "gtna:magmatter_block",
                         S2, "avaritia:eternal_singularity", S3, "avaritia:infinity_catalyst", S10, "placeablemaxwell:maxwell")));
+    }
+
+    /** Mana Bloom Leaves: the Great Mana Tree's canopy in the Mana Nexus */
+    private static void manaBloom(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mana_bloom_leaves")
+                .inputItems(net.minecraft.tags.ItemTags.LEAVES, 8)
+                .inputItems(S1, 2)
+                .inputItems(S2, 4)
+                .outputItems(GTAABlocks.MANA_BLOOM_LEAVES.asStack(8))
+                .duration(200).EUt(VA[LV])
+                .save(needing(provider, "botania", Map.of(S1, "botania:mana_powder", S2, "botania:pink_petal")));
     }
 }

@@ -10,6 +10,8 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.api.pattern.BlockPattern;
+import java.util.ArrayList;
+import java.util.List;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
@@ -1302,6 +1304,43 @@ public class GTAAMachines {
         return b == null || b == Blocks.AIR ? fallback : b;
     }
 
+    /** one growth stage of the Mana Nexus (see ManaNexusShapes) */
+    public static FactoryBlockPattern nexusStage(MultiblockMachineDefinition definition, int stage) {
+        var casing = blocks(GTAABlocks.MANA_NEXUS_CASING.get());
+        String[] colors = { "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray",
+                "cyan", "purple", "blue", "brown", "green", "red", "black" };
+        Block[] petals = new Block[colors.length];
+        for (int i = 0; i < colors.length; i++) petals[i] = botaniaBlock(colors[i] + "_petal_block", Blocks.PINK_WOOL);
+        var b = FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
+                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
+                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP);
+        for (String[] aisle : com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.aisles(stage)) b.aisle(aisle);
+        return b.where('~', controller(blocks(definition.get())))
+                .where('a', casing)
+                .where('I', abilities(PartAbility.IMPORT_ITEMS))
+                .where('i', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
+                .where('E', abilities(PartAbility.INPUT_ENERGY))
+                .where('e', casing.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY)))
+                .where('M', abilities(MANA_HATCH_ABILITY))
+                .where('m', casing.setMinGlobalLimited(1).or(abilities(MANA_HATCH_ABILITY)))
+                .where('O', abilities(PartAbility.EXPORT_ITEMS))
+                .where('o', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS)))
+                .where('w', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
+                .where('n', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
+                .where('b', blocks(botaniaBlock("livingrock_bricks", Blocks.STONE_BRICKS)))
+                .where('L', blocks(botaniaBlock("livingwood_log", Blocks.OAK_LOG)))
+                .where('l', blocks(GTAABlocks.MANA_BLOOM_LEAVES.get()))
+                .where('c', com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores())
+                .where('f', blocks(petals))
+                .where('p', blocks(botaniaBlock("mana_pool", Blocks.CAULDRON), botaniaBlock("diluted_pool", Blocks.CAULDRON),
+                        botaniaBlock("fabulous_pool", Blocks.CAULDRON), botaniaBlock("creative_pool", Blocks.CAULDRON)))
+                .where('P', blocks(botaniaBlock("mana_pylon", Blocks.BEACON), botaniaBlock("natura_pylon", Blocks.BEACON),
+                        botaniaBlock("gaia_pylon", Blocks.BEACON)))
+                .where('G', blocks(botaniaBlock("gaia_pylon", Blocks.BEACON)))
+                .where('h', blocks(botaniaBlock("elf_glass", Blocks.GLASS)))
+                .where(' ', any());
+    }
+
     public static final MultiblockMachineDefinition MANA_NEXUS = REGISTRATE
             .multiblock("mana_nexus", com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::new)
             .langValue("Mana Nexus")
@@ -1315,39 +1354,22 @@ public class GTAAMachines {
                     Component.literal("\u00a77 mana pool, runic altar, terra plate, elven trade, pure daisy, apothecary,"),
                     Component.literal("\u00a77 Mythic Botany's Mana Infuser and rune rituals (elven trades: circuit 3)"),
                     Component.literal("\u00a77Mana in: \u00a7bMana Hatches\u00a77 (spreaders, sparks) or liquid mana (1 mB = 100 mana)"),
-                    Component.literal("\u00a77Mana Cores set the tier: Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel"),
+                    Component.literal("\u00a77Grows in 5 stages around a \u00a7aGreat Mana Tree\u00a77: Grove, Pools, Pylons, Halo, Gaia"),
+                    Component.literal("\u00a77Tier = the lower of the stage and the Mana Cores in the canopy"),
+                    Component.literal("\u00a77 (Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel)"),
                     Component.literal("\u00a77 10M / 50M / 250M / 1B / 2B mana; 1 / 2 / 4 / 8 / 16 crafts at once"),
                     Component.literal("\u00a78GTAA's own multiblock, built for Botania + addons"))
             .appearanceBlock(GTAABlocks.MANA_NEXUS_CASING)
-            .pattern(definition -> {
-                var casing = blocks(GTAABlocks.MANA_NEXUS_CASING.get());
-                var glass = blocks(botaniaBlock("mana_glass", Blocks.GLASS), botaniaBlock("elf_glass", Blocks.GLASS));
-                var cores = com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores();
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        // front row: Item in, Item in/casing, Energy, controller, Mana Hatch, Mana Hatch/casing,
-                        // Energy/casing; back row: Output, Output/casing, liquid mana in x2, maintenance
-                        .aisle("IiE~Mme", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aOowwan")
-                        .aisle("ggggggg", "g     g", "g ccc g", "g ccc g", "g ccc g", "g     g", "ggggggg")
-                        .aisle("ggggggg", "g     g", "g     g", "g  c  g", "g     g", "g     g", "ggggggg")
-                        .aisle("aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa", "aaaaaaa")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('a', casing)
-                        .where('I', abilities(PartAbility.IMPORT_ITEMS))
-                        .where('i', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS)))
-                        .where('E', abilities(PartAbility.INPUT_ENERGY))
-                        .where('e', casing.setMinGlobalLimited(1).or(abilities(PartAbility.INPUT_ENERGY)))
-                        .where('M', abilities(MANA_HATCH_ABILITY))
-                        .where('m', casing.setMinGlobalLimited(1).or(abilities(MANA_HATCH_ABILITY)))
-                        .where('O', abilities(PartAbility.EXPORT_ITEMS))
-                        .where('o', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS)))
-                        .where('w', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
-                        .where('n', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
-                        .where('g', glass)
-                        .where('c', cores)
-                        .where(' ', any())
-                        .build();
+            .pattern(definition -> nexusStage(definition, 1).build())
+            .shapeInfos(definition -> {
+                List<com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo> shapes = new ArrayList<>();
+                for (int st = 1; st <= com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.STAGES; st++) {
+                    BlockPattern bp = nexusStage(definition, st).build();
+                    int[] reps = new int[bp.aisleRepetitions.length];
+                    java.util.Arrays.fill(reps, 1);
+                    shapes.add(new com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo(bp.getPreview(reps)));
+                }
+                return shapes;
             })
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/mana_nexus_casing"),

@@ -42,7 +42,7 @@ import java.util.List;
  * <li>a craft takes its mana when it starts; voltage sets speed like any GT machine.</li>
  * </ul>
  */
-public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
+public class ManaNexusMachine extends WorkableElectricMultiblockMachine implements com.omnicrox.gtaa.api.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             ManaNexusMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -61,6 +61,10 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
 
     @Persisted @DescSynced private long storedMana;
     @DescSynced private int coreTier;
+    @DescSynced private int stage;
+    private int trying;
+    private static final com.gregtechceu.gtceu.api.pattern.BlockPattern[] STAGE_PATTERNS =
+            new com.gregtechceu.gtceu.api.pattern.BlockPattern[ManaNexusShapes.STAGES + 1];
     private TickableSubscription tick;
     private Fluid liquidMana;
 
@@ -81,12 +85,69 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
         return coreTier;
     }
 
+    /** the tier everything runs at: the lower of the growth stage and the Mana Cores */
+    public int tier() {
+        return Math.max(0, Math.min(5, Math.min(coreTier, stage)));
+    }
+
+    // ---- growth stages ----
+
+    @Override
+    public int stageCount() {
+        return ManaNexusShapes.STAGES;
+    }
+
+    @Override
+    public int currentStage() {
+        return isFormed() ? stage : 0;
+    }
+
+    @Override
+    public com.gregtechceu.gtceu.api.pattern.BlockPattern stagePattern(int st) {
+        int i = Math.max(1, Math.min(ManaNexusShapes.STAGES, st));
+        if (STAGE_PATTERNS[i] == null)
+            STAGE_PATTERNS[i] = com.omnicrox.gtaa.common.data.GTAAMachines.nexusStage(
+                    com.omnicrox.gtaa.common.data.GTAAMachines.MANA_NEXUS, i).build();
+        return STAGE_PATTERNS[i];
+    }
+
+    @Override
+    public String stageName(int st) {
+        return ManaNexusShapes.STAGE_NAMES[Math.max(1, Math.min(5, st))];
+    }
+
+    @Override
+    public String stageAdds(int st) {
+        return ManaNexusShapes.STAGE_ADDS[Math.max(1, Math.min(5, st))];
+    }
+
+    @Override
+    public com.gregtechceu.gtceu.api.pattern.BlockPattern getPattern() {
+        return stagePattern(trying > 0 ? trying : Math.max(1, stage));
+    }
+
+    /** the biggest stage that's built wins */
+    @Override
+    public boolean checkPattern() {
+        for (int st = ManaNexusShapes.STAGES; st >= 1; st--) {
+            trying = st;
+            boolean ok = stagePattern(st).checkPatternAt(getMultiblockState(), false);
+            if (ok) {
+                stage = st;
+                trying = 0;
+                return true;
+            }
+        }
+        trying = 0;
+        return false;
+    }
+
     public long getStoredMana() {
         return storedMana;
     }
 
     public long capacity() {
-        return CAPACITY[Math.max(0, Math.min(5, coreTier))];
+        return CAPACITY[tier()];
     }
 
     @Override
@@ -151,8 +212,10 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
         int need = Math.max(1, recipe.data.getInt(TIER));
         if (need > nexus.coreTier) return ModifierFunction.cancel(Component.literal(
                 "Needs " + CORE_NAMES[Math.min(5, need)] + " Mana Cores"));
+        if (need > nexus.stage) return ModifierFunction.cancel(Component.literal(
+                "Needs the " + ManaNexusShapes.STAGE_NAMES[Math.min(5, need)] + " stage"));
         long mana = recipe.data.getLong(MANA);
-        int max = PARALLELS[Math.max(1, Math.min(5, nexus.coreTier))];
+        int max = PARALLELS[Math.max(1, nexus.tier())];
         if (mana > 0) {
             long affordable = nexus.storedMana / mana;
             if (affordable <= 0) return ModifierFunction.cancel(Component.literal("Needs " + com.omnicrox.gtaa.api.GTAAFormat.num(mana) + " mana"));
@@ -178,12 +241,14 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine {
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        int t = Math.max(0, Math.min(5, coreTier));
-        textList.add(Component.literal("Mana: " + com.omnicrox.gtaa.api.GTAAFormat.num(storedMana) + " / " + com.omnicrox.gtaa.api.GTAAFormat.num(capacity()))
-                .withStyle(ChatFormatting.AQUA));
-        textList.add(Component.literal("Cores: " + CORE_NAMES[t] + " (tier " + t + "), up to " + PARALLELS[t] + " crafts at once")
-                .withStyle(ChatFormatting.LIGHT_PURPLE));
-        textList.add(Component.literal("Crafts: " + TIER_CRAFTS[t]).withStyle(ChatFormatting.GRAY));
+        int t = tier();
+        textList.add(Component.literal("Mana " + com.omnicrox.gtaa.api.GTAAFormat.num(storedMana) + " / " +
+                com.omnicrox.gtaa.api.GTAAFormat.num(capacity())).withStyle(ChatFormatting.AQUA));
+        textList.add(Component.literal("Tier " + t + "  |  " + ManaNexusShapes.STAGE_NAMES[Math.max(1, stage)] + " stage, " +
+                CORE_NAMES[Math.max(0, Math.min(5, coreTier))] + " cores  |  " + PARALLELS[Math.max(1, t)] + "x").withStyle(ChatFormatting.LIGHT_PURPLE));
+        if (stage != coreTier) textList.add(Component.literal(stage < coreTier
+                ? "Grow it to the " + ManaNexusShapes.STAGE_NAMES[Math.min(5, stage + 1)] + " stage to use your cores"
+                : "Better cores would raise the tier").withStyle(ChatFormatting.YELLOW));
     }
 
     /** for the Structure Upgrader */

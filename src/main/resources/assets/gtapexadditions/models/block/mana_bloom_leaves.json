@@ -1,0 +1,1 @@
+{"parent": "minecraft:block/leaves", "render_type": "minecraft:cutout_mipped", "textures": {"all": "gtapexadditions:block/mana_bloom_leaves"}}
