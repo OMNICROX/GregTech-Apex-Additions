@@ -136,7 +136,7 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
-        MANA_NEXUS = register("mana_nexus", "multiblock", "Mana Nexus")
+        MANA_NEXUS = register("mana_nexus", "multiblock", "Sylvan Arbiter")
                 .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + com.omnicrox.gtaa.api.GTAAFormat.num(data.getLong("mana")) : "")

@@ -171,7 +171,7 @@ public class GTAAMachines {
             .abilities(MANA_HATCH_ABILITY)
             .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
             .tooltips(Component.literal("\u00a77Aim \u00a7bMana Spreaders\u00a77 at it or put a \u00a7bMana Spark\u00a77 on it"),
-                    Component.literal("\u00a77Holds 1,000,000 mana; the \u00a7dMana Nexus\u00a77 pulls it in"),
+                    Component.literal("\u00a77Holds 1,000,000 mana; the \u00a7dSylvan Arbiter\u00a77 pulls it in"),
                     Component.literal("\u00a78Right-click with an empty hand to see how much it holds"))
             .register();
 
@@ -1343,12 +1343,13 @@ public class GTAAMachines {
 
     public static final MultiblockMachineDefinition MANA_NEXUS = REGISTRATE
             .multiblock("mana_nexus", com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::new)
-            .langValue("Mana Nexus")
+            .langValue("Sylvan Arbiter")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTAARecipeTypes.MANA_NEXUS)
             .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::recipeModifier,
                     com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
             .tooltips(
+                    Component.literal("\u00a7a\u00a7oAn ancient tree that governs every drop of mana around it"),
                     Component.literal("\u00a77Machine Type: \u00a7dBotanical Altar"),
                     Component.literal("\u00a77Stores mana and does every \u00a7dBotania\u00a77 altar craft with it:"),
                     Component.literal("\u00a77 mana pool, runic altar, terra plate, elven trade, pure daisy, apothecary,"),
