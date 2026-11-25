@@ -15,7 +15,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 /**
  * Ascension Gate Base: goes where the gate's base goes. With the whole frame around it (9 chevrons, 14 rings),
- * right-clicking it turns the frame into the Retrogate, like Stargate Journey's classic gate base.
+ * right-clicking it turns the frame into the Warpgate, like Stargate Journey's classic gate base.
  */
 public class GateBaseBlock extends Block {
 

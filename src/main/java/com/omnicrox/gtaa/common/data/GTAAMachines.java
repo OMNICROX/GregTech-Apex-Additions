@@ -1364,7 +1364,7 @@ public class GTAAMachines {
                     Component.literal("\u00a7dThe end of Apex Ascension."),
                     Component.literal("\u00a77The pedestal of the \u00a75Apex Stargate\u00a77: build its frame on top"),
                     Component.literal("\u00a77 (Ascension Gate Base above this controller, 9 Chevrons, 14 Rings)"),
-                    Component.literal("\u00a77The finished frame becomes the \u00a75Retrogate\u00a77 - sealed, like every gate,"),
+                    Component.literal("\u00a77The finished frame becomes the \u00a75Warpgate\u00a77 - sealed, like every gate,"),
                     Component.literal("\u00a77 until it is charged with \u00a7b9.22E18 EU\u00a77"),
                     Component.literal("\u00a77Takes power from energy / laser hatches and the owner's wireless networks"),
                     Component.literal("\u00a77 (GTM Things, gtna Nexus) - at most ~7.68E14 EU/t, so 10 minutes at best"),

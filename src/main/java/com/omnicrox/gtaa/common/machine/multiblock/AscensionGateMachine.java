@@ -12,7 +12,6 @@ import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.omnicrox.gtaa.api.GTAAWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
-import com.omnicrox.gtaa.common.entity.AscendingMaxwellEntity;
 import com.omnicrox.gtaa.common.item.MaxwellItem;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
 import com.omnicrox.gtaa.common.stargate.ApexStargate;
@@ -47,11 +46,11 @@ import java.util.UUID;
 
 /**
  * Ascension Gate: the end of Apex Ascension. A pedestal (this controller, energy / laser hatches) under the Apex
- * Stargate's frame. Complete the frame and it becomes the Retrogate (Stargate Journey's Pegasus gate in More Gates'
- * Retrogate skin); every gate in the world stays sealed until this one is charged with 9.22 Qn EU (Long.MAX_VALUE,
+ * Stargate's frame. Complete the frame and it becomes the Warpgate (Stargate Journey's Pegasus gate in More Gates'
+ * Warpgate skin); every gate in the world stays sealed until this one is charged with 9.22 Qn EU (Long.MAX_VALUE,
  * the most a GregTech number can hold). Power comes from the hatches and the owner's wireless networks (GTM Things
  * and gtna's Nexus, where the Artificial Star sends its power), at most ~768 T EU/t so it takes 10 minutes at best.
- * Fully charged, the gate opens one way, just once: Maxwell comes through, the credits roll, and every gate wakes.
+ * Fully charged, the gate opens one way, just once: the credits roll and every gate wakes.
  */
 public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
 
@@ -219,7 +218,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
         ApexStargate.setAscended(level.getServer(), ascendedBy);
     }
 
-    /** the Maxwell open: horizon, Maxwell through the gate, credits, then it closes after a minute */
+    /** the first opening: event horizon, credits, then it closes after a minute */
     private void introTick(ServerLevel level) {
         BlockPos base = base();
         Vec3 c = ApexStargate.center(base);
@@ -239,22 +238,13 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
         }
         if (intro < 40 && intro % 4 == 0)
             level.sendParticles(ParticleTypes.REVERSE_PORTAL, c.x, c.y, c.z, 60, 1.5, 1.5, 1.5, 0.3);
-        if (intro == 40) {
-            Direction f = facing();
-            Vec3 start = c.add(f.getStepX() * 0.3, 0, f.getStepZ() * 0.3);
-            level.addFreshEntity(AscendingMaxwellEntity.create(level, start, f));
-            level.playSound(null, base.above(3), SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, 0.6f, 1.6f);
-        }
+        if (intro == 40) level.playSound(null, base.above(3), SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, 0.6f, 1.6f);
         if (intro == 120) {
             celebrateTicks = 200;
             level.playSound(null, base.above(3), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 3f, 1f);
             for (ServerPlayer p : level.players()) {
                 if (p.position().distanceTo(c) > 64) continue;
                 GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, MaxwellItem.stats(p)));
-                if (p.getGameProfile().getName().equals(ascendedBy)) {
-                    ItemStack prize = new ItemStack(GTAAItems.MAXWELL.get());
-                    if (!p.getInventory().add(prize)) p.drop(prize, false);
-                }
             }
         }
         if (++intro >= INTRO_TICKS) {
@@ -316,7 +306,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
         if (!isFormed()) return;
         if (ascendedHere) {
             textList.add(Component.literal("✦ " + ascendedBy + " ascended here ✦").withStyle(ChatFormatting.LIGHT_PURPLE));
-            textList.add(Component.literal("The Retrogate is awake: dial anywhere").withStyle(ChatFormatting.GRAY));
+            textList.add(Component.literal("The Warpgate is awake: dial anywhere").withStyle(ChatFormatting.GRAY));
             return;
         }
         if (!gateFormed) {

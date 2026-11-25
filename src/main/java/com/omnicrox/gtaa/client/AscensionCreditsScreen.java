@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-/** Rolling credits for the Ascension: the player's stats drift up the screen, Maxwell approves at the end. */
+/** Rolling credits for the Ascension: the player's stats drift up the screen. */
 public class AscensionCreditsScreen extends Screen {
 
     private static final int GOLD = 0xFFFFC94A, PINK = 0xFFFF9AD5, TEXT = 0xFFE6DDF7, MUTED = 0xFF9A8CB8;
@@ -45,11 +45,6 @@ public class AscensionCreditsScreen extends Screen {
             g.drawString(font, l, cx - font.width(l) / 2, y, c, true);
             y += 14;
         }
-        y += 18;
-        // a tiny spinning Maxwell made of text, because why not
-        String[] frames = { "=^.^=", "=^.^= ~", "~ =^.^=", "=^o^=" };
-        String m = frames[(int) (time / 10) % frames.length];
-        g.drawString(font, m, cx - font.width(m) / 2, y, PINK, true);
         String hint = "Esc to close";
         g.drawString(font, hint, cx - font.width(hint) / 2, height - 14, MUTED, false);
         super.render(g, mx, my, pt);

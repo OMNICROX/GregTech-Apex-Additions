@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The Apex Stargate: Stargate Journey's Pegasus gate in More Gates' Retrogate skin, built from GTAA's gate frame.
+ * The Apex Stargate: Stargate Journey's Pegasus gate in More Gates' Warpgate skin, built from GTAA's gate frame.
  * The frame has the gate's exact shape (Stargate Journey's 24 ring positions): the Ascension Gate Base where the
  * gate's base goes, 9 Ascension Gate Chevrons and 14 Ascension Gate Rings. When it's complete it turns into the
  * real gate, like Stargate Journey's classic gate. Gates stay sealed (no dialing) until a world's first gate is
@@ -47,7 +47,7 @@ public final class ApexStargate {
 
     public static final ResourceLocation PEGASUS_GATE = new ResourceLocation("sgjourney", "pegasus_stargate");
     public static final ResourceLocation PEGASUS_RING = new ResourceLocation("sgjourney", "pegasus_ring");
-    public static final ResourceLocation RETROGATE = new ResourceLocation("moregates", "retrogate");
+    public static final ResourceLocation WARPGATE = new ResourceLocation("moregates", "warpgate");
 
     public enum Kind { BASE, RING, CHEVRON }
 
@@ -122,7 +122,7 @@ public final class ApexStargate {
         return v.isPresent() ? s.setValue(p, (Comparable) v.get()) : s;
     }
 
-    /** Turns a complete frame into the Retrogate. @return false if Stargate Journey isn't there */
+    /** Turns a complete frame into the Warpgate. @return false if Stargate Journey isn't there */
     public static boolean form(ServerLevel level, BlockPos base, Direction facing, LivingEntity placer) {
         if (!available()) return false;
         Block gate = BuiltInRegistries.BLOCK.get(PEGASUS_GATE);
@@ -142,9 +142,9 @@ public final class ApexStargate {
             }
             try {
                 Method m = be.getClass().getMethod("setVariant", ResourceLocation.class);
-                m.invoke(be, RETROGATE);
+                m.invoke(be, WARPGATE);
             } catch (Throwable t) {
-                GTAA.LOGGER.warn("[GTAA] could not set the Retrogate variant: {}", t.toString());
+                GTAA.LOGGER.warn("[GTAA] could not set the Warpgate variant: {}", t.toString());
             }
             be.setChanged();
             level.sendBlockUpdated(base, state, level.getBlockState(base), 3);
