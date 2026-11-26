@@ -89,7 +89,12 @@ public final class GTAAWireless {
             if (ModList.get().isLoaded("gtna")) {
                 try {
                     Class<?> m = Class.forName("com.raishxn.gtna.api.capability.WirelessEnergyManager");
-                    Class<?> i = Class.forName("com.raishxn.gtna.utils.datastructure.Int128");
+                    Class<?> i;
+                    try { // gtna 0.6.1+ moved Int128 into TypeOmega Lib
+                        i = Class.forName("com.typeomega.lib.data.Int128");
+                    } catch (ClassNotFoundException e) {
+                        i = Class.forName("com.raishxn.gtna.utils.datastructure.Int128");
+                    }
                     nexusGet = m.getMethod("getEnergy", net.minecraft.server.level.ServerLevel.class, UUID.class);
                     nexusConsume = m.getMethod("consumeEnergy", net.minecraft.server.level.ServerLevel.class, UUID.class, i);
                     int128 = i.getConstructor(long.class);
