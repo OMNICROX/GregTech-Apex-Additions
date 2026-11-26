@@ -310,6 +310,31 @@ public final class GTAACompatRecipes {
                 .duration(2400).EUt(VA[UIV])
                 .save(needing(provider, mods, Map.of(S1, "gtna:infinity_block", S2, "draconicevolution:chaotic_core",
                         S3, "gtna:magmatter_ingot")));
+        // the pedestal under the gate (at least 4) and its controller: the last things to build
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:apex_gate/pedestal")
+                .inputItems(frameGt, GTMaterials.Neutronium)
+                .inputItems(S1, 6)
+                .inputItems(GTItems.FIELD_GENERATOR_UXV)
+                .inputItems(CustomTags.UXV_CIRCUITS, 2)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 4))
+                .outputItems(GTAABlocks.GATE_PEDESTAL.asStack())
+                .duration(600).EUt(VA[UXV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot")));
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/controller")
+                .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                .inputItems(S1)
+                .inputItems(S2)
+                .inputItems(S3, 2)
+                .inputItems(GTItems.FIELD_GENERATOR_OpV, 4)
+                .inputItems(GTItems.EMITTER_OpV, 2)
+                .inputItems(GTItems.SENSOR_OpV, 2)
+                .inputItems(CustomTags.OpV_CIRCUITS, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+                .outputItems(GTAAMachines.ASCENSION_GATE.asStack())
+                .duration(6000).EUt(VA[OpV])
+                .save(needing(provider, new String[] { "gtna", "draconicevolution", "avaritia" }, Map.of(
+                        S1, "gtna:magmatter_block", S2, "avaritia:eternal_singularity", S3, "draconicevolution:chaotic_core")));
     }
 
     /**

@@ -27,7 +27,7 @@ R = [r for r in R if not recycling(r) and not r['t'].startswith('tconstruct:')]
 R = [r for r in R if not r['id'].startswith(('apex:v13/unify/chaospersists_', 'apex:v13/unify/corewithstuff_titanium'))]
 # repairs and upgrades that need the item itself don't make it
 R = [r for r in R if not any(o in a for o in r['o'] for a in r['i'])]
-UNAVAILABLE = re.compile(r'^(sgjourney:.*(ore|raw_naquadah|raw_trinium|naquadah_nugget|trinium_nugget|naquadah_iron_nugget)|gravecore:.*(ore|raw_palladium)|grave\.core:titanium_|palladium:(raw_)?titanium|sgjourney:naquadah_iron_alloy|sgjourney:(naquadah|trinium|naquadah_iron|pure_naquadah)(_ingot|_block|_nugget)?$|sgjourney:raw_|gtceu:.*neutronium_ore)')
+UNAVAILABLE = re.compile(r'^(sgjourney:.*(ore|raw_naquadah|raw_trinium|naquadah_nugget|trinium_nugget|naquadah_iron_nugget)|gravecore:.*(ore|raw_palladium)|grave\.core:titanium_|palladium:(raw_)?titanium|sgjourney:naquadah_iron_alloy|sgjourney:(naquadah|trinium|naquadah_iron|pure_naquadah)(_ingot|_block|_nugget)?$|sgjourney:raw_|gtceu:.*neutronium_ore|avaritia:neutron|avaritia:infinity_(ingot|nugget|block))')
 # what the pack also has that the dump can't see: Pure Daisy turns stone/wood in the world
 R.append({'id': 'synthetic:pure_daisy', 't': 'botania:pure_daisy', 'i': [], 'o': ['botania:livingrock', 'botania:livingwood_log'], 'fi': [], 'fo': [], 'tier': 0})
 for extra in json.load(open(S + 'extra_recipes.json')) if os.path.exists(S + 'extra_recipes.json') else []:
