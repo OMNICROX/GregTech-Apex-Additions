@@ -276,23 +276,20 @@ q('hull', '&b&lElectricity', ['gtceu:lv_machine_hull'], [
 
 # ---------------------------------------------------------------- layout: a compact tree, side quests tight around it
 from fw import place
-place(C, cells={
-    'boiler': (0, 2),
-    'hammer': (1, 0), 'alloy': (1, 1), 'macerator': (1, 2), 'compressor': (1, 3),
-    'motor': (2, 0), 'alloys': (2, 1), 'ores': (2, 2), 'firebricks': (2, 3),
-    'precision': (3, 0), 'stronze': (3, 1), 'pbf': (3, 3),
-    'multis': (4, 0), 'manufacturer': (4, 1), 'steel': (4, 3),
-    'grinder': (5, 0), 'mold': (5, 3), 'nether': (5, 4),
-    'superheater': (6, 0), 'resistor': (6, 2), 'vacuum': (6, 3), 'rubber': (6, 4),
-    'circuit': (7, 3), 'cable': (7, 4), 'hull': (8, 3),
+place(C, col=3.6, row=2.9, cells={
+    'hammer': (1, 0), 'motor': (2, 0), 'precision': (3, 0), 'multis': (4, 0), 'grinder': (5, 0),
+    'alloy': (1, 1), 'alloys': (2, 1), 'stronze': (3, 1), 'manufacturer': (4, 1), 'superheater': (5, 1),
+    'boiler': (0, 2), 'macerator': (1, 2), 'ores': (2, 2), 'board': (3, 2), 'resistor': (4, 2), 'circuit': (5, 2), 'hull': (6, 2),
+    'compressor': (1, 3), 'firebricks': (2, 3), 'pbf': (3, 3), 'steel': (4, 3), 'mold': (5, 3), 'vacuum': (6, 3),
+    'nether': (4, 4), 'rubber': (5, 4), 'cable': (6, 4),
 }, deps={
     'hammer': ['boiler'], 'alloy': ['boiler'], 'macerator': ['boiler'], 'compressor': ['boiler'],
     'motor': ['hammer'], 'alloys': ['alloy'], 'ores': ['macerator'], 'firebricks': ['compressor'],
-    'precision': ['motor'], 'stronze': ['alloys', 'steel'], 'pbf': ['firebricks'],
-    'multis': ['precision'], 'manufacturer': ['multis', 'stronze'], 'steel': ['pbf'],
+    'precision': ['motor'], 'stronze': ['alloys', 'steel'], 'pbf': ['firebricks'], 'board': ['ores'],
+    'multis': ['precision'], 'manufacturer': ['multis', 'stronze'], 'steel': ['pbf'], 'resistor': ['board'],
     'grinder': ['multis'], 'superheater': ['grinder'], 'mold': ['steel'], 'nether': ['steel'],
-    'resistor': ['ores'], 'vacuum': ['mold'], 'rubber': ['nether'],
-    'circuit': ['vacuum', 'resistor', 'cable'], 'cable': ['rubber'], 'hull': ['circuit'],
+    'vacuum': ['mold'], 'rubber': ['nether'], 'cable': ['rubber'],
+    'circuit': ['resistor', 'vacuum', 'cable'], 'hull': ['circuit'],
 }, hubs={'boiler', 'hull'}, sats={
     'boiler': ['explode', 'water', 'pump', 'drum', 'vent', 'liquid'],
     'alloy': ['furnace'],
@@ -304,15 +301,14 @@ place(C, cells={
     'steel': ['hp_boiler', 'hp_machines'],
     'alloys': ['brass', 'clay_compound'],
     'stronze': ['breel'],
-    'motor': ['piston', 'arm', 'conveyor'],
+    'motor': ['piston', 'arm'],
     'precision': ['hydraulic_pump', 'regulator', 'large_solar'],
     'multis': ['oven', 'big_bus'],
     'grinder': ['large_crusher', 'large_furnace', 'thermal'],
     'superheater': ['cobbler', 'cactus'],
-    'manufacturer': ['large_compressor', 'bending', 'woodcutter'],
+    'manufacturer': ['conveyor', 'large_compressor', 'bending', 'woodcutter'],
     'nether': ['sulfur', 'infernal'],
     'rubber': ['red_alloy'],
     'vacuum': ['glass_tube'],
-    'resistor': ['board'],
     'circuit': ['magnet', 'lv_motor', 'lv_casing'],
 })
