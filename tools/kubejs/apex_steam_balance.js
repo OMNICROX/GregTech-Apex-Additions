@@ -2,7 +2,8 @@
 // Apex Ascension 1.3 - steam balance
 // Steam competes with LV but shouldn't skip ahead of it.
 //  - Steam Lava Maker: an LV assembler part (10 LV circuits + its steam parts), and it makes a tenth of the lava,
-//    so it can't undercut the scarce-lava gating.
+//    so it can't undercut the scarce-lava gating. The Stone SuperHeater gets the same cut, and both take
+//    stone, cobblestone, granite and diorite.
 //  - Dimensionally Transcendent Steam Oven (524,288 parallel): an MV assembler part instead of 16 furnaces in a
 //    compressor, so it arrives mid-MV, not on day two.
 // (The Large Steam Solar Boiler is tuned in config/gtna.yaml: 900 mB per cell.)
@@ -28,15 +29,29 @@ ServerEvents.recipes(event => {
       else shrink(node[k], f)
     })
   }
-  event.forEachRecipe({ type: 'gtna:lava_maker' }, r => {
-    let j
-    try { j = JSON.parse(String(r.json)) } catch (e) { return }
-    ;['outputs', 'tickOutputs'].forEach(k => { if (j[k] && j[k].fluid) shrink(j[k].fluid, 10) })
-    todo.push({ id: String(r.getId()), json: j })
+  // both lava multis (Steam Lava Maker, Stone SuperHeater) make a tenth as much, and both take all four stones
+  let STONES = ['minecraft:stone', 'minecraft:cobblestone', 'minecraft:granite', 'minecraft:diorite']
+  ;['gtna:lava_maker', 'gtna:super_heater'].forEach(type => {
+    let have = {}
+    event.forEachRecipe({ type: type }, r => {
+      let j
+      try { j = JSON.parse(String(r.json)) } catch (e) { return }
+      let text = JSON.stringify(j)
+      STONES.forEach(st => { if (text.indexOf('"' + st + '"') >= 0) have[st] = j })
+      ;['outputs', 'tickOutputs'].forEach(k => { if (j[k] && j[k].fluid) shrink(j[k].fluid, 10) })
+      todo.push({ id: String(r.getId()), json: j })
+    })
+    // copy the stone recipe for any stone type this machine was missing
+    let base = have['minecraft:stone']
+    if (base) STONES.forEach(st => {
+      if (have[st]) return
+      let j = JSON.parse(JSON.stringify(base).split('"minecraft:stone"').join('"' + st + '"'))
+      todo.push({ id: null, json: j })
+    })
   })
   todo.forEach(t => {
     try {
-      event.remove({ id: t.id })
+      if (t.id) event.remove({ id: t.id })
       event.custom(t.json) // GT recipe objects have no .id() here; KubeJS names it
       lava++
     } catch (e) { console.warn('[APEX-STEAM] lava ' + t.id + ': ' + e) }
@@ -51,5 +66,5 @@ ServerEvents.recipes(event => {
     .itemOutputs('gtna:dimensionally_transcendent_steam_oven')
     .duration(1200).EUt(120)
 
-  console.info(`[APEX-STEAM] lava maker LV assembler + ${lava} lava recipes cut 10x; DT Steam Oven moved to MV assembler`)
+  console.info(`[APEX-STEAM] lava maker LV assembler + ${lava} lava recipes (lava maker + stone superheater, 4 stones, 1/10 lava); DT Steam Oven moved to MV assembler`)
 })
