@@ -11,10 +11,7 @@ ServerEvents.loaded(event => {
   let server = event.server, access = server.registryAccess()
   let idsOf = ing => {
     let out = []
-    try {
-      let items = ing.getItems()
-      for (let k = 0; k < items.length && k < 40; k++) out.push(String(FR.ITEMS.getKey(items[k].getItem())))
-    } catch (e) {}
+    try { ing.getItemIds().forEach(x => { if (out.length < 40) out.push(String(x)) }) } catch (e) {}
     return out
   }
   let fluidsOf = ing => {
@@ -29,7 +26,7 @@ ServerEvents.loaded(event => {
   server.getRecipeManager().getRecipes().forEach(r => {
     n++
     try {
-      let rec = { id: String(r.getId()), t: String(r.getType()), i: [], o: [], fi: [], fo: [], eu: 0, d: 0 }
+      let rec = { id: String(r.getId()), t: String(r.getType()), i: [], o: [], fi: [], fo: [], tier: 0, d: 0 }
       if (r instanceof GTRecipe) {
         let ins = r.inputs.get(ItemCap), outs = r.outputs.get(ItemCap)
         if (ins) ins.forEach(c => { let a = idsOf(c.content); if (a.length) rec.i.push(a) })
@@ -37,7 +34,8 @@ ServerEvents.loaded(event => {
         let fins = r.inputs.get(FluidCap), fouts = r.outputs.get(FluidCap)
         if (fins) fins.forEach(c => fluidsOf(c.content).slice(0, 1).forEach(x => rec.fi.push(x)))
         if (fouts) fouts.forEach(c => fluidsOf(c.content).slice(0, 1).forEach(x => rec.fo.push(x)))
-        try { rec.eu = Number(RecipeHelper.getInputEUt(r)) } catch (e) {}
+        try { rec.t = String(r.recipeType.registryName) } catch (e) {}
+        try { rec.tier = Number(RecipeHelper.getRecipeEUtTier(r)) } catch (e) {}
         rec.d = r.duration
       } else {
         try {
