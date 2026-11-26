@@ -50,10 +50,8 @@ def main():
     derived = rgraph2.derive(list(allq), lambda k: items[k])
     flow.merge_deps(chapters, derived)
     flow.reduce(allq)
-    CLUSTER = {'steam': 'steel'}
     for ch in chapters:
-        if ch.key in CLUSTER: print(ch.key, 'lines over quests', flow.cluster(ch, CLUSTER[ch.key]))
-        else: print(ch.key, 'crossings', flow.flow(ch))
+        print(ch.key, 'conflicts left:', flow.clean_multi(ch, flow.flow))
     idmap = {}
     for ch in chapters:
         for q in ch.quests:

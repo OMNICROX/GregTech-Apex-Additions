@@ -397,3 +397,293 @@ def cluster(ch, center, pitch=2.0, iters=40000, seed=1, prune=True):
         x, y = P(cell[k]); byk[k].x, byk[k].y = x + shift, y
     tot = sum(seg_pen(a, b, {a, b}) for a, b in edges)
     return tot
+
+
+def conflicts(ch):
+    """lines that cross each other, and lines that run over a quest that is not one of their ends"""
+    from fw import _seg_dist
+    byk = {q.key: q for q in ch.quests}
+    edges = [(d, q.key) for q in ch.quests if not q.hide for d in q.deps if d in byk]
+    def ccw(a, b, c): return (c[1] - a[1]) * (b[0] - a[0]) - (b[1] - a[1]) * (c[0] - a[0])
+    P = lambda k: (byk[k].x, byk[k].y)
+    out = []
+    for i in range(len(edges)):
+        a, b = edges[i]
+        for j in range(i + 1, len(edges)):
+            c, d = edges[j]
+            if len({a, b, c, d}) < 4:
+                # shared end: only a problem if the two lines run along each other
+                s = ({a, b} & {c, d}).pop()
+                o1 = (set((a, b)) - {s}).pop(); o2 = (set((c, d)) - {s}).pop()
+                v1 = (P(o1)[0] - P(s)[0], P(o1)[1] - P(s)[1]); v2 = (P(o2)[0] - P(s)[0], P(o2)[1] - P(s)[1])
+                n1 = (v1[0] ** 2 + v1[1] ** 2) ** .5 or 1; n2 = (v2[0] ** 2 + v2[1] ** 2) ** .5 or 1
+                if (v1[0] * v2[0] + v1[1] * v2[1]) / (n1 * n2) > 0.996: out.append(('along', edges[i], edges[j]))
+                continue
+            A, B, C, D = P(a), P(b), P(c), P(d)
+            if ccw(A, B, C) * ccw(A, B, D) < 0 and ccw(C, D, A) * ccw(C, D, B) < 0:
+                out.append(('cross', edges[i], edges[j]))
+    for a, b in edges:
+        A, B = P(a), P(b)
+        for k, q in byk.items():
+            if k in (a, b): continue
+            r = KIND[q.kind][0] / 2 + 0.12
+            if _seg_dist(q.x, q.y, A[0], A[1], B[0], B[1]) < r: out.append(('over', (a, b), k))
+    return out
+
+
+def clean(ch, layout, tries=300, strict=False, seed=None):
+    """lay the chapter out, then fix the worst line until nothing crosses or runs over a quest. A line is fixed by
+    cutting it (when the quest has another way in) or by hanging the quest off a later quest that already needs the
+    same parent, so the order of the tech tree is kept."""
+    byk = {q.key: q for q in ch.quests}
+    def snap(): return {k: list(q.deps) for k, q in byk.items()}
+    def load(sn):
+        for k, d in sn.items(): byk[k].deps = list(d)
+    def descendants(a):
+        kids = collections.defaultdict(list)
+        for q in ch.quests:
+            for d in q.deps:
+                if d in byk: kids[d].append(q.key)
+        seen, st = set(), [a]
+        while st:
+            for c in kids[st.pop()]:
+                if c not in seen: seen.add(c); st.append(c)
+        return seen
+    def total():
+        layout(ch); return len(conflicts(ch))
+    full = snap()   # every real requirement, so a quest is only ever moved under something it truly needs
+    def true_anc(b):
+        seen, st = set(), [b]
+        while st:
+            for d in full.get(st.pop(), []):
+                if d in byk and d not in seen: seen.add(d); st.append(d)
+        return seen
+    cur = total()
+    tabu = set(); plateau = 0; seen_moves = set()
+    for n in range(tries):
+        if cur == 0: return n, 0
+        cs = conflicts(ch)
+        score = collections.Counter()
+        for c in cs:
+            for e in (c[1], c[2] if c[0] != 'over' else None):
+                if e and e not in tabu: score[e] += 1
+        if not score: return n, cur
+        base = snap()
+        def length(e): return abs(byk[e[0]].x - byk[e[1]].x) + abs(byk[e[0]].y - byk[e[1]].y)
+        order = sorted(score, key=lambda e: (e[0] not in byk[e[1]].deps0 and True, score[e], length(e)), reverse=True)
+        done = False
+        for e in order:
+            a, b = e
+            q = byk[b]
+            options = []
+            if len([d for d in q.deps if d in byk]) > 1:
+                options.append(('cut', None))
+            if a in q.deps:
+                bd = descendants(b) | {b}
+                ta = true_anc(b)
+                for c in descendants(a):
+                    if c not in bd and (c in ta or not strict) and byk[c].kind != 'tip': options.append(('move', c))
+            best = None
+            if seed is not None:
+                import random; random.Random(seed * 1000 + n).shuffle(options)
+            for kind, c in options[:60]:
+                load(base)
+                q.deps.remove(a)
+                if kind == 'move': q.deps.append(c)
+                t = total()
+                if best is None or t < best[0]: best = (t, kind, c)
+                if t == 0: break
+            if best and (best[0] < cur or (best[0] == cur and plateau < 120 and (e, best[1], best[2]) not in seen_moves)):
+                if best[0] == cur: plateau += 1; seen_moves.add((e, best[1], best[2]))
+                load(base); q.deps.remove(a)
+                if best[1] == 'move': q.deps.append(best[2])
+                cur = total(); done = True; break
+            tabu.add(e)
+            load(base); layout(ch)
+        if not done:
+            load(base); layout(ch); return n, cur
+    return tries, cur
+
+
+def tree(ch, colw=3.9, gap=0.55, extra_edges=True, req=None):
+    """A clean tree: every quest hangs off the latest quest it needs, columns are steps of progression, siblings are
+    stacked and parents sit centred beside them, so no lines cross. Then every other real requirement is added as a
+    line only where it can be drawn without touching anything."""
+    from fw import _seg_dist
+    byk = {q.key: q for q in ch.quests}
+    if not hasattr(ch, '_full'): ch._full = {k: [d for d in q.deps if d in byk] for k, q in byk.items()}
+    full = {k: list(v) for k, v in (req if req is not None else ch._full).items()}
+    root = next(q.key for q in ch.quests if not full[q.key])
+    layer = {}
+    def L(k):
+        if k not in layer:
+            ps = full[k]
+            layer[k] = 0 if not ps else 1 + max(L(p) for p in ps)
+        return layer[k]
+    for k in byk: L(k)
+    for k in byk:   # roots other than the start hub hang off it
+        if not full[k] and k != root: full[k] = [root]; layer[k] = 1
+    order = {q.key: i for i, q in enumerate(ch.quests)}
+    prim = {}
+    for k in byk:
+        if k == root: continue
+        ps = full[k]
+        mx = max(layer[p] for p in ps)
+        cand = [p for p in ps if layer[p] == mx]
+        # prefer a hand-written main-line parent
+        cand.sort(key=lambda p: (p not in byk[k].deps0, byk[p].kind not in ('hub', 'main'), order[p]))
+        prim[k] = cand[0]
+    # layer = parent layer + 1 along the tree
+    kids = collections.defaultdict(list)
+    for k, p in prim.items(): kids[p].append(k)
+    sat = {k for k in byk if k != root and not kids[k] and byk[k].kind in ('tip', 'opt', 'quest') and byk[prim[k]].kind in ('hub', 'main')}
+    def kidsof(k): return [c for c in sorted(kids[k], key=lambda c: order[c]) if c not in sat]
+    sats_of = collections.defaultdict(list)
+    for k in sat: sats_of[prim[k]].append(k)
+    depth = {root: 0}
+    st = [root]
+    while st:
+        k = st.pop()
+        for c in kids[k]: depth[c] = depth[k] + 1; st.append(c)
+    def own(k):
+        s = KIND[byk[k].kind][0] / 2
+        c = len(sats_of[k])
+        off = s + 0.55 + 0.5
+        return (off if c >= 1 else s) + (off if c >= 2 else s)
+    height = {}
+    def H(k):
+        ks = kidsof(k)
+        h = sum(H(c) for c in ks) + gap * max(0, len(ks) - 1)
+        height[k] = max(h, own(k))
+        return height[k]
+    H(root)
+    y = {}
+    def place(k, top):
+        ks = kidsof(k)
+        if not ks: y[k] = top + height[k] / 2; return
+        cur = top
+        used = sum(height[c] for c in ks) + gap * (len(ks) - 1)
+        cur += (height[k] - used) / 2
+        for c in ks:
+            place(c, cur); cur += height[c] + gap
+        y[k] = (y[ks[0]] + y[ks[-1]]) / 2
+    place(root, 0)
+    import math
+    xs = {root: 0.0}
+    st = [root]
+    while st:
+        k = st.pop()
+        for c in kidsof(k):
+            steps = max(1, math.ceil(abs(y[c] - y[k]) / (colw * 1.05)))
+            xs[c] = xs[k] + colw * steps
+            st.append(c)
+    for k in byk:
+        if k in sat: continue
+        byk[k].x, byk[k].y = xs[k], round(y[k] * 4) / 4
+    for m, ks in sats_of.items():
+        mq = byk[m]; off = KIND[mq.kind][0] / 2 + 0.55
+        slots = [(0, -off), (0, off), (-1.05, -off), (-1.05, off), (-2.1, -off), (-2.1, off), (-3.15, -off), (-3.15, off)]
+        for k, (dx, dy) in zip(ks, slots): byk[k].x, byk[k].y = mq.x + dx, mq.y + dy
+        if len(ks) > len(slots): ERRORS.append(f'too many satellites on {m}')
+    for k, q in byk.items(): q.deps = [prim[k]] if k in prim else []
+    if not extra_edges: return
+    # add the other real requirements wherever the line is free
+    extra = [(d, k) for k in byk if k not in sat for d in ch._full[k] if d != prim.get(k) and d in byk and d not in sat]
+    extra.sort(key=lambda e: (e[0] not in byk[e[1]].deps0, abs(layer[e[1]] - layer[e[0]]), order[e[1]]))
+    added = 0
+    for d, k in extra:
+        byk[k].deps.append(d)
+        if conflicts(ch): byk[k].deps.remove(d)
+        else: added += 1
+    return added
+
+
+def clean_tree(ch, tries=300):
+    """search over the requirement lines (cut one, or hang a quest under a later quest it also needs) until the tree
+    layout is free of crossings and overlaps, then add every other line that fits."""
+    tree(ch, extra_edges=False)   # sets ch._full
+    byk = {q.key: q for q in ch.quests}
+    truth = {k: list(v) for k, v in ch._full.items()}
+    req = {k: list(v) for k, v in truth.items()}
+    def total():
+        tree(ch, extra_edges=False, req=req); return len(conflicts(ch))
+    def desc(a):
+        kids = collections.defaultdict(list)
+        for k, ds in req.items():
+            for d in ds: kids[d].append(k)
+        seen, st = set(), [a]
+        while st:
+            for c in kids[st.pop()]:
+                if c not in seen: seen.add(c); st.append(c)
+        return seen
+    def tanc(b):
+        seen, st = set(), [b]
+        while st:
+            for d in truth.get(st.pop(), []):
+                if d not in seen: seen.add(d); st.append(d)
+        return seen
+    cur = total(); tabu = set(); plateau = 0; seen = set()
+    for n in range(tries):
+        if cur == 0: break
+        cs = conflicts(ch)
+        score = collections.Counter()
+        for c in cs:
+            for e in (c[1], c[2] if c[0] != 'over' else None):
+                if e and e not in tabu: score[e] += 1
+        if not score: break
+        # which requirement line is the tree edge? deps hold the tree edge only
+        base = {k: list(v) for k, v in req.items()}
+        progressed = False
+        for e in sorted(score, key=lambda e: -score[e]):
+            a, b = e
+            if a not in req.get(b, []): continue
+            opts = []
+            if len(req[b]) > 1: opts.append(('cut', None))
+            bd = desc(b) | {b}; ta = tanc(b)
+            for c in desc(a):
+                if c not in bd and c in ta and byk[c].kind != 'tip': opts.append(('move', c))
+            best = None
+            for kind, c in opts[:60]:
+                req.clear(); req.update({k: list(v) for k, v in base.items()})
+                req[b].remove(a)
+                if kind == 'move': req[b].append(c)
+                t = total()
+                if best is None or t < best[0]: best = (t, kind, c)
+                if t == 0: break
+            if best and (best[0] < cur or (best[0] == cur and plateau < 30 and (e, best[1], best[2]) not in seen)):
+                if best[0] == cur: plateau += 1; seen.add((e, best[1], best[2]))
+                req.clear(); req.update({k: list(v) for k, v in base.items()})
+                req[b].remove(a)
+                if best[1] == 'move': req[b].append(best[2])
+                cur = total(); progressed = True; break
+            tabu.add(e)
+        if not progressed:
+            req.clear(); req.update(base); cur = total(); break
+    # add the remaining true requirements as lines wherever they fit
+    tree(ch, extra_edges=False, req=req)
+    tree_edges = {q.key: list(q.deps) for q in ch.quests}
+    added = 0
+    ch._full = truth
+    extra = [(d, k) for k in byk for d in truth[k] if d not in tree_edges[k] and byk[d].kind != 'tip']
+    order = {q.key: i for i, q in enumerate(ch.quests)}
+    extra.sort(key=lambda e: (e[0] not in byk[e[1]].deps0, abs(byk[e[0]].x - byk[e[1]].x), order[e[1]]))
+    for d, k in extra:
+        if d in byk[k].deps: continue
+        byk[k].deps.append(d)
+        if conflicts(ch): byk[k].deps.remove(d)
+        else: added += 1
+    return cur, added
+
+
+def clean_multi(ch, layout, seeds=12):
+    byk = {q.key: q for q in ch.quests}
+    start = {k: list(q.deps) for k, q in byk.items()}
+    best = None
+    for sd in [None] + list(range(1, seeds)):
+        for k, d in start.items(): byk[k].deps = list(d)
+        n, left = clean(ch, layout, seed=sd)
+        if best is None or left < best[0]: best = (left, {k: list(q.deps) for k, q in byk.items()})
+        if left == 0: break
+    for k, d in best[1].items(): byk[k].deps = list(d)
+    layout(ch)
+    return len(conflicts(ch))
