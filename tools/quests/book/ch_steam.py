@@ -274,29 +274,33 @@ q('hull', '&b&lElectricity', ['gtceu:lv_machine_hull'], [
     'This is the end of the Steam Age, though not of steam: your boilers will power your first generator. Open &bTier 1 - LV&r.',
 ], ['circuit', 'lv_casing', 'lv_motor', 'stone/wrought'], at=(34, 0), kind='hub', bag='lv')
 
-# ---------------------------------------------------------------- layout (kept apart from the content)
-POS = {
-    'boiler': (1, 0), 'explode': (-1, -1.5), 'water': (-1, 0), 'pump': (-1, 1.5), 'drum': (-2.5, 1.5), 'vent': (1, 2.2),
-    'macerator': (3.5, -1.5), 'hammer': (5, -1.5), 'compressor': (6.5, -1.5), 'extractor': (8, -1.5),
-    'alloy': (3.5, 1.5), 'furnace': (5, 1.5), 'crusher': (6.5, 1.5),
-    'ores': (5.5, 5), 'wash': (3.5, 4.3), 'dust': (3.5, 5.8), 'forge_ore': (7.5, 4.3), 'byproduct': (7.5, 5.8),
-    'silver': (1.5, 6.5), 'solar': (0, 6.5), 'liquid': (-1, 4.8), 'large_solar': (0, 8.5), 'cactus': (-1.5, 8.5),
-    'fireclay': (9.5, -3), 'firebricks': (11, -3), 'pbf': (12.5, -1.5), 'pbf_tips': (12.5, 0.6), 'steel': (14.5, -1.5),
-    'mold': (14.5, 0.6), 'hp_boiler': (16, -3), 'hp_machines': (17.7, -3),
-    'alloys': (10.5, 5), 'stronze': (12.5, 4.2), 'breel': (12.5, 5.8), 'brass': (10.5, 7), 'clay_compound': (12.5, 7.6),
-    'motor': (16, 5), 'piston': (14.5, 7.6), 'arm': (14.5, 9.1), 'conveyor': (16, 9.1), 'hydraulic_pump': (17.5, 7.6),
-    'regulator': (17.5, 9.1), 'precision': (17.8, 4.2),
-    'multis': (21.5, 5), 'grinder': (20, 3), 'oven': (21.5, 3), 'superheater': (23, 3), 'infernal': (24.5, 3),
-    'large_furnace': (20, 7), 'large_crusher': (21.5, 7), 'large_compressor': (23, 7), 'thermal': (20, 8.5), 'bending': (21.5, 8.5),
-    'cobbler': (23, 8.5), 'woodcutter': (24.5, 8.5), 'manufacturer': (24.7, 5), 'big_bus': (24.5, 7),
-    'nether': (27, -4.5), 'sulfur': (28.5, -4.5), 'rubber': (30, -4.5), 'cable': (31.7, -4.5), 'red_alloy': (30, -3),
-    'glass_tube': (27, -1.5), 'vacuum': (28.5, -1.5), 'board': (27, 0), 'resistor': (28.5, 0), 'circuit': (30.5, -0.5),
-    'magnet': (27, 1.5), 'lv_motor': (28.5, 1.5), 'lv_casing': (31.7, 1.5), 'hull': (33.5, -0.5),
-}
-# cross-area links: the dependency still counts, the line is hidden so the page stays readable
-HIDE = {'nether', 'cactus', 'large_solar', 'silver', 'infernal', 'conveyor', 'board', 'magnet', 'lv_casing', 'glass_tube',
-        'precision', 'hydraulic_pump', 'regulator', 'stronze', 'breel', 'mold', 'hp_boiler', 'woodcutter'}
-for _q in C.quests:
-    k = _q.key.split('/', 1)[1]
-    if k in POS: _q.x, _q.y = map(float, POS[k])
-    if k in HIDE: _q.hide = True
+# ---------------------------------------------------------------- layout: one path, side quests beside it
+from fw import layout
+layout(C, rows=[
+    ['boiler', 'alloy', 'hammer', 'macerator', 'ores', 'compressor', 'firebricks'],
+    ['pbf', 'steel', 'mold', 'alloys', 'stronze', 'motor', 'precision'],
+    ['multis', 'grinder', 'superheater', 'manufacturer', 'nether', 'rubber', 'cable'],
+    ['vacuum', 'resistor', 'circuit', 'hull'],
+], hubs={'boiler', 'hull'}, sats={
+    'boiler': ['explode', 'water', 'pump', 'drum', 'vent', 'liquid'],
+    'alloy': ['furnace'],
+    'hammer': ['forge_ore'],
+    'macerator': ['extractor', 'crusher'],
+    'ores': ['wash', 'dust', 'byproduct', 'silver', 'solar'],
+    'compressor': ['fireclay'],
+    'pbf': ['pbf_tips'],
+    'steel': ['hp_boiler', 'hp_machines'],
+    'alloys': ['brass', 'clay_compound'],
+    'stronze': ['breel'],
+    'motor': ['piston', 'arm', 'conveyor', 'hydraulic_pump', 'regulator'],
+    'precision': ['large_solar'],
+    'multis': ['oven', 'big_bus'],
+    'grinder': ['large_crusher', 'large_furnace', 'thermal'],
+    'superheater': ['cobbler', 'cactus'],
+    'manufacturer': ['large_compressor', 'bending', 'woodcutter'],
+    'nether': ['sulfur', 'infernal'],
+    'rubber': ['red_alloy'],
+    'vacuum': ['glass_tube'],
+    'resistor': ['board'],
+    'circuit': ['magnet', 'lv_motor', 'lv_casing'],
+})

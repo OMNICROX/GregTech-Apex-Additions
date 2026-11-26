@@ -18,7 +18,7 @@ from core import hid, table_hex, to_snbt, Long, Dbl, NAMES, name, exists  # noqa
 TN = ['ULV', 'LV', 'MV', 'HV', 'EV', 'IV', 'LuV', 'ZPM', 'UV', 'UHV', 'UEV', 'UIV', 'UXV', 'OpV', 'MAX']
 TP = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max']
 MISSING, ERRORS = [], []
-KIND = {'hub': (2.0, 'gear'), 'main': (1.5, 'hexagon'), 'quest': (1.0, None), 'opt': (1.0, 'square'), 'tip': (1.0, 'rsquare')}
+KIND = {'hub': (3.0, 'gear'), 'main': (2.0, 'hexagon'), 'quest': (1.0, None), 'opt': (1.0, 'square'), 'tip': (1.0, 'rsquare')}
 
 
 class Q:
@@ -135,3 +135,53 @@ def overlaps(ch):
             r = (KIND[a.kind][0] + KIND[b.kind][0]) / 2 * 0.95
             if abs(a.x - b.x) < r and abs(a.y - b.y) < r: out.append((a.key, b.key))
     return out
+
+
+# ---------------------------------------------------------------- GTNH-style layout
+SLOTS = [(1.75, -1.5), (1.75, 1.5), (-1.75, -1.5), (-1.75, 1.5),      # beside the main quest
+         (2.85, -1.5), (2.85, 1.5), (-2.85, -1.5), (-2.85, 1.5),      # one further out
+         (0, -2.1), (0, 2.1), (1.75, -2.6), (-1.75, -2.6), (1.75, 2.6), (-1.75, 2.6)]
+
+
+def layout(ch, rows, sats, col=5.5, row=4.0, hubs=(), extra=None, keep_cross=()):
+    """rows: lists of main-quest keys; rows snake (left to right, then right to left...). Each main quest
+    depends on the one before it, so the main line reads as one path. sats: {main: [side quest keys]}: side
+    quests sit right beside their main quest and depend on it (and on side quests of the same main they list).
+    extra: {key: [deps]} extra dependencies to keep. keep_cross: side quests whose own dependencies are kept."""
+    extra = extra or {}
+    full = lambda k: k if '/' in k else f'{ch.key}/{k}'
+    byk = {q.key: q for q in ch.quests}
+    order = []
+    for r, keys in enumerate(rows):
+        cols = list(range(len(keys)))
+        if r % 2: cols = [max(len(rr) for rr in rows) - 1 - c for c in cols]
+        for c, k in zip(cols, keys):
+            q = byk[full(k)]
+            q.x, q.y = c * col, r * row
+            q.kind = 'hub' if k in hubs else 'main'
+            order.append(q)
+    first_deps = [d for d in order[0].deps if not d.startswith(ch.key + '/')]
+    for i, q in enumerate(order):
+        q.deps = (first_deps if i == 0 else [order[i - 1].key]) + [full(d) for d in extra.get(q.key.split('/', 1)[1], [])]
+        q.hide = False
+    taken = [(q.x, q.y, KIND[q.kind][0]) for q in order]
+    placed = set(q.key for q in order)
+    for m, keys in sats.items():
+        mq = byk[full(m)]
+        own = set(full(k) for k in keys)
+        for k in keys:
+            q = byk[full(k)]
+            if q.kind in ('hub', 'main'): q.kind = 'quest'
+            if q.key not in [full(x) for x in keep_cross]:
+                q.deps = [mq.key]
+            for dx, dy in SLOTS:
+                x, y = mq.x + dx, mq.y + dy
+                if all(abs(x - tx) >= (1 + ts) / 2 + 0.05 or abs(y - ty) >= (1 + ts) / 2 + 0.05 for tx, ty, ts in taken):
+                    q.x, q.y = x, y
+                    taken.append((x, y, 1.0))
+                    break
+            else:
+                ERRORS.append(f'no room next to {m} for {k}')
+            placed.add(q.key)
+    for q in ch.quests:
+        if q.key not in placed: ERRORS.append(f'not laid out: {q.key}')

@@ -204,18 +204,19 @@ q('to_steam', '&6&lSteam Power', ['gtceu:lp_steam_solid_boiler'], [
     '> Read the Steam Age\'s first quest before you place this. Boilers explode.',
 ], ['casing', 'pipe'], at=(21.5, 0.5), kind='hub', bag='steam')
 
-# ---------------------------------------------------------------- layout
-POS = {
-    'fire': (5, 5), 'form': (3, 4.3), 'coke_brick': (3, 5.8), 'coke_oven': (4.5, 7.5), 'creosote': (6.5, 7), 'treated': (8, 7),
-    'coke': (6.5, 8.5), 'hatch': (4.5, 9.3), 'kiln': (6.5, 10), 'wrought': (7, 4.3),
-    'stone_furnace': (1, 6), 'iron_furnace': (1, 7.5), 'chests': (1, 9),
-    'veins': (12, -4), 'copper_tin': (14.5, -5.5), 'iron': (12, -7), 'coal': (10, -6.5), 'galena': (9.5, -4),
-    'nickel': (10, -1.5), 'deep': (12, -1.2), 'salts': (14.3, -2.3), 'resin': (13.8, -8.3),
-    'bronze': (17, -4), 'bronze_tools': (17, -6), 'casing': (17, -1), 'pipe': (18.7, -2.5), 'to_steam': (20.5, -1),
-    'tinkers': (8.5, 2.3),
-}
-HIDE = set()
-for _q in C.quests:
-    k = _q.key.split('/', 1)[1]
-    if k in POS: _q.x, _q.y = map(float, POS[k])
-    if k in HIDE: _q.hide = True
+# ---------------------------------------------------------------- layout: one path, side quests beside it
+from fw import layout
+layout(C, rows=[
+    ['begin', 'tools', 'plates', 'veins', 'copper_tin', 'bronze'],
+    ['fire', 'coke_brick', 'coke_oven', 'coke', 'casing', 'to_steam'],
+], hubs={'begin', 'to_steam'}, sats={
+    'begin': ['wood', 'flint', 'claim', 'map', 'grave', 'night'],
+    'tools': ['mortar', 'file', 'wrench', 'saw', 'screwdriver', 'knife', 'cutter'],
+    'plates': ['tinkers', 'backpack', 'food', 'compass'],
+    'veins': ['coal', 'iron', 'galena', 'nickel', 'deep', 'salts'],
+    'copper_tin': ['resin'],
+    'bronze': ['bronze_tools'],
+    'fire': ['form', 'wrought', 'stone_furnace', 'iron_furnace', 'chests'],
+    'coke_oven': ['hatch', 'creosote', 'treated', 'kiln'],
+    'casing': ['pipe'],
+})
