@@ -44,6 +44,7 @@ class Chapter:
     def q(self, key, *a, **k):
         q = Q(f'{self.key}/{key}', *a, **k)
         q.deps = [d if '/' in d else f'{self.key}/{d}' for d in q.deps]
+        q.deps0 = list(q.deps)
         self.quests.append(q)
         return q
 

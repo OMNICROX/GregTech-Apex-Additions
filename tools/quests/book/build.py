@@ -42,18 +42,16 @@ def render(ch, path):
 
 def main():
     chapters = [importlib.import_module(m).C for m in CHAPTERS]
-    # transitive reduction: drop a dependency another dependency already implies (fewer, clearer lines)
+    # links from the recipes, merged with the hand-written ones, then reduced and laid out as a flow
+    import rgraph2, flow
     allq = {q.key: q for ch in chapters for q in ch.quests}
-    from functools import lru_cache
-    @lru_cache(None)
-    def anc(k):
-        out = set()
-        for d in allq[k].deps if k in allq else []:
-            out.add(d); out |= anc(d)
-        return frozenset(out)
-    for q in allq.values():
-        if q.any_dep: continue
-        q.deps = [d for d in q.deps if not any(d in anc(o) for o in q.deps if o != d)]
+    items = {k: [t.split('*')[0] for t in q.tasks if ':' in t and t.split(':')[0] not in ('dim', 'kill', 'structure')]
+             for k, q in allq.items()}
+    derived = rgraph2.derive(list(allq), lambda k: items[k])
+    flow.merge_deps(chapters, derived)
+    flow.reduce(allq)
+    for ch in chapters:
+        print(ch.key, 'crossings', flow.flow(ch))
     idmap = {}
     for ch in chapters:
         for q in ch.quests:
