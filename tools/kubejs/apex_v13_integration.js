@@ -62,8 +62,7 @@ const APEX_V13 = {
 
   // [mod item, GT tag that replaces it in every recipe, GT item it converts into]
   METALS: [
-    ['chaospersists:ingottitanium', 'forge:ingots/titanium', 'gtceu:titanium_ingot'],
-    ['chaospersists:ingoturanium', 'forge:ingots/uranium', 'gtceu:uranium_ingot'],
+    // (Chaos Persists' titanium and uranium stay its own: they don't turn into GregTech's)
     ['chaospersists:ruby', 'forge:gems/ruby', 'gtceu:ruby_gem'],
     ['corewithstuff:lead_ingot', 'forge:ingots/lead', 'gtceu:lead_ingot'],
     ['corewithstuff:silver_ingot', 'forge:ingots/silver', 'gtceu:silver_ingot'],

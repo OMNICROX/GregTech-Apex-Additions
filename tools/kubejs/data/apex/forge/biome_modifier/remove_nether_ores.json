@@ -1,0 +1,17 @@
+{
+  "type": "forge:remove_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "draconicevolution:nether_draconium_ore",
+    "tconstruct:cobalt_ore_large",
+    "tconstruct:cobalt_ore_small",
+    "tic3nh:ardite_ore",
+    "tic3nh:ardite_ore_mid",
+    "tinkers_thinking:ardite_ore_large",
+    "tinkers_thinking:ardite_ore_small",
+    "gravecore:nether_palladium_ore_placed",
+    "sgjourney:ore_naquadah_nether",
+    "sgjourney:ore_trinium",
+    "sgjourney:blackstone_naquadah_spire"
+  ]
+}

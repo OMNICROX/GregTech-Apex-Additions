@@ -1,0 +1,31 @@
+{
+  "type": "forge:remove_features",
+  "biomes": [
+    "sgjourney:abydos_desert",
+    "sgjourney:abydos_oasis",
+    "sgjourney:abydos_spires",
+    "sgjourney:athos_forest",
+    "sgjourney:cavum_tenebrae_shattered_crust",
+    "sgjourney:chulak_forest",
+    "sgjourney:chulak_plains",
+    "sgjourney:destiny",
+    "sgjourney:lantean_deep_ocean",
+    "sgjourney:milky_way_forest",
+    "sgjourney:milky_way_plains",
+    "sgjourney:rima_cracks",
+    "sgjourney:rima_shattered_plains",
+    "sgjourney:tollan_basalt_deltas",
+    "sgjourney:tollan_volcanic_mountains",
+    "sgjourney:tollan_wasteland",
+    "sgjourney:unitas_desert"
+  ],
+  "features": [
+    "sgjourney:ore_naquadah",
+    "sgjourney:ore_naquadah_extra",
+    "sgjourney:ore_naquadah_nether",
+    "sgjourney:ore_trinium",
+    "sgjourney:abydos_naquadah_spire",
+    "sgjourney:stone_naquadah_spire",
+    "sgjourney:blackstone_naquadah_spire"
+  ]
+}
