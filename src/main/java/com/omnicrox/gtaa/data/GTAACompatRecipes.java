@@ -68,6 +68,7 @@ public final class GTAACompatRecipes {
         godforge(provider);
         apexGate(provider);
         manaBloom(provider);
+        godforgeStarter(provider);
         maxwellCats(provider);
     }
 
@@ -380,6 +381,34 @@ public final class GTAACompatRecipes {
     }
 
     /** Mana Bloom Leaves: the Great Mana Tree's canopy in the Mana Nexus */
+    /**
+     * The Forge of the Gods chain had no start: Celestial Tungsten Plasma only came from the Forge's own Plasma module,
+     * and building the Forge needs Creon, which needs that plasma. Two starter routes, both slower than the Godforge:
+     * the Dimensionally Transcendent Plasma Forge (UIV, 1 min) and Fusion Reactor MK V (UEV, 5 min, 10B EU to start).
+     */
+    private static void godforgeStarter(Consumer<FinishedRecipe> provider) {
+        var mat = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:celestial_tungsten");
+        if (mat == null || mat.isNull()) return;
+        var plasma = mat.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, 144);
+        var molten = mat.getFluid(144);
+        var dtpf = com.gregtechceu.gtceu.api.registry.GTRegistries.RECIPE_TYPES.get(
+                new net.minecraft.resources.ResourceLocation("gtna", "plasma_forge"));
+        if (dtpf != null && plasma != null && !plasma.isEmpty())
+            dtpf.recipeBuilder("gtapexadditions:godforge_starter/celestial_tungsten_plasma")
+                    .inputItems(dust, mat)
+                    .inputFluids(GTMaterials.Neutronium.getFluid(144))
+                    .outputFluids(plasma)
+                    .duration(1200).EUt(VA[UIV]).blastFurnaceTemp(10800)
+                    .save(provider);
+        if (plasma != null && !plasma.isEmpty() && molten != null && !molten.isEmpty())
+            FUSION_RECIPES.recipeBuilder("gtapexadditions:godforge_starter/celestial_tungsten_plasma_fusion")
+                    .inputFluids(molten)
+                    .inputFluids(GTMaterials.Helium3.getFluid(500))
+                    .outputFluids(plasma)
+                    .duration(6000).EUt(VA[UEV]).fusionStartEU(10_000_000_000L)
+                    .save(provider);
+    }
+
     private static void manaBloom(Consumer<FinishedRecipe> provider) {
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mana_bloom_leaves")
                 .inputItems(net.minecraft.tags.ItemTags.LEAVES, 32)

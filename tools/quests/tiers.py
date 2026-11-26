@@ -1,5 +1,5 @@
 """Earliest voltage tier for every item from the pack's recipe dump (kubejs apex_quest_dump.js)."""
-import json, re, collections, sys
+import json, re, collections, sys, os
 S = '/tmp/claude-0/-home-claude/e2e2a1ea-2802-5c5f-8206-9605d72f9e6a/scratchpad/'
 R = json.load(open(S + 'apex_quest_recipes.json'))['recipes']; I = json.load(open(S + 'apex_quest_items.json'))
 NAMES = dict(I['items'])
@@ -19,22 +19,38 @@ for r in R:
 def recycling(r):
     """arc furnace / macerator / extractor turning a finished part back into its materials"""
     if r['t'] not in ('gtceu:arc_furnace', 'gtceu:macerator', 'gtceu:extractor', 'gtna:liquefaction_furnace'): return False
+    if not re.search(r'/(arc|macerate|extract)_', r['id']): return False
     return any(a and (a[0] in MADE or a[0] not in ALL_OUT) for a in r['i'])
 # Tinkers casting/melting: the dump has no fluids for them, and apex_tinkers_heat gates the melting by smeltery fuel
 R = [r for r in R if not recycling(r) and not r['t'].startswith('tconstruct:')]
+# sources the pack has since removed (ores taken out of worldgen, links cut)
+R = [r for r in R if not r['id'].startswith('apex:v13/unify/chaospersists_')]
+# repairs and upgrades that need the item itself don't make it
+R = [r for r in R if not any(o in a for o in r['o'] for a in r['i'])]
+UNAVAILABLE = re.compile(r'^(sgjourney:.*(ore|raw_naquadah|raw_trinium|naquadah_nugget|trinium_nugget|naquadah_iron_nugget)|gravecore:.*(ore|raw_palladium)|grave\.core:titanium_)')
+# what the pack also has that the dump can't see: Pure Daisy turns stone/wood in the world
+R.append({'id': 'synthetic:pure_daisy', 't': 'botania:pure_daisy', 'i': [], 'o': ['botania:livingrock', 'botania:livingwood_log'], 'fi': [], 'fo': [], 'tier': 0})
+for extra in json.load(open(S + 'extra_recipes.json')) if os.path.exists(S + 'extra_recipes.json') else []:
+    R.append(extra)
 producible = set(o for r in R for o in r['o'])
 fluid_made = set(f for r in R for f in r['fo'])
 ftier = collections.defaultdict(lambda: INF)
 tier = collections.defaultdict(lambda: INF)
 for it in NAMES:
-    if it not in producible: tier[it] = 0
+    if it not in producible and not UNAVAILABLE.search(it): tier[it] = 0
 types = set(r['t'] for r in R)
 def machines_for(t):
     ns, name = t.split(':')
     alts = [name, name.replace('_recipes', '')]
     pat = re.compile(r'(?:(?:lp|hp|' + '|'.join(PREF) + r')_)?(?:steam_)?(' + '|'.join(map(re.escape, alts)) + r')')
     return [i for i in NAMES if pat.fullmatch(i.split(':')[1])]
-TYPE_M = {t: machines_for(t) for t in types if not t.startswith('minecraft:')}
+TYPE_M = {}
+for m in json.load(open(S + 'apex_machines.json'))['machines']:
+    for t in m['types']:
+        TYPE_M.setdefault(t, []).append(m['id'])
+for t in types:
+    if t.startswith('minecraft:') or t in TYPE_M: continue
+    # other mods' recipe types are treated like crafting stations (no voltage)
 VANILLA_FREE = lambda t: t.startswith('minecraft:') or t in ('gtceu:crafting_shaped_strict',)
 def need(r, tt):
     n = r.get('tier', 0)
