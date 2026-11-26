@@ -26,7 +26,9 @@ public final class GTAAGTNHRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
         rockBreaker(provider);
+        superWater(provider);
         controllers(provider);
+        tstControllers(provider);
         parts(provider);
     }
 
@@ -182,4 +184,39 @@ public final class GTAAGTNHRecipes {
                 .inputItems(CustomTags.UV_CIRCUITS, 2)
                 .outputItems(GTAAItems.BLACK_HOLE_COLLAPSER.asStack()).duration(400).EUt(VA[UV]).save(provider);
     }
+    private static void superWater(Consumer<FinishedRecipe> provider) {
+        for (int g = 1; g <= 8; g++) {
+            GTAARecipeTypes.SUPER_WATER_PURIFIER.recipeBuilder("gtapexadditions:super_water_purifier/grade_" + g)
+                    .circuitMeta(g)
+                    .inputFluids(GTMaterials.DistilledWater.getFluid(1000))
+                    .outputFluids(com.omnicrox.gtaa.common.data.GTAAMaterials.pw(g, 1000))
+                    .duration(400).EUt(VA[UHV]).save(provider);
+        }
+    }
+
+    /** controllers of the Twist Space Technology ports */
+    private static void tstControllers(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:silicon_rock_synthesizer")
+                .inputItems(GTAAGTNHMachines.INDUSTRIAL_ROCK_BREAKER.asStack(4))
+                .inputItems(GTItems.ELECTRIC_PISTON_IV, 8)
+                .inputItems(GTItems.ELECTRIC_PUMP_IV, 4)
+                .inputItems(CustomTags.IV_CIRCUITS, 4)
+                .inputItems(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.asItem(), 16)
+                .inputItems(frameGt, GTMaterials.TungstenSteel, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                .outputItems(GTAAGTNHMachines.SILICON_ROCK_SYNTHESIZER.asStack())
+                .duration(1200).EUt(VA[IV]).save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:super_water_purifier")
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAMachines.PURIFICATION_PLANT.asStack(1))
+                .inputItems(GTItems.ELECTRIC_PUMP_UHV, 8)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(GTAABlocks.PUR_NAQUADAH_CASING.asItem(), 32)
+                .inputItems(GTAABlocks.PUR_PLASMA_HEATING_CASING.asItem(), 3)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .outputItems(GTAAGTNHMachines.SUPER_WATER_PURIFIER.asStack())
+                .duration(2400).EUt(VA[UHV]).save(provider);
+    }
+
 }

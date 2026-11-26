@@ -29,6 +29,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType PURIFICATION_PLANT;
     public static GTRecipeType ENTITY_CRUSHER;
     public static GTRecipeType INDUSTRIAL_ROCK_BREAKER;
+    public static GTRecipeType SUPER_WATER_PURIFIER;
     public static GTRecipeType ELECTRIC_IMPLOSION;
     public static GTRecipeType NEUTRONIUM_COMPRESSION;
     public static GTRecipeType CULTIVATION;
@@ -120,6 +121,10 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(2, 1, 0, 0)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MACERATE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
+        SUPER_WATER_PURIFIER = register("super_water_purifier", "multiblock", "Super Water Purifier")
+                .setMaxIOSize(1, 0, 1, 1)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
         ELECTRIC_IMPLOSION = register("electric_implosion", "multiblock", "Electric Implosion Compressor")
                 .setMaxIOSize(6, 2, 1, 0)
                 .setEUIO(IO.IN)

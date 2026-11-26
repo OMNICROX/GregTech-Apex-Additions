@@ -22,6 +22,8 @@ import com.omnicrox.gtaa.common.machine.multiblock.gtnh.ElectricImplosionCompres
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.MiracleTopMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.NanochipAssemblyComplexMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.PlasmaForgePrototypeMachine;
+import com.omnicrox.gtaa.common.machine.multiblock.tst.SiliconRockSynthesizerMachine;
+import com.omnicrox.gtaa.common.data.GTAABlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -315,4 +317,83 @@ public final class GTAAGTNHMachines {
             .register();
 
     public static void init() {}
+    // ---------------- Silicon Rock Synthesizer (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition SILICON_ROCK_SYNTHESIZER = REGISTRATE
+            .multiblock("silicon_rock_synthesizer", SiliconRockSynthesizerMachine::new)
+            .langValue("Silicon Rock Synthesizer")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.INDUSTRIAL_ROCK_BREAKER)
+            .recipeModifiers(SiliconRockSynthesizerMachine::recipeModifier)
+            .tooltips(
+                    Component.literal("§7Machine Type: §eRock Breaker"),
+                    Component.literal("§fHey, I heard you come from a sky island?"),
+                    Component.literal("§7Runs every §eIndustrial Rock Breaker§7 recipe (circuit picks the block)"),
+                    Component.literal("§b4 parallels§7, x4 per voltage tier above LV"),
+                    Component.literal("§7Output §ax4§7; with §91000 mB water§7 and §c1000 mB lava§7 in the hatches, §6x1024"),
+                    Component.literal("§7(the water and lava are not used up)"),
+                    Component.literal("§8Ported from Twist Space Technology (GTNH addon)"))
+            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .aisle("CCC~CCC", "CFFFFFC", "CFGGGFC", "CFFFFFC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CF###FC", "CG###GC", "CF###FC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CF###FC", "CG###GC", "CF###FC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CFFFFFC", "CFGGGFC", "CFFFFFC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', io(c, 80))
+                        .where('F', frames(com.gregtechceu.gtceu.common.data.GTMaterials.TungstenSteel))
+                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
+                    GTAA.id("block/multiblock/industrial_rock_breaker")))
+            .register();
+
+    // ---------------- Super Water Purifier (Twist Space Technology) ----------------
+    public static int superWaterParallel(com.gregtechceu.gtceu.api.machine.MetaMachine m) {
+        int over = Math.max(0, GTAAModifiers.tier(m) - com.gregtechceu.gtceu.api.GTValues.UHV);
+        return (int) Math.min(2_000_000L, 256L << (2L * Math.min(10, over)));
+    }
+
+    public static final MultiblockMachineDefinition SUPER_WATER_PURIFIER = REGISTRATE
+            .multiblock("super_water_purifier", WorkableElectricMultiblockMachine::new)
+            .langValue("Super Water Purifier")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.SUPER_WATER_PURIFIER)
+            .recipeModifiers(GTAAModifiers.parallel(GTAAGTNHMachines::superWaterParallel, m -> 1.0, 1.0),
+                    GTRecipeModifiers.OC_NON_PERFECT)
+            .tooltips(
+                    Component.literal("§7Machine Type: §ePerfect Water Creator"),
+                    Component.literal("§7Makes every grade of §bpurified water§7 in one machine, no units needed"),
+                    Component.literal("§7A §eProgrammed Circuit§7 picks the grade (1-8)"),
+                    Component.literal("§b256 parallels§7 at UHV, x4 per tier above, up to §b2,000,000"),
+                    Component.literal("§8Ported from Twist Space Technology (GTNH addon)"))
+            .appearanceBlock(GTAABlocks.PUR_NAQUADAH_CASING)
+            .pattern(definition -> {
+                var c = blocks(GTAABlocks.PUR_NAQUADAH_CASING.get());
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .aisle("CCC~CCC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CG###GC", "CG#P#GC", "CG#P#GC", "CG#P#GC", "CG###GC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CCCCCCC")
+                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', io(c, 120))
+                        .where('G', blocks(GTAABlocks.PUR_STERILE_CASING.get(), GTBlocks.FUSION_GLASS.get()))
+                        .where('P', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/pur_naquadah_casing"),
+                    gt("block/multiblock/distillation_tower")))
+            .register();
+
 }
