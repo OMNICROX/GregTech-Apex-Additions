@@ -30,8 +30,8 @@ def reduce(allq):
         q.deps = [d for d in q.deps if not any(d in anc(o) for o in q.deps if o != d)]
 
 
-def flow(ch, colw=3.7, gap=0.45, iters=40):
-    byk = {q.key: q for q in ch.quests}
+def flow(ch, colw=3.7, gap=0.45, iters=40, only=None):
+    byk = {q.key: q for q in ch.quests if only is None or q.key in only}
     par = {k: [d for d in byk[k].deps if d in byk] for k in byk}
     kids = collections.defaultdict(list)
     for k, ps in par.items():
@@ -238,3 +238,162 @@ def flow(ch, colw=3.7, gap=0.45, iters=40):
             byk[k].x, byk[k].y = mq.x + dx, mq.y + dy
         if len(ks) > len(slots): ERRORS.append(f'too many satellites on {m}')
     return best[0]
+
+
+def cluster(ch, center, pitch=2.0, iters=40000, seed=1, prune=True):
+    """GTNH 'Welcome to Tier One' style: one line into a big centre quest, and everything that grows out of it
+    packed on a tight grid around it, placed so lines stay short and do not run over other quests."""
+    import random, math
+    rnd = random.Random(seed)
+    byk = {q.key: q for q in ch.quests}
+    center = f'{ch.key}/{center}'
+    kids = collections.defaultdict(list)
+    for q in ch.quests:
+        for d in q.deps:
+            if d in byk: kids[d].append(q.key)
+    # everything downstream of the centre
+    down, st = set(), [center]
+    while st:
+        for c in kids[st.pop()]:
+            if c not in down: down.add(c); st.append(c)
+    rest = [q.key for q in ch.quests if q.key not in down]
+    # one line into the cluster: inside it, quests only hang off each other and the centre
+    for k in down:
+        q = byk[k]
+        q.deps = [d for d in q.deps if d not in byk or d in down or d == center]
+        if not any(d in byk for d in q.deps): q.deps.append(center)
+    kids = collections.defaultdict(list)
+    for q in ch.quests:
+        for d in q.deps:
+            if d in byk: kids[d].append(q.key)
+    # trim the cluster's lines like flow() does: at most 2-3 links, keep the most recent ones
+    if prune:
+        from functools import lru_cache
+        @lru_cache(None)
+        def depth(k):
+            ps = [d for d in byk[k].deps if d in down]
+            return 1 + max([depth(d) for d in ps], default=0)
+        for k in down:
+            q = byk[k]
+            inner = sorted([d for d in q.deps if d in byk], key=lambda d: -(depth(d) if d in down else 0))
+            cap = 3 if q.kind in ('hub', 'main') else 2
+            for d in inner[cap:]: q.deps.remove(d)
+    flow(ch, only=set(rest))
+    cq = byk[center]
+    cq.kind = 'hub'
+    left = max(byk[k].x + KIND[byk[k].kind][0] / 2 for k in rest)
+    feeders = [d for d in cq.deps if d in byk]
+    cy = sum(byk[d].y for d in feeders) / len(feeders) if feeders else 0
+    nodes = sorted(down, key=lambda k: [q.key for q in ch.quests].index(k))
+    R = math.ceil(math.sqrt(len(nodes) + 1) / 2) + 1
+    fx = max((byk[d].x for d in feeders), default=left)
+    cx = fx + 4.5
+    H = 3
+    W = math.ceil(1.5 * len(nodes) / (2 * H + 1))
+    cells = [(i, j) for i in range(-1, W) for j in range(-H, H + 1) if (i, j) != (0, 0) and not (j == 0 and i < 0)]
+    # the centre's own big neighbours need room: hubs take one cell plus clear diagonal space by size alone
+    P = lambda c: (cx + c[0] * pitch, cy + c[1] * pitch)
+    from fw import _seg_dist as _sd
+    fedges = [(byk[a], byk[b]) for b in rest for a in byk[b].deps if a in byk and a in rest]
+    def clear(c):
+        x, y = P(c)
+        for k in rest:
+            q = byk[k]; s_ = KIND[q.kind][0]
+            if abs(x - q.x) < (s_ + 1.75) / 2 + 0.5 and abs(y - q.y) < (s_ + 1.75) / 2 + 0.3: return False
+        return all(_sd(x, y, a.x, a.y, b.x, b.y) > 1.3 for a, b in fedges)
+    cells = [c for c in cells if clear(c)]
+    while len(cells) < 1.4 * len(nodes):
+        W += 1
+        cells += [c for c in ((W - 1, j) for j in range(-H, H + 1)) if clear(c)]
+    cells.sort(key=lambda c: (c[0] ** 2 + c[1] ** 2, -c[0]))
+    pos = {k: (byk[k].x, byk[k].y) for k in rest}
+    pos[center] = (cx, cy)
+    # start: breadth-first from the centre, nearest cells first
+    from functools import lru_cache
+    @lru_cache(None)
+    def dd(k):
+        ps = [d for d in byk[k].deps if d in down]
+        return 1 + max([dd(d) for d in ps], default=0)
+    order = sorted(nodes, key=lambda k: (dd(k), byk[k].kind not in ('hub', 'main')))
+    cell = {k: cells[i] for i, k in enumerate(order)}
+    free = cells[len(order):]
+    edges = [(d, q.key) for q in ch.quests for d in q.deps if d in byk and (q.key in down or d in down)]
+    inc = collections.defaultdict(list)
+    for e in edges:
+        inc[e[0]].append(e); inc[e[1]].append(e)
+    def xy(k): return P(cell[k]) if k in cell else pos[k]
+    def seg_pen(a, b, skip):
+        (ax, ay), (bx, by) = xy(a), xy(b)
+        pen = 0
+        for k, c in cell.items():
+            if k in skip: continue
+            px, py = P(c)
+            if min(ax, bx) - 1 < px < max(ax, bx) + 1 and min(ay, by) - 1 < py < max(ay, by) + 1:
+                r = KIND[byk[k].kind][0] / 2 + 0.1
+                from fw import _seg_dist  # noqa
+                if _seg_dist(px, py, ax, ay, bx, by) < r: pen += 1
+        return pen
+    def ecost(e):
+        (ax, ay), (bx, by) = xy(e[0]), xy(e[1])
+        L = math.hypot(ax - bx, ay - by)
+        back = 0
+        if e[0] in cell and e[1] in cell:   # children sit further out than parents
+            ra = math.hypot(*cell[e[0]]); rb = math.hypot(*cell[e[1]])
+            back = max(0, ra - rb + 0.5) * 1.5
+        return L + back + 6 * seg_pen(e[0], e[1], set(e))
+    def node_block(k):   # lines from elsewhere that run over this quest
+        if k not in cell: return 0
+        px, py = P(cell[k]); r = KIND[byk[k].kind][0] / 2 + 0.1
+        from fw import _seg_dist
+        n = 0
+        for a, b in edges:
+            if k in (a, b): continue
+            (ax, ay), (bx, by) = xy(a), xy(b)
+            if min(ax, bx) - 1 < px < max(ax, bx) + 1 and min(ay, by) - 1 < py < max(ay, by) + 1 and _seg_dist(px, py, ax, ay, bx, by) < r: n += 1
+        return 6 * n
+    def big_clash(k):  # two big quests side by side squeeze; keep mains off each other's 8-neighbourhood a bit
+        if k not in cell or byk[k].kind not in ('hub', 'main'): return 0
+        i, j = cell[k]; n = 0
+        for o, (a, b) in cell.items():
+            if o != k and byk[o].kind in ('hub', 'main') and max(abs(a - i), abs(b - j)) == 1: n += 1
+        return 0.8 * n
+    def local(ks):
+        es = set(e for k in ks for e in inc[k])
+        return sum(ecost(e) for e in es) + sum(node_block(k) + big_clash(k) for k in ks)
+    T0 = 3.0
+    for it in range(iters):
+        T = T0 * (1 - it / iters) + 0.02
+        a = rnd.choice(nodes)
+        if rnd.random() < 0.3 and free:
+            fi = rnd.randrange(len(free))
+            before = local([a]); old = cell[a]; cell[a] = free[fi]
+            after = local([a])
+            if after <= before or rnd.random() < math.exp((before - after) / T): free[fi] = old
+            else: cell[a] = old
+        else:
+            b = rnd.choice(nodes)
+            if a == b: continue
+            before = local([a, b]); cell[a], cell[b] = cell[b], cell[a]
+            after = local([a, b])
+            if not (after <= before or rnd.random() < math.exp((before - after) / T)):
+                cell[a], cell[b] = cell[b], cell[a]
+    minx = min(P(cell[k])[0] - KIND[byk[k].kind][0] / 2 for k in nodes)
+    minx = min(minx, cx - KIND['hub'][0] / 2)
+    shift = 0
+    from fw import _seg_dist
+    flow_edges = [(byk[a], byk[b]) for b in rest for a in byk[b].deps if a in byk and a in rest]
+    def ok(sh):
+        pts = [(P(cell[k])[0] + sh, P(cell[k])[1], KIND[byk[k].kind][0]) for k in nodes] + [(cx + sh, cy, KIND['hub'][0])]
+        for k in rest:
+            q = byk[k]; s_ = KIND[q.kind][0]
+            for x, y, sz in pts:
+                if abs(x - q.x) < (s_ + sz) / 2 + 1.2 and abs(y - q.y) < (s_ + sz) / 2 + 0.6: return False
+        for a, b in flow_edges:
+            for x, y, sz in pts:
+                if _seg_dist(x, y, a.x, a.y, b.x, b.y) < sz / 2 + 0.4: return False
+        return True
+    cq.x, cq.y = cx + shift, cy
+    for k in nodes:
+        x, y = P(cell[k]); byk[k].x, byk[k].y = x + shift, y
+    tot = sum(seg_pen(a, b, {a, b}) for a, b in edges)
+    return tot
