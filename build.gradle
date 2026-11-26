@@ -39,7 +39,7 @@ legacyForge {
         }
         server {
             server()
-            jvmArguments.addAll('-Xmx5G')
+            jvmArguments.addAll('-Xmx4G')
         }
         data {
             data()

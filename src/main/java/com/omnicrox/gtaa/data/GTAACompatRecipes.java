@@ -69,6 +69,8 @@ public final class GTAACompatRecipes {
         apexGate(provider);
         manaBloom(provider);
         godforgeStarter(provider);
+        missingSources(provider);
+        topCircuits(provider);
         maxwellCats(provider);
     }
 
@@ -407,6 +409,51 @@ public final class GTAACompatRecipes {
                     .outputFluids(plasma)
                     .duration(6000).EUt(VA[UEV]).fusionStartEU(10_000_000_000L)
                     .save(provider);
+    }
+
+    /** sources for the elements GTAA gave dust forms (Rhenium, Erbium, Praseodymium) */
+    private static void missingSources(Consumer<FinishedRecipe> provider) {
+        CHEMICAL_RECIPES.recipeBuilder("gtapexadditions:missing/rhenium_from_molybdenite")
+                .inputItems(dust, GTMaterials.Molybdenite, 8)
+                .inputFluids(GTMaterials.Oxygen.getFluid(1000))
+                .outputItems(dust, GTMaterials.Rhenium)
+                .outputItems(dust, GTMaterials.Molybdenum, 4)
+                .outputFluids(GTMaterials.SulfurDioxide.getFluid(1000))
+                .duration(400).EUt(VA[IV]).save(provider);
+        ELECTROLYZER_RECIPES.recipeBuilder("gtapexadditions:missing/rare_earth_split")
+                .inputItems(dust, GTMaterials.RareEarth, 8)
+                .outputItems(dust, GTMaterials.Erbium)
+                .outputItems(dust, GTMaterials.Praseodymium)
+                .outputItems(dust, GTMaterials.Neodymium, 2)
+                .outputItems(dust, GTMaterials.Lanthanum, 2)
+                .duration(600).EUt(VA[EV]).save(provider);
+    }
+
+    /**
+     * There was no real OpV or MAX circuit (the only one was Extended Features' Universal Circuit, made from itself).
+     * OpV: Space Assembler from UXV circuits and UXV parts; MAX: from OpV circuits and OpV parts.
+     */
+    private static void topCircuits(Consumer<FinishedRecipe> provider) {
+        Item opv = BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("extendedfeatures", "opv_universal_circuit"));
+        Item max = BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("extendedfeatures", "max_universal_circuit"));
+        if (opv != Items.AIR)
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:circuits/opv")
+                    .inputItems(CustomTags.UXV_CIRCUITS, 2)
+                    .inputItems(GTItems.EMITTER_UXV.asStack(2))
+                    .inputItems(GTItems.SENSOR_UXV.asStack(2))
+                    .inputItems(foil, GTMaterials.Neutronium, 16)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(2304))
+                    .outputItems(new net.minecraft.world.item.ItemStack(opv))
+                    .duration(1200).EUt(VA[UXV]).save(provider);
+        if (max != Items.AIR)
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:circuits/max")
+                    .inputItems(CustomTags.OpV_CIRCUITS, 2)
+                    .inputItems(GTItems.EMITTER_OpV.asStack(2))
+                    .inputItems(GTItems.SENSOR_OpV.asStack(2))
+                    .inputItems(foil, GTMaterials.Neutronium, 64)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(4608))
+                    .outputItems(new net.minecraft.world.item.ItemStack(max))
+                    .duration(2400).EUt(VA[OpV]).save(provider);
     }
 
     private static void manaBloom(Consumer<FinishedRecipe> provider) {

@@ -131,6 +131,44 @@ public class GTAAMaterials {
         NAQUADAH_FUEL_DEPLETED[6] = NAQUADAH_FUEL_MKVI_DEPLETED;
     }
 
+    /**
+     * GregTech parts that GT Nexus Additions and our own endgame recipes ask for but GTCEu never generates (their tags
+     * were empty, so ~150 recipes could not be made: UHV/UEV motors and pistons, Fusion MK IV/V, the Plasma Forge...).
+     */
+    public static void addMissingForms() {
+        flags(GTMaterials.Neutronium, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_DENSE, MaterialFlags.GENERATE_RING,
+                MaterialFlags.GENERATE_SMALL_GEAR, MaterialFlags.GENERATE_SPRING, MaterialFlags.GENERATE_FOIL,
+                MaterialFlags.GENERATE_FINE_WIRE);
+        for (Material m : new Material[] { GTMaterials.Duranium, GTMaterials.HSSS, GTMaterials.Iridium, GTMaterials.Naquadah,
+                GTMaterials.Osmiridium, GTMaterials.Tritanium })
+            flags(m, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_DENSE);
+        flags(GTMaterials.RutheniumTriniumAmericiumNeutronate, MaterialFlags.GENERATE_FINE_WIRE);
+        flags(GTMaterials.VanadiumSteel, MaterialFlags.GENERATE_FRAME);
+        for (Material m : new Material[] { GTMaterials.Topaz, GTMaterials.BlueTopaz, GTMaterials.GreenSapphire })
+            flags(m, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_LENS);
+        // elements that only had a fluid
+        var DUST = com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.DUST;
+        var INGOT = com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.INGOT;
+        var BLAST = com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.BLAST;
+        for (Material m : new Material[] { GTMaterials.Erbium, GTMaterials.Praseodymium, GTMaterials.Rhenium })
+            if (!m.hasProperty(DUST)) m.setProperty(DUST, new com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty());
+        if (!GTMaterials.Rhenium.hasProperty(INGOT))
+            GTMaterials.Rhenium.setProperty(INGOT, new com.gregtechceu.gtceu.api.data.chemical.material.properties.IngotProperty());
+        if (!GTMaterials.Rhenium.hasProperty(BLAST))
+            GTMaterials.Rhenium.setProperty(BLAST, new com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty(
+                    3459, com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty.GasTier.HIGH));
+        flags(GTMaterials.Rhenium, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_FOIL, MaterialFlags.GENERATE_FRAME,
+                MaterialFlags.GENERATE_ROD);
+    }
+
+    private static void flags(Material m, com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag... f) {
+        try {
+            m.addFlags(f);
+        } catch (Throwable t) {
+            GTAA.LOGGER.warn("[GTAA] could not add flags to {}: {}", m.getName(), t.toString());
+        }
+    }
+
     /** Fluid forms GTCEu doesn't have but the MK IV / MK V fusion recipes need (added in PostMaterialEvent). */
     public static void addFusionFluids() {
         var L = com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.LIQUID;
