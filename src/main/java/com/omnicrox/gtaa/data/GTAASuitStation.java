@@ -46,7 +46,6 @@ public final class GTAASuitStation {
 
     public static void init(Consumer<FinishedRecipe> provider) {
         machines(provider);
-        apex(provider);
         JsonArray suits;
         try (InputStream in = GTAA.class.getResourceAsStream("/gtapexadditions/suit_station.json")) {
             if (in == null) return;
@@ -61,42 +60,6 @@ public final class GTAASuitStation {
             if (suit(provider, s)) made++;
         }
         if (made > 0) GTAA.LOGGER.info("[GTAA] Suit Fabrication Station: {} suits", made);
-    }
-
-    /**
-     * Endgame: tier-IV hero suits are broken down into Hero Cores, and twelve Hero Cores (plus the best GT has)
-     * make the Apex Ascension Suit. Ascension Forge only.
-     */
-    private static void apex(Consumer<FinishedRecipe> provider) {
-        GTAARecipeTypes.SUIT_FABRICATION.recipeBuilder(GTAA.id("apex/hero_core"))
-                .inputItems(TagKey.create(Registries.ITEM, GTAA.id("tier4_suit_chestplates")), 1)
-                .inputItems(plate, GTMaterials.Neutronium, 4)
-                .inputItems(GTItems.FIELD_GENERATOR_UHV)
-                .inputItems(CustomTags.UHV_CIRCUITS, 2)
-                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.HERO_CORE.asStack())
-                .addData("station_tier", 4).addData("suit_kit", "").addData("suit_origin", "")
-                .duration(20 * 60).EUt(VA[UHV]).save(provider);
-        Object[][] pieces = {
-                { com.omnicrox.gtaa.common.data.GTAAItems.APEX_HELMET, 2, GTItems.SENSOR_UEV, "helmet" },
-                { com.omnicrox.gtaa.common.data.GTAAItems.APEX_CHESTPLATE, 4, GTItems.FIELD_GENERATOR_UEV, "chestplate" },
-                { com.omnicrox.gtaa.common.data.GTAAItems.APEX_LEGGINGS, 4, GTItems.ELECTRIC_MOTOR_UEV, "leggings" },
-                { com.omnicrox.gtaa.common.data.GTAAItems.APEX_BOOTS, 2, GTItems.ELECTRIC_PISTON_UEV, "boots" } };
-        for (Object[] pc : pieces) {
-            var item = (com.tterrag.registrate.util.entry.ItemEntry<?>) pc[0];
-            int cores = (int) pc[1];
-            var b = GTAARecipeTypes.SUIT_FABRICATION.recipeBuilder(GTAA.id("apex/" + pc[3]))
-                    .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.HERO_CORE.asStack(cores))
-                    .inputItems(plateDense, GTMaterials.Neutronium, cores * 2)
-                    .inputItems((com.tterrag.registrate.util.entry.ItemEntry<?>) pc[2], 2)
-                    .inputItems(CustomTags.UEV_CIRCUITS, cores)
-                    .inputItems(GTItems.GRAVI_STAR, cores)
-                    .inputItems(Items.NETHER_STAR, cores);
-            var water = com.omnicrox.gtaa.common.data.GTAAMaterials.PURIFIED_WATER[8];
-            if (water != null && !water.isNull()) b.inputFluids(water.getFluid(1000 * cores));
-            b.outputItems(item.asStack())
-                    .addData("station_tier", 4).addData("suit_kit", "Apex Ascension").addData("suit_origin", "")
-                    .duration(20 * 300).EUt(VA[UEV]).save(provider);
-        }
     }
 
     private static Item item(String id) {

@@ -3,7 +3,6 @@ package com.omnicrox.gtaa.common.stargate;
 import com.omnicrox.gtaa.api.GTAAFormat;
 import com.omnicrox.gtaa.api.GTAAWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
-import com.omnicrox.gtaa.common.item.MaxwellItem;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -241,7 +240,7 @@ public final class ApexGateCharge extends SavedData {
             celebrate = 200;
             level.playSound(null, base.above(3), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 3f, 1f);
             for (ServerPlayer p : level.players())
-                if (p.position().distanceTo(c) <= 64) GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, MaxwellItem.stats(p)));
+                if (p.position().distanceTo(c) <= 64) GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, com.omnicrox.gtaa.common.stargate.AscensionCredits.stats(p)));
         }
         if (++intro >= INTRO_TICKS) {
             for (long l : horizon) {

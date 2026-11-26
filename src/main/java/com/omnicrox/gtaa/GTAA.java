@@ -42,14 +42,12 @@ public class GTAA {
         bus.addGenericListener(MachineDefinition.class, this::registerMachines);
         bus.addListener(this::commonSetup);
         com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
-        com.omnicrox.gtaa.common.item.ApexSuitItem.registerEvents();
         com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
         com.omnicrox.gtaa.common.entity.GTAAEntities.register(bus);
         com.omnicrox.gtaa.common.stargate.ApexStargate.registerEvents();
         com.omnicrox.gtaa.common.stargate.ApexGateCharge.registerEvents();
         com.omnicrox.gtaa.common.network.GTAANetwork.register();
         com.omnicrox.gtaa.common.item.StructureUpgrader.registerEvents();
-        com.omnicrox.gtaa.common.item.MaxwellItem.registerEvents();
         if (net.minecraftforge.fml.ModList.get().isLoaded("botania")) com.omnicrox.gtaa.common.compat.BotaniaCompat.init();
         if (net.minecraftforge.fml.ModList.get().isLoaded("botanicadds")) com.omnicrox.gtaa.common.compat.BotanicAdditionsCompat.init(bus);
         net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,

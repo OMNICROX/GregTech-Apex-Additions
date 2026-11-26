@@ -45,10 +45,6 @@ public class AscendingMaxwellRenderer extends EntityRenderer<AscendingMaxwellEnt
             BlockState s = BuiltInRegistries.BLOCK.get(AscendingMaxwellEntity.MAXWELL_BLOCK).defaultBlockState();
             Minecraft.getInstance().getBlockRenderer().renderSingleBlock(s, pose, buffers, flying ? 0xF000F0 : light,
                     OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
-        } else {
-            pose.translate(0.5, 0.3, 0.5);
-            Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(com.omnicrox.gtaa.common.data.GTAAItems.MAXWELL.get()),
-                    ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, pose, buffers, e.level(), e.getId());
         }
         pose.popPose();
         super.render(e, yaw, partial, pose, buffers, light);

@@ -12,7 +12,6 @@ import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.omnicrox.gtaa.api.GTAAWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
-import com.omnicrox.gtaa.common.item.MaxwellItem;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
 import com.omnicrox.gtaa.common.stargate.ApexStargate;
 import net.minecraft.ChatFormatting;
@@ -244,7 +243,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
             level.playSound(null, base.above(3), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 3f, 1f);
             for (ServerPlayer p : level.players()) {
                 if (p.position().distanceTo(c) > 64) continue;
-                GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, MaxwellItem.stats(p)));
+                GTAANetwork.send(p, new GTAANetwork.AscensionPacket(true, com.omnicrox.gtaa.common.stargate.AscensionCredits.stats(p)));
             }
         }
         if (++intro >= INTRO_TICKS) {

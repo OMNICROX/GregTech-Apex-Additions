@@ -460,7 +460,6 @@ public final class GTAACompatRecipes {
      */
     private static void topCircuits(Consumer<FinishedRecipe> provider) {
         Item opv = BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("extendedfeatures", "opv_universal_circuit"));
-        Item max = BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("extendedfeatures", "max_universal_circuit"));
         if (opv != Items.AIR)
             com.omnicrox.gtaa.common.data.GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:circuits/opv")
                     .inputItems(CustomTags.UXV_CIRCUITS, 2)
@@ -470,14 +469,14 @@ public final class GTAACompatRecipes {
                     .inputFluids(GTMaterials.SolderingAlloy.getFluid(2304))
                     .outputItems(new net.minecraft.world.item.ItemStack(opv))
                     .duration(1200).EUt(VA[UXV]).save(provider);
-        if (max != Items.AIR)
-            com.omnicrox.gtaa.common.data.GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:circuits/max")
+        // nothing in the pack made a MAX circuit (extendedfeatures stops at OpV): GTAA's own, for the MAX hatches
+        com.omnicrox.gtaa.common.data.GTAARecipeTypes.SPACE_ASSEMBLER.recipeBuilder("gtapexadditions:circuits/max")
                     .inputItems(CustomTags.OpV_CIRCUITS, 2)
                     .inputItems(GTItems.EMITTER_OpV.asStack(2))
                     .inputItems(GTItems.SENSOR_OpV.asStack(2))
                     .inputItems(foil, GTMaterials.Neutronium, 64)
                     .inputFluids(GTMaterials.SolderingAlloy.getFluid(4608))
-                    .outputItems(new net.minecraft.world.item.ItemStack(max))
+                    .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.MAX_CIRCUIT.asStack())
                     .duration(2400).EUt(VA[OpV]).save(provider);
     }
 

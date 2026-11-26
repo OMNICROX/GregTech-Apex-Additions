@@ -105,10 +105,8 @@ public class AscendingMaxwellEntity extends Entity {
             if (s.hasProperty(HorizontalDirectionalBlock.FACING)) s = s.setValue(HorizontalDirectionalBlock.FACING, facing().getOpposite());
             placed = level.setBlock(at, s, 3);
         }
-        if (!placed) {
-            ItemStack drop = block != null ? new ItemStack(block) : new ItemStack(com.omnicrox.gtaa.common.data.GTAAItems.MAXWELL.get());
-            level.addFreshEntity(new ItemEntity(level, getX(), getY(), getZ(), drop));
-        }
+        if (!placed && block != null)
+            level.addFreshEntity(new ItemEntity(level, getX(), getY(), getZ(), new ItemStack(block)));
         level.sendParticles(ParticleTypes.HEART, getX(), getY() + 0.5, getZ(), 10, 0.4, 0.3, 0.4, 0);
         level.playSound(null, at, SoundEvents.CAT_AMBIENT, SoundSource.NEUTRAL, 1.5f, 0.9f);
         discard();

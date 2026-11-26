@@ -71,34 +71,14 @@ public class GTAAItems {
         return REGISTRATE.item(id, p -> new com.omnicrox.gtaa.common.item.InfernalSigilItem(rank, p))
                 .lang(name).model(NonNullBiConsumer.noop()).register();
     }
-    public static final ItemEntry<Item> HERO_CORE = REGISTRATE
-            .<Item>item("hero_core", p -> new Item(p.rarity(net.minecraft.world.item.Rarity.EPIC)) {
-                @Override
-                public boolean isFoil(net.minecraft.world.item.ItemStack stack) {
-                    return true;
-                }
-            })
-            .lang("Hero Core").model(NonNullBiConsumer.noop()).register();
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.ApexSuitItem> APEX_HELMET = apex("apex_helmet", "Apex Ascension Helm",
-            net.minecraft.world.item.ArmorItem.Type.HELMET);
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.ApexSuitItem> APEX_CHESTPLATE = apex("apex_chestplate", "Apex Ascension Core",
-            net.minecraft.world.item.ArmorItem.Type.CHESTPLATE);
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.ApexSuitItem> APEX_LEGGINGS = apex("apex_leggings", "Apex Ascension Greaves",
-            net.minecraft.world.item.ArmorItem.Type.LEGGINGS);
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.ApexSuitItem> APEX_BOOTS = apex("apex_boots", "Apex Ascension Striders",
-            net.minecraft.world.item.ArmorItem.Type.BOOTS);
-
-    private static ItemEntry<com.omnicrox.gtaa.common.item.ApexSuitItem> apex(String id, String name,
-                                                                                net.minecraft.world.item.ArmorItem.Type type) {
-        return REGISTRATE.item(id, p -> new com.omnicrox.gtaa.common.item.ApexSuitItem(type, p))
-                .lang(name).model(NonNullBiConsumer.noop()).register();
-    }
     public static final ItemEntry<Item> QUARK_CREATION_CATALYST = REGISTRATE.item("quark_creation_catalyst", Item::new)
             .lang("Quark Creation Catalyst").model(NonNullBiConsumer.noop()).register();
 
-    public static final ItemEntry<com.omnicrox.gtaa.common.item.MaxwellItem> MAXWELL = REGISTRATE
-            .item("maxwell", com.omnicrox.gtaa.common.item.MaxwellItem::new)
-            .lang("Maxwell").model(NonNullBiConsumer.noop()).register();
+    /** the MAX circuit: GregTech has the tag but nothing in the pack made one (the MAX hatches need them) */
+    public static final ItemEntry<Item> MAX_CIRCUIT = REGISTRATE
+            .<Item>item("max_universal_circuit", p -> new Item(p.rarity(net.minecraft.world.item.Rarity.EPIC)))
+            .lang("MAX Universal Circuit").tag(com.gregtechceu.gtceu.data.recipe.CustomTags.MAX_CIRCUITS)
+            .model(NonNullBiConsumer.noop()).register();
 
     public static final ItemEntry<Item> SPIRE_LIGHTNING_ROD = REGISTRATE.item("spire_lightning_rod", Item::new)
             .lang("Spire Lightning Rod").model(NonNullBiConsumer.noop()).register();
