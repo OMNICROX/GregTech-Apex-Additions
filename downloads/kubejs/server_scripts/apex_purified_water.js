@@ -34,22 +34,21 @@ ServerEvents.recipes(event => {
   let made = 0
   Object.keys(APEX_PW_BOULES).forEach(boule => {
     let grade = APEX_PW_BOULES[boule]
-    let done = false
+    let hasOwn = false   // a recipe for this boule that already uses purified water (GTCA's own)
+    let template = null
     event.forEachRecipe({ type: 'gtceu:cutter' }, r => {
       let text = String(r.json.toString())
       if (text.indexOf('"' + boule + '"') < 0) return
-      let id = String(r.getId())
-      let json = JSON.parse(text)
-      if (apexPwSwap(JSON.parse(text).inputs, 'x') == 0) return // already purified water (GTCA's own)
-      event.remove({ id: id })
-      if (Platform.isLoaded('gtca')) return // GTCA adds its own purified water recipe for this boule
-      if (done) return
-      if (apexPwSwap(json.inputs, apexPwId(grade)) > 0) {
-        event.custom(json)
-        done = true
-        made++
-      }
+      if (apexPwSwap(JSON.parse(text).inputs, 'x') == 0) { hasOwn = true; return }
+      if (template == null) template = JSON.parse(text)
+      event.remove({ id: String(r.getId()) })
     })
+    // 1.2.1 fix: GTCA has no purified water recipe for these boules, so the old early return left
+    // naquadah and neutronium wafers uncraftable. Always add ours unless one already exists.
+    if (!hasOwn && template != null && apexPwSwap(template.inputs, apexPwId(grade)) > 0) {
+      event.custom(template)
+      made++
+    }
   })
   console.info(`[APEX-PW] ${made} boule cutting recipes now need purified water`)
 })
