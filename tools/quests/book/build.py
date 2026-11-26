@@ -8,7 +8,7 @@ import picks
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
-CHAPTERS = ['ch_stone', 'ch_steam']
+CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv']
 GROUPS = []   # side groups come later
 
 
