@@ -204,15 +204,20 @@ q('to_steam', '&6&lSteam Power', ['gtceu:lp_steam_solid_boiler'], [
     '> Read the Steam Age\'s first quest before you place this. Boilers explode.',
 ], ['casing', 'pipe'], at=(21.5, 0.5), kind='hub', bag='steam')
 
-# ---------------------------------------------------------------- layout: one path, side quests beside it
-from fw import layout
-layout(C, rows=[
-    ['begin', 'tools', 'plates', 'veins', 'copper_tin', 'bronze'],
-    ['fire', 'coke_brick', 'coke_oven', 'coke', 'casing', 'to_steam'],
-], hubs={'begin', 'to_steam'}, sats={
-    'begin': ['wood', 'flint', 'claim', 'map', 'grave', 'night'],
+# ---------------------------------------------------------------- layout: a compact tree, side quests tight around it
+from fw import place
+place(C, cells={
+    'begin': (0, 1), 'tools': (1, 0), 'plates': (2, 0),
+    'veins': (1, 1), 'copper_tin': (2, 1), 'bronze': (3, 1), 'casing': (4, 1), 'to_steam': (5, 1),
+    'fire': (1, 2), 'coke_brick': (2, 2), 'coke_oven': (3, 2), 'coke': (4, 2),
+}, deps={
+    'tools': ['begin'], 'plates': ['tools'], 'veins': ['begin'], 'copper_tin': ['veins'], 'bronze': ['copper_tin'],
+    'casing': ['bronze', 'plates'], 'to_steam': ['casing', 'coke'], 'fire': ['begin'], 'coke_brick': ['fire'],
+    'coke_oven': ['coke_brick'], 'coke': ['coke_oven'],
+}, hubs={'begin', 'to_steam'}, sats={
+    'begin': ['wood', 'flint', 'claim', 'map', 'grave', 'night', 'backpack', 'food', 'compass'],
     'tools': ['mortar', 'file', 'wrench', 'saw', 'screwdriver', 'knife', 'cutter'],
-    'plates': ['tinkers', 'backpack', 'food', 'compass'],
+    'plates': ['tinkers'],
     'veins': ['coal', 'iron', 'galena', 'nickel', 'deep', 'salts'],
     'copper_tin': ['resin'],
     'bronze': ['bronze_tools'],

@@ -18,7 +18,7 @@ from core import hid, table_hex, to_snbt, Long, Dbl, NAMES, name, exists  # noqa
 TN = ['ULV', 'LV', 'MV', 'HV', 'EV', 'IV', 'LuV', 'ZPM', 'UV', 'UHV', 'UEV', 'UIV', 'UXV', 'OpV', 'MAX']
 TP = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max']
 MISSING, ERRORS = [], []
-KIND = {'hub': (3.0, 'gear'), 'main': (2.0, 'hexagon'), 'quest': (1.0, None), 'opt': (1.0, 'square'), 'tip': (1.0, 'rsquare')}
+KIND = {'hub': (2.25, 'gear'), 'main': (1.75, 'square'), 'quest': (1.0, 'square'), 'opt': (1.0, 'circle'), 'tip': (1.0, 'rsquare')}
 
 
 class Q:
@@ -138,12 +138,11 @@ def overlaps(ch):
 
 
 # ---------------------------------------------------------------- GTNH-style layout
-SLOTS = [(1.75, -1.5), (1.75, 1.5), (-1.75, -1.5), (-1.75, 1.5),      # beside the main quest
-         (2.85, -1.5), (2.85, 1.5), (-2.85, -1.5), (-2.85, 1.5),      # one further out
-         (0, -2.1), (0, 2.1), (1.75, -2.6), (-1.75, -2.6), (1.75, 2.6), (-1.75, 2.6)]
+SLOTS = [(0, -1.4), (0, 1.4), (1.05, -1.4), (1.05, 1.4), (-1.05, -1.4), (-1.05, 1.4),   # just above / below
+         (2.0, -1.4), (2.0, 1.4), (-2.0, -1.4), (-2.0, 1.4)]                                # between two main quests
 
 
-def layout(ch, rows, sats, col=5.5, row=4.0, hubs=(), extra=None, keep_cross=()):
+def layout(ch, rows, sats, col=4.0, row=2.8, hubs=(), extra=None, keep_cross=()):
     """rows: lists of main-quest keys; rows snake (left to right, then right to left...). Each main quest
     depends on the one before it, so the main line reads as one path. sats: {main: [side quest keys]}: side
     quests sit right beside their main quest and depend on it (and on side quests of the same main they list).
@@ -176,10 +175,64 @@ def layout(ch, rows, sats, col=5.5, row=4.0, hubs=(), extra=None, keep_cross=())
                 q.deps = [mq.key]
             for dx, dy in SLOTS:
                 x, y = mq.x + dx, mq.y + dy
-                if all(abs(x - tx) >= (1 + ts) / 2 + 0.05 or abs(y - ty) >= (1 + ts) / 2 + 0.05 for tx, ty, ts in taken):
+                if all(abs(x - tx) >= (1 + ts) / 2 + 0.02 or abs(y - ty) >= (1 + ts) / 2 + 0.02 for tx, ty, ts in taken):
                     q.x, q.y = x, y
                     taken.append((x, y, 1.0))
                     break
+            else:
+                ERRORS.append(f'no room next to {m} for {k}')
+            placed.add(q.key)
+    for q in ch.quests:
+        if q.key not in placed: ERRORS.append(f'not laid out: {q.key}')
+
+
+def place(ch, cells, deps, sats, col=4.0, row=3.0, hubs=(), sat_deps=None):
+    """Hand-placed lattice (GTNH style). cells: {main: (col, row)}; deps: {main: [mains it needs]} (the lines
+    of the tree); sats: {main: [side quests]} placed tight around it. sat_deps: {side: [extra deps]}."""
+    sat_deps = sat_deps or {}
+    full = lambda k: k if '/' in k else f'{ch.key}/{k}'
+    byk = {q.key: q for q in ch.quests}
+    for k, (c, r) in cells.items():
+        q = byk[full(k)]
+        q.x, q.y = c * col, r * row
+        q.kind = 'hub' if k in hubs else 'main'
+        cross = [d for d in q.deps if not d.startswith(ch.key + '/')]
+        q.deps = cross + [full(d) for d in deps.get(k, [])]
+        q.hide = False
+    layout_sats(ch, byk, sats, sat_deps, full)
+
+
+def _seg_dist(px, py, ax, ay, bx, by):
+    dx, dy = bx - ax, by - ay
+    t = 0 if dx == dy == 0 else max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)))
+    return ((px - ax - t * dx) ** 2 + (py - ay - t * dy) ** 2) ** 0.5
+
+
+def layout_sats(ch, byk, sats, sat_deps, full):
+    mains = [q for q in ch.quests if q.kind in ('hub', 'main')]
+    taken = [(q.x, q.y, KIND[q.kind][0]) for q in mains]
+    segs = [(q.x, q.y, byk[d].x, byk[d].y) for q in mains for d in q.deps if d in byk and byk[d].kind in ('hub', 'main')]
+    placed = set(q.key for q in mains)
+    for m, keys in sats.items():
+        mq = byk[full(m)]
+        off = KIND[mq.kind][0] / 2 + 0.55
+        ring = [(0, -off), (0, off), (1.05, -off), (-1.05, off), (-1.05, -off), (1.05, off),
+                (off, -1.05), (-off, 1.05), (-off, -1.05), (off, 1.05), (off, 0), (-off, 0), (0, -off),
+                (2.1, -off), (-2.1, off), (-2.1, -off), (2.1, off),
+                (off + 1.05, -1.05), (-off - 1.05, 1.05), (-off - 1.05, -1.05), (off + 1.05, 1.05),
+                (off + 1.05, 0), (-off - 1.05, 0), (2.1, -off - 1.05), (-2.1, off + 1.05)]
+        for k in keys:
+            q = byk[full(k)]
+            if q.kind in ('hub', 'main'): q.kind = 'quest'
+            q.deps = [mq.key] + [full(d) for d in sat_deps.get(k, [])]
+            for dx, dy in ring:
+                x, y = mq.x + dx, mq.y + dy
+                if not all(abs(x - tx) >= (1 + ts) / 2 + 0.02 or abs(y - ty) >= (1 + ts) / 2 + 0.02 for tx, ty, ts in taken):
+                    continue
+                if any(_seg_dist(x, y, *sg) < 0.62 for sg in segs):
+                    continue
+                q.x, q.y = x, y
+                taken.append((x, y, 1.0)); segs.append((x, y, mq.x, mq.y)); break
             else:
                 ERRORS.append(f'no room next to {m} for {k}')
             placed.add(q.key)

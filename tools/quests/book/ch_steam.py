@@ -274,14 +274,26 @@ q('hull', '&b&lElectricity', ['gtceu:lv_machine_hull'], [
     'This is the end of the Steam Age, though not of steam: your boilers will power your first generator. Open &bTier 1 - LV&r.',
 ], ['circuit', 'lv_casing', 'lv_motor', 'stone/wrought'], at=(34, 0), kind='hub', bag='lv')
 
-# ---------------------------------------------------------------- layout: one path, side quests beside it
-from fw import layout
-layout(C, rows=[
-    ['boiler', 'alloy', 'hammer', 'macerator', 'ores', 'compressor', 'firebricks'],
-    ['pbf', 'steel', 'mold', 'alloys', 'stronze', 'motor', 'precision'],
-    ['multis', 'grinder', 'superheater', 'manufacturer', 'nether', 'rubber', 'cable'],
-    ['vacuum', 'resistor', 'circuit', 'hull'],
-], hubs={'boiler', 'hull'}, sats={
+# ---------------------------------------------------------------- layout: a compact tree, side quests tight around it
+from fw import place
+place(C, cells={
+    'boiler': (0, 2),
+    'hammer': (1, 0), 'alloy': (1, 1), 'macerator': (1, 2), 'compressor': (1, 3),
+    'motor': (2, 0), 'alloys': (2, 1), 'ores': (2, 2), 'firebricks': (2, 3),
+    'precision': (3, 0), 'stronze': (3, 1), 'pbf': (3, 3),
+    'multis': (4, 0), 'manufacturer': (4, 1), 'steel': (4, 3),
+    'grinder': (5, 0), 'mold': (5, 3), 'nether': (5, 4),
+    'superheater': (6, 0), 'resistor': (6, 2), 'vacuum': (6, 3), 'rubber': (6, 4),
+    'circuit': (7, 3), 'cable': (7, 4), 'hull': (8, 3),
+}, deps={
+    'hammer': ['boiler'], 'alloy': ['boiler'], 'macerator': ['boiler'], 'compressor': ['boiler'],
+    'motor': ['hammer'], 'alloys': ['alloy'], 'ores': ['macerator'], 'firebricks': ['compressor'],
+    'precision': ['motor'], 'stronze': ['alloys', 'steel'], 'pbf': ['firebricks'],
+    'multis': ['precision'], 'manufacturer': ['multis', 'stronze'], 'steel': ['pbf'],
+    'grinder': ['multis'], 'superheater': ['grinder'], 'mold': ['steel'], 'nether': ['steel'],
+    'resistor': ['ores'], 'vacuum': ['mold'], 'rubber': ['nether'],
+    'circuit': ['vacuum', 'resistor', 'cable'], 'cable': ['rubber'], 'hull': ['circuit'],
+}, hubs={'boiler', 'hull'}, sats={
     'boiler': ['explode', 'water', 'pump', 'drum', 'vent', 'liquid'],
     'alloy': ['furnace'],
     'hammer': ['forge_ore'],
@@ -292,8 +304,8 @@ layout(C, rows=[
     'steel': ['hp_boiler', 'hp_machines'],
     'alloys': ['brass', 'clay_compound'],
     'stronze': ['breel'],
-    'motor': ['piston', 'arm', 'conveyor', 'hydraulic_pump', 'regulator'],
-    'precision': ['large_solar'],
+    'motor': ['piston', 'arm', 'conveyor'],
+    'precision': ['hydraulic_pump', 'regulator', 'large_solar'],
     'multis': ['oven', 'big_bus'],
     'grinder': ['large_crusher', 'large_furnace', 'thermal'],
     'superheater': ['cobbler', 'cactus'],

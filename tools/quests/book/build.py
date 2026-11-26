@@ -27,16 +27,16 @@ def render(ch, path):
         if q.hide: continue
         for dk in q.deps:
             if dk in pos:
-                d.line([P(q), P(pos[dk])], fill=(80, 80, 120), width=2)
+                d.line([P(q), P(pos[dk])], fill=(200, 40, 40), width=4)
     col = {'hub': (240, 180, 60), 'main': (120, 200, 240), 'quest': (200, 200, 200), 'opt': (130, 200, 130), 'tip': (200, 140, 220)}
     for q in qs:
-        r = fw.KIND[q.kind][0] * S * 0.45
+        r = fw.KIND[q.kind][0] * S * 0.42
         x, y = P(q)
-        d.ellipse([x - r, y - r, x + r, y + r], outline=col[q.kind], width=3, fill=(34, 34, 44))
+        d.rectangle([x - r, y - r, x + r, y + r], outline=col[q.kind], width=3, fill=(34, 34, 44))
         t = q.title.replace('&l', '')
         import re
         t = re.sub('&.', '', t)[:18]
-        d.text((x - r, y + r + 2), t, fill=(220, 220, 220), font=f)
+        if q.kind in ('hub', 'main'): d.text((x - r, y + r + 2), t[:14], fill=(220, 220, 220), font=f)
     im.save(path)
 
 
