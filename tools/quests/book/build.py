@@ -8,7 +8,7 @@ import picks
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
-CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv']
+CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv']
 GROUPS = [('gtnh_ref', '&8GTNH Reference (dev only)')]
 
 
@@ -40,6 +40,36 @@ def render(ch, path):
     im.save(path)
 
 
+LOCKED = os.path.join(HERE, 'locked')   # chapter files as you arranged them in game; their layout always wins
+
+
+def keep_user_layout(ch, d):
+    """If you've arranged this chapter in game, keep your positions, sizes, shapes and lines exactly; only text,
+    tasks and rewards come from here. New quests you haven't placed yet go in a column to the right, flagged."""
+    p = os.path.join(LOCKED, ch.key + '.snbt')
+    if not os.path.exists(p): return
+    import snbt_read
+    from fw import Dbl
+    user, links = snbt_read.layout(p)
+    xs = [u['x'] for u in user.values()] or [0]
+    new = 0
+    for q in d['quests']:
+        u = user.get(q['id'])
+        if not u:
+            q['x'] = Dbl(max(xs) + 4); q['y'] = Dbl(new * 2.0); new += 1
+            q['title'] = '&c[NEW] &r' + q['title']
+            continue
+        q['x'], q['y'] = Dbl(u['x']), Dbl(u['y'])
+        for k in ('size', 'shape'):
+            if u[k] is not None: q[k] = Dbl(u[k]) if k == 'size' else u[k]
+        if u['deps']: q['dependencies'] = u['deps']
+        else: q.pop('dependencies', None)
+        if u['hide']: q['hide_dependency_lines'] = True
+    if links: d['quest_links'] = links
+    gone = set(user) - {q['id'] for q in d['quests']}
+    print(f'  {ch.key}: kept your layout for {len(user) - len(gone)} quests, {new} new, {len(gone)} removed')
+
+
 def main():
     chapters = [importlib.import_module(m).C for m in CHAPTERS]
     # links from the recipes, merged with the hand-written ones, then reduced and laid out as a flow
@@ -64,7 +94,9 @@ def main():
     os.makedirs(OUT + '/chapters'); os.makedirs(OUT + '/reward_tables'); os.makedirs(PREVIEW, exist_ok=True)
     total = 0
     for ch in chapters:
-        open(f'{OUT}/chapters/{ch.key}.snbt', 'w').write(to_snbt(fw.chapter_snbt(ch, idmap, hid('b2/group/' + ch.group) if ch.group else '')) + '\n')
+        d = fw.chapter_snbt(ch, idmap, hid('b2/group/' + ch.group) if ch.group else '')
+        keep_user_layout(ch, d)
+        open(f'{OUT}/chapters/{ch.key}.snbt', 'w').write(to_snbt(d) + '\n')
         total += len(ch.quests)
         if not ch.key.startswith('gtnh_'): render(ch, f'{PREVIEW}/{ch.key}.png')
         ov = fw.overlaps(ch)

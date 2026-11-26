@@ -22,6 +22,10 @@ PICKS = {
         ('gtceu:steel_ingot', 16), ('gtceu:red_alloy_ingot', 12), ('gtceu:tin_single_cable', 12), ('gtceu:rubber_plate', 12),
         ('gtceu:vacuum_tube', 4), ('gtceu:resistor', 4), ('gtceu:lead_ingot', 16), ('gtceu:silver_ingot', 8),
         ('gtceu:electrum_ingot', 6), ('gtceu:invar_ingot', 12), ('gtceu:sulfur_dust', 16), ('minecraft:diamond', 2)]),
+    'pick_mv': ('MV Supplies', 'gtceu:aluminium_crate', [
+        ('gtceu:aluminium_ingot', 16), ('gtceu:cupronickel_ingot', 16), ('gtceu:silicon_dust', 16), ('gtceu:electrum_ingot', 12),
+        ('gtceu:good_electronic_circuit', 2), ('gtceu:diode', 8), ('gtceu:gallium_arsenide_dust', 2), ('gtceu:silicone_rubber_plate', 8),
+        ('gtceu:polyethylene_plate', 8), ('gtceu:chromium_dust', 4), ('gtceu:manganese_dust', 4), ('minecraft:emerald', 4)]),
 }
 
 # loot bags: one random entry
@@ -40,6 +44,11 @@ BAGS = {
         ('gtceu:vacuum_tube', 8, 5), ('gtceu:resistor', 8, 5), ('gtceu:lv_electric_motor', 2, 3), ('gtceu:lv_electric_pump', 1, 2),
         ('gtceu:lv_conveyor_module', 1, 2), ('gtceu:rubber_plate', 16, 6), ('gtceu:lead_ingot', 16, 5), ('gtceu:silver_ingot', 8, 4),
         ('gtceu:lv_sodium_battery', 1, 2), ('gtceu:invar_ingot', 16, 4), ('gtceu:electrum_ingot', 8, 4)]),
+    'mv': ('MV Bag', 'gtceu:aluminium_crate', [
+        ('gtceu:aluminium_ingot', 24, 10), ('gtceu:cupronickel_ingot', 16, 6), ('gtceu:silicon_dust', 24, 6), ('gtceu:electrum_ingot', 12, 5),
+        ('gtceu:good_electronic_circuit', 2, 4), ('gtceu:diode', 12, 5), ('gtceu:mv_electric_motor', 2, 3), ('gtceu:mv_electric_pump', 1, 2),
+        ('gtceu:mv_conveyor_module', 1, 2), ('gtceu:silicone_rubber_plate', 8, 4), ('gtceu:polyethylene_plate', 8, 4), ('gtceu:gallium_arsenide_dust', 2, 3),
+        ('gtceu:chromium_dust', 6, 3), ('gtceu:manganese_dust', 6, 3), ('gtceu:silicon_wafer', 4, 2), ('minecraft:emerald', 6, 3)]),
 }
 
 
