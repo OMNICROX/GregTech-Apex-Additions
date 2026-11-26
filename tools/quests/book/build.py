@@ -9,7 +9,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
 CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv']
-GROUPS = []   # side groups come later
+GROUPS = [('gtnh_ref', '&8GTNH Reference (dev only)')]
 
 
 def render(ch, path):
@@ -51,7 +51,10 @@ def main():
     flow.merge_deps(chapters, derived)
     flow.reduce(allq)
     for ch in chapters:
-        print(ch.key, 'conflicts left:', flow.clean_multi(ch, flow.flow))
+        flow.flow(ch); print(ch.key, 'line conflicts:', len(flow.conflicts(ch)))
+    import gtnh_ref
+    refs = gtnh_ref.chapters()
+    chapters = chapters + refs
     idmap = {}
     for ch in chapters:
         for q in ch.quests:
@@ -61,9 +64,9 @@ def main():
     os.makedirs(OUT + '/chapters'); os.makedirs(OUT + '/reward_tables'); os.makedirs(PREVIEW, exist_ok=True)
     total = 0
     for ch in chapters:
-        open(f'{OUT}/chapters/{ch.key}.snbt', 'w').write(to_snbt(fw.chapter_snbt(ch, idmap, '')) + '\n')
+        open(f'{OUT}/chapters/{ch.key}.snbt', 'w').write(to_snbt(fw.chapter_snbt(ch, idmap, hid('b2/group/' + ch.group) if ch.group else '')) + '\n')
         total += len(ch.quests)
-        render(ch, f'{PREVIEW}/{ch.key}.png')
+        if not ch.key.startswith('gtnh_'): render(ch, f'{PREVIEW}/{ch.key}.png')
         ov = fw.overlaps(ch)
         if ov: print('OVERLAP', ch.key, ov)
     open(f'{OUT}/chapter_groups.snbt', 'w').write(to_snbt({'chapter_groups': [{'id': hid('b2/group/' + g), 'title': t} for g, t in GROUPS]}) + '\n')
