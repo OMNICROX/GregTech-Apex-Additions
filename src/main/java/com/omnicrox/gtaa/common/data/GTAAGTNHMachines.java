@@ -440,6 +440,7 @@ public final class GTAAGTNHMachines {
     // terms in LICENSE-ADDITIONAL-TERMS.md). Project authors include HFstudio, LineBroke and other contributors.
     // Each machine keeps its original author line.
     public static final String GTNL_NLXCJH = "§7Add Mod: §bGT Not Leisure§7: §6§l§n年轮新城计划 by 咸到老时变成鱼";
+    public static final String GTNL_SRP = "§7Add Mod: §bGT Not Leisure§7: §bStructural Replacement Plan";
     public static final String GTNL_EDEN = "§7Add Mod: §bGT Not Leisure §7X §6伊甸生态园 by 荻角";
     public static final String GTNL_QYZG = "§7Add Mod: §bGT Not Leisure§7: §6§o犰狳重工 GT-Odyssey";
 
@@ -965,6 +966,48 @@ public final class GTAAGTNHMachines {
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(gt("block/casings/gcym/watertight_casing"),
                     gt("block/multiblock/implosion_compressor")))
+            .register();
+
+
+    // ---------------- Real Annihilation Generator (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition REAL_ANNIHILATION_GENERATOR = REGISTRATE
+            .multiblock("real_annihilation_generator", com.omnicrox.gtaa.common.machine.multiblock.gtnl.RealAnnihilationGeneratorMachine::new)
+            .langValue("Real · Annihilation Generator")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Real · Annihilation Generator")
+                    .flavor("You only need to let the proton and antiproton beams pass quietly from both ends")
+                    .flavor("Through the magnetic field into the containment sphere, easy and pleasant!")
+                    .info("Its simple appearance is due to the elegance of the theory.")
+                    .info("Every 5 s it annihilates all the §dAntimatter§7 in its input hatches: §b1e12 EU§7 per mB")
+                    .info("The actual energy production is affected by three levels of blocks")
+                    .info(" (time, spacetime and stabilisation field generators): x(1 + tiers / 9)")
+                    .info("Maintaining continuous operation will also increase energy output (up to x2).")
+                    .info("Energy will be output directly to the wireless EU network.")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)").author(GTNL_SRP).build())
+            .appearanceBlock(() -> modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "annihilation_generator")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', com.omnicrox.gtaa.common.machine.multiblock.gtnl.RealAnnihilationGeneratorMachine.timeFields())
+                    .where('B', blocks(modBlock("gtna:accelerator_protection_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('C', blocks(GTAABlocks.COMPACT_FUSION_COIL_MK5.get()))
+                    .where('D', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1)))
+                    .where('E', com.omnicrox.gtaa.common.machine.multiblock.gtnl.RealAnnihilationGeneratorMachine.spaceFields())
+                    .where('F', blocks(modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('G', blocks(modBlock("gtna:naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get)))
+                    .where('H', com.omnicrox.gtaa.common.machine.multiblock.gtnl.RealAnnihilationGeneratorMachine.stabFields())
+                    .where('I', blocks(modBlock("gtna:dyson_receiver_casing", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('J', blocks(modBlock("gtna:dyson_control_casing", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('K', blocks(modBlock("gtna:dyson_control_toroid", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('L', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+                    gt("block/multiblock/fusion_reactor")))
             .register();
 
 }

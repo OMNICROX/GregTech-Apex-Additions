@@ -75,6 +75,7 @@ public final class GTAACompatRecipes {
         crystallineInfinitier(provider);
         microSpacetime(provider);
         divineIsaForge(provider);
+        realAnnihilationGenerator(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -705,5 +706,23 @@ public final class GTAACompatRecipes {
                 .save(needing(provider, new String[] { "gtna", "gtca" }, Map.of(S1, "gtca:isamill",
                         S2, "gtna:spacetime_compression_field_generator_tier_8", S3, "gtna:stabilisation_field_generator_tier_8",
                         S4, "gtna:time_acceleration_field_generator_tier_8")));
+    }
+
+    /** GT-Not-Leisure's Real Annihilation Generator (UXV) */
+    private static void realAnnihilationGenerator(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:real_annihilation_generator")
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAMachines.ANTIMATTER_GENERATOR.asStack(4))
+                .inputItems(S1, 4)
+                .inputItems(S2, 4)
+                .inputItems(S3, 4)
+                .inputItems(GTAABlocks.COMPACT_FUSION_COIL_MK5.asStack(64))
+                .inputItems(GTItems.FIELD_GENERATOR_UXV, 16)
+                .inputItems(CustomTags.OpV_CIRCUITS, 8)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack(16))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 256))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.REAL_ANNIHILATION_GENERATOR.asStack())
+                .duration(6000).EUt(VA[UXV])
+                .save(needing(provider, "gtna", Map.of(S1, "gtna:time_acceleration_field_generator_tier_0",
+                        S2, "gtna:spacetime_compression_field_generator_tier_0", S3, "gtna:stabilisation_field_generator_tier_0")));
     }
 }
