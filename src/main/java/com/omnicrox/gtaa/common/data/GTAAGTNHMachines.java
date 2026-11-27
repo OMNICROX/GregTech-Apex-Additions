@@ -1010,4 +1010,62 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
+
+    // ---------------- Library of Ruina (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition LIBRARY_OF_RUINA = REGISTRATE
+            .multiblock("library_of_ruina", WorkableElectricMultiblockMachine::new)
+            .langValue("§eLibrary of Ruina")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.LIBRARY_OF_RUINA)
+            .recipeModifiers(ApexModifiers.parallel(m -> {
+                        int max = 8;
+                        if (m instanceof com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController c)
+                            for (var part : c.getParts())
+                                if (part instanceof com.gregtechceu.gtceu.api.capability.IParallelHatch h)
+                                    max = Math.max(max, h.getCurrentParallel());
+                        return max;
+                    }, m -> 0.6, 0.8),
+                    GTRecipeModifiers.OC_PERFECT_SUBTICK)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Eternal Twilight")
+                    .info("§68 Parallels§7 (a Parallel Hatch can raise it)")
+                    .info("§a167% Speed")
+                    .info("§b80% EU Usage")
+                    .flavor("Broke the eternal night of the Twilight Forest")
+                    .flavor("Things turned into books")
+                    .flavor("The library will last forever")
+                    .flavor("Radiance, solitude, endless")
+                    .flavor("Filled with rare books")
+                    .flavor("Useless, indestructible, hidden")
+                    .flavor("Here, may you find the book you desire.")
+                    .info("Put a §eTwilight Forest boss trophy§7 in an input bus: it brings back that boss's loot")
+                    .info(" (the trophy is not used up)")
+                    .info("§bMachine does not lose efficiency when overclocked")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)").author(GTNL_NLXCJH).build())
+            .appearanceBlock(GTAABlocks.EUROPIUM_RADIATION_PROOF_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "library_of_ruina")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()))
+                    .where('B', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('C', blocks(GTAABlocks.SE_BASE_CASING.get()))
+                    .where('D', blocks(GTAABlocks.EUROPIUM_RADIATION_PROOF_CASING.get()).setMinGlobalLimited(850)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('E', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_STRESS_PROOF.get()))
+                    .where('F', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('G', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('H', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where('I', blocks(net.minecraft.world.level.block.Blocks.WATER,
+                            modBlock("twilightforest:twilight_portal", () -> net.minecraft.world.level.block.Blocks.WATER)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/europium_radiation_proof_casing"),
+                    gt("block/multiblock/implosion_compressor")))
+            .register();
+
 }

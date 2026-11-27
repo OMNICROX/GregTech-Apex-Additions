@@ -38,6 +38,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType MANA_NEXUS;
     public static GTRecipeType MATTER_FABRICATOR;
     public static GTRecipeType NETHER_INTERFACE;
+    public static GTRecipeType LIBRARY_OF_RUINA;
     public static GTRecipeType MICRO_SPACETIME;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
@@ -141,6 +142,10 @@ public class GTAARecipeTypes {
         MICRO_SPACETIME = register("micro_spacetime_fabricatorio", "multiblock", "Micro SpaceTime Fabricatorio")
                 .setMaxIOSize(6, 3, 3, 2).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
+        LIBRARY_OF_RUINA = register("library_of_ruina", "multiblock", "Eternal Twilight")
+                .setMaxIOSize(1, 9, 0, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> "The trophy is not used up");
         NETHER_INTERFACE = register("nether_interface", "multiblock", "Nether Interface")
                 .setMaxIOSize(1, 9, 1, 1).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT);

@@ -76,6 +76,7 @@ public final class GTAACompatRecipes {
         microSpacetime(provider);
         divineIsaForge(provider);
         realAnnihilationGenerator(provider);
+        libraryOfRuina(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -724,5 +725,51 @@ public final class GTAACompatRecipes {
                 .duration(6000).EUt(VA[UXV])
                 .save(needing(provider, "gtna", Map.of(S1, "gtna:time_acceleration_field_generator_tier_0",
                         S2, "gtna:spacetime_compression_field_generator_tier_0", S3, "gtna:stabilisation_field_generator_tier_0")));
+    }
+
+    /** GT-Not-Leisure's Library of Ruina: the controller, and what each Twilight Forest boss trophy brings back */
+    private static void libraryOfRuina(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:library_of_ruina")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[UHV].asStack(4))
+                .inputItems(S1, 1).inputItems(S2, 1).inputItems(S3, 1).inputItems(S4, 1)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 8)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(GTAABlocks.GRAVITY_STABILIZATION_CASING.asStack(32))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.LIBRARY_OF_RUINA.asStack())
+                .duration(2400).EUt(VA[UHV])
+                .save(needing(provider, "twilightforest", Map.of(S1, "twilightforest:naga_trophy",
+                        S2, "twilightforest:lich_trophy", S3, "twilightforest:hydra_trophy", S4, "twilightforest:ur_ghast_trophy")));
+        // trophy -> loot, GTNL's chances; outputs[i] = { item, count, chance/10000 }
+        Object[][] bosses = {
+                { "naga_trophy", new Object[][] { { "naga_scale", 16, 10000 }, { "minecraft:emerald", 16, 2500 } } },
+                { "lich_trophy", new Object[][] { { "twilight_scepter", 1, 5000 }, { "zombie_scepter", 1, 5000 },
+                        { "minecraft:ender_pearl", 16, 7500 }, { "minecraft:gold_ingot", 32, 7500 } } },
+                { "minoshroom_trophy", new Object[][] { { "steeleaf_ingot", 32, 10000 }, { "ironwood_ingot", 32, 10000 },
+                        { "minecraft:emerald", 16, 2500 }, { "minecraft:emerald_block", 1, 1000 }, { "minecraft:iron_ingot", 32, 7500 } } },
+                { "hydra_trophy", new Object[][] { { "fiery_blood", 16, 9500 }, { "hydra_chop", 16, 7500 },
+                        { "minecraft:redstone_block", 2, 7500 }, { "minecraft:lapis_block", 2, 7500 }, { "minecraft:iron_block", 2, 5000 },
+                        { "minecraft:gold_block", 2, 5000 }, { "minecraft:emerald_block", 2, 2500 }, { "minecraft:diamond_block", 2, 2500 } } },
+                { "knight_phantom_trophy", new Object[][] { { "knightmetal_ingot", 24, 7500 }, { "charm_of_life_1", 1, 2500 } } },
+                { "ur_ghast_trophy", new Object[][] { { "fiery_tears", 16, 9500 }, { "carminite", 16, 7500 } } },
+                { "alpha_yeti_trophy", new Object[][] { { "alpha_yeti_fur", 16, 8000 }, { "ice_bomb", 16, 8000 }, { "arctic_fur", 32, 7500 } } },
+                { "snow_queen_trophy", new Object[][] { { "ice_bomb", 32, 8000 }, { "arctic_fur", 32, 7500 }, { "minecraft:packed_ice", 64, 10000 } } },
+                { "quest_ram_trophy", new Object[][] { { "giant_cobblestone", 8, 7500 }, { "giant_obsidian", 8, 7500 }, { "giant_log", 8, 7500 },
+                        { "fluffy_cloud", 32, 7500 }, { "wispy_cloud", 32, 7500 }, { "huge_stalk", 8, 7500 } } } };
+        for (Object[] boss : bosses) {
+            String trophy = (String) boss[0];
+            var b = com.omnicrox.gtaa.common.data.GTAARecipeTypes.LIBRARY_OF_RUINA.recipeBuilder("gtapexadditions:library_of_ruina/" + trophy)
+                    .notConsumable(S1).duration(600).EUt(VA[UHV]);
+            java.util.Map<Item, String> swap = new java.util.HashMap<>();
+            swap.put(S1, "twilightforest:" + trophy);
+            Item[] slots = { S2, S3, S4, S5, S6, S7, S8, S9 };
+            Object[][] outs = (Object[][]) boss[1];
+            for (int i = 0; i < outs.length; i++) {
+                String id = (String) outs[i][0];
+                swap.put(slots[i], id.contains(":") ? id : "twilightforest:" + id);
+                b.chancedOutput(new net.minecraft.world.item.ItemStack(slots[i], (Integer) outs[i][1]), (Integer) outs[i][2], 0);
+            }
+            b.save(needing(provider, "twilightforest", swap));
+        }
     }
 }

@@ -24,6 +24,7 @@ Built on [GregTech CEu Modern](https://github.com/GregTechCEu/GregTech-Modern) (
 ## GT5-Unofficial machines (LGPL-3.0)
 
 | Exothermic Hearth | GT5-Unofficial `MTEExothermicHearth` (structure, numbers; molten Blaze replaces Blazing Pyrotheum) |
+| Spinmatron-2737 | GT5-Unofficial `MTESpinmatron` (standard mode; Diesel replaces Kerosene) |
 | --- | --- |
 
 ## Twist Space Technology and 123Technology
@@ -38,6 +39,11 @@ marked textures follow the originals.
 | Miracle Top | TST `GT_TileEntity_MiracleTop` | Nxer and contributors, GPL-3.0 |
 | Extreme Craft Center | TST `TST_MegaCraftingCenter` | Shordinger (author), Nxer (maintainer), GPL-3.0 |
 | Crystalline Infinitier | TST `GTCM_CrystallineInfinitier` | Nxer and contributors, GPL-3.0 |
+| General Ore Processing Factory | TST `TST_OreProcessingFactory` | Nxer and contributors, GPL-3.0 |
+| Integrated Assembly Matrix | TST `TST_IntegratedAssemblyMatrix` | Nxer and contributors, GPL-3.0 |
+| Nether Interface | TST `TST_NetherInterface` (outputs remade for vanilla nether items) | Nxer and contributors, GPL-3.0 |
+| Micro SpaceTime Fabricatorio | TST `TST_MicroSpaceTimeFabricatorio` | Nxer and contributors, GPL-3.0 |
+| Divine Isa Forge | 123Technology `OTEMegaIsaForge` (runs the IsaMill lists and the Space Assembler) | newmaa / CallmeSHaobe and contributors, GPL-3.0 |
 | (filled in as machines are ported) | 123Technology (https://github.com/CallmeSHaobe/123Technology) | CallmeSHaobe and contributors, GPL-3.0 |
 
 
@@ -54,6 +60,9 @@ additional terms in LICENSE-ADDITIONAL-TERMS.md".
 | Alfheim Teleportation Array | GTNL `TeleportationArrayToAlfheim` | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
 | Draconic Fusion Crafting | GTNL `DraconicFusionCrafting` | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
 | Matter Fabricator | GTNL `MatterFabricator` | GT Not Leisure: 犰狳重工 GT-Odyssey |
+| Eden Garden | GTNL `EdenGarden` (runs GTNA's greenhouse list) | GT Not Leisure X 伊甸生态园 by 荻角 |
+| Real · Annihilation Generator | GTNL `RealArtificialStar` (burns GTAA antimatter) | GT Not Leisure: Structural Replacement Plan |
+| Library of Ruina | GTNL `LibraryOfRuina` (boss trophies instead of GTNL's books) | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
 
 ## Textures from GT5-Unofficial (LGPL-3.0)
 
