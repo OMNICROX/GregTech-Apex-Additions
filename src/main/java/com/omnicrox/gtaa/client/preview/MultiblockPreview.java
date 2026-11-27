@@ -270,6 +270,11 @@ public final class MultiblockPreview {
         fboW = w;
         fboH = h;
         renderer = new ApexSceneRenderer(world, w, h);
+        // LDLib's scene needs a particle manager (it also sets up the camera entity) and a look-at listener for hover
+        var particles = new com.lowdragmc.lowdraglib.client.scene.ParticleManager();
+        renderer.setParticleManager(particles);
+        world.setParticleManager(particles);
+        renderer.setOnLookingAt(hit -> {});
         renderer.setClearColor(0x00000000);
         renderer.useCacheBuffer(placed.size() > 200);
         applyLayer();

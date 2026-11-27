@@ -25,6 +25,8 @@ public final class PreviewPanel {
 
     private PreviewPanel() {}
 
+    private static final java.util.Set<String> LOGGED = new java.util.HashSet<>();
+
     // ---------------- drawing ----------------
     public static void draw(MultiblockPreview p, GuiGraphics g, int mouseX, int mouseY) {
         Font font = Minecraft.getInstance().font;
@@ -42,6 +44,8 @@ public final class PreviewPanel {
             hovered = p.render(g, SX + 1, SY + 1, SW - 2, SH - 2, mouseX, mouseY);
         } catch (Throwable t) {
             g.drawString(font, "Preview failed: " + t.getClass().getSimpleName(), SX + 4, SY + 4, 0xFFFF5555, false);
+            if (LOGGED.add(p.def.getId().toString()))
+                com.omnicrox.gtaa.GTAA.LOGGER.error("[Apex preview] {} failed to render", p.def.getId(), t);
         }
         if (p.isCompiling())
             g.drawString(font, "Loading " + (int) (p.compileProgress() * 100) + "%", SX + 4, SY + SH - 11, 0xFFFFFFFF, true);
