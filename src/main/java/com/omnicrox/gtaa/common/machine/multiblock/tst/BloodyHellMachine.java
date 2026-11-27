@@ -168,17 +168,20 @@ public class BloodyHellMachine extends WorkableElectricMultiblockMachine
             return;
         }
         bloodFilled = false;
-        // fill the whole pool at once, 1000 mB a block, like Twist's button
-        for (BlockPos p : missing) {
-            BlockState s = level.getBlockState(p);
-            if (!s.isAir() && !s.canBeReplaced() && !s.liquid()) return;
-        }
-        FluidStack need = new FluidStack(le(), missing.size() * 1000);
-        if (!ApexHatches.drain(this, need)) return;
+        // fill the pool from the input hatches, 1000 mB of Life Essence per block, up to 64 blocks a second (a big pool
+        // needs far more than one hatch holds, so it fills over time instead of waiting for all of it at once)
         BlockState blood = leBlock().defaultBlockState();
-        for (BlockPos p : missing) level.setBlock(p, blood, Block.UPDATE_ALL);
-        poolMissing = 0;
-        bloodFilled = true;
+        int placed = 0;
+        for (BlockPos p : missing) {
+            if (placed >= 64) break;
+            BlockState s = level.getBlockState(p);
+            if (!s.isAir() && !s.canBeReplaced() && !s.liquid()) continue;
+            if (!ApexHatches.drain(this, new FluidStack(le(), 1000))) break;
+            level.setBlock(p, blood, Block.UPDATE_ALL);
+            placed++;
+        }
+        poolMissing = missing.size() - placed;
+        bloodFilled = poolMissing == 0;
     }
 
     private int findOrbTier() {
