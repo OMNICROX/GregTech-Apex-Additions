@@ -21,6 +21,11 @@ artists. GTAA does **not** use the separate UU-Tex resource pack.
 
 Built on [GregTech CEu Modern](https://github.com/GregTechCEu/GregTech-Modern) (LGPL-3.0).
 
+## GT5-Unofficial machines (LGPL-3.0)
+
+| Exothermic Hearth | GT5-Unofficial `MTEExothermicHearth` (structure, numbers; molten Blaze replaces Blazing Pyrotheum) |
+| --- | --- |
+
 ## Twist Space Technology and 123Technology
 
 Machines ported from these GTNH addons are re-implemented for GregTech CEu Modern; their structures, numbers and
@@ -32,6 +37,7 @@ marked textures follow the originals.
 | Super Water Purifier | TST `TST_SuperWaterPurifier` | Nxer and contributors, GPL-3.0 |
 | Miracle Top | TST `GT_TileEntity_MiracleTop` | Nxer and contributors, GPL-3.0 |
 | Extreme Craft Center | TST `TST_MegaCraftingCenter` | Shordinger (author), Nxer (maintainer), GPL-3.0 |
+| Crystalline Infinitier | TST `GTCM_CrystallineInfinitier` | Nxer and contributors, GPL-3.0 |
 | (filled in as machines are ported) | 123Technology (https://github.com/CallmeSHaobe/123Technology) | CallmeSHaobe and contributors, GPL-3.0 |
 
 

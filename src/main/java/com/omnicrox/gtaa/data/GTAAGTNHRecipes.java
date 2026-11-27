@@ -218,6 +218,22 @@ public final class GTAAGTNHRecipes {
                 .outputItems(GTAAGTNHMachines.SUPER_WATER_PURIFIER.asStack())
                 .duration(2400).EUt(VA[UHV]).save(provider);
 
+        // Exothermic Hearth (GT5-Unofficial: ZPM assembly line; molten Blaze stands in for Pyrotheum)
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:exothermic_hearth")
+                .inputItems(GTMultiMachines.ELECTRIC_BLAST_FURNACE.asStack(64))
+                .inputItems(com.gregtechceu.gtceu.common.data.machines.GCYMMachines.BLAST_ALLOY_SMELTER.asStack(8))
+                .inputItems(CustomTags.UV_CIRCUITS, 8)
+                .inputItems(GTItems.ELECTRIC_PUMP_ZPM, 8)
+                .inputItems(GTItems.FLUID_REGULATOR_ZPM, 8)
+                .inputItems(wireGtDouble, GTMaterials.UraniumRhodiumDinaquadide, 16)
+                .inputItems(plateDense, GTMaterials.Invar, 8)
+                .inputItems(plateDense, GTMaterials.Cupronickel, 8)
+                .inputFluids(GTMaterials.Blaze.getFluid(64000))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 10))
+                .inputFluids(GTMaterials.Lubricant.getFluid(16000))
+                .outputItems(GTAAGTNHMachines.EXOTHERMIC_HEARTH.asStack())
+                .duration(1200).EUt(VA[ZPM] / 2).save(provider);
+
         // Extreme Craft Center: TST uses molecular assemblers + extreme auto crafters + a molecular transformer
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_craft_center")
                 .inputItems(appeng.core.definitions.AEBlocks.MOLECULAR_ASSEMBLER.stack(16))

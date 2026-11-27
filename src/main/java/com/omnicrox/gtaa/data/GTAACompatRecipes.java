@@ -72,6 +72,7 @@ public final class GTAACompatRecipes {
         matterFabricator(provider);
         nuclearStar(provider);
         cosmicCircuits(provider);
+        crystallineInfinitier(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -636,5 +637,21 @@ public final class GTAACompatRecipes {
                 .inputItems(star.asStack(4)).inputItems(S10, 64).inputFluids(transcendent.getFluid(L * 8))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_MAINFRAME.asStack(2))
                 .cleanroom(sterile).duration(1200).EUt(VA[OpV]).save(p);
+    }
+
+    /** Twist Space Technology's Crystalline Infinitier (UHV, with GTNA's molecular casings and field generators) */
+    private static void crystallineInfinitier(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:crystalline_infinitier")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.AUTOCLAVE[UV].asStack(4))
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.CHEMICAL_BATH[UV].asStack(4))
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
+                .inputItems(CustomTags.UHV_CIRCUITS, 8)
+                .inputItems(S1, 16)
+                .inputItems(S2, 4)
+                .inputItems(frameGt, GTMaterials.NaquadahAlloy, 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.CRYSTALLINE_INFINITIER.asStack())
+                .duration(1600).EUt(VA[UHV])
+                .save(needing(provider, "gtna", Map.of(S1, "gtna:molecular_casing", S2, "gtna:containment_field_generator")));
     }
 }
