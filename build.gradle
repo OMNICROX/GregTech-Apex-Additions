@@ -5,6 +5,8 @@ plugins {
 }
 
 evaluationDependsOn(':apex-lib')
+evaluationDependsOn(':apex-guide')
+def apexGuideProject = project(':apex-guide')
 
 version = project.mod_version
 group = project.maven_group
@@ -33,11 +35,15 @@ legacyForge {
     mods {
         "${project.mod_id}" { sourceSet(sourceSets.main) }
         apexlib { sourceSet(project(':apex-lib').sourceSets.main) }
+        apexguide { sourceSet(project(':apex-guide').sourceSets.main) }
     }
     runs {
         client {
             client()
             jvmArguments.addAll('-Xmx4G')
+            // the Apex Guide in dev runs (its shaded libraries come from its own configuration)
+            additionalRuntimeClasspathConfiguration.extendsFrom apexGuideProject.configurations.shaded
+            if (project.hasProperty('showGuide')) systemProperty('apexguide.showOnStartup', project.showGuide)
             if (project.hasProperty('quickplay')) programArguments.addAll('--quickPlaySingleplayer', project.quickplay)
         }
         server {
@@ -69,6 +75,7 @@ dependencies {
     modCompileOnly "mezz.jei:jei-1.20.1-forge-api:15.62.0.219"
     compileOnly files('../devmods/infiniverse-1.20.1-1.0.0.5.jar')
     compileOnly project(':apex-guide')   // the Apex Guide mod (optional at runtime)
+    runtimeOnly project(':apex-guide')   // dev runs only; not bundled
     compileOnly 'org.jetbrains:annotations:26.0.1'
     compileOnly 'org.projectlombok:lombok:1.18.38'
     annotationProcessor 'org.projectlombok:lombok:1.18.38'

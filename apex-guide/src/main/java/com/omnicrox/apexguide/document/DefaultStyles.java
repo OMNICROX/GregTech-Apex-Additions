@@ -22,19 +22,19 @@ public final class DefaultStyles {
             false,
             false,
             false,
-            Minecraft.UNIFORM_FONT,
+            Minecraft.DEFAULT_FONT,
             SymbolicColor.BODY_TEXT,
             WhiteSpaceMode.NORMAL,
             TextAlignment.LEFT,
             false);
 
     public static final TextStyle BODY_TEXT = TextStyle.builder()
-            .font(Minecraft.UNIFORM_FONT)
+            .font(Minecraft.DEFAULT_FONT)
             .color(SymbolicColor.BODY_TEXT)
             .build();
 
     public static final TextStyle CRAFTING_RECIPE_TYPE = TextStyle.builder()
-            .font(Minecraft.UNIFORM_FONT)
+            .font(Minecraft.DEFAULT_FONT)
             .color(SymbolicColor.CRAFTING_RECIPE_TYPE)
             .build();
 
@@ -54,16 +54,16 @@ public final class DefaultStyles {
     public static final TextStyle HEADING4 = TextStyle.builder()
             .fontScale(1.1f)
             .bold(true)
-            .font(Minecraft.UNIFORM_FONT)
+            .font(Minecraft.DEFAULT_FONT)
             .build();
     public static final TextStyle HEADING5 = TextStyle.builder()
             .fontScale(1f)
             .bold(true)
-            .font(Minecraft.UNIFORM_FONT)
+            .font(Minecraft.DEFAULT_FONT)
             .build();
     public static final TextStyle HEADING6 = TextStyle.builder()
             .fontScale(1f)
-            .font(Minecraft.UNIFORM_FONT)
+            .font(Minecraft.DEFAULT_FONT)
             .build();
 
     public static final TextStyle SEARCH_RESULT_HIGHLIGHT = TextStyle.builder()

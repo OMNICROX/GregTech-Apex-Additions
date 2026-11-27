@@ -252,6 +252,9 @@ public class HomePageView {
         var entries = sections.get(idx);
         if (entries.isEmpty()) {
             var empty = GuidebookText.HomeEmpty.text().getString();
+            if (font.width(empty) > r.w() - 8) {
+                empty = font.plainSubstrByWidth(empty, Math.max(0, r.w() - 8));
+            }
             g.drawString(font, empty, r.x() + (r.w() - font.width(empty)) / 2, r.y() + (r.h() - font.lineHeight) / 2,
                     ApexTheme.HOME_SUMMARY, false);
             return;

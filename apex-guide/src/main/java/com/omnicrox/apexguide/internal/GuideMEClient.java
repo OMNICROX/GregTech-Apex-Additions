@@ -239,7 +239,7 @@ public class GuideMEClient {
             fullWidthLayout = builder
                     .comment(
                             "Use the full width of the screen for the guide when it is opened.")
-                    .define("fullWidthLayout", true);
+                    .define("fullWidthLayout", false);
             builder.pop();
 
             builder.push("debug");

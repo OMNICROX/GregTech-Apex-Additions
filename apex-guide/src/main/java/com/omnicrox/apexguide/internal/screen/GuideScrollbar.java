@@ -42,31 +42,16 @@ public class GuideScrollbar extends AbstractWidget {
             return;
         }
 
+        // GuideNH-style slim dark scrollbar
         int thumbHeight = getThumbHeight();
-        int left = getX();
-        int right = left + 8;
+        int left = getX() + 2;
+        int right = left + 4;
         int top = getY() + getThumbTop();
-        int bottom = top + thumbHeight;
-
-        var pose = guiGraphics.pose().last().pose();
-        var min = new Vector3f();
-        pose.transformPosition(left, top, 0, min);
-        var max = new Vector3f();
-        pose.transformPosition(right, bottom, 0, max);
-
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-        bufferBuilder.vertex(min.x, max.y, 0.0).color(128, 128, 128, 255).endVertex();
-        bufferBuilder.vertex(max.x, max.y, 0.0).color(128, 128, 128, 255).endVertex();
-        bufferBuilder.vertex(max.x, min.y, 0.0).color(128, 128, 128, 255).endVertex();
-        bufferBuilder.vertex(min.x, min.y, 0.0).color(128, 128, 128, 255).endVertex();
-        bufferBuilder.vertex(min.x, max.y - 1, 0.0).color(192, 192, 192, 255).endVertex();
-        bufferBuilder.vertex(max.x - 1, max.y - 1, 0.0).color(192, 192, 192, 255).endVertex();
-        bufferBuilder.vertex(max.x - 1, min.y, 0.0).color(192, 192, 192, 255).endVertex();
-        bufferBuilder.vertex(min.x, min.y, 0.0).color(192, 192, 192, 255).endVertex();
-        tesselator.end();
+        boolean hovered = mouseX >= getX() && mouseX < getX() + WIDTH && mouseY >= getY()
+                && mouseY < getY() + height;
+        guiGraphics.fill(left, getY(), right, getY() + height, ApexTheme.SCROLL_TRACK);
+        guiGraphics.fill(left, top, right, top + thumbHeight,
+                hovered ? ApexTheme.SCROLL_THUMB_HOVER : ApexTheme.SCROLL_THUMB);
     }
 
     /**

@@ -598,6 +598,8 @@ public final class GTAACompatRecipes {
                 .duration(4800).EUt(VA[UIV])
                 .save(needing(provider, mods, Map.of(S1, "gtna:dimensionally_transcendent_casing",
                         S2, "gtna:stabilisation_field_generator_tier_0")));
+        // hydrogen plasma comes from GTNA; dev runs without it must not crash
+        if (GTMaterials.Hydrogen.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA) != null)
         com.omnicrox.gtaa.common.data.GTAARecipeTypes.MICRO_SPACETIME.recipeBuilder("gtapexadditions:mstf/quantum_anomaly")
                 .circuitMeta(24).inputItems(S1, 16)
                 .inputFluids(GTMaterials.Hydrogen.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, 1000))
