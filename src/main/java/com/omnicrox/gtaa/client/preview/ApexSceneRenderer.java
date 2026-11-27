@@ -53,6 +53,14 @@ public class ApexSceneRenderer extends WorldSceneRenderer {
         int prevFb = GL11.glGetInteger(GL30.GL_FRAMEBUFFER_BINDING);
         int[] vp = new int[4];
         GL11.glGetIntegerv(GL11.GL_VIEWPORT, vp);
+        // a page that clips (GuideME's scrolling document) leaves the scissor test on, in screen coordinates: inside
+        // the FBO that cuts the scene down to a sliver, so switch it off while drawing the scene
+        boolean scissor = GL11.glIsEnabled(GL11.GL_SCISSOR_TEST);
+        int[] box = new int[4];
+        if (scissor) {
+            GL11.glGetIntegerv(GL11.GL_SCISSOR_BOX, box);
+            GlStateManager._disableScissorTest();
+        }
         try {
             target.setClearColor(0, 0, 0, 0);
             target.clear(Minecraft.ON_OSX);
@@ -63,6 +71,10 @@ public class ApexSceneRenderer extends WorldSceneRenderer {
             target.unbindWrite();
             GlStateManager._glBindFramebuffer(GL30.GL_FRAMEBUFFER, prevFb);
             RenderSystem.viewport(vp[0], vp[1], vp[2], vp[3]);
+            if (scissor) {
+                GlStateManager._enableScissorTest();
+                GlStateManager._scissorBox(box[0], box[1], box[2], box[3]);
+            }
         }
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, target.getColorTextureId());
