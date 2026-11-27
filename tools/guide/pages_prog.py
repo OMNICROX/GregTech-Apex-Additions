@@ -30,18 +30,7 @@ page('progression/tier-ladder.md', 'The Tier Ladder', '''
 STEAM_SCENES = '''
 ## Coke Oven
 
-<GameScene zoom="5" interactive={true}>
-  <Block id="gtceu:coke_oven_bricks" x="0" y="0" z="0" /><Block id="gtceu:coke_oven_bricks" x="1" y="0" z="0" /><Block id="gtceu:coke_oven_bricks" x="2" y="0" z="0" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="0" z="1" /><Block id="gtceu:coke_oven_bricks" x="1" y="0" z="1" /><Block id="gtceu:coke_oven_bricks" x="2" y="0" z="1" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="0" z="2" /><Block id="gtceu:coke_oven_bricks" x="1" y="0" z="2" /><Block id="gtceu:coke_oven_bricks" x="2" y="0" z="2" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="1" z="0" /><Block id="gtceu:coke_oven_bricks" x="1" y="1" z="0" /><Block id="gtceu:coke_oven_bricks" x="2" y="1" z="0" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="1" z="1" /><Block id="gtceu:coke_oven_bricks" x="2" y="1" z="1" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="1" z="2" /><Block id="gtceu:coke_oven" x="1" y="1" z="2" /><Block id="gtceu:coke_oven_bricks" x="2" y="1" z="2" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="2" z="0" /><Block id="gtceu:coke_oven_bricks" x="1" y="2" z="0" /><Block id="gtceu:coke_oven_bricks" x="2" y="2" z="0" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="2" z="1" /><Block id="gtceu:coke_oven_bricks" x="1" y="2" z="1" /><Block id="gtceu:coke_oven_bricks" x="2" y="2" z="1" />
-  <Block id="gtceu:coke_oven_bricks" x="0" y="2" z="2" /><Block id="gtceu:coke_oven_bricks" x="1" y="2" z="2" /><Block id="gtceu:coke_oven_bricks" x="2" y="2" z="2" />
-  <IsometricCamera yaw="195" pitch="30" />
-</GameScene>
+<Multiblock id="gtceu:coke_oven" />
 
 A 3x3x3 of <ItemLink id="gtceu:coke_oven_bricks" /> with a hollow middle and the <ItemLink id="gtceu:coke_oven" />
 in the middle of one side. Coal becomes **coal coke** (a better fuel) and **creosote**. A
@@ -49,21 +38,7 @@ in the middle of one side. Coal becomes **coal coke** (a better fuel) and **creo
 
 ## Primitive Blast Furnace
 
-<GameScene zoom="5" interactive={true}>
-  <Block id="gtceu:firebricks" x="0" y="0" z="0" /><Block id="gtceu:firebricks" x="1" y="0" z="0" /><Block id="gtceu:firebricks" x="2" y="0" z="0" />
-  <Block id="gtceu:firebricks" x="0" y="0" z="1" /><Block id="gtceu:firebricks" x="1" y="0" z="1" /><Block id="gtceu:firebricks" x="2" y="0" z="1" />
-  <Block id="gtceu:firebricks" x="0" y="0" z="2" /><Block id="gtceu:firebricks" x="1" y="0" z="2" /><Block id="gtceu:firebricks" x="2" y="0" z="2" />
-  <Block id="gtceu:firebricks" x="0" y="1" z="0" /><Block id="gtceu:firebricks" x="1" y="1" z="0" /><Block id="gtceu:firebricks" x="2" y="1" z="0" />
-  <Block id="gtceu:firebricks" x="0" y="1" z="1" /><Block id="gtceu:firebricks" x="2" y="1" z="1" />
-  <Block id="gtceu:firebricks" x="0" y="1" z="2" /><Block id="gtceu:primitive_blast_furnace" x="1" y="1" z="2" /><Block id="gtceu:firebricks" x="2" y="1" z="2" />
-  <Block id="gtceu:firebricks" x="0" y="2" z="0" /><Block id="gtceu:firebricks" x="1" y="2" z="0" /><Block id="gtceu:firebricks" x="2" y="2" z="0" />
-  <Block id="gtceu:firebricks" x="0" y="2" z="1" /><Block id="gtceu:firebricks" x="2" y="2" z="1" />
-  <Block id="gtceu:firebricks" x="0" y="2" z="2" /><Block id="gtceu:firebricks" x="1" y="2" z="2" /><Block id="gtceu:firebricks" x="2" y="2" z="2" />
-  <Block id="gtceu:firebricks" x="0" y="3" z="0" /><Block id="gtceu:firebricks" x="1" y="3" z="0" /><Block id="gtceu:firebricks" x="2" y="3" z="0" />
-  <Block id="gtceu:firebricks" x="0" y="3" z="1" /><Block id="gtceu:firebricks" x="2" y="3" z="1" />
-  <Block id="gtceu:firebricks" x="0" y="3" z="2" /><Block id="gtceu:firebricks" x="1" y="3" z="2" /><Block id="gtceu:firebricks" x="2" y="3" z="2" />
-  <IsometricCamera yaw="195" pitch="30" />
-</GameScene>
+<Multiblock id="gtceu:primitive_blast_furnace" />
 
 <ItemLink id="gtceu:firebricks" />, 3 wide, 4 tall, hollow in the middle and open on top, controller low on one side.
 Iron + coal / coal coke / charcoal -> **steel** (and ash). Slow, so build several.
@@ -213,6 +188,8 @@ tier('05-iv.md', 'IV (8,192 V)', 60, 'gtceu:iv_machine_hull', '''
 1. **Platinum group** from sheldonite (End) and byproducts: platinum, palladium, then iridium / osmium / rhodium / ruthenium.
 2. <ItemLink id="gtceu:iv_machine_hull" />, crystal processors later. HSS-G coils.
 3. <ItemLink id="gtceu:assembly_line" /> (research data for some recipes).
+
+   <Multiblock id="gtceu:assembly_line" />
 
    ![An Assembly Line with its input buses and data hatch](../assets/images/assembly_line.png)
 4. Power: <ItemLink id="gtceu:steam_large_turbine" /> / <ItemLink id="gtceu:gas_large_turbine" />, or the

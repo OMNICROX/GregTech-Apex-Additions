@@ -28,43 +28,7 @@ The <ItemLink id="gtceu:electric_blast_furnace" /> smelts metals that need heat.
 
 ## Building it
 
-<GameScene zoom="4" interactive={true}>
-  <Block id="gtceu:heatproof_machine_casing" x="0" y="0" z="0" />
-  <Block id="gtceu:lv_input_bus" x="1" y="0" z="0" />
-  <Block id="gtceu:heatproof_machine_casing" x="2" y="0" z="0" />
-  <Block id="gtceu:lv_energy_input_hatch" x="0" y="0" z="1" />
-  <Block id="gtceu:heatproof_machine_casing" x="1" y="0" z="1" />
-  <Block id="gtceu:lv_energy_input_hatch" x="2" y="0" z="1" />
-  <Block id="gtceu:maintenance_hatch" x="0" y="0" z="2" />
-  <Block id="gtceu:electric_blast_furnace" x="1" y="0" z="2" />
-  <Block id="gtceu:lv_output_bus" x="2" y="0" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="1" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="1" y="1" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="1" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="1" z="1" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="1" z="1" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="1" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="1" y="1" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="1" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="2" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="1" y="2" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="2" z="0" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="2" z="1" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="2" z="1" />
-  <Block id="gtceu:cupronickel_coil_block" x="0" y="2" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="1" y="2" z="2" />
-  <Block id="gtceu:cupronickel_coil_block" x="2" y="2" z="2" />
-  <Block id="gtceu:heatproof_machine_casing" x="0" y="3" z="0" />
-  <Block id="gtceu:heatproof_machine_casing" x="1" y="3" z="0" />
-  <Block id="gtceu:heatproof_machine_casing" x="2" y="3" z="0" />
-  <Block id="gtceu:heatproof_machine_casing" x="0" y="3" z="1" />
-  <Block id="gtceu:lv_muffler_hatch" x="1" y="3" z="1" />
-  <Block id="gtceu:heatproof_machine_casing" x="2" y="3" z="1" />
-  <Block id="gtceu:heatproof_machine_casing" x="0" y="3" z="2" />
-  <Block id="gtceu:heatproof_machine_casing" x="1" y="3" z="2" />
-  <Block id="gtceu:heatproof_machine_casing" x="2" y="3" z="2" />
-  <IsometricCamera yaw="195" pitch="30" />
-</GameScene>
+<Multiblock id="gtceu:electric_blast_furnace" />
 
 Bottom layer: casings with the controller, an input bus, an output bus, energy hatches and a maintenance hatch.
 Two layers of coils (hollow middle), then a casing top with a **muffler hatch** in the middle facing up.

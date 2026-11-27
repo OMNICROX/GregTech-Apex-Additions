@@ -12,9 +12,7 @@ item_ids:
 
 # Strange Matter Aggregator
 
-<Row>
-  <BlockImage id="gtapexadditions:strange_matter_aggregator" scale="3" />
-</Row>
+<Multiblock id="gtapexadditions:strange_matter_aggregator" />
 
 **Tier:** UIV · **Kind:** Power · **From:** Twist Space Technology
 
@@ -22,8 +20,9 @@ Breeds antimatter. 3-8 rings of GTNA field generators set its tier; feed hydroge
 
 ## Building it
 
-Press **U** on the controller in JEI for the 3D structure (layers, tiers, hatch spots, block counts), or use the
-[Structure Upgrader](../items/structure-upgrader.md) to place it.
+The structure above works like the JEI multiblock page: left drag rotates, right drag or the scroll wheel zooms,
+middle drag pans; the sliders show one layer or another tier, **H** shows hatch spots, and the row underneath lists
+every block you need (click one for its recipe). The [Structure Upgrader](../items/structure-upgrader.md) builds it for you.
 
 ## Controller recipe
 

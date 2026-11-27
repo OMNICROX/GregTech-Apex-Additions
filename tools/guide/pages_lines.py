@@ -26,6 +26,9 @@ line('oil.md', 'Oil Processing', 20, 'gtceu:distillation_tower', '''
 
 1. Find oil with a prospector (fluid mode) and pump it, or make it from oil sands / bedrock fluid drills.
 2. **Desulfurize** in a chemical reactor (hydrogen) and **distill** in the <ItemLink id="gtceu:distillation_tower" />.
+
+<Multiblock id="gtceu:distillation_tower" />
+
 3. Light fuel + heavy fuel -> **diesel**; with tetranitromethane -> **cetane-boosted diesel** (best LCE fuel).
 4. Naphtha / gases -> ethylene, propene, benzene for plastics. Ad Astra rockets burn GregTech rocket fuel.
 ''')
@@ -71,6 +74,8 @@ line('fusion.md', 'Fusion', 70, 'gtceu:luv_fusion_reactor', '''
 1. <ItemLink id="gtceu:luv_fusion_reactor" /> (MK-I), <ItemLink id="gtceu:zpm_fusion_reactor" /> (MK-II),
    <ItemLink id="gtceu:uv_fusion_reactor" /> (MK-III); Apex adds MK-IV (UHV) and MK-V (UEV) and the GoodGenerator
    Compact Fusion Computers MK-I to MK-V (parallels).
+<Multiblock id="gtceu:luv_fusion_reactor" />
+
 2. Each recipe needs a start-up energy (EU stored in the reactor): more energy hatches = more storage.
 3. **Plasmas** (helium, oxygen, nitrogen, nickel, iron...) burn in the <ItemLink id="gtceu:plasma_large_turbine" />.
 4. Fusion makes europium, americium, naquadria, duranium, tritanium and other late metals.

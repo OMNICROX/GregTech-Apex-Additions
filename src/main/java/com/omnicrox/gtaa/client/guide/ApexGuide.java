@@ -32,6 +32,7 @@ public final class ApexGuide {
                         Optional.empty()))
                 .extension(RecipeTypeMappingSupplier.EXTENSION_POINT, GTGuideRecipes::collect)
                 .extension(TagCompiler.EXTENSION_POINT, new GTRecipesTag())
+                .extension(TagCompiler.EXTENSION_POINT, new MultiblockTag())
                 .build();
     }
 }

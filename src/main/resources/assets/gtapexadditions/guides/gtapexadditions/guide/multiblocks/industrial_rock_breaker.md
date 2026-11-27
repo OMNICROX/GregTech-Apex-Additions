@@ -12,9 +12,7 @@ item_ids:
 
 # Industrial Rock Breaker
 
-<Row>
-  <BlockImage id="gtapexadditions:industrial_rock_breaker" scale="3" />
-</Row>
+<Multiblock id="gtapexadditions:industrial_rock_breaker" />
 
 **Tier:** MV · **Kind:** Processing · **From:** GT++ (GTNH)
 
@@ -22,8 +20,9 @@ Makes stone blocks from lava and water. A programmed circuit picks the block: 1 
 
 ## Building it
 
-Press **U** on the controller in JEI for the 3D structure (layers, tiers, hatch spots, block counts), or use the
-[Structure Upgrader](../items/structure-upgrader.md) to place it.
+The structure above works like the JEI multiblock page: left drag rotates, right drag or the scroll wheel zooms,
+middle drag pans; the sliders show one layer or another tier, **H** shows hatch spots, and the row underneath lists
+every block you need (click one for its recipe). The [Structure Upgrader](../items/structure-upgrader.md) builds it for you.
 
 ## Controller recipe
 

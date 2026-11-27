@@ -12,9 +12,7 @@ item_ids:
 
 # Miracle Top
 
-<Row>
-  <BlockImage id="gtapexadditions:miracle_top" scale="3" />
-</Row>
+<Multiblock id="gtapexadditions:miracle_top" />
 
 **Tier:** UHV · **Kind:** Assembly · **From:** Twist Space Technology
 
@@ -22,8 +20,9 @@ A circuit assembler built from a ring section and a conveying section, 2-16 ring
 
 ## Building it
 
-Press **U** on the controller in JEI for the 3D structure (layers, tiers, hatch spots, block counts), or use the
-[Structure Upgrader](../items/structure-upgrader.md) to place it.
+The structure above works like the JEI multiblock page: left drag rotates, right drag or the scroll wheel zooms,
+middle drag pans; the sliders show one layer or another tier, **H** shows hatch spots, and the row underneath lists
+every block you need (click one for its recipe). The [Structure Upgrader](../items/structure-upgrader.md) builds it for you.
 
 ## Controller recipe
 
