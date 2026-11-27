@@ -1,5 +1,7 @@
 package com.omnicrox.gtaa.mixin;
 
+import com.omnicrox.gtaa.common.glass.GlassTierBlocked;
+
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;

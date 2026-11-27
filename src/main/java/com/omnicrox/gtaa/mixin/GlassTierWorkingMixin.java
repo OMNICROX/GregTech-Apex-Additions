@@ -1,5 +1,7 @@
 package com.omnicrox.gtaa.mixin;
 
+import com.omnicrox.gtaa.common.glass.GlassTierBlocked;
+
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import org.spongepowered.asm.mixin.Mixin;
