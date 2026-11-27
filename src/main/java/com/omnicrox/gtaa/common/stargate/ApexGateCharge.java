@@ -1,7 +1,7 @@
 package com.omnicrox.gtaa.common.stargate;
 
-import com.omnicrox.gtaa.api.GTAAFormat;
-import com.omnicrox.gtaa.api.GTAAWireless;
+import com.omnicrox.apexlib.util.ApexFormat;
+import com.omnicrox.apexlib.compat.ApexWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
 import net.minecraft.ChatFormatting;
@@ -165,8 +165,8 @@ public final class ApexGateCharge extends SavedData {
         long need = Math.min(MAX_PER_TICK, REQUIRED - charge);
         long got = 0;
         if (need > 0 && owner != null) {
-            got += GTAAWireless.drawNexusEU(level, owner, need);
-            if (got < need) got += GTAAWireless.drawEU(owner, need - got);
+            got += ApexWireless.drawNexusEU(level, owner, need);
+            if (got < need) got += ApexWireless.drawEU(owner, need - got);
         }
         if (got > 0) {
             charge = charge > REQUIRED - got ? REQUIRED : charge + got;
@@ -192,7 +192,7 @@ public final class ApexGateCharge extends SavedData {
         float frac = intro >= 0 ? 1f : (float) ((double) charge / REQUIRED);
         bar.setProgress(Math.max(0, Math.min(1, frac)));
         String text = intro >= 0 ? "✦ The gate is open ✦" : rate > 0
-                ? String.format("Ascension charge: %.3f%%  (%s EU/t)", frac * 100, GTAAFormat.num(rate))
+                ? String.format("Ascension charge: %.3f%%  (%s EU/t)", frac * 100, ApexFormat.num(rate))
                 : String.format("Ascension charge: %.3f%%  - waiting for %s's wireless power", frac * 100, ownerName);
         bar.setName(Component.literal(text).withStyle(ChatFormatting.AQUA));
         Vec3 c = ApexStargate.center(base);
@@ -284,6 +284,6 @@ public final class ApexGateCharge extends SavedData {
         if (ApexStargate.ascended(server)) return Component.literal("This world has ascended - every gate is awake").withStyle(ChatFormatting.AQUA);
         if (d.dim.isEmpty()) return Component.literal("No Apex Stargate is charging yet").withStyle(ChatFormatting.GRAY);
         return Component.literal(String.format("Ascension charge: %.4f%% (%s / 9.22E18 EU)",
-                (double) d.charge / REQUIRED * 100, GTAAFormat.num(d.charge))).withStyle(ChatFormatting.AQUA);
+                (double) d.charge / REQUIRED * 100, ApexFormat.num(d.charge))).withStyle(ChatFormatting.AQUA);
     }
 }

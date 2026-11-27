@@ -176,7 +176,7 @@ public class PurificationUnitMachine extends WorkableElectricMultiblockMachine {
         if (!isFormed()) return;
         textList.add(Component.literal(linked ? "Linked to a Water Purification Plant" : "Not linked: build a Water Purification Plant within 32 blocks")
                 .withStyle(linked ? ChatFormatting.GREEN : ChatFormatting.RED));
-        textList.add(Component.literal("Stored: " + com.omnicrox.gtaa.api.GTAAFormat.num(buffer.getEnergyStored()) + " EU")
+        textList.add(Component.literal("Stored: " + com.omnicrox.apexlib.util.ApexFormat.num(buffer.getEnergyStored()) + " EU")
                 .withStyle(ChatFormatting.YELLOW));
         if (lastChance > 0) textList.add(Component.literal("Success chance: " + lastChance + "%").withStyle(ChatFormatting.AQUA));
     }

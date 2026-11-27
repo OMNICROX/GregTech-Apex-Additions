@@ -1,4 +1,4 @@
-package com.omnicrox.gtaa.common.machine;
+package com.omnicrox.apexlib.multiblock;
 
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
@@ -18,10 +18,10 @@ import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 
-/** Shared recipe modifiers / structure predicates for GTAA's GTNH-style multis. */
-public final class GTAAModifiers {
+/** Shared recipe modifiers and structure predicates for Apex GTNH-style multiblocks. */
+public final class ApexModifiers {
 
-    private GTAAModifiers() {}
+    private ApexModifiers() {}
 
     /** Voltage tier of the machine's energy hatches (0 when unformed) */
     public static int tier(MetaMachine m) {

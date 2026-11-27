@@ -97,3 +97,8 @@ Needs JDK 17. The jar ends up in `build/libs`.
 
 ## License
 LGPL-3.0-or-later. Ported GTNH content keeps its original credits; see [CREDITS.md](CREDITS.md).
+
+## Apex platform
+
+This repository also builds **Apex Lib**, the shared library for the Apex Ascension mods. See
+[docs/APEX_PLATFORM.md](docs/APEX_PLATFORM.md).

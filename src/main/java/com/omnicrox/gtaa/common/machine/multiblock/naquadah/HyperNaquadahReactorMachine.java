@@ -158,14 +158,14 @@ public class HyperNaquadahReactorMachine extends WorkableElectricMultiblockMachi
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        textList.add(Component.literal("Generating: " + com.omnicrox.gtaa.api.GTAAFormat.num(output) + " EU/t").withStyle(ChatFormatting.GOLD));
+        textList.add(Component.literal("Generating: " + com.omnicrox.apexlib.util.ApexFormat.num(output) + " EU/t").withStyle(ChatFormatting.GOLD));
         textList.add(Component.literal("Parallels: " + parallels + " (max " + spec.parallels() + ", " + spec.boostedParallels() + " boosted)")
                 .withStyle(ChatFormatting.AQUA));
         FluidStack b = spec.boost().get();
         textList.add(Component.literal("Boost: " + (boosted ? "ON" : "off") + (b == null || b.isEmpty() ? "" :
                 " (" + b.getAmount() + " L/s " + b.getDisplayName().getString() + ": x" + spec.boostPowerMult() + " power, x" +
                         spec.boostSpeedMult() + " speed)")).withStyle(boosted ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.GRAY));
-        if (lastVoided > 0) textList.add(Component.literal("Output hatches full: " + com.omnicrox.gtaa.api.GTAAFormat.num(lastVoided) + " EU/t lost")
+        if (lastVoided > 0) textList.add(Component.literal("Output hatches full: " + com.omnicrox.apexlib.util.ApexFormat.num(lastVoided) + " EU/t lost")
                 .withStyle(ChatFormatting.RED));
     }
 }

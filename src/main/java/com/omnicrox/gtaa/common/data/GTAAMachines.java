@@ -72,10 +72,10 @@ public class GTAAMachines {
                     .recipeModifiers(DEFAULT_ENVIRONMENT_REQUIREMENT, FusionReactorMachine::recipeModifier, BATCH_MODE)
                     .tooltips(
                             Component.literal("\u00a77Runs fusion recipes up to " + VNF[tier] + "§7, with perfect overclocks"),
-                            Component.literal("\u00a77§e" + com.omnicrox.gtaa.api.GTAAFormat.num(
+                            Component.literal("\u00a77§e" + com.omnicrox.apexlib.util.ApexFormat.num(
                                     AdvancedFusionReactorMachine.capacityPerHatch(tier)) +
                                     "§7 EU buffer per Energy Hatch (max 16: §e" +
-                                    com.omnicrox.gtaa.api.GTAAFormat.num(AdvancedFusionReactorMachine.totalCapacity(tier, 16)) +
+                                    com.omnicrox.apexlib.util.ApexFormat.num(AdvancedFusionReactorMachine.totalCapacity(tier, 16)) +
                                     "§7 EU)"),
                             Component.literal("\u00a77§8Ported from GT New Horizons (GT++)"))
                     .appearanceBlock(() -> fusionCasing(tier))
@@ -129,7 +129,7 @@ public class GTAAMachines {
             .tier(UEV)
             .rotationState(RotationState.ALL)
             .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
-            .tooltips(Component.literal("\u00a77Holds \u00a7d" + com.omnicrox.gtaa.api.GTAAFormat.num(AntimatterHatchPartMachine.CAPACITY) +
+            .tooltips(Component.literal("\u00a77Holds \u00a7d" + com.omnicrox.apexlib.util.ApexFormat.num(AntimatterHatchPartMachine.CAPACITY) +
                             " L\u00a77 of Semi-Stable Antimatter"),
                     Component.literal("\u00a77The SASS needs exactly 16, around its inner ring"),
                     Component.literal("\u00a77Keeps \u00a7d1,000,000 L\u00a77 inside; only the surplus can leave (auto-output, ME, pipes)"),
@@ -392,7 +392,7 @@ public class GTAAMachines {
                 .tooltips(tooltips)
                 .tooltips(Component.literal("\u00a77Goes in a Space Elevator module slot, front facing the elevator"),
                         Component.literal("\u00a77 (or let the Structure Upgrader place it and build its frame)"),
-                        Component.literal("\u00a77Capacity: \u00a79" + com.omnicrox.gtaa.api.GTAAFormat.num(stats.bufferSize()) + " EU"),
+                        Component.literal("\u00a77Capacity: \u00a79" + com.omnicrox.apexlib.util.ApexFormat.num(stats.bufferSize()) + " EU"),
                         Component.literal(credit != null ? credit : "\u00a78Ported from GT New Horizons (GTNH-Intergalactic)"))
                 .appearanceBlock(GTAABlocks.SE_BASE_CASING)
                 .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.LEFT, RelativeDirection.DOWN, RelativeDirection.BACK)
@@ -555,9 +555,9 @@ public class GTAAMachines {
             Component.literal("\u00a77Launches Dyson Swarm Modules into orbit around the sun"),
             Component.literal("\u00a7d\u00a7lHarness the power of a star"),
             Component.literal("\u00a77Launching uses energy from the Space Elevator"),
-            Component.literal("\u00a77Every module in orbit makes \u00a7e" + com.omnicrox.gtaa.api.GTAAFormat.num(DysonLaunchSiteMachine.EU_PER_MODULE) + " EU/t\u00a77 through Dynamo or Laser Source hatches"),
+            Component.literal("\u00a77Every module in orbit makes \u00a7e" + com.omnicrox.apexlib.util.ApexFormat.num(DysonLaunchSiteMachine.EU_PER_MODULE) + " EU/t\u00a77 through Dynamo or Laser Source hatches"),
             Component.literal("\u00a77Modules in orbit slowly break: \u00a7c0.1%\u00a77 of the swarm is lost every second"),
-            Component.literal("\u00a77At most \u00a76" + com.omnicrox.gtaa.api.GTAAFormat.num(DysonLaunchSiteMachine.MAX_MODULES) + "\u00a77 modules in orbit"),
+            Component.literal("\u00a77At most \u00a76" + com.omnicrox.apexlib.util.ApexFormat.num(DysonLaunchSiteMachine.MAX_MODULES) + "\u00a77 modules in orbit"),
             Component.literal("\u00a77Runs at " + VNF[UIV] + "\u00a77 with up to \u00a7664\u00a77 parallel launches"),
             Component.literal("\u00a77Needs at least \u00a76Motor Mk-IV\u00a77 to work"));
 
@@ -620,12 +620,12 @@ public class GTAAMachines {
                 .tooltips(
                         Component.literal("\u00a77Machine Type: \u00a7eFusion Reactor"),
                         Component.literal("\u00a7664\u00a77 + (Machine Tier - Recipe Tier) * \u00a7664\u00a77 Parallels"),
-                        Component.literal("\u00a7a" + com.omnicrox.gtaa.api.GTAAFormat.num(V[tier] * 2L * mk) + "\u00a77 EU/t and \u00a7e" +
-                                com.omnicrox.gtaa.api.GTAAFormat.num(capacity / 32) + "\u00a77 EU capacity per \u00a7bEnergy Hatch"),
+                        Component.literal("\u00a7a" + com.omnicrox.apexlib.util.ApexFormat.num(V[tier] * 2L * mk) + "\u00a77 EU/t and \u00a7e" +
+                                com.omnicrox.apexlib.util.ApexFormat.num(capacity / 32) + "\u00a77 EU capacity per \u00a7bEnergy Hatch"),
                         Component.literal("\u00a77The total combined EU capacity must be greater than the recipe start cost to ignite"),
                         Component.literal("\u00a77Can only run " + VNF[tier] + "\u00a77 recipes and below"),
                         Component.literal("\u00a77Up to \u00a7e32\u00a77 Energy Hatches (" + VNF[tier] + "\u00a77 or better): \u00a7e" +
-                                com.omnicrox.gtaa.api.GTAAFormat.num(capacity) + "\u00a77 EU total"),
+                                com.omnicrox.apexlib.util.ApexFormat.num(capacity) + "\u00a77 EU total"),
                         Component.literal("\u00a7dPerforms " + oc + " Perfect Overclocks"),
                         Component.literal("\u00a78Ported from GT New Horizons (GoodGenerator)"))
                 .appearanceBlock(() -> compactFusionCasing(mk))

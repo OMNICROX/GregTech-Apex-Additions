@@ -13,7 +13,7 @@ import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -88,7 +88,7 @@ public class PlasmaForgePrototypeMachine extends CoilWorkableElectricMultiblockM
             copy.inputs.put(FluidRecipeCapability.CAP, scaled);
             return copy;
         };
-        ModifierFunction par = GTAAModifiers.parallel(m -> PARALLEL, m -> 1.0, 1.0).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(m -> PARALLEL, m -> 1.0, 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         GTRecipe afterPar = par.apply(recipe);
         ModifierFunction oc = GTRecipeModifiers.ebfOverclock(machine, afterPar);

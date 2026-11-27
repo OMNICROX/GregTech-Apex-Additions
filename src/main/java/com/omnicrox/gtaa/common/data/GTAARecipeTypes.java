@@ -77,19 +77,19 @@ public class GTAARecipeTypes {
         NAQUADAH_REACTOR = register("naquadah_reactor", "multiblock", "Large Naquadah Reactor")
                 .setMaxIOSize(0, 0, 1, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
-                .addDataInfo(d -> "Base output: " + com.omnicrox.gtaa.api.GTAAFormat.num(d.getLong("lnr_output")) + " EU/t")
+                .addDataInfo(d -> "Base output: " + com.omnicrox.apexlib.util.ApexFormat.num(d.getLong("lnr_output")) + " EU/t")
                 .setMaxTooltips(4);
         HYPER_NAQUADAH_REACTOR = register("hyper_naquadah_reactor", "multiblock", "Hyper Naquadah Reaction")
                 .setMaxIOSize(0, 0, 2, 1)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
-                .addDataInfo(d -> "Output: " + com.omnicrox.gtaa.api.GTAAFormat.num(d.getLong("hnr_power")) + " EU/t per parallel")
+                .addDataInfo(d -> "Output: " + com.omnicrox.apexlib.util.ApexFormat.num(d.getLong("hnr_power")) + " EU/t per parallel")
                 .addDataInfo(d -> d.getInt("hnr_tier") >= 2 ? "Needs the Advanced Hyper Naquadah Reactor" : "Hyper or Advanced Hyper Naquadah Reactor")
                 .setMaxTooltips(4);
         FUEL_REFINING_COMPLEX = register("fuel_refining_complex", "multiblock", "Fuel Refining Complex")
                 .setMaxIOSize(3, 0, 8, 1)
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
-                .addDataInfo(d -> "Heat: " + com.omnicrox.gtaa.api.GTAAFormat.num(d.getInt("frc_heat")) + " K")
+                .addDataInfo(d -> "Heat: " + com.omnicrox.apexlib.util.ApexFormat.num(d.getInt("frc_heat")) + " K")
                 .addDataInfo(d -> "Needs Field Restriction Coil T" + d.getInt("nfr_coil_tier"))
                 .setMaxTooltips(4);
         COMPONENT_ASSEMBLY_LINE = register("component_assembly_line", "multiblock", "Component Assembly Line")
@@ -144,7 +144,7 @@ public class GTAARecipeTypes {
         MANA_NEXUS = register("mana_nexus", "multiblock", "Sylvan Arbiter")
                 .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
-                .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + com.omnicrox.gtaa.api.GTAAFormat.num(data.getLong("mana")) : "")
+                .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + com.omnicrox.apexlib.util.ApexFormat.num(data.getLong("mana")) : "")
                 .addDataInfo(data -> "Mana Cores: " + com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.CORE_NAMES[
                         Math.max(1, Math.min(5, data.getInt("nexus_tier")))] + " or better");
         SEED_SYNTHESIS = register("seed_synthesizer", "electric", "Seed Synthesizer")

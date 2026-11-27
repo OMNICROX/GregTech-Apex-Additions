@@ -370,7 +370,7 @@ public class MysticalCultivationArrayMachine extends WorkableElectricMultiblockM
                 .withStyle(seedSlots > 0 && seedTypes >= seedSlots ? ChatFormatting.YELLOW : ChatFormatting.GRAY));
         textList.add(Component.literal("Harvest every " + cycle / 20.0 + " s, " + soilYield() + "x yield")
                 .withStyle(ChatFormatting.GREEN));
-        if (lastEut > 0) textList.add(Component.literal("Using " + com.omnicrox.gtaa.api.GTAAFormat.num(lastEut) + " EU/t")
+        if (lastEut > 0) textList.add(Component.literal("Using " + com.omnicrox.apexlib.util.ApexFormat.num(lastEut) + " EU/t")
                 .withStyle(ChatFormatting.AQUA));
         textList.add(Component.literal("Soil tier " + soilTier + ", " + GLASS_NAMES[Math.max(0, Math.min(3, glassTier - 1))] +
                 " (runs up to " + GTValues.VNF[GLASS_CAP[Math.max(0, Math.min(3, glassTier - 1))]] + ChatFormatting.GRAY + ")")

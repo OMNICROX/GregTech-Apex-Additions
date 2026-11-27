@@ -14,7 +14,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import com.omnicrox.gtaa.common.data.GTAAItems;
 import com.omnicrox.gtaa.common.data.GTAARecipeTypes;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
@@ -114,10 +114,10 @@ public class BlackHoleCompressorMachine extends WorkableElectricMultiblockMachin
         boolean neutronium = recipe.recipeType == GTAARecipeTypes.NEUTRONIUM_COMPRESSION;
         if (neutronium && !bh.open) return ModifierFunction.cancel(Component.literal("Requires an active black hole"));
         int mult = !bh.open ? 1 : bh.stability < 20 ? 4 : bh.stability < 50 ? 2 : 1;
-        int max = 8 * Math.max(1, GTAAModifiers.tier(machine)) * mult;
+        int max = 8 * Math.max(1, ApexModifiers.tier(machine)) * mult;
         if (bh.open && bh.stability < 20 && !neutronium) max = 1 << 16; // uncapped
         final int cap = max;
-        ModifierFunction par = GTAAModifiers.parallel(m -> cap, m -> 0.2, 0.7).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(m -> cap, m -> 0.2, 0.7).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         ModifierFunction oc = GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, par.apply(recipe));
         ModifierFunction result = par.andThen(oc);

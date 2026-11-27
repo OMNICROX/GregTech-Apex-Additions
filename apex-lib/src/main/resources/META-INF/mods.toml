@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GPL-3.0-or-later"
+issueTrackerURL="https://github.com/OMNICROX/GregTech-Apex-Additions/issues"
+
+[[mods]]
+modId="apexlib"
+version="${apexlib_version}"
+displayName="Apex Lib"
+authors="OMNICROX"
+description='''
+Shared code for the Apex Ascension mods: GregTech multiblock helpers, GTNH-style tooltips, number formatting and
+compatibility helpers. Does nothing on its own.
+'''
+
+[[dependencies.apexlib]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apexlib]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apexlib]]
+    modId="gtceu"
+    mandatory=true
+    versionRange="[${gtceu_version},)"
+    ordering="AFTER"
+    side="BOTH"

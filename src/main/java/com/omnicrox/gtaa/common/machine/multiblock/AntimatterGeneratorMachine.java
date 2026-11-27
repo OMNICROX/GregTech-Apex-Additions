@@ -13,7 +13,7 @@ import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.omnicrox.gtaa.api.GTAAWireless;
+import com.omnicrox.apexlib.compat.ApexWireless;
 import com.omnicrox.gtaa.common.data.GTAAMaterials;
 import com.omnicrox.gtaa.common.machine.multiblock.AntimatterMachineHelper.StoredFluid;
 import net.minecraft.ChatFormatting;
@@ -110,7 +110,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
     @Override
     protected InteractionResult onScrewdriverClick(Player player, InteractionHand hand, Direction gridSide, BlockHitResult hitResult) {
         if (isRemote()) return InteractionResult.SUCCESS;
-        if (!GTAAWireless.isAvailable()) {
+        if (!ApexWireless.isAvailable()) {
             player.displayClientMessage(Component.literal("Wireless mode needs GTM Things installed"), true);
             return InteractionResult.CONSUME;
         }
@@ -202,7 +202,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
                     break;
                 }
         inputHatches = in;
-        wirelessStored = wireless ? GTAAWireless.storedText(getOwnerUUID()) : "";
+        wirelessStored = wireless ? ApexWireless.storedText(getOwnerUUID()) : "";
     }
 
     private static long sat(long a, long b) {
@@ -220,7 +220,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
         sentThisCycle = 0;
         if (undelivered > 0) {
             euVoidedLastCycle = undelivered;
-            problem = "The hatches couldn't take a whole burst in 5 s: " + com.omnicrox.gtaa.api.GTAAFormat.num(undelivered) +
+            problem = "The hatches couldn't take a whole burst in 5 s: " + com.omnicrox.apexlib.util.ApexFormat.num(undelivered) +
                     " EU voided. Add more / bigger dynamo or laser hatches";
         }
         List<StoredFluid> inputs = AntimatterMachineHelper.inputFluids(this);
@@ -278,7 +278,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
             return;
         }
         if (wireless) {
-            if (!GTAAWireless.isAvailable()) {
+            if (!ApexWireless.isAvailable()) {
                 problem = "Wireless mode needs GTM Things; sent to the hatches instead";
             } else if (getOwnerUUID() == null) {
                 problem = "This controller has no owner (placed by a machine?): break and place it yourself. Sent to the hatches instead";
@@ -287,7 +287,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
             } else {
                 long cap = 0;
                 for (IEnergyContainer c : outs) cap = sat(cap, c.getEnergyCapacity());
-                long sent = GTAAWireless.addEU(getOwnerUUID(), Math.min(eu, cap), this, true);
+                long sent = ApexWireless.addEU(getOwnerUUID(), Math.min(eu, cap), this, true);
                 euVoidedLastCycle = eu - sent;
                 if (eu > cap) problem = "Over the hatches' capacity: the rest was voided (wireless is still capped by hatches)";
                 return;
@@ -319,7 +319,7 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
     }
 
     private static String eu(long v) {
-        return com.omnicrox.gtaa.api.GTAAFormat.num(v) + " EU";
+        return com.omnicrox.apexlib.util.ApexFormat.num(v) + " EU";
     }
 
     @Override
@@ -332,20 +332,20 @@ public class AntimatterGeneratorMachine extends WorkableElectricMultiblockMachin
 
                     t.add(Component.literal("Last burst").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
                     t.add(line(" Generated: ", eu(euLastCycle), ChatFormatting.GREEN));
-                    t.add(line(" Average: ", com.omnicrox.gtaa.api.GTAAFormat.num(euLastCycle / CYCLE_TICKS) + " EU/t", ChatFormatting.GREEN));
-                    t.add(line(" Used: ", com.omnicrox.gtaa.api.GTAAFormat.num(antimatterLastCycle) + " L antimatter + " +
-                            com.omnicrox.gtaa.api.GTAAFormat.num(matterLastCycle) + " L " +
+                    t.add(line(" Average: ", com.omnicrox.apexlib.util.ApexFormat.num(euLastCycle / CYCLE_TICKS) + " EU/t", ChatFormatting.GREEN));
+                    t.add(line(" Used: ", com.omnicrox.apexlib.util.ApexFormat.num(antimatterLastCycle) + " L antimatter + " +
+                            com.omnicrox.apexlib.util.ApexFormat.num(matterLastCycle) + " L " +
                             (matterNameLastCycle.isEmpty() ? "matter" : matterNameLastCycle), ChatFormatting.AQUA));
                     if (boostLastCycle > 0) t.add(line(" Boost: ", "x^" + boostLastCycle, ChatFormatting.YELLOW));
                     t.add(line(" Efficiency: ", Math.round(efficiency * 100) + "% (avg " + Math.round(avgEfficiency * 100) + "%)",
                             efficiency >= 0.999f ? ChatFormatting.GREEN : ChatFormatting.RED));
-                    if (!wireless) t.add(line(" Delivered: ", eu(sentThisCycle) + " (" + com.omnicrox.gtaa.api.GTAAFormat.num(sentThisCycle / CYCLE_TICKS) + " EU/t)", ChatFormatting.GREEN));
+                    if (!wireless) t.add(line(" Delivered: ", eu(sentThisCycle) + " (" + com.omnicrox.apexlib.util.ApexFormat.num(sentThisCycle / CYCLE_TICKS) + " EU/t)", ChatFormatting.GREEN));
                     if (euVoidedLastCycle > 0) t.add(line(" Voided: ", eu(euVoidedLastCycle), ChatFormatting.RED));
 
                     t.add(Component.literal("Inputs").withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE));
                     t.add(line(" Fluid hatches: ", String.valueOf(inputHatches), ChatFormatting.WHITE));
-                    t.add(line(" Antimatter: ", com.omnicrox.gtaa.api.GTAAFormat.num(antimatterStored) + " L", ChatFormatting.AQUA));
-                    t.add(line(" Matter: ", com.omnicrox.gtaa.api.GTAAFormat.num(matterStored) + " L" +
+                    t.add(line(" Antimatter: ", com.omnicrox.apexlib.util.ApexFormat.num(antimatterStored) + " L", ChatFormatting.AQUA));
+                    t.add(line(" Matter: ", com.omnicrox.apexlib.util.ApexFormat.num(matterStored) + " L" +
                             (matterStoredName.isEmpty() ? "" : " (" + matterStoredName + ")"), ChatFormatting.AQUA));
                     if (fluidKinds > 2) t.add(Component.literal(" More than 2 fluids: the next burst will be voided!")
                             .withStyle(ChatFormatting.RED));

@@ -9,7 +9,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
-import com.omnicrox.gtaa.api.GTAAWireless;
+import com.omnicrox.apexlib.compat.ApexWireless;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.data.GTAAItems;
 import com.omnicrox.gtaa.common.network.GTAANetwork;
@@ -164,8 +164,8 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
             if (take > 0) got += energyContainer.removeEnergy(take);
         }
         UUID owner = getOwnerUUID();
-        if (got < need && owner != null) got += GTAAWireless.drawNexusEU(level, owner, need - got);
-        if (got < need && owner != null) got += GTAAWireless.drawEU(owner, need - got);
+        if (got < need && owner != null) got += ApexWireless.drawNexusEU(level, owner, need - got);
+        if (got < need && owner != null) got += ApexWireless.drawEU(owner, need - got);
         charge = charge > REQUIRED - got ? REQUIRED : charge + got;
         secondCharge += got;
         if (getOffsetTimer() % 20 == 0) {
@@ -296,7 +296,7 @@ public class AscensionGateMachine extends WorkableElectricMultiblockMachine {
     //////////////////////////////////////
 
     private static String big(long v) {
-        return com.omnicrox.gtaa.api.GTAAFormat.num(v);
+        return com.omnicrox.apexlib.util.ApexFormat.num(v);
     }
 
     @Override

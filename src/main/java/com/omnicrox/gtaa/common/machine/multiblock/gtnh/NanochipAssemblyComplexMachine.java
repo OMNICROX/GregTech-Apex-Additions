@@ -12,7 +12,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.omnicrox.gtaa.common.data.GTAABlocks;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -140,7 +140,7 @@ public class NanochipAssemblyComplexMachine extends WorkableElectricMultiblockMa
         if (!nac.has(need)) return ModifierFunction.cancel(Component.literal("Needs the " + need.title + " module"));
         int max = 32 * Integer.bitCount(nac.moduleMask);
         double speed = nac.has(Module.PART_PROCESSOR) ? 0.5 : 1.0;
-        ModifierFunction par = GTAAModifiers.parallel(m -> max, m -> speed, 1.0).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(m -> max, m -> speed, 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         return par.andThen(GTRecipeModifiers.OC_PERFECT.getModifier(machine, par.apply(recipe)));
     }

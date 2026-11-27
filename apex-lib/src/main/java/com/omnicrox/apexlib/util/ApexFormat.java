@@ -1,4 +1,4 @@
-package com.omnicrox.gtaa.api;
+package com.omnicrox.apexlib.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -7,12 +7,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * Number display for GTAA machines. Small numbers keep their commas (12,345,678); anything from a billion up is
+ * Number display for Apex machines. Small numbers keep their commas (12,345,678); anything from a billion up is
  * written in scientific notation like GTNH does: 1.08E16.
  */
-public final class GTAAFormat {
+public final class ApexFormat {
 
-    private GTAAFormat() {}
+    private ApexFormat() {}
 
     public static final long SCIENTIFIC_FROM = 1_000_000_000L;
 

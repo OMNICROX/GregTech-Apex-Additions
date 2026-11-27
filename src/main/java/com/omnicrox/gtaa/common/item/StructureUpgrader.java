@@ -344,7 +344,7 @@ public class StructureUpgrader extends Item {
                 : "To unlock locked recipes: " + String.join(", ", needs) + ".";
         rows.add(new GTAANetwork.Row("Status", "", "", List.of(), status,
                 needs.isEmpty() ? UpgradeAdvisor.OPTIONAL : UpgradeAdvisor.NEEDED, verdict));
-        if (controller instanceof com.omnicrox.gtaa.api.IStagedMulti sm) {
+        if (controller instanceof com.omnicrox.apexlib.multiblock.IStagedMulti sm) {
             int cur = sm.currentStage();
             List<GTAANetwork.Choice> grow = new ArrayList<>();
             for (int st = cur + 1; st <= sm.stageCount(); st++)
@@ -705,7 +705,7 @@ public class StructureUpgrader extends Item {
     /** staged multis: build stage N from the inventory and say what's still missing */
     private static int buildStage(ServerPlayer player, BlockPos cpos, int st) {
         if (!(MetaMachine.getMachine(player.level(), cpos) instanceof IMultiController c)) return 0;
-        if (!(c instanceof com.omnicrox.gtaa.api.IStagedMulti sm) || !allowed(player, cpos)) return 0;
+        if (!(c instanceof com.omnicrox.apexlib.multiblock.IStagedMulti sm) || !allowed(player, cpos)) return 0;
         BlockPattern pattern = sm.stagePattern(st);
         try {
             pattern.autoBuild(player, c.getMultiblockState());

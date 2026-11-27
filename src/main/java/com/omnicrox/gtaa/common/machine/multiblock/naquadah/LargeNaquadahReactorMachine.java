@@ -210,7 +210,7 @@ public class LargeNaquadahReactorMachine extends com.gregtechceu.gtceu.api.machi
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!isFormed()) return;
-        textList.add(Component.literal("Generating: " + com.omnicrox.gtaa.api.GTAAFormat.num(trueOutput) + " EU/t")
+        textList.add(Component.literal("Generating: " + com.omnicrox.apexlib.util.ApexFormat.num(trueOutput) + " EU/t")
                 .withStyle(ChatFormatting.GOLD));
         textList.add(Component.literal("Efficiency: " + trueEff + "%  |  Booster: x" + times)
                 .withStyle(ChatFormatting.AQUA));

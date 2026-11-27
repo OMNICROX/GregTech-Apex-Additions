@@ -42,7 +42,7 @@ import java.util.List;
  * <li>a craft takes its mana when it starts; voltage sets speed like any GT machine.</li>
  * </ul>
  */
-public class ManaNexusMachine extends WorkableElectricMultiblockMachine implements com.omnicrox.gtaa.api.IStagedMulti {
+public class ManaNexusMachine extends WorkableElectricMultiblockMachine implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             ManaNexusMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -220,7 +220,7 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine implemen
         int max = PARALLELS[Math.max(1, nexus.tier())];
         if (mana > 0) {
             long affordable = nexus.storedMana / mana;
-            if (affordable <= 0) return ModifierFunction.cancel(Component.literal("Needs " + com.omnicrox.gtaa.api.GTAAFormat.num(mana) + " mana"));
+            if (affordable <= 0) return ModifierFunction.cancel(Component.literal("Needs " + com.omnicrox.apexlib.util.ApexFormat.num(mana) + " mana"));
             max = (int) Math.min(max, affordable);
         }
         int parallels = ParallelLogic.getParallelAmount(machine, recipe, max);
@@ -244,8 +244,8 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine implemen
         super.addDisplayText(textList);
         if (!isFormed()) return;
         int t = tier();
-        textList.add(Component.literal("Mana " + com.omnicrox.gtaa.api.GTAAFormat.num(storedMana) + " / " +
-                com.omnicrox.gtaa.api.GTAAFormat.num(capacity())).withStyle(ChatFormatting.AQUA));
+        textList.add(Component.literal("Mana " + com.omnicrox.apexlib.util.ApexFormat.num(storedMana) + " / " +
+                com.omnicrox.apexlib.util.ApexFormat.num(capacity())).withStyle(ChatFormatting.AQUA));
         textList.add(Component.literal("Tier " + t + "  |  " + ManaNexusShapes.STAGE_NAMES[Math.max(1, stage)] + " stage, " +
                 CORE_NAMES[Math.max(0, Math.min(5, coreTier))] + " cores  |  " + PARALLELS[Math.max(1, t)] + "x").withStyle(ChatFormatting.LIGHT_PURPLE));
         if (stage != coreTier) textList.add(Component.literal(stage < coreTier
@@ -257,7 +257,7 @@ public class ManaNexusMachine extends WorkableElectricMultiblockMachine implemen
     public static List<String> coreInfo(int tier) {
         List<String> l = new ArrayList<>();
         int t = Math.max(1, Math.min(5, tier));
-        l.add(com.omnicrox.gtaa.api.GTAAFormat.num(CAPACITY[t]) + " mana, " + PARALLELS[t] + " crafts at once; " + TIER_CRAFTS[t]);
+        l.add(com.omnicrox.apexlib.util.ApexFormat.num(CAPACITY[t]) + " mana, " + PARALLELS[t] + " crafts at once; " + TIER_CRAFTS[t]);
         return l;
     }
 }

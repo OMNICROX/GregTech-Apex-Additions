@@ -15,7 +15,7 @@ import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.omnicrox.gtaa.GTAA;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.BlackHoleCompressorMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.CircuitAssemblyLineMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.gtnh.ElectricImplosionCompressorMachine;
@@ -58,7 +58,7 @@ public final class GTAAGTNHMachines {
             .langValue("Industrial Rock Breaker")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTAARecipeTypes.INDUSTRIAL_ROCK_BREAKER)
-            .recipeModifiers(GTAAModifiers.parallel(m -> 8 * Math.max(1, GTAAModifiers.tier(m)), m -> 1.0 / 3.0, 1.0),
+            .recipeModifiers(ApexModifiers.parallel(m -> 8 * Math.max(1, ApexModifiers.tier(m)), m -> 1.0 / 3.0, 1.0),
                     GTRecipeModifiers.OC_NON_PERFECT)
             .tooltips(
                     Component.literal("§7Machine Type: §eRock Breaker"),
@@ -87,7 +87,7 @@ public final class GTAAGTNHMachines {
             .langValue("Electric Implosion Compressor")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTAARecipeTypes.ELECTRIC_IMPLOSION)
-            .recipeModifiers(GTAAModifiers.parallel(ElectricImplosionCompressorMachine::maxParallel, m -> 1.0, 1.0),
+            .recipeModifiers(ApexModifiers.parallel(ElectricImplosionCompressorMachine::maxParallel, m -> 1.0, 1.0),
                     GTRecipeModifiers.OC_NON_PERFECT)
             .tooltips(
                     Component.literal("§7Machine Type: §eImplosion Compressor"),
@@ -234,7 +234,7 @@ public final class GTAAGTNHMachines {
                         .where('I', abilities(PartAbility.IMPORT_ITEMS).or(blocks(GTBlocks.CASING_STEEL_SOLID.get())))
                         .where('O', abilities(PartAbility.EXPORT_ITEMS))
                         .where('A', blocks(GTBlocks.CASING_ASSEMBLY_LINE.get()))
-                        .where('T', GTAAModifiers.counted(CircuitAssemblyLineMachine.CTX,
+                        .where('T', ApexModifiers.counted(CircuitAssemblyLineMachine.CTX,
                                 () -> new Block[] { GTBlocks.CASING_ASSEMBLY_CONTROL.get() }))
                         .where('G', glass)
                         .build();
@@ -268,7 +268,7 @@ public final class GTAAGTNHMachines {
                         .where('~', controller(blocks(definition.get())))
                         .where('C', io(c, 20))
                         .where('P', blocks(GTBlocks.FUSION_CASING_MK3.get()))
-                        .where('R', GTAAModifiers.counted(MiracleTopMachine.CTX, () -> new Block[] { GTBlocks.FUSION_COIL.get() }))
+                        .where('R', ApexModifiers.counted(MiracleTopMachine.CTX, () -> new Block[] { GTBlocks.FUSION_COIL.get() }))
                         .where('#', air())
                         .build();
             })
@@ -324,14 +324,13 @@ public final class GTAAGTNHMachines {
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTAARecipeTypes.INDUSTRIAL_ROCK_BREAKER)
             .recipeModifiers(SiliconRockSynthesizerMachine::recipeModifier)
-            .tooltips(
-                    Component.literal("§7Machine Type: §eRock Breaker"),
-                    Component.literal("§fHey, I heard you come from a sky island?"),
-                    Component.literal("§7Runs every §eIndustrial Rock Breaker§7 recipe (circuit picks the block)"),
-                    Component.literal("§b4 parallels§7, x4 per voltage tier above LV"),
-                    Component.literal("§7Output §ax4§7; with §91000 mB water§7 and §c1000 mB lava§7 in the hatches, §6x1024"),
-                    Component.literal("§7(the water and lava are not used up)"),
-                    Component.literal("§8Ported from Twist Space Technology (GTNH addon)"))
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Rock Breaker")
+                    .flavor("Hey, I heard you come from a sky island?")
+                    .info("Runs every §eIndustrial Rock Breaker§7 recipe (circuit picks the block)")
+                    .parallel("4, x4 per voltage tier above LV")
+                    .bonus("Output x4; with 1000 mB water and 1000 mB lava in the hatches, x1024")
+                    .info("The water and lava are not used up")
+                    .portedFrom("Twist Space Technology (GTNH addon)").build())
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
             .pattern(definition -> {
                 var c = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
@@ -356,7 +355,7 @@ public final class GTAAGTNHMachines {
 
     // ---------------- Super Water Purifier (Twist Space Technology) ----------------
     public static int superWaterParallel(com.gregtechceu.gtceu.api.machine.MetaMachine m) {
-        int over = Math.max(0, GTAAModifiers.tier(m) - com.gregtechceu.gtceu.api.GTValues.UHV);
+        int over = Math.max(0, ApexModifiers.tier(m) - com.gregtechceu.gtceu.api.GTValues.UHV);
         return (int) Math.min(2_000_000L, 256L << (2L * Math.min(10, over)));
     }
 
@@ -365,7 +364,7 @@ public final class GTAAGTNHMachines {
             .langValue("Super Water Purifier")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTAARecipeTypes.SUPER_WATER_PURIFIER)
-            .recipeModifiers(GTAAModifiers.parallel(GTAAGTNHMachines::superWaterParallel, m -> 1.0, 1.0),
+            .recipeModifiers(ApexModifiers.parallel(GTAAGTNHMachines::superWaterParallel, m -> 1.0, 1.0),
                     GTRecipeModifiers.OC_NON_PERFECT)
             .tooltips(
                     Component.literal("§7Machine Type: §ePerfect Water Creator"),

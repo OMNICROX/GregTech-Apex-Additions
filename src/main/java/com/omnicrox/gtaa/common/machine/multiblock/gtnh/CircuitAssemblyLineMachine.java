@@ -10,7 +10,7 @@ import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -52,7 +52,7 @@ public class CircuitAssemblyLineMachine extends WorkableElectricMultiblockMachin
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        slices = GTAAModifiers.count(this, CTX);
+        slices = ApexModifiers.count(this, CTX);
     }
 
     private static String output(GTRecipe r) {
@@ -71,7 +71,7 @@ public class CircuitAssemblyLineMachine extends WorkableElectricMultiblockMachin
         if (!cal.imprint.isEmpty() && !cal.imprint.equals(out))
             return ModifierFunction.cancel(Component.literal("Imprinted for another circuit"));
         int max = 4 * Math.max(1, cal.slices);
-        ModifierFunction par = GTAAModifiers.parallel(m -> max, m -> 1.0, 1.0).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(m -> max, m -> 1.0, 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         return par.andThen(GTRecipeModifiers.OC_PERFECT.getModifier(machine, par.apply(recipe)));
     }

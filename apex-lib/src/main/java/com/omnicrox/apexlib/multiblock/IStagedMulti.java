@@ -1,4 +1,4 @@
-package com.omnicrox.gtaa.api;
+package com.omnicrox.apexlib.multiblock;
 
 import com.gregtechceu.gtceu.api.pattern.BlockPattern;
 

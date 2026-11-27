@@ -8,7 +8,7 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
@@ -39,13 +39,13 @@ public class MiracleTopMachine extends WorkableElectricMultiblockMachine {
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        rings = GTAAModifiers.count(this, CTX);
+        rings = ApexModifiers.count(this, CTX);
     }
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof MiracleTopMachine mt)) return ModifierFunction.NULL;
         int r = Math.max(1, mt.rings);
-        ModifierFunction par = GTAAModifiers.parallel(m -> 128 * r, m -> 1.0 / (4.0 * r), 1.0).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(m -> 128 * r, m -> 1.0 / (4.0 * r), 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         var oc = r >= 8 ? GTRecipeModifiers.OC_PERFECT : GTRecipeModifiers.OC_NON_PERFECT;
         return par.andThen(oc.getModifier(machine, par.apply(recipe)));

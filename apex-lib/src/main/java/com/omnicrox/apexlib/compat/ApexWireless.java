@@ -1,7 +1,7 @@
-package com.omnicrox.gtaa.api;
+package com.omnicrox.apexlib.compat;
 
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.omnicrox.gtaa.GTAA;
+import com.omnicrox.apexlib.ApexLib;
 import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Method;
@@ -11,9 +11,9 @@ import java.util.UUID;
  * Soft link to GTM Things' wireless energy network (no compile dependency). If GTM Things isn't installed,
  * wireless mode is unavailable.
  */
-public final class GTAAWireless {
+public final class ApexWireless {
 
-    private GTAAWireless() {}
+    private ApexWireless() {}
 
     private static Boolean available;
     private static Method getOrCreate, addEnergy, getStorage, setStorage;
@@ -30,7 +30,7 @@ public final class GTAAWireless {
             setStorage = c.getMethod("setStorage", java.math.BigInteger.class);
             available = true;
         } catch (Throwable t) {
-            GTAA.LOGGER.warn("[GTAA] GTM Things found but its wireless API changed: {}", t.toString());
+            ApexLib.LOGGER.warn("[ApexLib] GTM Things found but its wireless API changed: {}", t.toString());
         }
         return available;
     }
@@ -53,7 +53,7 @@ public final class GTAAWireless {
             }
             return added;
         } catch (Throwable t) {
-            GTAA.LOGGER.warn("[GTAA] wireless transfer failed: {}", t.toString());
+            ApexLib.LOGGER.warn("[ApexLib] wireless transfer failed: {}", t.toString());
             return 0;
         }
     }
@@ -100,7 +100,7 @@ public final class GTAAWireless {
                     int128 = i.getConstructor(long.class);
                     nexusAvailable = true;
                 } catch (Throwable t) {
-                    GTAA.LOGGER.warn("[GTAA] gtna found but its wireless API changed: {}", t.toString());
+                    ApexLib.LOGGER.warn("[ApexLib] gtna found but its wireless API changed: {}", t.toString());
                 }
             }
         }
@@ -124,7 +124,7 @@ public final class GTAAWireless {
         if (owner == null || !isAvailable()) return "";
         try {
             java.math.BigInteger b = (java.math.BigInteger) getStorage.invoke(getOrCreate.invoke(null, owner));
-            return GTAAFormat.num(b);
+            return com.omnicrox.apexlib.util.ApexFormat.num(b);
         } catch (Throwable t) {
             return "";
         }

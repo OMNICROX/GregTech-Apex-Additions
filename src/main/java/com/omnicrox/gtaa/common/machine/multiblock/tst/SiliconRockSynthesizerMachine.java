@@ -1,22 +1,17 @@
 package com.omnicrox.gtaa.common.machine.multiblock.tst;
 
-import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
-import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
-import com.omnicrox.gtaa.common.machine.GTAAModifiers;
+import com.omnicrox.apexlib.multiblock.ApexHatches;
+import com.omnicrox.apexlib.multiblock.ApexModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -33,29 +28,18 @@ public class SiliconRockSynthesizerMachine extends WorkableElectricMultiblockMac
     }
 
     public static int maxParallel(MetaMachine m) {
-        int tier = Math.max(1, GTAAModifiers.tier(m));
+        int tier = Math.max(1, ApexModifiers.tier(m));
         return (int) Math.min(1 << 30, 4L << (2L * Math.min(14, tier - 1)));
     }
 
     /** true when the input hatches hold at least 1000 mB of water and 1000 mB of lava */
     public boolean boosted() {
-        boolean water = false, lava = false;
-        for (IMultiPart part : getParts()) {
-            for (var handler : part.getRecipeHandlers()) {
-                if (handler.getHandlerIO() != IO.IN) continue;
-                for (var h : handler.getCapability(FluidRecipeCapability.CAP)) {
-                    if (!(h instanceof NotifiableFluidTank t)) continue;
-                    if (!water) water = t.drainInternal(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.SIMULATE).getAmount() >= 1000;
-                    if (!lava) lava = t.drainInternal(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.SIMULATE).getAmount() >= 1000;
-                }
-            }
-        }
-        return water && lava;
+        return ApexHatches.amount(this, Fluids.WATER) >= 1000 && ApexHatches.amount(this, Fluids.LAVA) >= 1000;
     }
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof SiliconRockSynthesizerMachine s)) return ModifierFunction.NULL;
-        ModifierFunction par = GTAAModifiers.parallel(SiliconRockSynthesizerMachine::maxParallel, m -> 1.0, 1.0).getModifier(machine, recipe);
+        ModifierFunction par = ApexModifiers.parallel(SiliconRockSynthesizerMachine::maxParallel, m -> 1.0, 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         ModifierFunction out = ModifierFunction.builder().outputModifier(ContentModifier.multiplier(s.boosted() ? 1024 : 4)).build();
         ModifierFunction both = par.andThen(out);

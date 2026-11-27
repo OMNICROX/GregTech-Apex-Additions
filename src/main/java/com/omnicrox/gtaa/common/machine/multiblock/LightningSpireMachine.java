@@ -184,7 +184,7 @@ public class LightningSpireMachine extends WorkableElectricMultiblockMachine
         FluidStack cool = coolant(COOLANT), fe = iron(IRON_PER_ROD * rods);
         if (!drain(cool, true) || !drain(fe, true)) {
             problem = "Each strike needs " + COOLANT + " L " + cool.getDisplayName().getString() + " and " +
-                    com.omnicrox.gtaa.api.GTAAFormat.num(fe.getAmount()) + " L Molten Iron";
+                    com.omnicrox.apexlib.util.ApexFormat.num(fe.getAmount()) + " L Molten Iron";
             return;
         }
         drain(cool, false);
@@ -223,14 +223,14 @@ public class LightningSpireMachine extends WorkableElectricMultiblockMachine
         super.addDisplayText(textList);
         if (!isFormed()) return;
         textList.add(Component.literal("Lightning Rods: " + rods + " / " + MAX_RODS).withStyle(ChatFormatting.YELLOW));
-        textList.add(Component.literal("Per strike: " + com.omnicrox.gtaa.api.GTAAFormat.num(rods * EU_PER_ROD) + " EU (avg " +
-                com.omnicrox.gtaa.api.GTAAFormat.num(rods * EU_PER_ROD / STRIKE_TICKS) + " EU/t)").withStyle(ChatFormatting.GOLD));
-        textList.add(Component.literal("Buffer: " + com.omnicrox.gtaa.api.GTAAFormat.num(stored) + " / " +
-                com.omnicrox.gtaa.api.GTAAFormat.num(rods * BUFFER_PER_ROD) + " EU").withStyle(ChatFormatting.AQUA));
-        textList.add(Component.literal("Output: " + com.omnicrox.gtaa.api.GTAAFormat.num(lastOut) + " EU/t").withStyle(ChatFormatting.GREEN));
+        textList.add(Component.literal("Per strike: " + com.omnicrox.apexlib.util.ApexFormat.num(rods * EU_PER_ROD) + " EU (avg " +
+                com.omnicrox.apexlib.util.ApexFormat.num(rods * EU_PER_ROD / STRIKE_TICKS) + " EU/t)").withStyle(ChatFormatting.GOLD));
+        textList.add(Component.literal("Buffer: " + com.omnicrox.apexlib.util.ApexFormat.num(stored) + " / " +
+                com.omnicrox.apexlib.util.ApexFormat.num(rods * BUFFER_PER_ROD) + " EU").withStyle(ChatFormatting.AQUA));
+        textList.add(Component.literal("Output: " + com.omnicrox.apexlib.util.ApexFormat.num(lastOut) + " EU/t").withStyle(ChatFormatting.GREEN));
         textList.add(Component.literal("Next strike in " + String.format("%.1f s", ticksToStrike / 20f)).withStyle(ChatFormatting.WHITE));
         textList.add(Component.literal("Needs " + COOLANT + " L " + coolant(1).getDisplayName().getString() + " + " +
-                com.omnicrox.gtaa.api.GTAAFormat.num((long) IRON_PER_ROD * rods) + " L Molten Iron per strike").withStyle(ChatFormatting.GRAY));
+                com.omnicrox.apexlib.util.ApexFormat.num((long) IRON_PER_ROD * rods) + " L Molten Iron per strike").withStyle(ChatFormatting.GRAY));
         if (!problem.isEmpty()) textList.add(Component.literal(problem).withStyle(ChatFormatting.RED));
     }
 }
