@@ -13,6 +13,11 @@ java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
 
 repositories { mavenCentral() }
 
+sourceSets {
+    // Dev-only: the GTAA guide pages as a resource mod, so the UI can be checked without GTAA
+    testmod {}
+}
+
 configurations {
     shaded { transitive = false }
     compileClasspath.extendsFrom shaded
@@ -25,7 +30,20 @@ legacyForge {
         minecraftVersion = project.minecraft_version
         mappingsVersion = project.parchment_version
     }
-    mods { apexguide { sourceSet(sourceSets.main) } }
+    mods {
+        apexguide { sourceSet(sourceSets.main) }
+        testmod { sourceSet(sourceSets.testmod) }
+    }
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('run')
+            sourceSet = sourceSets.testmod
+            loadedMods = [mods.apexguide, mods.testmod]
+            additionalRuntimeClasspathConfiguration.extendsFrom configurations.shaded
+            if (project.hasProperty('showGuide')) systemProperty('apexguide.showOnStartup', project.showGuide)
+        }
+    }
 }
 
 dependencies {
@@ -35,6 +53,11 @@ dependencies {
     ['core', 'analysis-common', 'queryparser', 'facet', 'queries', 'highlighter', 'memory'].each {
         shaded "org.apache.lucene:lucene-${it}:9.12.1"
     }
+}
+
+// copy the real guide pages into the test mod
+tasks.named('processTestmodResources', ProcessResources) {
+    from('../src/main/resources/assets/gtapexadditions/guides') { into 'assets/gtapexadditions/guides' }
 }
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }

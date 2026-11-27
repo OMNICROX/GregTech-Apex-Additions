@@ -21,7 +21,7 @@ public final class GuideGift {
     private static final String TAG = "gtapexadditions_guide_given";
 
     public static ItemStack guide() {
-        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("guideme", "guide"));
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("apexguide", "guide"));
         if (item == null) return ItemStack.EMPTY;
         ItemStack s = new ItemStack(item);
         CompoundTag t = new CompoundTag();

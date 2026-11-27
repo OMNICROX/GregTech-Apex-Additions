@@ -65,14 +65,7 @@ public abstract class DocumentScreen extends IndepentScaleScreen implements Guid
     protected void init() {
         super.init();
 
-        if (GuideMEClient.instance().isFullWidthLayout() || width < getMaxWidth()) {
-            screenRect = new LytRect(0, 0, width, height);
-        } else {
-            var maxWidth = getMaxWidth();
-            var screenWidth = Math.min(maxWidth, width);
-            var left = (width - screenWidth) / 2;
-            screenRect = new LytRect(left, 0, screenWidth, height);
-        }
+        screenRect = ApexTheme.panelRect(width, height, GuideMEClient.instance().isFullWidthLayout());
 
         addRenderableWidget(scrollbar);
         updateDocumentLayout();

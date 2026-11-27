@@ -36,6 +36,10 @@ public class ParsedGuidePage {
         return id;
     }
 
+    public String getSource() {
+        return source;
+    }
+
     public Frontmatter getFrontmatter() {
         return frontmatter;
     }

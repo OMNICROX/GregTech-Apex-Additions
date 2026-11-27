@@ -20,6 +20,24 @@ public class GuideIconButton extends Button {
     public static final int HEIGHT = 16;
 
     private Role role;
+    private boolean highlighted;
+
+    public void setHighlighted(boolean highlighted) {
+        this.highlighted = highlighted;
+    }
+
+    /** Draws a toolbar icon from the GuideNH button atlas, tinted with an ARGB color. */
+    public static void drawIcon(GuiGraphics guiGraphics, Role role, int x, int y, int argb) {
+        drawIcon(guiGraphics, role, x, y, 16, argb);
+    }
+
+    public static void drawIcon(GuiGraphics guiGraphics, Role role, int x, int y, int size, int argb) {
+        Blitter.texture(GuideME.makeId("textures/guide/buttons.png"), 256, 256)
+                .src(role.iconSrcX, role.iconSrcY, 16, 16)
+                .dest(x, y, size, size)
+                .colorArgb(argb)
+                .blit(guiGraphics);
+    }
 
     public GuideIconButton(int x, int y, Role role, Runnable callback) {
         this(x, y, role, btn -> callback.run());
@@ -50,21 +68,7 @@ public class GuideIconButton extends Button {
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        var color = SymbolicColor.ICON_BUTTON_NORMAL;
-
-        if (!isActive()) {
-            color = SymbolicColor.ICON_BUTTON_DISABLED;
-        } else if (isHovered()) {
-            color = SymbolicColor.ICON_BUTTON_HOVER;
-        }
-
-        var resolved = color.resolve(GuideMEClient.currentLightDarkMode());
-
-        Blitter.texture(GuideME.makeId("textures/guide/buttons.png"), 64, 64)
-                .src(role.iconSrcX, role.iconSrcY, 16, 16)
-                .dest(getX(), getY(), 16, 16)
-                .colorArgb(resolved)
-                .blit(guiGraphics);
+        drawIcon(guiGraphics, role, getX(), getY(), ApexTheme.iconColor(isActive(), isHovered(), highlighted));
     }
 
     public enum Role {
@@ -78,7 +82,12 @@ public class GuideIconButton extends Button {
         ZOOM_IN(GuidebookText.ZoomIn.text(), 48, 16),
         RESET_VIEW(GuidebookText.ResetView.text(), 0, 32),
         OPEN_FULL_WIDTH_VIEW(GuidebookText.FullWidthView.text(), 16, 32),
-        CLOSE_FULL_WIDTH_VIEW(GuidebookText.CloseFullWidthView.text(), 32, 32);
+        CLOSE_FULL_WIDTH_VIEW(GuidebookText.CloseFullWidthView.text(), 32, 32),
+        HOMEPAGE(GuidebookText.HomePage.text(), 16, 80),
+        BOOKMARK(GuidebookText.Bookmark.text(), 128, 0),
+        BOOKMARKED(GuidebookText.Bookmarked.text(), 144, 0),
+        NAVIGATION_PIN(GuidebookText.NavigationPin.text(), 0, 80),
+        TOGGLE_GRID(GuidebookText.ToggleGrid.text(), 16, 64);
 
         final Component actionText;
 

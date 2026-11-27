@@ -25,7 +25,19 @@ public enum GuidebookText implements LocalizationEnum {
     Crafting("Crafting"),
     FullWidthView("Full Width View"),
     CloseFullWidthView("Close Full Width View"),
-    RunsCommand("Runs Command:");
+    RunsCommand("Runs Command:"),
+    HomePage("Home Page"),
+    Bookmark("Bookmark this page"),
+    Bookmarked("Remove bookmark"),
+    Bookmarks("Bookmarks"),
+    HomeRecommended("Recommended"),
+    HomeHistory("History"),
+    HomeEmpty("There is nothing here yet :("),
+    NavigationTitle("Navigation"),
+    NavigationPin("Pin navigation"),
+    NavigationFilter("Filter pages..."),
+    ToggleGrid("Toggle Grid"),
+    Loading("Loading");
 
     private final String englishText;
 

@@ -10,11 +10,11 @@ public interface LocalizationEnum {
     String getTranslationKey();
 
     default MutableComponent text() {
-        return Component.translatable(getTranslationKey());
+        return Component.translatableWithFallback(getTranslationKey(), getEnglishText());
     }
 
     default MutableComponent text(Object... args) {
-        return Component.translatable(getTranslationKey(), args);
+        return Component.translatableWithFallback(getTranslationKey(), getEnglishText(), args);
     }
 
     default MutableComponent withSuffix(String text) {

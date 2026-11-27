@@ -1,0 +1,9 @@
+modLoader = "lowcodefml"
+loaderVersion = "*"
+license = "dev only"
+
+[[mods]]
+modId = "gtapexadditions"
+version = "0.0.0"
+displayName = "Apex Guide test content"
+description = "Dev-only: loads the GTAA guide pages without GTAA."

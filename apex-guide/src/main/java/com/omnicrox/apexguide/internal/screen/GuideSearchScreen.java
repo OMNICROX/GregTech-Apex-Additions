@@ -115,7 +115,8 @@ public class GuideSearchScreen extends DocumentScreen {
         toolbar.addToScreen(this::addRenderableWidget);
         toolbar.update();
 
-        searchField.setX(screenRect.x() + 16);
+        searchField.setX(screenRect.x() + 22);
+        searchField.setY(screenRect.y() + 4);
         searchField.setWidth(screenRect.right() - searchField.getX() - toolbar.getWidth());
         searchField.setCursorPosition(searchField.getCursorPosition());
 
@@ -126,14 +127,14 @@ public class GuideSearchScreen extends DocumentScreen {
         var left = screenRect.x();
 
         int documentTop = searchField.getY() + searchField.getHeight();
-        var toolbarTop = (documentTop - toolbar.getHeight()) / 2;
+        var toolbarTop = screenRect.y() + (documentTop - screenRect.y() - toolbar.getHeight()) / 2;
         toolbar.move(screenRect.right() - toolbar.getWidth(), toolbarTop);
 
         setDocumentRect(new LytRect(
-                left,
-                documentTop,
-                screenRect.right() - left,
-                screenRect.height() - getMarginBottom()));
+                left + ApexTheme.PANEL_PADDING,
+                documentTop + 4,
+                screenRect.width() - ApexTheme.PANEL_PADDING * 2,
+                screenRect.bottom() - documentTop - 4 - ApexTheme.PANEL_PADDING));
 
         updateDocumentLayout();
     }
@@ -212,16 +213,15 @@ public class GuideSearchScreen extends DocumentScreen {
     @Override
     protected void scaledRender(GuiGraphics guiGraphics, RenderContext context, int mouseX, int mouseY,
             float partialTick) {
-        context.fillIcon(screenRect, GuiAssets.GUIDE_BACKGROUND, SymbolicColor.GUIDE_SCREEN_BACKGROUND);
+        ApexTheme.drawPanel(guiGraphics, width, height, screenRect);
 
-        Blitter.texture(GuideME.makeId("textures/guide/buttons.png"), 64, 64)
+        Blitter.texture(GuideME.makeId("textures/guide/buttons.png"), 256, 256)
                 .src(GuideIconButton.Role.SEARCH.iconSrcX, GuideIconButton.Role.SEARCH.iconSrcY, 16, 16)
-                .dest(screenRect.x(), 2, 16, 16)
+                .dest(screenRect.x() + 4, searchField.getY() + (searchField.getHeight() - 16) / 2, 16, 16)
                 .colorArgb(context.resolveColor(SymbolicColor.ICON_BUTTON_NORMAL))
                 .blit(guiGraphics);
 
         var documentRect = getDocumentRect();
-        context.fillRect(documentRect, new ConstantColor(0x80333333));
 
         if (searchField.getValue().isEmpty()) {
             context.renderTextCenteredIn(

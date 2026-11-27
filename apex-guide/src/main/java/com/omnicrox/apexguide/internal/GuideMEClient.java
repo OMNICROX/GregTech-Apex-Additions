@@ -186,7 +186,8 @@ public class GuideMEClient {
             if (historyPage.isPresent()) {
                 GuideNavigation.navigateTo(guide, historyPage.get());
             } else {
-                GuideNavigation.navigateTo(guide, PageAnchor.page(initialPage));
+                // Apex Guide: a fresh guide opens on its home page (GuideNH behavior)
+                GuideNavigation.navigateTo(guide, PageAnchor.page(com.omnicrox.apexguide.internal.screen.GuideScreen.HOME_PAGE_ID));
             }
             return true;
         } catch (Exception e) {

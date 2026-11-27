@@ -1,11 +1,11 @@
 {
   "type": "forge:conditional",
   "recipes": [{
-    "conditions": [{"type": "forge:mod_loaded", "modid": "guideme"}],
+    "conditions": [{"type": "forge:mod_loaded", "modid": "apexguide"}],
     "recipe": {
       "type": "minecraft:crafting_shapeless",
       "ingredients": [{"item": "minecraft:book"}, {"tag": "minecraft:planks"}],
-      "result": {"item": "guideme:guide", "nbt": "{guideId:\"gtapexadditions:guide\"}"}
+      "result": {"item": "apexguide:guide", "nbt": "{guideId:\"gtapexadditions:guide\"}"}
     }
   }]
 }

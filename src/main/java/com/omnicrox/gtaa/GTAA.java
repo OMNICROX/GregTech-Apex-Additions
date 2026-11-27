@@ -57,7 +57,7 @@ public class GTAA {
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
             com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
                     com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);
-            if (net.minecraftforge.fml.ModList.get().isLoaded("guideme")) com.omnicrox.gtaa.client.guide.GuideLoader.load();
+            if (net.minecraftforge.fml.ModList.get().isLoaded("apexguide")) com.omnicrox.gtaa.client.guide.GuideLoader.load();
         }
         bus.addListener(this::registerMaterialRegistry);
         bus.addListener(this::registerMaterials);

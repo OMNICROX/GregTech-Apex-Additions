@@ -1,435 +1,664 @@
 package com.omnicrox.apexguide.internal.screen;
 
-import com.omnicrox.apexguide.color.SymbolicColor;
-import com.omnicrox.apexguide.document.LytPoint;
-import com.omnicrox.apexguide.document.LytRect;
-import com.omnicrox.apexguide.document.block.LytParagraph;
-import com.omnicrox.apexguide.document.flow.LytFlowSpan;
+import com.omnicrox.apexguide.Guide;
 import com.omnicrox.apexguide.internal.GuideMEClient;
-import com.omnicrox.apexguide.internal.util.Transition;
-import com.omnicrox.apexguide.layout.LayoutContext;
-import com.omnicrox.apexguide.layout.MinecraftFontMetrics;
+import com.omnicrox.apexguide.internal.GuidebookText;
+import com.omnicrox.apexguide.internal.home.GuideUserData;
 import com.omnicrox.apexguide.navigation.NavigationNode;
 import com.omnicrox.apexguide.navigation.NavigationTree;
-import com.omnicrox.apexguide.render.SimpleRenderContext;
-import com.omnicrox.apexguide.ui.GuideUiHost;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec2;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
 
+/**
+ * Collapsible navigation tree on the left side of the guide window.
+ * <p>
+ * Layout, metrics and behavior follow GuideNH's GuideNavBar (LGPL-3.0, HFstudio): a 10px strip with an arrow while
+ * closed, opening as an overlay on hover; a title row with a pin button; 12px rows with expand arrows, 9px icons, a
+ * highlighted current page and a bookmark toggle on hover; sticky parent rows while scrolling; and a title filter.
+ */
 public class GuideNavBar extends AbstractWidget {
-    public static final int WIDTH_OPEN = 150;
-    public static final int WIDTH_CLOSED = 15;
-    private static final int CHILD_ROW_INDENT = 10;
-    private static final int PARENT_ROW_INDENT = 7;
-    private static boolean neverInteracted = true;
+    public static final int WIDTH_CLOSED = 10;
+    public static final int MIN_OPEN_WIDTH = 110;
+    public static final int OPEN_WIDTH_SCREEN_PERCENT = 18;
+    public static final int TITLE_H = 16;
+    public static final int ROW_H = 12;
+    public static final int INDENT = 8;
+    public static final int ICON_SIZE = 9;
+    private static final int ACTION_SLOT_W = 12;
+    private static final int SCROLLBAR_W = 4;
 
-    private final Transition widthTransition = new Transition(
-            WIDTH_CLOSED,
-            WIDTH_OPEN,
-            0.1,
-            () -> width,
-            value -> width = (int) Math.round(value));
+    private final GuideScreen screen;
+    private final Guide guide;
 
     private NavigationTree navTree;
-
+    private final List<Row> allRows = new ArrayList<>();
     private final List<Row> rows = new ArrayList<>();
+    private final Set<ResourceLocation> expanded = new HashSet<>();
+    private static final Set<ResourceLocation> REMEMBERED_EXPANDED = new HashSet<>();
 
-    private final GuideUiHost screen;
-
-    private int scrollOffset;
-
-    private State state = State.CLOSED;
+    private int openWidth = 150;
     private boolean pinned;
+    private boolean hoverOpen;
+    private int scrollY;
+    private boolean draggingScrollbar;
+    private int scrollGrab;
 
-    public GuideNavBar(GuideScreen screen) {
-        super(0, 0, WIDTH_CLOSED, screen.height, Component.literal("Navigation Tree"));
+    @Nullable
+    private EditBox filterField;
+    private String filter = "";
+
+    public GuideNavBar(GuideScreen screen, Guide guide) {
+        super(0, 0, WIDTH_CLOSED, 100, Component.literal("Navigation"));
         this.screen = screen;
+        this.guide = guide;
+        this.pinned = GuideUserData.isNavPinned();
+        this.expanded.addAll(REMEMBERED_EXPANDED);
     }
 
-    @Override
-    public void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+    // ------------------------------------------------------------------ layout
+
+    public void setBounds(int x, int y, int height, int openWidth) {
+        setX(x);
+        setY(y);
+        this.height = height;
+        this.openWidth = Math.max(WIDTH_CLOSED, openWidth);
+        this.width = isOpen() ? this.openWidth : WIDTH_CLOSED;
+        clampScroll();
     }
 
-    @Override
-    public void onClick(double mouseX, double mouseY) {
-        if (state != State.OPENING && state != State.OPEN) {
-            return;
-        }
-
-        var row = pickRow(mouseX, mouseY);
-        if (row != null) {
-            row.expanded = !row.expanded;
-            updateLayout();
-
-            var handler = Minecraft.getInstance().getSoundManager();
-            handler.play(SimpleSoundInstance.forUI(GuideMEClient.GUIDE_CLICK_EVENT, 1.0F));
-            if (row.node.pageId() != null) {
-                screen.navigateTo(row.node.pageId());
-            }
-        }
-    }
-
-    @Override
-    public void playDownSound(SoundManager handler) {
-        // Mute default sound
-    }
-
-    @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        if (state != State.OPENING && state != State.OPEN) {
-            return false;
-        }
-
-        setScrollOffset((int) Math.round(scrollOffset - dragY));
-        return true;
-    }
-
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        if (state != State.OPENING && state != State.OPEN) {
-            return false;
-        }
-
-        setScrollOffset((int) Math.round(scrollOffset - delta * 20));
-        return true;
-    }
-
-    private void setScrollOffset(int offset) {
-        var maxScrollOffset = 0;
-        var visibleRows = rows.stream().filter(Row::isVisible).toList();
-        if (!visibleRows.isEmpty()) {
-            var contentHeight = visibleRows.get(visibleRows.size() - 1).bottom - visibleRows.get(0).top;
-            maxScrollOffset = Math.max(0, contentHeight - height);
-        }
-        scrollOffset = Mth.clamp(offset, 0, maxScrollOffset);
-    }
-
-    @Override
-    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-
-        // Check if we need to re-layout
-        var currentNavTree = screen.getGuide().getNavigationTree();
-        if (currentNavTree != this.navTree) {
-            recreateRows();
-        }
-
-        // stop reacting to mouse events
-        active = !this.rows.isEmpty();
-
-        if (this.rows.isEmpty()) {
-            return; // do not render the navbar if there are no nodes.
-        }
-
-        widthTransition.update();
-
-        if (state != State.CLOSED) {
-            updateLayout();
-        }
-
-        var renderContext = new SimpleRenderContext(graphics);
-
-        double currentTime = GLFW.glfwGetTime();
-
-        boolean containsMouse = (mouseX >= getX() && mouseY >= getY() && mouseX < getX() + width
-                && mouseY <= getY() + height);
-        switch (state) {
-            case CLOSED -> {
-                if (containsMouse) {
-                    state = State.OPENING;
-                    widthTransition.set(WIDTH_OPEN);
-                    neverInteracted = false;
-                } else if (neverInteracted) {
-                    // Show animation on 6 second interval
-                    var ot = Math.abs((currentTime % 6) / 3 - 1);
-                    // only play the animation for 6/10*2=1.2 seconds of it
-                    if (ot >= 0.9) {
-                        var t = (ot - 0.9) * 10;
-                        var f = easeOutBounce(t);
-                        width = (int) Math.round(WIDTH_CLOSED + f * (WIDTH_OPEN - WIDTH_CLOSED) * 0.075);
-                    } else {
-                        width = WIDTH_CLOSED;
-                    }
-                }
-            }
-            case OPENING -> {
-                if (!containsMouse) {
-                    state = State.CLOSING;
-                    widthTransition.set(WIDTH_CLOSED);
-                } else if (width >= WIDTH_OPEN) {
-                    width = WIDTH_OPEN;
-                    state = State.OPEN;
-                }
-            }
-            case OPEN -> {
-                if (!containsMouse && !pinned) {
-                    state = State.CLOSING;
-                    widthTransition.set(WIDTH_CLOSED);
-                }
-            }
-            case CLOSING -> {
-                if (containsMouse) {
-                    state = State.OPENING;
-                    widthTransition.set(WIDTH_OPEN);
-                } else if (width <= WIDTH_CLOSED) {
-                    width = WIDTH_CLOSED;
-                    state = State.CLOSED;
-                }
-            }
-        }
-
-        updateMousePos(mouseX, mouseY);
-
-        if (state == State.CLOSED) {
-            renderContext.fillGradientHorizontal(getX(), getY(), width, height, SymbolicColor.NAVBAR_BG_TOP,
-                    SymbolicColor.NAVBAR_BG_BOTTOM);
-
-            var p1 = new Vec2(width - WIDTH_CLOSED + WIDTH_CLOSED - 4, height / 2f);
-            var p2 = new Vec2(width - WIDTH_CLOSED + 4, height / 2f - 5);
-            var p3 = new Vec2(width - WIDTH_CLOSED + 4, height / 2f + 5);
-
-            renderContext.fillTriangle(p1, p2, p3, SymbolicColor.NAVBAR_EXPAND_ARROW);
-        } else if (!isPinned()) {
-            renderContext.fillGradientVertical(getX(), getY(), width, height, SymbolicColor.NAVBAR_BG_TOP,
-                    SymbolicColor.NAVBAR_BG_BOTTOM);
-        }
-
-        if (state != State.CLOSED) {
-            graphics.enableScissor(getX(), getY(), getX() + width, getY() + height);
-
-            var pose = graphics.pose();
-            pose.pushPose();
-            pose.translate(getX(), getY() - scrollOffset, 0);
-
-            var viewport = renderContext.viewport();
-
-            // Draw a backdrop on the hovered row before starting batch rendering
-            var hoveredRow = pickRow(mouseX, mouseY);
-            if (hoveredRow != null) {
-                renderContext.fillRect(hoveredRow.getBounds(), SymbolicColor.NAVBAR_ROW_HOVER);
-            }
-
-            // Render Text in batch
-            var buffers = renderContext.beginBatch();
-            for (var row : rows) {
-                if (!row.isVisible(viewport)) {
-                    continue; // Cull this row, it's not in the viewport
-                }
-                row.paragraph.renderBatch(renderContext, buffers);
-            }
-            renderContext.endBatch(buffers);
-
-            // Render decorations, icons, etc.
-            for (var row : rows) {
-                if (!row.isVisible(viewport)) {
-                    continue; // Cull this row, it's not in the viewport
-                }
-                if (row.hasChildren) {
-                    float x = row.getBounds().x();
-                    x += 5;
-                    float y = row.getBounds().y();
-                    y += 2f;
-                    Vec2 p1, p2, p3;
-                    if (row.expanded) {
-                        // Triangle points down
-                        p1 = new Vec2(x + 5, y);
-                        p2 = new Vec2(x, y);
-                        p3 = new Vec2(x + 2.5f, y + 5);
-                    } else {
-                        // Triangle points right
-                        p1 = new Vec2(x + 5, y + 2.5f);
-                        p2 = new Vec2(x, y);
-                        p3 = new Vec2(x, y + 5);
-                    }
-
-                    var color = row == hoveredRow ? SymbolicColor.LINK : SymbolicColor.BODY_TEXT;
-                    renderContext.fillTriangle(p1, p2, p3, color);
-                }
-
-                var icon = row.node.icon();
-                if (!icon.isEmpty()) {
-                    renderContext.renderItem(icon, row.paragraph.getBounds().x() - 9, row.paragraph.getBounds().y(), 1,
-                            8,
-                            8);
-                }
-            }
-
-            pose.popPose();
-
-            graphics.disableScissor();
-        }
-    }
-
-    public static double easeOutBounce(double x) {
-        return Math.sqrt(1 - Math.pow(x - 1, 2));
-    }
-
-    @Nullable
-    private Row pickRow(double x, double y) {
-        var vpPos = getViewportPoint(x, y);
-        if (vpPos != null) {
-            for (var row : rows) {
-                if (row.isVisible() && vpPos.y() >= row.top && vpPos.y() < row.bottom) {
-                    return row;
-                }
-            }
-        }
-        return null;
-    }
-
-    private void updateMousePos(double x, double y) {
-        var vpPos = getViewportPoint(x, y);
-        for (Row row : rows) {
-            if (!row.isVisible()) {
-                continue;
-            }
-
-            if (vpPos != null && row.contains(vpPos.x(), vpPos.y())) {
-                row.paragraph.onMouseEnter(row.span);
-            } else {
-                row.paragraph.onMouseLeave();
-            }
-        }
-    }
-
-    private void recreateRows() {
-        this.navTree = screen.getGuide().getNavigationTree();
-        // Save Freeze expanded / scroll position
-        this.rows.clear();
-
-        for (var rootNode : this.navTree.getRootNodes()) {
-            var row = new Row(rootNode, null);
-            rows.add(row);
-
-            // Add second level
-            for (var child : row.node.children()) {
-                row.hasChildren = true;
-                var childRow = new Row(child, row);
-                rows.add(childRow);
-            }
-        }
-
-        updateLayout();
-    }
-
-    private void updateLayout() {
-        var context = new LayoutContext(new MinecraftFontMetrics());
-
-        var currentY = 0;
-        for (var row : this.rows) {
-            if (!row.isVisible()) {
-                continue;
-            }
-
-            // Child-Rows should be indented and their parents
-            // need an indent too for the expand/collapse indicator
-            int indent;
-            if (row.hasChildren) {
-                indent = PARENT_ROW_INDENT;
-            } else if (row.parent != null) {
-                indent = CHILD_ROW_INDENT;
-            } else {
-                indent = 0;
-            }
-
-            if (!row.node.icon().isEmpty()) {
-                indent += 8; // Indent for icon;
-            }
-
-            var x = indent;
-            var width = WIDTH_OPEN - indent;
-            var bounds = row.paragraph.layout(context, x, currentY, width);
-            row.top = bounds.y();
-            row.bottom = bounds.bottom();
-            currentY = bounds.bottom();
-        }
-    }
-
-    /**
-     * Gets a point in the coordinate space of the scrollable viewport.
-     */
-    @Nullable
-    private LytPoint getViewportPoint(double screenX, double screenY) {
-        if (state != State.OPENING && state != State.OPEN) {
-            return null;
-        }
-
-        if (screenX >= getX() && screenX < getX() + width
-                && screenY >= getY() && screenY < getY() + height) {
-            var vpX = (int) Math.round(screenX - getX());
-            var vpY = (int) Math.round(screenY + scrollOffset - getY());
-            return new LytPoint(vpX, vpY);
-        }
-
-        return null; // Outside the viewport
-    }
-
-    public void setPinned(boolean pinned) {
-        this.pinned = pinned;
-        if (pinned) {
-            this.state = State.OPEN;
-            this.setWidth(WIDTH_OPEN);
-            this.widthTransition.set(WIDTH_OPEN);
-        }
+    public boolean isOpen() {
+        return pinned || hoverOpen || (filterField != null && filterField.isFocused());
     }
 
     public boolean isPinned() {
         return pinned;
     }
 
-    private class Row {
-        private final NavigationNode node;
-        private final LytParagraph paragraph = new LytParagraph();
-        public final LytFlowSpan span;
-        private boolean expanded;
-        private final Row parent;
-        private boolean hasChildren;
-        public int top;
-        public int bottom;
+    /** Horizontal space the document must leave free for the navigation. */
+    public int reservedWidth() {
+        return pinned ? openWidth : WIDTH_CLOSED;
+    }
 
-        public Row(NavigationNode node, Row parent) {
-            this.node = node;
-            this.parent = parent;
+    public boolean hasRows() {
+        ensureRows();
+        return !allRows.isEmpty();
+    }
 
-            span = new LytFlowSpan();
-            span.appendText(node.title());
-            span.modifyHoverStyle(style -> style.color(SymbolicColor.LINK));
-            this.paragraph.setPaddingLeft(5);
-            this.paragraph.append(span);
+    private void ensureRows() {
+        var current = guide.getNavigationTree();
+        if (current == navTree) {
+            return;
         }
-
-        public LytRect getBounds() {
-            return new LytRect(0, top, width, bottom - top);
+        navTree = current;
+        allRows.clear();
+        for (var root : navTree.getRootNodes()) {
+            addRows(root, null, 0);
         }
+        rebuildVisibleRows();
+    }
 
-        public boolean contains(float x, float y) {
-            return x >= 0 && x < width && y >= top && y < bottom;
-        }
-
-        public boolean isVisible() {
-            return parent == null || parent.expanded;
-        }
-
-        // Is this row visible in the given viewport?
-        public boolean isVisible(LytRect viewport) {
-            return isVisible() && bottom > viewport.y() && top < viewport.bottom();
+    private void addRows(NavigationNode node, @Nullable Row parent, int depth) {
+        var row = new Row(node, parent, depth);
+        allRows.add(row);
+        for (var child : node.children()) {
+            addRows(child, row, depth + 1);
         }
     }
 
-    enum State {
-        CLOSED,
-        OPENING,
-        OPEN,
-        CLOSING
+    private void rebuildVisibleRows() {
+        rows.clear();
+        var query = filter.trim().toLowerCase(Locale.ROOT);
+        if (query.isEmpty()) {
+            for (var row : allRows) {
+                if (row.isVisible()) {
+                    rows.add(row);
+                }
+            }
+        } else {
+            // Show matches together with the chain of parents that leads to them
+            var keep = new HashSet<Row>();
+            for (var row : allRows) {
+                if (row.node.title().toLowerCase(Locale.ROOT).contains(query)) {
+                    for (var r = row; r != null; r = r.parent) {
+                        keep.add(r);
+                    }
+                }
+            }
+            for (var row : allRows) {
+                if (keep.contains(row)) {
+                    rows.add(row);
+                }
+            }
+        }
+        clampScroll();
+    }
+
+    public void expandParentsOf(@Nullable ResourceLocation pageId) {
+        ensureRows();
+        if (pageId == null) {
+            return;
+        }
+        for (var row : allRows) {
+            if (pageId.equals(row.node.pageId())) {
+                for (var p = row.parent; p != null; p = p.parent) {
+                    setExpanded(p, true);
+                }
+            }
+        }
+        rebuildVisibleRows();
+        scrollToPage(pageId);
+    }
+
+    private void scrollToPage(ResourceLocation pageId) {
+        for (int i = 0; i < rows.size(); i++) {
+            if (pageId.equals(rows.get(i).node.pageId())) {
+                int rowTop = i * ROW_H;
+                int body = bodyHeight();
+                if (rowTop < scrollY || rowTop + ROW_H > scrollY + body) {
+                    scrollY = rowTop - body / 3;
+                    clampScroll();
+                }
+                return;
+            }
+        }
+    }
+
+    private void setExpanded(Row row, boolean value) {
+        var key = row.key();
+        if (value) {
+            expanded.add(key);
+            REMEMBERED_EXPANDED.add(key);
+        } else {
+            expanded.remove(key);
+            REMEMBERED_EXPANDED.remove(key);
+        }
+    }
+
+    private int bodyY() {
+        return getY() + TITLE_H;
+    }
+
+    private int bodyHeight() {
+        return Math.max(0, height - TITLE_H);
+    }
+
+    private int maxScroll() {
+        return Math.max(0, rows.size() * ROW_H - bodyHeight());
+    }
+
+    private void clampScroll() {
+        scrollY = Mth.clamp(scrollY, 0, maxScroll());
+    }
+
+    private boolean hasScrollbar() {
+        return maxScroll() > 0;
+    }
+
+    private int rowRight() {
+        return getX() + width - 1 - (hasScrollbar() ? SCROLLBAR_W + 1 : 0);
+    }
+
+    private int pinX() {
+        return getX() + width - 1 - 16 - 1;
+    }
+
+    // ------------------------------------------------------------------ rendering
+
+    @Override
+    protected void renderWidget(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        ensureRows();
+        active = !allRows.isEmpty();
+        if (allRows.isEmpty()) {
+            return;
+        }
+
+        // Hover-open (GuideNH opens the bar as an overlay while the mouse is over it)
+        boolean inside = mouseX >= getX() && mouseX < getX() + (isOpen() ? openWidth : WIDTH_CLOSED)
+                && mouseY >= getY() && mouseY < getY() + height;
+        if (!pinned) {
+            if (inside && !hoverOpen) {
+                hoverOpen = true;
+            } else if (!inside && hoverOpen && !draggingScrollbar) {
+                hoverOpen = false;
+            }
+        }
+        width = isOpen() ? openWidth : WIDTH_CLOSED;
+
+        var pose = g.pose();
+        pose.pushPose();
+        if (!pinned && isOpen()) {
+            pose.translate(0, 0, 300); // overlay above the document
+        }
+
+        int x = getX();
+        int y = getY();
+        g.fillGradient(x, y, x + width, y + height, ApexTheme.NAV_BG_TOP, ApexTheme.NAV_BG_BOTTOM);
+        g.fill(x + width - 1, y, x + width, y + height, ApexTheme.SEPARATOR);
+
+        if (!isOpen()) {
+            drawArrow(g, x + width / 2 - 2, y + height / 2 - 3, true, ApexTheme.NAV_ARROW_CLOSED);
+            pose.popPose();
+            return;
+        }
+
+        renderTitle(g, mouseX, mouseY);
+
+        int bodyY = bodyY();
+        int bodyBottom = bodyY + bodyHeight();
+        g.enableScissor(x, bodyY, x + width - 1, bodyBottom);
+        var font = Minecraft.getInstance().font;
+        var currentPage = screen.getCurrentPageIdOrNull();
+
+        int first = Math.max(0, scrollY / ROW_H);
+        var sticky = computeSticky(first);
+        for (int i = first; i < rows.size(); i++) {
+            int rowY = bodyY + i * ROW_H - scrollY;
+            if (rowY >= bodyBottom) {
+                break;
+            }
+            var row = rows.get(i);
+            if (sticky.contains(row)) {
+                continue;
+            }
+            renderRow(g, font, row, rowY, mouseX, mouseY, currentPage, false);
+        }
+        // Sticky parents: the chain of ancestors of the first visible row stays pinned to the top
+        for (int s = 0; s < sticky.size(); s++) {
+            var row = sticky.get(s);
+            int stickyY = bodyY + s * ROW_H;
+            // Push up when the subtree of this parent scrolls out
+            int lastIdx = subtreeEnd(row);
+            int limit = bodyY + lastIdx * ROW_H - scrollY;
+            stickyY = Math.min(stickyY, limit - ROW_H * (sticky.size() - s));
+            renderRow(g, font, row, stickyY, mouseX, mouseY, currentPage, true);
+        }
+        g.disableScissor();
+
+        renderScrollbar(g, mouseX, mouseY);
+        pose.popPose();
+    }
+
+    private List<Row> computeSticky(int firstVisible) {
+        var result = new ArrayList<Row>();
+        if (firstVisible >= rows.size() || scrollY == 0) {
+            return result;
+        }
+        var anchor = rows.get(firstVisible);
+        for (var p = anchor.parent; p != null; p = p.parent) {
+            if (rows.contains(p)) {
+                result.add(0, p);
+            }
+        }
+        return result;
+    }
+
+    /** Index (exclusive) of the last visible row belonging to the subtree of a row. */
+    private int subtreeEnd(Row row) {
+        int idx = rows.indexOf(row);
+        int i = idx + 1;
+        while (i < rows.size() && rows.get(i).depth > row.depth) {
+            i++;
+        }
+        return i;
+    }
+
+    private void renderTitle(GuiGraphics g, int mouseX, int mouseY) {
+        var font = Minecraft.getInstance().font;
+        int x = getX();
+        int y = getY();
+        int borderX = x + width - 1;
+        g.fill(x, y, borderX, y + TITLE_H, ApexTheme.NAV_TITLE_BG);
+        g.fill(x, y + TITLE_H - 1, borderX, y + TITLE_H, ApexTheme.SEPARATOR);
+
+        int pinX = pinX();
+        boolean pinHovered = isInside(mouseX, mouseY, pinX, y, 16, 16);
+        GuideIconButton.drawIcon(g, GuideIconButton.Role.NAVIGATION_PIN, pinX, y,
+                ApexTheme.iconColor(true, pinHovered, pinned));
+
+        int titleX = x + 6;
+        int titleW = pinX - 1 - titleX;
+        if (filterField != null) {
+            filterField.setX(titleX);
+            filterField.setY(y + (TITLE_H - font.lineHeight) / 2 + 1);
+            filterField.setWidth(titleW);
+            filterField.render(g, mouseX, mouseY, 0);
+            if (filterField.getValue().isEmpty() && !filterField.isFocused()) {
+                g.drawString(font, GuidebookText.NavigationFilter.text(), titleX, filterField.getY(),
+                        ApexTheme.TEXT_DIM, false);
+            }
+            return;
+        }
+        var title = GuidebookText.NavigationTitle.text().getString();
+        boolean hovered = isInside(mouseX, mouseY, titleX, y, titleW, TITLE_H);
+        g.drawString(font, font.plainSubstrByWidth(title, titleW), titleX, y + (TITLE_H - font.lineHeight) / 2 + 1,
+                hovered ? ApexTheme.ACCENT_SOFT : ApexTheme.TEXT_TITLE, false);
+    }
+
+    private void renderRow(GuiGraphics g, Font font, Row row, int rowY, int mouseX, int mouseY,
+            @Nullable ResourceLocation currentPage, boolean sticky) {
+        int x = getX();
+        int rowRight = rowRight();
+        boolean hovered = !draggingScrollbar && mouseX >= x && mouseX < rowRight
+                && mouseY >= Math.max(rowY, bodyY()) && mouseY < rowY + ROW_H
+                && mouseY < bodyY() + bodyHeight();
+        boolean current = currentPage != null && currentPage.equals(row.node.pageId());
+        var pageId = row.node.hasPage() ? row.node.pageId() : null;
+        boolean bookmarked = pageId != null && GuideUserData.isBookmarked(guide.getId(), pageId);
+        boolean bookmarkVisible = pageId != null && (hovered || bookmarked);
+
+        if (sticky) {
+            g.fill(x, rowY, rowRight, rowY + ROW_H, ApexTheme.NAV_STICKY_BG);
+            g.fill(x, rowY + ROW_H - 1, rowRight, rowY + ROW_H, ApexTheme.NAV_STICKY_LINE);
+        }
+        if (current) {
+            g.fill(x, rowY, rowRight, rowY + ROW_H, ApexTheme.NAV_ROW_CURRENT);
+        } else if (hovered) {
+            g.fill(x, rowY, rowRight, rowY + ROW_H, ApexTheme.NAV_ROW_HOVER);
+        }
+
+        int rowX = x + 2 + row.depth * 3;
+        if (row.hasChildren()) {
+            drawArrow(g, rowX, rowY + 2, !row.isExpanded(), ApexTheme.NAV_ARROW);
+        }
+        int textX = rowX + INDENT;
+        if (!row.node.icon().isEmpty()) {
+            var pose = g.pose();
+            pose.pushPose();
+            pose.translate(textX, rowY + (ROW_H - ICON_SIZE) / 2f, 0);
+            pose.scale(ICON_SIZE / 16f, ICON_SIZE / 16f, 1);
+            g.renderItem(row.node.icon(), 0, 0);
+            pose.popPose();
+            textX += ICON_SIZE + 2;
+        }
+
+        int textRight = rowRight - 1 - (bookmarkVisible ? ACTION_SLOT_W : 0);
+        int maxW = textRight - textX;
+        if (maxW > 0) {
+            var title = row.node.title();
+            if (font.width(title) > maxW) {
+                title = font.plainSubstrByWidth(title, Math.max(0, maxW - font.width("…"))) + "…";
+            }
+            g.drawString(font, title, textX, rowY + 2, ApexTheme.rowTextColor(current, hovered), false);
+        }
+
+        if (bookmarkVisible) {
+            int bx = rowRight - ACTION_SLOT_W + 1;
+            boolean bHovered = hovered && mouseX >= bx;
+            GuideIconButton.drawIcon(g, bookmarked ? GuideIconButton.Role.BOOKMARKED : GuideIconButton.Role.BOOKMARK,
+                    bx, rowY + 1, 10, ApexTheme.iconColor(true, bHovered, bookmarked));
+        }
+    }
+
+    private void renderScrollbar(GuiGraphics g, int mouseX, int mouseY) {
+        if (!hasScrollbar()) {
+            return;
+        }
+        int x = getX() + width - 1 - SCROLLBAR_W;
+        int top = bodyY();
+        int h = bodyHeight();
+        int thumbH = thumbHeight();
+        int thumbY = top + (int) ((long) scrollY * (h - thumbH) / Math.max(1, maxScroll()));
+        boolean hovered = draggingScrollbar || isInside(mouseX, mouseY, x, top, SCROLLBAR_W, h);
+        g.fill(x, top, x + SCROLLBAR_W, top + h, ApexTheme.SCROLL_TRACK);
+        g.fill(x, thumbY, x + SCROLLBAR_W, thumbY + thumbH,
+                hovered ? ApexTheme.SCROLL_THUMB_HOVER : ApexTheme.SCROLL_THUMB);
+    }
+
+    private int thumbHeight() {
+        int h = bodyHeight();
+        int content = Math.max(1, rows.size() * ROW_H);
+        return Math.max(16, h * h / Math.max(h, content));
+    }
+
+    /** Small filled triangle, pointing right (collapsed) or down (expanded), like GuideNH's drawArrow. */
+    static void drawArrow(GuiGraphics g, int x, int y, boolean pointRight, int color) {
+        if (pointRight) {
+            for (int i = 0; i < 4; i++) {
+                g.fill(x + i, y + i, x + i + 1, y + 7 - i, color);
+            }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                g.fill(x + i, y + 1 + i, x + 7 - i, y + 2 + i, color);
+            }
+        }
+    }
+
+    private static boolean isInside(double mx, double my, int x, int y, int w, int h) {
+        return mx >= x && my >= y && mx < x + w && my < y + h;
+    }
+
+    // ------------------------------------------------------------------ input
+
+    @Override
+    public boolean isMouseOver(double mouseX, double mouseY) {
+        return active && visible && isInside(mouseX, mouseY, getX(), getY(), width, height);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (!isMouseOver(mouseX, mouseY) || !isOpen()) {
+            if (filterField != null && filterField.isFocused() && !isMouseOver(mouseX, mouseY)) {
+                filterField.setFocused(false);
+            }
+            return false;
+        }
+        int y = getY();
+        // Title row: pin button / filter
+        if (mouseY < y + TITLE_H) {
+            if (isInside(mouseX, mouseY, pinX(), y, 16, 16)) {
+                pinned = !pinned;
+                hoverOpen = !pinned;
+                GuideUserData.setNavPinned(pinned);
+                playClick();
+                screen.onNavigationLayoutChanged();
+                return true;
+            }
+            openFilter();
+            if (filterField != null) {
+                filterField.mouseClicked(mouseX, mouseY, button);
+                filterField.setFocused(true);
+            }
+            return true;
+        }
+        // Scrollbar
+        if (hasScrollbar() && mouseX >= getX() + width - 1 - SCROLLBAR_W) {
+            int thumbH = thumbHeight();
+            int thumbY = bodyY() + (int) ((long) scrollY * (bodyHeight() - thumbH) / Math.max(1, maxScroll()));
+            draggingScrollbar = true;
+            scrollGrab = (mouseY >= thumbY && mouseY < thumbY + thumbH) ? (int) mouseY - thumbY : thumbH / 2;
+            dragScrollbarTo(mouseY);
+            return true;
+        }
+        var row = pickRow(mouseX, mouseY);
+        if (row == null) {
+            return true;
+        }
+        var pageId = row.node.hasPage() ? row.node.pageId() : null;
+        // Bookmark toggle
+        if (pageId != null && mouseX >= rowRight() - ACTION_SLOT_W + 1) {
+            GuideUserData.toggleBookmark(guide.getId(), pageId);
+            playClick();
+            return true;
+        }
+        int rowX = getX() + 2 + row.depth * 3;
+        boolean onArrow = row.hasChildren() && mouseX < rowX + INDENT;
+        if (onArrow || (row.hasChildren() && pageId == null)) {
+            setExpanded(row, !row.isExpanded());
+            rebuildVisibleRows();
+            playClick();
+            return true;
+        }
+        if (row.hasChildren() && !row.isExpanded()) {
+            setExpanded(row, true);
+            rebuildVisibleRows();
+        }
+        if (pageId != null) {
+            playClick();
+            screen.navigateTo(pageId);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (draggingScrollbar) {
+            draggingScrollbar = false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (draggingScrollbar) {
+            dragScrollbarTo(mouseY);
+            return true;
+        }
+        return false;
+    }
+
+    private void dragScrollbarTo(double mouseY) {
+        int thumbH = thumbHeight();
+        int travel = Math.max(1, bodyHeight() - thumbH);
+        int pos = (int) mouseY - scrollGrab - bodyY();
+        scrollY = (int) ((long) pos * maxScroll() / travel);
+        clampScroll();
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (!isOpen() || !isMouseOver(mouseX, mouseY)) {
+            return false;
+        }
+        scrollY -= (int) Math.round(delta * ROW_H * 2);
+        clampScroll();
+        return true;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (filterField != null && filterField.isFocused()) {
+            if (keyCode == 256) { // escape clears the filter
+                closeFilter();
+                return true;
+            }
+            return filterField.keyPressed(keyCode, scanCode, modifiers);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean charTyped(char codePoint, int modifiers) {
+        if (filterField != null && filterField.isFocused()) {
+            return filterField.charTyped(codePoint, modifiers);
+        }
+        return false;
+    }
+
+    public boolean isFilterFocused() {
+        return filterField != null && filterField.isFocused();
+    }
+
+    private void openFilter() {
+        if (filterField != null) {
+            return;
+        }
+        var font = Minecraft.getInstance().font;
+        filterField = new EditBox(font, getX() + 6, getY() + 4, Math.max(10, pinX() - getX() - 7), font.lineHeight,
+                Component.empty());
+        filterField.setBordered(false);
+        filterField.setMaxLength(128);
+        filterField.setTextColor(0xFFFFFF);
+        filterField.setResponder(value -> {
+            filter = value;
+            scrollY = 0;
+            rebuildVisibleRows();
+        });
+    }
+
+    private void closeFilter() {
+        filterField = null;
+        filter = "";
+        rebuildVisibleRows();
+    }
+
+    @Nullable
+    private Row pickRow(double mouseX, double mouseY) {
+        int bodyY = bodyY();
+        if (mouseY < bodyY || mouseY >= bodyY + bodyHeight()) {
+            return null;
+        }
+        // Sticky rows sit on top of the regular ones
+        int first = Math.max(0, scrollY / ROW_H);
+        var sticky = computeSticky(first);
+        int stickyIdx = (int) ((mouseY - bodyY) / ROW_H);
+        if (stickyIdx < sticky.size()) {
+            return sticky.get(stickyIdx);
+        }
+        int idx = (int) ((mouseY - bodyY + scrollY) / ROW_H);
+        return idx >= 0 && idx < rows.size() ? rows.get(idx) : null;
+    }
+
+    private void playClick() {
+        Minecraft.getInstance().getSoundManager()
+                .play(SimpleSoundInstance.forUI(GuideMEClient.GUIDE_CLICK_EVENT, 1.0F));
+    }
+
+    @Override
+    public void playDownSound(SoundManager handler) {
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput output) {
+    }
+
+    private class Row {
+        final NavigationNode node;
+        @Nullable
+        final Row parent;
+        final int depth;
+
+        Row(NavigationNode node, @Nullable Row parent, int depth) {
+            this.node = node;
+            this.parent = parent;
+            this.depth = depth;
+        }
+
+        ResourceLocation key() {
+            return node.pageId() != null ? node.pageId()
+                    : new ResourceLocation("apexguide", "nav/" + Integer.toHexString(node.title().hashCode()));
+        }
+
+        boolean hasChildren() {
+            return !node.children().isEmpty();
+        }
+
+        boolean isExpanded() {
+            return !filter.isBlank() || expanded.contains(key());
+        }
+
+        boolean isVisible() {
+            for (var p = parent; p != null; p = p.parent) {
+                if (!p.isExpanded()) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
