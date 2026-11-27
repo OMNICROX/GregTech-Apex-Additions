@@ -784,6 +784,7 @@ public class GTAAMachines {
                 .where('E', blocks(gtna("dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3.get())))
                 .where('F', reactorHatches())
                 .where('G', frames(GTMaterials.Naquadria))
+                .where('H', blocks(core.get()))
                 .where(' ', any())
                 .build();
     }
@@ -1172,8 +1173,48 @@ public class GTAAMachines {
             Component.literal("\u00a77Uses Quark Creation Catalysts and Molten Neutronium for \u00a7a95%"));
 
     // ---------------- Mega Distillation Tower (BartWorks) ----------------
+
+    private static final java.util.Map<Integer, com.gregtechceu.gtceu.api.pattern.BlockPattern> MDT_PATTERNS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /** GT5-Unofficial's Mega Distillation Tower: base, 1-5 layers (two output hatches each), top */
+    public static com.gregtechceu.gtceu.api.pattern.BlockPattern megaDistillationPattern(
+            com.gregtechceu.gtceu.api.machine.MachineDefinition md, int layers) {
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
+        return MDT_PATTERNS.computeIfAbsent(layers, l -> {
+            var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
+            var out = abilities(PartAbility.EXPORT_FLUIDS_1X, PartAbility.EXPORT_FLUIDS).setPreviewCount(1);
+            return GTAAStructures.pattern("gt5u", "mega_distillation_tower_" + l)
+                    .where('~', controller(blocks(definition.getBlock())))
+                    .where('A', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('1', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()).setMinGlobalLimited(60)
+                            .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', blocks(GTBlocks.CASING_STEEL_SOLID.get()))
+                    .where('C', blocks(GTBlocks.CASING_BRONZE_PIPE.get()))
+                    .where('D', blocks(GTBlocks.CASING_STEEL_PIPE.get()))
+                    .where('E', casing)
+                    .where('F', frames(GTMaterials.StainlessSteel))
+                    .where('G', blocks(gtceuBlock("naquadah_block", GTBlocks.CASING_STAINLESS_CLEAN.get())))
+                    .where('H', blocks(GTBlocks.CASING_BRONZE_BRICKS.get()))
+                    .where('2', blocks(GTBlocks.CASING_STEEL_PIPE.get()).or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1)))
+                    .where('3', blocks(GTBlocks.CASING_BRONZE_PIPE.get()).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where('7', blocks(GTBlocks.CASING_BRONZE_BRICKS.get()).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where('4', blocks(GTBlocks.CASING_BRONZE_PIPE.get()).or(out))
+                    .where('5', blocks(GTBlocks.CASING_BRONZE_PIPE.get()).or(out))
+                    .where('6', blocks(GTBlocks.CASING_BRONZE_PIPE.get()).or(out))
+                    .where(' ', any())
+                    .build();
+        });
+    }
+
+    private static Block gtceuBlock(String id, Block fallback) {
+        Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation("gtceu", id));
+        return b == null || b == Blocks.AIR ? fallback : b;
+    }
+
     public static final MultiblockMachineDefinition MEGA_DISTILLATION_TOWER = REGISTRATE
-            .multiblock("mega_distillation_tower", com.gregtechceu.gtceu.common.machine.multiblock.electric.DistillationTowerMachine::new)
+            .multiblock("mega_distillation_tower", com.omnicrox.gtaa.common.machine.multiblock.gtnh.MegaDistillationTowerMachine::new)
             .langValue("Mega Distillation Tower")
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(GTRecipeTypes.DISTILLATION_RECIPES)
@@ -1190,26 +1231,9 @@ public class GTAAMachines {
                     Component.literal("\u00a77One fluid output hatch per layer, 2 to 13 layers"),
                     Component.literal("\u00a78Ported from GT New Horizons (BartWorks)"))
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
-            .pattern(definition -> {
-                TraceabilityPredicate out = abilities(PartAbility.EXPORT_FLUIDS_1X, PartAbility.EXPORT_FLUIDS).setMaxLayerLimited(1);
-                var casing = blocks(GTBlocks.CASING_STAINLESS_CLEAN.get());
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("YYYYYYYSYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY", "YYYYYYYYYYYYYYY")
-                        .aisle("ZZZZZZZZZZZZZZZ", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "Z#############Z", "ZZZZZZZZZZZZZZZ")
-                        .aisle("XXXXXXXXXXXXXXX", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "X#############X", "XXXXXXXXXXXXXXX").setRepeatable(0, 11)
-                        .aisle("XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX")
-                        .where('S', controller(blocks(definition.getBlock())))
-                        .where('Y', casing.setMinGlobalLimited(1).or(abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(1))
-                                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
-                        .where('Z', casing.or(out))
-                        .where('X', casing.or(out))
-                        .where('#', air())
-                        .build();
-            })
+            .pattern(definition -> megaDistillationPattern(definition, 1))
+            .shapeInfos(definition -> com.omnicrox.gtaa.common.data.GTAAGTNHMachines.variantShapes(
+                    megaDistillationPattern(definition, 1), megaDistillationPattern(definition, 3), megaDistillationPattern(definition, 5)))
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_clean_stainless_steel"),
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/distillation_tower")))

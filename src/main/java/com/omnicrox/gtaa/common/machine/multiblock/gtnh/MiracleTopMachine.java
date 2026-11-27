@@ -36,10 +36,32 @@ public class MiracleTopMachine extends WorkableElectricMultiblockMachine {
         return MANAGED_FIELD_HOLDER;
     }
 
+    public static final int MIN_RINGS = 2, MAX_RINGS = 16;
+    private int matched = MIN_RINGS;
+
+    /** Twist's structure: main piece, 0-14 middle pieces, end piece = 2-16 rings; the longest that matches wins */
+    @Override
+    public boolean checkPattern() {
+        for (int r = MAX_RINGS; r >= MIN_RINGS; r--) {
+            com.gregtechceu.gtceu.api.pattern.BlockPattern p =
+                    com.omnicrox.gtaa.common.data.GTAAGTNHMachines.miracleTopPattern(getDefinition(), r);
+            if (p != null && p.checkPatternAt(getMultiblockState(), false)) {
+                matched = r;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public com.gregtechceu.gtceu.api.pattern.BlockPattern getPattern() {
+        return com.omnicrox.gtaa.common.data.GTAAGTNHMachines.miracleTopPattern(getDefinition(), matched);
+    }
+
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        rings = Math.max(1, ApexModifiers.count(this, CTX) / 2); // 8 rings: two ring coils each in the fixed TST shape
+        rings = matched;
     }
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {

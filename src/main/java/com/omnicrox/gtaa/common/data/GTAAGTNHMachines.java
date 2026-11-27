@@ -260,22 +260,9 @@ public final class GTAAGTNHMachines {
                     Component.literal("§aPerfect overclocks§7 with 8 or more rings"),
                     Component.literal("§8After Twist Space Technology (GTNH addon)"))
             .appearanceBlock(() -> modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get))
-            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "miracle_top")
-                    .where('~', controller(blocks(definition.get())))
-                    .where('A', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
-                    .where('M', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
-                    .where('H', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
-                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
-                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
-                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
-                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
-                    .where('B', ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.gtnh.MiracleTopMachine.CTX,
-                            () -> new Block[] { modBlock("gtna:molecular_coil", GTBlocks.FUSION_COIL::get) }))
-                    .where('C', blocks(modBlock("gtna:hollow_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
-                    .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
-                    .where('E', blocks(GTBlocks.FUSION_GLASS.get()))
-                    .where(' ', any())
-                    .build())
+            .pattern(definition -> miracleTopPattern(definition, 2))
+            .shapeInfos(definition -> variantShapes(miracleTopPattern(definition, 2), miracleTopPattern(definition, 8),
+                    miracleTopPattern(definition, 16)))
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/molecular_casing"),
                     gt("block/multiblock/gcym/large_circuit_assembler")))
@@ -442,6 +429,44 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/assembly_line")))
             .register();
 
+
+
+    // ---------------- structures that come in several lengths (GTNH's repeated pieces) ----------------
+    private static final java.util.Map<String, com.gregtechceu.gtceu.api.pattern.BlockPattern> VARIANTS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /** the preview pages of a multi with several structure lengths */
+    public static java.util.List<com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo> variantShapes(
+            com.gregtechceu.gtceu.api.pattern.BlockPattern... patterns) {
+        java.util.List<com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo> out = new java.util.ArrayList<>();
+        for (var bp : patterns) {
+            int[] reps = new int[bp.aisleRepetitions.length];
+            java.util.Arrays.fill(reps, 1);
+            out.add(new com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo(bp.getPreview(reps)));
+        }
+        return out;
+    }
+
+    /** Twist Space Technology's Miracle Top with 2-16 rings */
+    public static com.gregtechceu.gtceu.api.pattern.BlockPattern miracleTopPattern(
+            com.gregtechceu.gtceu.api.machine.MachineDefinition md, int rings) {
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
+        return VARIANTS.computeIfAbsent("miracle_top_" + rings, k -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "miracle_top_" + rings)
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('M', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('H', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.gtnh.MiracleTopMachine.CTX,
+                            () -> new Block[] { modBlock("gtna:molecular_coil", GTBlocks.FUSION_COIL::get) }))
+                    .where('C', blocks(modBlock("gtna:hollow_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('E', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where(' ', any())
+                    .build());
+    }
 
     // ======================= GT-Not-Leisure ports =======================
     // Contains code from GT-Not-Leisure (https://github.com/GTNotLeisure/GT-Not-Leisure, GPL-3.0 with the additional
