@@ -80,6 +80,23 @@ public class GTAAItems {
             .lang("MAX Universal Circuit").tag(com.gregtechceu.gtceu.data.recipe.CustomTags.MAX_CIRCUITS)
             .model(NonNullBiConsumer.noop()).register();
 
+    /** GT5-Unofficial's Nuclear Star (texture from GT5-Unofficial, LGPL-3.0) */
+    public static final ItemEntry<Item> NUCLEAR_STAR = REGISTRATE
+            .<Item>item("nuclear_star", p -> new Item(p.rarity(net.minecraft.world.item.Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(net.minecraft.world.item.ItemStack stack, net.minecraft.world.level.Level level,
+                                            java.util.List<net.minecraft.network.chat.Component> tooltip,
+                                            net.minecraft.world.item.TooltipFlag flag) {
+                    tooltip.add(net.minecraft.network.chat.Component.literal("§7By the powers of Greg, I command this star to be really hot."));
+                }
+
+                @Override
+                public boolean isFoil(net.minecraft.world.item.ItemStack stack) {
+                    return true;
+                }
+            })
+            .lang("Nuclear Star").model(NonNullBiConsumer.noop()).register();
+
     public static final ItemEntry<Item> SPIRE_LIGHTNING_ROD = REGISTRATE.item("spire_lightning_rod", Item::new)
             .lang("Spire Lightning Rod").model(NonNullBiConsumer.noop()).register();
 

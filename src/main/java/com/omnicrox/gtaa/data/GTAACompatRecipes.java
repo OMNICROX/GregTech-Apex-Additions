@@ -70,6 +70,7 @@ public final class GTAACompatRecipes {
         alfheimArray(provider);
         draconicFusionCrafting(provider);
         matterFabricator(provider);
+        nuclearStar(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -538,5 +539,23 @@ public final class GTAACompatRecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MATTER_FABRICATOR.asStack())
                 .duration(1600).EUt(VA[ZPM])
                 .save(provider);
+    }
+
+    /** GT5-Unofficial's Nuclear Star: 16 Gravi Stars in molten Infinity (UEV), or 64 Nether Stars in Infinity plasma (UIV) */
+    private static void nuclearStar(Consumer<FinishedRecipe> provider) {
+        var infinity = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:infinity");
+        if (infinity == null || !infinity.hasFluid()) return;
+        AUTOCLAVE_RECIPES.recipeBuilder("gtapexadditions:nuclear_star")
+                .inputItems(GTItems.GRAVI_STAR, 16)
+                .inputFluids(infinity.getFluid(L * 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack())
+                .duration(480).EUt(VA[UEV]).save(provider);
+        var plasma = infinity.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, (int) (L * 2));
+        if (plasma != null && !plasma.isEmpty())
+            AUTOCLAVE_RECIPES.recipeBuilder("gtapexadditions:nuclear_star_plasma")
+                    .inputItems(Items.NETHER_STAR, 64)
+                    .inputFluids(plasma)
+                    .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack())
+                    .duration(20).EUt(VA[UIV]).save(provider);
     }
 }
