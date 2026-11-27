@@ -77,6 +77,8 @@ public final class GTAACompatRecipes {
         divineIsaForge(provider);
         realAnnihilationGenerator(provider);
         libraryOfRuina(provider);
+        bloodyHell(provider);
+        laserMeteorMiner(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -755,5 +757,34 @@ public final class GTAACompatRecipes {
             }
             b.save(needing(provider, "twilightforest", swap));
         }
+    }
+
+    /** Twist's Bloody Hell: the graduation of Blood Magic (master ritual stone, altar, alchemy table) at IV */
+    private static void bloodyHell(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:bloody_hell")
+                .inputItems(S1, 1).inputItems(S2, 1).inputItems(S3, 1).inputItems(S4, 1).inputItems(S5, 4)
+                .inputItems(CustomTags.IV_CIRCUITS, 4)
+                .inputItems(GTItems.SENSOR_IV, 2)
+                .inputItems(plateDense, GTMaterials.TungstenSteel, 4)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.BLOODY_HELL.asStack())
+                .duration(1200).EUt(VA[IV])
+                .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:masterritualstone", S2, "bloodmagic:altar",
+                        S3, "bloodmagic:alchemytable", S4, "bloodmagic:activationcrystalawakened", S5, "bloodmagic:demonslate")));
+    }
+
+    /** Twist's Laser Meteor Miner: an Ore Drilling Plant with a ritual stone, LuV sensors and emitters */
+    private static void laserMeteorMiner(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:laser_meteor_miner")
+                .inputItems(com.gregtechceu.gtceu.common.data.machines.GTMultiMachines.LARGE_MINER[IV].asStack())
+                .inputItems(S1, 1).inputItems(S2, 2)
+                .inputItems(GTItems.SENSOR_LuV, 2)
+                .inputItems(GTItems.EMITTER_LuV, 2)
+                .inputItems(CustomTags.LuV_CIRCUITS, 4)
+                .inputItems(plateDense, GTMaterials.TungstenSteel, 2)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.LASER_METEOR_MINER.asStack())
+                .duration(1200).EUt(VA[LuV])
+                .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:masterritualstone", S2, "bloodmagic:demonslate")));
     }
 }

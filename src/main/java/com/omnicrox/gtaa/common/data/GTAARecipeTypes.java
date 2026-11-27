@@ -39,6 +39,8 @@ public class GTAARecipeTypes {
     public static GTRecipeType MATTER_FABRICATOR;
     public static GTRecipeType NETHER_INTERFACE;
     public static GTRecipeType LIBRARY_OF_RUINA;
+    public static GTRecipeType BLOODY_HELL;
+    public static GTRecipeType LASER_METEOR_MINER;
     public static GTRecipeType MICRO_SPACETIME;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
@@ -155,6 +157,13 @@ public class GTAARecipeTypes {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MASS_FAB, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(data -> "Any ingot or gem works (a block counts as 9)")
                 .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.MatterFabricationLogic.INSTANCE);
+        BLOODY_HELL = register("bloody_hell", "multiblock", "Bloody Hell")
+                .setMaxIOSize(9, 1, 1, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> data.getInt("bh_altar") > 0 ? "Altar tier: " + data.getInt("bh_altar") : "")
+                .addDataInfo(data -> data.getInt("bh_orb") > 0 ? "Blood Orb tier: " + data.getInt("bh_orb") : "");
+        LASER_METEOR_MINER = register("laser_meteor_miner", "multiblock", "Laser Meteor Miner")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")

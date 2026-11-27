@@ -1091,7 +1091,7 @@ public final class GTAAGTNHMachines {
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
                     .where('E', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_STRESS_PROOF.get()))
                     .where('F', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
-                    .where('G', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('G', blocks(modBlock("gtceu:trinium_coil_block", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
                     .where('H', blocks(GTBlocks.FUSION_GLASS.get()))
                     .where('I', blocks(net.minecraft.world.level.block.Blocks.WATER,
                             modBlock("twilightforest:twilight_portal", () -> net.minecraft.world.level.block.Blocks.WATER)))
@@ -1100,6 +1100,185 @@ public final class GTAAGTNHMachines {
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/europium_radiation_proof_casing"),
                     gt("block/multiblock/implosion_compressor")))
+            .register();
+
+    // ======================= Blood Magic (Twist Space Technology) =======================
+    private static final String TST_TASKEREN = "§7Authors: §cTaskeren§7, §6Goderium§7, added by §aTwist Space Technology";
+    private static final String TST_TOTTO = "§7Author: §bTotto§7, added by §aTwist Space Technology";
+
+    private static Block bm(String path, java.util.function.Supplier<Block> fallback) {
+        return modBlock("bloodmagic:" + path, fallback);
+    }
+
+    private static final String[] BM_RUNES = { "blankrune", "sacrificerune", "selfsacrificerune", "dislocationrune",
+            "altarcapacityrune", "bettercapacityrune", "orbcapacityrune", "accelerationrune", "chargingrune",
+            "sacrificerune2", "selfsacrificerune2", "dislocationrune2", "altarcapacityrune2", "bettercapacityrune2",
+            "orbcapacityrune2", "accelerationrune2", "chargingrune2" };
+
+    /** any glass block (Twist: any glass, without a glass tier) */
+    private static TraceabilityPredicate anyGlass() {
+        return new TraceabilityPredicate(s -> s.getBlockState().is(net.minecraftforge.common.Tags.Blocks.GLASS),
+                () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] {
+                        com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(GTBlocks.CASING_TEMPERED_GLASS.get().defaultBlockState()),
+                        com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(GTBlocks.FUSION_GLASS.get().defaultBlockState()) });
+    }
+
+    /** a Bloody Hell pool block: empty or Life Essence; records the position */
+    private static TraceabilityPredicate bloodPool() {
+        return new TraceabilityPredicate(s -> {
+            var st = s.getBlockState();
+            Block le = bm("life_essence_block", () -> net.minecraft.world.level.block.Blocks.AIR);
+            if (!(st.isAir() || st.getBlock() == le || st.canBeReplaced())) return false;
+            java.util.Set<Long> set = s.getMatchContext().getOrPut(
+                    com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine.CTX_BLOOD, new java.util.HashSet<Long>());
+            set.add(s.getPos().asLong());
+            return true;
+        }, () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] { com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(
+                bm("life_essence_block", () -> net.minecraft.world.level.block.Blocks.AIR).defaultBlockState()) });
+    }
+
+    /** Twist's Bloody Hell, structure tiers 1-6 */
+    public static com.gregtechceu.gtceu.api.pattern.BlockPattern bloodyHellPattern(
+            com.gregtechceu.gtceu.api.machine.MachineDefinition md, int tier) {
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
+        return VARIANTS.computeIfAbsent("bloody_hell_" + tier, k -> {
+            Block brick = bm("dungeon_brick1", () -> net.minecraft.world.level.block.Blocks.NETHER_BRICKS);
+            java.util.List<Block> runes = new java.util.ArrayList<>();
+            for (String r : BM_RUNES) {
+                Block b = bm(r, () -> null);
+                if (b != null) runes.add(b);
+            }
+            if (runes.isEmpty()) runes.add(net.minecraft.world.level.block.Blocks.RED_NETHER_BRICKS);
+            return com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "bloody_hell_" + tier)
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(bm("dungeon_polished", () -> net.minecraft.world.level.block.Blocks.POLISHED_BLACKSTONE)))
+                    .where('B', blocks(brick))
+                    .where('C', blocks(bm("dungeon_metal", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('D', blocks(bm("dungeon_metal_vengeful", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('E', blocks(bm("dungeon_metal_corrosive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('F', blocks(bm("dungeon_metal_destructive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('G', ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine.CTX_SPEED,
+                                    () -> new Block[] { bm("speedrune", () -> net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK) })
+                            .or(ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine.CTX_SPEED2,
+                                    () -> new Block[] { bm("speedrune2", () -> net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK) }))
+                            .or(blocks(runes.toArray(new Block[0]))))
+                    .where('H', blocks(bm("largebloodstonebrick", () -> net.minecraft.world.level.block.Blocks.RED_NETHER_BRICKS)))
+                    .where('I', blocks(bm("dungeon_metal_steadfast", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('J', blocks(bm("dungeon_eye", () -> net.minecraft.world.level.block.Blocks.CRYING_OBSIDIAN)))
+                    .where('K', blocks(net.minecraft.world.level.block.Blocks.GLOWSTONE))
+                    .where('L', blocks(net.minecraft.world.level.block.Blocks.DIAMOND_BLOCK))
+                    .where('M', blocks(net.minecraft.world.level.block.Blocks.BEACON))
+                    .where('N', blocks(brick)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('Z', bloodPool())
+                    .where(' ', any())
+                    .build();
+        });
+    }
+
+    // ---------------- Bloody Hell (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition BLOODY_HELL = REGISTRATE
+            .multiblock("bloody_hell", com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine::new)
+            .langValue("Bloody Hell")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.BLOODY_HELL)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Altar of Blood / Alchemy Table / Alchemy Array")
+                    .flavor("After years of researching, you finally find the last piece to mass-produce the Blood Magic things!")
+                    .flavor("Researches show that the speed of soaking ritual is highly related to the greatness of the altar and the runes it used.")
+                    .flavor("And there is a small text on the corner said, \"Speed Runes can be the key.\"")
+                    .flavor("Also a weird stranger told you that Armok splashes Blood everywhere in the machine.")
+                    .info("Runs every §cBlood Altar§7, §cAlchemy Table§7 and §cAlchemy Array§7 recipe with §cLife Essence§7")
+                    .info(" from the input hatches; no power needed")
+                    .info("§66 structure tiers§7; tier N counts as a tier N+1 altar")
+                    .info("§b(tier)^3 parallels§7; speed +50% per tier above 2, and up to §a+3500%§7 from Speed Runes")
+                    .info(" (a Reinforced Speed Rune counts as 3)")
+                    .info("Alchemy Table recipes need a §dBlood Orb§7 of their tier in an input bus (not used up)")
+                    .info("Tiers 3-6: the §4blood pool§7 fills itself from the input hatches (1000 mB of Life Essence a block)")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_TASKEREN).build())
+            .appearanceBlock(() -> bm("dungeon_brick1", () -> net.minecraft.world.level.block.Blocks.NETHER_BRICKS))
+            .pattern(definition -> bloodyHellPattern(definition, 1))
+            .shapeInfos(definition -> variantShapes(bloodyHellPattern(definition, 1), bloodyHellPattern(definition, 2),
+                    bloodyHellPattern(definition, 3), bloodyHellPattern(definition, 4), bloodyHellPattern(definition, 5),
+                    bloodyHellPattern(definition, 6)))
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("bloodmagic", "block/dungeon/dungeon_brick1"),
+                    gt("block/multiblock/implosion_compressor")))
+            .register();
+
+    private static TraceabilityPredicate lmmHatches(Block casing, boolean energyMin) {
+        return blocks(casing)
+                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(energyMin ? 1 : 0).setPreviewCount(1))
+                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1));
+    }
+
+    /** Twist's Laser Meteor Miner, tiers 1-3 */
+    public static com.gregtechceu.gtceu.api.pattern.BlockPattern laserMeteorMinerPattern(
+            com.gregtechceu.gtceu.api.machine.MachineDefinition md, int tier) {
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
+        return VARIANTS.computeIfAbsent("laser_meteor_miner_" + tier, k -> {
+            Block robust = GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get();
+            Block neutronium = modBlock("gtna:neutronium_stable_casing", () -> robust);
+            Block support = modBlock("gtna:high_strength_support_mechanical_casing", () -> robust);
+            Block solar = GTBlocks.CASING_STAINLESS_CLEAN.get();
+            return com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "laser_meteor_miner_" + tier)
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', anyGlass())
+                    .where('B', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
+                    .where('C', blocks(GTBlocks.FUSION_COIL.get()))
+                    .where('D', blocks(neutronium))
+                    .where('E', blocks(modBlock("gtna:iridium_casing", () -> robust)))
+                    .where('F', blocks(modBlock("gtceu:trinium_coil_block", () -> robust)))
+                    .where('G', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Neutronium))
+                    .where('H', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Trinium))
+                    .where('I', blocks(modBlock("gtceu:naquadah_coil_block", () -> robust)))
+                    .where('J', frames(com.gregtechceu.gtceu.common.data.GTMaterials.StainlessSteel))
+                    .where('K', blocks(solar))
+                    .where('L', blocks(GTBlocks.CASING_TITANIUM_STABLE.get()))
+                    .where('M', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('N', blocks(support))
+                    .where('O', blocks(modBlock("gtca:borsilicate_reinforced_iridium_glass", GTBlocks.FUSION_GLASS::get)))
+                    .where('P', blocks(modBlock("gtapexadditions:compact_fusion_coil_mk3", GTBlocks.FUSION_COIL::get)))
+                    .where('Q', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where('R', blocks(bm("dungeon_metal_vengeful", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('S', blocks(bm("dungeon_metal_corrosive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('U', blocks(modBlock("gtca:radiant_proof_reinforced_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('V', lmmHatches(support, true))
+                    .where('W', lmmHatches(solar, true))
+                    .where('X', lmmHatches(neutronium, true))
+                    .where('Y', blocks(solar).or(abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(1).setPreviewCount(1)))
+                    .where('Z', blocks(net.minecraft.world.level.block.Blocks.BEACON))
+                    .where(' ', any())
+                    .build();
+        });
+    }
+
+    // ---------------- Laser Meteor Miner (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition LASER_METEOR_MINER = REGISTRATE
+            .multiblock("laser_meteor_miner", com.omnicrox.gtaa.common.machine.multiblock.tst.LaserMeteorMinerMachine::new)
+            .langValue("Laser Meteor Miner")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.LASER_METEOR_MINER)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Meteor Miner")
+                    .flavor("Who needs a pickaxe when you have a laser?")
+                    .info("Mines the §cBlood Magic§7 meteor called down by the §cMark of the Falling Tower§7:")
+                    .info(" put the ritual's Master Ritual Stone in the laser's column below the machine, and a block")
+                    .info(" §e48 blocks above the top of the machine§7, right over the beacon, to catch the meteor")
+                    .info("§63 tiers§7: one block (fortune of the pickaxe in the first input bus), one row (Fortune III)")
+                    .info(" or one layer (Fortune IV) per cycle")
+                    .info("Cycles take §62 s§7 at §bMV§7 and overclock (x4 power, x1.41 speed) with a 16x voltage margin")
+                    .warning("Everything within 40 blocks of the meteor center is mined, not only the meteor")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_TOTTO).build())
+            .appearanceBlock(() -> modBlock("gtna:high_strength_support_mechanical_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get))
+            .pattern(definition -> laserMeteorMinerPattern(definition, 1))
+            .shapeInfos(definition -> variantShapes(laserMeteorMinerPattern(definition, 1),
+                    laserMeteorMinerPattern(definition, 2), laserMeteorMinerPattern(definition, 3)))
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/high_strength_support_mechanical_casing"),
+                    gt("block/multiblock/large_miner")))
             .register();
 
 }
