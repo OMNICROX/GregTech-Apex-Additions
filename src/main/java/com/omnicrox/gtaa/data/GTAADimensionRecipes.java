@@ -39,6 +39,7 @@ public final class GTAADimensionRecipes {
     }
 
     public static void init(Consumer<FinishedRecipe> p) {
+        bloodOrbs(p);
         // ---------------- Aether ----------------
         run(p, "aether", "zanite", "aether:zanite_gemstone", CENTRIFUGE_RECIPES, MV, 200,
                 b -> b.outputItems(dust, GTMaterials.Sapphire, 1).outputItems(dustSmall, GTMaterials.Titanium, 1));
@@ -67,5 +68,37 @@ public final class GTAADimensionRecipes {
                 b -> b.outputItems(dust, GTMaterials.Iron, 1).outputItems(dustSmall, GTMaterials.Tin, 1));
         run(p, "undergarden", "froststeel", "undergarden:froststeel_ingot", MACERATOR_RECIPES, HV, 140, dust(GTMaterials.Steel, 1));
         run(p, "undergarden", "depthrock", "undergarden:depthrock", MACERATOR_RECIPES, LV, 60, dust(GTMaterials.Stone, 1));
+    }
+
+    /**
+     * Blood Magic tier gating (GT New Horizons, NHCore's ScriptBloodMagic): Blood Orbs are soaked from Raw Orbs made in
+     * GregTech, one voltage tier per orb (Weak LV ... Archmage IV). apex_blood_magic_gating.js swaps the altar inputs and
+     * moves Blood Magic's orb crafting (runes, ritual stones...) into the assembler at the orb's tier.
+     */
+    public static void bloodOrbs(Consumer<FinishedRecipe> p) {
+        var orbs = com.omnicrox.gtaa.common.data.GTAAItems.RAW_BLOOD_ORBS;
+        var circuits = new net.minecraft.tags.TagKey[] { com.gregtechceu.gtceu.data.recipe.CustomTags.LV_CIRCUITS,
+                com.gregtechceu.gtceu.data.recipe.CustomTags.MV_CIRCUITS, com.gregtechceu.gtceu.data.recipe.CustomTags.HV_CIRCUITS,
+                com.gregtechceu.gtceu.data.recipe.CustomTags.EV_CIRCUITS, com.gregtechceu.gtceu.data.recipe.CustomTags.IV_CIRCUITS };
+        Material[] plates = { GTMaterials.Steel, GTMaterials.Aluminium, GTMaterials.StainlessSteel, GTMaterials.Titanium,
+                GTMaterials.TungstenSteel };
+        int[] tiers = { LV, MV, HV, EV, IV };
+        // the core each Blood Magic orb is soaked from: diamond, redstone block, gold block, weak blood shard, dungeon metal
+        for (int i = 0; i < 5; i++) {
+            GTRecipeBuilder b = ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:bloodmagic/raw_blood_orb_" + (i + 1));
+            switch (i) {
+                case 0 -> b.inputItems(gem, GTMaterials.Diamond, 1).inputItems(plate, GTMaterials.Redstone, 4);
+                case 1 -> b.inputItems(block, GTMaterials.Redstone, 1).inputItems(plate, GTMaterials.Ruby, 2);
+                case 2 -> b.inputItems(block, GTMaterials.Gold, 1).inputItems(plate, GTMaterials.Emerald, 2);
+                case 3 -> b.inputItems(IN).inputItems(plate, GTMaterials.Diamond, 2);
+                default -> b.inputItems(IN).inputItems(plate, GTMaterials.NetherStar, 1);
+            }
+            @SuppressWarnings("unchecked") net.minecraft.tags.TagKey<Item> c = (net.minecraft.tags.TagKey<Item>) circuits[i];
+            b.inputItems(c, 2).inputItems(plate, plates[i], 4).inputFluids(GTMaterials.Glowstone.getFluid(144 * (i + 1)))
+                    .outputItems(orbs[i].asStack()).duration(200 + 100 * i).EUt(VA[tiers[i]]);
+            if (i == 3) b.save(GTAACompatRecipes.needing(p, "bloodmagic", Map.of(IN, "bloodmagic:weakbloodshard")));
+            else if (i == 4) b.save(GTAACompatRecipes.needing(p, "bloodmagic", Map.of(IN, "bloodmagic:dungeon_metal")));
+            else b.save(GTAACompatRecipes.needing(p, "bloodmagic", Map.of()));
+        }
     }
 }

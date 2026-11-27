@@ -51,6 +51,15 @@ public class GTAAItems {
         }
     }
 
+    /** GT New Horizons' Raw Orbs: made in GregTech, soaked in the Blood Altar into Blood Orbs (tier 1-5 = LV-IV) */
+    @SuppressWarnings("unchecked")
+    public static final ItemEntry<Item>[] RAW_BLOOD_ORBS = new ItemEntry[5];
+    static {
+        String[] names = { "Weak", "Apprentice", "Magician", "Master", "Archmage" };
+        for (int i = 0; i < 5; i++) RAW_BLOOD_ORBS[i] = REGISTRATE.item("raw_blood_orb_" + (i + 1), Item::new)
+                .lang("Raw " + names[i] + " Blood Orb").model(NonNullBiConsumer.noop()).register();
+    }
+
     public static final ItemEntry<Item> ACTIVATED_CARBON_FILTER_MESH = REGISTRATE.item("activated_carbon_filter_mesh", Item::new)
             .lang("Activated Carbon Filter Mesh").model(NonNullBiConsumer.noop()).register();
     public static final ItemEntry<com.omnicrox.gtaa.common.item.AngelRingItem> ANGEL_RING = REGISTRATE

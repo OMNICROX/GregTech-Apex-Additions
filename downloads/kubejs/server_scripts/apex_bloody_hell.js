@@ -46,7 +46,10 @@ ServerEvents.recipes(event => {
 
   event.forEachRecipe({ type: 'bloodmagic:altar' }, r => {
     let j = parse(r); if (!j) return
-    add('altar', String(r.getId()), [ing(j.input)], out(j.output), j.altarSyphon || 0, 1, (j.upgradeLevel || 0) + 1, 0)
+    // Blood Magic gating (apex_blood_magic_gating.js): orbs soak a GregTech Raw Blood Orb here too
+    let raw = j.output && global.APEX_BM_ORB_INPUTS ? global.APEX_BM_ORB_INPUTS[j.output.item] : null
+    let input = raw && Item.exists(raw) ? raw : ing(j.input)
+    add('altar', String(r.getId()), [input], out(j.output), j.altarSyphon || 0, 1, (j.upgradeLevel || 0) + 1, 0)
   })
   event.forEachRecipe({ type: 'bloodmagic:alchemytable' }, r => {
     let j = parse(r); if (!j) return
