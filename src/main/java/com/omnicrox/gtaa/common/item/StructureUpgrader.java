@@ -135,7 +135,6 @@ public class StructureUpgrader extends Item {
         List<Block> coal = new ArrayList<>();
         for (var b : GTAABlocks.COAL_CASINGS) if (b != null) coal.add(b.get());
         out.add(new Family("coal_casings", "Component Assembly Casings", single(coal.toArray(Block[]::new))));
-        out.add(new Family("suit_casings", "Suit Station Casings", single(GTAABlocks.suitCasings())));
         out.add(new Family("mca_soil", "Cultivation Soil", grouped(MysticalCultivationArrayMachine.soilTiers())));
         out.add(new Family("mca_glass", "Tiered Glass", grouped(MysticalCultivationArrayMachine.glassTiers())));
         out.add(new Family("borosilicate_glass", "Borosilicate Glass", com.omnicrox.gtaa.common.glass.GTAAGlass.family()));

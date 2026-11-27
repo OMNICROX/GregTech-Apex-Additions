@@ -44,8 +44,6 @@ public class GTAA {
         com.omnicrox.gtaa.common.item.AngelRingItem.registerEvents();
         com.omnicrox.gtaa.common.infernal.InfernalMobs.register();
         com.omnicrox.gtaa.common.entity.GTAAEntities.register(bus);
-        com.omnicrox.gtaa.common.stargate.ApexStargate.registerEvents();
-        com.omnicrox.gtaa.common.stargate.ApexGateCharge.registerEvents();
         com.omnicrox.gtaa.common.network.GTAANetwork.register();
         com.omnicrox.gtaa.common.item.StructureUpgrader.registerEvents();
         if (net.minecraftforge.fml.ModList.get().isLoaded("botania")) com.omnicrox.gtaa.common.compat.BotaniaCompat.init();
@@ -59,8 +57,6 @@ public class GTAA {
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
             com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
                     com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);
-            com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("suit_hologram"),
-                    com.omnicrox.gtaa.client.SuitHologramRender.TYPE);
         }
         bus.addListener(this::registerMaterialRegistry);
         bus.addListener(this::registerMaterials);
@@ -111,7 +107,7 @@ public class GTAA {
                         GTAAMachines.PURIFICATION_PH, GTAAMachines.PURIFICATION_PLASMA, GTAAMachines.PURIFICATION_UV,
                         GTAAMachines.PURIFICATION_DEGASSER, GTAAMachines.PURIFICATION_BARYONIC, GTAAMachines.MEGA_DISTILLATION_TOWER,
                         GTAAMachines.EXTREME_ENTITY_CRUSHER,
-                        GTAAMachines.MYSTICAL_CULTIVATION_ARRAY, GTAAMachines.SUIT_FABRICATION_STATION }) m.getPatternFactory().get();
+                        GTAAMachines.MYSTICAL_CULTIVATION_ARRAY }) m.getPatternFactory().get();
                 LOGGER.info("[GTAA] antimatter patterns built OK");
             }
         });

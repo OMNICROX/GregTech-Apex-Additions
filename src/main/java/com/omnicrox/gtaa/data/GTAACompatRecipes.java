@@ -66,7 +66,6 @@ public final class GTAACompatRecipes {
         angelRing(provider);
         aether(provider);
         godforge(provider);
-        apexGate(provider);
         alfheimArray(provider);
         draconicFusionCrafting(provider);
         matterFabricator(provider);
@@ -86,7 +85,6 @@ public final class GTAACompatRecipes {
         topCircuits(provider);
         maxwellCats(provider);
         tieredGlass(provider);
-        personalSpace(provider);
         GTAAMissingRecipes.init(provider);
         GTAADimensionRecipes.init(provider);
     }
@@ -272,74 +270,6 @@ public final class GTAACompatRecipes {
                         S3, "mysticalagriculture:inferium_ingot", S4, "mysticalagriculture:inferium_essence")));
     }
 
-    /**
-     * Apex Stargate frame: the final gate. 14 rings (UHV), 9 chevrons (UEV, each built on a ring) and the base (UIV).
-     * The world's first finished gate then charges itself with 9.22E18 EU (ApexGateCharge).
-     */
-    private static void apexGate(Consumer<FinishedRecipe> provider) {
-        String[] mods = { "gtna", "draconicevolution" };
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/ring")
-                .inputItems(frameGt, GTMaterials.Neutronium)
-                .inputItems(plateDense, GTMaterials.Neutronium, 2)
-                .inputItems(S1, 4)
-                .inputItems(GTItems.FIELD_GENERATOR_UHV)
-                .inputItems(CustomTags.UHV_CIRCUITS, 2)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 4))
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 4))
-                .outputItems(GTAABlocks.GATE_RING.asStack())
-                .duration(600).EUt(VA[UHV])
-                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/chevron")
-                .inputItems(GTAABlocks.GATE_RING.asStack())
-                .inputItems(GTItems.EMITTER_UEV, 2)
-                .inputItems(GTItems.SENSOR_UEV)
-                .inputItems(CustomTags.UEV_CIRCUITS, 2)
-                .inputItems(S1, 8)
-                .inputItems(Items.NETHER_STAR, 4)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 8))
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 8))
-                .outputItems(GTAABlocks.GATE_CHEVRON.asStack())
-                .duration(900).EUt(VA[UEV])
-                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/base")
-                .inputItems(frameGt, GTMaterials.Neutronium, 4)
-                .inputItems(S1, 4)
-                .inputItems(S2, 2)
-                .inputItems(S3, 4)
-                .inputItems(GTItems.FIELD_GENERATOR_UIV, 4)
-                .inputItems(CustomTags.UIV_CIRCUITS, 4)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 16))
-                .outputItems(GTAABlocks.GATE_BASE.asStack())
-                .duration(2400).EUt(VA[UIV])
-                .save(needing(provider, mods, Map.of(S1, "gtna:infinity_block", S2, "draconicevolution:chaotic_core",
-                        S3, "gtna:magmatter_ingot")));
-        // the pedestal under the gate (at least 4) and its controller: the last things to build
-        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:apex_gate/pedestal")
-                .inputItems(frameGt, GTMaterials.Neutronium)
-                .inputItems(S1, 6)
-                .inputItems(GTItems.FIELD_GENERATOR_UXV)
-                .inputItems(CustomTags.UXV_CIRCUITS, 2)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 4))
-                .outputItems(GTAABlocks.GATE_PEDESTAL.asStack())
-                .duration(600).EUt(VA[UXV])
-                .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:apex_gate/controller")
-                .inputItems(frameGt, GTMaterials.Neutronium, 4)
-                .inputItems(S1)
-                .inputItems(S2)
-                .inputItems(S3, 2)
-                .inputItems(GTItems.FIELD_GENERATOR_OpV, 4)
-                .inputItems(GTItems.EMITTER_OpV, 2)
-                .inputItems(GTItems.SENSOR_OpV, 2)
-                .inputItems(CustomTags.OpV_CIRCUITS, 4)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
-                .outputItems(GTAAMachines.ASCENSION_GATE.asStack())
-                .duration(6000).EUt(VA[OpV])
-                .save(needing(provider, new String[] { "gtna", "draconicevolution", "avaritia" }, Map.of(
-                        S1, "gtna:magmatter_block", S2, "avaritia:eternal_singularity", S3, "draconicevolution:chaotic_core")));
-    }
 
     /**
      * The other final goal (like Twist Space Technology's): Placeable Maxwell's cats. Mars, Poomba, Valenok and
@@ -809,7 +739,7 @@ public final class GTAACompatRecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.BLOODY_HELL.asStack())
                 .duration(1200).EUt(VA[IV])
                 .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:masterritualstone", S2, "bloodmagic:altar",
-                        S3, "bloodmagic:alchemytable", S4, "bloodmagic:activationcrystalawakened", S5, "bloodmagic:demonslate")));
+                        S3, "bloodmagic:alchemytable", S4, "bloodmagic:masterbloodorb", S5, "bloodmagic:demonslate")));
     }
 
     /** Twist's Laser Meteor Miner: an Ore Drilling Plant with a ritual stone, LuV sensors and emitters */

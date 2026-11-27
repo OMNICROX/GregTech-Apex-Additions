@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-/** GTAA's packets: the Structure Upgrader screen, Ascension credits, infernal mob data. */
+/** GTAA's packets: the Structure Upgrader screen, infernal mob data. */
 public final class GTAANetwork {
 
     private GTAANetwork() {}
@@ -28,8 +28,6 @@ public final class GTAANetwork {
     public static void register() {
         CHANNEL.registerMessage(0, UpgraderScreenPacket.class, UpgraderScreenPacket::write, UpgraderScreenPacket::read,
                 UpgraderScreenPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-        CHANNEL.registerMessage(1, AscensionPacket.class, AscensionPacket::write, AscensionPacket::read,
-                AscensionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(2, InfernalPacket.class, InfernalPacket::write, InfernalPacket::read,
                 InfernalPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(3, PersonalSpacePacket.class, PersonalSpacePacket::write, PersonalSpacePacket::read,
@@ -127,29 +125,6 @@ public final class GTAANetwork {
         }
     }
 
-    /** Ascension Gate credits; celebrate = the gate just opened (pink glow for a minute) */
-    public record AscensionPacket(boolean celebrate, List<String> lines) {
-
-        void write(FriendlyByteBuf buf) {
-            buf.writeBoolean(celebrate);
-            buf.writeVarInt(lines.size());
-            for (String l : lines) buf.writeUtf(l);
-        }
-
-        static AscensionPacket read(FriendlyByteBuf buf) {
-            boolean c = buf.readBoolean();
-            int n = buf.readVarInt();
-            List<String> l = new ArrayList<>();
-            for (int i = 0; i < n; i++) l.add(buf.readUtf());
-            return new AscensionPacket(c, l);
-        }
-
-        void handle(Supplier<NetworkEvent.Context> ctx) {
-            ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                    () -> () -> com.omnicrox.gtaa.client.AscensionClient.show(this)));
-            ctx.get().setPacketHandled(true);
-        }
-    }
 
     /** An infernal mob's modifier names and title words, for the boss bar and particles */
     public record InfernalPacket(int entityId, List<String> mods, String prefix, String suffix) {

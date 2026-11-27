@@ -57,6 +57,41 @@ public final class GTAAMissingRecipes {
         gtcaOptical(provider);
         opticalCircuits(provider);
         wirelessCovers(provider);
+        adAstraPlates(provider);
+        gtnaIngots(provider);
+    }
+
+    /** Ad Astra's desh / ostrum / calorite plates (its compressor recipes are gone): GregTech bender and forge hammer */
+    private static void adAstraPlates(Consumer<FinishedRecipe> p) {
+        Object[][] metals = { { "desh", EV }, { "ostrum", IV }, { "calorite", LuV } };
+        for (Object[] m : metals) {
+            String n = (String) m[0];
+            int t = (Integer) m[1];
+            BENDER_RECIPES.recipeBuilder("gtapexadditions:ad_astra/" + n + "_plate")
+                    .inputItems(S[0]).circuitMeta(1).outputItems(S[1]).duration(200).EUt(VA[t - 1])
+                    .save(with(p, "ad_astra", "ad_astra:" + n + "_ingot", "ad_astra:" + n + "_plate"));
+            FORGE_HAMMER_RECIPES.recipeBuilder("gtapexadditions:ad_astra/" + n + "_plate_hammer")
+                    .inputItems(S[0], 3).outputItems(S[1], 2).duration(200).EUt(VA[t - 1])
+                    .save(with(p, "ad_astra", "ad_astra:" + n + "_ingot", "ad_astra:" + n + "_plate"));
+        }
+    }
+
+    /** GTNA's Magmatter and Magnetohydrodynamically Constrained Star Matter only exist as fluids: solidify them */
+    private static void gtnaIngots(Consumer<FinishedRecipe> p) {
+        var mm = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
+        Object[][] mats = { { "gtna:magmatter", UXV }, { "gtna:magnetohydrodynamically_constrained_star_matter", UIV } };
+        for (Object[] o : mats) {
+            Material m = mm.getMaterial((String) o[0]);
+            if (m == null || !m.hasFluid() || !has(ingot, m)) continue;
+            int t = (Integer) o[1];
+            String n = m.getName();
+            FLUID_SOLIDFICATION_RECIPES.recipeBuilder("gtapexadditions:gtna/solidify_" + n + "_ingot")
+                    .notConsumable(GTItems.SHAPE_MOLD_INGOT).inputFluids(m.getFluid(L)).outputItems(ingot, m)
+                    .duration(400).EUt(VA[t]).save(p);
+            if (has(block, m)) FLUID_SOLIDFICATION_RECIPES.recipeBuilder("gtapexadditions:gtna/solidify_" + n + "_block")
+                    .notConsumable(GTItems.SHAPE_MOLD_BLOCK).inputFluids(m.getFluid(L * 9)).outputItems(block, m)
+                    .duration(1800).EUt(VA[t]).save(p);
+        }
     }
 
     // ---------------- GTCA wafers: europium boule -> NPIC -> PPIC -> pico wafer ----------------
@@ -183,8 +218,9 @@ public final class GTAAMissingRecipes {
         var mm = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
         String[] names = { "uhv", "uev", "uiv", "uxv", "opv" };
         int[] tiers = { UHV, UEV, UIV, UXV, OpV };
+        // GTNA's Spacetime / Universium plates have no recipe, so the top two use Transcendent Metal
         Material[] plates = { GTMaterials.Neutronium, mm.getMaterial("gtna:infinity"), mm.getMaterial("gtna:transcendent_metal"),
-                mm.getMaterial("gtna:space_time"), mm.getMaterial("gtna:universium") };
+                mm.getMaterial("gtna:transcendent_metal"), mm.getMaterial("gtna:transcendent_metal") };
         var sensors = new com.tterrag.registrate.util.entry.ItemEntry[] { GTItems.SENSOR_UHV, GTItems.SENSOR_UEV, GTItems.SENSOR_UIV,
                 GTItems.SENSOR_UXV, GTItems.SENSOR_OpV };
         var emitters = new com.tterrag.registrate.util.entry.ItemEntry[] { GTItems.EMITTER_UHV, GTItems.EMITTER_UEV, GTItems.EMITTER_UIV,

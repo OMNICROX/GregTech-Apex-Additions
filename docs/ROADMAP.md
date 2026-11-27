@@ -20,3 +20,9 @@ category, fed by every GTCEu multiblock's pattern / shape infos; GTCEu's own pag
 ## Convention (2026-11-27)
 New features get an on/off switch (or a tuning value) in config/gtapexadditions-client.toml (visual / client) or
 config/gtapexadditions-common.toml (gameplay) whenever that makes sense.
+
+## 2026-11-27: removed, to be redone later
+- Ascension Gate / Apex Stargate (gate frame blocks, event horizon, credits, gate charge). The Stargate Journey
+  data pack (its recipes off, planets as Ad Astra destinations) stays.
+- Suit Fabrication Station (hero suits are made at their tailoring benches again; apex_suit_station.js is a stub).
+- Personal Space: code kept, off by default (personalSpace.enabled) because GTNA has its own personal dimension.

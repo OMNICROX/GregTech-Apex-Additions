@@ -28,8 +28,9 @@ public final class GTAACommonConfig {
         b.pop();
         b.push("personalSpace");
         PERSONAL_SPACE = b.comment("Personal Space Portals (GT New Horizons): each player can make one world of their own.",
-                "Needs the Infiniverse mod. Turning it off keeps the worlds on disk but the portals stop working.")
-                .define("enabled", true);
+                "Needs the Infiniverse mod. Off by default: GTNA has its own personal dimension. The portal has no recipe",
+                "while this is off (give it with /give); turning it off keeps the worlds on disk but the portals stop working.")
+                .define("enabled", false);
         b.pop();
         SPEC = b.build();
     }

@@ -33,7 +33,6 @@ public class GTAARecipeTypes {
     public static GTRecipeType ELECTRIC_IMPLOSION;
     public static GTRecipeType NEUTRONIUM_COMPRESSION;
     public static GTRecipeType CULTIVATION;
-    public static GTRecipeType SUIT_FABRICATION;
     public static GTRecipeType SEED_SYNTHESIS;
     public static GTRecipeType MANA_NEXUS;
     public static GTRecipeType MATTER_FABRICATOR;
@@ -188,11 +187,6 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(9, 1, 0, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setSound(com.gregtechceu.gtceu.common.data.GTSoundEntries.SCIENCE);
-        SUIT_FABRICATION = register("suit_fabrication", "multiblock", "Suit Fabrication")
-                .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
-                .addDataInfo(data -> "Station tier: " + data.getInt("station_tier"))
-                .addDataInfo(data -> data.getString("suit_kit").isEmpty() ? "" : "Kit: " + data.getString("suit_kit"))
-                .addDataInfo(data -> data.getString("suit_origin").isEmpty() ? "" : "Power: " + data.getString("suit_origin"));
         GTAA.REGISTRATE.addRawLang(GTAA.MOD_ID + ".draconic_fusion_crafter", "Draconic Fusion Crafting");
         DRACONIC_FUSION = new com.omnicrox.gtaa.api.DefcRecipeType(GTAA.id("draconic_fusion_crafter"), "multiblock");
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, DRACONIC_FUSION.registryName, DRACONIC_FUSION);

@@ -16,7 +16,6 @@ import com.omnicrox.gtaa.common.data.GTAABlocks;
 import com.omnicrox.gtaa.common.machine.multiblock.ComponentAssemblyLineMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.QuantumForceTransformerMachine;
-import com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine;
 import com.omnicrox.gtaa.common.machine.multiblock.naquadah.NaquadahFuelRefineryMachine;
 import net.minecraft.world.level.Level;
 
@@ -265,7 +264,6 @@ final class UpgradeAdvisor {
                     case "defc_cores" -> "Core tier " + t + ": " + (1 << (t - cur)) + "× faster on what you run now";
                     case "coal_casings" -> "Makes up to " + vn(GTAABlocks.coalCasingTier(fam.block(t))) + " components, " +
                             (1 << (t - cur)) + "× faster on what you run now";
-                    case "suit_casings" -> "Tier " + t + " (" + SuitFabricationStationMachine.TIER_NAMES[Math.min(4, t)] + ")";
                     case "mca_soil" -> "Yield " + MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, t - 1)] + " per crop (now " +
                             MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, Math.max(0, cur - 1))] + ")";
                     case "mca_glass" -> "Runs at up to " + vn(MysticalCultivationArrayMachine.GLASS_CAP[Math.min(3, t - 1)]);

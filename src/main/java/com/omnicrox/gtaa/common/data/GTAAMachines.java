@@ -1278,52 +1278,6 @@ public class GTAAMachines {
     // ---------------- Draconic Fusion Crafter (KubaTech) ----------------
 
     // ---------------- Mystical Cultivation Array (KubaTech EIG) ----------------
-    // ---------------- Ascension Gate: the finale ----------------
-    public static final MultiblockMachineDefinition ASCENSION_GATE = REGISTRATE
-            .multiblock("ascension_gate", com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine::new)
-            .langValue("Ascension Gate")
-            .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
-            .tooltips(
-                    Component.literal("\u00a7dThe end of Apex Ascension."),
-                    Component.literal("\u00a77The pedestal of the \u00a75Apex Stargate\u00a77: build its frame on top"),
-                    Component.literal("\u00a77 (Ascension Gate Base above this controller, 9 Chevrons, 14 Rings)"),
-                    Component.literal("\u00a77The finished frame becomes the \u00a75Warpgate\u00a77 - sealed, like every gate,"),
-                    Component.literal("\u00a77 until it is charged with \u00a7b9.22E18 EU\u00a77"),
-                    Component.literal("\u00a77Takes power from energy / laser hatches and the owner's wireless networks"),
-                    Component.literal("\u00a77 (GTM Things, gtna Nexus) - at most ~7.68E14 EU/t, so 10 minutes at best"),
-                    Component.literal("\u00a78Something will come through. It will be completely useless. It will be perfect."))
-            .appearanceBlock(GTAABlocks.GATE_PEDESTAL)
-            .pattern(definition -> {
-                var pedestal = blocks(GTAABlocks.GATE_PEDESTAL.get());
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK)
-                        // the pedestal, then the gate's frame (Stargate Journey's ring positions), bottom up
-                        .aisle("PPPP~PPPP",
-                                "  RVBVR  ",
-                                " VR   RV ",
-                                " R     R ",
-                                " R     R ",
-                                " V     V ",
-                                " RR   RR ",
-                                "  VRVRV  ")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('P', pedestal.setMinGlobalLimited(4)
-                                .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setPreviewCount(1)))
-                        .where('B', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(GTAABlocks.GATE_BASE::get,
-                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_GATE))
-                        .where('R', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(GTAABlocks.GATE_RING::get,
-                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_RING))
-                        .where('V', com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine.gatePart(() -> GTAABlocks.GATE_CHEVRON.get(),
-                                com.omnicrox.gtaa.common.stargate.ApexStargate.PEGASUS_RING))
-                        .where(' ', any())
-                        .build();
-            })
-            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/gate_pedestal"),
-                    GTAA.id("block/multiblock/ascension_gate")))
-            .register();
 
     public static final MultiblockMachineDefinition MYSTICAL_CULTIVATION_ARRAY = REGISTRATE
             .multiblock("mystical_cultivation_array", com.omnicrox.gtaa.common.machine.multiblock.MysticalCultivationArrayMachine::new)
@@ -1382,54 +1336,6 @@ public class GTAAMachines {
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor")))
             .register();
 
-    // ---------------- Suit Fabrication Station ----------------
-    public static final MultiblockMachineDefinition SUIT_FABRICATION_STATION = REGISTRATE
-            .multiblock("suit_fabrication_station", com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine::new)
-            .langValue("Suit Fabrication Station")
-            .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTAARecipeTypes.SUIT_FABRICATION)
-            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine::recipeModifier,
-                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
-            .tooltips(
-                    Component.literal("\u00a77Machine Type: \u00a7eHero Suit Fabricator"),
-                    Component.literal("\u00a77Makes hero suits; every suit comes with its own \u00a7dhero kit\u00a77 of powers"),
-                    Component.literal("\u00a77Casing tier sets which suits it can make:"),
-                    Component.literal("\u00a77 1 Steel Booth (MV), 2 Showcase Pod (EV),"),
-                    Component.literal("\u00a77 3 Holo Chamber (LuV), 4 Ascension Forge (UHV)"),
-                    Component.literal("\u00a77Same building for every tier: swap the casings to upgrade"),
-                    Component.literal("\u00a77Use an ME Input Bus + a pattern to autocraft missing parts"))
-            .appearanceBlock(GTAABlocks.SUIT_CASING_T1)
-            .pattern(definition -> {
-                var casing = com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine.casings();
-                var glass = com.omnicrox.gtaa.common.glass.GTAAGlass.tiered().or(blocks(net.minecraft.world.level.block.Blocks.GLASS));
-                var monitor = blocks(GTAABlocks.SUIT_MONITOR.get());
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("CC~CC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                        .aisle("cgggc", "c###c", "c#p#c", "c###c", "ccccc")
-                        .aisle("cgggc", "c###c", "c###c", "c###c", "ccccc")
-                        .aisle("cgggc", "c###c", "c###c", "c###c", "ccccc")
-                        .aisle("cmmmc", "m###m", "m###m", "m###m", "cmmmc")
-                        .aisle("ccccc", "ccccc", "ccLcc", "ccccc", "ccccc")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', casing.setMinGlobalLimited(1).or(autoAbilities(definition.getRecipeTypes()))
-                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
-                        .where('c', casing)
-                        .where('g', glass)
-                        .where('m', monitor)
-                        .where('p', any())
-                        .where('L', blocks(net.minecraft.world.level.block.Blocks.REDSTONE_LAMP, net.minecraft.world.level.block.Blocks.GLOWSTONE,
-                                net.minecraft.world.level.block.Blocks.SEA_LANTERN))
-                        .where('#', air())
-                        .build();
-            })
-            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/suit_casing_t1"),
-                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/large_chemical_reactor"))
-                    .andThen(b -> b.addDynamicRenderer(() -> new com.omnicrox.gtaa.client.SuitHologramRender())))
-            .hasBER(true)
-            .register();
 
     public static void init() {
         GTAAGTNHMachines.init();

@@ -194,16 +194,6 @@ public class GTAABlocks {
         return new Block[] { DEFC_CORE_T1.get(), DEFC_CORE_T2.get(), DEFC_CORE_T3.get(), DEFC_CORE_T4.get() };
     }
 
-    // ---------------- Suit Fabrication Station ----------------
-    public static final BlockEntry<Block> SUIT_CASING_T1 = casing("suit_casing_t1", "Steel Booth Casing");
-    public static final BlockEntry<Block> SUIT_CASING_T2 = casing("suit_casing_t2", "Showcase Pod Casing");
-    public static final BlockEntry<Block> SUIT_CASING_T3 = casing("suit_casing_t3", "Holo Chamber Casing");
-    public static final BlockEntry<Block> SUIT_CASING_T4 = casing("suit_casing_t4", "Ascension Forge Casing");
-    public static final BlockEntry<Block> SUIT_MONITOR = casing("suit_monitor", "Suit Display Monitor");
-
-    public static Block[] suitCasings() {
-        return new Block[] { SUIT_CASING_T1.get(), SUIT_CASING_T2.get(), SUIT_CASING_T3.get(), SUIT_CASING_T4.get() };
-    }
 
     /** Plain casing. Blockstate / models / loot are static files in resources (no datagen needed). */
     // ---- Nanochip Assembly Complex (GT5-Unofficial 2.9 textures) ----
@@ -305,37 +295,6 @@ public class GTAABlocks {
                 .register();
     }
 
-
-    // ---------------- Ascension Gate (the finale) ----------------
-    public static final BlockEntry<Block> GATE_RING = casing("gate_ring", "Ascension Gate Ring");
-    public static final BlockEntry<com.omnicrox.gtaa.common.block.GateBaseBlock> GATE_BASE = REGISTRATE
-            .block("gate_base", com.omnicrox.gtaa.common.block.GateBaseBlock::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.strength(5.0f, 10.0f).isValidSpawn((s, l, pos, e) -> false))
-            .addLayer(() -> RenderType::solid)
-            .blockstate(NonNullBiConsumer.noop())
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .lang("Ascension Gate Base")
-            .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
-            .register();
-    public static final BlockEntry<Block> GATE_PEDESTAL = casing("gate_pedestal", "Ascension Gate Pedestal");
-    public static final BlockEntry<com.omnicrox.gtaa.common.block.GateChevronBlock> GATE_CHEVRON = REGISTRATE
-            .block("gate_chevron", com.omnicrox.gtaa.common.block.GateChevronBlock::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.strength(5.0f, 10.0f).isValidSpawn((s, l, pos, e) -> false))
-            .addLayer(() -> RenderType::solid)
-            .blockstate(NonNullBiConsumer.noop())
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .lang("Ascension Gate Chevron")
-            .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
-            .register();
-    public static final BlockEntry<com.omnicrox.gtaa.common.block.EventHorizonBlock> EVENT_HORIZON = REGISTRATE
-            .block("event_horizon", com.omnicrox.gtaa.common.block.EventHorizonBlock::new)
-            .initialProperties(() -> Blocks.GLASS)
-            .addLayer(() -> RenderType::translucent)
-            .blockstate(NonNullBiConsumer.noop())
-            .lang("Event Horizon")
-            .register();
 
     public static void init() {}
 }
