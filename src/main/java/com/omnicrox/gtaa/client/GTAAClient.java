@@ -60,6 +60,21 @@ public final class GTAAClient {
                 retexture(GTAAMaterials.SPATIALLY_ENLARGED_FLUID, "spatial_fluid");
                 retexture(GTAAMaterials.TACHYON_RICH_TEMPORAL_FLUID, "temporal_fluid");
             });
+            // the multiblock preview's tier slider: the Structure Upgrader's families + the Forge of the Gods generators
+            com.omnicrox.gtaa.client.preview.MultiblockPreview.FAMILY_SOURCES.add(() -> {
+                java.util.List<java.util.List<java.util.List<net.minecraft.world.level.block.Block>>> out = new java.util.ArrayList<>();
+                for (var f : com.omnicrox.gtaa.common.item.StructureUpgrader.families()) out.add(f.tiers());
+                for (String fam : new String[] { "spacetime_compression_field_generator", "stabilisation_field_generator",
+                        "time_acceleration_field_generator" }) {
+                    java.util.List<java.util.List<net.minecraft.world.level.block.Block>> tiers = new java.util.ArrayList<>();
+                    for (int t = 0; t <= 8; t++) {
+                        var b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new ResourceLocation("gtna", fam + "_tier_" + t));
+                        if (b != null && b != net.minecraft.world.level.block.Blocks.AIR) tiers.add(java.util.List.of(b));
+                    }
+                    if (tiers.size() > 1) out.add(tiers);
+                }
+                return out;
+            });
         }
     }
 
