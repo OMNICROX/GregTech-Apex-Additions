@@ -8,8 +8,10 @@ A GuideNH-style in-game guide mod ("apexguide"), working together with the quest
 - consider building on GuideME (already in the pack via AE2) instead of starting from scratch
 
 ## Still to port properly
-- Mega Distillation Tower: GT5U's layered structure (6-high layers per output) - GTCEu patterns can't repeat a 6-slice
-  group, needs a custom pattern or fixed layer count
-- Miracle Top: fixed at 8 rings (TST allows 2-16 via repeated pieces)
 - Singularity Data Hub (GTNL), Strange Matter Aggregator and Mass Fabricator Genesis (TST modular machines),
   Laser Meteor Miner (needs Blood Magic)
+
+## GTNH-style multiblock preview (requested 2026-11-27)
+Replace GTCEu's JEI multiblock page with a GTNH NEI-style one (BlockRenderer6343 look): tier slider for tiered blocks,
+layer slider, hatch toggle (H), "?" info and the block list down the side. Built in ApexLib as its own recipe-viewer
+category, fed by every GTCEu multiblock's pattern / shape infos; GTCEu's own page hidden.
