@@ -1,0 +1,27 @@
+# Handoff (2026-11-27): where the work stands
+
+## Not yet installed in the pack
+The current `apex-platform` build: GTNH-style multiblock preview (BlockRenderer6343 controls: left-drag rotate,
+right-drag zoom, middle-drag pan, scroll zoom, right-click a block = what that spot accepts, Tier/Layer sliders,
+H = hatch spot highlight, R = reset, ? = help) and the config files `gtapexadditions-client.toml` /
+`gtapexadditions-common.toml`. Build, back up the old jar, install to `mods` and `apex_updates` (game closed).
+
+## Multiblock preview: what to check first
+- Code: `src/main/java/com/omnicrox/gtaa/client/preview/` + `integration/jei/`.
+- NEI Rewrite shows JEI categories but never passes mouse input, so `PreviewPanel` polls GLFW buttons every frame
+  and `MouseHandlerScrollMixin` (SRG `m_91526_`) hands the wheel to `PreviewInput` first.
+- `ApexSceneRenderer` = LDLib FBO renderer that restores the framebuffer and viewport (LDLib's own leaves the
+  viewport at FBO size and blanked the NEI page). Scenes need a `ParticleManager` (sets up the camera).
+- Render failures are logged once per multi as `[Apex preview]` in latest.log.
+- Last confirmed in game: scene renders, but clicks didn't register (before the polling rewrite). Untested since.
+
+## Done this session (all on apex-platform)
+Bloody Hell, Laser Meteor Miner, Singularity Data Hub (AE2 storage), Strange Matter Aggregator (adapted: breeds
+GTAA antimatter), Mass Fabricator Genesis, DTPF MK-II with Twist's real structure, Bloody Hell's own casings
+(Twist/NHCore textures), gtocore CTM textures for gtna's magenta casings, auto-build casing-first mixins,
+Structure Upgrader stages for Miracle Top / Bloody Hell / LMM / SMA / Mega Distillation Tower.
+
+## Next (owner's order)
+1. Get the multiblock preview fully working and matching GTNH's NEI page.
+2. "apexguide" guide mod working together with the questbook (see ROADMAP.md).
+3. Blood Magic tier gating vs GregTech (GTNH NHCore ScriptBloodMagic as reference).
