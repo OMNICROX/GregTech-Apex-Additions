@@ -87,6 +87,7 @@ public final class GTAACompatRecipes {
         maxwellCats(provider);
         tieredGlass(provider);
         personalSpace(provider);
+        GTAAMissingRecipes.init(provider);
     }
 
     /**
@@ -694,7 +695,7 @@ public final class GTAACompatRecipes {
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 256))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.DIVINE_ISA_FORGE.asStack())
                 .duration(6000).EUt(VA[UXV])
-                .save(needing(provider, new String[] { "gtna", "gtca" }, Map.of(S1, "gtca:isamill",
+                .save(needing(provider, new String[] { "gtna" }, Map.of(S1, "gtna:isa_mill",
                         S2, "gtna:spacetime_compression_field_generator_tier_8", S3, "gtna:stabilisation_field_generator_tier_8",
                         S4, "gtna:time_acceleration_field_generator_tier_8")));
     }

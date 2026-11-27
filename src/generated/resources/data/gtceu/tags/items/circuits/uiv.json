@@ -1,5 +1,9 @@
 {
   "values": [
-    "gtapexadditions:cosmic_processor"
+    "gtapexadditions:cosmic_processor",
+    {
+      "id": "gtca:optical_mainframe",
+      "required": false
+    }
   ]
 }

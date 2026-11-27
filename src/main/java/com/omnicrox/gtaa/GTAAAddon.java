@@ -32,6 +32,21 @@ public class GTAAAddon implements IGTAddon {
     }
 
     @Override
+    public void registerTagPrefixes() {
+        com.omnicrox.gtaa.common.worldgen.GTAADimensionOres.registerTagPrefixes();
+    }
+
+    @Override
+    public void registerWorldgenLayers() {
+        com.omnicrox.gtaa.common.worldgen.GTAADimensionOres.registerWorldgenLayers();
+    }
+
+    @Override
+    public void registerOreVeins() {
+        com.omnicrox.gtaa.common.worldgen.GTAADimensionOres.registerOreVeins();
+    }
+
+    @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
         GTAARecipes.init(provider);
     }
