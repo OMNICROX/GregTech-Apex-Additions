@@ -11,6 +11,7 @@ public final class GTAACommonConfig {
     public static final ForgeConfigSpec.BooleanValue PERSONAL_SPACE;
     public static final ForgeConfigSpec.BooleanValue MOVE_OVERWORLD_VEINS;
     public static final ForgeConfigSpec.BooleanValue HNN_EXTRACTOR;
+    public static final ForgeConfigSpec.BooleanValue GIVE_GUIDE;
     public static final ForgeConfigSpec.DoubleValue HNN_SIM_COST;
 
     static {
@@ -27,6 +28,9 @@ public final class GTAACommonConfig {
         MOVE_OVERWORLD_VEINS = b.comment("GT New Horizons: the sapphire and olivine veins only spawn in the Twilight Forest (not the Overworld).",
                 "The Aether, Undergarden and Twilight veins are added either way. New chunks only; needs a restart.")
                 .define("moveOverworldVeins", true);
+        b.pop();
+        b.push("guide");
+        GIVE_GUIDE = b.comment("Give every player the Apex Guide the first time they join a world.").define("giveOnFirstJoin", true);
         b.pop();
         b.push("hostileNetworks");
         HNN_EXTRACTOR = b.comment("A Hostile Neural Networks prediction in a GregTech Extractor gives every drop its data model lists.")

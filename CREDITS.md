@@ -95,3 +95,7 @@ magenta. GTAA ships the 30 missing `*_ctm` textures under `assets/gtocore/textur
 Textures for the eleven Borosilicate Glass blocks (HV to UXV) come from BartWorks in
 [GT5-Unofficial](https://github.com/GTNewHorizons/GT5-Unofficial) (LGPL-3.0); the tier rule (energy hatch no higher
 than the glass) follows GT New Horizons.
+
+## Apex Guide
+Built on GuideME (the guidebook system of Applied Energistics 2, by the AE2 team), laid out like GT New Horizons'
+GuideNH and questbook.

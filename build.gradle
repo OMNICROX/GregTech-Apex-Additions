@@ -67,7 +67,8 @@ dependencies {
     modCompileOnly "vazkii.botania:Botania:1.20.1-456-FORGE"     // Mana Nexus: mana receiver / spark API (optional at runtime)
     modCompileOnly "mezz.jei:jei-1.20.1-common-api:15.62.0.219"   // multiblock preview category (NEI Rewrite shows JEI categories)
     modCompileOnly "mezz.jei:jei-1.20.1-forge-api:15.62.0.219"
-    compileOnly files('../devmods/infiniverse-1.20.1-1.0.0.5.jar')   // Personal Space worlds (optional at runtime)
+    compileOnly files('../devmods/infiniverse-1.20.1-1.0.0.5.jar')
+    compileOnly files('../devmods/guideme-20.1.15.jar')   // the Apex Guide (GuideME ships with AE2)   // Personal Space worlds (optional at runtime)
     compileOnly 'org.jetbrains:annotations:26.0.1'
     compileOnly 'org.projectlombok:lombok:1.18.38'
     annotationProcessor 'org.projectlombok:lombok:1.18.38'
