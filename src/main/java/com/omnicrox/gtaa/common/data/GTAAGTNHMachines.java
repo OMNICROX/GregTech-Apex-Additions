@@ -879,4 +879,50 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
+
+    // ---------------- Spinmatron-2737 (GT5-Unofficial) ----------------
+    public static final MultiblockMachineDefinition SPINMATRON = REGISTRATE
+            .multiblock("spinmatron", com.omnicrox.gtaa.common.machine.multiblock.gtnh.SpinmatronMachine::new)
+            .langValue("Spinmatron-2737")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.CENTRIFUGE_RECIPES)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.gtnh.SpinmatronMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Centrifuge")
+                    .info("§64 Parallels§7 per §fTotal Turbine Tier§7 (the rotors in its rotor holders)")
+                    .info("§a300% Speed")
+                    .info("§b70% EU Usage")
+                    .info("Requires §e(Recipe Tier x 10 mB/s)§7 of §6Diesel§7 to run")
+                    .info("Upgrade blocks: Naquadah Alloy, Neutronium or Infinity (block + frame)")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .flavor("Maahes guides the way...")
+                    .portedFrom("GT5-Unofficial (GT New Horizons)").build())
+            .appearanceBlock(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_VIBRATION_SAFE)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "spinmatron")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_VIBRATION_SAFE.get()).setMinGlobalLimited(500)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('C', blocks(GTBlocks.CASING_GRATE.get()))
+                    .where('D', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('E', blocks(modBlock("gtca:isa_mill_gearbox", GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX::get)))
+                    .where('F', blocks(GTBlocks.CASING_TUNGSTENSTEEL_GEARBOX.get()))
+                    .where('G', blocks(modBlock("gtna:supercritical_turbine_casing", GTBlocks.CASING_TUNGSTENSTEEL_TURBINE::get)))
+                    .where('H', abilities(PartAbility.ROTOR_HOLDER))
+                    .where('a', blocks(modBlock("gtceu:naquadah_alloy_block", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get),
+                            modBlock("gtceu:neutronium_block", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get),
+                            modBlock("gtna:infinity_block", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('b', blocks(modBlock("gtceu:naquadah_alloy_frame", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get),
+                            modBlock("gtceu:neutronium_frame", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get),
+                            modBlock("gtna:infinity_frame", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/gcym/vibration_safe_casing"),
+                    gt("block/multiblock/large_centrifuge")))
+            .register();
+
 }

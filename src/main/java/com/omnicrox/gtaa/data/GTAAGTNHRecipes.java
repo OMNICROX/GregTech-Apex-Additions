@@ -286,6 +286,19 @@ public final class GTAAGTNHRecipes {
                 .outputFluids(GTMaterials.Lava.getFluid(16000))
                 .duration(1200).EUt(VA[IV]).save(provider);
 
+        // Spinmatron-2737 (GT5-Unofficial)
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:spinmatron")
+                .inputItems(com.gregtechceu.gtceu.common.data.machines.GCYMMachines.LARGE_CENTRIFUGE.asStack(16))
+                .inputItems(GTMachines.CENTRIFUGE[ZPM].asStack(16))
+                .inputItems(GTItems.ELECTRIC_MOTOR_UV, 16)
+                .inputItems(CustomTags.UV_CIRCUITS, 8)
+                .inputItems(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_VIBRATION_SAFE.asStack(64))
+                .inputItems(block, GTMaterials.NaquadahAlloy, 8)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .inputFluids(GTMaterials.Lubricant.getFluid(16000))
+                .outputItems(GTAAGTNHMachines.SPINMATRON.asStack())
+                .duration(2400).EUt(VA[UV]).save(provider);
+
         // Extreme Craft Center: TST uses molecular assemblers + extreme auto crafters + a molecular transformer
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_craft_center")
                 .inputItems(appeng.core.definitions.AEBlocks.MOLECULAR_ASSEMBLER.stack(16))
