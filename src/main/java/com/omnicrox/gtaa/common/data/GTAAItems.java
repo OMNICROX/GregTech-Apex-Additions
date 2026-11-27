@@ -97,6 +97,43 @@ public class GTAAItems {
             })
             .lang("Nuclear Star").model(NonNullBiConsumer.noop()).register();
 
+
+    // ---------------- GTNH's Cosmic and Transcendent circuits (textures from GT5-Unofficial, LGPL-3.0) ----------------
+    private static ItemEntry<Item> circuit(String id, String name, String tierLine,
+                                           net.minecraft.tags.TagKey<Item> tag) {
+        var b = REGISTRATE.<Item>item(id, p -> new Item(p.rarity(net.minecraft.world.item.Rarity.EPIC)) {
+            @Override
+            public void appendHoverText(net.minecraft.world.item.ItemStack stack, net.minecraft.world.level.Level level,
+                                        java.util.List<net.minecraft.network.chat.Component> tooltip,
+                                        net.minecraft.world.item.TooltipFlag flag) {
+                tooltip.add(net.minecraft.network.chat.Component.literal(tierLine));
+            }
+        }).lang(name).model(NonNullBiConsumer.noop());
+        if (tag != null) b = b.tag(tag);
+        return b.register();
+    }
+
+    public static final ItemEntry<Item> COSMIC_CIRCUIT_BOARD = circuit("cosmic_circuit_board", "Cosmic Circuit Board",
+            "§7A board woven from the fabric of space", null);
+    public static final ItemEntry<Item> COSMIC_PROCESSOR = circuit("cosmic_processor", "Cosmic Processor",
+            "§7A §5UIV§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.UIV_CIRCUITS);
+    public static final ItemEntry<Item> COSMIC_ASSEMBLY = circuit("cosmic_assembly", "Cosmic Assembly",
+            "§7A §4UXV§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.UXV_CIRCUITS);
+    public static final ItemEntry<Item> COSMIC_COMPUTER = circuit("cosmic_computer", "Cosmic Supercomputer",
+            "§7An §9OpV§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.OpV_CIRCUITS);
+    public static final ItemEntry<Item> COSMIC_MAINFRAME = circuit("cosmic_mainframe", "Cosmic Mainframe",
+            "§7A §cMAX§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.MAX_CIRCUITS);
+    public static final ItemEntry<Item> TRANSCENDENT_CIRCUIT_BOARD = circuit("transcendent_circuit_board",
+            "Transcendent Circuit Board", "§7Exists slightly outside of time", null);
+    public static final ItemEntry<Item> TRANSCENDENT_PROCESSOR = circuit("transcendent_processor", "Transcendent Processor",
+            "§7A §4UXV§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.UXV_CIRCUITS);
+    public static final ItemEntry<Item> TRANSCENDENT_ASSEMBLY = circuit("transcendent_assembly", "Transcendent Assembly",
+            "§7An §9OpV§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.OpV_CIRCUITS);
+    public static final ItemEntry<Item> TRANSCENDENT_COMPUTER = circuit("transcendent_computer", "Transcendent Supercomputer",
+            "§7A §cMAX§7 circuit", com.gregtechceu.gtceu.data.recipe.CustomTags.MAX_CIRCUITS);
+    public static final ItemEntry<Item> TRANSCENDENT_MAINFRAME = circuit("transcendent_mainframe", "Transcendent Mainframe",
+            "§7A §cMAX§7 circuit, the last one there is", com.gregtechceu.gtceu.data.recipe.CustomTags.MAX_CIRCUITS);
+
     public static final ItemEntry<Item> SPIRE_LIGHTNING_ROD = REGISTRATE.item("spire_lightning_rod", Item::new)
             .lang("Spire Lightning Rod").model(NonNullBiConsumer.noop()).register();
 

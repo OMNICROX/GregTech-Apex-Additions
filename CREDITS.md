@@ -52,4 +52,7 @@ additional terms in LICENSE-ADDITIONAL-TERMS.md".
 ## Textures from GT5-Unofficial (LGPL-3.0)
 
 - `item/nuclear_star.png` - GT5-Unofficial `gt.metaitem.03/230.png` (Nuclear Star).
+- `item/cosmic_*.png` - GT5-Unofficial `gt.metaitem.03/170-173, 730.png`, recoloured with a baked starfield (GTNH draws
+  them with a shader).
+- `item/transcendent_*.png` - GT5-Unofficial `gt.metaitem.03/174-177, 731.png`.
 - `item/max_universal_circuit.png` - redrawn from Extended Features' OpV universal circuit, red "MA" lettering.

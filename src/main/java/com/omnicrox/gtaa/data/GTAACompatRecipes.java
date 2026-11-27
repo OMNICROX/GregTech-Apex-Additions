@@ -71,6 +71,7 @@ public final class GTAACompatRecipes {
         draconicFusionCrafting(provider);
         matterFabricator(provider);
         nuclearStar(provider);
+        cosmicCircuits(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -557,5 +558,83 @@ public final class GTAACompatRecipes {
                     .inputFluids(plasma)
                     .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack())
                     .duration(20).EUt(VA[UIV]).save(provider);
+    }
+
+    /**
+     * GTNH's Cosmic and Transcendent circuits on GTCEu tiers: Cosmic UIV / UXV / OpV / MAX, Transcendent UXV / OpV /
+     * MAX / MAX. Built from GTCA's optical parts and Quantum Anomaly, GTNA's Infinity and Transcendent Metal, and the
+     * Nuclear Star. Each circuit is made one tier below its own, in a sterile cleanroom (the NAC runs these too).
+     */
+    private static void cosmicCircuits(Consumer<FinishedRecipe> provider) {
+        var mm = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
+        var infinity = mm.getMaterial("gtna:infinity");
+        var transcendent = mm.getMaterial("gtna:transcendent_metal");
+        if (infinity == null || !infinity.hasFluid() || transcendent == null || !transcendent.hasFluid()) return;
+        var sterile = com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType.STERILE_CLEANROOM;
+        String[] mods = { "gtca", "gtna" };
+        Map<Item, String> parts = Map.of(S1, "gtca:optical_circuit_board", S2, "gtca:quantum_anomaly",
+                S3, "gtca:piko_wafer_ic", S4, "gtca:optical_smd_transistor", S5, "gtca:optical_smd_resistor",
+                S6, "gtca:optical_smd_capacitor", S7, "gtca:optical_smd_inductor", S8, "gtca:accurate_optical_ram",
+                S9, "gtca:optical_smd_diode", S10, "gtca:optically_perfect_cpu");
+        var p = needing(provider, mods, parts);
+        var star = com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR;
+        var cb = com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_CIRCUIT_BOARD;
+        var tb = com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_CIRCUIT_BOARD;
+
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:cosmic_circuit_board")
+                .inputItems(S1).inputItems(S2).inputItems(foil, GTMaterials.Neutronium, 8)
+                .inputFluids(infinity.getFluid(L * 2))
+                .outputItems(cb.asStack(4)).cleanroom(sterile).duration(600).EUt(VA[UEV]).save(p);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:transcendent_circuit_board")
+                .inputItems(cb.asStack(2)).inputItems(star.asStack()).inputItems(foil, GTMaterials.Neutronium, 16)
+                .inputFluids(transcendent.getFluid(L * 2))
+                .outputItems(tb.asStack(4)).cleanroom(sterile).duration(600).EUt(VA[UIV]).save(p);
+
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:cosmic_processor")
+                .inputItems(cb.asStack()).inputItems(S3, 2).inputItems(S4, 8).inputItems(S5, 8).inputItems(S6, 8)
+                .inputItems(wireFine, GTMaterials.Neutronium, 8).inputFluids(infinity.getFluid(L / 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_PROCESSOR.asStack(2))
+                .cleanroom(sterile).duration(200).EUt(VA[UEV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:cosmic_assembly")
+                .inputItems(cb.asStack()).inputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_PROCESSOR.asStack(2))
+                .inputItems(S7, 8).inputItems(S6, 16).inputItems(S8, 16)
+                .inputItems(wireFine, GTMaterials.Neutronium, 16).inputFluids(infinity.getFluid(L))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_ASSEMBLY.asStack())
+                .cleanroom(sterile).duration(400).EUt(VA[UIV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:cosmic_computer")
+                .inputItems(cb.asStack()).inputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_ASSEMBLY.asStack(2))
+                .inputItems(S9, 16).inputItems(S10, 16).inputItems(S8, 24)
+                .inputItems(wireFine, GTMaterials.Neutronium, 24).inputFluids(infinity.getFluid(L * 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_COMPUTER.asStack())
+                .cleanroom(sterile).duration(600).EUt(VA[UXV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:cosmic_mainframe")
+                .inputItems(frameGt, GTMaterials.Neutronium, 2)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_COMPUTER.asStack(2))
+                .inputItems(S7, 32).inputItems(S6, 32).inputItems(S8, 32).inputItems(star.asStack())
+                .inputFluids(infinity.getFluid(L * 4))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.COSMIC_MAINFRAME.asStack())
+                .cleanroom(sterile).duration(800).EUt(VA[OpV]).save(p);
+
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:transcendent_processor")
+                .inputItems(tb.asStack()).inputItems(S3, 4).inputItems(S4, 16).inputItems(S9, 16)
+                .inputItems(wireFine, GTMaterials.Neutronium, 16).inputFluids(transcendent.getFluid(L / 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_PROCESSOR.asStack(2))
+                .cleanroom(sterile).duration(200).EUt(VA[UIV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:transcendent_assembly")
+                .inputItems(tb.asStack()).inputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_PROCESSOR.asStack(2))
+                .inputItems(S7, 32).inputItems(S6, 32).inputItems(S8, 32).inputFluids(transcendent.getFluid(L))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_ASSEMBLY.asStack())
+                .cleanroom(sterile).duration(400).EUt(VA[UXV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:transcendent_computer")
+                .inputItems(tb.asStack()).inputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_ASSEMBLY.asStack(2))
+                .inputItems(S9, 32).inputItems(S10, 32).inputItems(star.asStack()).inputFluids(transcendent.getFluid(L * 2))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_COMPUTER.asStack())
+                .cleanroom(sterile).duration(600).EUt(VA[OpV]).save(p);
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:transcendent_mainframe")
+                .inputItems(frameGt, GTMaterials.Neutronium, 4)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_COMPUTER.asStack(2))
+                .inputItems(star.asStack(4)).inputItems(S10, 64).inputFluids(transcendent.getFluid(L * 8))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.TRANSCENDENT_MAINFRAME.asStack(2))
+                .cleanroom(sterile).duration(1200).EUt(VA[OpV]).save(p);
     }
 }
