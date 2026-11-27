@@ -1,15 +1,15 @@
 // priority: -85
-// Apex Ascension - Botania gated by GregTech voltage (GregTech Apex Additions)
-//   pre-LV : Pure Daisy, Petal Apothecary, Mana Pool, Spreaders, generating flowers, Manasteel (natural)
+// Apex Ascension - Botania gated by GregTech voltage (GregTech Apex Additions), paced like GT New Horizons:
+// base Botania through LV-HV, the Gaia Guardian around HV/EV, post-Gaia crafting on the IV Alfheim Teleportation Array.
+//   steam  : Pure Daisy, Petal Apothecary, Mana Pool, Spreaders, generating flowers, Manasteel (from steel)
 //   LV     : Runic Altar, Mechanical Daisy / Apothecary
-//   MV     : Terrestrial Agglomeration Plate, Mechanical Mana Pool / Runic Altar
-//   HV     : Elven Gateway Core, Mana Battery, Alfheim Market, Mechanical Brewery
-//   EV     : Gaia Pylon, Industrial Agglomeration Factory, Mana Infuser (Mythic Botany)
-//   IV     : Alfsteel Pylon, Elven Altar, Dreaming Mana Pool (Botanic Additions)
-//   LuV    : Gaia Agglomeration Plate, Mana Tesseract, Terra Catalyst, Gaiasteel Pylon (+ Avaritia Crystal Matrix)
+//   MV     : Terrestrial Agglomeration Plate, Alfheim Portal, Mechanical Mana Pool / Runic Altar
+//   HV     : Gaia Pylon, Mana Battery, Alfheim Market, Mechanical Brewery, Mana Infuser, Agglomeration Factory
+//   EV     : Alfsteel Pylon, Elven Altar, Dreaming Mana Pool (Botanic Additions)
+//   IV     : Gaia Agglomeration Plate, Mana Tesseract, Terra Catalyst, Gaiasteel Pylon (post-Gaia, with the Array)
 // The item keeps its own ingredients and is made in a GT assembler with that tier's circuits and parts.
 // Exploits removed: Orechid / Orechid Ignem (stone -> ores skips GT veins), Elven Mana Fluxfield (mana -> FE).
-// Also the Mana Nexus' own blocks (they need Botania items, so they live here instead of the GTAA jar).
+// Also the Mana Hatch (it needs Botania items, so it lives here instead of the GTAA jar).
 
 const APEX_BOT_TIERS = {
   lv:  { eut: 30,    pump: 'gtceu:lv_electric_pump',  plate: '#forge:plates/steel' },
@@ -28,20 +28,20 @@ const APEX_BOT_GATED = {
   'botania:terra_plate':                             ['mv',  ['plates'], 30],
   'botanicalmachinery:mechanical_mana_pool':         ['mv',  ['hull', 'pump'], 30],
   'botanicalmachinery:mechanical_runic_altar':       ['mv',  ['hull'], 30],
-  'botania:alfheim_portal':                          ['hv',  ['plates', 'field'], 40],
+  'botania:alfheim_portal':                          ['mv',  ['plates', 'field'], 40],
   'botanicalmachinery:mana_battery':                 ['hv',  ['hull'], 40],
   'botanicalmachinery:alfheim_market':               ['hv',  ['hull'], 40],
   'botanicalmachinery:mechanical_brewery':           ['hv',  ['hull', 'pump'], 40],
-  'botania:gaia_pylon':                              ['ev',  ['plates', 'field'], 50],
-  'botanicalmachinery:industrial_agglomeration_factory': ['ev', ['hull', 'field'], 60],
-  'mythicbotany:mana_infuser':                       ['ev',  ['hull', 'field'], 60],
-  'mythicbotany:alfsteel_pylon':                     ['iv',  ['plates', 'field'], 60],
-  'botanicadds:elven_altar':                         ['iv',  ['hull', 'field'], 60],
-  'botanicadds:dreaming_pool':                       ['iv',  ['hull', 'pump'], 60],
-  'botanicadds:gaia_plate':                          ['luv', ['plates', 'field', 'matrix4'], 80],
-  'botanicadds:mana_tesseract':                      ['luv', ['hull', 'field', 'matrix2'], 80],
-  'botanicadds:terra_catalyst':                      ['luv', ['field', 'matrix2'], 80],
-  'botanicadds:gaiasteel_pylon':                     ['luv', ['plates', 'field', 'matrix2'], 80]
+  'botania:gaia_pylon':                              ['hv',  ['plates', 'field'], 50],
+  'botanicalmachinery:industrial_agglomeration_factory': ['hv', ['hull', 'field'], 60],
+  'mythicbotany:mana_infuser':                       ['hv',  ['hull', 'field'], 60],
+  'mythicbotany:alfsteel_pylon':                     ['ev',  ['plates', 'field'], 60],
+  'botanicadds:elven_altar':                         ['ev',  ['hull', 'field'], 60],
+  'botanicadds:dreaming_pool':                       ['ev',  ['hull', 'pump'], 60],
+  'botanicadds:gaia_plate':                          ['iv',  ['plates', 'field'], 60],
+  'botanicadds:mana_tesseract':                      ['iv',  ['hull', 'field'], 60],
+  'botanicadds:terra_catalyst':                      ['iv',  ['field'], 60],
+  'botanicadds:gaiasteel_pylon':                     ['iv',  ['plates', 'field'], 60]
 }
 
 // Botanic Additions adds its crafting recipes through HammerLib, out of KubeJS' reach; GTAA removes them
