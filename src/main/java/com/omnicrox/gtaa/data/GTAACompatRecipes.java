@@ -86,6 +86,7 @@ public final class GTAACompatRecipes {
         topCircuits(provider);
         maxwellCats(provider);
         tieredGlass(provider);
+        personalSpace(provider);
     }
 
     /**
@@ -916,5 +917,17 @@ public final class GTAACompatRecipes {
             if (props.getStorage().get(key) != null) return m.getFluid(key, amount);
         }
         return m.getFluid(amount);
+    }
+
+    /** GT New Horizons' Personal Space Portal, at MV */
+    private static void personalSpace(Consumer<FinishedRecipe> provider) {
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:personal_space_portal")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[MV].asStack())
+                .inputItems(GTItems.EMITTER_MV, 2)
+                .inputItems(CustomTags.MV_CIRCUITS, 2)
+                .inputItems(Items.ENDER_EYE, 4)
+                .inputItems(plate, GTMaterials.Aluminium, 4)
+                .outputItems(GTAABlocks.PERSONAL_PORTAL.asStack())
+                .duration(400).EUt(VA[MV]).save(provider);
     }
 }

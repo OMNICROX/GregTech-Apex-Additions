@@ -8,6 +8,7 @@ public final class GTAACommonConfig {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.BooleanValue AUTOBUILD_CASING_FIRST;
     public static final ForgeConfigSpec.BooleanValue GLASS_TIER_LIMITS_ENERGY;
+    public static final ForgeConfigSpec.BooleanValue PERSONAL_SPACE;
 
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
@@ -18,6 +19,11 @@ public final class GTAACommonConfig {
         GLASS_TIER_LIMITS_ENERGY = b.comment("GT New Horizons' glass rule: a multiblock built with tiered glass can't run with an energy",
                 "hatch above its lowest glass tier (Borosilicate = HV ... Universium = UXV; tempered = HV, laminated = IV, fusion = LuV).")
                 .define("glassTierLimitsEnergyHatches", true);
+        b.pop();
+        b.push("personalSpace");
+        PERSONAL_SPACE = b.comment("Personal Space Portals (GT New Horizons): each player can make one world of their own.",
+                "Needs the Infiniverse mod. Turning it off keeps the worlds on disk but the portals stop working.")
+                .define("enabled", true);
         b.pop();
         SPEC = b.build();
     }

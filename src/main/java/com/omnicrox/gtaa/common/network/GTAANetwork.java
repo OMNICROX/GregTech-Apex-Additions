@@ -32,6 +32,27 @@ public final class GTAANetwork {
                 AscensionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(2, InfernalPacket.class, InfernalPacket::write, InfernalPacket::read,
                 InfernalPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(3, PersonalSpacePacket.class, PersonalSpacePacket::write, PersonalSpacePacket::read,
+                PersonalSpacePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+    }
+
+    /** opens the Personal Space setup screen (floors and times to pick from) */
+    public record PersonalSpacePacket(List<String> floors, List<String> times) {
+
+        void write(FriendlyByteBuf buf) {
+            buf.writeCollection(floors, FriendlyByteBuf::writeUtf);
+            buf.writeCollection(times, FriendlyByteBuf::writeUtf);
+        }
+
+        static PersonalSpacePacket read(FriendlyByteBuf buf) {
+            return new PersonalSpacePacket(buf.readList(FriendlyByteBuf::readUtf), buf.readList(FriendlyByteBuf::readUtf));
+        }
+
+        void handle(Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> com.omnicrox.gtaa.client.PersonalSpaceScreen.open(this)));
+            ctx.get().setPacketHandled(true);
+        }
     }
 
     public static void send(ServerPlayer player, Object msg) {

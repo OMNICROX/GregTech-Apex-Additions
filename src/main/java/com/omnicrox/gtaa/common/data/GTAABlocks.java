@@ -146,6 +146,16 @@ public class GTAABlocks {
     public static final BlockEntry<Block> SE_MOTOR_MK4 = casing("space_elevator_motor_mk4", "Space Elevator Motor MK-IV");
     public static final BlockEntry<Block> SE_MOTOR_MK5 = casing("space_elevator_motor_mk5", "Space Elevator Motor MK-V");
 
+    public static final BlockEntry<com.omnicrox.gtaa.common.personal.PersonalPortalBlock> PERSONAL_PORTAL = REGISTRATE
+            .block("personal_space_portal", com.omnicrox.gtaa.common.personal.PersonalPortalBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.strength(5.0f, 10.0f).lightLevel(s -> 10))
+            .blockstate(NonNullBiConsumer.noop())
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .lang("Personal Space Portal")
+            .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
+            .register();
+
     public static final BlockEntry<SpaceElevatorCableBlock> SPACE_ELEVATOR_CABLE = REGISTRATE
             .block("space_elevator_cable", SpaceElevatorCableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
