@@ -74,6 +74,7 @@ public final class GTAACompatRecipes {
         cosmicCircuits(provider);
         crystallineInfinitier(provider);
         microSpacetime(provider);
+        divineIsaForge(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -685,5 +686,24 @@ public final class GTAACompatRecipes {
                     .inputFluids(infinity.getFluid(L * 32))
                     .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack(32))
                     .duration(1200).EUt(VA[UIV]).save(provider);
+    }
+
+    /** 123Technology's Divine Isa Forge: end-game (UXV), built from tier-8 field generators */
+    private static void divineIsaForge(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:divine_isa_forge")
+                .inputItems(S1, 16)
+                .inputItems(S2, 4)
+                .inputItems(S3, 4)
+                .inputItems(S4, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_UXV, 16)
+                .inputItems(GTItems.ROBOT_ARM_UXV, 16)
+                .inputItems(CustomTags.OpV_CIRCUITS, 8)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack(16))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 256))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.DIVINE_ISA_FORGE.asStack())
+                .duration(6000).EUt(VA[UXV])
+                .save(needing(provider, new String[] { "gtna", "gtca" }, Map.of(S1, "gtca:isamill",
+                        S2, "gtna:spacetime_compression_field_generator_tier_8", S3, "gtna:stabilisation_field_generator_tier_8",
+                        S4, "gtna:time_acceleration_field_generator_tier_8")));
     }
 }

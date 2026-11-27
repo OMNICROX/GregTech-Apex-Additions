@@ -823,4 +823,60 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
+
+    // ---------------- Divine Isa Forge (123Technology) ----------------
+    /** 123Technology's speed: time / (V ^ (glass / 2 + 1)) ^ (1/3), with the voltage tier standing in for glass */
+    public static double isaForgeSpeed(com.gregtechceu.gtceu.api.machine.MetaMachine m) {
+        int v = Math.max(1, ApexModifiers.tier(m));
+        return 1.0 / Math.cbrt(Math.pow(v, v / 2.0 + 1));
+    }
+
+    public static final MultiblockMachineDefinition DIVINE_ISA_FORGE = REGISTRATE
+            .multiblock("divine_isa_forge", WorkableElectricMultiblockMachine::new)
+            .langValue("Divine Isa Forge")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(extType("gtceu:isamill", GTRecipeTypes.MACERATOR_RECIPES),
+                    extType("gtna:isa_mill", GTRecipeTypes.MACERATOR_RECIPES), GTAARecipeTypes.SPACE_ASSEMBLER)
+            .recipeModifiers(ApexModifiers.parallel(m -> Integer.MAX_VALUE, GTAAGTNHMachines::isaForgeSpeed, 1.0),
+                    GTRecipeModifiers.OC_PERFECT_SUBTICK)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips
+                    .of("Laodeng's Ultimate Creation - Divine Isa Machine (IsaMill & Space Assembler)")
+                    .flavor("'I rejected the Blood Magic's favor and the Bee's sweetness'")
+                    .info("§dIsa Lord Certified")
+                    .info("Unimaginable speed and parallel.")
+                    .info("Time = recipe time x ( 1 / (Voltage Tier^[(Voltage Tier / 2)+1])^(1/3))")
+                    .info("Runs both IsaMill recipe lists and the Space Assembler; switch in the controller GUI")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("123Technology (GTNH addon)")
+                    .author("§aAdded by: 123Technology - Make ISA great again!").build())
+            .appearanceBlock(() -> modBlock("gtna:molecular_casing", GTBlocks.HIGH_POWER_CASING::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("ote", "divine_isa_forge")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('B', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('C', blocks(modBlock("gtna:hollow_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('D', blocks(modBlock("gtna:molecular_coil", GTBlocks.SUPERCONDUCTING_COIL::get)))
+                    .where('E', blocks(modBlock("gtna:molecular_casing", GTBlocks.HIGH_POWER_CASING::get)).setMinGlobalLimited(3000)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.MUFFLER).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('F', blocks(modBlock("gtna:spacetime_compression_field_generator_tier_8", GTBlocks.FUSION_COIL::get)))
+                    .where('G', blocks(modBlock("gtna:stabilisation_field_generator_tier_8", GTBlocks.FUSION_COIL::get)))
+                    .where('H', blocks(modBlock("gtna:time_acceleration_field_generator_tier_8", GTBlocks.FUSION_COIL::get)))
+                    .where('I', blocks(GTBlocks.FUSION_CASING_MK3.get()))
+                    .where('J', blocks(modBlock("gtna:dyson_receiver_casing", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('K', blocks(modBlock("gtna:dyson_control_casing", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('L', blocks(modBlock("gtna:dyson_control_toroid", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('M', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where('N', blocks(modBlock("gtna:infinity_frame", () -> modBlock("gtceu:neutronium_frame", GTBlocks.FUSION_COIL::get))))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
 }
