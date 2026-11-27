@@ -76,3 +76,10 @@ additional terms in LICENSE-ADDITIONAL-TERMS.md".
   them with a shader).
 - `item/transcendent_*.png` - GT5-Unofficial `gt.metaitem.03/174-177, 731.png`.
 - `item/max_universal_circuit.png` - redrawn from Extended Features' OpV universal circuit, red "MA" lettering.
+
+## Textures from GTOCore (LGPL-3.0)
+
+GT Nexus Addon (gtna) 0.5.2 points the connected textures of some of its casings (Accelerator, Neutronium Stable,
+Containment Field Generator, Fusion MK4, ...) at `gtocore:` textures it doesn't ship, so those blocks showed up
+magenta. GTAA ships the 30 missing `*_ctm` textures under `assets/gtocore/textures/`, unchanged, from GTOCore
+(https://github.com/GregTech-Odyssey/GTOCore, GregTech Odyssey team, LGPL-3.0).
