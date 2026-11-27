@@ -9,7 +9,6 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
-import com.lowdragmc.lowdraglib.client.scene.FBOWorldSceneRenderer;
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 import com.lowdragmc.lowdraglib.utils.TrackedDummyWorld;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -103,7 +102,7 @@ public final class MultiblockPreview {
     public final Vector3f pan = new Vector3f();
 
     private TrackedDummyWorld world;
-    private FBOWorldSceneRenderer renderer;
+    private ApexSceneRenderer renderer;
     private int fboW, fboH;
     private boolean dirty = true;
     private final Map<BlockPos, BlockInfo> placed = new HashMap<>();
@@ -161,7 +160,7 @@ public final class MultiblockPreview {
             RenderSystem.recordRenderCall(() -> {
                 try {
                     renderer.deleteCacheBuffer();
-                    renderer.releaseFBO();
+                    renderer.release();
                 } catch (Throwable ignored) {}
             });
         }
@@ -255,23 +254,22 @@ public final class MultiblockPreview {
         if (renderer != null) {
             try {
                 renderer.deleteCacheBuffer();
-                renderer.releaseFBO();
+                renderer.release();
             } catch (Throwable ignored) {}
             renderer = null;
         }
     }
 
     private void ensureRenderer(int w, int h) {
-        if (renderer != null && fboW == w && fboH == h) return;
         if (renderer != null) {
-            try {
-                renderer.deleteCacheBuffer();
-                renderer.releaseFBO();
-            } catch (Throwable ignored) {}
+            if (fboW != w || fboH != h) renderer.resize(w, h);
+            fboW = w;
+            fboH = h;
+            return;
         }
         fboW = w;
         fboH = h;
-        renderer = new FBOWorldSceneRenderer(world, w, h);
+        renderer = new ApexSceneRenderer(world, w, h);
         renderer.setClearColor(0x00000000);
         renderer.useCacheBuffer(placed.size() > 200);
         applyLayer();
@@ -302,7 +300,7 @@ public final class MultiblockPreview {
         Vector3f look = new Vector3f(center).add(pan);
         renderer.setCameraLookAt(look, baseRadius * zoom, Math.toRadians(yaw), Math.toRadians(pitch));
         boolean inside = mouseX >= x && mouseY >= y && mouseX < x + w && mouseY < y + h;
-        renderer.render(g.pose(), x, y, w, h, inside ? mouseX : -1000, inside ? mouseY : -1000);
+        renderer.draw(g.pose(), x, y, w, h, inside ? mouseX : -1000, inside ? mouseY : -1000);
         if (!inside) return null;
         BlockHitResult hit = renderer.getLastTraceResult();
         if (hit == null || hit.getType() == HitResult.Type.MISS) return null;
