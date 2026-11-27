@@ -113,6 +113,16 @@ Every multiblock has a 3D structure page in JEI (the NEI-style preview):
 6. The row of blocks under the preview is everything you need for the shape and tier on screen (counts update).
    Click a block for its recipe, right-click for its uses.
 
+## In this guide
+
+Multiblock pages show the same structure in a 3D view beside the text:
+
+* **Left drag** rotates, the **scroll wheel** zooms, **right or middle drag** pans. Right-click a block to see what
+  that spot accepts.
+* The buttons on the right: zoom in, zoom out, reset the view, next shape (multis with several sizes), show where
+  hatches can go, and list every block you need.
+* The sliders underneath switch the tier of coils, glass and other parts, or show one layer at a time.
+
 To build it in the world, hold a <ItemLink id="gtceu:terminal" /> or use the
 [Structure Upgrader](../items/structure-upgrader.md), which also upgrades an existing multi to better parts.
 ''', parent='getting-started/getting-started-index.md', pos=30, icon='gtceu:terminal')

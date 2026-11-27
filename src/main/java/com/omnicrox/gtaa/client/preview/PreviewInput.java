@@ -23,7 +23,12 @@ public final class PreviewInput {
 
     private PreviewInput() {}
 
-    private record Region(MultiblockPreview preview, Matrix4f inverse, long time) {}
+    /** scroll in a region's local coordinates; true = used */
+    public interface Scroll {
+        boolean scroll(double x, double y, double delta);
+    }
+
+    private record Region(MultiblockPreview preview, Matrix4f inverse, long time, int w, int h, Scroll handler) {}
 
     private static final List<Region> REGIONS = new ArrayList<>();
     private static final long FRESH_NS = 250_000_000L;
@@ -31,7 +36,15 @@ public final class PreviewInput {
     public static void drawn(MultiblockPreview p, GuiGraphics g) {
         long now = System.nanoTime();
         REGIONS.removeIf(r -> now - r.time > FRESH_NS || r.preview == p);
-        REGIONS.add(new Region(p, new Matrix4f(g.pose().last().pose()).invert(), now));
+        REGIONS.add(new Region(p, new Matrix4f(g.pose().last().pose()).invert(), now, PreviewPanel.W,
+                PreviewPanel.SLOTS_Y, (x, y, d) -> PreviewPanel.scroll(p, x, y, d)));
+    }
+
+    /** a preview drawn with other chrome (the Apex Guide scene) */
+    public static void drawn(MultiblockPreview p, GuiGraphics g, int w, int h, Scroll handler) {
+        long now = System.nanoTime();
+        REGIONS.removeIf(r -> now - r.time > FRESH_NS || r.preview == p);
+        REGIONS.add(new Region(p, new Matrix4f(g.pose().last().pose()).invert(), now, w, h, handler));
     }
 
     /** from the mouse handler: window scroll; true = a preview used it */
@@ -45,9 +58,9 @@ public final class PreviewInput {
             Region r = REGIONS.get(i);
             if (now - r.time > FRESH_NS) continue;
             Vector4f v = new Vector4f((float) gx, (float) gy, 0, 1).mul(r.inverse);
-            if (!PreviewPanel.in(v.x, v.y, 0, 0, PreviewPanel.W, PreviewPanel.SLOTS_Y)) continue;
+            if (!PreviewPanel.in(v.x, v.y, 0, 0, r.w, r.h)) continue;
             try {
-                return PreviewPanel.scroll(r.preview, v.x, v.y, delta);
+                return r.handler.scroll(v.x, v.y, delta);
             } catch (Throwable t) {
                 return false;
             }

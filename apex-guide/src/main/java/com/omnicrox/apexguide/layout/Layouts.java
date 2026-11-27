@@ -52,7 +52,25 @@ public final class Layouts {
                 innerY = offsetIntoContentArea(LytAxis.VERTICAL, innerY, previousBlock, child);
                 // Block width is the width available for the inner content area of the child
                 var blockWidth = Math.max(1, innerWidth - child.getMarginLeft() - child.getMarginRight());
-                var childBounds = child.layout(context, innerX + child.getMarginLeft(), innerY, blockWidth);
+                var blockX = innerX + child.getMarginLeft();
+                // Apex Guide: boxes (tables, recipes...) sit beside a floating block like GuideNH, or below it when
+                // there isn't room. Paragraphs and lists wrap around floats on their own.
+                if (!(child instanceof com.omnicrox.apexguide.document.block.LytParagraph)
+                        && !(child instanceof com.omnicrox.apexguide.document.block.LytList)) {
+                    context.clearFloatsAbove(innerY);
+                    int left = Math.max(blockX, context.getLeftFloatRightEdge().orElse(blockX));
+                    int right = Math.min(blockX + blockWidth, context.getRightFloatLeftEdge().orElse(blockX + blockWidth));
+                    if (right - left < 160) {
+                        var below = context.clearFloats(true, true);
+                        if (below.isPresent()) {
+                            innerY = Math.max(innerY, below.getAsInt());
+                        }
+                    } else {
+                        blockWidth = Math.max(1, right - left - 4);
+                        blockX = left;
+                    }
+                }
+                var childBounds = child.layout(context, blockX, innerY, blockWidth);
                 innerY += childBounds.height() + child.getMarginBottom() + gap;
                 contentWidth = Math.max(contentWidth, childBounds.right() - x);
                 contentHeight = Math.max(contentHeight, childBounds.bottom() - y);

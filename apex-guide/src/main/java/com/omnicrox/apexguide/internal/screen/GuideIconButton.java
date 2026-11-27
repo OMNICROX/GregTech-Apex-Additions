@@ -87,7 +87,9 @@ public class GuideIconButton extends Button {
         BOOKMARK(GuidebookText.Bookmark.text(), 128, 0),
         BOOKMARKED(GuidebookText.Bookmarked.text(), 144, 0),
         NAVIGATION_PIN(GuidebookText.NavigationPin.text(), 0, 80),
-        TOGGLE_GRID(GuidebookText.ToggleGrid.text(), 16, 64);
+        TOGGLE_GRID(GuidebookText.ToggleGrid.text(), 16, 64),
+        TOGGLE_BLOCK_STATS(GuidebookText.ToggleGrid.text(), 16, 48),
+        SCENE_CROP(GuidebookText.ToggleGrid.text(), 32, 48);
 
         final Component actionText;
 
