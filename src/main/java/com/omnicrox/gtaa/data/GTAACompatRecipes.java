@@ -246,19 +246,6 @@ public final class GTAACompatRecipes {
                     .save(needing(provider, "draconicevolution", Map.of(S1, cores[i][0], S2, cores[i][1])));
         }
 
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:draconic_fusion_crafter")
-                .inputItems(S1)
-                .inputItems(S2, 4)
-                .inputItems(GTBlocks.FUSION_COIL.asStack(4))
-                .inputItems(GTItems.FIELD_GENERATOR_LuV, 2)
-                .inputItems(GTItems.ROBOT_ARM_LuV, 4)
-                .inputItems(CustomTags.LuV_CIRCUITS, 4)
-                .inputItems(plateDouble, GTMaterials.NaquadahAlloy, 8)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
-                .outputItems(GTAAMachines.DRACONIC_FUSION_CRAFTER.asStack())
-                .duration(1200).EUt(VA[LuV])
-                .save(needing(provider, "draconicevolution", Map.of(
-                        S1, "draconicevolution:crafting_core", S2, "draconicevolution:basic_crafting_injector")));
     }
 
     private static void cultivation(Consumer<FinishedRecipe> provider) {
@@ -499,7 +486,6 @@ public final class GTAACompatRecipes {
                 .inputItems(S3, 4)
                 .inputItems(S4, 4)
                 .inputItems(S5, 8)
-                .inputItems(GTItems.SENSOR_IV, 4)
                 .inputItems(GTItems.FIELD_GENERATOR_IV, 4)
                 .inputItems(CustomTags.IV_CIRCUITS, 8)
                 .inputItems(GTBlocks.HIGH_POWER_CASING.asStack(16))
@@ -511,24 +497,22 @@ public final class GTAACompatRecipes {
                         S4, "botania:natura_pylon", S5, "botania:mana_spreader")));
     }
 
-    /** GT-Not-Leisure's Draconic Fusion Crafting: their UMV recipe brought to UHV for this pack */
+    /** GT-Not-Leisure's Draconic Fusion Crafting: the only GT fusion crafter, so it sits at LuV like the old one did */
     private static void draconicFusionCrafting(Consumer<FinishedRecipe> provider) {
         ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:draconic_fusion_crafting")
-                .inputItems(GTAAMachines.DRACONIC_FUSION_CRAFTER.asStack())
-                .inputItems(plateDense, GTMaterials.Neutronium, 4)
-                .inputItems(GTItems.EMITTER_UHV, 16)
-                .inputItems(GTItems.FIELD_GENERATOR_UHV, 16)
-                .inputItems(S1, 32)
-                .inputItems(CustomTags.UHV_CIRCUITS, 16)
-                .inputItems(S2)
-                .inputItems(S3)
-                .inputItems(GTAABlocks.RADIATION_ABSORBENT_CASING.asStack(32))
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .inputItems(S1)
+                .inputItems(S2, 8)
+                .inputItems(GTBlocks.FUSION_COIL.asStack(16))
+                .inputItems(GTItems.FIELD_GENERATOR_LuV, 4)
+                .inputItems(GTItems.ROBOT_ARM_LuV, 8)
+                .inputItems(CustomTags.LuV_CIRCUITS, 8)
+                .inputItems(plateDouble, GTMaterials.NaquadahAlloy, 16)
+                .inputItems(GTAABlocks.RADIATION_ABSORBENT_CASING.asStack(16))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.DRACONIC_FUSION_CRAFTING.asStack())
-                .duration(2400).EUt(VA[UHV])
-                .save(needing(provider, "draconicevolution", Map.of(S1, "draconicevolution:draconic_core",
-                        S2, "draconicevolution:dragon_heart", S3, "draconicevolution:chaos_shard")));
+                .duration(1600).EUt(VA[LuV])
+                .save(needing(provider, "draconicevolution", Map.of(
+                        S1, "draconicevolution:crafting_core", S2, "draconicevolution:basic_crafting_injector")));
     }
 
     /** GT-Not-Leisure's Matter Fabricator (ZPM) */

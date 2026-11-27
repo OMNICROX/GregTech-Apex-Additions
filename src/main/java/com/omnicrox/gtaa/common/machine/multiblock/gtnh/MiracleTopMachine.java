@@ -39,7 +39,7 @@ public class MiracleTopMachine extends WorkableElectricMultiblockMachine {
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        rings = ApexModifiers.count(this, CTX);
+        rings = Math.max(1, ApexModifiers.count(this, CTX) / 2); // 8 rings: two ring coils each in the fixed TST shape
     }
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {

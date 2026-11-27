@@ -741,6 +741,53 @@ public class GTAAMachines {
         }
     }
 
+    private static final String NBOX = "com.gregtechceu.gtceu.common.data.";
+
+    private static TraceabilityPredicate reactorHatches() {
+        return blocks(GTAABlocks.NAQUADAH_REACTOR_CASING.get())
+                .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1))
+                .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1));
+    }
+
+    private static Block gtna(String id, Block fallback) {
+        Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation("gtna", id));
+        return b == null || b == Blocks.AIR ? fallback : b;
+    }
+
+    /** GT-Not-Leisure's Hyper Naquadah Reactor structure */
+    private static com.gregtechceu.gtceu.api.pattern.BlockPattern hyperShape(MultiblockMachineDefinition definition, java.util.function.Supplier<Block> core) {
+        return GTAAStructures.pattern("gtnl", "hyper_naquadah_reactor")
+                .where('~', controller(blocks(definition.get())))
+                .where('A', blocks(GTBlocks.HIGH_POWER_CASING.get()))
+                .where('B', blocks(core.get()))
+                .where('C', blocks(gtna("containment_field_generator", GTBlocks.FUSION_COIL.get())))
+                .where('D', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                .where('E', blocks(GTAABlocks.SE_BASE_CASING.get()))
+                .where('F', blocks(gtna("molecular_casing", GTBlocks.FUSION_CASING_MK2.get())))
+                .where('G', reactorHatches())
+                .where('H', blocks(GTAABlocks.FIELD_RESTRICTION_GLASS.get(), GTBlocks.FUSION_GLASS.get()))
+                .where('I', frames(GTMaterials.Neutronium))
+                .where(' ', any())
+                .build();
+    }
+
+    /** GT-Not-Leisure's Advanced Hyper Naquadah Reactor structure */
+    private static com.gregtechceu.gtceu.api.pattern.BlockPattern advancedHyperShape(MultiblockMachineDefinition definition, java.util.function.Supplier<Block> core) {
+        return GTAAStructures.pattern("gtnl", "advanced_hyper_naquadah_reactor")
+                .where('~', controller(blocks(definition.get())))
+                .where('A', blocks(gtna("containment_field_generator", GTBlocks.FUSION_COIL.get())))
+                .where('B', blocks(core.get()))
+                .where('C', blocks(gtna("dyson_receiver_casing", GTBlocks.HIGH_POWER_CASING.get())))
+                .where('D', blocks(GTBlocks.HIGH_POWER_CASING.get()))
+                .where('E', blocks(gtna("dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3.get())))
+                .where('F', reactorHatches())
+                .where('G', frames(GTMaterials.Naquadria))
+                .where(' ', any())
+                .build();
+    }
+
     private static MultiblockMachineDefinition hyperReactor(String id, String name,
                                                             com.omnicrox.gtaa.common.machine.multiblock.naquadah.HyperNaquadahReactorMachine.Spec spec,
                                                             java.util.function.Supplier<Block> core, String boostName) {
@@ -760,28 +807,7 @@ public class GTAAMachines {
                         Component.literal("\u00a77Power the hatches can't take is lost"),
                         Component.literal("\u00a78After GT Not Leisure (GTNH addon), tuned for Apex"))
                 .appearanceBlock(GTAABlocks.NAQUADAH_REACTOR_CASING)
-                .pattern(definition -> {
-                    var casing = blocks(GTAABlocks.NAQUADAH_REACTOR_CASING.get());
-                    return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                    com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                    com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                            .aisle("AIOEA", "AAAAA", "AAAAA", "AAAAA", "AAmAA")
-                            .aisle("AA~AA", "G   G", "G C G", "G   G", "AGGGA")
-                            .aisle("AGGGA", "G   G", "G C G", "G   G", "AGGGA")
-                            .aisle("AGGGA", "G   G", "G C G", "G   G", "AGGGA")
-                            .aisle("AAAAA", "AAAAA", "AACAA", "AAAAA", "AAAAA")
-                            .where('~', controller(blocks(definition.get())))
-                            .where('A', casing.setMinGlobalLimited(40).or(abilities(PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
-                                    PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER)))
-                            .where('I', abilities(PartAbility.IMPORT_FLUIDS))
-                            .where('O', abilities(PartAbility.EXPORT_FLUIDS))
-                            .where('E', abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER))
-                            .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
-                            .where('G', blocks(GTAABlocks.FIELD_RESTRICTION_GLASS.get()))
-                            .where('C', blocks(core.get()))
-                            .where(' ', any())
-                            .build();
-                })
+                .pattern(definition -> spec.tier() >= 2 ? advancedHyperShape(definition, core) : hyperShape(definition, core))
                 .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
                 .model(createWorkableCasingMachineModel(GTAA.id("block/casing/naquadah_reactor_casing"),
                         new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
@@ -858,35 +884,21 @@ public class GTAAMachines {
                     Component.literal("\u00a77The buffer empties into Dynamo / Laser hatches. Weather doesn't matter"),
                     Component.literal("\u00a77Breaking the controller drops its rods. Screwdriver: lightning visuals on/off"),
                     Component.literal("\u00a78After Twist Space Technology (GTNH addon)"))
-            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
-            .pattern(definition -> {
-                var casing = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
-                var frame = frames(GTMaterials.TungstenSteel);
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("AbIEA", "AAAAA", "AAAAA", "AAAAA", "AAmAA")
-                        .aisle("AA~AA", "A   A", "A F A", "A   A", "AAAAA")
-                        .aisle("     ", " F F ", "  F  ", " F F ", "     ")
-                        .aisle("     ", "     ", "  F  ", "     ", "     ")
-                        .aisle("     ", "     ", "  F  ", "     ", "     ")
-                        .aisle("     ", "     ", "  F  ", "     ", "     ")
-                        .aisle("     ", "     ", "  F  ", "     ", "     ")
-                        .aisle("     ", "     ", "  T  ", "     ", "     ")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('A', casing.setMinGlobalLimited(20).or(abilities(PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS,
-                                PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER)))
-                        .where('b', abilities(PartAbility.IMPORT_ITEMS))
-                        .where('I', abilities(PartAbility.IMPORT_FLUIDS))
-                        .where('E', abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER))
-                        .where('m', casing.setMinGlobalLimited(1).or(abilities(PartAbility.MAINTENANCE)))
-                        .where('F', frame)
-                        .where('T', blocks(Blocks.LIGHTNING_ROD))
-                        .where(' ', any())
-                        .build();
-            })
+            .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "lightning_spire")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.FUSION_COIL.get()))
+                    .where('B', blocks(GTBlocks.HIGH_POWER_CASING.get()).setMinGlobalLimited(80)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.OUTPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('C', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('D', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_robust_tungstensteel"),
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/hpca/high_power_casing"),
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/implosion_compressor")))
             .register();
 
@@ -1222,81 +1234,26 @@ public class GTAAMachines {
                     Component.literal("\u00a7cBosses can't be crushed"),
                     Component.literal("\u00a78Idea from GT New Horizons (KubaTech)"))
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
-            .pattern(definition -> {
-                var casing = blocks(GTBlocks.CASING_STEEL_SOLID.get());
-                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
-                        GTBlocks.FUSION_GLASS.get(), GTBlocks.CLEANROOM_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("CCSCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                        .aisle("fgggf", "gsssg", "gsssg", "gsssg", "fgggf")
-                        .aisle("fgggf", "g###g", "g###g", "g###g", "fgggf").setRepeatable(4)
-                        .aisle("ccccc", "ccccc", "ccccc", "ccccc", "ccccc")
-                        .where('S', controller(blocks(definition.getBlock())))
-                        .where('C', casing.setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1))
-                                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2))
-                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
-                        .where('c', casing)
-                        .where('g', glass)
-                        .where('f', frames(GTMaterials.Steel))
-                        .where('s', any())
-                        .where('#', air())
-                        .build();
-            })
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "extreme_entity_crusher")
+                    .where('~', controller(blocks(definition.getBlock())))
+                    .where('c', blocks(GTBlocks.CASING_STEEL_SOLID.get()))
+                    .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get())
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('g', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get(),
+                            net.minecraft.world.level.block.Blocks.GLASS))
+                    .where('f', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Steel))
+                    .where('s', any())
+                    .where('-', air())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_solid_steel"),
                     new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/distillation_tower")))
             .register();
 
     // ---------------- Draconic Fusion Crafter (KubaTech) ----------------
-    public static final MultiblockMachineDefinition DRACONIC_FUSION_CRAFTER = REGISTRATE
-            .multiblock("draconic_fusion_crafter", com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine::new)
-            .langValue("Draconic Fusion Crafter")
-            .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTAARecipeTypes.DRACONIC_FUSION)
-            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine::recipeModifier,
-                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.PARALLEL_HATCH, com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
-            .tooltips(
-                    Component.literal("\u00a77Machine Type: \u00a7eFusion Crafter"),
-                    Component.literal("\u00a77Runs every \u00a7dDraconic Evolution\u00a77 fusion crafting recipe, no injectors needed"),
-                    Component.literal("\u00a77Core casings set the highest recipe tier: Draconium, Wyvern, Draconic, Chaotic"),
-                    Component.literal("\u00a77Each core tier above the recipe halves its time"),
-                    Component.literal("\u00a77Chaotic cores need \u00a7eFusion Machine Casing MK II"),
-                    Component.literal("\u00a77Accepts a Parallel Hatch"),
-                    Component.literal("\u00a78Ported from GT New Horizons (KubaTech)"))
-            .appearanceBlock(GTAABlocks.DEFC_CASING)
-            .pattern(definition -> {
-                var casing = blocks(GTAABlocks.DEFC_CASING.get());
-                return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP)
-                        .aisle("NN~NN", "NNNNN", "NNNNN", "NNNNN", "NNNNN")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("RRRRR", "R F R", "RFfFR", "R F R", "RRRRR")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("RRRRR", "R F R", "RFfFR", "R F R", "RRRRR")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("     ", "  F  ", " FfF ", "  F  ", "     ")
-                        .aisle("nnnnn", "nnnnn", "nnnnn", "nnnnn", "nnnnn")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('N', casing.setMinGlobalLimited(1).or(autoAbilities(definition.getRecipeTypes()))
-                                .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
-                                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
-                        .where('n', casing)
-                        .where('f', blocks(GTBlocks.FUSION_COIL.get()))
-                        .where('F', com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine.fusionCasings())
-                        .where('R', com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine.cores())
-                        .where(' ', any())
-                        .build();
-            })
-            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/defc_0"),
-                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/fusion_reactor")))
-            .register();
 
     // ---------------- Mystical Cultivation Array (KubaTech EIG) ----------------
     // ---------------- Ascension Gate: the finale ----------------

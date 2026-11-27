@@ -49,6 +49,8 @@ legacyForge {
             programArguments.addAll('--mod', project.mod_id, '--all',
                     '--output', file('src/generated/resources').absolutePath,
                     '--existing', file('src/main/resources').absolutePath,
+                    // placeholder textures of other mods (GTNA...) so models can point at them; never shipped
+                    '--existing', file('tools/datagen_existing').absolutePath,
                     '--existing-mod', 'gtceu')
         }
     }

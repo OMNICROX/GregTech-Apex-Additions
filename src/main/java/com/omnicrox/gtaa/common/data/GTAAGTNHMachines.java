@@ -67,17 +67,23 @@ public final class GTAAGTNHMachines {
                     Component.literal("§65§7 Deepslate, §66§7 Netherrack, §67§7 End Stone (needs one of the block)"),
                     Component.literal("§b8 parallels§7 per voltage tier, §a200% faster"),
                     Component.literal("§8Ported from GT New Horizons (GT++)"))
-            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
-            .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                    .aisle("CCC", "CCC", "CCC")
-                    .aisle("C~C", "C#C", "CCC")
-                    .aisle("CCC", "CCC", "CCC")
+            .appearanceBlock(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "industrial_rock_breaker")
                     .where('~', controller(blocks(definition.get())))
-                    .where('C', io(blocks(GTBlocks.CASING_STEEL_SOLID.get()), 12))
-                    .where('#', air())
+                    .where('A', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Tungsten))
+                    .where('B', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('C', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()).setMinGlobalLimited(30)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.MUFFLER).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('D', blocks(net.minecraft.world.level.block.Blocks.LAVA).or(air()))
+                    .where('E', blocks(net.minecraft.world.level.block.Blocks.WATER).or(air()))
+                    .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_solid_steel"),
+            .model(createWorkableCasingMachineModel(gt("block/casings/gcym/high_temperature_smelting_casing"),
                     GTAA.id("block/multiblock/industrial_rock_breaker")))
             .register();
 
@@ -96,23 +102,23 @@ public final class GTAAGTNHMachines {
                     Component.literal("§fNeutronium§7 1, §cInfinity§7 4, §8Transcendent Metal§7 16,"),
                     Component.literal("§5Spacetime§7 64, §3Universium§7 256"),
                     Component.literal("§8Ported from GT New Horizons"))
-            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
-            .pattern(definition -> {
-                var c = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                        .aisle("CC~CC", "CXXXC", "CXXXC", "CXXXC", "CCCCC")
-                        .aisle("CGGGC", "GXXXG", "GXXXG", "GXXXG", "CGGGC")
-                        .aisle("CCCCC", "CXXXC", "CXXXC", "CXXXC", "CCCCC")
-                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', io(c, 40))
-                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
-                        .where('X', ElectricImplosionCompressorMachine.containmentPredicate())
-                        .build();
-            })
+            .appearanceBlock(GTAABlocks.PUR_NAQUADAH_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "electric_implosion_compressor")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('B', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('C', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('D', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Naquadah))
+                    .where('E', com.omnicrox.gtaa.common.machine.multiblock.gtnh.ElectricImplosionCompressorMachine.containmentPredicate())
+                    .where('F', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).setMinGlobalLimited(150).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/pur_naquadah_casing"),
                     gt("block/multiblock/implosion_compressor")))
             .register();
 
@@ -135,21 +141,19 @@ public final class GTAAGTNHMachines {
                     Component.literal("§7Parallels §bx2 / x4§7 below 50 / 20 stability (compressor uncapped below 20)"),
                     Component.literal("§8Ported from GT New Horizons"))
             .appearanceBlock(GTAABlocks.EXTREME_DENSITY_CASING)
-            .pattern(definition -> {
-                var d = blocks(GTAABlocks.EXTREME_DENSITY_CASING.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD", "DDDDDDD")
-                        .aisle("DDD~DDD", "DRRRRRD", "DR###RD", "DR###RD", "DR###RD", "DRRRRRD", "DDDDDDD")
-                        .aisle("DDHHHDD", "D#####D", "H#####H", "H#####H", "H#####H", "D#####D", "DDHHHDD")
-                        .aisle("DDDDDDD", "DRRRRRD", "DR###RD", "DR###RD", "DR###RD", "DRRRRRD", "DDDDDDD")
-                        .aisle("DDDDDDD", "DDDDDDD", "DDHHHDD", "DDHHHDD", "DDHHHDD", "DDDDDDD", "DDDDDDD")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('D', io(d, 80))
-                        .where('R', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()))
-                        .where('H', blocks(GTAABlocks.HAWKING_GLASS.get()))
-                        .where('#', air())
-                        .build();
-            })
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "black_hole_compressor")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.HAWKING_GLASS.get()))
+                    .where('B', blocks(GTAABlocks.EXTREME_DENSITY_CASING.get()).setMinGlobalLimited(600).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('C', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()))
+                    .where('D', frames(com.gregtechceu.gtceu.common.data.GTMaterials.NaquadahAlloy))
+                    .where('E', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/extreme_density_casing"),
                     GTAA.id("block/multiblock/black_hole_compressor")))
@@ -180,21 +184,18 @@ public final class GTAAGTNHMachines {
                     Component.literal("§b16 parallels§7; coil heat and overclocks like the Electric Blast Furnace"),
                     Component.literal("§8After Twist Space Technology (GTNH addon)"))
             .appearanceBlock(GTBlocks.FUSION_CASING_MK3)
-            .pattern(definition -> {
-                var c = blocks(GTBlocks.FUSION_CASING_MK3.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .aisle("CCC~CCC", "CKKKKKC", "CK###KC", "CK###KC", "CK###KC", "CKKKKKC", "CCCCCCC")
-                        .aisle("CGGGGGC", "GKKKKKG", "GK###KG", "GK###KG", "GK###KG", "GKKKKKG", "CGGGGGC")
-                        .aisle("CCCCCCC", "CKKKKKC", "CK###KC", "CK###KC", "CK###KC", "CKKKKKC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', io(c, 80))
-                        .where('K', heatingCoils())
-                        .where('G', blocks(GTBlocks.FUSION_GLASS.get()))
-                        .where('#', air())
-                        .build();
-            })
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "plasma_forge")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('C', heatingCoils())
+                    .where('b', blocks(GTBlocks.FUSION_CASING_MK3.get()).setMinGlobalLimited(900).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('N', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('s', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
                     gt("block/multiblock/fusion_reactor")))
@@ -258,22 +259,25 @@ public final class GTAAGTNHMachines {
                     Component.literal("§b128 parallels§7 per ring, §a400% speed§7 per ring"),
                     Component.literal("§aPerfect overclocks§7 with 8 or more rings"),
                     Component.literal("§8After Twist Space Technology (GTNH addon)"))
-            .appearanceBlock(GTBlocks.FUSION_CASING_MK2)
-            .pattern(definition -> {
-                var c = blocks(GTBlocks.FUSION_CASING_MK2.get());
-                return FactoryBlockPattern.start(RelativeDirection.BACK, RelativeDirection.UP, RelativeDirection.RIGHT)
-                        .aisle("CCCCC", "CCCCC", "~CCCC", "CCCCC", "CCCCC")
-                        .aisle("PPPPP", "P###P", "P###P", "P###P", "PPRPP").setRepeatable(2, 16)
-                        .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', io(c, 20))
-                        .where('P', blocks(GTBlocks.FUSION_CASING_MK3.get()))
-                        .where('R', ApexModifiers.counted(MiracleTopMachine.CTX, () -> new Block[] { GTBlocks.FUSION_COIL.get() }))
-                        .where('#', air())
-                        .build();
-            })
+            .appearanceBlock(() -> modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "miracle_top")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('M', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('H', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.gtnh.MiracleTopMachine.CTX,
+                            () -> new Block[] { modBlock("gtna:molecular_coil", GTBlocks.FUSION_COIL::get) }))
+                    .where('C', blocks(modBlock("gtna:hollow_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('E', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk2"),
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/molecular_casing"),
                     gt("block/multiblock/gcym/large_circuit_assembler")))
             .register();
 
@@ -295,22 +299,25 @@ public final class GTAAGTNHMachines {
                     Component.literal("§b32 parallels§7 per installed module, §aperfect overclocks"),
                     Component.literal("§8Ported from GT New Horizons 2.9 (condensed)"))
             .appearanceBlock(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING)
-            .pattern(definition -> {
-                var m = blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM", "MMMMMMM")
-                        .aisle("RMM~MMR", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "RMMMMMR")
-                        .aisle("RGGGGGR", "GXXXXXG", "GXXXXXG", "GXXXXXG", "GXXXXXG", "GXXXXXG", "RGGGGGR")
-                        .aisle("RMMMMMR", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "MXXXXXM", "RMMMMMR")
-                        .aisle("RRRRRRR", "RMMMMMR", "RMSSSMR", "RMSSSMR", "RMSSSMR", "RMMMMMR", "RRRRRRR")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('M', io(m, 60).or(abilities(PartAbility.DATA_ACCESS).setMaxGlobalLimited(2)))
-                        .where('R', blocks(GTAABlocks.NANOCHIP_REINFORCEMENT_CASING.get()))
-                        .where('X', blocks(GTAABlocks.NANOCHIP_COMPUTATIONAL_MATRIX_CASING.get()))
-                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get()))
-                        .where('S', NanochipAssemblyComplexMachine.moduleSlot())
-                        .build();
-            })
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "nanochip_assembly_complex")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.NANOCHIP_FIREWALL_PROJECTION_CASING.get()))
+                    .where('B', blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get()))
+                    .where('C', blocks(GTAABlocks.NANOCHIP_REINFORCEMENT_CASING.get()))
+                    .where('J', blocks(GTAABlocks.NANOCHIP_COMPUTATIONAL_MATRIX_CASING.get()))
+                    .where('D', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Naquadah))
+                    .where('E', blocks(GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get()))
+                    .where('F', com.omnicrox.gtaa.common.machine.multiblock.gtnh.NanochipAssemblyComplexMachine.moduleSlot()
+                            .or(blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get())))
+                    .where('H', blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get())
+                            .or(abilities(PartAbility.DATA_ACCESS, PartAbility.OPTICAL_DATA_RECEPTION).setMaxGlobalLimited(2).setPreviewCount(1)).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('I', blocks(GTAABlocks.NANOCHIP_MESH_INTERFACE_CASING.get()))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/nanochip_mesh_interface_casing"),
                     GTAA.id("block/multiblock/nanochip_assembly_complex")))
@@ -331,25 +338,28 @@ public final class GTAAGTNHMachines {
                     .bonus("Output x4; with 1000 mB water and 1000 mB lava in the hatches, x1024")
                     .info("The water and lava are not used up")
                     .portedFrom("Twist Space Technology (GTNH addon)").build())
-            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
-            .pattern(definition -> {
-                var c = blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .aisle("CCC~CCC", "CFFFFFC", "CFGGGFC", "CFFFFFC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CF###FC", "CG###GC", "CF###FC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CF###FC", "CG###GC", "CF###FC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CFFFFFC", "CFGGGFC", "CFFFFFC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', io(c, 80))
-                        .where('F', frames(com.gregtechceu.gtceu.common.data.GTMaterials.TungstenSteel))
-                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
-                        .where('#', air())
-                        .build();
-            })
+            .appearanceBlock(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SECURE_MACERATION)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "silicon_rock_synthesizer")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('B', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
+                    .where('C', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('D', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
+                    .where('E', blocks(modBlock("gtca:cosmic_neutronium_frame", () -> modBlock("gtceu:neutronium_frame", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get))))
+                    .where('F', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SECURE_MACERATION.get()))
+                    .where('G', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_STRESS_PROOF.get()))
+                    .where('H', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SHOCK_PROOF.get()))
+                    .where('I', blocks(modBlock("gtca:pressure_resistant_wall", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('J', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SECURE_MACERATION.get())
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('L', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SECURE_MACERATION.get()).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where('W', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_SECURE_MACERATION.get()).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
+            .model(createWorkableCasingMachineModel(gt("block/casings/gcym/secure_maceration_casing"),
                     GTAA.id("block/multiblock/industrial_rock_breaker")))
             .register();
 
@@ -373,23 +383,21 @@ public final class GTAAGTNHMachines {
                     Component.literal("§b256 parallels§7 at UHV, x4 per tier above, up to §b2,000,000"),
                     Component.literal("§8Ported from Twist Space Technology (GTNH addon)"))
             .appearanceBlock(GTAABlocks.PUR_NAQUADAH_CASING)
-            .pattern(definition -> {
-                var c = blocks(GTAABlocks.PUR_NAQUADAH_CASING.get());
-                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .aisle("CCC~CCC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CG###GC", "CG#P#GC", "CG#P#GC", "CG#P#GC", "CG###GC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CG###GC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CCCCCCC")
-                        .aisle("CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC", "CCCCCCC")
-                        .where('~', controller(blocks(definition.get())))
-                        .where('C', io(c, 120))
-                        .where('G', blocks(GTAABlocks.PUR_STERILE_CASING.get(), GTBlocks.FUSION_GLASS.get()))
-                        .where('P', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
-                        .where('#', air())
-                        .build();
-            })
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "super_water_purifier")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTAABlocks.PUR_NAQUADAH_CASING.get()).setMinGlobalLimited(40)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
+                    .where('C', blocks(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
+                    .where('D', blocks(modBlock("gtna:six_phased_copper_frame", () -> modBlock("gtceu:naquadah_alloy_frame", GTBlocks.FUSION_CASING_MK3::get))))
+                    .where('E', blocks(modBlock("gtapexadditions:pur_quark_containment", GTBlocks.FUSION_COIL::get)))
+                    .where('F', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where(' ', any())
+                    .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTAA.id("block/casing/pur_naquadah_casing"),
                     gt("block/multiblock/distillation_tower")))
@@ -821,7 +829,7 @@ public final class GTAAGTNHMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/dimensionally_transcendent_casing"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
@@ -877,7 +885,7 @@ public final class GTAAGTNHMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/molecular_casing"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
@@ -959,8 +967,9 @@ public final class GTAAGTNHMachines {
                     .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
                     .where('G', blocks(GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get()))
                     .where('H', blocks(net.minecraft.world.level.block.Blocks.GLOWSTONE))
-                    .where('I', blocks(net.minecraft.world.level.block.Blocks.FARMLAND))
-                    .where('J', blocks(net.minecraft.world.level.block.Blocks.WATER))
+                    .where('I', blocks(net.minecraft.world.level.block.Blocks.FARMLAND, net.minecraft.world.level.block.Blocks.DIRT,
+                            net.minecraft.world.level.block.Blocks.GRASS_BLOCK, net.minecraft.world.level.block.Blocks.COARSE_DIRT))
+                    .where('J', blocks(net.minecraft.world.level.block.Blocks.WATER, net.minecraft.world.level.block.Blocks.WATER_CAULDRON))
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
@@ -1006,7 +1015,7 @@ public final class GTAAGTNHMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/dimensionally_transcendent_casing"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
