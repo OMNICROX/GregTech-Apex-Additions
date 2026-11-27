@@ -116,6 +116,7 @@ public final class MultiblockPreview {
     private boolean dirty = true;
     private final Map<BlockPos, BlockInfo> placed = new HashMap<>();
     private Map<BlockPos, TraceabilityPredicate> predicates = Map.of();
+    private List<ItemStack> partsCache;
     private int minY, maxY, maxTier;
     /** families this multi really accepts in several tiers (read from its formed predicates); null = not known yet */
     private Set<List<List<Block>>> tierable;
@@ -271,7 +272,9 @@ public final class MultiblockPreview {
                     mnX = Math.min(mnX, pos.getX()); mnY = Math.min(mnY, pos.getY()); mnZ = Math.min(mnZ, pos.getZ());
                     mxX = Math.max(mxX, pos.getX()); mxY = Math.max(mxY, pos.getY()); mxZ = Math.max(mxZ, pos.getZ());
                 }
+        partsCache = null;
         if (placed.isEmpty()) return;
+        partsCache = count(placed.values(), def.get().self());
         minY = mnY;
         maxY = mxY;
         world.addBlocks(placed);
@@ -461,21 +464,33 @@ public final class MultiblockPreview {
         return out;
     }
 
+    /** blocks in the shape on screen now (shape, tier), controller first, then blocks by count, then hatches */
+    public List<ItemStack> currentParts() {
+        if (partsCache != null && !dirty) return partsCache;
+        if (partsCache != null) return partsCache; // rebuilt on the next frame
+        List<MultiblockShapeInfo> sh = shapes();
+        return sh.isEmpty() ? List.of(def.asStack()) : parts(sh.get(Math.floorMod(page, sh.size())), def.get().self());
+    }
+
     /** blocks needed for a shape, controller first, biggest counts next */
     public static List<ItemStack> parts(MultiblockShapeInfo shape, Block controller) {
-        Map<net.minecraft.world.item.Item, Integer> counts = new LinkedHashMap<>();
-        BlockInfo[][][] blocks = shape.getBlocks();
-        for (BlockInfo[][] a : blocks)
+        List<BlockInfo> all = new ArrayList<>();
+        for (BlockInfo[][] a : shape.getBlocks())
             for (BlockInfo[] r : a)
-                for (BlockInfo info : r) {
-                    if (info == null) continue;
-                    BlockState s = info.getBlockState();
-                    if (s.isAir()) continue;
-                    net.minecraft.world.item.Item item = s.getBlock().asItem();
-                    if (item == Items.AIR && !s.getFluidState().isEmpty()) item = s.getFluidState().getType().getBucket();
-                    if (item == Items.AIR) continue;
-                    counts.merge(item, 1, Integer::sum);
-                }
+                for (BlockInfo info : r) if (info != null) all.add(info);
+        return count(all, controller);
+    }
+
+    private static List<ItemStack> count(Iterable<BlockInfo> infos, Block controller) {
+        Map<net.minecraft.world.item.Item, Integer> counts = new LinkedHashMap<>();
+        for (BlockInfo info : infos) {
+            BlockState s = info.getBlockState();
+            if (s.isAir()) continue;
+            net.minecraft.world.item.Item item = s.getBlock().asItem();
+            if (item == Items.AIR && !s.getFluidState().isEmpty()) item = s.getFluidState().getType().getBucket();
+            if (item == Items.AIR) continue;
+            counts.merge(item, 1, Integer::sum);
+        }
         List<ItemStack> out = new ArrayList<>();
         net.minecraft.world.item.Item ci = controller.asItem();
         counts.remove(ci);

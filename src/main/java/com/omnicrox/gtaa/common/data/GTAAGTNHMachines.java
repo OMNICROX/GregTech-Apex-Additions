@@ -990,7 +990,7 @@ public final class GTAAGTNHMachines {
                             .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                             .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
-                    .where('C', blocks(GTBlocks.CASING_TITANIUM_PIPE.get()))
+                    .where('C', blocks(GTBlocks.CASING_TITANIUM_STABLE.get())) // GTNL uses pipe casings here
                     .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
                     .where('E', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()))
                     .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))

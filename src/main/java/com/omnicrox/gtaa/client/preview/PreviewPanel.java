@@ -43,6 +43,9 @@ public final class PreviewPanel {
     private static MultiblockPreview owner;
     private static Target target = Target.NONE;
     private static final boolean[] wasDown = new boolean[3];
+    /** set by the JEI plugin: (stack, uses?) opens JEI's recipes (false) or uses (true) page for a part */
+    public static java.util.function.BiConsumer<ItemStack, Boolean> SHOW_RECIPES;
+    private static ItemStack hoveredPart = ItemStack.EMPTY;
     private static double lastX, lastY;
     private static long lastFrame;
 
@@ -165,9 +168,35 @@ public final class PreviewPanel {
             g.drawString(font, sh, SX + SW - 4 - font.width(sh), SY + 3, 0xFFFFFFFF, true);
         }
 
+        // the blocks this shape / tier needs (re-counted whenever the shape or tier changes)
+        List<ItemStack> parts = p.currentParts();
+        hoveredPart = ItemStack.EMPTY;
+        int n = Math.min(18, parts.size());
+        for (int i = 0; i < n; i++) {
+            int ix = 1 + (i % 9) * 18, iy = SLOTS_Y + 1 + (i / 9) * 18;
+            ItemStack st = parts.get(i);
+            if (i == 17 && parts.size() > 18) st = parts.get(17 + (int) ((System.currentTimeMillis() / 1000) % (parts.size() - 17)));
+            g.fill(ix - 1, iy - 1, ix + 17, iy + 17, 0xFF8B8B8B);
+            g.fill(ix - 1, iy - 1, ix + 17, iy, 0xFF373737);
+            g.fill(ix - 1, iy - 1, ix, iy + 17, 0xFF373737);
+            g.fill(ix, iy + 16, ix + 17, iy + 17, 0xFFFFFFFF);
+            g.fill(ix + 16, iy, ix + 17, iy + 17, 0xFFFFFFFF);
+            g.renderItem(st, ix, iy);
+            g.renderItemDecorations(font, st, ix, iy);
+            if (in(mx, my, ix, iy, 16, 16)) {
+                hoveredPart = st;
+                g.fill(ix, iy, ix + 16, iy + 16, 0x80FFFFFF);
+            }
+        }
+
         // tooltips
         List<Component> tip = null;
-        if (!hoveredCandidate.isEmpty()) tip = List.of(hoveredCandidate.getHoverName());
+        if (!hoveredPart.isEmpty()) {
+            tip = new ArrayList<>(net.minecraft.client.gui.screens.Screen.getTooltipFromItem(mc, hoveredPart));
+            if (hoveredPart.getCount() > 1) tip.add(Component.literal("Needed: " + hoveredPart.getCount()).withStyle(ChatFormatting.YELLOW));
+            if (SHOW_RECIPES != null) tip.add(Component.literal("Click: recipes, right-click: uses").withStyle(ChatFormatting.DARK_GRAY));
+        }
+        else if (!hoveredCandidate.isEmpty()) tip = List.of(hoveredCandidate.getHoverName());
         else if (hovered != null && target == Target.NONE) tip = p.tooltip(hovered);
         if (in(mx, my, btnX(0), btnY(0), BTN_W, BTN_H)) tip = List.of(Component.literal("Toggle hatch position highlight"));
         else if (in(mx, my, btnX(1), btnY(1), BTN_W, BTN_H)) tip = List.of(Component.literal("Reset the view"));
@@ -207,6 +236,14 @@ public final class PreviewPanel {
         double dx = mx - lastX, dy = my - lastY;
         boolean inScene = in(mx, my, SX, SY, SW, SH);
 
+        if (target == Target.NONE && !hoveredPart.isEmpty() && SHOW_RECIPES != null && my >= SLOTS_Y
+                && ((down[0] && !wasDown[0]) || (down[1] && !wasDown[1]))) {
+            ItemStack st = hoveredPart.copyWithCount(1);
+            boolean uses = down[1];
+            System.arraycopy(down, 0, wasDown, 0, 3);
+            Minecraft.getInstance().tell(() -> SHOW_RECIPES.accept(st, uses));
+            return;
+        }
         if (target == Target.NONE) {
             if (down[0] && !wasDown[0]) leftPress(p, mx, my, inScene);
             else if (down[1] && !wasDown[1] && inScene) {

@@ -81,14 +81,8 @@ public class MultiblockPreviewCategory implements IRecipeCategory<MultiblockPrev
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.OUTPUT, PreviewPanel.W - 16, 0).addItemStack(recipe.def.asStack());
-        List<ItemStack> parts = recipe.parts;
-        int slots = Math.min(18, parts.size());
-        for (int i = 0; i < slots; i++) {
-            int x = 1 + (i % 9) * 18, y = PreviewPanel.SLOTS_Y + 1 + (i / 9) * 18;
-            var b = builder.addSlot(RecipeIngredientRole.INPUT, x, y).setBackground(slot, -1, -1);
-            if (i == 17 && parts.size() > 18) b.addItemStacks(new ArrayList<>(parts.subList(17, parts.size())));
-            else b.addItemStack(parts.get(i));
-        }
+        // the panel draws the part list itself (counts follow the shape / tier); JEI still finds this page from any part
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(new ArrayList<>(recipe.parts));
     }
 
     @Override

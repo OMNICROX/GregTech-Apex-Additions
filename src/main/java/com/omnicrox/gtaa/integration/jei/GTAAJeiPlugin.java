@@ -47,6 +47,14 @@ public class GTAAJeiPlugin implements IModPlugin {
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime runtime) {
+        com.omnicrox.gtaa.client.preview.PreviewPanel.SHOW_RECIPES = (stack, uses) -> {
+            try {
+                var focus = runtime.getJeiHelpers().getFocusFactory().createFocus(
+                        uses ? mezz.jei.api.recipe.RecipeIngredientRole.INPUT : mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT,
+                        mezz.jei.api.constants.VanillaTypes.ITEM_STACK, stack);
+                runtime.getRecipesGui().show(focus);
+            } catch (Throwable ignored) {}
+        };
         if (!on() || !com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_HIDE_GREGTECH.get()) return;
         // GregTech's own (static under NEI) multiblock page goes away
         try {
