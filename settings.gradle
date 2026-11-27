@@ -7,3 +7,4 @@ pluginManagement {
 rootProject.name = 'gtapexadditions'
 include 'apex-lib'
 include 'apex-core'
+include 'apex-guide'

@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "*"
+logoFile = "logo.png"
+authors = "OMNICROX; based on GuideME by shartte and GuideNH by HFstudio"
+license = "LGPL-3.0"
+
+[[mixins]]
+config="apexguide.optional.mixins.json"
+
+[[mods]]
+modId = "apexguide"
+version = "${version}"
+displayName = "Apex Guide"
+description = "In-game guidebook for Apex Ascension. Fork of GuideME (LGPL-3.0) with a UI ported from GuideNH (LGPL-3.0)."
+
+[[dependencies.apexguide]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.apexguide]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1]"
+ordering = "NONE"
+side = "BOTH"

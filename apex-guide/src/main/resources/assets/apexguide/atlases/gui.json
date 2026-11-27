@@ -1,0 +1,54 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/background",
+      "sprite": "apexguide:background"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/large_slot",
+      "sprite": "apexguide:large_slot"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/recipe_arrow",
+      "sprite": "apexguide:recipe_arrow"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/recipe_arrow_filled",
+      "sprite": "apexguide:recipe_arrow_filled"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/slot",
+      "sprite": "apexguide:slot"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/slot_cross",
+      "sprite": "apexguide:slot_cross"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/window",
+      "sprite": "apexguide:window"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/window_darkmode",
+      "sprite": "apexguide:window_darkmode"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/window_inner",
+      "sprite": "apexguide:window_inner"
+    },
+    {
+      "type": "single",
+      "resource": "apexguide:gui/sprites/window_inner_darkmode",
+      "sprite": "apexguide:window_inner_darkmode"
+    }
+  ]
+}

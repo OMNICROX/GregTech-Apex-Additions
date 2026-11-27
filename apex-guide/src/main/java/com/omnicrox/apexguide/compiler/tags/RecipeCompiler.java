@@ -1,0 +1,237 @@
+package com.omnicrox.apexguide.compiler.tags;
+
+import com.omnicrox.apexguide.compiler.PageCompiler;
+import com.omnicrox.apexguide.document.block.LytBlock;
+import com.omnicrox.apexguide.document.block.LytBlockContainer;
+import com.omnicrox.apexguide.document.block.LytParagraph;
+import com.omnicrox.apexguide.internal.GuideMEClient;
+import com.omnicrox.apexguide.internal.util.Platform;
+import com.omnicrox.apexguide.libs.mdast.mdx.model.MdxJsxElementFields;
+import com.omnicrox.apexguide.libs.mdast.model.MdAstNode;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.function.Function;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Shows a Recipe-Book-Like representation of the recipe needed to craft a given item.
+ */
+public class RecipeCompiler extends BlockTagCompiler {
+    private static final Logger LOG = LoggerFactory.getLogger(RecipeCompiler.class);
+
+    @Nullable
+    private List<RecipeTypeMapping<?, ?>> sharedMappings;
+
+    @Override
+    public Set<String> getTagNames() {
+        return Set.of("Recipe", "RecipeFor", "RecipesFor");
+    }
+
+    @Override
+    protected void compile(PageCompiler compiler, LytBlockContainer parent, MdxJsxElementFields el) {
+        // Find the recipe
+        var recipeManager = Platform.getClientRecipeManager();
+        if (recipeManager == null) {
+            parent.appendError(compiler, "Cannot show recipe while not in-game", el);
+            return;
+        }
+
+        var fallbackText = el.getAttributeString("fallbackText", null);
+
+        if ("RecipesFor".equals(el.name())) {
+            var itemAndId = MdxAttrs.getRequiredItemAndId(compiler, parent, el, "id");
+            if (itemAndId == null) {
+                return;
+            }
+
+            boolean anyAdded = false;
+            var item = itemAndId.getRight();
+            for (var recipe : recipeManager.getRecipes()) {
+                if (Platform.recipeHasResult(recipe, item)) {
+                    for (var mapping : getMappings(compiler)) {
+                        var block = mapping.tryCreate(recipe);
+                        if (block != null) {
+                            block.setSourceNode((MdAstNode) el);
+                            parent.append(block);
+                            anyAdded = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!anyAdded && fallbackText != null && !fallbackText.isEmpty()) {
+                parent.append(LytParagraph.of(fallbackText));
+            }
+        } else if ("RecipeFor".equals(el.name())) {
+            var itemAndId = MdxAttrs.getRequiredItemAndId(compiler, parent, el, "id");
+            if (itemAndId == null) {
+                return;
+            }
+
+            var id = itemAndId.getLeft();
+            var item = itemAndId.getRight();
+
+            for (var mapping : getMappings(compiler)) {
+                var block = mapping.tryCreate(recipeManager, item);
+                if (block != null) {
+                    block.setSourceNode((MdAstNode) el);
+                    parent.append(block);
+                    return;
+                }
+            }
+
+            if (fallbackText == null) {
+                if (!GuideMEClient.instance().isHideMissingRecipeErrors()) {
+                    parent.appendError(compiler, "Couldn't find recipe for " + id, el);
+                }
+            } else if (!fallbackText.isEmpty()) {
+                parent.append(LytParagraph.of(fallbackText));
+            }
+        } else {
+            var recipeId = MdxAttrs.getRequiredId(compiler, parent, el, "id");
+            if (recipeId == null) {
+                return;
+            }
+
+            var recipe = recipeManager.byKey(recipeId).orElse(null);
+            if (recipe == null) {
+                if (fallbackText == null) {
+                    parent.appendError(compiler, "Couldn't find recipe " + recipeId, el);
+                } else if (!fallbackText.isEmpty()) {
+                    parent.append(LytParagraph.of(fallbackText));
+                }
+                return;
+            }
+
+            for (var mapping : getMappings(compiler)) {
+                var block = mapping.tryCreate(recipe);
+                if (block != null) {
+                    block.setSourceNode((MdAstNode) el);
+                    parent.append(block);
+                    return;
+                }
+            }
+
+            if (fallbackText == null) {
+                if (!GuideMEClient.instance().isHideMissingRecipeErrors()) {
+                    parent.appendError(compiler, "Couldn't find a handler for recipe " + recipeId, el);
+                }
+            } else if (!fallbackText.isEmpty()) {
+                parent.append(LytParagraph.of(fallbackText));
+            }
+        }
+    }
+
+    /**
+     * Maps a recipe type to a factory that can create a layout block to display it.
+     */
+    private record RecipeTypeMapping<T extends Recipe<C>, C extends Container>(
+            RecipeType<T> recipeType,
+            Function<? super T, LytBlock> factory) {
+        @SuppressWarnings("unchecked")
+        @Nullable
+        LytBlock tryCreate(RecipeManager recipeManager, Item resultItem) {
+            var registryAccess = Platform.getClientRegistryAccess();
+
+            // We try to find non-special recipes first then fall back to special
+            List<Recipe<C>> fallbackCandidates = new ArrayList<>();
+            for (var recipe : recipeManager.byType(recipeType).values()) {
+                if (recipe.isSpecial()) {
+                    fallbackCandidates.add(recipe);
+                    continue;
+                }
+
+                if (Platform.recipeHasResult(recipe, resultItem)) {
+                    return factory.apply(recipe);
+                }
+            }
+
+            for (var recipe : fallbackCandidates) {
+                if (Platform.recipeHasResult(recipe, resultItem)) {
+                    return factory.apply((T) recipe);
+                }
+            }
+
+            return null;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Nullable
+        LytBlock tryCreate(Recipe<?> recipe) {
+            if (recipeType == recipe.getType()) {
+                return factory.apply((T) recipe);
+            }
+
+            return null;
+        }
+    }
+
+    private Iterable<RecipeTypeMapping<?, ?>> getMappings(PageCompiler compiler) {
+        List<RecipeTypeMapping<?, ?>> result = new ArrayList<>();
+        var mappings = new RecipeTypeMappingSupplier.RecipeTypeMappings() {
+            @Override
+            public <T extends Recipe<C>, C extends Container> void add(RecipeType<T> recipeType,
+                    Function<? super T, LytBlock> factory) {
+                result.add(new RecipeTypeMapping<>(recipeType, factory));
+            }
+        };
+        for (var extension : compiler.getExtensions(RecipeTypeMappingSupplier.EXTENSION_POINT)) {
+            extension.collect(mappings);
+        }
+
+        result.addAll(getSharedMappings());
+
+        return result;
+    }
+
+    private List<? extends RecipeTypeMapping<?, ?>> getSharedMappings() {
+        if (sharedMappings != null) {
+            return sharedMappings;
+        }
+
+        Set<ResourceLocation> recipeTypes = new HashSet<>();
+        List<RecipeTypeMapping<?, ?>> result = new ArrayList<>();
+        var mappings = new RecipeTypeMappingSupplier.RecipeTypeMappings() {
+            @Override
+            public <T extends Recipe<C>, C extends Container> void add(RecipeType<T> recipeType,
+                    Function<? super T, LytBlock> factory) {
+                Objects.requireNonNull(recipeType, "recipeType");
+                Objects.requireNonNull(factory, "factory");
+
+                recipeTypes.add(BuiltInRegistries.RECIPE_TYPE.getKey(recipeType));
+                result.add(new RecipeTypeMapping<>(recipeType, factory));
+            }
+        };
+
+        var it = ServiceLoader.load(RecipeTypeMappingSupplier.class).stream().iterator();
+        while (it.hasNext()) {
+            var provider = it.next();
+            try {
+                provider.get().collect(mappings);
+            } catch (Exception e) {
+                LOG.error("Failed to collect shared recipe type mappings from {}", provider.type(), e);
+            }
+        }
+
+        var recipeTypesSorted = new ArrayList<>(recipeTypes);
+        Collections.sort(recipeTypesSorted);
+        LOG.info("Discovered shared recipe type mappings: {}", recipeTypesSorted);
+
+        return sharedMappings = List.copyOf(result);
+    }
+}
