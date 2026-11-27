@@ -212,7 +212,7 @@ public final class MultiblockPreview {
                     BlockState s = info.getBlockState();
                     if (s.isAir()) continue;
                     BlockPos pos = ORIGIN.offset(x, y, z);
-                    boolean isController = s.getBlock() == def.get();
+                    boolean isController = s.getBlock() == def.get().self();
                     for (List<List<Block>> f : fams) if (tierIn(f, s.getBlock()) >= 0) maxTier = Math.max(maxTier, f.size());
                     BlockInfo use = transform(info, isController);
                     if (isController) {

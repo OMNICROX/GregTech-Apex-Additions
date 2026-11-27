@@ -40,7 +40,7 @@ public class MultiblockPreviewCategory implements IRecipeCategory<MultiblockPrev
         List<ItemStack> parts;
         try {
             var shapes = def.getMatchingShapes();
-            parts = shapes.isEmpty() ? List.of(def.asStack()) : MultiblockPreview.parts(shapes.get(0), def.get());
+            parts = shapes.isEmpty() ? List.of(def.asStack()) : MultiblockPreview.parts(shapes.get(0), def.get().self());
         } catch (Throwable t) {
             parts = List.of(def.asStack());
         }
