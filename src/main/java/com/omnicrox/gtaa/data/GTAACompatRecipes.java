@@ -483,32 +483,25 @@ public final class GTAACompatRecipes {
     }
 
 
-    /** GT-Not-Leisure's Alfheim Teleportation Array: their ZPM assembly line recipe, with this pack's blocks */
+    /** GT-Not-Leisure's Alfheim Teleportation Array, brought down to IV for this pack (GTNL: ZPM assembly line) */
     private static void alfheimArray(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:alfheim_teleportation_array")
-                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[ZPM].asStack(8))
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:alfheim_teleportation_array")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[IV].asStack(4))
                 .inputItems(S1, 4)
-                .inputItems(S2, 16)
-                .inputItems(S3, 8)
-                .inputItems(S4, 64)
-                .inputItems(S5, 64)
-                .inputItems(S6, 64)
-                .inputItems(GTItems.SENSOR_ZPM, 16)
-                .inputItems(GTItems.FIELD_GENERATOR_ZPM, 16)
-                .inputItems(CustomTags.ZPM_CIRCUITS, 16)
-                .inputItems(CustomTags.UV_CIRCUITS, 8)
-                .inputItems(CustomTags.UHV_CIRCUITS, 4)
-                .inputItems(S7, 16)
-                .inputItems(GTBlocks.FUSION_COIL.asStack(16))
-                .inputItems(S8, 32)
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
-                .inputFluids(GTMaterials.NaquadahAlloy.getFluid(L * 32))
+                .inputItems(S2, 4)
+                .inputItems(S3, 4)
+                .inputItems(S4, 4)
+                .inputItems(S5, 8)
+                .inputItems(GTItems.SENSOR_IV, 4)
+                .inputItems(GTItems.FIELD_GENERATOR_IV, 4)
+                .inputItems(CustomTags.IV_CIRCUITS, 8)
+                .inputItems(GTBlocks.HIGH_POWER_CASING.asStack(16))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.ALFHEIM_TELEPORTATION_ARRAY.asStack())
-                .duration(2400).EUt(VA[ZPM])
-                .save(needing(provider, new String[] { "botania", "gtna" }, Map.of(
-                        S1, "botania:gaia_pylon", S2, "botania:fabulous_pool", S3, "botania:gaia_spreader",
-                        S4, "botania:alfheim_portal", S5, "botania:runic_altar", S6, "botania:corporea_spark",
-                        S7, "gtna:radiant_naquadah_alloy_casing", S8, "botania:manasteel_block")));
+                .duration(1200).EUt(VA[IV])
+                .save(needing(provider, "botania", Map.of(
+                        S1, "botania:alfheim_portal", S2, "botania:runic_altar", S3, "botania:mana_pool",
+                        S4, "botania:natura_pylon", S5, "botania:mana_spreader")));
     }
 
     /** GT-Not-Leisure's Draconic Fusion Crafting: their UMV recipe brought to UHV for this pack */
@@ -539,11 +532,11 @@ public final class GTAACompatRecipes {
                 .inputItems(GTItems.ELECTRIC_PUMP_ZPM, 8)
                 .inputItems(CustomTags.ZPM_CIRCUITS, 8)
                 .inputItems(GTBlocks.SUPERCONDUCTING_COIL.asStack(16))
-                .inputItems(S1, 8)
+                .inputItems(GTBlocks.FUSION_CASING.asStack(8))
                 .inputItems(frameGt, GTMaterials.Naquadria, 8)
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MATTER_FABRICATOR.asStack())
                 .duration(1600).EUt(VA[ZPM])
-                .save(needing(provider, "gtna", Map.of(S1, "gtna:radiant_naquadah_alloy_casing")));
+                .save(provider);
     }
 }

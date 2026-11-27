@@ -469,14 +469,14 @@ public final class GTAAGTNHMachines {
                     .info("§aSupports Multi-Amp and Laser Hatches!")
                     .portedFrom("GT-Not-Leisure (GTNH addon)")
                     .author(GTNL_NLXCJH).build())
-            .appearanceBlock(() -> modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get))
+            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
             .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "alfheim")
                     .where('~', controller(blocks(definition.get())))
-                    .where('A', blocks(modBlock("gtna:accelerator_protection_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('A', blocks(GTBlocks.CASING_TITANIUM_STABLE.get()))
                     .where('B', blocks(modBlock("gtna:pressure_containment_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
-                    .where('C', blocks(GTBlocks.FUSION_COIL.get()))
+                    .where('C', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
                     .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
-                    .where('E', blocks(modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get))
+                    .where('E', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get())
                             .setMinGlobalLimited(300)
                             .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
@@ -490,7 +490,7 @@ public final class GTAAGTNHMachines {
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/radiant_naquadah_alloy_casing"),
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
@@ -558,7 +558,7 @@ public final class GTAAGTNHMachines {
                     .where('C', blocks(GTBlocks.MACHINE_CASING_ZPM.get()))
                     .where('D', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
                     .where('E', blocks(GTBlocks.FILTER_CASING.get()))
-                    .where('F', blocks(modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get)))
+                    .where('F', blocks(GTBlocks.FUSION_CASING.get()))
                     .where('G', blocks(GTBlocks.HIGH_POWER_CASING.get()).setMinGlobalLimited(100)
                             .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
