@@ -8,15 +8,23 @@ same split:
 | --- | --- | --- |
 | **Apex Lib** (`apexlib`) | `apex-lib/` | Shared code: multiblock helpers (parallels, counted casings, hatches, JSON structures), GTNH-style tooltips, number formatting, soft compatibility with other mods' APIs. Does nothing on its own. |
 | **GregTech Apex Additions** (`gtapexadditions`) | root | GregTech content: machines, materials, ports of GTNH / Twist Space Technology / 123Technology multiblocks, the Ascension Gate. Depends on Apex Lib. |
-| **Apex Core** (`apexcore`, planned) | `apex-core/` | The pack's own changes, moved out of KubeJS one script at a time: recipe fixes, tier gating, ore veins, mod integrations, quest hooks. |
+| **Apex Core** (`apexcore`) | `apex-core/` | The pack's own changes, moved out of KubeJS one script at a time: recipe fixes, tier gating, ore veins, mod integrations, quest hooks. Depends on Apex Lib. |
 | **Apex Fixes** (`apexfixes`) | separate | Patches to other mods while they load, so their jars stay the official files. |
 
 ## Building
 
-    ./gradlew build          # builds apex-lib/build/libs/apexlib-*.jar and build/libs/gtapexadditions-*.jar
+    ./gradlew build          # builds apex-lib/build/libs/apexlib-*.jar, apex-core/build/libs/apexcore-*.jar
+                             # and build/libs/gtapexadditions-*.jar
     ./gradlew runData        # regenerates GTAA's lang, models and blockstates
 
-Both jars go in the pack's `mods` folder.
+All three jars (`apexlib`, `apexcore`, `gtapexadditions`) go in the pack's `mods` folder.
+
+## Moved out of KubeJS
+
+| KubeJS script | Apex Core class | Notes |
+| --- | --- | --- |
+| `apex_purified_water.js` | `recipe.WaferRecipes` | delete the script when installing Apex Core; also fixes the GTCA wafer bug |
+
 
 ## Apex Lib at a glance
 

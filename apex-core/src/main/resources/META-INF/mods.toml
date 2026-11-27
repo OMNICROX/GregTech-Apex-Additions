@@ -1,0 +1,49 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GPL-3.0-or-later"
+issueTrackerURL="https://github.com/OMNICROX/GregTech-Apex-Additions/issues"
+
+[[mods]]
+modId="apexcore"
+version="${apexcore_version}"
+displayName="Apex Core"
+authors="OMNICROX"
+description='''
+The Apex Ascension modpack's own recipe changes, fixes and integrations (like GTNH's NewHorizonsCoreMod).
+Replaces the pack's KubeJS scripts one at a time.
+'''
+
+[[dependencies.apexcore]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apexcore]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apexcore]]
+    modId="gtceu"
+    mandatory=true
+    versionRange="[${gtceu_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apexcore]]
+    modId="apexlib"
+    mandatory=true
+    versionRange="[${apexlib_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apexcore]]
+    modId="gtca"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
