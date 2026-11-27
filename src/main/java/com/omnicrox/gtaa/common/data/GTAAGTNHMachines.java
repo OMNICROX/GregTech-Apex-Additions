@@ -440,6 +440,7 @@ public final class GTAAGTNHMachines {
     // terms in LICENSE-ADDITIONAL-TERMS.md). Project authors include HFstudio, LineBroke and other contributors.
     // Each machine keeps its original author line.
     public static final String GTNL_NLXCJH = "§7Add Mod: §bGT Not Leisure§7: §6§l§n年轮新城计划 by 咸到老时变成鱼";
+    public static final String GTNL_EDEN = "§7Add Mod: §bGT Not Leisure §7X §6伊甸生态园 by 荻角";
     public static final String GTNL_QYZG = "§7Add Mod: §bGT Not Leisure§7: §6§o犰狳重工 GT-Odyssey";
 
     /** a block of another mod, or the fallback when that mod is missing */
@@ -923,6 +924,47 @@ public final class GTAAGTNHMachines {
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(gt("block/casings/gcym/vibration_safe_casing"),
                     gt("block/multiblock/large_centrifuge")))
+            .register();
+
+
+    // ---------------- Eden Garden (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition EDEN_GARDEN = REGISTRATE
+            .multiblock("eden_garden", WorkableElectricMultiblockMachine::new)
+            .langValue("Eden Garden")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(extType("gtna:greenhouse", extType("gtceu:green_house", GTRecipeTypes.MACERATOR_RECIPES)))
+            .recipeModifiers(ApexModifiers.parallel(m -> 64 * Math.max(1, ApexModifiers.tier(m)), m -> 0.01, 1.0),
+                    GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Crop Farm")
+                    .flavor("God said: \"Let the land produce vegetation and various plants.\"")
+                    .flavor("And the earth brought forth vegetation, bearing all kinds of fruits and crops.")
+                    .flavor("The earth was filled with abundant seeds, and all the land was full of life.")
+                    .info("Runs every §aGreenhouse§7 recipe §a100 times faster§7, 64 parallels per voltage tier")
+                    .info("No fertilizer or herbicide required!")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)").author(GTNL_EDEN).build())
+            .appearanceBlock(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_WATERTIGHT)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "eden_garden")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('B', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_WATERTIGHT.get()).setMinGlobalLimited(1200)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('C', blocks(GTBlocks.CASING_TITANIUM_PIPE.get()))
+                    .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('E', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('G', blocks(GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get()))
+                    .where('H', blocks(net.minecraft.world.level.block.Blocks.GLOWSTONE))
+                    .where('I', blocks(net.minecraft.world.level.block.Blocks.FARMLAND))
+                    .where('J', blocks(net.minecraft.world.level.block.Blocks.WATER))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/gcym/watertight_casing"),
+                    gt("block/multiblock/implosion_compressor")))
             .register();
 
 }

@@ -299,6 +299,20 @@ public final class GTAAGTNHRecipes {
                 .outputItems(GTAAGTNHMachines.SPINMATRON.asStack())
                 .duration(2400).EUt(VA[UV]).save(provider);
 
+        // Eden Garden (GT-Not-Leisure)
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:eden_garden")
+                .inputItems(GTMachines.HULL[ZPM].asStack(4))
+                .inputItems(GTItems.ELECTRIC_PUMP_ZPM, 16)
+                .inputItems(GTItems.ROBOT_ARM_ZPM, 8)
+                .inputItems(CustomTags.UV_CIRCUITS, 8)
+                .inputItems(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_WATERTIGHT.asStack(64))
+                .inputItems(net.minecraft.world.item.Items.GLOWSTONE, 64)
+                .inputItems(net.minecraft.world.item.Items.WHEAT_SEEDS, 64)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .inputFluids(GTMaterials.Water.getFluid(64000))
+                .outputItems(GTAAGTNHMachines.EDEN_GARDEN.asStack())
+                .duration(2400).EUt(VA[ZPM]).save(provider);
+
         // Extreme Craft Center: TST uses molecular assemblers + extreme auto crafters + a molecular transformer
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_craft_center")
                 .inputItems(appeng.core.definitions.AEBlocks.MOLECULAR_ASSEMBLER.stack(16))
