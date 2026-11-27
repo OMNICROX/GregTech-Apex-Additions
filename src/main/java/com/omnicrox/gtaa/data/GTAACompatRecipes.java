@@ -717,15 +717,16 @@ public final class GTAACompatRecipes {
 
     /** GT-Not-Leisure's Library of Ruina: the controller, and what each Twilight Forest boss trophy brings back */
     private static void libraryOfRuina(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:library_of_ruina")
-                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[UHV].asStack(4))
+        // IV: the Twilight Forest opens at HV (apex_twilight_gate.js), its bosses' trophies make this
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:library_of_ruina")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[IV].asStack(1))
                 .inputItems(S1, 1).inputItems(S2, 1).inputItems(S3, 1).inputItems(S4, 1)
-                .inputItems(GTItems.FIELD_GENERATOR_UHV, 8)
-                .inputItems(CustomTags.UHV_CIRCUITS, 8)
-                .inputItems(GTAABlocks.GRAVITY_STABILIZATION_CASING.asStack(32))
-                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputItems(GTItems.FIELD_GENERATOR_IV, 2)
+                .inputItems(CustomTags.IV_CIRCUITS, 4)
+                .inputItems(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.asStack(8))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.LIBRARY_OF_RUINA.asStack())
-                .duration(2400).EUt(VA[UHV])
+                .duration(1200).EUt(VA[IV])
                 .save(needing(provider, "twilightforest", Map.of(S1, "twilightforest:naga_trophy",
                         S2, "twilightforest:lich_trophy", S3, "twilightforest:hydra_trophy", S4, "twilightforest:ur_ghast_trophy")));
         // trophy -> loot, GTNL's chances; outputs[i] = { item, count, chance/10000 }
@@ -747,7 +748,7 @@ public final class GTAACompatRecipes {
         for (Object[] boss : bosses) {
             String trophy = (String) boss[0];
             var b = com.omnicrox.gtaa.common.data.GTAARecipeTypes.LIBRARY_OF_RUINA.recipeBuilder("gtapexadditions:library_of_ruina/" + trophy)
-                    .notConsumable(S1).duration(600).EUt(VA[UHV]);
+                    .notConsumable(S1).duration(600).EUt(VA[IV]);
             java.util.Map<Item, String> swap = new java.util.HashMap<>();
             swap.put(S1, "twilightforest:" + trophy);
             Item[] slots = { S2, S3, S4, S5, S6, S7, S8, S9 };

@@ -81,6 +81,15 @@ public final class PreviewPanel {
         SLIDER.render(g, mx, my, 0);
     }
 
+    private static final Button SMALL = Button.builder(Component.empty(), b -> {}).bounds(0, 0, 10, BTN_H).build();
+
+    private static void drawSmall(GuiGraphics g, int x, int y, String label, int mx, int my) {
+        SMALL.setX(x);
+        SMALL.setY(y);
+        SMALL.setMessage(Component.literal(label));
+        SMALL.render(g, mx, my, 0);
+    }
+
     static boolean in(double mx, double my, int x, int y, int w, int h) {
         return mx >= x && my >= y && mx < x + w && my < y + h;
     }
@@ -149,7 +158,12 @@ public final class PreviewPanel {
         drawButton(g, btnX(0), btnY(0), "H", p.highlightHatches, imx, imy);
         drawButton(g, btnX(1), btnY(1), "R", false, imx, imy);
         drawButton(g, btnX(2), btnY(2), "?", false, imx, imy);
-        if (p.pages() > 1) drawButton(g, btnX(3), btnY(3), (p.page + 1) + "/" + p.pages(), false, imx, imy);
+        if (p.pages() > 1) {
+            drawSmall(g, btnX(3), btnY(3), "<", imx, imy);
+            drawSmall(g, btnX(3) + 10, btnY(3), ">", imx, imy);
+            String sh = "Shape " + (p.page + 1) + "/" + p.pages();
+            g.drawString(font, sh, SX + SW - 4 - font.width(sh), SY + 3, 0xFFFFFFFF, true);
+        }
 
         // tooltips
         List<Component> tip = null;
@@ -158,7 +172,9 @@ public final class PreviewPanel {
         if (in(mx, my, btnX(0), btnY(0), BTN_W, BTN_H)) tip = List.of(Component.literal("Toggle hatch position highlight"));
         else if (in(mx, my, btnX(1), btnY(1), BTN_W, BTN_H)) tip = List.of(Component.literal("Reset the view"));
         else if (in(mx, my, btnX(2), btnY(2), BTN_W, BTN_H)) tip = help();
-        else if (p.pages() > 1 && in(mx, my, btnX(3), btnY(3), BTN_W, BTN_H)) tip = List.of(Component.literal("Next shape"));
+        else if (p.pages() > 1 && in(mx, my, btnX(3), btnY(3), BTN_W, BTN_H))
+            tip = List.of(Component.literal("Shape " + (p.page + 1) + " of " + p.pages() + " (sizes / variants of this multi)"),
+                    Component.literal("< previous, > next").withStyle(ChatFormatting.GRAY));
         if (tip != null && !tip.isEmpty()) g.renderTooltip(font, tip, Optional.empty(), imx, imy);
     }
 
@@ -240,7 +256,7 @@ public final class PreviewPanel {
         }
         if (in(mx, my, btnX(2), btnY(2), BTN_W, BTN_H)) return;
         if (p.pages() > 1 && in(mx, my, btnX(3), btnY(3), BTN_W, BTN_H)) {
-            p.page = Math.floorMod(p.page + 1, p.pages());
+            p.page = Math.floorMod(p.page + (mx < btnX(3) + 10 ? -1 : 1), p.pages());
             p.layer = 0;
             p.markDirty();
             click();

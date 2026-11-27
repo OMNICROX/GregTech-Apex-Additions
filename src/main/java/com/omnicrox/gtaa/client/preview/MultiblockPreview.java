@@ -117,6 +117,8 @@ public final class MultiblockPreview {
     private final Map<BlockPos, BlockInfo> placed = new HashMap<>();
     private Map<BlockPos, TraceabilityPredicate> predicates = Map.of();
     private int minY, maxY, maxTier;
+    /** families this multi really accepts in several tiers (read from its formed predicates); null = not known yet */
+    private Set<List<List<Block>>> tierable;
     private float size = 10;
     private final Vector3f center = new Vector3f(), boxCenter = new Vector3f();
     private String error;
@@ -229,6 +231,7 @@ public final class MultiblockPreview {
         }
         if (tier >= 0) {
             for (List<List<Block>> fam : families()) {
+                if (tierable != null && !tierable.contains(fam)) continue;
                 if (tierIn(fam, b) >= 0) return BlockInfo.fromBlockState(fam.get(Math.min(tier, fam.size() - 1)).get(0).defaultBlockState());
             }
         }
@@ -259,7 +262,6 @@ public final class MultiblockPreview {
                     if (s.isAir()) continue;
                     BlockPos pos = ORIGIN.offset(x, y, z);
                     boolean isController = s.getBlock() == def.get().self();
-                    for (List<List<Block>> f : fams) if (tierIn(f, s.getBlock()) >= 0) maxTier = Math.max(maxTier, f.size());
                     BlockInfo use = transform(info, isController);
                     if (isController) {
                         use = BlockInfo.fromBlockState(s);
@@ -294,6 +296,35 @@ public final class MultiblockPreview {
                 }
             } catch (Throwable ignored) {}
         }
+        // the tier slider only covers blocks the pattern really takes in several tiers
+        if (tierable == null && !predicates.isEmpty()) {
+            tierable = new HashSet<>();
+            for (var e : predicates.entrySet()) {
+                BlockInfo info = placed.get(e.getKey());
+                if (info == null) continue;
+                Block b = info.getBlockState().getBlock();
+                for (List<List<Block>> f : fams) {
+                    if (tierable.contains(f) || tierIn(f, b) < 0) continue;
+                    Set<Integer> tiers = new HashSet<>();
+                    List<SimplePredicate> all = new ArrayList<>(e.getValue().limited);
+                    all.addAll(e.getValue().common);
+                    for (SimplePredicate sp : all) {
+                        try {
+                            for (ItemStack st : sp.getCandidates()) {
+                                int t = tierIn(f, Block.byItem(st.getItem()));
+                                if (t >= 0) tiers.add(t);
+                            }
+                        } catch (Throwable ignored) {}
+                    }
+                    if (tiers.size() > 1) tierable.add(f);
+                }
+            }
+        }
+        maxTier = 0;
+        for (BlockInfo info : placed.values())
+            for (List<List<Block>> f : fams)
+                if ((tierable == null || tierable.contains(f)) && tierIn(f, info.getBlockState().getBlock()) >= 0)
+                    maxTier = Math.max(maxTier, f.size());
         boxCenter.set((mnX + mxX + 1) / 2f, (mnY + mxY + 1) / 2f, (mnZ + mxZ + 1) / 2f);
         float newSize = Math.max(mxX - mnX, Math.max(mxY - mnY, mxZ - mnZ)) + 1;
         if (newSize != size) cameraSet = false;
