@@ -30,6 +30,27 @@ public class MultiblockPreviewCategory implements IRecipeCategory<MultiblockPrev
 
     private final IDrawable background, icon, slot;
 
+    private static final mezz.jei.api.ingredients.IIngredientRenderer<ItemStack> NOTHING = new mezz.jei.api.ingredients.IIngredientRenderer<>() {
+        @Override
+        public void render(GuiGraphics g, ItemStack ingredient) {}
+
+        @Override
+        @SuppressWarnings("removal")
+        public List<Component> getTooltip(ItemStack ingredient, net.minecraft.world.item.TooltipFlag flag) {
+            return List.of();
+        }
+
+        @Override
+        public int getWidth() {
+            return 1;
+        }
+
+        @Override
+        public int getHeight() {
+            return 1;
+        }
+    };
+
     public MultiblockPreviewCategory(IGuiHelper gui) {
         background = gui.createBlankDrawable(PreviewPanel.W, PreviewPanel.H);
         icon = gui.createDrawableItemStack(com.gregtechceu.gtceu.common.data.machines.GTMultiMachines.ELECTRIC_BLAST_FURNACE.asStack());
@@ -82,7 +103,9 @@ public class MultiblockPreviewCategory implements IRecipeCategory<MultiblockPrev
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.OUTPUT, PreviewPanel.W - 16, 0).addItemStack(recipe.def.asStack());
         // the panel draws the part list itself (counts follow the shape / tier); JEI still finds this page from any part
-        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(new ArrayList<>(recipe.parts));
+        // (an invisible-ingredient list isn't a slot to NEI, so this is a real slot that draws nothing, 1x1 px)
+        builder.addSlot(RecipeIngredientRole.INPUT, PreviewPanel.W - 18, 0).addItemStacks(new ArrayList<>(recipe.parts))
+                .setCustomRenderer(mezz.jei.api.constants.VanillaTypes.ITEM_STACK, NOTHING);
     }
 
     @Override
