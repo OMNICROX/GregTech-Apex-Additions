@@ -120,9 +120,6 @@ final class UpgradeAdvisor {
             case "suit_casings" -> {
                 return Math.max(1, r.data.getInt("station_tier"));
             }
-            case "mana_cores" -> {
-                return Math.max(1, r.data.getInt(com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.TIER));
-            }
             case "coal_casings" -> {
                 int v = r.data.getInt(ComponentAssemblyLineMachine.CASING_TIER);
                 if (v <= 0) return 0;
@@ -194,10 +191,6 @@ final class UpgradeAdvisor {
                 info.add("Chaotic cores also need Fusion Machine Casing MK II in the structure.");
             }
             case "coal_casings" -> info.add("Sets the highest component tier it can make. Every tier above a recipe halves its time.");
-            case "mana_cores" -> {
-                info.add("Mana storage, crafts at once, and which Botania crafts the Nexus can do.");
-                info.add("Every core must be the same kind.");
-            }
             case "suit_casings" -> info.add("Decides which suits the station can make (Steel Booth, Showcase Pod, Holo Chamber, Ascension Forge).");
             case "mca_soil" -> info.add("Yield: how much essence each crop gives per harvest. Higher soil = more output, nothing is locked.");
             case "mca_glass" -> info.add("Caps the voltage the array runs at. Higher voltage = faster harvests (up to LuV) and more crops.");
@@ -273,7 +266,6 @@ final class UpgradeAdvisor {
                     case "coal_casings" -> "Makes up to " + vn(GTAABlocks.coalCasingTier(fam.block(t))) + " components, " +
                             (1 << (t - cur)) + "× faster on what you run now";
                     case "suit_casings" -> "Tier " + t + " (" + SuitFabricationStationMachine.TIER_NAMES[Math.min(4, t)] + ")";
-                    case "mana_cores" -> com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.coreInfo(t).get(0);
                     case "mca_soil" -> "Yield " + MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, t - 1)] + " per crop (now " +
                             MysticalCultivationArrayMachine.SOIL_YIELD[Math.min(6, Math.max(0, cur - 1))] + ")";
                     case "mca_glass" -> "Runs at up to " + vn(MysticalCultivationArrayMachine.GLASS_CAP[Math.min(3, t - 1)]);

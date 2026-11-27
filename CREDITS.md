@@ -34,3 +34,15 @@ marked textures follow the originals.
 | Extreme Craft Center | TST `TST_MegaCraftingCenter` | Shordinger (author), Nxer (maintainer), GPL-3.0 |
 | (filled in as machines are ported) | 123Technology (https://github.com/CallmeSHaobe/123Technology) | CallmeSHaobe and contributors, GPL-3.0 |
 
+
+## GT-Not-Leisure
+
+Contains code from GT-Not-Leisure (https://github.com/GTNotLeisure/GT-Not-Leisure), GPL-3.0 with additional terms
+under section 7(b): **Based on code from GT-Not-Leisure. Original project authors include HFstudio, LineBroke and other
+contributors.** The additional terms are shipped in `licenses/GT-Not-Leisure/` (also inside the jar), and each ported
+machine keeps its original author line in its tooltip. Ported files carry the note "This file is subject to the
+additional terms in LICENSE-ADDITIONAL-TERMS.md".
+
+| GTAA content | Original | Author line kept |
+| --- | --- | --- |
+| Alfheim Teleportation Array | GTNL `TeleportationArrayToAlfheim` | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |

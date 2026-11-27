@@ -9,7 +9,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_authors}"
 displayURL="https://github.com/OMNICROX/GregTech-Apex-Additions"
-credits="Ports machines from GT5-Unofficial / GT New Horizons (GoodGenerator, GT++, KubaTech), Twist Space Technology and 123Technology. See CREDITS.md."
+credits="Ports machines from GT5-Unofficial / GT New Horizons (GoodGenerator, GT++, KubaTech), Twist Space Technology, 123Technology and GT-Not-Leisure. Based on code from GT-Not-Leisure (https://github.com/GTNotLeisure/GT-Not-Leisure). Original project authors include HFstudio, LineBroke and other contributors. See CREDITS.md and licenses/."
 description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]

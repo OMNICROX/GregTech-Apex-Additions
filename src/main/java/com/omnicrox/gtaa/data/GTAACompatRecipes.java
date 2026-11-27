@@ -67,7 +67,7 @@ public final class GTAACompatRecipes {
         aether(provider);
         godforge(provider);
         apexGate(provider);
-        manaBloom(provider);
+        alfheimArray(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -480,13 +480,32 @@ public final class GTAACompatRecipes {
                     .duration(2400).EUt(VA[OpV]).save(provider);
     }
 
-    private static void manaBloom(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:mana_bloom_leaves")
-                .inputItems(net.minecraft.tags.ItemTags.LEAVES, 32)
-                .inputItems(S1, 1)
-                .inputItems(S2, 2)
-                .outputItems(GTAABlocks.MANA_BLOOM_LEAVES.asStack(32))
-                .duration(160).EUt(VA[LV])
-                .save(needing(provider, "botania", Map.of(S1, "botania:mana_powder", S2, "botania:pink_petal")));
+
+    /** GT-Not-Leisure's Alfheim Teleportation Array: their ZPM assembly line recipe, with this pack's blocks */
+    private static void alfheimArray(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:alfheim_teleportation_array")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[ZPM].asStack(8))
+                .inputItems(S1, 4)
+                .inputItems(S2, 16)
+                .inputItems(S3, 8)
+                .inputItems(S4, 64)
+                .inputItems(S5, 64)
+                .inputItems(S6, 64)
+                .inputItems(GTItems.SENSOR_ZPM, 16)
+                .inputItems(GTItems.FIELD_GENERATOR_ZPM, 16)
+                .inputItems(CustomTags.ZPM_CIRCUITS, 16)
+                .inputItems(CustomTags.UV_CIRCUITS, 8)
+                .inputItems(CustomTags.UHV_CIRCUITS, 4)
+                .inputItems(S7, 16)
+                .inputItems(GTBlocks.FUSION_COIL.asStack(16))
+                .inputItems(S8, 32)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
+                .inputFluids(GTMaterials.NaquadahAlloy.getFluid(L * 32))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.ALFHEIM_TELEPORTATION_ARRAY.asStack())
+                .duration(2400).EUt(VA[ZPM])
+                .save(needing(provider, new String[] { "botania", "gtna" }, Map.of(
+                        S1, "botania:gaia_pylon", S2, "botania:fabulous_pool", S3, "botania:gaia_spreader",
+                        S4, "botania:alfheim_portal", S5, "botania:runic_altar", S6, "botania:corporea_spark",
+                        S7, "gtna:radiant_naquadah_alloy_casing", S8, "botania:manasteel_block")));
     }
 }

@@ -434,4 +434,63 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/assembly_line")))
             .register();
 
+
+    // ======================= GT-Not-Leisure ports =======================
+    // Contains code from GT-Not-Leisure (https://github.com/GTNotLeisure/GT-Not-Leisure, GPL-3.0 with the additional
+    // terms in LICENSE-ADDITIONAL-TERMS.md). Project authors include HFstudio, LineBroke and other contributors.
+    // Each machine keeps its original author line.
+    public static final String GTNL_NLXCJH = "§7Add Mod: §bGT Not Leisure§7: §6§l§n年轮新城计划 by 咸到老时变成鱼";
+
+    /** a block of another mod, or the fallback when that mod is missing */
+    private static Block modBlock(String id, java.util.function.Supplier<Block> fallback) {
+        Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));
+        return b == null || b == net.minecraft.world.level.block.Blocks.AIR ? fallback.get() : b;
+    }
+
+    // ---------------- Alfheim Teleportation Array (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition ALFHEIM_TELEPORTATION_ARRAY = REGISTRATE
+            .multiblock("alfheim_teleportation_array",
+                    com.omnicrox.gtaa.common.machine.multiblock.gtnl.AlfheimTeleportationArrayMachine::new)
+            .langValue("Alfheim Teleportation Array")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MANA_NEXUS)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.gtnl.AlfheimTeleportationArrayMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips
+                    .of("Portal to Alfheim / Nature Spirit Array / Mana Infusion / Rune Altar")
+                    .parallel("2147483647")
+                    .flavor("Legend says this array can stably transport large amounts of materials.")
+                    .info("Runs every §dBotania§7 altar craft: mana pool, runic altar, terra plate, elven trade,")
+                    .info(" pure daisy, petal apothecary, Mythic Botany infuser and rune rituals (elven trades: circuit 3)")
+                    .info("Needs §bliquid mana§7 (1 mB = 100 mana) in an input hatch, or Mana Hatches")
+                    .info("Consumes §b100 mB§7 of liquid mana per second to operate")
+                    .bonus("Put an Everlasting Guilty Pool or an Asgard Dandelion in an input bus for unlimited mana")
+                    .info("§bMachine does not lose efficiency when overclocked")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)")
+                    .author(GTNL_NLXCJH).build())
+            .appearanceBlock(() -> modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "alfheim")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:accelerator_protection_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('B', blocks(modBlock("gtna:pressure_containment_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('C', blocks(GTBlocks.FUSION_COIL.get()))
+                    .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('E', blocks(modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get))
+                            .setMinGlobalLimited(300)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(GTAAMachines.MANA_HATCH_ABILITY).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('F', blocks(GTBlocks.HIGH_POWER_CASING.get()))
+                    .where('G', blocks(modBlock("botania:elf_glass", GTBlocks.CASING_LAMINATED_GLASS::get)))
+                    .where('H', blocks(modBlock("botania:mana_glass", GTBlocks.CASING_LAMINATED_GLASS::get)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/radiant_naquadah_alloy_casing"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
 }

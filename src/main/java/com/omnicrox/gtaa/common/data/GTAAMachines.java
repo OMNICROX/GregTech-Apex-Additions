@@ -171,7 +171,7 @@ public class GTAAMachines {
             .abilities(MANA_HATCH_ABILITY)
             .colorOverlayTieredHullModel(OVERLAY_FLUID_HATCH_OUTPUT, null, "overlay_pipe_out_emissive")
             .tooltips(Component.literal("\u00a77Aim \u00a7bMana Spreaders\u00a77 at it or put a \u00a7bMana Spark\u00a77 on it"),
-                    Component.literal("\u00a77Holds 1,000,000 mana; the \u00a7dSylvan Arbiter\u00a77 pulls it in"),
+                    Component.literal("\u00a77Holds 1,000,000 mana; the \u00a7dAlfheim Teleportation Array\u00a77 pulls it in"),
                     Component.literal("\u00a78Right-click with an empty hand to see how much it holds"))
             .register();
 
@@ -1299,113 +1299,6 @@ public class GTAAMachines {
             .register();
 
     // ---------------- Mystical Cultivation Array (KubaTech EIG) ----------------
-    private static Block botaniaBlock(String id, Block fallback) {
-        Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation("botania", id));
-        return b == null || b == Blocks.AIR ? fallback : b;
-    }
-
-    /** one growth stage of the Sylvan Arbiter (howester84's Botania Sanctuary, see ManaNexusShapes) */
-    public static FactoryBlockPattern nexusStage(MultiblockMachineDefinition definition, int stage) {
-        var b = FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.LEFT,
-                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,
-                com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.UP);
-        for (String[] aisle : com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.aisles(stage)) b.aisle(aisle);
-        // hatches go in the floor under the dome or the back wall; all of them share these limits
-        var hatches = abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1)
-                .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
-                .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1))
-                .or(abilities(MANA_HATCH_ABILITY).setPreviewCount(1))
-                .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
-                .or(abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1).setPreviewCount(1));
-        var pools = blocks(botaniaBlock("mana_pool", Blocks.CAULDRON), botaniaBlock("diluted_pool", Blocks.CAULDRON),
-                botaniaBlock("fabulous_pool", Blocks.CAULDRON), botaniaBlock("creative_pool", Blocks.CAULDRON));
-        for (var sym : com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.legend().values()) {
-            TraceabilityPredicate pred = switch (sym.kind()) {
-                case "controller" -> controller(blocks(definition.get()));
-                case "core" -> com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.cores();
-                case "pool" -> pools;
-                case "glass" -> blocks(botaniaBlock("mana_glass", Blocks.GLASS));
-                case "leaves" -> blocks(GTAABlocks.MANA_BLOOM_LEAVES.get());
-                case "optional" -> sanctuaryBlock(sym.block(), sym.props(), true);
-                case "hatch" -> sanctuaryBlock(sym.block(), sym.props(), false).or(hatches);
-                default -> sanctuaryBlock(sym.block(), sym.props(), false);
-            };
-            b.where(sym.c(), pred);
-        }
-        return b.where(' ', any());
-    }
-
-    /**
-     * a block from the schematic: any state of it counts (stairs can face either way), but the preview and auto-build
-     * use the state in the schematic. A block from a mod that isn't installed is skipped. Optional ones (grass,
-     * flowers, torches...) may also be air, water or anything you could place over.
-     */
-    private static TraceabilityPredicate sanctuaryBlock(String ids, String props, boolean optional) {
-        // "a|b": either block counts, the first one is shown
-        java.util.List<Block> accepted = new java.util.ArrayList<>();
-        for (String id : ids.split("\\|")) {
-            Block b = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getValue(new net.minecraft.resources.ResourceLocation(id));
-            if (b != null && b != Blocks.AIR) accepted.add(b);
-        }
-        if (accepted.isEmpty()) return any();
-        Block block = accepted.get(0);
-        net.minecraft.world.level.block.state.BlockState state = block.defaultBlockState();
-        if (props != null && !props.isEmpty()) for (String kv : props.split(",")) {
-            String[] p = kv.split("=", 2);
-            var prop = block.getStateDefinition().getProperty(p[0]);
-            if (prop != null && p.length == 2) state = withValue(state, prop, p[1]);
-        }
-        final var shown = state;
-        return new TraceabilityPredicate(ms -> {
-            var st = ms.getBlockState();
-            for (Block b : accepted) if (st.is(b)) return true;
-            return optional && (st.isAir() || st.canBeReplaced() || !st.getFluidState().isEmpty());
-        }, () -> new com.lowdragmc.lowdraglib.utils.BlockInfo[] { com.lowdragmc.lowdraglib.utils.BlockInfo.fromBlockState(shown) });
-    }
-
-    private static <T extends Comparable<T>> net.minecraft.world.level.block.state.BlockState withValue(
-            net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.block.state.properties.Property<T> prop, String value) {
-        return prop.getValue(value).map(v -> state.setValue(prop, v)).orElse(state);
-    }
-
-    public static final MultiblockMachineDefinition MANA_NEXUS = REGISTRATE
-            .multiblock("mana_nexus", com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::new)
-            .langValue("Sylvan Arbiter")
-            .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTAARecipeTypes.MANA_NEXUS)
-            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine::recipeModifier,
-                    com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_NON_PERFECT_SUBTICK)
-            .tooltips(
-                    Component.literal("\u00a7a\u00a7oAn ancient tree that governs every drop of mana around it"),
-                    Component.literal("\u00a77Machine Type: \u00a7dBotanical Altar"),
-                    Component.literal("\u00a77Stores mana and does every \u00a7dBotania\u00a77 altar craft with it:"),
-                    Component.literal("\u00a77 mana pool, runic altar, terra plate, elven trade, pure daisy, apothecary,"),
-                    Component.literal("\u00a77 Mythic Botany's Mana Infuser and rune rituals (elven trades: circuit 3)"),
-                    Component.literal("\u00a77Mana in: \u00a7bMana Hatches\u00a77 (spreaders, sparks) or liquid mana (1 mB = 100 mana)"),
-                    Component.literal("\u00a77Grows a floor at a time inside the \u00a7aBotania Sanctuary\u00a77: Roots, Gallery, Terrace, Canopy, Crown"),
-                    Component.literal("\u00a77Tier = the lower of the floors built and the 8 Mana Cores round the tree"),
-                    Component.literal("\u00a77 (Manasteel, Terrasteel, Elementium, Alfsteel, Gaiasteel); its leaves show the tier"),
-                    Component.literal("\u00a77 10M / 50M / 250M / 1B / 2B mana; 1 / 2 / 4 / 8 / 16 crafts at once"),
-                    Component.literal("\u00a77Hatches go in the floor under the dome or the back wall"),
-                    Component.literal("\u00a7bBuild by howester84"),
-                    Component.literal("\u00a78GTAA's own multiblock, built for Botania + addons"))
-            .appearanceBlock(GTAABlocks.MANA_NEXUS_CASING)
-            .pattern(definition -> nexusStage(definition, 1).build())
-            .shapeInfos(definition -> {
-                List<com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo> shapes = new ArrayList<>();
-                for (int st = 1; st <= com.omnicrox.gtaa.common.machine.multiblock.ManaNexusShapes.STAGES; st++) {
-                    BlockPattern bp = nexusStage(definition, st).build();
-                    int[] reps = new int[bp.aisleRepetitions.length];
-                    java.util.Arrays.fill(reps, 1);
-                    shapes.add(new com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo(bp.getPreview(reps)));
-                }
-                return shapes;
-            })
-            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/mana_nexus_casing"),
-                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/assembly_line")))
-            .register();
-
     // ---------------- Ascension Gate: the finale ----------------
     public static final MultiblockMachineDefinition ASCENSION_GATE = REGISTRATE
             .multiblock("ascension_gate", com.omnicrox.gtaa.common.machine.multiblock.AscensionGateMachine::new)

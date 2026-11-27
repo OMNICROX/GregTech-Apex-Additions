@@ -18,6 +18,7 @@ public final class ApexTooltips {
 
     private final List<Component> lines = new ArrayList<>();
     private String credit;
+    private final List<Component> authors = new ArrayList<>();
 
     private ApexTooltips(String type) {
         lines.add(Component.literal("§7Machine Type: §e" + type));
@@ -63,9 +64,19 @@ public final class ApexTooltips {
         return this;
     }
 
+    /**
+     * The original author line, kept as the source shows it (some licenses, such as GT-Not-Leisure's additional
+     * terms, require it). Shown under the "Ported from" line.
+     */
+    public ApexTooltips author(String line) {
+        authors.add(Component.literal(line));
+        return this;
+    }
+
     public Component[] build() {
         List<Component> out = new ArrayList<>(lines);
         if (credit != null) out.add(Component.literal("§8Ported from " + credit));
+        out.addAll(authors);
         return out.toArray(Component[]::new);
     }
 }

@@ -185,18 +185,6 @@ public class GTAABlocks {
     }
 
     // ---------------- Suit Fabrication Station ----------------
-    // Mana Nexus - GTAA's own textures
-    public static final BlockEntry<Block> MANA_NEXUS_CASING = casing("mana_nexus_casing", "Livingrock Nexus Casing");
-    public static final BlockEntry<Block> MANA_CORE_T1 = casing("mana_core_t1", "Manasteel Mana Core");
-    public static final BlockEntry<Block> MANA_CORE_T2 = casing("mana_core_t2", "Terrasteel Mana Core");
-    public static final BlockEntry<Block> MANA_CORE_T3 = casing("mana_core_t3", "Elementium Mana Core");
-    public static final BlockEntry<Block> MANA_CORE_T4 = casing("mana_core_t4", "Alfsteel Mana Core");
-    public static final BlockEntry<Block> MANA_CORE_T5 = casing("mana_core_t5", "Gaiasteel Mana Core");
-
-    public static Block[] manaCores() {
-        return new Block[] { MANA_CORE_T1.get(), MANA_CORE_T2.get(), MANA_CORE_T3.get(), MANA_CORE_T4.get(), MANA_CORE_T5.get() };
-    }
-
     public static final BlockEntry<Block> SUIT_CASING_T1 = casing("suit_casing_t1", "Steel Booth Casing");
     public static final BlockEntry<Block> SUIT_CASING_T2 = casing("suit_casing_t2", "Showcase Pod Casing");
     public static final BlockEntry<Block> SUIT_CASING_T3 = casing("suit_casing_t3", "Holo Chamber Casing");
@@ -265,18 +253,6 @@ public class GTAABlocks {
                 .register();
     }
 
-    // ---------------- Mana Nexus: the Great Mana Tree's canopy ----------------
-    public static final BlockEntry<com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock> MANA_BLOOM_LEAVES = REGISTRATE
-            .block("mana_bloom_leaves", com.omnicrox.gtaa.common.block.ManaBloomLeavesBlock::new)
-            .initialProperties(() -> Blocks.AZALEA_LEAVES)
-            .properties(p -> p.strength(0.6f).noOcclusion().lightLevel(s -> 6).isValidSpawn((s, l, pos, e) -> false)
-                    .isSuffocating((s, l, pos) -> false).isViewBlocking((s, l, pos) -> false))
-            .addLayer(() -> RenderType::cutoutMipped)
-            .blockstate(NonNullBiConsumer.noop())
-            .tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE)
-            .lang("Mana Bloom Leaves")
-            .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
-            .register();
 
     // ---------------- Ascension Gate (the finale) ----------------
     public static final BlockEntry<Block> GATE_RING = casing("gate_ring", "Ascension Gate Ring");

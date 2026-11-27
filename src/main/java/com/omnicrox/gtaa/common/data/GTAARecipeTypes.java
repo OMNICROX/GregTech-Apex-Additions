@@ -141,12 +141,10 @@ public class GTAARecipeTypes {
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")
                 .addDataInfo(data -> "Seeds aren't used up; real drops follow the crop");
-        MANA_NEXUS = register("mana_nexus", "multiblock", "Sylvan Arbiter")
+        MANA_NEXUS = register("mana_nexus", "multiblock", "Alfheim Teleportation Array")
                 .setMaxIOSize(16, 4, 1, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
-                .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + com.omnicrox.apexlib.util.ApexFormat.num(data.getLong("mana")) : "")
-                .addDataInfo(data -> "Mana Cores: " + com.omnicrox.gtaa.common.machine.multiblock.ManaNexusMachine.CORE_NAMES[
-                        Math.max(1, Math.min(5, data.getInt("nexus_tier")))] + " or better");
+                .addDataInfo(data -> data.getLong("mana") > 0 ? "Mana: " + com.omnicrox.apexlib.util.ApexFormat.num(data.getLong("mana")) : "");
         SEED_SYNTHESIS = register("seed_synthesizer", "electric", "Seed Synthesizer")
                 .setMaxIOSize(9, 1, 0, 0).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)

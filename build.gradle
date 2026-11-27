@@ -49,6 +49,8 @@ legacyForge {
             programArguments.addAll('--mod', project.mod_id, '--all',
                     '--output', file('src/generated/resources').absolutePath,
                     '--existing', file('src/main/resources').absolutePath,
+                    // placeholder textures of other mods (GTNA...) so models can point at them; never shipped
+                    '--existing', file('tools/datagen_existing').absolutePath,
                     '--existing-mod', 'gtceu')
         }
     }
@@ -74,7 +76,12 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 mixin {
     config "${project.mod_id}.mixins.json"
 }
-jar { manifest.attributes('MixinConfigs': "${project.mod_id}.mixins.json") }
+jar {
+    manifest.attributes('MixinConfigs': "${project.mod_id}.mixins.json")
+    // GPL-3.0 text and the additional terms of ported projects travel with the jar
+    from('LICENSE') { rename { 'LICENSE-gtapexadditions' } }
+    from('licenses') { into 'licenses' }
+}
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 
