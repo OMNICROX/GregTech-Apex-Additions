@@ -660,4 +660,129 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/implosion_compressor")))
             .register();
 
+
+    /** a recipe type from another GTCEu addon (GTNA...), or the fallback when that mod is missing */
+    private static GTRecipeType extType(String id, GTRecipeType fallback) {
+        GTRecipeType t = GTRegistries.RECIPE_TYPES.get(new ResourceLocation(id));
+        return t == null ? fallback : t;
+    }
+
+    private static final String TST_NXER = "§7Author: §cNxer§7, added by §aTwist Space Technology";
+
+    // ---------------- General Ore Processing Factory (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition ORE_PROCESSING_FACTORY = REGISTRATE
+            .multiblock("ore_processing_factory", com.omnicrox.gtaa.common.machine.multiblock.tst.OreProcessingFactoryMachine::new)
+            .langValue("General Ore Processing Factory")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(extType("gtna:ore_processing", GTRecipeTypes.MACERATOR_RECIPES))
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.tst.OreProcessingFactoryMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Ore Processor")
+                    .flavor("Engineering is the art of directing the great sources of power in nature for the use and convenience of man.")
+                    .info("The ores will line up and go in through the entrance and out through the exit.")
+                    .info("Runs every §eIntegrated Ore Processor§7 recipe")
+                    .info("This machine will not overclock. Progress time is always §66.4s§7.")
+                    .info("It will process as many inputs as possible at once, if power allows.")
+                    .info("Consumes §63200 mB Lubricant§7 every §612.8s§7.")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "ore_processing_factory")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('B', blocks(GTBlocks.CASING_TITANIUM_GEARBOX.get()))
+                    .where('C', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('D', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
+                    .where('E', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
+                    .where('G', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
+                    .where('H', blocks(GTBlocks.HIGH_POWER_CASING.get()))
+                    .where('I', blocks(modBlock("gtna:molecular_coil", GTBlocks.SUPERCONDUCTING_COIL::get)))
+                    .where('J', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get())
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('K', blocks(GTBlocks.HIGH_POWER_CASING.get())
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('L', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get())
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('M', frames(com.gregtechceu.gtceu.common.data.GTMaterials.TungstenSteel))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_robust_tungstensteel"),
+                    gt("block/multiblock/large_chemical_reactor")))
+            .register();
+
+    // ---------------- Integrated Assembly Matrix (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition INTEGRATED_ASSEMBLY_MATRIX = REGISTRATE
+            .multiblock("integrated_assembly_matrix", com.omnicrox.gtaa.common.machine.multiblock.tst.IntegratedAssemblyMatrixMachine::new)
+            .langValue("Integrated Assembly Matrix")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.ASSEMBLY_LINE_RECIPES)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.tst.IntegratedAssemblyMatrixMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Assembly Line")
+                    .flavor("Imagination can take you anywhere")
+                    .info("The built-in integrated logistics system allows you to no longer worry about external logistics design.")
+                    .info("Spatial isolation technology brings higher batch production capabilities: §b128 parallels")
+                    .info("The cost is §c1.5§7 times the base time.")
+                    .info("Still need to use the data access hatch to provide data stick.")
+                    .info("Put silver or gold nanites in an input bus to increase the running speed (not used up):")
+                    .info("Up to §f256 Silver Nanites§7 increase the running speed to 100% of normal speed.")
+                    .info("Or up to §e1024 Gold Nanites§7 increase the running speed to 200% of normal speed,")
+                    .info("And §edouble§7 the parallelism.")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "integrated_assembly_matrix")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('B', blocks(GTBlocks.CASING_ASSEMBLY_LINE.get()))
+                    .where('C', blocks(GTBlocks.CASING_ASSEMBLY_CONTROL.get()))
+                    .where('D', blocks(GTAABlocks.SE_BASE_CASING.get()))
+                    .where('E', blocks(GTBlocks.HIGH_POWER_CASING.get()).setMinGlobalLimited(150)
+                            .or(abilities(PartAbility.DATA_ACCESS, PartAbility.OPTICAL_DATA_RECEPTION).setMaxGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('F', blocks(modBlock("gtna:molecular_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('G', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
+                    .where('H', blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/hpca/high_power_casing"),
+                    gt("block/multiblock/assembly_line")))
+            .register();
+
+    // ---------------- Nether Interface (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition NETHER_INTERFACE = REGISTRATE
+            .multiblock("nether_interface", WorkableElectricMultiblockMachine::new)
+            .langValue("Nether Interface")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.NETHER_INTERFACE)
+            .recipeModifiers(ApexModifiers.parallel(m -> 64, m -> 1.0, 1.0))
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Otherworld Teleporter")
+                    .flavor("The imprisoned souls of an ancient civilization now serve you.")
+                    .info("Build portals and transport the dirty but useful resources of Hell back to you.")
+                    .info("Machine takes §e1A IV§7 per parallel, up to §b64 parallels§7, one run a minute")
+                    .info("Brings back ancient debris, netherite scrap, quartz, glowstone, blaze rods and more")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "nether_interface")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_STEEL_SOLID.get()).setMinGlobalLimited(80)
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', frames(com.gregtechceu.gtceu.common.data.GTMaterials.BlackSteel))
+                    .where('C', blocks(GTBlocks.CASING_TITANIUM_STABLE.get()))
+                    .where('D', blocks(net.minecraft.world.level.block.Blocks.OBSIDIAN))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/solid/machine_casing_solid_steel"),
+                    gt("block/multiblock/implosion_compressor")))
+            .register();
+
 }
