@@ -43,6 +43,10 @@ marked textures follow the originals.
 | Integrated Assembly Matrix | TST `TST_IntegratedAssemblyMatrix` | Nxer and contributors, GPL-3.0 |
 | Nether Interface | TST `TST_NetherInterface` (outputs remade for vanilla nether items) | Nxer and contributors, GPL-3.0 |
 | Micro SpaceTime Fabricatorio | TST `TST_MicroSpaceTimeFabricatorio` | Nxer and contributors, GPL-3.0 |
+| Bloody Hell | TST `TST_BloodyHell` (Blood Magic 1.20 altar / alchemy table / array recipes) | Taskeren, Goderium, GPL-3.0 |
+| Laser Meteor Miner | TST `TST_LaserMeteorMiner` (mines Blood Magic 1.20 meteors) | Totto, GPL-3.0 |
+| Strange Matter Aggregator | TST `TST_StrangeMatterAggregator` (adapted: breeds GTAA antimatter) | Nxer and contributors, GPL-3.0 |
+| Mass Fabricator Genesis | TST `MM_MassFabricatorGenesis` (parallel hatches for the modular controllers) | Nxer and contributors, GPL-3.0 |
 | Divine Isa Forge | 123Technology `OTEMegaIsaForge` (runs the IsaMill lists and the Space Assembler) | newmaa / CallmeSHaobe and contributors, GPL-3.0 |
 | (filled in as machines are ported) | 123Technology (https://github.com/CallmeSHaobe/123Technology) | CallmeSHaobe and contributors, GPL-3.0 |
 
@@ -63,6 +67,7 @@ additional terms in LICENSE-ADDITIONAL-TERMS.md".
 | Eden Garden | GTNL `EdenGarden` (runs GTNA's greenhouse list) | GT Not Leisure X 伊甸生态园 by 荻角 |
 | Real · Annihilation Generator | GTNL `RealArtificialStar` (burns GTAA antimatter) | GT Not Leisure: Structural Replacement Plan |
 | Library of Ruina | GTNL `LibraryOfRuina` (boss trophies instead of GTNL's books) | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
+| Singularity Data Hub | GTNL `SingularityDataHub` (controller mounted as AE2 storage instead of a vault port hatch) | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
 
 ## Textures from GT5-Unofficial (LGPL-3.0)
 

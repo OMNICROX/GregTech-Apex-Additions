@@ -7,9 +7,10 @@ A GuideNH-style in-game guide mod ("apexguide"), working together with the quest
 - quests link to guide pages and guide pages link back to quests; the user arranges quests, the guide carries the text
 - consider building on GuideME (already in the pack via AE2) instead of starting from scratch
 
-## Still to port properly
-- Singularity Data Hub (GTNL), Strange Matter Aggregator and Mass Fabricator Genesis (TST modular machines),
-  Laser Meteor Miner (needs Blood Magic)
+## Multi ports
+All requested multis are in (last batch 2026-11-27: Bloody Hell, Laser Meteor Miner, Singularity Data Hub,
+Strange Matter Aggregator, Mass Fabricator Genesis). Next: Blood Magic tier gating vs GregTech (NHCore's
+ScriptBloodMagic as the reference).
 
 ## GTNH-style multiblock preview (requested 2026-11-27)
 Replace GTCEu's JEI multiblock page with a GTNH NEI-style one (BlockRenderer6343 look): tier slider for tiered blocks,

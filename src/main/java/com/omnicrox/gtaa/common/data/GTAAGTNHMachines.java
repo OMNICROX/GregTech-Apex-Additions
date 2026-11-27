@@ -1281,4 +1281,140 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/large_miner")))
             .register();
 
+    // ---------------- Singularity Data Hub (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition SINGULARITY_DATA_HUB = REGISTRATE
+            .multiblock("singularity_data_hub", com.omnicrox.gtaa.common.machine.multiblock.gtnl.SingularityDataHubMachine::new)
+            .langValue("Singularity Data Hub")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.SINGULARITY_DATA_HUB)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Item / Fluid Vault")
+                    .flavor("Infinite storage at your fingertips.")
+                    .info("Stores §eunlimited types and amounts§7 of items and fluids")
+                    .info("While running it pulls everything out of its input buses and hatches")
+                    .info("Connect the §bcontroller§7 to an ME network: the hub is mounted as storage on it")
+                    .info("Uses §61/20 of UHV§7 (" + com.omnicrox.apexlib.util.ApexFormat.num(com.gregtechceu.gtceu.api.GTValues.VA[com.gregtechceu.gtceu.api.GTValues.UHV] / 20) +
+                            " EU/t); with no energy hatch it draws from the wireless network")
+                    .info("The storage is locked while the hub is not running")
+                    .info("Broken, the controller keeps its contents")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)").author(GTNL_NLXCJH).build())
+            .appearanceBlock(() -> modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "singularity_data_hub")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:t5_me_storage_core", GTBlocks.HIGH_POWER_CASING::get)))
+                    .where('B', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)).setMinGlobalLimited(100)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setPreviewCount(1)))
+                    .where('C', blocks(GTBlocks.HIGH_POWER_CASING.get()))
+                    .where('D', blocks(GTBlocks.CASING_ALUMINIUM_FROSTPROOF.get()))
+                    .where('E', blocks(modBlock("gtna:neutronium_stable_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('F', blocks(modBlock("gtna:hollow_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('G', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('H', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
+                    .where('I', blocks(modBlock("gtna:force_field_glass", GTBlocks.FUSION_GLASS::get)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/molecular_casing"),
+                    gt("block/multiblock/data_bank")))
+            .register();
+
+    // ---------------- Strange Matter Aggregator (Twist Space Technology, adapted) ----------------
+    private static TraceabilityPredicate tstBoundary() {
+        return blocks(modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get));
+    }
+
+    public static com.gregtechceu.gtceu.api.pattern.BlockPattern strangeMatterAggregatorPattern(
+            com.gregtechceu.gtceu.api.machine.MachineDefinition md, int rings) {
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
+        return VARIANTS.computeIfAbsent("strange_matter_aggregator_" + rings, k -> {
+            Block boundary = modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get);
+            return com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "strange_matter_aggregator_" + rings)
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:reinforced_temporal_structure_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('B', blocks(modBlock("gtna:reinforced_spatial_structure_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('C', blocks(boundary))
+                    .where('D', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()))
+                    .where('E', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()))
+                    .where('F', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
+                    .where('G', blocks(GTAABlocks.FORCE_FIELD_GLASS.get()))
+                    .where('H', blocks(boundary)
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setPreviewCount(1)))
+                    .where('I', blocks(boundary).or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where('J', blocks(boundary).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1)))
+                    .where('K', blocks(boundary).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1)))
+                    .where('R', com.omnicrox.gtaa.common.machine.multiblock.tst.StrangeMatterAggregatorMachine.ringPredicate())
+                    .where(' ', any())
+                    .build();
+        });
+    }
+
+    public static final MultiblockMachineDefinition STRANGE_MATTER_AGGREGATOR = REGISTRATE
+            .multiblock("strange_matter_aggregator", com.omnicrox.gtaa.common.machine.multiblock.tst.StrangeMatterAggregatorMachine::new)
+            .langValue("Strange Matter Aggregator")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.STRANGE_MATTER_AGGREGATOR)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Antimatter Breeder")
+                    .flavor("Matter is just energy that forgot how to move.")
+                    .info("Breeds §5Semi-Stable Antimatter§7 for the Shielded Lagrangian Annihilation Matrix")
+                    .info("Each parallel: §d(256 / sqrt(Oscillator rings)) mB§7 of antimatter + hydrogen plasma in,")
+                    .info(" §d1 L + 1 L per consecutive run§7 out (up to 24 / 144 / 384 runs by Merger tier)")
+                    .info("Uses a §6maintenance fluid§7 every run: SpaceTime, Universium or Magnetohydrodynamically")
+                    .info(" Constrained Star Matter (better ones: more rods per Nuclear Star, less plasma, byproducts)")
+                    .info("Also eats §eStellar Alloy Frames§7 (1 per L), §eTesseracts§7 and §eNuclear Stars§7;")
+                    .info(" an §eExquisite Strange Crystal§7 doubles the byproducts")
+                    .info("§63-8 rings§7 behind the main section, at least one of each kind, ring blocks = the Forge")
+                    .info(" of the Gods field generators (Spacetime Compression = Oscillator, Stabilisation =")
+                    .info(" Constraintor, Time Acceleration = Merger; generator tier 0-2/3-5/6-8 = ring tier 1/2/3)")
+                    .info("No energy hatch: the run's power comes from the wireless network")
+                    .warning("Adapted: Twist's machine makes fuel rods for its Dyson Sphere line")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(() -> modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> strangeMatterAggregatorPattern(definition, 3))
+            .shapeInfos(definition -> variantShapes(strangeMatterAggregatorPattern(definition, 3),
+                    strangeMatterAggregatorPattern(definition, 5), strangeMatterAggregatorPattern(definition, 8)))
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/eye_of_harmony/boundary"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
+    // ---------------- Mass Fabricator Genesis (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition MASS_FABRICATOR_GENESIS = REGISTRATE
+            .multiblock("mass_fabricator_genesis", com.omnicrox.gtaa.common.machine.multiblock.tst.MassFabricatorGenesisMachine::new)
+            .langValue("Mass Fabricator Genesis")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MASS_FABRICATOR_GENESIS)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.tst.MassFabricatorGenesisMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Mass Fabricator")
+                    .flavor("Even though the future seems far away, it is actually beginning right now.")
+                    .flavor("Energy - Mass : Interface.")
+                    .info("Makes §dUU-Matter§7 out of energy")
+                    .info("Parallels come from §bParallel Hatches§7: use as many as you like, they add up")
+                    .info("§aPerfect overclocks")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(() -> modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "mass_fabricator_genesis")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', tstBoundary())
+                    .where('B', blocks(GTAABlocks.GRAVITY_STABILIZATION_CASING.get()))
+                    .where('C', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()))
+                    .where('D', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('E', blocks(modBlock("gtna:hyper_mechanical_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('F', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
+                    .where('G', blocks(GTAABlocks.FORCE_FIELD_GLASS.get()))
+                    .where('H', tstBoundary()
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.PARALLEL_HATCH).setPreviewCount(1)))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/eye_of_harmony/boundary"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
 }

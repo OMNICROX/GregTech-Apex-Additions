@@ -79,6 +79,8 @@ public final class GTAACompatRecipes {
         libraryOfRuina(provider);
         bloodyHell(provider);
         laserMeteorMiner(provider);
+        singularityDataHub(provider);
+        tstModular(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -786,5 +788,57 @@ public final class GTAACompatRecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.LASER_METEOR_MINER.asStack())
                 .duration(1200).EUt(VA[LuV])
                 .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:masterritualstone", S2, "bloodmagic:demonslate")));
+    }
+
+    /** GT-Not-Leisure's Singularity Data Hub: drives, singularities, cell parts, quantum chests and tanks (UEV there) */
+    private static void singularityDataHub(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:singularity_data_hub")
+                .inputItems(S1, 16).inputItems(S2, 16).inputItems(S3, 16)
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.SUPER_CHEST[IV].asStack(16))
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.SUPER_TANK[IV].asStack(16))
+                .inputItems(GTItems.FIELD_GENERATOR_UV, 32)
+                .inputItems(CustomTags.UHV_CIRCUITS, 48)
+                .inputItems(GTAABlocks.GRAVITY_STABILIZATION_CASING.asStack(16))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 32))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.SINGULARITY_DATA_HUB.asStack())
+                .duration(8000).EUt(VA[UHV])
+                .save(needing(provider, "ae2", Map.of(S1, "ae2:drive", S2, "ae2:singularity", S3, "ae2:cell_component_256k")));
+    }
+
+    /** Twist's Strange Matter Aggregator and Mass Fabricator Genesis (UMV / UXV there, UIV here) */
+    private static void tstModular(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:mass_fabricator_genesis")
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MATTER_FABRICATOR.asStack(16))
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 32)
+                .inputItems(GTItems.EMITTER_UIV, 32)
+                .inputItems(CustomTags.UIV_CIRCUITS, 32)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR, 4)
+                .inputItems(plateDense, GTMaterials.Neutronium, 32)
+                .inputItems(GTAABlocks.GRAVITY_STABILIZATION_CASING.asStack(64))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 512))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 256))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MASS_FABRICATOR_GENESIS.asStack())
+                .duration(6000).EUt(VA[UIV])
+                .save(provider);
+        com.omnicrox.gtaa.common.data.GTAARecipeTypes.MASS_FABRICATOR_GENESIS.recipeBuilder("gtapexadditions:mass_fabricator_genesis/uu_matter")
+                .circuitMeta(1)
+                .outputFluids(GTMaterials.UUMatter.getFluid(1000))
+                .duration(1000).EUt(200000)
+                .save(provider);
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:strange_matter_aggregator")
+                .inputItems(GTAABlocks.ANTIMATTER_CONTAINMENT_CASING.asStack(64))
+                .inputItems(GTAABlocks.MAGNETIC_FLUX_CASING.asStack(64))
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 64)
+                .inputItems(GTItems.EMITTER_UIV, 32)
+                .inputItems(CustomTags.UIV_CIRCUITS, 64)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR, 16)
+                .inputItems(plateDense, GTMaterials.Neutronium, 64)
+                .inputItems(GTItems.GRAVI_STAR, 64)
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 1024))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 512))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.STRANGE_MATTER_AGGREGATOR.asStack())
+                .duration(12000).EUt(VA[UIV])
+                .save(provider);
     }
 }

@@ -41,6 +41,9 @@ public class GTAARecipeTypes {
     public static GTRecipeType LIBRARY_OF_RUINA;
     public static GTRecipeType BLOODY_HELL;
     public static GTRecipeType LASER_METEOR_MINER;
+    public static GTRecipeType SINGULARITY_DATA_HUB;
+    public static GTRecipeType STRANGE_MATTER_AGGREGATOR;
+    public static GTRecipeType MASS_FABRICATOR_GENESIS;
     public static GTRecipeType MICRO_SPACETIME;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
@@ -164,6 +167,13 @@ public class GTAARecipeTypes {
                 .addDataInfo(data -> data.getInt("bh_orb") > 0 ? "Blood Orb tier: " + data.getInt("bh_orb") : "");
         LASER_METEOR_MINER = register("laser_meteor_miner", "multiblock", "Laser Meteor Miner")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        SINGULARITY_DATA_HUB = register("singularity_data_hub", "multiblock", "Singularity Data Hub")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        STRANGE_MATTER_AGGREGATOR = register("strange_matter_aggregator", "multiblock", "Strange Matter Aggregator")
+                .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        MASS_FABRICATOR_GENESIS = register("mass_fabricator_genesis", "multiblock", "Mass Fabricator Genesis")
+                .setMaxIOSize(1, 0, 0, 1).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MASS_FAB, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")
