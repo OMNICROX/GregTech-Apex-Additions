@@ -33,7 +33,7 @@ public final class GuideUserData {
 
     private static final Map<ResourceLocation, Set<ResourceLocation>> BOOKMARKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, List<ResourceLocation>> HISTORY = new LinkedHashMap<>();
-    private static boolean navPinned = true;
+    private static boolean navPinned = false; // GuideNH default: guideNavigationPinned=false
     private static boolean loaded;
     private static int version;
 

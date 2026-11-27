@@ -97,5 +97,8 @@ Textures for the eleven Borosilicate Glass blocks (HV to UXV) come from BartWork
 than the glass) follows GT New Horizons.
 
 ## Apex Guide
-Built on GuideME (the guidebook system of Applied Energistics 2, by the AE2 team), laid out like GT New Horizons'
-GuideNH and questbook.
+A separate mod, `apex-guide/` (`apexguide`), licensed LGPL-3.0:
+- engine forked from [GuideME](https://github.com/AppliedEnergistics/GuideME) 20.1 (LGPL-3.0, shartte and the AE2 team);
+- window, navigation tree, home page, bookmarks/history and icon atlas ported from
+  [GuideNH](https://github.com/GTNewHorizons/GuideNH) (LGPL-3.0, HFstudio);
+- bundles Apache Lucene, SnakeYAML and directory-watcher (Apache-2.0), relocated.
