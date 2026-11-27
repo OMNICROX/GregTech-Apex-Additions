@@ -11,7 +11,7 @@ M = [
  ('library_of_ruina', 'Library of Ruina', 'IV', 'GT-Not-Leisure', 'Farming',
   'Makes Twilight Forest boss loot in bulk. Built with the Twilight bosses\' trophies, so you explore the Twilight Forest at HV and harvest it at IV.'),
  ('bloody_hell', 'Bloody Hell', 'IV', 'Twist Space Technology', 'Magic',
-  'Every Blood Altar, Alchemy Table and Alchemy Array recipe in bulk, soaked from a pool of Life Essence inside the structure (it fills itself). Circuit 1 = altar, 2 = alchemy table (needs a Blood Orb in a bus), 11 = binding rituals. Tiers 1-6 give tier-cubed parallels and a higher effective altar tier; blood runes speed it up.'),
+  'Every Blood Altar, Alchemy Table and Alchemy Array recipe in bulk, soaked from a pool of Life Essence inside the structure (tiers 3-6). Pipe Life Essence into an input hatch: the pool fills itself from it, 1,000 mB per block, up to 64 blocks a second, and the machine shows how much is still missing. Recipes start once the pool is full. Circuit 1 = altar, 2 = alchemy table (needs a Blood Orb in a bus), 11 = binding rituals. Tiers 1-6 give tier-cubed parallels and a higher effective altar tier; blood runes speed it up.'),
  ('alfheim_teleportation_array', 'Alfheim Teleportation Array', 'IV', 'GT-Not-Leisure', 'Magic',
   'Every Botania altar craft (mana pool, runic altar, pure daisy, petal apothecary, terrestrial agglomeration, elven trade, Mythic Botany) as a GregTech recipe. After the Gaia Guardian, recipes with Gaia Spirit are made only here. Runes and catalysts are kept.'),
  ('component_assembly_line', 'Component Assembly Line', 'IV', 'GoodGenerator (GTNH)', 'Assembly',
