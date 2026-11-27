@@ -794,8 +794,8 @@ public final class GTAACompatRecipes {
     private static void singularityDataHub(Consumer<FinishedRecipe> provider) {
         ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:singularity_data_hub")
                 .inputItems(S1, 16).inputItems(S2, 16).inputItems(S3, 16)
-                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.SUPER_CHEST[IV].asStack(16))
-                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.SUPER_TANK[IV].asStack(16))
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.QUANTUM_CHEST[IV].asStack(16))
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.QUANTUM_TANK[IV].asStack(16))
                 .inputItems(GTItems.FIELD_GENERATOR_UV, 32)
                 .inputItems(CustomTags.UHV_CIRCUITS, 48)
                 .inputItems(GTAABlocks.GRAVITY_STABILIZATION_CASING.asStack(16))
