@@ -88,6 +88,7 @@ public final class GTAACompatRecipes {
         tieredGlass(provider);
         personalSpace(provider);
         GTAAMissingRecipes.init(provider);
+        GTAADimensionRecipes.init(provider);
     }
 
     /**
