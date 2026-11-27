@@ -38,6 +38,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType MANA_NEXUS;
     public static GTRecipeType MATTER_FABRICATOR;
     public static GTRecipeType NETHER_INTERFACE;
+    public static GTRecipeType MICRO_SPACETIME;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
@@ -137,6 +138,9 @@ public class GTAARecipeTypes {
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.NeutroniumCompressionLogic.INSTANCE);
+        MICRO_SPACETIME = register("micro_spacetime_fabricatorio", "multiblock", "Micro SpaceTime Fabricatorio")
+                .setMaxIOSize(6, 3, 3, 2).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
         NETHER_INTERFACE = register("nether_interface", "multiblock", "Nether Interface")
                 .setMaxIOSize(1, 9, 1, 1).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT);

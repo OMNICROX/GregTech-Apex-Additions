@@ -38,7 +38,7 @@ public class CrystallineInfinitierMachine extends WorkableElectricMultiblockMach
             CrystallineInfinitierMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
     public static final String CTX = "CIFieldGenerator";
 
-    @DescSynced private int fieldTier;
+    @DescSynced protected int fieldTier;
 
     public CrystallineInfinitierMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);

@@ -73,6 +73,7 @@ public final class GTAACompatRecipes {
         nuclearStar(provider);
         cosmicCircuits(provider);
         crystallineInfinitier(provider);
+        microSpacetime(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -653,5 +654,36 @@ public final class GTAACompatRecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.CRYSTALLINE_INFINITIER.asStack())
                 .duration(1600).EUt(VA[UHV])
                 .save(needing(provider, "gtna", Map.of(S1, "gtna:molecular_casing", S2, "gtna:containment_field_generator")));
+    }
+
+    /** Twist Space Technology's Micro SpaceTime Fabricatorio and its bulk recipes */
+    private static void microSpacetime(Consumer<FinishedRecipe> provider) {
+        var mm = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
+        var infinity = mm.getMaterial("gtna:infinity");
+        String[] mods = { "gtca", "gtna" };
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:micro_spacetime_fabricatorio")
+                .inputItems(S1, 64)
+                .inputItems(GTBlocks.FUSION_CASING_MK3.asStack(32))
+                .inputItems(GTItems.FIELD_GENERATOR_UEV, 16)
+                .inputItems(CustomTags.UIV_CIRCUITS, 8)
+                .inputItems(S2, 4)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack(4))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MICRO_SPACETIME_FABRICATORIO.asStack())
+                .duration(4800).EUt(VA[UIV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:dimensionally_transcendent_casing",
+                        S2, "gtna:stabilisation_field_generator_tier_0")));
+        com.omnicrox.gtaa.common.data.GTAARecipeTypes.MICRO_SPACETIME.recipeBuilder("gtapexadditions:mstf/quantum_anomaly")
+                .circuitMeta(24).inputItems(S1, 16)
+                .inputFluids(GTMaterials.Hydrogen.getFluid(com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.PLASMA, 1000))
+                .outputItems(S2, 64)
+                .duration(1200).EUt(VA[UIV])
+                .save(needing(provider, mods, Map.of(S1, "gtna:stable_boson_containment_unit", S2, "gtca:quantum_anomaly")));
+        if (infinity != null && infinity.hasFluid())
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.MICRO_SPACETIME.recipeBuilder("gtapexadditions:mstf/nuclear_star")
+                    .circuitMeta(23).inputItems(GTItems.GRAVI_STAR, 256)
+                    .inputFluids(infinity.getFluid(L * 32))
+                    .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.NUCLEAR_STAR.asStack(32))
+                    .duration(1200).EUt(VA[UIV]).save(provider);
     }
 }

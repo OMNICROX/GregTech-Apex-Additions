@@ -785,4 +785,42 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/implosion_compressor")))
             .register();
 
+
+    // ---------------- Micro SpaceTime Fabricatorio (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition MICRO_SPACETIME_FABRICATORIO = REGISTRATE
+            .multiblock("micro_spacetime_fabricatorio", com.omnicrox.gtaa.common.machine.multiblock.tst.MicroSpaceTimeFabricatorioMachine::new)
+            .langValue("Micro SpaceTime Fabricatorio")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MICRO_SPACETIME)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.tst.MicroSpaceTimeFabricatorioMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Artificial SpaceTime Fabricator")
+                    .flavor("A little start of Genesis.")
+                    .info("Activate the primordial singularity to begin the creation process of the universe, of course, within controllable limits.")
+                    .parallel("16")
+                    .info("A §eStabilisation Field Generator§7 enables perfect overclock,")
+                    .info(" and further upgrades can significantly increase the running speed.")
+                    .info("Makes Quantum Anomalies and Nuclear Stars in bulk")
+                    .portedFrom("Twist Space Technology (GTNH addon)").author(TST_NXER).build())
+            .appearanceBlock(() -> modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "micro_spacetime_fabricatorio")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('E', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get))
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1)))
+                    .where('B', blocks(GTBlocks.FUSION_CASING_MK3.get()))
+                    .where('F', blocks(GTBlocks.FUSION_CASING_MK3.get())
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('C', blocks(modBlock("gtna:transcendentally_amplified_magnetic_confinement_casing", GTBlocks.FUSION_COIL::get)))
+                    .where('D', com.omnicrox.gtaa.common.machine.multiblock.tst.CrystallineInfinitierMachine.fieldGenerators())
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
 }
