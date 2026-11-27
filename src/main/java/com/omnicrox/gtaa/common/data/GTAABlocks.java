@@ -234,6 +234,40 @@ public class GTAABlocks {
     public static final BlockEntry<Block> BLOODY_THAUMIUM_BLOCK = casing("bloody_thaumium_block", "Block of Bloody Thaumium");
     public static final BlockEntry<Block> BLOODY_VOID_BLOCK = casing("bloody_void_block", "Block of Bloody Void");
 
+    // Tiered borosilicate glass, HV to UXV - textures from GT5-Unofficial / BartWorks (LGPL-3.0)
+    public static final String[] TIERED_GLASS_IDS = { "borosilicate_glass", "titanium_reinforced_borosilicate_glass",
+            "tungstensteel_reinforced_borosilicate_glass", "rhodium_plated_palladium_reinforced_borosilicate_glass",
+            "iridium_reinforced_borosilicate_glass", "osmium_reinforced_borosilicate_glass",
+            "neutronium_reinforced_borosilicate_glass", "infinity_reinforced_borosilicate_glass",
+            "transcendentally_reinforced_borosilicate_glass", "hexanite_reinforced_borosilicate_glass",
+            "universium_reinforced_borosilicate_glass" };
+    private static final String[] TIERED_GLASS_NAMES = { "Borosilicate Glass Block", "Titanium Reinforced Borosilicate Glass Block",
+            "Tungstensteel Reinforced Borosilicate Glass Block", "Rhodium-Plated Palladium Reinforced Borosilicate Glass Block",
+            "Iridium Reinforced Borosilicate Glass Block", "Osmium Reinforced Borosilicate Glass Block",
+            "Neutronium Reinforced Borosilicate Glass Block", "Infinity Reinforced Borosilicate Glass Block",
+            "Transcendentally Reinforced Borosilicate Glass Block", "Hexanite Reinforced Borosilicate Glass Block",
+            "Universium Reinforced Borosilicate Glass Block" };
+    /** index i = voltage tier HV + i */
+    @SuppressWarnings("unchecked")
+    public static final BlockEntry<Block>[] TIERED_GLASS = new BlockEntry[TIERED_GLASS_IDS.length];
+    static {
+        for (int i = 0; i < TIERED_GLASS_IDS.length; i++) TIERED_GLASS[i] = clearGlass(TIERED_GLASS_IDS[i], TIERED_GLASS_NAMES[i]);
+    }
+
+    /** see-through, half-transparent glass (translucent layer) */
+    public static BlockEntry<Block> clearGlass(String name, String lang) {
+        return REGISTRATE.<Block>block(name, p -> new net.minecraft.world.level.block.GlassBlock(p))
+                .initialProperties(() -> Blocks.GLASS)
+                .properties(p -> p.strength(5.0f, 10.0f).noOcclusion().isValidSpawn((s, l, pos, e) -> false)
+                        .isSuffocating((s, l, pos) -> false).isViewBlocking((s, l, pos) -> false))
+                .addLayer(() -> RenderType::translucent)
+                .blockstate(NonNullBiConsumer.noop())
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .lang(lang)
+                .item(BlockItem::new).model(NonNullBiConsumer.noop()).build()
+                .register();
+    }
+
     public static BlockEntry<Block> casing(String name, String lang) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)

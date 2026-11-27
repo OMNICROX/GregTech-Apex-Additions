@@ -112,6 +112,17 @@
     "gtapexadditions:gate_ring",
     "gtapexadditions:gate_base",
     "gtapexadditions:gate_pedestal",
-    "gtapexadditions:gate_chevron"
+    "gtapexadditions:gate_chevron",
+    "gtapexadditions:borosilicate_glass",
+    "gtapexadditions:titanium_reinforced_borosilicate_glass",
+    "gtapexadditions:tungstensteel_reinforced_borosilicate_glass",
+    "gtapexadditions:rhodium_plated_palladium_reinforced_borosilicate_glass",
+    "gtapexadditions:iridium_reinforced_borosilicate_glass",
+    "gtapexadditions:osmium_reinforced_borosilicate_glass",
+    "gtapexadditions:neutronium_reinforced_borosilicate_glass",
+    "gtapexadditions:infinity_reinforced_borosilicate_glass",
+    "gtapexadditions:transcendentally_reinforced_borosilicate_glass",
+    "gtapexadditions:hexanite_reinforced_borosilicate_glass",
+    "gtapexadditions:universium_reinforced_borosilicate_glass"
   ]
 }

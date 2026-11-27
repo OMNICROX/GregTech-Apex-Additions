@@ -920,8 +920,7 @@ public class GTAAMachines {
             .appearanceBlock(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING)
             .pattern(definition -> {
                 var h = blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get());
-                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
-                        FUSION_GLASS.get(), GTBlocks.CLEANROOM_GLASS.get());
+                var glass = com.omnicrox.gtaa.common.glass.GTAAGlass.tiered().or(blocks(GTBlocks.CLEANROOM_GLASS.get()));
                 return GTAAStructures.pattern("component_assembly_line", "component_assembly_line")
                         .where('~', controller(blocks(definition.get())))
                         .where('H', h)
@@ -1022,7 +1021,7 @@ public class GTAAMachines {
                     .where('A', blocks(GTAABlocks.PUR_CONCRETE.get()))
                     .where('B', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()))
                     .where('C', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
-                    .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('D', com.omnicrox.gtaa.common.glass.GTAAGlass.tiered())
                     .where('F', waterOrAir())
                     .where('G', frameOr(GTMaterials.Tungsten))
                     .where('H', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()).setMinGlobalLimited(1)
@@ -1089,7 +1088,7 @@ public class GTAAMachines {
                     .where('A', fluidIO(GTAABlocks.PUR_OZONE_CASING.get()))
                     .where('B', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()))
                     .where('C', blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
-                    .where('D', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('D', com.omnicrox.gtaa.common.glass.GTAAGlass.tiered())
                     .where('E', frameOr(GTMaterials.TungstenSteel))
                     .where('O', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS))),
             Component.literal("\u00a77Uses Ozone: \u00a7e128k / 256k / 512k / 1M L\u00a77 per cycle for \u00a7a20 / 40 / 60 / 80%"));
@@ -1104,7 +1103,7 @@ public class GTAAMachines {
                     .where('D', blocks(GTAABlocks.PUR_INDUSTRIAL_CASING.get()))
                     .where('E', frameOr(GTMaterials.Neutronium))
                     .where('W', waterOrAir())
-                    .where('G', blocks(GTBlocks.CASING_TEMPERED_GLASS.get())),
+                    .where('G', com.omnicrox.gtaa.common.glass.GTAAGlass.tiered()),
             Component.literal("\u00a77Uses \u00a7e100k L\u00a77 Polyaluminium Chloride per cycle for \u00a7a90%\u00a77 (10% without)"));
 
     public static final MultiblockMachineDefinition PURIFICATION_PH = purUnit(4, "purification_unit_ph_adjustment",
@@ -1130,7 +1129,7 @@ public class GTAAMachines {
                     .where('A', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
                     .where('B', fluidIO(GTAABlocks.PUR_PLASMA_HEATING_CASING.get()))
                     .where('D', blocks(GTAABlocks.PUR_STERILE_CASING.get()))
-                    .where('E', blocks(GTBlocks.CASING_TEMPERED_GLASS.get()))
+                    .where('E', com.omnicrox.gtaa.common.glass.GTAAGlass.tiered())
                     .where('F', any())
                     .where('G', frameOr(GTMaterials.NaquadahAlloy))
                     .where('K', blocks(GTAABlocks.PUR_STERILE_CASING.get()).setMinGlobalLimited(1).or(abilities(PartAbility.IMPORT_FLUIDS)))
@@ -1266,8 +1265,7 @@ public class GTAAMachines {
                             .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
                             .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setPreviewCount(1)))
-                    .where('g', blocks(GTBlocks.CASING_LAMINATED_GLASS.get(), GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_TEMPERED_GLASS.get(),
-                            net.minecraft.world.level.block.Blocks.GLASS))
+                    .where('g', com.omnicrox.gtaa.common.glass.GTAAGlass.tiered().or(blocks(net.minecraft.world.level.block.Blocks.GLASS)))
                     .where('f', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Steel))
                     .where('s', any())
                     .where('-', air())
@@ -1403,8 +1401,7 @@ public class GTAAMachines {
             .appearanceBlock(GTAABlocks.SUIT_CASING_T1)
             .pattern(definition -> {
                 var casing = com.omnicrox.gtaa.common.machine.multiblock.SuitFabricationStationMachine.casings();
-                var glass = blocks(GTBlocks.CASING_TEMPERED_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get(),
-                        GTBlocks.FUSION_GLASS.get(), net.minecraft.world.level.block.Blocks.GLASS);
+                var glass = com.omnicrox.gtaa.common.glass.GTAAGlass.tiered().or(blocks(net.minecraft.world.level.block.Blocks.GLASS));
                 var monitor = blocks(GTAABlocks.SUIT_MONITOR.get());
                 return FactoryBlockPattern.start(com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.RIGHT,
                                 com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.BACK,

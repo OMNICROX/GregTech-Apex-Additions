@@ -90,3 +90,8 @@ magenta. GTAA ships the 30 missing `*_ctm` textures under `assets/gtocore/textur
   `MetaBlockCasing02/0, 1` and `MetaBlockCasing01/9` (GPL-3.0).
 - `bloody_ichorium_block`, `bloody_thaumium_block`, `bloody_void_block`: GT New Horizons NewHorizonsCoreMod
   `dreamcraft:blockBloody*` (GPL-3.0).
+
+## Tiered borosilicate glass
+Textures for the eleven Borosilicate Glass blocks (HV to UXV) come from BartWorks in
+[GT5-Unofficial](https://github.com/GTNewHorizons/GT5-Unofficial) (LGPL-3.0); the tier rule (energy hatch no higher
+than the glass) follows GT New Horizons.

@@ -85,6 +85,7 @@ public final class GTAACompatRecipes {
         missingSources(provider);
         topCircuits(provider);
         maxwellCats(provider);
+        tieredGlass(provider);
     }
 
     /**
@@ -873,5 +874,47 @@ public final class GTAACompatRecipes {
                 .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.STRANGE_MATTER_AGGREGATOR.asStack())
                 .duration(12000).EUt(VA[UIV])
                 .save(provider);
+    }
+
+    /**
+     * GT New Horizons' BartWorks glass line: borosilicate glass, then each tier is a borosilicate block solidified with
+     * 8 ingots' worth of a molten metal, one voltage tier below the glass. Hexanite has no GTCEu material, so Spacetime
+     * takes its place.
+     */
+    private static void tieredGlass(Consumer<FinishedRecipe> provider) {
+        var mm = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager;
+        var boro = GTAABlocks.TIERED_GLASS[0].asStack();
+        FLUID_SOLIDFICATION_RECIPES.recipeBuilder("gtapexadditions:glass/borosilicate_glass")
+                .inputItems(Items.GLASS)
+                .inputFluids(GTMaterials.BorosilicateGlass.getFluid(L * 4))
+                .outputItems(boro).duration(200).EUt(VA[MV]).save(provider);
+        Object[] metals = { GTMaterials.Titanium, GTMaterials.TungstenSteel, GTMaterials.RhodiumPlatedPalladium,
+                GTMaterials.Iridium, GTMaterials.Osmium, GTMaterials.Neutronium, "gtna:infinity",
+                "gtna:transcendent_metal", "gtna:space_time", "gtna:universium" };
+        for (int i = 0; i < metals.length; i++) {
+            var m = metals[i] instanceof String id ? mm.getMaterial(id)
+                    : (com.gregtechceu.gtceu.api.data.chemical.material.Material) metals[i];
+            if (m == null || !m.hasFluid()) continue;
+            var fluid = moltenOrLiquid(m, (int) (L * 8));
+            if (fluid == null) continue;
+            int glassTier = HV + 1 + i;
+            FLUID_SOLIDFICATION_RECIPES.recipeBuilder("gtapexadditions:glass/" + GTAABlocks.TIERED_GLASS_IDS[i + 1])
+                    .inputItems(boro.copy())
+                    .inputFluids(fluid)
+                    .outputItems(GTAABlocks.TIERED_GLASS[i + 1].asStack())
+                    .duration(800).EUt(VA[glassTier - 1]).save(provider);
+        }
+    }
+
+    private static net.minecraftforge.fluids.FluidStack moltenOrLiquid(
+            com.gregtechceu.gtceu.api.data.chemical.material.Material m, int amount) {
+        var props = m.getProperty(com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey.FLUID);
+        if (props == null) return null;
+        for (var key : new com.gregtechceu.gtceu.api.fluids.store.FluidStorageKey[] {
+                com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.MOLTEN,
+                com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys.LIQUID }) {
+            if (props.getStorage().get(key) != null) return m.getFluid(key, amount);
+        }
+        return m.getFluid(amount);
     }
 }

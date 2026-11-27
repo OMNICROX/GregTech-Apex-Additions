@@ -8,7 +8,9 @@
     "SteamSpeedMixin",
     "PatternCasingFirstMixin",
     "BlockPatternInvoker",
-    "AutoBuildCasingFirstMixin"
+    "AutoBuildCasingFirstMixin",
+    "GlassTierElectricMixin",
+    "GlassTierWorkingMixin"
   ],
   "injectors": {
     "defaultRequire": 0

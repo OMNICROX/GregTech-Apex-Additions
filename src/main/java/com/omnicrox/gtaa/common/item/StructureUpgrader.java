@@ -138,6 +138,7 @@ public class StructureUpgrader extends Item {
         out.add(new Family("suit_casings", "Suit Station Casings", single(GTAABlocks.suitCasings())));
         out.add(new Family("mca_soil", "Cultivation Soil", grouped(MysticalCultivationArrayMachine.soilTiers())));
         out.add(new Family("mca_glass", "Tiered Glass", grouped(MysticalCultivationArrayMachine.glassTiers())));
+        out.add(new Family("borosilicate_glass", "Borosilicate Glass", com.omnicrox.gtaa.common.glass.GTAAGlass.family()));
         out.add(new Family("se_motors", "Space Elevator Motors", single(GTAABlocks.SE_MOTOR_MK1.get(), GTAABlocks.SE_MOTOR_MK2.get(),
                 GTAABlocks.SE_MOTOR_MK3.get(), GTAABlocks.SE_MOTOR_MK4.get(), GTAABlocks.SE_MOTOR_MK5.get())));
         return out;
