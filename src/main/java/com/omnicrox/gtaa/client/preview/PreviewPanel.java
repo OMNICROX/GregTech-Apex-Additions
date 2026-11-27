@@ -156,8 +156,11 @@ public final class PreviewPanel {
     static void drag(MultiblockPreview p, Drag d, double mx, double dx, double dy) {
         switch (d) {
             case ROTATE -> {
-                p.yaw += (float) dx * 1.6f;
-                p.pitch = Math.max(-89, Math.min(89, p.pitch + (float) dy * 1.6f));
+                float sp = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_ROTATE_SPEED.get().floatValue();
+                float sx = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_INVERT_X.get() ? -sp : sp;
+                float sy = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_INVERT_Y.get() ? -sp : sp;
+                p.yaw += (float) dx * sx;
+                p.pitch = Math.max(-89, Math.min(89, p.pitch + (float) dy * sy));
             }
             case PAN -> {
                 double rad = Math.toRadians(p.yaw);
@@ -171,7 +174,8 @@ public final class PreviewPanel {
 
     static boolean scroll(MultiblockPreview p, double mx, double my, double delta) {
         if (in(mx, my, SX, SY, SW, SH)) {
-            p.zoom = (float) Math.max(0.05, Math.min(6, p.zoom * (delta > 0 ? 0.88 : 1.0 / 0.88)));
+            double k = 1 - com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_ZOOM_SPEED.get();
+            p.zoom = (float) Math.max(0.05, Math.min(6, p.zoom * (delta > 0 ? k : 1.0 / k)));
             return true;
         }
         int step = delta > 0 ? 1 : -1;

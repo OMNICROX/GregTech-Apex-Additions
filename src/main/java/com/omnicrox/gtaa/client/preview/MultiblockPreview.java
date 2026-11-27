@@ -72,7 +72,11 @@ public final class MultiblockPreview {
     private static final LinkedHashMap<MultiblockMachineDefinition, MultiblockPreview> PREVIEWS = new LinkedHashMap<>(16, 0.75f, true) {
         @Override
         protected boolean removeEldestEntry(Map.Entry<MultiblockMachineDefinition, MultiblockPreview> e) {
-            if (size() > CACHE) {
+            int max = CACHE;
+            try {
+                max = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_CACHE.get();
+            } catch (Throwable ignored) {}
+            if (size() > max) {
                 e.getValue().release();
                 return true;
             }

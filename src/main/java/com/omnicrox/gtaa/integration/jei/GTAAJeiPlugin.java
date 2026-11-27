@@ -22,13 +22,23 @@ public class GTAAJeiPlugin implements IModPlugin {
         return GTAA.id("jei_plugin");
     }
 
+    private static boolean on() {
+        try {
+            return com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_ENABLED.get();
+        } catch (Throwable t) {
+            return true;
+        }
+    }
+
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
+        if (!on()) return;
         registration.addRecipeCategories(new MultiblockPreviewCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        if (!on()) return;
         List<MultiblockPreviewCategory.Recipe> recipes = new ArrayList<>();
         for (var def : GTRegistries.MACHINES.values())
             if (def instanceof MultiblockMachineDefinition m) recipes.add(MultiblockPreviewCategory.recipe(m));
@@ -37,6 +47,7 @@ public class GTAAJeiPlugin implements IModPlugin {
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime runtime) {
+        if (!on() || !com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_HIDE_GREGTECH.get()) return;
         // GregTech's own (static under NEI) multiblock page goes away
         try {
             runtime.getRecipeManager().hideRecipeCategory(

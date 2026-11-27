@@ -16,3 +16,7 @@ ScriptBloodMagic as the reference).
 Replace GTCEu's JEI multiblock page with a GTNH NEI-style one (BlockRenderer6343 look): tier slider for tiered blocks,
 layer slider, hatch toggle (H), "?" info and the block list down the side. Built in ApexLib as its own recipe-viewer
 category, fed by every GTCEu multiblock's pattern / shape infos; GTCEu's own page hidden.
+
+## Convention (2026-11-27)
+New features get an on/off switch (or a tuning value) in config/gtapexadditions-client.toml (visual / client) or
+config/gtapexadditions-common.toml (gameplay) whenever that makes sense.

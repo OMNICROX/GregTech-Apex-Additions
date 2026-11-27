@@ -52,6 +52,10 @@ public class GTAA {
         if (net.minecraftforge.fml.ModList.get().isLoaded("botanicadds")) com.omnicrox.gtaa.common.compat.BotanicAdditionsCompat.init(bus);
         net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
                 com.omnicrox.gtaa.common.infernal.InfernalConfig.SPEC, "gtapexadditions-infernal.toml");
+        net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
+                com.omnicrox.gtaa.config.GTAACommonConfig.SPEC, "gtapexadditions-common.toml");
+        net.minecraftforge.fml.ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.CLIENT,
+                com.omnicrox.gtaa.config.GTAAClientConfig.SPEC, "gtapexadditions-client.toml");
         if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
             com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager.register(id("antimatter_core"),
                     com.omnicrox.gtaa.client.AntimatterCoreRender.TYPE);

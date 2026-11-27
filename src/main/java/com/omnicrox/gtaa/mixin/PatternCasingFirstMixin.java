@@ -31,6 +31,7 @@ public abstract class PatternCasingFirstMixin {
 
     @Inject(method = "build", at = @At("HEAD"), remap = false, require = 0)
     private void gtaa$casingFirst(CallbackInfoReturnable<?> cir) {
+        if (!gtaa$enabled()) return;
         for (TraceabilityPredicate tp : symbolMap.values()) {
             if (tp == null || tp.isController || tp.limited.isEmpty() || tp.common.isEmpty()) continue;
             List<SimplePredicate> casings = new ArrayList<>();
@@ -55,5 +56,13 @@ public abstract class PatternCasingFirstMixin {
             if (b == Blocks.AIR || b instanceof MetaMachineBlock) return false;
         }
         return true;
+    }
+
+    private static boolean gtaa$enabled() {
+        try {
+            return com.omnicrox.gtaa.config.GTAACommonConfig.AUTOBUILD_CASING_FIRST.get();
+        } catch (Throwable t) {
+            return true; // config not loaded yet
+        }
     }
 }
