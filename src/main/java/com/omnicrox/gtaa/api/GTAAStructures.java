@@ -9,10 +9,10 @@ public final class GTAAStructures {
     private GTAAStructures() {}
 
     public static String[][] get(String file, String key) {
-        return ApexStructures.get("gtapexadditions", file, key);
+        return ApexStructures.get(GTAAStructures.class, "gtapexadditions", file, key);
     }
 
     public static FactoryBlockPattern pattern(String file, String key) {
-        return ApexStructures.pattern("gtapexadditions", file, key);
+        return ApexStructures.pattern(GTAAStructures.class, "gtapexadditions", file, key);
     }
 }

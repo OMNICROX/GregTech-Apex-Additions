@@ -23,10 +23,14 @@ public final class ApexStructures {
 
     private ApexStructures() {}
 
-    public static synchronized String[][] get(String namespace, String file, String key) {
+    /**
+     * Mods are separate modules under Forge, so a resource is only visible from a class in the jar that holds it:
+     * pass a class from the mod that owns the structure file as {@code owner}.
+     */
+    public static synchronized String[][] get(Class<?> owner, String namespace, String file, String key) {
         return CACHE.computeIfAbsent(namespace + ":" + file + "#" + key, k -> {
             String path = "/" + namespace + "/structures/" + file + ".json";
-            try (InputStream in = ApexStructures.class.getResourceAsStream(path)) {
+            try (InputStream in = open(owner, path)) {
                 if (in == null) throw new IllegalStateException("missing structure file " + path);
                 JsonObject root = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
                 JsonArray layers = root.getAsJsonArray(key);
@@ -44,11 +48,21 @@ public final class ApexStructures {
         });
     }
 
+    private static InputStream open(Class<?> owner, String path) {
+        InputStream in = owner.getResourceAsStream(path);
+        if (in == null) in = owner.getClassLoader().getResourceAsStream(path.substring(1));
+        if (in == null) {
+            ClassLoader ctx = Thread.currentThread().getContextClassLoader();
+            if (ctx != null) in = ctx.getResourceAsStream(path.substring(1));
+        }
+        return in;
+    }
+
     /** A pattern builder pre-filled with the shape; callers add the {@code where} clauses. */
-    public static FactoryBlockPattern pattern(String namespace, String file, String key) {
+    public static FactoryBlockPattern pattern(Class<?> owner, String namespace, String file, String key) {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RelativeDirection.LEFT, RelativeDirection.DOWN,
                 RelativeDirection.BACK);
-        for (String[] layer : get(namespace, file, key)) pattern.aisle(layer);
+        for (String[] layer : get(owner, namespace, file, key)) pattern.aisle(layer);
         return pattern;
     }
 
