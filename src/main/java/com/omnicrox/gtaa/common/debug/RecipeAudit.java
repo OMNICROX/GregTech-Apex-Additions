@@ -68,6 +68,51 @@ public final class RecipeAudit {
                     }
             } catch (Throwable ignored) {}
         }
+        // loot tables (block drops, mob drops, chests) count as a source
+        Set<Item> loot = new HashSet<>();
+        try {
+            var lootData = server.getLootData();
+            var gson = net.minecraft.world.level.storage.loot.LootDataType.TABLE.parser();
+            java.util.regex.Pattern name = java.util.regex.Pattern.compile("\"name\"\\s*:\\s*\"([a-z0-9_.\\-]+:[a-z0-9_./\\-]+)\"");
+            for (ResourceLocation id : lootData.getKeys(net.minecraft.world.level.storage.loot.LootDataType.TABLE)) {
+                try {
+                    var table = lootData.getElement(new net.minecraft.world.level.storage.loot.LootDataId<>(
+                            net.minecraft.world.level.storage.loot.LootDataType.TABLE, id));
+                    if (table == null) continue;
+                    var m = name.matcher(gson.toJsonTree(table).toString());
+                    while (m.find()) {
+                        Item it = BuiltInRegistries.ITEM.get(new ResourceLocation(m.group(1)));
+                        if (it != null && it != net.minecraft.world.item.Items.AIR) loot.add(it);
+                    }
+                } catch (Throwable ignored) {}
+            }
+        } catch (Throwable t) {
+            GTAA.LOGGER.warn("[audit] loot tables not read", t);
+        }
+        Set<Item> have = new HashSet<>(made);
+        have.addAll(loot);
+        // recipes with an ingredient that nothing can give (no option is made by a recipe or dropped by loot)
+        Map<String, Set<String>> blocked = new TreeMap<>();
+        for (Recipe<?> r : server.getRecipeManager().getRecipes()) {
+            String id = r.getId().toString();
+            try {
+                List<List<Item>> groups = new ArrayList<>();
+                if (r instanceof GTRecipe g) {
+                    groups(g.inputs, groups);
+                    groups(g.tickInputs, groups);
+                } else for (Ingredient ing : r.getIngredients()) {
+                    List<Item> l = new ArrayList<>();
+                    for (ItemStack st : ing.getItems()) l.add(st.getItem());
+                    groups.add(l);
+                }
+                for (List<Item> grp : groups) {
+                    if (grp.isEmpty() || grp.stream().anyMatch(have::contains)) continue;
+                    String key = grp.stream().map(i -> BuiltInRegistries.ITEM.getKey(i).toString()).distinct().limit(4)
+                            .reduce((a, b) -> a + " | " + b).orElse("?");
+                    blocked.computeIfAbsent(key, k -> new TreeSet<>()).add(id);
+                }
+            } catch (Throwable ignored) {}
+        }
         Path dir = server.getServerDirectory().toPath().resolve("gtaa_audit");
         try {
             Files.createDirectories(dir);
@@ -88,6 +133,11 @@ public final class RecipeAudit {
                 l.forEach(x -> sb.append(x).append('\n'));
             });
             Files.writeString(dir.resolve("used_not_made.txt"), sb);
+            StringBuilder bl = new StringBuilder("# ingredient nothing gives (recipe outputs + loot tables)\trecipes blocked\texamples\n");
+            blocked.entrySet().stream().sorted((a, b) -> b.getValue().size() - a.getValue().size()).forEach(e -> bl.append(e.getKey())
+                    .append('\t').append(e.getValue().size()).append('\t')
+                    .append(e.getValue().stream().limit(4).reduce((a, b) -> a + ", " + b).orElse("")).append('\n'));
+            Files.writeString(dir.resolve("blocked_recipes.txt"), bl);
             // items with no recipe at all, for our namespaces
             StringBuilder nr = new StringBuilder();
             for (Item it : BuiltInRegistries.ITEM) {
@@ -124,6 +174,19 @@ public final class RecipeAudit {
         }
         src.sendSuccess(() -> Component.literal("Audit written to " + dir), false);
         return 1;
+    }
+
+    private static void groups(Map<?, List<Content>> map, List<List<Item>> out) {
+        if (map == null) return;
+        List<Content> list = map.get(ItemRecipeCapability.CAP);
+        if (list == null) return;
+        for (Content c : list) {
+            try {
+                List<Item> l = new ArrayList<>();
+                for (ItemStack s : ItemRecipeCapability.CAP.of(c.content).getItems()) l.add(s.getItem());
+                out.add(l);
+            } catch (Throwable ignored) {}
+        }
     }
 
     private static void collect(Map<?, List<Content>> map, Set<Item> into, Map<Item, Set<String>> by, String id) {
