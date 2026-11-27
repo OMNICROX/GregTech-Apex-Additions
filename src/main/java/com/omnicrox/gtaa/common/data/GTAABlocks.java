@@ -226,6 +226,14 @@ public class GTAABlocks {
     public static final BlockEntry<Block> RADIATION_ABSORBENT_CASING = casing("radiation_absorbent_casing", "Background Radiation Absorbent Casing");
     public static final BlockEntry<Block> HAWKING_GLASS = glass("hawking_glass", "Hawking Radiation Realignment Focus");
 
+    // Bloody Hell - textures from Twist Space Technology (GPL-3.0) and GT New Horizons' NewHorizonsCoreMod (GPL-3.0)
+    public static final BlockEntry<Block> REINFORCED_STONE_BRICK_CASING = casing("reinforced_stone_brick_casing", "Reinforced Stone Brick Casing");
+    public static final BlockEntry<Block> GORE_CASING = casing("gore_casing", "Gore Casing");
+    public static final BlockEntry<Block> ICHOR_DRACONIC_BLOCK = casing("ichor_draconic_block", "Ichor Draconic Block");
+    public static final BlockEntry<Block> BLOODY_ICHORIUM_BLOCK = casing("bloody_ichorium_block", "Block of Bloody Ichorium");
+    public static final BlockEntry<Block> BLOODY_THAUMIUM_BLOCK = casing("bloody_thaumium_block", "Block of Bloody Thaumium");
+    public static final BlockEntry<Block> BLOODY_VOID_BLOCK = casing("bloody_void_block", "Block of Bloody Void");
+
     public static BlockEntry<Block> casing(String name, String lang) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)

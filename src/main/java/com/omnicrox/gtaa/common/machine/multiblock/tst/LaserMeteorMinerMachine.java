@@ -41,7 +41,8 @@ import java.util.List;
  * mines one block per cycle (fortune from the pickaxe in the first input bus), tier 2 a row (fortune III), tier 3 a
  * whole layer (fortune IV). Cycles take 2 s at MV and overclock x4 power / x1.41 speed, with a 16x voltage margin.
  */
-public class LaserMeteorMinerMachine extends WorkableElectricMultiblockMachine {
+public class LaserMeteorMinerMachine extends WorkableElectricMultiblockMachine
+        implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             LaserMeteorMinerMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -327,5 +328,14 @@ public class LaserMeteorMinerMachine extends WorkableElectricMultiblockMachine {
         if (!status.isEmpty()) textList.add(Component.literal(status + (status.equals("Mining") ? " (radius " + radius +
                 ", " + ApexFormat.num(mined) + " blocks)" : "")).withStyle(status.equals("Mining") ? ChatFormatting.GREEN : ChatFormatting.YELLOW));
         if (lastEut > 0) textList.add(Component.literal("Using " + ApexFormat.num(lastEut) + " EU/t").withStyle(ChatFormatting.AQUA));
+    }
+
+    // ---- Structure Upgrader: the three tiers ----
+    @Override public int stageCount() { return 3; }
+    @Override public int currentStage() { return isFormed() ? tier : 0; }
+    @Override public BlockPattern stagePattern(int stage) { return GTAAGTNHMachines.laserMeteorMinerPattern(getDefinition(), stage); }
+    @Override public String stageName(int stage) { return "Tier " + stage; }
+    @Override public String stageAdds(int stage) {
+        return stage == 1 ? "one block a cycle" : stage == 2 ? "one row a cycle, Fortune III" : "one layer a cycle, Fortune IV";
     }
 }

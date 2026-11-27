@@ -23,7 +23,8 @@ import java.util.List;
  * hatches each) and a top. GTCEu's tower gives one output per block of height and voids the gaps; here the outputs go
  * to the fluid output hatches in height order, gaps skipped, so the 1st distillate is the lowest hatch and so on.
  */
-public class MegaDistillationTowerMachine extends DistillationTowerMachine {
+public class MegaDistillationTowerMachine extends DistillationTowerMachine
+        implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             MegaDistillationTowerMachine.class, com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -91,4 +92,13 @@ public class MegaDistillationTowerMachine extends DistillationTowerMachine {
         super.addDisplayText(textList);
         if (isFormed()) textList.add(Component.literal(layers + " / " + MAX_LAYERS + " layers").withStyle(ChatFormatting.AQUA));
     }
+
+    // ---- Structure Upgrader: 1-5 layers ----
+    @Override public int stageCount() { return MAX_LAYERS; }
+    @Override public int currentStage() { return isFormed() ? layers : 0; }
+    @Override public com.gregtechceu.gtceu.api.pattern.BlockPattern stagePattern(int stage) {
+        return com.omnicrox.gtaa.common.data.GTAAMachines.megaDistillationPattern(getDefinition(), stage);
+    }
+    @Override public String stageName(int stage) { return stage + (stage == 1 ? " layer" : " layers"); }
+    @Override public String stageAdds(int stage) { return "two more output layers"; }
 }

@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ForgeOfGodsStarFuelMixin",
-    "SteamSpeedMixin"
+    "SteamSpeedMixin",
+    "PatternCasingFirstMixin",
+    "BlockPatternInvoker",
+    "AutoBuildCasingFirstMixin"
   ],
   "injectors": {
     "defaultRequire": 0

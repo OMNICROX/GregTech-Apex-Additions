@@ -763,6 +763,38 @@ public final class GTAACompatRecipes {
 
     /** Twist's Bloody Hell: the graduation of Blood Magic (master ritual stone, altar, alchemy table) at IV */
     private static void bloodyHell(Consumer<FinishedRecipe> provider) {
+        // Twist's casings and GTNH's bloody metal blocks
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:reinforced_stone_brick_casing")
+                .inputItems(new net.minecraft.world.item.ItemStack(Items.STONE_BRICKS, 6))
+                .inputItems(frameGt, GTMaterials.Steel, 1)
+                .outputItems(GTAABlocks.REINFORCED_STONE_BRICK_CASING.asStack(2))
+                .circuitMeta(6).duration(100).EUt(VA[MV]).save(provider);
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:gore_casing")
+                .inputItems(S1, 1).inputItems(S2, 1)
+                .inputItems(plate, GTMaterials.StainlessSteel, 4)
+                .inputItems(frameGt, GTMaterials.StainlessSteel, 1)
+                .outputItems(GTAABlocks.GORE_CASING.asStack(2))
+                .circuitMeta(6).duration(200).EUt(VA[HV])
+                .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:largebloodstonebrick", S2, "bloodmagic:infusedslate")));
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:ichor_draconic_block")
+                .inputItems(GTAABlocks.GORE_CASING.asStack(1)).inputItems(S1, 1)
+                .inputItems(plate, GTMaterials.TungstenSteel, 4)
+                .outputItems(GTAABlocks.ICHOR_DRACONIC_BLOCK.asStack(1))
+                .circuitMeta(6).duration(300).EUt(VA[IV])
+                .save(needing(provider, "bloodmagic", Map.of(S1, "bloodmagic:etherealslate")));
+        Object[][] metals = { { GTAABlocks.BLOODY_THAUMIUM_BLOCK, GTMaterials.Titanium, "bloodmagic:infusedslate", EV },
+                { GTAABlocks.BLOODY_ICHORIUM_BLOCK, GTMaterials.Naquadah, "bloodmagic:demonslate", IV },
+                { GTAABlocks.BLOODY_VOID_BLOCK, GTMaterials.TungstenSteel, "bloodmagic:etherealslate", IV } };
+        for (Object[] m : metals) {
+            @SuppressWarnings("unchecked")
+            var out = (com.tterrag.registrate.util.entry.BlockEntry<net.minecraft.world.level.block.Block>) m[0];
+            ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:" + out.getId().getPath())
+                    .inputItems(com.gregtechceu.gtceu.api.data.tag.TagPrefix.block, (com.gregtechceu.gtceu.api.data.chemical.material.Material) m[1], 1)
+                    .inputItems(S1, 1)
+                    .outputItems(out.asStack(1))
+                    .circuitMeta(7).duration(300).EUt(VA[(Integer) m[3]])
+                    .save(needing(provider, "bloodmagic", Map.of(S1, (String) m[2])));
+        }
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:bloody_hell")
                 .inputItems(S1, 1).inputItems(S2, 1).inputItems(S3, 1).inputItems(S4, 1).inputItems(S5, 4)
                 .inputItems(CustomTags.IV_CIRCUITS, 4)

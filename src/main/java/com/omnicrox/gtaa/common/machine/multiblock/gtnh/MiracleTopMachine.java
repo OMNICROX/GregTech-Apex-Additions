@@ -19,7 +19,8 @@ import java.util.List;
  * Miracle Top (Twist Space Technology): circuit assembler with 2-16 rings. 128 parallels per ring,
  * speed 400% per ring, perfect overclocks from 8 rings.
  */
-public class MiracleTopMachine extends WorkableElectricMultiblockMachine {
+public class MiracleTopMachine extends WorkableElectricMultiblockMachine
+        implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             MiracleTopMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -79,4 +80,13 @@ public class MiracleTopMachine extends WorkableElectricMultiblockMachine {
         if (isFormed()) textList.add(Component.literal(rings + " rings: " + 128 * rings + " parallels, " + 400 * rings +
                 "% speed" + (rings >= 8 ? ", perfect overclocks" : "")).withStyle(ChatFormatting.LIGHT_PURPLE));
     }
+
+    // ---- Structure Upgrader: stage N = N + 1 rings ----
+    @Override public int stageCount() { return MAX_RINGS - MIN_RINGS + 1; }
+    @Override public int currentStage() { return isFormed() ? rings - MIN_RINGS + 1 : 0; }
+    @Override public com.gregtechceu.gtceu.api.pattern.BlockPattern stagePattern(int stage) {
+        return com.omnicrox.gtaa.common.data.GTAAGTNHMachines.miracleTopPattern(getDefinition(), stage + MIN_RINGS - 1);
+    }
+    @Override public String stageName(int stage) { return (stage + MIN_RINGS - 1) + " rings"; }
+    @Override public String stageAdds(int stage) { return "a ring: +128 parallels, +400% speed" + (stage + MIN_RINGS - 1 == 8 ? ", perfect overclocks" : ""); }
 }

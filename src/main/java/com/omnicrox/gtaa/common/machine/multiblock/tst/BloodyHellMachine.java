@@ -42,7 +42,8 @@ import java.util.Set;
  * Six structure tiers; parallels = tier^3; speed from the tier and the Speed Runes. Tiers 3-6 have a pool that must be
  * filled with Life Essence (done automatically from the input hatches) before anything runs.
  */
-public class BloodyHellMachine extends WorkableElectricMultiblockMachine {
+public class BloodyHellMachine extends WorkableElectricMultiblockMachine
+        implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             BloodyHellMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -236,5 +237,14 @@ public class BloodyHellMachine extends WorkableElectricMultiblockMachine {
                 Component.literal("Blood pool full (" + poolSize + " blocks)").withStyle(ChatFormatting.DARK_RED) :
                 Component.literal("Blood pool: needs " + ApexFormat.num(poolMissing * 1000L) +
                         " mB of Life Essence in an input hatch").withStyle(ChatFormatting.YELLOW));
+    }
+
+    // ---- Structure Upgrader: the six tiers ----
+    @Override public int stageCount() { return MAX_TIER; }
+    @Override public int currentStage() { return isFormed() ? tier : 0; }
+    @Override public BlockPattern stagePattern(int stage) { return GTAAGTNHMachines.bloodyHellPattern(getDefinition(), stage); }
+    @Override public String stageName(int stage) { return "Tier " + stage; }
+    @Override public String stageAdds(int stage) {
+        return stage * stage * stage + " parallels, altar tier " + Math.min(6, stage + 1) + (stage == 3 ? ", the blood pool" : "");
     }
 }

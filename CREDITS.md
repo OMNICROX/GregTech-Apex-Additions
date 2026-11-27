@@ -83,3 +83,10 @@ GT Nexus Addon (gtna) 0.5.2 points the connected textures of some of its casings
 Containment Field Generator, Fusion MK4, ...) at `gtocore:` textures it doesn't ship, so those blocks showed up
 magenta. GTAA ships the 30 missing `*_ctm` textures under `assets/gtocore/textures/`, unchanged, from GTOCore
 (https://github.com/GregTech-Odyssey/GTOCore, GregTech Odyssey team, LGPL-3.0).
+
+## Bloody Hell casings
+
+- `gore_casing`, `ichor_draconic_block` (animated), `reinforced_stone_brick_casing`: Twist Space Technology
+  `MetaBlockCasing02/0, 1` and `MetaBlockCasing01/9` (GPL-3.0).
+- `bloody_ichorium_block`, `bloody_thaumium_block`, `bloody_void_block`: GT New Horizons NewHorizonsCoreMod
+  `dreamcraft:blockBloody*` (GPL-3.0).

@@ -181,23 +181,27 @@ public final class GTAAGTNHMachines {
                     Component.literal("§7Better at continuous long-term operation and mass production:"),
                     Component.literal("§7after §c24 h§7 of continuous running it uses §b75%§7 less catalyst fuel"),
                     Component.literal("§7Once stopped, the discount falls back to §b0%§7 within §c1 h"),
-                    Component.literal("§b16 parallels§7; coil heat and overclocks like the Electric Blast Furnace"),
+                    Component.literal("§b16 parallels§7 (a Parallel Hatch adds more); coil heat and overclocks like the Electric Blast Furnace"),
+                    Component.literal("§7Twist Space Technology's full 65x43x65 structure: 11,520 coils"),
                     Component.literal("§8After Twist Space Technology (GTNH addon)"))
-            .appearanceBlock(GTBlocks.FUSION_CASING_MK3)
-            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gt5u", "plasma_forge")
+            .appearanceBlock(() -> modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get))
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "plasma_forge_mk2")
                     .where('~', controller(blocks(definition.get())))
-                    .where('C', heatingCoils())
-                    .where('b', blocks(GTBlocks.FUSION_CASING_MK3.get()).setMinGlobalLimited(900).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                    .where('A', heatingCoils())
+                    .where('C', blocks(GTAABlocks.MAGNETIC_FLUX_CASING.get()))
+                    .where('D', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get)))
+                    .where('E', blocks(GTAABlocks.FORCE_FIELD_GLASS.get()))
+                    .where('F', blocks(modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get))
+                            .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1)))
+                    .where('B', blocks(modBlock("gtna:infinite_spacetime_energy_boundary_casing", GTBlocks.FUSION_CASING_MK3::get)).setMinGlobalLimited(3000).or(abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
                             .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
-                    .where('N', blocks(modBlock("gtna:dimensionally_transcendent_casing", GTBlocks.FUSION_CASING_MK3::get)))
-                    .where('s', blocks(modBlock("gtna:containment_field_generator", GTBlocks.FUSION_COIL::get)))
                     .where(' ', any())
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(gt("block/casings/fusion/fusion_casing_mk3"),
+            .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/eye_of_harmony/boundary"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 
@@ -550,7 +554,7 @@ public final class GTAAGTNHMachines {
             .appearanceBlock(GTAABlocks.RADIATION_ABSORBENT_CASING)
             .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "draconic_fusion")
                     .where('~', controller(blocks(definition.get())))
-                    .where('A', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('A', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()))
                     .where('B', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()))
                     .where('C', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()).setMinGlobalLimited(25)
                             .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
@@ -988,7 +992,7 @@ public final class GTAAGTNHMachines {
                             .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
                     .where('C', blocks(GTBlocks.CASING_TITANIUM_PIPE.get()))
                     .where('D', blocks(GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING.get()))
-                    .where('E', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('E', blocks(com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()))
                     .where('F', blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()))
                     .where('G', blocks(GTBlocks.FUSION_GLASS.get(), GTBlocks.CASING_LAMINATED_GLASS.get()))
                     .where('H', blocks(net.minecraft.world.level.block.Blocks.GLOWSTONE))
@@ -1142,7 +1146,7 @@ public final class GTAAGTNHMachines {
             com.gregtechceu.gtceu.api.machine.MachineDefinition md, int tier) {
         MultiblockMachineDefinition definition = (MultiblockMachineDefinition) md;
         return VARIANTS.computeIfAbsent("bloody_hell_" + tier, k -> {
-            Block brick = bm("dungeon_brick1", () -> net.minecraft.world.level.block.Blocks.NETHER_BRICKS);
+            Block brick = GTAABlocks.GORE_CASING.get();
             java.util.List<Block> runes = new java.util.ArrayList<>();
             for (String r : BM_RUNES) {
                 Block b = bm(r, () -> null);
@@ -1151,12 +1155,12 @@ public final class GTAAGTNHMachines {
             if (runes.isEmpty()) runes.add(net.minecraft.world.level.block.Blocks.RED_NETHER_BRICKS);
             return com.omnicrox.gtaa.api.GTAAStructures.pattern("tst", "bloody_hell_" + tier)
                     .where('~', controller(blocks(definition.get())))
-                    .where('A', blocks(bm("dungeon_polished", () -> net.minecraft.world.level.block.Blocks.POLISHED_BLACKSTONE)))
+                    .where('A', blocks(GTAABlocks.REINFORCED_STONE_BRICK_CASING.get()))
                     .where('B', blocks(brick))
-                    .where('C', blocks(bm("dungeon_metal", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
-                    .where('D', blocks(bm("dungeon_metal_vengeful", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
-                    .where('E', blocks(bm("dungeon_metal_corrosive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
-                    .where('F', blocks(bm("dungeon_metal_destructive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('C', blocks(GTAABlocks.ICHOR_DRACONIC_BLOCK.get()))
+                    .where('D', blocks(GTAABlocks.BLOODY_ICHORIUM_BLOCK.get()))
+                    .where('E', blocks(GTAABlocks.BLOODY_THAUMIUM_BLOCK.get()))
+                    .where('F', blocks(GTAABlocks.BLOODY_VOID_BLOCK.get()))
                     .where('G', ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine.CTX_SPEED,
                                     () -> new Block[] { bm("speedrune", () -> net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK) })
                             .or(ApexModifiers.counted(com.omnicrox.gtaa.common.machine.multiblock.tst.BloodyHellMachine.CTX_SPEED2,
@@ -1198,13 +1202,13 @@ public final class GTAAGTNHMachines {
                     .info("Alchemy Table recipes need a §dBlood Orb§7 of their tier in an input bus (not used up)")
                     .info("Tiers 3-6: the §4blood pool§7 fills itself from the input hatches (1000 mB of Life Essence a block)")
                     .portedFrom("Twist Space Technology (GTNH addon)").author(TST_TASKEREN).build())
-            .appearanceBlock(() -> bm("dungeon_brick1", () -> net.minecraft.world.level.block.Blocks.NETHER_BRICKS))
+            .appearanceBlock(GTAABlocks.GORE_CASING)
             .pattern(definition -> bloodyHellPattern(definition, 1))
             .shapeInfos(definition -> variantShapes(bloodyHellPattern(definition, 1), bloodyHellPattern(definition, 2),
                     bloodyHellPattern(definition, 3), bloodyHellPattern(definition, 4), bloodyHellPattern(definition, 5),
                     bloodyHellPattern(definition, 6)))
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
-            .model(createWorkableCasingMachineModel(new ResourceLocation("bloodmagic", "block/dungeon/dungeon_brick1"),
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/gore_casing"),
                     gt("block/multiblock/implosion_compressor")))
             .register();
 
@@ -1243,8 +1247,8 @@ public final class GTAAGTNHMachines {
                     .where('O', blocks(modBlock("gtca:borsilicate_reinforced_iridium_glass", GTBlocks.FUSION_GLASS::get)))
                     .where('P', blocks(modBlock("gtapexadditions:compact_fusion_coil_mk3", GTBlocks.FUSION_COIL::get)))
                     .where('Q', blocks(GTBlocks.FUSION_GLASS.get()))
-                    .where('R', blocks(bm("dungeon_metal_vengeful", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
-                    .where('S', blocks(bm("dungeon_metal_corrosive", () -> net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK)))
+                    .where('R', blocks(GTAABlocks.BLOODY_ICHORIUM_BLOCK.get()))
+                    .where('S', blocks(GTAABlocks.BLOODY_THAUMIUM_BLOCK.get()))
                     .where('U', blocks(modBlock("gtca:radiant_proof_reinforced_casing", GTBlocks.FUSION_CASING_MK3::get)))
                     .where('V', lmmHatches(support, true))
                     .where('W', lmmHatches(solar, true))

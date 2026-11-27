@@ -49,7 +49,8 @@ import java.util.Map;
  * Time Acceleration = Merger; generator tiers 0-2 / 3-5 / 6-8 = ring tier 1 / 2 / 3), end section.
  * Twist's formulas, with 1 Antimatter Fuel Rod = 1 L of antimatter and the antimatter input counted in mB.
  */
-public class StrangeMatterAggregatorMachine extends WorkableElectricMultiblockMachine {
+public class StrangeMatterAggregatorMachine extends WorkableElectricMultiblockMachine
+        implements com.omnicrox.apexlib.multiblock.IStagedMulti {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             StrangeMatterAggregatorMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -393,4 +394,13 @@ public class StrangeMatterAggregatorMachine extends WorkableElectricMultiblockMa
         if (lastOutput > 0) textList.add(Component.literal("Last run: " + ApexFormat.num(lastOutput / 1000) + " L of antimatter")
                 .withStyle(ChatFormatting.GREEN));
     }
+
+    // ---- Structure Upgrader: stage N = N + 2 rings ----
+    @Override public int stageCount() { return MAX_RINGS - MIN_RINGS + 1; }
+    @Override public int currentStage() { return isFormed() ? rings - MIN_RINGS + 1 : 0; }
+    @Override public BlockPattern stagePattern(int stage) {
+        return GTAAGTNHMachines.strangeMatterAggregatorPattern(getDefinition(), stage + MIN_RINGS - 1);
+    }
+    @Override public String stageName(int stage) { return (stage + MIN_RINGS - 1) + " rings"; }
+    @Override public String stageAdds(int stage) { return "another ring (any of the three kinds)"; }
 }

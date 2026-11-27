@@ -88,7 +88,12 @@ public class PlasmaForgePrototypeMachine extends CoilWorkableElectricMultiblockM
             copy.inputs.put(FluidRecipeCapability.CAP, scaled);
             return copy;
         };
-        ModifierFunction par = ApexModifiers.parallel(m -> PARALLEL, m -> 1.0, 1.0).getModifier(machine, recipe);
+        int extra = 0;
+        if (machine instanceof com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController mc)
+            for (var part : mc.getParts())
+                if (part instanceof com.gregtechceu.gtceu.api.capability.IParallelHatch h) extra += h.getCurrentParallel();
+        int maxPar = PARALLEL + extra;
+        ModifierFunction par = ApexModifiers.parallel(m -> maxPar, m -> 1.0, 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         GTRecipe afterPar = par.apply(recipe);
         ModifierFunction oc = GTRecipeModifiers.ebfOverclock(machine, afterPar);
