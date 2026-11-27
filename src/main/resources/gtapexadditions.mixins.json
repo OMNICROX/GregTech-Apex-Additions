@@ -10,7 +10,8 @@
     "BlockPatternInvoker",
     "AutoBuildCasingFirstMixin",
     "GlassTierElectricMixin",
-    "GlassTierWorkingMixin"
+    "GlassTierWorkingMixin",
+    "HnnSimCostMixin"
   ],
   "injectors": {
     "defaultRequire": 0

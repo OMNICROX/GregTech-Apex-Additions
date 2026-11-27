@@ -86,6 +86,7 @@ public class GTAA {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(com.omnicrox.gtaa.common.compat.HnnPredictionLogic::register);
         event.enqueueWork(() -> {
             FusionReactorMachine.registerFusionTier(GTValues.UHV, " (MKIV)");
             FusionReactorMachine.registerFusionTier(GTValues.UEV, " (MKV)");

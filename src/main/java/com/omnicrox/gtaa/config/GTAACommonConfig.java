@@ -10,6 +10,8 @@ public final class GTAACommonConfig {
     public static final ForgeConfigSpec.BooleanValue GLASS_TIER_LIMITS_ENERGY;
     public static final ForgeConfigSpec.BooleanValue PERSONAL_SPACE;
     public static final ForgeConfigSpec.BooleanValue MOVE_OVERWORLD_VEINS;
+    public static final ForgeConfigSpec.BooleanValue HNN_EXTRACTOR;
+    public static final ForgeConfigSpec.DoubleValue HNN_SIM_COST;
 
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
@@ -25,6 +27,12 @@ public final class GTAACommonConfig {
         MOVE_OVERWORLD_VEINS = b.comment("GT New Horizons: the sapphire and olivine veins only spawn in the Twilight Forest (not the Overworld).",
                 "The Aether, Undergarden and Twilight veins are added either way. New chunks only; needs a restart.")
                 .define("moveOverworldVeins", true);
+        b.pop();
+        b.push("hostileNetworks");
+        HNN_EXTRACTOR = b.comment("A Hostile Neural Networks prediction in a GregTech Extractor gives every drop its data model lists.")
+                .define("extractorPredictions", true);
+        HNN_SIM_COST = b.comment("Simulation Chamber power (FE/t per data model) is multiplied by this. 0.125 = an eighth of HNN's cost.")
+                .defineInRange("simCostMultiplier", 0.125, 0.0, 10.0);
         b.pop();
         b.push("personalSpace");
         PERSONAL_SPACE = b.comment("Personal Space Portals (GT New Horizons): each player can make one world of their own.",
