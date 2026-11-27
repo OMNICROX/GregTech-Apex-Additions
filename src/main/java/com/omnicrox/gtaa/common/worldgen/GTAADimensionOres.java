@@ -163,18 +163,25 @@ public final class GTAADimensionOres {
             layered(u, "undergarden_cinnabar_vein", 30, -60, 100, Cinnabar, new Object[][] { { Cinnabar, 3 }, { Redstone, 2 }, { Ruby, 1 } });
         }
         if (twilightLayer != null) {
-            twilight("twilight_sapphire_vein", 50, Sapphire, new Object[][] { { Almandine, 3 }, { Pyrope, 2 }, { Sapphire, 2 }, { GreenSapphire, 1 } });
-            twilight("twilight_galena_vein", 50, Galena, new Object[][] { { Galena, 3 }, { Silver, 2 }, { Lead, 1 } });
-            twilight("twilight_olivine_vein", 40, Olivine, new Object[][] { { Bentonite, 3 }, { Magnesite, 2 }, { Olivine, 2 }, { GlauconiteSand, 1 } });
-            twilight("twilight_nickel_vein", 40, Nickel, new Object[][] { { Garnierite, 3 }, { Nickel, 2 }, { Cobaltite, 2 }, { Pentlandite, 1 } });
-            twilight("twilight_molybdenum_vein", 30, Molybdenum, new Object[][] { { Wulfenite, 3 }, { Molybdenite, 2 }, { Molybdenum, 1 }, { Powellite, 1 } });
+            boolean moved = false;
             if (moveOverworld()) {
-                // GTNH: sapphire and olivine are Twilight Forest veins
+                // GTNH: sapphire and olivine are Twilight Forest veins. GT's own veins move there (a layer the
+                // client knows; an unregistered layer breaks the vein sync on login)
                 for (String v : new String[] { "sapphire_vein", "olivine_vein" }) {
                     GTOreDefinition d = GTRegistries.ORE_VEINS.get(new ResourceLocation("gtceu", v));
-                    if (d != null) d.layer(IWorldGenLayer.NOWHERE).dimensions(Set.of());
+                    if (d != null) {
+                        d.layer(twilightLayer).dimensions(Set.of(TWILIGHT));
+                        moved = true;
+                    }
                 }
             }
+            if (!moved) {
+                twilight("twilight_sapphire_vein", 50, Sapphire, new Object[][] { { Almandine, 3 }, { Pyrope, 2 }, { Sapphire, 2 }, { GreenSapphire, 1 } });
+                twilight("twilight_olivine_vein", 40, Olivine, new Object[][] { { Bentonite, 3 }, { Magnesite, 2 }, { Olivine, 2 }, { GlauconiteSand, 1 } });
+            }
+            twilight("twilight_galena_vein", 50, Galena, new Object[][] { { Galena, 3 }, { Silver, 2 }, { Lead, 1 } });
+            twilight("twilight_nickel_vein", 40, Nickel, new Object[][] { { Garnierite, 3 }, { Nickel, 2 }, { Cobaltite, 2 }, { Pentlandite, 1 } });
+            twilight("twilight_molybdenum_vein", 30, Molybdenum, new Object[][] { { Wulfenite, 3 }, { Molybdenite, 2 }, { Molybdenum, 1 }, { Powellite, 1 } });
         }
     }
 
