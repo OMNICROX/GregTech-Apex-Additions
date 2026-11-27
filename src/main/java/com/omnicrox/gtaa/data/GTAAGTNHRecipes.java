@@ -217,6 +217,18 @@ public final class GTAAGTNHRecipes {
                 .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 64))
                 .outputItems(GTAAGTNHMachines.SUPER_WATER_PURIFIER.asStack())
                 .duration(2400).EUt(VA[UHV]).save(provider);
+
+        // Extreme Craft Center: TST uses molecular assemblers + extreme auto crafters + a molecular transformer
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:extreme_craft_center")
+                .inputItems(appeng.core.definitions.AEBlocks.MOLECULAR_ASSEMBLER.stack(16))
+                .inputItems(appeng.core.definitions.AEBlocks.PATTERN_PROVIDER.stack(4))
+                .inputItems(GTMachines.ASSEMBLER[IV].asStack(2))
+                .inputItems(GTItems.ROBOT_ARM_IV, 4)
+                .inputItems(CustomTags.IV_CIRCUITS, 4)
+                .inputItems(GTBlocks.HIGH_POWER_CASING.asItem(), 16)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 16))
+                .outputItems(GTAAGTNHMachines.EXTREME_CRAFT_CENTER.asStack())
+                .duration(1200).EUt(VA[IV]).save(provider);
     }
 
 }

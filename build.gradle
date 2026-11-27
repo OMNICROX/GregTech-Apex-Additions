@@ -60,7 +60,8 @@ dependencies {
     modImplementation "com.lowdragmc.ldlib:ldlib-forge-1.20.1:${project.ldlib_version}"
     modImplementation "com.tterrag.registrate:Registrate:${project.registrate_version}"
     modImplementation "dev.toma.configuration:configuration-forge-1.20.1:${project.configuration_version}"
-    modCompileOnly "appeng:appliedenergistics2-forge:15.4.10"
+    modImplementation "appeng:appliedenergistics2-forge:15.4.10"
+    modRuntimeOnly "curse.maven:guideme-1173950:7127447"        // AE2 needs it at runtime (datagen)
     modCompileOnly "vazkii.botania:Botania:1.20.1-456-FORGE"     // Mana Nexus: mana receiver / spark API (optional at runtime)
     compileOnly 'org.jetbrains:annotations:26.0.1'
     compileOnly 'org.projectlombok:lombok:1.18.38'

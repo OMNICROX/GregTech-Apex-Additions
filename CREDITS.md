@@ -31,5 +31,6 @@ marked textures follow the originals.
 | Silicon Rock Synthesizer | TST `TST_MegaStoneBreaker` | Nxer and contributors, GPL-3.0 |
 | Super Water Purifier | TST `TST_SuperWaterPurifier` | Nxer and contributors, GPL-3.0 |
 | Miracle Top | TST `GT_TileEntity_MiracleTop` | Nxer and contributors, GPL-3.0 |
+| Extreme Craft Center | TST `TST_MegaCraftingCenter` | Shordinger (author), Nxer (maintainer), GPL-3.0 |
 | (filled in as machines are ported) | 123Technology (https://github.com/CallmeSHaobe/123Technology) | CallmeSHaobe and contributors, GPL-3.0 |
 

@@ -395,4 +395,43 @@ public final class GTAAGTNHMachines {
                     gt("block/multiblock/distillation_tower")))
             .register();
 
+
+    // ---------------- Extreme Craft Center (Twist Space Technology) ----------------
+    public static final MultiblockMachineDefinition EXTREME_CRAFT_CENTER = REGISTRATE
+            .multiblock("extreme_craft_center", com.omnicrox.gtaa.common.machine.multiblock.tst.ExtremeCraftCenterMachine::new)
+            .langValue("Extreme Craft Center")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Molecular Assembler | Extreme Crafting Table")
+                    .flavor("Goodbye, all crafting lag.")
+                    .info("An §eME crafting provider§7: connect an ME cable to the controller face")
+                    .info("Put §eencoded crafting, smithing or stonecutting patterns§7 into an input bus;")
+                    .info("they are pulled inside (up to 1024). Other items go to the output bus")
+                    .info("Uses §ano EU§7 and no assemblers; results go straight into the ME network")
+                    .bonus("Every pattern crafts §6x magnification§7 per push (x1 up to x1,048,576)")
+                    .info("Screwdriver: change magnification. Sneak + screwdriver: take patterns out")
+                    .warning("Processing patterns are not accepted")
+                    .portedFrom("Twist Space Technology (GTNH addon)").build())
+            .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+            .pattern(definition -> {
+                var c = blocks(GTBlocks.HIGH_POWER_CASING.get());
+                var edge = c.setMinGlobalLimited(40)
+                        .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                        .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1));
+                String[] cap = { "CCCCCCC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CGGGGGC", "CCCCCCC" };
+                String[] mid = { "CGGGGGC", "G#####G", "G#####G", "G#####G", "G#####G", "G#####G", "CGGGGGC" };
+                String[] ctl = { "CGG~GGC", "G#####G", "G#####G", "G#####G", "G#####G", "G#####G", "CGGGGGC" };
+                return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
+                        .aisle(cap).aisle(mid).aisle(mid).aisle(ctl).aisle(mid).aisle(mid).aisle(cap)
+                        .where('~', controller(blocks(definition.get())))
+                        .where('C', edge)
+                        .where('G', blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                        .where('#', air())
+                        .build();
+            })
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/hpca/high_power_casing"),
+                    gt("block/multiblock/assembly_line")))
+            .register();
+
 }
