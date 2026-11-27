@@ -10,7 +10,16 @@ item_ids:
 
 # Electric Blast Furnace and Coils
 
-The <ItemLink id="gtceu:electric_blast_furnace" /> smelts metals that need heat. Its **coils** set the temperature.
+<Multiblock id="gtceu:electric_blast_furnace" />
+
+The <ItemLink id="gtceu:electric_blast_furnace" /> (EBF) is usually your first electric multiblock, built in LV.
+Electricity and **heating coils** reach temperatures the Primitive Blast Furnace can't: your first big job is
+**aluminium**, then stainless steel, titanium, tungstensteel and most hot metals of the game.
+
+## Coils
+
+The coils set the furnace's **heat**. A recipe only runs if the heat is at least the recipe's temperature (JEI
+shows it under the recipe).
 
 | Coil | Heat | Unlocks |
 |---|---|---|
@@ -23,14 +32,47 @@ The <ItemLink id="gtceu:electric_blast_furnace" /> smelts metals that need heat.
 | <ItemLink id="gtceu:trinium_coil_block" /> | 9,001 K | Late UV metals |
 | <ItemLink id="gtceu:tritanium_coil_block" /> | 10,800 K | UHV metals |
 
-* Every 900 K above a recipe's heat: 5% less energy. Every 1,800 K above: one **perfect** overclock.
-* Use the energy hatch tier of the voltage you want to run; two hatches = 2 amps.
+Bonuses:
+
+* **+100 K** for every Energy Hatch tier above MV.
+* Every **900 K** above the recipe's temperature: **5% less energy** (multiplied, before overclocking).
+* Every **1,800 K** above: one overclock becomes **perfect** (4x power, 4x speed).
 
 ## Building it
 
-<Multiblock id="gtceu:electric_blast_furnace" />
+3 x 3 x 4:
 
-Bottom layer: casings with the controller, an input bus, an output bus, energy hatches and a maintenance hatch.
-Two layers of coils (hollow middle), then a casing top with a **muffler hatch** in the middle facing up.
+1. **Bottom layer**: the controller at the front middle, then the Energy Hatches, a Maintenance Hatch, at least one
+   input (bus or hatch) and one output (bus or hatch). Fill the rest with
+   <ItemLink id="gtceu:heatproof_machine_casing" />. The bottom middle block is part of the structure too.
+2. **Two rings of 8 coils** above it, all the same tier, with **air** in the middle of both rings.
+3. **Top layer**: casings around a <ItemLink id="gtceu:lv_muffler_hatch" /> in the middle, facing up into open air.
+   Output Hatches may replace top casings for gas outputs.
+
+The preview above can build it for you. Keep the two middle blocks empty: a torch or cable there breaks the
+structure.
+
+## Two Energy Hatches
+
+An LV Energy Hatch takes 2 A at 32 V. With **two LV hatches** the EBF can run **MV recipes** (up to 120 EU/t,
+since 4 A x 32 V = 128 EU/t). The cable still carries **LV**: give it more LV amps, never MV voltage. See
+[Overclocking and Parallels](oc/oc-index.md).
+
+Maintenance matters here: each maintenance problem slows the furnace and raises its energy use, so an early EBF on
+two LV hatches can run short. Fix problems at the Maintenance Hatch.
+
+## Your first aluminium
+
+1. Look up the aluminium EBF recipes in JEI and pick one you can supply: items, circuit, gas, EU/t and heat.
+2. Check the controller says the structure is formed with no maintenance problems, and the muffler is free.
+3. Make room in the outputs.
+4. Get power stable first: generators running, batteries charged, both hatches connected.
+5. Put in one small batch and watch a full recipe finish before you automate it.
+
+Metals hotter than **1,750 K** come out as **hot ingots**: cool them in a
+[Vacuum Freezer](../gtmultis/vacuum_freezer.md).
 
 <GTRecipesFor id="gtceu:electric_blast_furnace" limit="1" />
+
+
+<Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>

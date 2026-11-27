@@ -794,3 +794,282 @@ two; GTNA adds the GT New Horizons steam machines.
 <Multiblock id="gtna:large_steam_crusher" />
 """ + SRC, parent='gtmultis/gtmultis-index.md', pos=3, icon='gtceu:steam_grinder',
      items=[i for i, *_ in STEAM])
+
+# ====================================================================== EBF and cleanroom (replace the short pages)
+page('gregtech/ebf-and-coils.md', 'Electric Blast Furnace and Coils', """
+# Electric Blast Furnace and Coils
+
+<Multiblock id="gtceu:electric_blast_furnace" />
+
+The <ItemLink id="gtceu:electric_blast_furnace" /> (EBF) is usually your first electric multiblock, built in LV.
+Electricity and **heating coils** reach temperatures the Primitive Blast Furnace can't: your first big job is
+**aluminium**, then stainless steel, titanium, tungstensteel and most hot metals of the game.
+
+## Coils
+
+The coils set the furnace's **heat**. A recipe only runs if the heat is at least the recipe's temperature (JEI
+shows it under the recipe).
+
+| Coil | Heat | Unlocks |
+|---|---|---|
+| <ItemLink id="gtceu:cupronickel_coil_block" /> | 1,800 K | Aluminium, steel in bulk, silicon |
+| <ItemLink id="gtceu:kanthal_coil_block" /> | 2,700 K | Stainless steel, titanium |
+| <ItemLink id="gtceu:nichrome_coil_block" /> | 3,600 K | Tungstensteel, tungsten |
+| <ItemLink id="gtceu:rtm_alloy_coil_block" /> | 4,500 K | HSS-G and higher |
+| <ItemLink id="gtceu:hssg_coil_block" /> | 5,400 K | Naquadah, iridium |
+| <ItemLink id="gtceu:naquadah_coil_block" /> | 7,200 K | Naquadah alloy, trinium |
+| <ItemLink id="gtceu:trinium_coil_block" /> | 9,001 K | Late UV metals |
+| <ItemLink id="gtceu:tritanium_coil_block" /> | 10,800 K | UHV metals |
+
+Bonuses:
+
+* **+100 K** for every Energy Hatch tier above MV.
+* Every **900 K** above the recipe's temperature: **5% less energy** (multiplied, before overclocking).
+* Every **1,800 K** above: one overclock becomes **perfect** (4x power, 4x speed).
+
+## Building it
+
+3 x 3 x 4:
+
+1. **Bottom layer**: the controller at the front middle, then the Energy Hatches, a Maintenance Hatch, at least one
+   input (bus or hatch) and one output (bus or hatch). Fill the rest with
+   <ItemLink id="gtceu:heatproof_machine_casing" />. The bottom middle block is part of the structure too.
+2. **Two rings of 8 coils** above it, all the same tier, with **air** in the middle of both rings.
+3. **Top layer**: casings around a <ItemLink id="gtceu:lv_muffler_hatch" /> in the middle, facing up into open air.
+   Output Hatches may replace top casings for gas outputs.
+
+The preview above can build it for you. Keep the two middle blocks empty: a torch or cable there breaks the
+structure.
+
+## Two Energy Hatches
+
+An LV Energy Hatch takes 2 A at 32 V. With **two LV hatches** the EBF can run **MV recipes** (up to 120 EU/t,
+since 4 A x 32 V = 128 EU/t). The cable still carries **LV**: give it more LV amps, never MV voltage. See
+[Overclocking and Parallels](oc/oc-index.md).
+
+Maintenance matters here: each maintenance problem slows the furnace and raises its energy use, so an early EBF on
+two LV hatches can run short. Fix problems at the Maintenance Hatch.
+
+## Your first aluminium
+
+1. Look up the aluminium EBF recipes in JEI and pick one you can supply: items, circuit, gas, EU/t and heat.
+2. Check the controller says the structure is formed with no maintenance problems, and the muffler is free.
+3. Make room in the outputs.
+4. Get power stable first: generators running, batteries charged, both hatches connected.
+5. Put in one small batch and watch a full recipe finish before you automate it.
+
+Metals hotter than **1,750 K** come out as **hot ingots**: cool them in a
+[Vacuum Freezer](../gtmultis/vacuum_freezer.md).
+
+<GTRecipesFor id="gtceu:electric_blast_furnace" limit="1" />
+""" + SRC, parent='gregtech/gregtech-index.md', pos=50, icon='gtceu:electric_blast_furnace',
+     items=['gtceu:electric_blast_furnace'])
+
+page('gregtech/cleanroom.md', 'Cleanroom', """
+# Cleanroom
+
+<Multiblock id="gtceu:cleanroom" />
+
+Advanced circuits, wafers and many components need a **clean environment**. The <ItemLink id="gtceu:cleanroom" />
+provides it to every machine built inside it. It doesn't process anything itself: the machines inside do, with their
+own power and pipes.
+
+| | |
+|---|---|
+| Unlocks | HV (it runs fine on LV power) |
+| Size | 5x5x5 up to 15x15x15 (outside) |
+| Power | 30 EU/t while dirty, 4 EU/t once clean; a higher Energy Hatch cleans faster |
+| Inside | Any machines except generators, mufflers, drills and primitive machines |
+
+## Building it
+
+* Walls, floor and ceiling edge of <ItemLink id="gtceu:plascrete" /> (or <ItemLink id="gtceu:cleanroom_glass" />).
+* The ceiling inside the edge is <ItemLink id="gtceu:filter_casing" />, with the controller in the middle of the
+  ceiling. Sterile Filter Casings make a **sterile** cleanroom, needed for wetware and other late recipes.
+* One Energy Hatch and one Maintenance Hatch in the walls.
+* Up to **4 doors**. The room stays clean while a door is open.
+* To bring power in, put **Machine Hulls** or **Diodes** in the walls. Hulls also pass items, fluids and up to 8 AE2
+  channels.
+
+## Running it
+
+1. Fix the maintenance problems.
+2. Power it and wait until the controller says it is **clean**.
+3. Then start the machines inside. A recipe marked "Requires Cleanroom" in JEI won't start in a dirty room.
+
+Keep it powered: if it loses power or the structure breaks, it gets dirty again.
+
+## Multiblocks and cleanrooms
+
+In Apex, **multiblocks follow cleanroom rules too** (the pack doesn't exempt them). Give a multiblock that runs
+cleanroom recipes a **Cleaning Maintenance Hatch** (a small built-in cleanroom), or build it inside a cleanroom.
+
+![A finished cleanroom](../assets/images/cleanroom.png)
+
+<GTRecipesFor id="gtceu:cleanroom" limit="1" />
+""" + SRC, parent='gregtech/gregtech-index.md', pos=80, icon='gtceu:cleanroom', items=['gtceu:cleanroom'])
+
+# ====================================================================== holes: more GTCEu multis
+gtmulti('multi_smelter', 'Multi Smelter', 'gtceu:multi_smelter', 'MV', """
+The **Multi Smelter** smelts many items at once in normal furnace recipes (and alloy smelter recipes in its second
+mode). Its **coils** set how many items it handles per run: hotter coils, more parallel smelting. It uses very little
+power per item, so it is the best bulk furnace of the mid game.
+""", 16)
+
+gtmulti('cracker', 'Oil Cracking Unit', 'gtceu:cracker', 'HV', """
+The **Oil Cracking Unit** cracks heavy fuels and gases with **steam** or **hydrogen** into lighter, more useful
+products (for example heavy fuel into light fuel and naphtha, ethane into ethylene). Cracked products then go into the
+[Distillation Tower](distillation_tower.md).
+
+* Coils lower its energy use: each coil tier above Cupronickel saves 10%.
+* See the [oil processing](../lines/oil.md) line for which cracked products to make.
+""", 17)
+
+gtmulti('large_boilers', 'Large Boilers', 'gtceu:bronze_large_boiler', 'Steam age to EV', """
+The **Large Boilers** burn solid or liquid fuel and make a lot of steam for steam turbines and steam multis.
+
+| Boiler | Max temperature | Notes |
+|---|---|---|
+| <ItemLink id="gtceu:bronze_large_boiler" /> | 800 K | Steam age |
+| <ItemLink id="gtceu:steel_large_boiler" /> | 1,800 K | LV |
+| <ItemLink id="gtceu:titanium_large_boiler" /> | 3,200 K | EV |
+| <ItemLink id="gtceu:tungstensteel_large_boiler" /> | 6,400 K | IV, heats up twice as fast |
+
+* They need a while to heat up; steam output grows with temperature.
+* Each mB of water becomes 160 mB of steam (pack setting). **Never let a hot boiler run dry**: refilling it with water
+  while hot makes it explode. Keep the water supply steady.
+* The throttle button in the controller lowers fuel use and output.
+""", 4, icon='gtceu:steel_large_boiler', extra_items=('gtceu:steel_large_boiler', 'gtceu:titanium_large_boiler',
+                                                      'gtceu:tungstensteel_large_boiler'))
+
+gtmulti('large_turbines', 'Large Turbines and Combustion Engines', 'gtceu:steam_large_turbine', 'HV to LuV', """
+The big generators of the mid game. All output through a **Dynamo Hatch**.
+
+| Generator | Fuel |
+|---|---|
+| <ItemLink id="gtceu:steam_large_turbine" /> | Steam |
+| <ItemLink id="gtceu:gas_large_turbine" /> | Gas fuels (methane, natural gas, ...) |
+| <ItemLink id="gtceu:plasma_large_turbine" /> | Plasma from fusion |
+| <ItemLink id="gtceu:large_combustion_engine" /> | Liquid fuels (diesel, gasoline...); oxygen boosts it |
+| <ItemLink id="gtceu:extreme_combustion_engine" /> | Liquid fuels; liquid oxygen boosts it |
+
+## Turbines
+
+* A turbine needs a **turbine rotor** in its **Rotor Holder**. The rotor's material sets efficiency, power and
+  durability; the rotor wears out and must be replaced.
+* A higher-tier Rotor Holder spins faster and gives more power.
+* Turbines take time to spin up and spin down.
+
+## Combustion engines
+
+* Need **lubricant** as well as fuel. Adding oxygen (or liquid oxygen for the Extreme engine) boosts output.
+* The intake side must face open air.
+""", 5, extra_items=('gtceu:gas_large_turbine', 'gtceu:plasma_large_turbine', 'gtceu:large_combustion_engine',
+                     'gtceu:extreme_combustion_engine'))
+
+gtmulti('drilling', 'Fluid Drilling Rigs and Large Miners', 'gtceu:mv_fluid_drilling_rig', 'MV to LuV', """
+## Fluid Drilling Rig
+
+The <ItemLink id="gtceu:mv_fluid_drilling_rig" /> (and its HV and EV versions) pumps **bedrock fluid veins**: oil,
+natural gas, salt water, lava and more, depending on the area. Every chunk group has one hidden fluid vein; a
+**Prospector** in fluid mode shows what is under you and how much. Veins slowly deplete down to a minimum rate;
+higher-tier rigs pump more and deplete veins slower.
+
+## Large Miner
+
+<Multiblock id="gtceu:ev_large_miner" />
+
+The <ItemLink id="gtceu:ev_large_miner" /> (and IV and LuV versions) mines a large area below it chunk by chunk,
+doubling or tripling ore output with **drilling fluid**. It needs fluid input and power, and replaces mined blocks
+with cobblestone in this pack.
+""", 18, extra_items=('gtceu:ev_large_miner', 'gtceu:hv_fluid_drilling_rig', 'gtceu:ev_fluid_drilling_rig'))
+
+gtmulti('fusion_reactor', 'Fusion Reactors', 'gtceu:luv_fusion_reactor', 'LuV to UV', """
+The **Fusion Reactors** (MK I at LuV, MK II at ZPM, MK III at UV) fuse light elements into heavy ones and make
+plasma for the Plasma Turbine. Each recipe needs a burst of **startup energy** stored in the reactor's own buffer, so
+a reactor needs many Energy Hatches of its tier.
+
+The full walkthrough is on the [Fusion](../lines/fusion.md) page; Apex adds Fusion MK IV and MK V and compact fusion
+computers on top (see [Apex Multiblocks](../multiblocks/multiblocks-index.md)).
+""", 42, extra_items=('gtceu:zpm_fusion_reactor', 'gtceu:uv_fusion_reactor'))
+
+gtmulti('charcoal_pile_igniter', 'Charcoal Pile Igniter', 'gtceu:charcoal_pile_igniter', 'Steam age', """
+The **Charcoal Pile Igniter** turns a big pile of **logs** covered with dirt or grass into **charcoal** without any
+furnace. Build the log pile next to it (the controller shows the size), cover it, and light the igniter with flint and
+steel. A cheap way to get lots of charcoal early.
+""", 6)
+
+gtmulti('primitive_pump', 'Primitive Water Pump', 'gtceu:primitive_pump', 'Steam age', """
+The **Primitive Water Pump** gives free water for your first boilers. It pumps more in wet biomes (oceans, rivers,
+swamps) and more with a better output hatch. Pipe the water out of its pump hatch.
+""", 7)
+
+# ====================================================================== holes: covers, pipes, hazards, circuits
+page('gregtech/covers.md', 'Covers', """
+# Covers
+
+**Covers** go on the side of a machine, pipe or tank and add a job to that side. Shift-right-click a side with a cover
+to place it; open it with a screwdriver or by right-clicking; remove it with a crowbar.
+
+| Cover | What it does |
+|---|---|
+| <ItemLink id="gtceu:lv_conveyor_module" /> | Moves items in or out of the side. Faster per tier. |
+| <ItemLink id="gtceu:lv_robot_arm" /> | Like a conveyor, but can move exact amounts or keep a stock |
+| <ItemLink id="gtceu:lv_electric_pump" /> | Moves fluids |
+| <ItemLink id="gtceu:lv_fluid_regulator" /> | Like a pump, with exact amounts |
+| <ItemLink id="gtceu:item_filter" /> / <ItemLink id="gtceu:item_tag_filter" /> | Filters for conveyors, arms and filter covers |
+| <ItemLink id="gtceu:machine_controller_cover" /> | Turns the machine on or off with redstone |
+| <ItemLink id="gtceu:energy_detector_cover" /> | Gives a redstone signal from stored energy |
+| <ItemLink id="gtceu:lv_solar_panel" /> | A small solar generator on top of a machine |
+| <ItemLink id="gtceu:shutter_module_cover" /> | Blocks the side completely |
+
+* Conveyors, pumps and arms have a direction (import or export) and can be set to only work with a redstone signal.
+* A conveyor on a machine's output side, set to export, is the simplest automation: it pushes products into the next
+  machine or chest.
+* The **Machine Controller** set to "prevent power fail" stops a multiblock from shutting down when power runs out.
+""" + SRC.replace('Adapted from the GuideNH DefaultGuide (GT New Horizons)', 'Written'),
+     parent='gregtech/gregtech-index.md', pos=33, icon='gtceu:lv_conveyor_module')
+
+page('gregtech/pipes.md', 'Pipes', """
+# Pipes
+
+## Item pipes
+
+GregTech item pipes move items between inventories. Wider pipes and better materials move more items per second; a
+**restrictive** pipe makes items prefer other routes. Items flow from an inventory that pushes (a machine with
+auto-output, or a conveyor cover set to export) to the nearest free inventory.
+
+## Fluid pipes
+
+Fluid pipes have a **throughput** (mB/t), a **max temperature** and flags in their tooltip: whether they hold **gases**,
+**acids**, **cryogenics** and **plasma**. A pipe that can't hold a fluid leaks or burns. Use bronze or steel early,
+stainless steel and PTFE (polytetrafluoroethylene) for acids, and better materials for hot or cryogenic fluids.
+Quadruple and nonuple pipes carry several fluids side by side.
+
+## Connections
+
+Apex uses GT6-style pipes and cables: they connect only where you connect them, with a **wrench** for pipes or a
+**wire cutter** for cables. Shift-right-click a placed pipe with another pipe to swap it.
+""" + SRC.replace('Adapted from the GuideNH DefaultGuide (GT New Horizons)', 'Written'),
+     parent='gregtech/gregtech-index.md', pos=34, icon='gtceu:bronze_normal_fluid_pipe')
+
+page('gregtech/hazards.md', 'Chemical Hazards', """
+# Chemical Hazards
+
+Hazards are **on** in Apex. Many dangerous materials (toxic dusts, acids, radioactive elements, carcinogens...)
+hurt you while you carry them or stand near them as fluids, and some give lasting **medical conditions** that get
+worse over time. The item's tooltip tells you its hazard and what protects against it.
+
+## Protection
+
+* <ItemLink id="gtceu:face_mask" /> and <ItemLink id="gtceu:rubber_gloves" />: early protection against breathing
+  and touching hazardous materials.
+* The full **Hazmat suit** (<ItemLink id="gtceu:hazmat_headpiece" />, <ItemLink id="gtceu:hazmat_chestpiece" />,
+  <ItemLink id="gtceu:hazmat_leggings" />, <ItemLink id="gtceu:hazmat_boots" />): protects against everything.
+* Medicine such as <ItemLink id="gtceu:paracetamol_pill" /> and <ItemLink id="gtceu:rad_away_pill" /> treats some
+  conditions.
+
+Keep hazardous materials in machines, tanks and your ME system rather than in your inventory, and wear protection
+when you handle them.
+""" + SRC.replace('Adapted from the GuideNH DefaultGuide (GT New Horizons)', 'Written'),
+     parent='gregtech/gregtech-index.md', pos=35, icon='gtceu:hazmat_headpiece')
