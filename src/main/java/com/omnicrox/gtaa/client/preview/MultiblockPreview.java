@@ -102,8 +102,13 @@ public final class MultiblockPreview {
     /** -1 = as designed, otherwise the tier index for every tier family */
     public int tier = -1;
     public boolean hatches = true;
-    public float yaw = -135, pitch = 25, zoom = 1;
-    public final Vector3f pan = new Vector3f();
+    /** BlockRenderer6343's camera: horizontal angle, vertical angle (degrees) and distance */
+    public float rotH = 50, rotV = 20, distance = 10;
+    public boolean highlightHatches;
+    public BlockPos selected;
+    private boolean cameraSet;
+    private final Set<BlockPos> hatchSpots = new HashSet<>();
+    private BlockPos hovered;
 
     private TrackedDummyWorld world;
     private ApexSceneRenderer renderer;
@@ -112,8 +117,8 @@ public final class MultiblockPreview {
     private final Map<BlockPos, BlockInfo> placed = new HashMap<>();
     private Map<BlockPos, TraceabilityPredicate> predicates = Map.of();
     private int minY, maxY, maxTier;
-    private float baseRadius = 10;
-    private final Vector3f center = new Vector3f();
+    private float size = 10;
+    private final Vector3f center = new Vector3f(), boxCenter = new Vector3f();
     private String error;
 
     private MultiblockPreview(MultiblockMachineDefinition def) {
@@ -149,10 +154,48 @@ public final class MultiblockPreview {
     }
 
     public void resetView() {
-        yaw = -135;
-        pitch = 25;
-        zoom = 1;
-        pan.set(0);
+        cameraSet = false;
+    }
+
+    /** BlockRenderer6343: zoom = 3.5 * sqrt(size) * (1 + log10(size)) / 1.5, 20 degrees down, 50 around */
+    private void defaultCamera() {
+        float max = Math.max(1, size);
+        distance = (float) (3.5 * Math.sqrt(max) * (1 + Math.log10(max)) / 1.5);
+        rotH = 50;
+        rotV = 20;
+        center.set(boxCenter);
+        cameraSet = true;
+    }
+
+    /** middle-drag: move the look-at point in the screen plane (BlockRenderer6343) */
+    public void pan(double dx, double dy) {
+        if (renderer == null) return;
+        Vector3f look = renderer.getLookAt(), eye = renderer.getEyePos(), up = renderer.getWorldUp();
+        Vector3f dir = new Vector3f(look).sub(eye);
+        Vector3f right = dir.cross(up, new Vector3f()).normalize();
+        Vector3f upDir = right.cross(dir, new Vector3f()).normalize();
+        center.add(new Vector3f(-(float) dx * right.x + (float) dy * upDir.x, -(float) dx * right.y + (float) dy * upDir.y,
+                -(float) dx * right.z + (float) dy * upDir.z).mul(0.15f));
+    }
+
+    /** what the block at this spot may be (right-click), from the formed structure's predicates */
+    public List<ItemStack> candidates(BlockPos p) {
+        List<ItemStack> out = new ArrayList<>();
+        TraceabilityPredicate tp = predicates.get(p);
+        if (tp == null) {
+            BlockInfo info = placed.get(p);
+            if (info != null) out.add(info.getItemStackForm());
+            return out;
+        }
+        List<SimplePredicate> all = new ArrayList<>(tp.limited);
+        all.addAll(tp.common);
+        for (SimplePredicate sp : all) {
+            try {
+                for (ItemStack st : sp.getCandidates())
+                    if (!st.isEmpty() && out.stream().noneMatch(o -> ItemStack.isSameItemSameTags(o, st))) out.add(st);
+            } catch (Throwable ignored) {}
+        }
+        return out;
     }
 
     public String error() {
@@ -251,9 +294,24 @@ public final class MultiblockPreview {
                 }
             } catch (Throwable ignored) {}
         }
-        center.set((mnX + mxX + 1) / 2f, (mnY + mxY + 1) / 2f, (mnZ + mxZ + 1) / 2f);
-        int dim = Math.max(mxX - mnX, Math.max(mxY - mnY, mxZ - mnZ)) + 1;
-        baseRadius = Math.max(4f, dim * 1.25f + 2f);
+        boxCenter.set((mnX + mxX + 1) / 2f, (mnY + mxY + 1) / 2f, (mnZ + mxZ + 1) / 2f);
+        float newSize = Math.max(mxX - mnX, Math.max(mxY - mnY, mxZ - mnZ)) + 1;
+        if (newSize != size) cameraSet = false;
+        size = newSize;
+        selected = null;
+        hatchSpots.clear();
+        for (var e : predicates.entrySet()) {
+            TraceabilityPredicate tp = e.getValue();
+            boolean hatch = false;
+            for (SimplePredicate sp : tp.limited) {
+                try {
+                    for (ItemStack st : sp.getCandidates())
+                        if (Block.byItem(st.getItem()) instanceof MetaMachineBlock) { hatch = true; break; }
+                } catch (Throwable ignored) {}
+                if (hatch) break;
+            }
+            if (hatch && placed.containsKey(e.getKey()) && !e.getKey().equals(controllerPos)) hatchSpots.add(e.getKey());
+        }
         if (layer > layers()) layer = 0;
         if (renderer != null) {
             try {
@@ -279,6 +337,18 @@ public final class MultiblockPreview {
         renderer.setParticleManager(particles);
         world.setParticleManager(particles);
         renderer.setOnLookingAt(hit -> {});
+        // BlockRenderer6343's overlays: hovered block, selected block (red), hatch spots (blue) when toggled
+        renderer.setAfterWorldRender(r -> {
+            var ps = new com.mojang.blaze3d.vertex.PoseStack();
+            try {
+                if (highlightHatches)
+                    for (BlockPos hs : hatchSpots) com.lowdragmc.lowdraglib.client.utils.RenderUtils.renderBlockOverLay(ps, hs, 0.2f, 0.4f, 1f, 1.02f);
+                if (selected != null)
+                    com.lowdragmc.lowdraglib.client.utils.RenderUtils.renderBlockOverLay(ps, selected, 0.9f, 0.1f, 0.1f, 1.03f);
+                if (hovered != null && !hovered.equals(selected))
+                    com.lowdragmc.lowdraglib.client.utils.RenderUtils.renderBlockOverLay(ps, hovered, 0.6f, 0.6f, 0.6f, 1.03f);
+            } catch (Throwable ignored) {}
+        });
         renderer.setClearColor(0x00000000);
         renderer.useCacheBuffer(placed.size() > 200);
         applyLayer();
@@ -306,15 +376,19 @@ public final class MultiblockPreview {
         if (placed.isEmpty()) return null;
         double scale = Minecraft.getInstance().getWindow().getGuiScale();
         ensureRenderer(Math.max(16, (int) (w * scale)), Math.max(16, (int) (h * scale)));
-        Vector3f look = new Vector3f(center).add(pan);
-        renderer.setCameraLookAt(look, baseRadius * zoom, Math.toRadians(yaw), Math.toRadians(pitch));
+        if (!cameraSet) defaultCamera();
+        renderer.setCameraLookAt(center, distance, Math.toRadians(rotH), Math.toRadians(rotV));
         boolean inside = mouseX >= x && mouseY >= y && mouseX < x + w && mouseY < y + h;
         renderer.draw(g.pose(), x, y, w, h, inside ? mouseX : -1000, inside ? mouseY : -1000);
-        if (!inside) return null;
+        if (!inside) return hovered = null;
         BlockHitResult hit = renderer.getLastTraceResult();
-        if (hit == null || hit.getType() == HitResult.Type.MISS) return null;
+        if (hit == null || hit.getType() == HitResult.Type.MISS) return hovered = null;
         BlockPos p = hit.getBlockPos();
-        return placed.containsKey(p) ? p : null;
+        return hovered = placed.containsKey(p) ? p : null;
+    }
+
+    public BlockPos hoveredBlock() {
+        return hovered;
     }
 
     public boolean isCompiling() {

@@ -1,38 +1,113 @@
 package com.omnicrox.gtaa.client.preview;
 
+import com.omnicrox.gtaa.config.GTAAClientConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import org.joml.Matrix4f;
+import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Layout, drawing and mouse handling of the preview inside a recipe page (local coordinates, 0,0 = top left).
- * Input arrives through {@link PreviewInput}, because NEI Rewrite does not pass mouse input to JEI categories.
+ * The preview page, laid out and driven like GT New Horizons' BlockRenderer6343 NEI multiblock page:
+ * left-drag rotates, right-drag zooms, middle-drag moves, scroll zooms, right-click a block to see what that spot
+ * accepts, Tier and Layer sliders under the scene, small buttons on the right.
+ * Like BlockRenderer6343 it reads the mouse buttons itself every frame, because NEI Rewrite never passes mouse input
+ * to JEI categories; scrolling comes in through {@link PreviewInput}.
  */
 public final class PreviewPanel {
 
-    public static final int W = 170, H = 212;
-    public static final int SX = 0, SY = 12, SW = 170, SH = 136;
-    public static final int ROW_LAYER = 151, ROW_TIER = 162, TRACK_X = 60, TRACK_W = 108;
-    public static final int SLOTS_Y = 176;
-    private static final int BTN = 11, BTN_X = SX + SW - BTN - 2;
+    public static final int W = 170, H = 216;
+    public static final int SX = 0, SY = 12, SW = 170, SH = 138;
+    static final int UNDER = SY + SH + 2, ROW = 13;
+    static final int SLIDER_W = 121, SLIDER_H = 12, BTN_W = 20, BTN_H = 12, BTN_RIGHT = 148, BTN_GAP = 22;
+    public static final int SLOTS_Y = UNDER + 2 * ROW + 2;
 
     private PreviewPanel() {}
 
     private static final java.util.Set<String> LOGGED = new java.util.HashSet<>();
 
-    // ---------------- drawing ----------------
-    public static void draw(MultiblockPreview p, GuiGraphics g, int mouseX, int mouseY) {
-        Font font = Minecraft.getInstance().font;
+    // ---------------- per-frame mouse state (one preview is handled at a time) ----------------
+    enum Target { NONE, ROTATE, ZOOM, PAN, TIER, LAYER }
+
+    private static MultiblockPreview owner;
+    private static Target target = Target.NONE;
+    private static final boolean[] wasDown = new boolean[3];
+    private static double lastX, lastY;
+    private static long lastFrame;
+
+    /** vanilla-looking slider, drawn only (we drive it ourselves) */
+    private static final class Slider extends AbstractSliderButton {
+        Slider() {
+            super(0, 0, SLIDER_W, SLIDER_H, Component.empty(), 0);
+        }
+
+        void set(int x, int y, String text, double frac) {
+            setX(x);
+            setY(y);
+            value = Math.max(0, Math.min(1, frac));
+            setMessage(Component.literal(text));
+        }
+
+        @Override
+        protected void updateMessage() {}
+
+        @Override
+        protected void applyValue() {}
+    }
+
+    private static final Slider SLIDER = new Slider();
+    private static final Button BUTTON = Button.builder(Component.empty(), b -> {}).bounds(0, 0, BTN_W, BTN_H).build();
+
+    private static void drawButton(GuiGraphics g, int x, int y, String label, boolean on, int mx, int my) {
+        BUTTON.setX(x);
+        BUTTON.setY(y);
+        BUTTON.setMessage(Component.literal(on ? "§a" + label : label));
+        BUTTON.render(g, mx, my, 0);
+    }
+
+    private static void drawSlider(GuiGraphics g, int y, String text, int value, int min, int max, int mx, int my) {
+        SLIDER.set(0, y, text, max <= min ? 0 : (double) (value - min) / (max - min));
+        SLIDER.render(g, mx, my, 0);
+    }
+
+    static boolean in(double mx, double my, int x, int y, int w, int h) {
+        return mx >= x && my >= y && mx < x + w && my < y + h;
+    }
+
+    private static int btnX(int i) {
+        return BTN_RIGHT - (i % 2) * BTN_GAP;
+    }
+
+    private static int btnY(int i) {
+        return UNDER + (i / 2) * ROW;
+    }
+
+    // ---------------- drawing + input ----------------
+    public static void draw(MultiblockPreview p, GuiGraphics g, int ignoredMouseX, int ignoredMouseY) {
+        Minecraft mc = Minecraft.getInstance();
+        Font font = mc.font;
+        // mouse in this page's coordinates, read straight from the window (NEI's own mouse values can't be trusted)
+        Matrix4f inv = new Matrix4f(g.pose().last().pose()).invert();
+        double gx = mc.mouseHandler.xpos() * mc.getWindow().getGuiScaledWidth() / mc.getWindow().getScreenWidth();
+        double gy = mc.mouseHandler.ypos() * mc.getWindow().getGuiScaledHeight() / mc.getWindow().getScreenHeight();
+        Vector4f lm = new Vector4f((float) gx, (float) gy, 0, 1).mul(inv);
+        double mx = lm.x, my = lm.y;
+        int imx = (int) Math.floor(mx), imy = (int) Math.floor(my);
+        handleMouse(p, mc, mx, my);
+
         String name = p.def.getItem().getDescription().getString();
         g.drawString(font, font.plainSubstrByWidth(name, 150), 1, 2, 0xFF303030, false);
-        // scene frame
         g.fill(SX, SY, SX + SW, SY + SH, 0x30000000);
         g.renderOutline(SX, SY, SW, SH, 0xFF555555);
         if (p.error() != null) {
@@ -41,7 +116,7 @@ public final class PreviewPanel {
         }
         BlockPos hovered = null;
         try {
-            hovered = p.render(g, SX + 1, SY + 1, SW - 2, SH - 2, mouseX, mouseY);
+            hovered = p.render(g, SX + 1, SY + 1, SW - 2, SH - 2, imx, imy);
         } catch (Throwable t) {
             g.drawString(font, "Preview failed: " + t.getClass().getSimpleName(), SX + 4, SY + 4, 0xFFFF5555, false);
             if (LOGGED.add(p.def.getId().toString()))
@@ -49,152 +124,155 @@ public final class PreviewPanel {
         }
         if (p.isCompiling())
             g.drawString(font, "Loading " + (int) (p.compileProgress() * 100) + "%", SX + 4, SY + SH - 11, 0xFFFFFFFF, true);
-        // buttons
-        button(g, font, BTN_X, SY + 2, "H", p.hatches ? 0xFF2E7D32 : 0xFF555555, mouseX, mouseY);
-        button(g, font, BTN_X, SY + 2 + BTN + 2, "R", 0xFF555555, mouseX, mouseY);
-        button(g, font, BTN_X, SY + 2 + 2 * (BTN + 2), "?", 0xFF1565C0, mouseX, mouseY);
-        if (p.pages() > 1) {
-            int by = SY + SH - BTN - 2;
-            button(g, font, SX + 2, by, "<", 0xFF555555, mouseX, mouseY);
-            String t = (p.page + 1) + "/" + p.pages();
-            g.drawString(font, t, SX + 2 + BTN + 3, by + 2, 0xFFFFFFFF, true);
-            button(g, font, SX + 2 + BTN + 6 + font.width(t), by, ">", 0xFF555555, mouseX, mouseY);
+
+        // what the selected spot accepts (BlockRenderer6343 shows it in place of the ingredients)
+        List<ItemStack> cands = p.selected == null ? List.of() : p.candidates(p.selected);
+        ItemStack hoveredCandidate = ItemStack.EMPTY;
+        if (!cands.isEmpty()) {
+            int n = Math.min(cands.size(), 18), rows = (n + 8) / 9;
+            int py = SY + SH - 2 - rows * 18 - 10;
+            g.fill(SX + 1, py, SX + SW - 1, SY + SH - 1, 0xC0101010);
+            g.drawString(font, "Accepts (right-click empty space to close):", SX + 3, py + 2, 0xFFBBBBBB, false);
+            for (int i = 0; i < n; i++) {
+                int ix = SX + 3 + (i % 9) * 18, iy = py + 11 + (i / 9) * 18;
+                g.renderItem(cands.get(i), ix, iy);
+                if (in(mx, my, ix, iy, 16, 16)) hoveredCandidate = cands.get(i);
+            }
         }
-        // sliders
-        String ly = p.layer == 0 ? "All" : p.layer + "/" + p.layers();
-        slider(g, font, ROW_LAYER, "Layer: " + ly, p.layer, p.layers());
+
+        // sliders and buttons (BlockRenderer6343 layout)
+        int row = 0;
         if (p.maxTier() > 1) {
-            String tt = p.tier < 0 ? "Shown" : (p.tier + 1) + "/" + p.maxTier();
-            slider(g, font, ROW_TIER, "Tier: " + tt, p.tier + 1, p.maxTier());
+            drawSlider(g, UNDER + ROW * row++, "Tier: " + (p.tier < 0 ? "Shown" : (p.tier + 1) + ""), p.tier + 1, 0, p.maxTier(), imx, imy);
         }
+        drawSlider(g, UNDER + ROW * row, "Layer: " + (p.layer == 0 ? "All" : p.layer + ""), p.layer, 0, p.layers(), imx, imy);
+        drawButton(g, btnX(0), btnY(0), "H", p.highlightHatches, imx, imy);
+        drawButton(g, btnX(1), btnY(1), "R", false, imx, imy);
+        drawButton(g, btnX(2), btnY(2), "?", false, imx, imy);
+        if (p.pages() > 1) drawButton(g, btnX(3), btnY(3), (p.page + 1) + "/" + p.pages(), false, imx, imy);
+
         // tooltips
         List<Component> tip = null;
-        if (hovered != null) tip = p.tooltip(hovered);
-        if (in(mouseX, mouseY, BTN_X, SY + 2, BTN, BTN))
-            tip = List.of(Component.literal(p.hatches ? "Hatches shown (click: show casings instead)" : "Casings in place of hatches (click: show hatches)"));
-        else if (in(mouseX, mouseY, BTN_X, SY + 2 + BTN + 2, BTN, BTN)) tip = List.of(Component.literal("Reset the view"));
-        else if (in(mouseX, mouseY, BTN_X, SY + 2 + 2 * (BTN + 2), BTN, BTN)) tip = help();
-        if (tip != null && !tip.isEmpty()) g.renderTooltip(font, tip, Optional.empty(), mouseX, mouseY);
+        if (!hoveredCandidate.isEmpty()) tip = List.of(hoveredCandidate.getHoverName());
+        else if (hovered != null && target == Target.NONE) tip = p.tooltip(hovered);
+        if (in(mx, my, btnX(0), btnY(0), BTN_W, BTN_H)) tip = List.of(Component.literal("Toggle hatch position highlight"));
+        else if (in(mx, my, btnX(1), btnY(1), BTN_W, BTN_H)) tip = List.of(Component.literal("Reset the view"));
+        else if (in(mx, my, btnX(2), btnY(2), BTN_W, BTN_H)) tip = help();
+        else if (p.pages() > 1 && in(mx, my, btnX(3), btnY(3), BTN_W, BTN_H)) tip = List.of(Component.literal("Next shape"));
+        if (tip != null && !tip.isEmpty()) g.renderTooltip(font, tip, Optional.empty(), imx, imy);
     }
 
     private static List<Component> help() {
         List<Component> l = new ArrayList<>();
-        l.add(Component.literal("Multiblock preview").withStyle(ChatFormatting.GOLD));
+        l.add(Component.literal("Multiblock Structure").withStyle(ChatFormatting.GOLD));
         l.add(Component.literal("Left-drag: rotate").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("Right-drag: move").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("Scroll: zoom (on a slider: step it)").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("Layer: show one layer at a time").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("Tier: swap coils and other tiered blocks").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("H: hatches or plain casings").withStyle(ChatFormatting.GRAY));
-        l.add(Component.literal("Hover a block to see what that spot accepts").withStyle(ChatFormatting.GRAY));
+        l.add(Component.literal("Right-drag or scroll: zoom").withStyle(ChatFormatting.GRAY));
+        l.add(Component.literal("Middle-drag: move").withStyle(ChatFormatting.GRAY));
+        l.add(Component.literal("Right-click a block: what that spot accepts").withStyle(ChatFormatting.GRAY));
+        l.add(Component.literal("Tier / Layer: drag, or scroll over them").withStyle(ChatFormatting.GRAY));
+        l.add(Component.literal("H: highlight where hatches can go").withStyle(ChatFormatting.GRAY));
         return l;
     }
 
-    private static void button(GuiGraphics g, Font font, int x, int y, String label, int color, int mx, int my) {
-        boolean hover = in(mx, my, x, y, BTN, BTN);
-        g.fill(x, y, x + BTN, y + BTN, hover ? (color | 0xFF000000) + 0x00202020 : color);
-        g.renderOutline(x, y, BTN, BTN, 0xFF000000);
-        g.drawString(font, label, x + (BTN - font.width(label)) / 2 + 1, y + 2, 0xFFFFFFFF, false);
-    }
-
-    private static void slider(GuiGraphics g, Font font, int y, String label, int value, int max) {
-        g.drawString(font, label, 1, y, 0xFF303030, false);
-        g.fill(TRACK_X, y + 3, TRACK_X + TRACK_W, y + 5, 0xFF777777);
-        int kx = max <= 0 ? TRACK_X : TRACK_X + Math.round((float) value / max * (TRACK_W - 4));
-        g.fill(kx, y, kx + 4, y + 8, 0xFF303030);
-        g.fill(kx + 1, y + 1, kx + 3, y + 7, 0xFFDDDDDD);
-    }
-
-    static boolean in(double mx, double my, int x, int y, int w, int h) {
-        return mx >= x && my >= y && mx < x + w && my < y + h;
-    }
-
-    // ---------------- input (local coordinates) ----------------
-    enum Drag { NONE, ROTATE, PAN, LAYER, TIER }
-
-    static Drag press(MultiblockPreview p, double mx, double my, int button) {
-        if (p.error() != null) return Drag.NONE;
-        if (button == 0 && in(mx, my, BTN_X, SY + 2, BTN, BTN)) {
-            p.hatches = !p.hatches;
-            p.markDirty();
-            return Drag.NONE;
+    private static void handleMouse(MultiblockPreview p, Minecraft mc, double mx, double my) {
+        long win = mc.getWindow().getWindow();
+        boolean[] down = new boolean[3];
+        for (int b = 0; b < 3; b++) down[b] = GLFW.glfwGetMouseButton(win, b) == GLFW.GLFW_PRESS;
+        long now = System.nanoTime();
+        // a different preview, or this one wasn't drawn for a while: start fresh
+        if (owner != p || now - lastFrame > 200_000_000L) {
+            if (owner != p) target = Target.NONE;
+            System.arraycopy(down, 0, wasDown, 0, 3);
+            lastX = mx;
+            lastY = my;
+            owner = p;
         }
-        if (button == 0 && in(mx, my, BTN_X, SY + 2 + BTN + 2, BTN, BTN)) {
-            p.resetView();
-            return Drag.NONE;
-        }
-        if (in(mx, my, BTN_X, SY + 2 + 2 * (BTN + 2), BTN, BTN)) return Drag.NONE;
-        if (p.pages() > 1 && button == 0) {
-            int by = SY + SH - BTN - 2;
-            Font font = Minecraft.getInstance().font;
-            String t = (p.page + 1) + "/" + p.pages();
-            if (in(mx, my, SX + 2, by, BTN, BTN)) {
-                p.page = Math.floorMod(p.page - 1, p.pages());
-                p.layer = 0;
-                p.markDirty();
-                return Drag.NONE;
-            }
-            if (in(mx, my, SX + 2 + BTN + 6 + font.width(t), by, BTN, BTN)) {
-                p.page = Math.floorMod(p.page + 1, p.pages());
-                p.layer = 0;
-                p.markDirty();
-                return Drag.NONE;
-            }
-        }
-        if (in(mx, my, SX, SY, SW, SH)) return button == 1 ? Drag.PAN : Drag.ROTATE;
-        if (in(mx, my, 0, ROW_LAYER - 1, W, 10)) {
-            setSlider(p, Drag.LAYER, mx);
-            return Drag.LAYER;
-        }
-        if (p.maxTier() > 1 && in(mx, my, 0, ROW_TIER - 1, W, 10)) {
-            setSlider(p, Drag.TIER, mx);
-            return Drag.TIER;
-        }
-        return null; // not ours
-    }
+        lastFrame = now;
+        double dx = mx - lastX, dy = my - lastY;
+        boolean inScene = in(mx, my, SX, SY, SW, SH);
 
-    static void drag(MultiblockPreview p, Drag d, double mx, double dx, double dy) {
-        switch (d) {
+        if (target == Target.NONE) {
+            if (down[0] && !wasDown[0]) leftPress(p, mx, my, inScene);
+            else if (down[1] && !wasDown[1] && inScene) {
+                target = Target.ZOOM;
+                // right-click selects the block (BlockRenderer6343), empty space clears it
+                p.selected = p.hoveredBlock();
+            } else if (down[2] && !wasDown[2] && inScene) target = Target.PAN;
+        }
+        switch (target) {
             case ROTATE -> {
-                float sp = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_ROTATE_SPEED.get().floatValue();
-                float sx = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_INVERT_X.get() ? -sp : sp;
-                float sy = com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_INVERT_Y.get() ? -sp : sp;
-                p.yaw += (float) dx * sx;
-                p.pitch = Math.max(-89, Math.min(89, p.pitch + (float) dy * sy));
+                if (!down[0]) target = Target.NONE;
+                else {
+                    float sp = GTAAClientConfig.PREVIEW_ROTATE_SPEED.get().floatValue();
+                    p.rotH = (p.rotH + (float) dx * (GTAAClientConfig.PREVIEW_INVERT_X.get() ? -sp : sp) + 360) % 360;
+                    p.rotV = (float) Math.max(-89.9, Math.min(89.9, p.rotV + dy * (GTAAClientConfig.PREVIEW_INVERT_Y.get() ? -sp : sp)));
+                }
+            }
+            case ZOOM -> {
+                if (!down[1]) target = Target.NONE;
+                else if (Math.abs(dy) > 1) p.distance = (float) Math.max(3, Math.min(999, p.distance + (dy > 0 ? 0.15 : -0.15) * Math.abs(dy)));
             }
             case PAN -> {
-                double rad = Math.toRadians(p.yaw);
-                float k = 0.06f * p.zoom * Math.max(1, p.layers() / 8f);
-                p.pan.add((float) (-Math.sin(rad) * dx * k), (float) (dy * k), (float) (Math.cos(rad) * dx * k));
+                if (!down[2]) target = Target.NONE;
+                else p.pan(dx, dy);
             }
-            case LAYER, TIER -> setSlider(p, d, mx);
+            case TIER, LAYER -> {
+                if (!down[0]) target = Target.NONE;
+                else setSlider(p, target, mx);
+            }
             default -> {}
         }
+        System.arraycopy(down, 0, wasDown, 0, 3);
+        lastX = mx;
+        lastY = my;
     }
 
-    static boolean scroll(MultiblockPreview p, double mx, double my, double delta) {
-        if (in(mx, my, SX, SY, SW, SH)) {
-            double k = 1 - com.omnicrox.gtaa.config.GTAAClientConfig.PREVIEW_ZOOM_SPEED.get();
-            p.zoom = (float) Math.max(0.05, Math.min(6, p.zoom * (delta > 0 ? k : 1.0 / k)));
-            return true;
+    private static void leftPress(MultiblockPreview p, double mx, double my, boolean inScene) {
+        if (in(mx, my, btnX(0), btnY(0), BTN_W, BTN_H)) {
+            p.highlightHatches = !p.highlightHatches;
+            click();
+            return;
         }
-        int step = delta > 0 ? 1 : -1;
-        if (in(mx, my, 0, ROW_LAYER - 1, W, 10)) {
-            p.setLayer(p.layer + step);
-            return true;
+        if (in(mx, my, btnX(1), btnY(1), BTN_W, BTN_H)) {
+            p.resetView();
+            click();
+            return;
         }
-        if (p.maxTier() > 1 && in(mx, my, 0, ROW_TIER - 1, W, 10)) {
-            setTier(p, p.tier + step);
-            return true;
+        if (in(mx, my, btnX(2), btnY(2), BTN_W, BTN_H)) return;
+        if (p.pages() > 1 && in(mx, my, btnX(3), btnY(3), BTN_W, BTN_H)) {
+            p.page = Math.floorMod(p.page + 1, p.pages());
+            p.layer = 0;
+            p.markDirty();
+            click();
+            return;
         }
-        return in(mx, my, 0, 0, W, SLOTS_Y);
+        int row = 0;
+        if (p.maxTier() > 1) {
+            if (in(mx, my, 0, UNDER + ROW * row, SLIDER_W, SLIDER_H)) {
+                target = Target.TIER;
+                setSlider(p, target, mx);
+                return;
+            }
+            row++;
+        }
+        if (in(mx, my, 0, UNDER + ROW * row, SLIDER_W, SLIDER_H)) {
+            target = Target.LAYER;
+            setSlider(p, target, mx);
+            return;
+        }
+        if (inScene) target = Target.ROTATE;
     }
 
-    private static void setSlider(MultiblockPreview p, Drag d, double mx) {
-        int max = d == Drag.LAYER ? p.layers() : p.maxTier();
-        int v = (int) Math.round((mx - TRACK_X - 2) / (TRACK_W - 4) * max);
+    private static void click() {
+        Minecraft.getInstance().getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK, 1f));
+    }
+
+    private static void setSlider(MultiblockPreview p, Target t, double mx) {
+        int max = t == Target.LAYER ? p.layers() : p.maxTier();
+        int v = (int) Math.round((mx - 4) / (SLIDER_W - 8) * max);
         v = Math.max(0, Math.min(max, v));
-        if (d == Drag.LAYER) p.setLayer(v);
+        if (t == Target.LAYER) p.setLayer(v);
         else setTier(p, v - 1);
     }
 
@@ -203,5 +281,27 @@ public final class PreviewPanel {
         if (t == p.tier) return;
         p.tier = t;
         p.markDirty();
+    }
+
+    /** scroll over the page (local coordinates); true = used */
+    static boolean scroll(MultiblockPreview p, double mx, double my, double delta) {
+        if (in(mx, my, SX, SY, SW, SH)) {
+            double step = GTAAClientConfig.PREVIEW_ZOOM_SPEED.get();
+            p.distance = (float) Math.max(3, Math.min(999, p.distance - delta * step));
+            return true;
+        }
+        int step = delta > 0 ? 1 : -1, row = 0;
+        if (p.maxTier() > 1) {
+            if (in(mx, my, 0, UNDER, SLIDER_W, SLIDER_H)) {
+                setTier(p, p.tier + step);
+                return true;
+            }
+            row++;
+        }
+        if (in(mx, my, 0, UNDER + ROW * row, SLIDER_W, SLIDER_H)) {
+            p.setLayer(p.layer + step);
+            return true;
+        }
+        return in(mx, my, 0, 0, W, SLOTS_Y);
     }
 }
