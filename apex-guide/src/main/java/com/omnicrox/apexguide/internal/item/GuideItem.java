@@ -68,12 +68,23 @@ public class GuideItem extends Item {
         return InteractionResultHolder.success(stack);
     }
 
+    /**
+     * The guide this book opens. A book without a guide id, or with one that isn't registered, falls back to the
+     * pack's guide when exactly one guide is registered (Apex Guide behavior), so a plain book from /give still works.
+     */
     @Nullable
     public static ResourceLocation getGuideId(ItemStack stack) {
         var tag = stack.getTag();
+        ResourceLocation id = null;
         if (tag != null && tag.contains(TAG_GUIDE_ID, Tag.TAG_STRING)) {
-            return ResourceLocation.tryParse(tag.getString(TAG_GUIDE_ID));
+            id = ResourceLocation.tryParse(tag.getString(TAG_GUIDE_ID));
         }
-        return null;
+        if (id == null || com.omnicrox.apexguide.internal.GuideRegistry.getById(id) == null) {
+            var all = com.omnicrox.apexguide.internal.GuideRegistry.getAll();
+            if (all.size() == 1) {
+                return all.iterator().next().getId();
+            }
+        }
+        return id;
     }
 }

@@ -30,10 +30,28 @@ public final class GuideGift {
         return s;
     }
 
+    /** books from before the Apex Guide became its own mod (GuideME items pointing at our guide) become Apex Guides */
+    private static void swapOldBooks(Player p) {
+        ItemStack fresh = guide();
+        if (fresh.isEmpty()) return;
+        var inv = p.getInventory();
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            ItemStack s = inv.getItem(i);
+            if (s.isEmpty() || s.getTag() == null) continue;
+            var key = ForgeRegistries.ITEMS.getKey(s.getItem());
+            if (key != null && key.getNamespace().equals("guideme")
+                    && GTAA.id("guide").toString().equals(s.getTag().getString("guideId"))) {
+                inv.setItem(i, fresh.copy());
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
         Player p = e.getEntity();
-        if (p.level().isClientSide || !GTAACommonConfig.GIVE_GUIDE.get()) return;
+        if (p.level().isClientSide) return;
+        swapOldBooks(p);
+        if (!GTAACommonConfig.GIVE_GUIDE.get()) return;
         CompoundTag data = p.getPersistentData();
         CompoundTag keep = data.getCompound(Player.PERSISTED_NBT_TAG);
         if (keep.getBoolean(TAG)) return;

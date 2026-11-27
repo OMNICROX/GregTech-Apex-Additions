@@ -32,7 +32,8 @@
   "apexguide.guidebook.Smelting": "Smelting",
   "apexguide.guidebook.ZoomIn": "Zoom In",
   "apexguide.guidebook.ZoomOut": "Zoom Out",
-  "item.apexguide.guide": "Guide",
+  "item.apexguide.guide": "Apex Guide",
   "key.apexguide.category": "Apex Guide",
-  "key.apexguide.guide": "Open Guide for Items"
+  "key.apexguide.guide": "Open Guide for Hovered Item",
+  "key.apexguide.home": "Open Apex Guide (home page)"
 }

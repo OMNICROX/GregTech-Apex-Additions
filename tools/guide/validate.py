@@ -25,7 +25,7 @@ for k in json.load(open(G)):
     if mm: add('gtapexadditions', mm.group(2))
 for f in glob.glob(os.path.join(os.path.dirname(G), '../models/item/*.json')) + glob.glob(os.path.normpath(os.path.join(os.path.dirname(__file__), '../../src/main/resources/assets/gtapexadditions/models/item/*.json'))):
     add('gtapexadditions', os.path.basename(f)[:-5])
-GT_MAT = re.compile(r'^(iron|steel|gold|copper|tin|bronze)_(hammer|ingot|plate|wrench|file|saw)$')
+GT_MAT = re.compile(r'^((iron|steel|gold|copper|tin|bronze)_(hammer|ingot|plate|wrench|file|saw)|[a-z_]+_(single|double|quadruple|octal|hex)_(wire|cable))$')
 bad = []
 for path in glob.glob(ROOT + '/**/*.md', recursive=True):
     s = open(path).read()

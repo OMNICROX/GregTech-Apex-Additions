@@ -32,8 +32,17 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
  */
 public final class OpenGuideHotkey {
     private static final KeyMapping OPEN_GUIDE_MAPPING = new KeyMapping(
-            "key.guideme.guide", KeyConflictContext.GUI, InputConstants.Type.KEYSYM, InputConstants.KEY_G,
-            "key.guideme.category");
+            "key.apexguide.guide", KeyConflictContext.GUI, InputConstants.Type.KEYSYM, InputConstants.KEY_G,
+            "key.apexguide.category");
+
+    /** GuideNH: G in the world opens the guide's home page. */
+    private static final KeyMapping OPEN_HOME_MAPPING = new KeyMapping(
+            "key.apexguide.home", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_G,
+            "key.apexguide.category");
+
+    public static KeyMapping getHomeHotkey() {
+        return OPEN_HOME_MAPPING;
+    }
 
     private static final int TICKS_TO_OPEN = 10;
 
@@ -71,6 +80,14 @@ public final class OpenGuideHotkey {
         MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent evt) -> {
             if (evt.phase == TickEvent.Phase.END) {
                 newTick = true;
+                while (OPEN_HOME_MAPPING.consumeClick()) {
+                    var mc = Minecraft.getInstance();
+                    var guides = com.omnicrox.apexguide.Guides.getAll();
+                    if (mc.screen == null && mc.player != null && !guides.isEmpty()) {
+                        com.omnicrox.apexguide.internal.GuideMEClient.openGuideAtAnchor(guides.iterator().next(),
+                                PageAnchor.page(com.omnicrox.apexguide.internal.screen.GuideScreen.HOME_PAGE_ID));
+                    }
+                }
             }
         });
     }

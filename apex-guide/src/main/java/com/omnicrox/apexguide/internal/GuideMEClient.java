@@ -121,6 +121,7 @@ public class GuideMEClient {
 
     private void registerHotkeys(RegisterKeyMappingsEvent e) {
         e.register(OpenGuideHotkey.getHotkey());
+        e.register(OpenGuideHotkey.getHomeHotkey());
     }
 
     public static GuideMEClient instance() {
@@ -197,6 +198,9 @@ public class GuideMEClient {
     }
 
     public static boolean openGuideAtAnchor(Guide guide, PageAnchor anchor) {
+        if (guide == null) {
+            return false;
+        }
         try {
             GuideNavigation.navigateTo(guide, anchor);
             return true;

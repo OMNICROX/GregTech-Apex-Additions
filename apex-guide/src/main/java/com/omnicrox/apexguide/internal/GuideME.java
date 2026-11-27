@@ -70,6 +70,14 @@ public class GuideME {
                 this::handlePacket);
 
         MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
+        // Apex Guide: a ready-to-use book for every registered guide in the Tools tab (and so in JEI)
+        modBus.addListener((net.minecraftforge.event.BuildCreativeModeTabContentsEvent e) -> {
+            if (e.getTabKey() == net.minecraft.world.item.CreativeModeTabs.TOOLS_AND_UTILITIES) {
+                for (var guide : com.omnicrox.apexguide.internal.GuideRegistry.getStaticGuides()) {
+                    e.accept(com.omnicrox.apexguide.Guides.createGuideItem(guide.getId()));
+                }
+            }
+        });
 
         if (FMLLoader.getDist().isClient()) {
             new GuideMEClient(context, modBus);

@@ -19,7 +19,7 @@ class GuideMEClientProxy extends GuideMEServerProxy {
     public void addGuideTooltip(ResourceLocation guideId, List<Component> lines, TooltipFlag tooltipFlag) {
         var guide = GuideRegistry.getById(guideId);
         if (guide == null) {
-            lines.add(GuidebookText.ItemInvalidGuideId.text().withStyle(ChatFormatting.RED));
+            lines.add(GuidebookText.ItemInvalidGuideId.text(guideId.toString()).withStyle(ChatFormatting.RED));
             return;
         }
 
