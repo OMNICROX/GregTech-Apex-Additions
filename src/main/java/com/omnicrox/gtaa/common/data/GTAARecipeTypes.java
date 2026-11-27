@@ -36,6 +36,7 @@ public class GTAARecipeTypes {
     public static GTRecipeType SUIT_FABRICATION;
     public static GTRecipeType SEED_SYNTHESIS;
     public static GTRecipeType MANA_NEXUS;
+    public static GTRecipeType MATTER_FABRICATOR;
     public static com.omnicrox.gtaa.api.DefcRecipeType DRACONIC_FUSION;
 
     private static GTRecipeType register(String name, String group, String english) {
@@ -135,6 +136,12 @@ public class GTAARecipeTypes {
                 .setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.NeutroniumCompressionLogic.INSTANCE);
+        MATTER_FABRICATOR = register("matter_fabricator", "multiblock", "Matter Fabricator")
+                .setMaxIOSize(2, 1, 0, 1)
+                .setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_MASS_FAB, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> "Any ingot or gem works (a block counts as 9)")
+                .addCustomRecipeLogic(com.omnicrox.gtaa.common.recipe.MatterFabricationLogic.INSTANCE);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")

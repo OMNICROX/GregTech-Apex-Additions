@@ -68,6 +68,8 @@ public final class GTAACompatRecipes {
         godforge(provider);
         apexGate(provider);
         alfheimArray(provider);
+        draconicFusionCrafting(provider);
+        matterFabricator(provider);
         godforgeStarter(provider);
         missingSources(provider);
         topCircuits(provider);
@@ -507,5 +509,41 @@ public final class GTAACompatRecipes {
                         S1, "botania:gaia_pylon", S2, "botania:fabulous_pool", S3, "botania:gaia_spreader",
                         S4, "botania:alfheim_portal", S5, "botania:runic_altar", S6, "botania:corporea_spark",
                         S7, "gtna:radiant_naquadah_alloy_casing", S8, "botania:manasteel_block")));
+    }
+
+    /** GT-Not-Leisure's Draconic Fusion Crafting: their UMV recipe brought to UHV for this pack */
+    private static void draconicFusionCrafting(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:draconic_fusion_crafting")
+                .inputItems(GTAAMachines.DRACONIC_FUSION_CRAFTER.asStack())
+                .inputItems(plateDense, GTMaterials.Neutronium, 4)
+                .inputItems(GTItems.EMITTER_UHV, 16)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 16)
+                .inputItems(S1, 32)
+                .inputItems(CustomTags.UHV_CIRCUITS, 16)
+                .inputItems(S2)
+                .inputItems(S3)
+                .inputItems(GTAABlocks.RADIATION_ABSORBENT_CASING.asStack(32))
+                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 128))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.DRACONIC_FUSION_CRAFTING.asStack())
+                .duration(2400).EUt(VA[UHV])
+                .save(needing(provider, "draconicevolution", Map.of(S1, "draconicevolution:draconic_core",
+                        S2, "draconicevolution:dragon_heart", S3, "draconicevolution:chaos_shard")));
+    }
+
+    /** GT-Not-Leisure's Matter Fabricator (ZPM) */
+    private static void matterFabricator(Consumer<FinishedRecipe> provider) {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:matter_fabricator")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[ZPM].asStack(4))
+                .inputItems(GTItems.FIELD_GENERATOR_ZPM, 8)
+                .inputItems(GTItems.ELECTRIC_PUMP_ZPM, 8)
+                .inputItems(CustomTags.ZPM_CIRCUITS, 8)
+                .inputItems(GTBlocks.SUPERCONDUCTING_COIL.asStack(16))
+                .inputItems(S1, 8)
+                .inputItems(frameGt, GTMaterials.Naquadria, 8)
+                .inputFluids(GTMaterials.SolderingAlloy.getFluid(L * 32))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MATTER_FABRICATOR.asStack())
+                .duration(1600).EUt(VA[ZPM])
+                .save(needing(provider, "gtna", Map.of(S1, "gtna:radiant_naquadah_alloy_casing")));
     }
 }

@@ -440,6 +440,7 @@ public final class GTAAGTNHMachines {
     // terms in LICENSE-ADDITIONAL-TERMS.md). Project authors include HFstudio, LineBroke and other contributors.
     // Each machine keeps its original author line.
     public static final String GTNL_NLXCJH = "§7Add Mod: §bGT Not Leisure§7: §6§l§n年轮新城计划 by 咸到老时变成鱼";
+    public static final String GTNL_QYZG = "§7Add Mod: §bGT Not Leisure§7: §6§o犰狳重工 GT-Odyssey";
 
     /** a block of another mod, or the fallback when that mod is missing */
     private static Block modBlock(String id, java.util.function.Supplier<Block> fallback) {
@@ -490,6 +491,85 @@ public final class GTAAGTNHMachines {
                     .build())
             .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(new ResourceLocation("gtna", "block/casings/radiant_naquadah_alloy_casing"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
+
+    // ---------------- Draconic Fusion Crafting (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition DRACONIC_FUSION_CRAFTING = REGISTRATE
+            .multiblock("draconic_fusion_crafting",
+                    com.omnicrox.gtaa.common.machine.multiblock.gtnl.DraconicFusionCraftingMachine::new)
+            .langValue("Draconic Fusion Crafting")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.DRACONIC_FUSION)
+            .recipeModifiers(com.omnicrox.gtaa.common.machine.multiblock.gtnl.DraconicFusionCraftingMachine::recipeModifier)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Fusion Crafting")
+                    .info("§68 Parallels§7 (a Parallel Hatch can raise it)")
+                    .info("§a200% Speed")
+                    .info("§b50% EU Usage")
+                    .info("Enables §cPerfect Overclock§7 at machine casing tier 4 (Chaotic) or higher")
+                    .info("Core casings set the highest recipe tier; each tier above the recipe halves its time")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)")
+                    .author(GTNL_NLXCJH).build())
+            .appearanceBlock(GTAABlocks.RADIATION_ABSORBENT_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "draconic_fusion")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(modBlock("gtca:heat_resistant_trinium_plated_casing", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST::get)))
+                    .where('B', blocks(GTAABlocks.PUR_PRESSURE_CASING.get()))
+                    .where('C', blocks(GTAABlocks.RADIATION_ABSORBENT_CASING.get()).setMinGlobalLimited(25)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('D', com.omnicrox.gtaa.common.machine.multiblock.DraconicFusionCrafterMachine.cores())
+                    .where('E', blocks(modBlock("gtna:electron_permeable_amprosium_coated_glass",
+                            () -> modBlock("gtca:neutronium_fused_glass", GTBlocks.FUSION_GLASS::get))))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(GTAA.id("block/casing/radiation_absorbent_casing"),
+                    gt("block/multiblock/fusion_reactor")))
+            .register();
+
+
+    // ---------------- Matter Fabricator (GT-Not-Leisure) ----------------
+    public static final MultiblockMachineDefinition MATTER_FABRICATOR = REGISTRATE
+            .multiblock("matter_fabricator", WorkableElectricMultiblockMachine::new)
+            .langValue("Matter Fabricator")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MATTER_FABRICATOR)
+            .tooltips(com.omnicrox.apexlib.tooltip.ApexTooltips.of("Matter Fabricator")
+                    .info("§68 Parallels§7 (a Parallel Hatch can raise it)")
+                    .info("§a167% Speed")
+                    .info("§b80% EU Usage")
+                    .info("Turns §eany ingot or gem§7 into matter (a block counts as 9):")
+                    .info(" circuit 1: 640 §eMatter Balls§7, circuit 2: 2000 mB of §dUU Matter Amplifier")
+                    .info("§aSupports Multi-Amp and Laser Hatches!")
+                    .portedFrom("GT-Not-Leisure (GTNH addon)")
+                    .author(GTNL_QYZG).build())
+            .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+            .pattern(definition -> com.omnicrox.gtaa.api.GTAAStructures.pattern("gtnl", "matter_fabricator")
+                    .where('~', controller(blocks(definition.get())))
+                    .where('A', blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
+                    .where('B', blocks(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST.get()))
+                    .where('C', blocks(GTBlocks.MACHINE_CASING_ZPM.get()))
+                    .where('D', blocks(GTBlocks.SUPERCONDUCTING_COIL.get()))
+                    .where('E', blocks(GTBlocks.FILTER_CASING.get()))
+                    .where('F', blocks(modBlock("gtna:radiant_naquadah_alloy_casing", GTAABlocks.ADVANCED_IRIDIUM_PLATED_CASING::get)))
+                    .where('G', blocks(GTBlocks.HIGH_POWER_CASING.get()).setMinGlobalLimited(100)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                            .or(abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER).setMinGlobalLimited(1).setPreviewCount(1)))
+                    .where('H', frames(com.gregtechceu.gtceu.common.data.GTMaterials.Naquadria))
+                    .where(' ', any())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(gt("block/casings/hpca/high_power_casing"),
                     gt("block/multiblock/fusion_reactor")))
             .register();
 

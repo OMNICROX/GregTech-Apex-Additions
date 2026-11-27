@@ -30,7 +30,7 @@ public class DraconicFusionCrafterMachine extends WorkableElectricMultiblockMach
     public static final String CTX_CORE = "DEFCCore";
     public static final String CTX_FUSION = "DEFCFusion";
 
-    @DescSynced private int coreTier;
+    @DescSynced protected int coreTier;
     @DescSynced private int fusionTier;
 
     public DraconicFusionCrafterMachine(IMachineBlockEntity holder, Object... args) {

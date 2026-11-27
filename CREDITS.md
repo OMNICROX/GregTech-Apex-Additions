@@ -46,3 +46,5 @@ additional terms in LICENSE-ADDITIONAL-TERMS.md".
 | GTAA content | Original | Author line kept |
 | --- | --- | --- |
 | Alfheim Teleportation Array | GTNL `TeleportationArrayToAlfheim` | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
+| Draconic Fusion Crafting | GTNL `DraconicFusionCrafting` | GT Not Leisure: 年轮新城计划 by 咸到老时变成鱼 |
+| Matter Fabricator | GTNL `MatterFabricator` | GT Not Leisure: 犰狳重工 GT-Odyssey |
