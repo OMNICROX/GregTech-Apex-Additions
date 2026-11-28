@@ -45,8 +45,10 @@ their real links: every line is a row of its own.
 Positions are cached in `out/layout_cache.json` (keyed by the chapter's quests and grid.py); a clean build takes ~3 min.
 
 ## Quest expansion (started 2026-11-28)
-The owner wants the book to guide the whole pack, GTNH-full. Stone, Steam and LV were roughly doubled (99 / 95 / 97
-quests) in a block at the end of each chapter file ("more to do in ..."); MV onwards and the side chapters are next.
+The owner wants the book to guide the whole pack, GTNH-full. Every chapter has a block at its end ("more to do in
+...") with the added quests: 580 -> 991 in total. Still thin against GTNH: the later tiers (30-57 quests each).
+The Maxwell step items (Concentrated Effort, Proof of Heroes, Giga Chad Token, Space Warper, Liquid Stargate) and the
+Maxwell Maker have no quests yet: they are not in the item dump until the game has loaded the new jar.
 New quests only use item ids checked against `apex_quest_items.json`, and descriptions only say what was verified.
 To do when the item dump is refreshed: a quest for the Maxwell Maker (LV, optional).
 

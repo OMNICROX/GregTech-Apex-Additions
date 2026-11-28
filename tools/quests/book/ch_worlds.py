@@ -101,3 +101,150 @@ q('outer', '&eThe Outer Planets', ['ad_astra_rocketed:tier_5_rocket', 'ad_astra_
 q('personal', 'A World of Your Own', ['gtna:personal_space_portal'], [
     'GTNA\'s personal dimension: an empty world for a base with no neighbours and no mobs.',
 ], ['start'], kind='opt', guide='dimensions/personal-space.md')
+
+
+# ================================================================ more to do in the other worlds (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'worlds/' + key)
+    x.deps += [d if '/' in d else 'worlds/' + d for d in deps if (d if '/' in d else 'worlds/' + d) not in x.deps]
+
+
+# ---------------------------------------------------------------- the Nether
+q('netherite', 'Netherite', ['minecraft:netherite_ingot'], [
+    'Ancient debris, deep in the Nether.',
+], ['nether'], kind='opt')
+q('wither_skulls', 'Three Skulls', ['minecraft:wither_skeleton_skull*3'], [
+    'Wither skeletons in a fortress. The Wither\'s star is a GregTech ingredient from EV on, so this is not the last time.',
+], ['blaze'])
+
+# ---------------------------------------------------------------- the Aether
+q('ambrosium', 'Ambrosium', ['aether:ambrosium_shard*16'], [
+    'The Aether\'s coal. It fuels the Altar and the Freezer, and turns grass into enchanted grass.',
+], ['aether'])
+q('aether_altar', 'Altar and Freezer', ['aether:altar', 'aether:freezer'], [
+    'The &eAltar&r repairs and enchants: gravitite ore becomes enchanted gravitite in it. The &eFreezer&r turns water to ice and makes the ice accessories.',
+], ['ambrosium'])
+also('gravitite', 'aether_altar')
+q('bronze_key', 'Bronze Dungeon', ['aether:bronze_dungeon_key'], [
+    'The stone dungeons inside the islands. The Slider at the end only takes damage from a pickaxe.',
+], ['aether'])
+q('silver_key', 'Silver Dungeon', ['aether:silver_dungeon_key'], [
+    'The temple on its own cloud. Beat the valkyries for medals, then their queen.',
+], ['bronze_key'])
+q('gold_key', 'Gold Dungeon', ['aether:gold_dungeon_key'], [
+    'The island with the golden oaks, and the Sun Spirit inside it. It only takes damage from the ice it throws: hit it back.',
+], ['silver_key'])
+q('parachute', 'Golden Parachute', ['aether:golden_parachute'], [
+    'Falling off the Aether drops you into the Overworld from the top of the sky. A parachute makes that a way home.',
+], ['aether'], kind='opt')
+
+# ---------------------------------------------------------------- the Twilight Forest
+q('magic_map', 'Magic Map', ['twilightforest:magic_map_focus'], [
+    'A raven feather, glowstone and a torchberry. The &eMagic Map&r shows every boss lair in the forest around you.',
+], ['twilight'])
+q('ore_magnet', 'Ore Magnet', ['twilightforest:ore_magnet'], [
+    'Pulls ore up through the ground towards you.',
+], ['naga'], kind='opt')
+q('ironwood', 'Ironwood and Steeleaf', ['twilightforest:ironwood_ingot*4', 'twilightforest:steeleaf_ingot*4'], [
+    'The forest\'s first two metals: one crafted from roots and iron, one found in labyrinth and tower chests.',
+], ['twilight'], kind='opt')
+q('minoshroom', 'The Minoshroom', ['twilightforest:minoshroom_trophy'], [
+    'At the bottom of a labyrinth in the swamp. Its stew is what lets you walk into the Fire Swamp.',
+], ['lich'])
+also('hydra', 'minoshroom')
+q('fiery', 'Fiery Ingots', ['twilightforest:fiery_ingot*4'], [
+    'Iron and the Hydra\'s blood. Fiery tools smelt what they mine.',
+], ['hydra'], kind='opt')
+q('phantoms', 'The Knight Phantoms', ['twilightforest:knight_phantom_trophy'], [
+    'Under the Goblin Knight Stronghold in the Dark Forest. Six of them.',
+], ['lich'])
+also('ur_ghast', 'phantoms')
+q('knightmetal', 'Knightmetal', ['twilightforest:knightmetal_ingot*4'], [
+    'Melted down from the armour shards the goblin knights drop.',
+], ['phantoms'], kind='opt')
+q('yeti', 'The Alpha Yeti', ['twilightforest:alpha_yeti_trophy'], [
+    'In a cave in the Snowy Forest. Its fur is the armour for what comes next.',
+], ['lich'])
+q('snow_queen', 'The Snow Queen', ['twilightforest:snow_queen_trophy'], [
+    'At the top of the Aurora Palace on the glacier.',
+], ['yeti'])
+q('lamp', 'Lamp of Cinders', ['twilightforest:lamp_of_cinders'], [
+    'With the Hydra, the Ur-Ghast and the Snow Queen beaten, the Highlands open. The lamp burns the thorns around the last plateau.',
+], ['hydra', 'ur_ghast', 'snow_queen'])
+q('uncrafting', 'Uncrafting Table', ['twilightforest:uncrafting_table'], [
+    'Takes an item apart into its ingredients, for experience.',
+], ['twilight'], kind='opt')
+
+# ---------------------------------------------------------------- the Undergarden
+q('cloggrum', 'Cloggrum and Froststeel', ['undergarden:cloggrum_ingot*8', 'undergarden:froststeel_ingot*8'], [
+    'The Undergarden\'s two common metals. Cloggrum is heavy and slow; froststeel chills what it hits.',
+], ['undergarden'])
+q('utherium', 'Utherium', ['undergarden:utherium_crystal*4'], [
+    'The red crystal. Utherium tools do extra damage to Rotspawn.',
+], ['undergarden'], kind='opt')
+q('forgotten', 'Forgotten Metal', ['undergarden:forgotten_ingot'], [
+    'Dropped in pieces by the Forgotten Guardian, deep down.',
+], ['cloggrum'], kind='opt')
+
+# ---------------------------------------------------------------- the End
+q('elytra', 'Wings', ['minecraft:elytra'], [
+    'In the ship beside an End City. Until the jetpack, and often after, this is how you get around.',
+], ['end'])
+q('shulker', 'Shulker Boxes', ['minecraft:shulker_shell*2'], [
+    'A chest that keeps its contents in your pocket.',
+], ['end'], kind='opt')
+q('dragon_breath', 'Dragon\'s Breath', ['minecraft:dragon_breath*4'], [
+    'Bottle the purple cloud. A few recipes ask for it.',
+], ['end'], kind='opt')
+
+# ---------------------------------------------------------------- space
+q('nasa', 'NASA Workbench', ['ad_astra:nasa_workbench'], [
+    'Rockets are assembled here, piece by piece.',
+], ['suit'])
+q('launch_pad', 'Launch Pad', ['ad_astra:launch_pad'], [
+    'A rocket stands on a launch pad. Take a second one with you: you need it to come back.',
+], ['suit'])
+also('moon', 'nasa', 'launch_pad')
+q('oxygen', 'Air to Breathe', ['ad_astra:oxygen_loader', 'ad_astra:oxygen_distributor'], [
+    'The &eOxygen Loader&r fills suits and tanks; the &eOxygen Distributor&r fills a sealed room so you can take the helmet off.',
+], ['moon'])
+q('desh', 'Desh', ['ad_astra:desh_ingot*8'], [
+    'The Moon\'s metal. The next rocket is made of it.',
+], ['moon'])
+also('mars', 'desh')
+q('rover', 'Rover', ['ad_astra:tier_1_rover'], [
+    'Four wheels, a fuel tank and a trunk.',
+], ['desh'], kind='opt')
+q('cheese', 'It Really Is', ['ad_astra:cheese*8'], [
+    'Cheese ore. On the Moon.',
+], ['moon'], kind='opt')
+q('ostrum', 'Ostrum', ['ad_astra:ostrum_ingot*8'], [
+    'Mars\'s metal, for the rocket after that.',
+], ['mars'])
+also('venus', 'ostrum')
+q('hot_suit', 'Netherite Space Suit', ['ad_astra:netherite_space_suit'], [
+    'Venus and Mercury are hot enough to kill through the first suit. This one holds.',
+], ['mars'])
+also('venus', 'hot_suit')
+q('calorite', 'Calorite', ['ad_astra:calorite_ingot*8'], [
+    'Venus\'s metal, and the last of Ad Astra\'s three.',
+], ['venus'])
+also('glacio', 'calorite')
+
+# ---------------------------------------------------------------- dragons
+q('dragon', '&cDragons', ['iceandfire:dragonbone*8'], [
+    'Ice and Fire\'s dragons nest in the Overworld: fire dragons in warm places, ice dragons in cold ones, lightning dragons in jungles and badlands. Their roosts are scorched, frozen or charred ground.',
+    'A young one is a fight. An old one in its cave is a project. Bones, scales, heart and blood are all worth having.',
+], ['start'], kind='main')
+q('scales', 'Scales', ['iceandfire:dragonscales_red*8'], [
+    'Dragon scale armour, in the colour of the dragon.',
+], ['dragon'], kind='opt')
+q('dragon_blood', 'Blood and a Heart', ['iceandfire:fire_dragon_blood', 'iceandfire:fire_dragon_heart'], [
+    'Use empty bottles on the corpse for blood before you strip it. The heart drops once.',
+], ['dragon'])
+q('dragonforge', 'Dragonforge', ['iceandfire:dragonforge_fire_core'], [
+    'A forge of dragonforge bricks around a core, with a tamed dragon of the right kind breathing into it.',
+], ['dragon_blood'])
+q('dragonsteel', 'Dragonsteel', ['iceandfire:dragonsteel_fire_ingot*4'], [
+    'Iron and dragon blood in the forge.',
+], ['dragonforge'])

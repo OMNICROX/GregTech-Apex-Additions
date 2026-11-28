@@ -82,3 +82,40 @@ q('max', '&c&lMAX', ['gtapexadditions:max_universal_circuit', 'gtceu:max_machine
     'The &cMAX Universal Circuit&r: an OpV circuit, an OpV emitter and sensor and neutronium foil, in the Space Assembler.',
     'This is the top of Apex Ascension. Everything after it is what you decide to build.',
 ], ['eoh', 'fog', 'tpm'], kind='hub', bag='end')
+
+
+# ================================================================ more to do in the endgame (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'end/' + key)
+    x.deps += [d if '/' in d else 'end/' + d for d in deps if (d if '/' in d else 'end/' + d) not in x.deps]
+
+
+q('uev_fg', 'UEV Field Generator', ['gtceu:uev_field_generator'], [
+    'A tier up, as ever.',
+], ['uev_parts'])
+q('uiv_fg', 'UIV Field Generator', ['gtceu:uiv_field_generator'], [
+    'And again.',
+], ['uiv'])
+q('uxv_fg', 'UXV Field Generator', ['gtceu:uxv_field_generator'], [
+    'And again.',
+], ['uxv'])
+q('opv_fg', 'OpV Field Generator', ['gtceu:opv_field_generator'], [
+    'The last one.',
+], ['opv'])
+q('mars_cat', '&dMars', ['placeablemaxwell:mars'], [
+    'The other way to finish the pack is a cat. Four cats, then a fifth.',
+    'Each of Maxwell\'s friends is one &eMiracle Top&r recipe at MAX: a thousand of several dusts, 64 of the tier\'s parts and 9,999,999 seconds. Parallels and overclocks do not apply; only more rings make it faster.',
+], ['start', 'uhv/miracle_top'], kind='main')
+q('poomba', '&dPoomba', ['placeablemaxwell:poomba'], [
+    'The second friend.',
+], ['mars_cat'], kind='main')
+q('valenok', '&dValenok', ['placeablemaxwell:valenok'], [
+    'The third.',
+], ['poomba'], kind='main')
+q('vasilisa', '&dVasilisa', ['placeablemaxwell:vasilisa'], [
+    'The fourth.',
+], ['valenok'], kind='main')
+q('maxwell', '&d&lMaxwell', ['placeablemaxwell:maxwell'], [
+    'All four friends, Concentrated Effort, a Proof of Heroes, a Giga Chad Token, sixteen Space Warpers and a bucket of Liquid Stargate, in the Miracle Top for 99,999,999 seconds.',
+    'Or 64 cod, 64 salmon, 64 string, a black wool and a bucket of milk in a &eMaxwell Maker&r at LV, for 16,000,000 seconds. He does not mind which.',
+], ['vasilisa'], kind='hub')

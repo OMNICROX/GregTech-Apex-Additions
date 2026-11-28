@@ -146,3 +146,60 @@ q('iv', '&9&lOn to IV', ['gtceu:iv_machine_hull'], [
     'Tungstensteel plates, &ePTFE&r sheets and platinum cable: the &9IV Machine Hull&r.',
     'IV is 8,192 EU/t. It brings the platinum group, the Assembly Line and the first wave of Apex\'s own multiblocks. Open &9Tier 5 - IV&r.',
 ], ['tungstensteel', 'platinum'], kind='hub', bag='ev')
+
+
+# ================================================================ more to do in EV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'ev/' + key)
+    x.deps += [d if '/' in d else 'ev/' + d for d in deps if (d if '/' in d else 'ev/' + d) not in x.deps]
+
+
+q('ev_cables', 'EV Cables', ['gtceu:aluminium_single_cable*16'], [
+    '&eAluminium&r carries EV. Gold and electrum stop at HV.',
+], ['start'])
+q('sensor', 'EV Sensor', ['gtceu:ev_sensor'], [
+    'The pair to the emitter, as in every tier.',
+], ['emitter'])
+q('robot_arm', 'EV Robot Arm', ['gtceu:ev_robot_arm'], [
+    'Motors, a piston, a circuit. The assembler upgrades of this tier want several.',
+], ['motor', 'piston'])
+q('ti_casing', 'Stable Titanium Casing', ['gtceu:stable_machine_casing*16'], [
+    'Titanium\'s casing. Several EV multiblocks are built of it: look at a controller\'s preview before you craft a stack of the wrong one.',
+], ['start'])
+q('ti_boiler', 'Titanium Large Boiler', ['gtceu:titanium_large_boiler'], [
+    'The third large boiler. Worth it only if steam is still part of your power.',
+], ['ti_casing'], kind='opt')
+q('ti_drum', 'Titanium Drum', ['gtceu:titanium_drum'], [
+    'Bigger again.',
+], ['start'], kind='opt')
+q('superconductor', 'A Wire That Loses Nothing', ['gtceu:uranium_triplatinum_single_wire*8'], [
+    'Every tier has a &esuperconductor&r: a wire with no loss over any distance and no insulation. This is EV\'s.',
+    'They are expensive now and ordinary later: from LuV on, the best machines ask for them by name.',
+], ['platinum'], kind='opt')
+q('big_buses', 'Bigger Buses', ['gtceu:ev_input_bus', 'gtceu:ev_input_hatch'], [
+    'A bus or hatch of a higher tier has more slots or a bigger tank. A multiblock that keeps stopping for input wants one.',
+], ['start'], kind='opt')
+q('large_macerator', 'Large Maceration Tower', ['gtceu:large_maceration_tower'], [
+    'The large machines are the answer to "I need eight of these": one multiblock, &eparallel hatches&r, many recipes at once.',
+], ['gcym'])
+q('large_mixer', 'Large Mixer', ['gtceu:large_mixer'], [
+    'More fluid and item inputs than any single mixer: the alloys ahead have six and more ingredients.',
+], ['gcym'])
+q('large_electrolyzer', 'Large Electrolyzer', ['gtceu:large_electrolyzer'], [
+    'Bulk electrolysis. Bauxite, salt water and clay stop being a queue.',
+], ['gcym'], kind='opt')
+q('large_bath', 'Large Chemical Bath', ['gtceu:large_chemical_bath'], [
+    'Ore washing and chemical bathing in one multiblock.',
+], ['gcym'], kind='opt')
+q('large_sifter', 'Large Sifting Funnel', ['gtceu:large_sifting_funnel'], [
+    'Every gem ore you own, sifted at once.',
+], ['gcym'], kind='opt')
+q('ev_rig', 'A Deeper Rig', ['gtceu:ev_fluid_drilling_rig'], [
+    'A higher tier of drilling rig pumps more per cycle from the same fluid vein.',
+], ['pump'], kind='opt')
+q('data_orb', 'Data Orb', ['gtceu:data_orb'], [
+    'Holds what a scanner reads. You will meet it again when assembly line research starts.',
+], ['mainframe'], kind='opt')
+q('nanomuscle', 'NanoMuscle Suit', ['gtceu:nanomuscle_chestplate'], [
+    'Powered armour: it takes damage out of its battery instead of out of you.',
+], ['lapotron'], kind='opt')

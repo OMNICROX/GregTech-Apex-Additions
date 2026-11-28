@@ -160,3 +160,59 @@ q('luv', '&d&lOn to LuV', ['gtceu:luv_machine_hull'], [
     'Rhodium-plated palladium plates, PTFE sheets and niobium-titanium cable: the &dLuV Machine Hull&r.',
     'LuV is 32,768 EU/t. It brings fusion, naquadah and wetware. Open &dTier 6 - LuV&r.',
 ], ['rpp', 'luv_motor'], kind='hub', bag='iv')
+
+
+# ================================================================ more to do in IV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'iv/' + key)
+    x.deps += [d if '/' in d else 'iv/' + d for d in deps if (d if '/' in d else 'iv/' + d) not in x.deps]
+
+
+q('iv_cables', 'IV Cables', ['gtceu:platinum_single_cable*16'], [
+    '&ePlatinum&r and &etungsten&r carry IV.',
+], ['start'])
+q('sensor', 'IV Emitter and Sensor', ['gtceu:iv_emitter', 'gtceu:iv_sensor'], [
+    'The assembly line\'s recipes use both, often by the eight.',
+], ['parts'])
+q('robust_casing', 'Robust Tungstensteel Casing', ['gtceu:robust_machine_casing*16'], [
+    'Tungstensteel\'s casing, for the multiblocks of this tier.',
+], ['start'])
+q('quantum_storage', 'Quantum Chest and Tank', ['gtceu:iv_quantum_chest', 'gtceu:iv_quantum_tank'], [
+    'The super chest\'s successor: one item or fluid, in numbers you will not fill by hand.',
+], ['field_gen'])
+q('osmium', 'Osmium', ['gtceu:osmium_ingot*4'], [
+    'From the platinum group sludge, at the far end of the chain. Osmium and iridium make osmiridium in LuV.',
+], ['pgm'])
+q('ruthenium', 'Ruthenium', ['gtceu:ruthenium_dust*4'], [
+    'Another of the six. Ruthenium and iridium make ruridit, which the LuV parts need.',
+], ['pgm'])
+q('hss_more', 'HSS-E and HSS-S', ['gtceu:hsse_ingot*4', 'gtceu:hsss_ingot*4'], [
+    'The other two high speed steels. HSS-S goes into LuV motors and pistons.',
+], ['hss'])
+also('luv_motor', 'hss_more')
+q('tungsten_carbide', 'Tungsten Carbide', ['gtceu:tungsten_carbide_ingot*8'], [
+    'Tungsten and carbon. Hard, and an ingredient in several of the alloys ahead.',
+], ['start'], kind='opt')
+q('iv_superconductor', 'IV Superconductor', ['gtceu:samarium_iron_arsenic_oxide_single_wire*8'], [
+    'Samarium iron arsenic oxide: the IV wire with no loss.',
+], ['start'], kind='opt')
+q('lapotronic', 'Lapotronic Capacitor', ['gtceu:iv_lapotronic_battery'], [
+    'The storage blocks a Power Substation is filled with. Each tier of capacitor holds more.',
+], ['start'])
+also('pss', 'lapotronic')
+q('data', 'Research Data', ['gtceu:data_stick*4'], [
+    'Most assembly line recipes are locked behind &eresearch&r: scan the item named in the recipe in the &eScanner&r onto a data stick.',
+], ['scanner'])
+q('data_hatch', 'Data Access Hatch', ['gtceu:data_access_hatch'], [
+    'Put the data sticks in a &eData Access Hatch&r on the assembly line. It can only run recipes whose research it holds.',
+], ['data'])
+also('assline', 'data_hatch')
+q('large_assembler', 'Large Assembler', ['gtceu:large_assembler'], [
+    'The assembler as a multiblock, with parallels.',
+], ['start'], kind='opt')
+q('large_engraver', 'Large Engraving Laser', ['gtceu:large_engraving_laser'], [
+    'Wafers by the stack.',
+], ['start'], kind='opt')
+q('quarktech', 'QuarkTech Suit', ['gtceu:quarktech_chestplate'], [
+    'The second powered armour, built around quantum stars.',
+], ['quantum_star'], kind='opt')

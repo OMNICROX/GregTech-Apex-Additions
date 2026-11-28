@@ -93,3 +93,108 @@ q('rock_breaker', 'Industrial Rock Breaker', ['gtapexadditions:industrial_rock_b
 q('upgrader', 'Structure Upgrader', ['gtapexadditions:structure_upgrader'], [
     'Builds and upgrades multiblocks from your inventory or your ME network: point it at a controller. MV.',
 ], ['start', 'mv/robot_arm'], kind='opt', guide='items/structure-upgrader.md')
+
+
+# ================================================================ more to do in AE2 and automation (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'ae2/' + key)
+    x.deps += [d if '/' in d else 'ae2/' + d for d in deps if (d if '/' in d else 'ae2/' + d) not in x.deps]
+
+
+q('meteor', 'Meteorites', ['ae2:meteorite_compass'], [
+    'The compass points at the nearest meteorite. Inside is sky stone, certus quartz and a mysterious cube that breaks into the four inscriber presses.',
+], ['start'])
+q('presses', 'The Presses', ['ae2:silicon_press'], [
+    'Silicon, logic, calculation, engineering. Copy a press in the inscriber with a block of iron, so you never have to find another.',
+], ['meteor'])
+q('charger', 'Charger', ['ae2:charger'], [
+    'Charges certus quartz crystals. Charged certus, redstone and nether quartz dropped in water grow fluix crystals.',
+], ['start'])
+q('fluix', 'Fluix', ['ae2:fluix_crystal*8'], [
+    'The purple crystal every cable and most machines are made of.',
+], ['charger'])
+q('processors', 'Processors', ['ae2:logic_processor*4', 'ae2:calculation_processor*4', 'ae2:engineering_processor*4'], [
+    'Press a circuit from gold, certus or diamond, press silicon, then press the two together over redstone.',
+    'Three inscribers in a row with hoppers between them do it without you.',
+], ['inscriber', 'presses'])
+also('network', 'processors')
+q('cable', 'Cable', ['ae2:fluix_glass_cable*16'], [
+    'Glass cable carries &e8 channels&r. Every device on the network that stores, moves or crafts uses one.',
+], ['fluix'])
+also('network', 'cable')
+q('drive', 'ME Drive', ['ae2:drive'], [
+    'Ten storage cells in one block.',
+], ['network'])
+also('cells', 'drive')
+q('terminal', 'Terminal', ['ae2:terminal'], [
+    'Everything in the network, in one searchable window.',
+], ['network'])
+also('crafting_terminal', 'terminal')
+q('energy_cell', 'Energy Cell', ['ae2:energy_cell'], [
+    'A buffer for the network. Big crafting jobs draw power in bursts; without a buffer the network browns out and restarts.',
+], ['network'])
+q('export_bus', 'Export Bus', ['ae2:export_bus'], [
+    'Pushes the items you list out of the network into what it touches.',
+], ['buses'])
+q('storage_bus', 'Storage Bus', ['ae2:storage_bus'], [
+    'Makes the inventory it touches part of the network: a super chest, a drawer, a quantum tank. The network sees it and uses it, nothing is moved.',
+], ['buses'])
+q('level_emitter', 'Level Emitter', ['ae2:level_emitter'], [
+    'A redstone signal when the network has more (or less) than a number of an item. A machine controller cover reads it: "keep 256 of this in stock" without autocrafting.',
+], ['buses'], kind='opt')
+q('fluid_cell', 'Fluid Cells', ['ae2:fluid_storage_cell_1k'], [
+    'Fluids are stored exactly like items, in their own cells.',
+], ['cells'], kind='opt')
+q('dense_cable', 'Smart and Dense Cable', ['ae2:fluix_smart_cable*8', 'ae2:fluix_covered_dense_cable*8'], [
+    'Dense cable carries &e32 channels&r. Smart cable shows how many channels it is carrying.',
+], ['controller'])
+q('p2p', 'P2P Tunnels', ['ae2:me_p2p_tunnel*2'], [
+    'A pair of tunnels carries a whole dense cable through one channel of another network. This is how a big base gets channels where it needs them.',
+], ['dense_cable'], kind='opt')
+q('cards', 'Upgrade Cards', ['ae2:speed_card*4'], [
+    'Cards go into buses, interfaces and assemblers. Speed cards first.',
+], ['buses'], kind='opt')
+q('pattern_terminal', 'Pattern Encoding Terminal', ['ae2:pattern_encoding_terminal', 'ae2:blank_pattern*16'], [
+    'A pattern is a recipe on a card. For a GregTech recipe use the &eprocessing&r mode: list what goes in and what comes out.',
+    'The + button of the recipe viewer fills it in for you.',
+], ['autocraft'])
+q('assembler', 'Molecular Assembler', ['ae2:molecular_assembler'], [
+    'Does crafting-table patterns. Put it against a pattern provider.',
+], ['autocraft'])
+q('cpu', 'Crafting CPU', ['ae2:crafting_unit', 'ae2:1k_crafting_storage'], [
+    'Every running job needs a crafting CPU of its own: any block of crafting units with at least one storage in it.',
+], ['autocraft'])
+q('coprocessor', 'Co-Processors', ['ae2:crafting_accelerator*4'], [
+    'Each co-processor in a CPU lets the job hand out one more task at a time.',
+], ['cpu'], kind='opt')
+q('wap', 'Wireless Access Point', ['ae2:wireless_access_point'], [
+    'Gives wireless terminals their range. Boosters in it extend the range and the power draw.',
+], ['controller'])
+also('wireless', 'wap')
+q('singularity', 'Singularity', ['ae2:condenser', 'ae2:singularity'], [
+    'A &eMatter Condenser&r eats items and, with a storage component in it, turns 256,000 of them into a singularity.',
+    'A singularity blown up next to ender dust becomes an entangled pair: one for each end of a quantum bridge.',
+], ['controller'])
+also('quantum', 'singularity')
+q('ex_drive', 'Extended Drive', ['expatternprovider:ex_drive'], [
+    'Twenty cells instead of ten.',
+], ['ex_provider'], kind='opt')
+q('ex_assembler', 'Extended Molecular Assembler', ['expatternprovider:ex_molecular_assembler'], [
+    'Several crafts at a time in one block.',
+], ['ex_provider'], kind='opt')
+q('adv_provider', 'Advanced Pattern Provider', ['advanced_ae:adv_pattern_provider'], [
+    'A pattern provider that can send each ingredient to a chosen side of the machine: the answer to machines that want items on one face and fluids on another.',
+], ['adv_ae'])
+q('reaction_chamber', 'Reaction Chamber', ['advanced_ae:reaction_chamber'], [
+    'Advanced AE\'s own machine, for its quantum alloy and the parts built from it.',
+], ['adv_ae'], kind='opt')
+q('bulk_cell', 'Bulk Cell', ['megacells:bulk_item_cell'], [
+    'One item type, without limit. The cell for cobblestone.',
+], ['mega'], kind='opt')
+q('data_model', 'Data Models', ['hostilenetworks:blank_data_model*4'], [
+    'Use a blank model on a mob to bind it, then keep it in the Deep Learner while you kill that mob. The model levels up.',
+], ['learner'])
+also('sim', 'data_model')
+q('loot_fab', 'Loot Fabricator', ['hostilenetworks:loot_fabricator'], [
+    'Turns the predictions a Simulation Chamber makes into the mob\'s drops, the one you pick.',
+], ['sim'])

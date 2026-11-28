@@ -128,3 +128,56 @@ q('zpm', '&c&lOn to ZPM', ['gtceu:zpm_machine_hull'], [
     'Naquadah alloy plates, &epolybenzimidazole&r sheets and vanadium-gallium cable: the &cZPM Machine Hull&r.',
     'ZPM is 131,072 EU/t. It brings fusion MK II, research computers and wetware. Open &cTier 7 - ZPM&r.',
 ], ['naq_alloy', 'europium'], kind='hub', bag='luv')
+
+
+# ================================================================ more to do in LuV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'luv/' + key)
+    x.deps += [d if '/' in d else 'luv/' + d for d in deps if (d if '/' in d else 'luv/' + d) not in x.deps]
+
+
+q('luv_cables', 'LuV Cables', ['gtceu:niobium_titanium_single_cable*16'], [
+    '&eNiobium-titanium&r carries LuV.',
+], ['start'])
+q('sensor', 'LuV Sensor', ['gtceu:luv_sensor'], [
+    'Assembly line made, like every LuV part.',
+], ['emitter'])
+q('robot_arm', 'LuV Robot Arm', ['gtceu:luv_robot_arm'], [
+    'The same again, a tier up.',
+], ['parts'])
+q('ruridit', 'Ruridit', ['gtceu:ruridit_ingot*8'], [
+    'Ruthenium and iridium. LuV motors are wound with it.',
+], ['start'])
+q('enriched', 'Enriched Naquadah', ['gtceu:enriched_naquadah_ingot*4'], [
+    'Naquadah\'s first refinement. It goes into ZPM parts and into the alloys of the tiers after.',
+], ['naquadah'])
+q('naquadria', 'Naquadria', ['gtceu:naquadria_ingot*4'], [
+    'The second refinement, and the unstable one.',
+], ['enriched'], kind='opt')
+q('active_transformer', 'Active Transformer', ['gtceu:active_transformer'], [
+    'Turns power into a &elaser&r and a laser back into power. Lasers carry thousands of amps with no loss.',
+], ['lasers'])
+q('laser_pipe', 'Laser Pipes', ['gtceu:normal_laser_pipe*16'], [
+    'A laser only runs in a straight line: no corners, no branches. Plan the line before you place the hatches.',
+], ['active_transformer'])
+q('fusion_glass', 'Fusion Glass', ['gtceu:fusion_glass*16'], [
+    'It can replace some of the fusion casings, so you can watch the plasma go round.',
+], ['fusion_casing'], kind='opt')
+q('helium_plasma', 'Plasma', ['gtceu:helium_plasma_bucket'], [
+    'What a fusion reactor makes besides new elements. A plasma turbine burns it for more power than the reactor took.',
+], ['fusion'])
+also('plasma', 'helium_plasma')
+q('raw_crystal', 'Raw Crystal Chip', ['gtceu:raw_crystal_chip*4'], [
+    'Grown in the autoclave from emerald or olivine. Each one is engraved into a crystal CPU.',
+], ['start'])
+also('crystal_chip', 'raw_crystal')
+q('crystal_cpu', 'Crystal CPU', ['gtceu:crystal_cpu*4'], [
+    'The engraved chip, cut. A crystal processor is built around one.',
+], ['crystal_chip'])
+also('crystal', 'crystal_cpu')
+q('luv_battery', 'LuV Lapotronic Capacitor', ['gtceu:luv_lapotronic_battery'], [
+    'A bigger storage block for the substation.',
+], ['start'], kind='opt')
+q('adv_data_hatch', 'Advanced Data Access Hatch', ['gtceu:advanced_data_access_hatch'], [
+    'Holds more research than the plain hatch.',
+], ['data_bank'], kind='opt')

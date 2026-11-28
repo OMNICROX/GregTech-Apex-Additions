@@ -102,3 +102,32 @@ q('uhv', '&4&lOn to UHV', ['gtceu:uhv_machine_hull'], [
     'Neutronium plates, polybenzimidazole sheets and europium cable: the &4UHV Machine Hull&r.',
     'UHV is 2,097,152 EU/t. GregTech\'s own progression ends here; the Space Elevator and Apex\'s endgame take over. Open &4Tier 9 - UHV&r.',
 ], ['neutronium', 'wetware_mainframe'], kind='hub', bag='uv')
+
+
+# ================================================================ more to do in UV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'uv/' + key)
+    x.deps += [d if '/' in d else 'uv/' + d for d in deps if (d if '/' in d else 'uv/' + d) not in x.deps]
+
+
+q('uv_cables', 'UV Cables', ['gtceu:yttrium_barium_cuprate_single_cable*16'], [
+    '&eYttrium barium cuprate&r carries UV.',
+], ['start'])
+q('sensor', 'UV Emitter and Sensor', ['gtceu:uv_emitter', 'gtceu:uv_sensor'], [
+    'Both, for the field generator and nearly everything after it.',
+], ['parts'])
+q('robot_arm', 'UV Robot Arm', ['gtceu:uv_robot_arm'], [
+    'A tier up.',
+], ['parts'])
+q('energy_cluster', 'Energy Cluster', ['gtceu:energy_cluster'], [
+    'The UV battery.',
+], ['start'], kind='opt')
+q('uv_superconductor', 'UV Superconductor', ['gtceu:enriched_naquadah_trinium_europium_duranide_single_wire*8'], [
+    'The longest name in the pack so far.',
+], ['start'], kind='opt')
+q('uv_quantum', 'UV Quantum Chest', ['gtceu:uv_quantum_chest'], [
+    'The last of the quantum chests.',
+], ['field_gen'], kind='opt')
+q('adv_quarktech', 'Advanced QuarkTech', ['gtceu:advanced_quarktech_chestplate'], [
+    'QuarkTech with a jetpack built in.',
+], ['gravi_star'], kind='opt')

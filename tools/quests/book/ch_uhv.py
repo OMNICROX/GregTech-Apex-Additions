@@ -94,3 +94,26 @@ q('uev', '&a&lBeyond UHV', ['gtceu:uev_machine_hull'], [
     'The &aUEV Machine Hull&r. From here the tiers are UEV, UIV, UXV, OpV and MAX, and the Space Assembler builds their parts.',
     'Open &aThe Endgame&r.',
 ], ['assembler_module', 'optical_computer'], kind='hub', bag='uhv')
+
+
+# ================================================================ more to do in UHV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'uhv/' + key)
+    x.deps += [d if '/' in d else 'uhv/' + d for d in deps if (d if '/' in d else 'uhv/' + d) not in x.deps]
+
+
+q('uhv_cables', 'UHV Cables', ['gtceu:europium_single_cable*16'], [
+    '&eEuropium&r carries UHV. All of it comes out of a fusion reactor.',
+], ['start'])
+q('sensor', 'UHV Sensor', ['gtceu:uhv_sensor'], [
+    'A tier up.',
+], ['emitter'])
+q('robot_arm', 'UHV Robot Arm', ['gtceu:uhv_robot_arm'], [
+    'A tier up.',
+], ['parts'])
+q('uhv_superconductor', 'UHV Superconductor', ['gtceu:ruthenium_trinium_americium_neutronate_single_wire*8'], [
+    'Ruthenium trinium americium neutronate.',
+], ['start'], kind='opt')
+q('ultimate_battery', 'Ultimate Battery', ['gtceu:max_battery'], [
+    'A battery you are not expected to fill.',
+], ['start'], kind='opt')

@@ -106,3 +106,60 @@ q('uv', '&3&lOn to UV', ['gtceu:uv_machine_hull'], [
     'Darmstadtium plates, polybenzimidazole sheets and yttrium barium cuprate cable: the &3UV Machine Hull&r.',
     'UV is 524,288 EU/t: the last of GregTech\'s own tiers, and the first of the endgame. Open &3Tier 8 - UV&r.',
 ], ['darmstadtium', 'americium'], kind='hub', bag='zpm')
+
+
+# ================================================================ more to do in ZPM (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'zpm/' + key)
+    x.deps += [d if '/' in d else 'zpm/' + d for d in deps if (d if '/' in d else 'zpm/' + d) not in x.deps]
+
+
+q('zpm_cables', 'ZPM Cables', ['gtceu:vanadium_gallium_single_cable*16'], [
+    '&eVanadium-gallium&r carries ZPM.',
+], ['start'])
+q('sensor', 'ZPM Sensor', ['gtceu:zpm_sensor'], [
+    'A tier up.',
+], ['emitter'])
+q('robot_arm', 'ZPM Robot Arm', ['gtceu:zpm_robot_arm'], [
+    'A tier up.',
+], ['parts'])
+q('hpca_parts', 'Computation Components', ['gtceu:hpca_computation_component*2'], [
+    'What goes inside the High Performance Computing Array. Each component makes &eCWU/t&r and heat.',
+], ['hpca'])
+q('hpca_cooling', 'Cooling', ['gtceu:hpca_heat_sink_component*2', 'gtceu:hpca_active_cooler_component'], [
+    'Heat sinks cool a little for nothing; active coolers cool a lot for coolant. An array that overheats damages its own components.',
+], ['hpca_parts'])
+q('hpca_bridge', 'Bridge Component', ['gtceu:hpca_bridge_component'], [
+    'Lets a network switch combine this array with others.',
+], ['hpca_parts'], kind='opt')
+also('network_switch', 'hpca_bridge')
+q('optical', 'Optical Fiber', ['gtceu:normal_optical_pipe*16'], [
+    'Computation travels on optical fiber, from a transmitter hatch to a receiver hatch. A fiber joins exactly two things: no branches.',
+], ['hpca'])
+q('comp_hatches', 'Computation Hatches', ['gtceu:computation_transmitter_hatch', 'gtceu:computation_receiver_hatch'], [
+    'One on the array, one on what needs the computation.',
+], ['optical'])
+also('research', 'comp_hatches')
+q('holder', 'Object Holder', ['gtceu:object_holder'], [
+    'The part of the Research Station that holds the item being researched and the data item it is written to.',
+], ['hpca'])
+also('research', 'holder')
+q('data_module', 'Data Module', ['gtceu:data_module'], [
+    'The research of this tier and above is too big for a data orb.',
+], ['research'])
+q('trinium', 'Trinium', ['gtceu:trinium_ingot*8'], [
+    'From naquadah processing. The coil of this tier is made of it.',
+], ['start'])
+also('trinium_coils', 'trinium')
+q('tritanium', 'Tritanium', ['gtceu:tritanium_ingot*4'], [
+    'Titanium and duranium in the fusion reactor.',
+], ['duranium'])
+q('energy_module', 'Energy Module', ['gtceu:energy_module'], [
+    'The ZPM battery.',
+], ['start'], kind='opt')
+q('zpm_superconductor', 'ZPM Superconductor', ['gtceu:uranium_rhodium_dinaquadide_single_wire*8'], [
+    'Uranium rhodium dinaquadide.',
+], ['start'], kind='opt')
+q('mega_freezer', 'Bulk Blast Chiller', ['gtceu:mega_vacuum_freezer'], [
+    'The blast furnace\'s partner at the same scale.',
+], ['rhf'], kind='opt')
