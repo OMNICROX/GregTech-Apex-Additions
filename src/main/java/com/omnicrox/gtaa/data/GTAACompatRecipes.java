@@ -353,14 +353,20 @@ public final class GTAACompatRecipes {
                 .inputItems(dust, GTMaterials.Neutronium, 1000)
                 .inputItems(dust, GTMaterials.Tritanium, 1000)
                 .inputItems(dust, GTMaterials.Naquadria, 1000)
-                .inputItems(dust, GTMaterials.Darmstadtium, 1000)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.CONCENTRATED_EFFORT)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.PROOF_OF_HEROES)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.GIGA_CHAD_TOKEN)
+                .inputItems(com.omnicrox.gtaa.common.data.GTAAItems.SPACE_WARPER, 16)
                 .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
                 .inputFluids(GTMaterials.Milk.getFluid(1000))
+                .inputFluids(com.omnicrox.gtaa.common.data.GTAAMaterials.LIQUID_STARGATE.getFluid(1000))
                 .outputItems(S10)
                 .duration(maxwell).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S5, "placeablemaxwell:mars", S6, "placeablemaxwell:poomba",
                         S7, "placeablemaxwell:valenok", S8, "placeablemaxwell:vasilisa", S1, "gtna:magmatter_block",
                         S2, "avaritia:eternal_singularity", S3, "avaritia:infinity_catalyst", S10, "placeablemaxwell:maxwell")));
+
+        maxwellSteps(provider, top);
 
         // the patient way: fish, yarn, a warm box and half a year
         ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:maxwell_maker")
@@ -410,6 +416,83 @@ public final class GTAACompatRecipes {
                     .outputFluids(plasma)
                     .duration(6000).EUt(VA[UEV]).fusionStartEU(10_000_000_000L)
                     .save(provider);
+    }
+
+    /**
+     * What Maxwell asks for besides his friends, each one absurd recipe (after Twist Space Technology's token chain):
+     * Concentrated Effort (100,000 of every motor), Proof of Heroes (64 of eleven endgame controllers), the Giga Chad
+     * Token (two days in the plasma forge at 2,000,000,000 EU/t), sixteen Space Warpers and a bucket of Liquid Stargate.
+     */
+    private static void maxwellSteps(Consumer<FinishedRecipe> provider, com.gregtechceu.gtceu.api.recipe.GTRecipeType top) {
+        var effort = top.recipeBuilder("gtapexadditions:maxwell/concentrated_effort").circuitMeta(6);
+        for (var motor : new com.tterrag.registrate.util.entry.ItemEntry<?>[] { GTItems.ELECTRIC_MOTOR_LV,
+                GTItems.ELECTRIC_MOTOR_MV, GTItems.ELECTRIC_MOTOR_HV, GTItems.ELECTRIC_MOTOR_EV, GTItems.ELECTRIC_MOTOR_IV,
+                GTItems.ELECTRIC_MOTOR_LuV, GTItems.ELECTRIC_MOTOR_ZPM, GTItems.ELECTRIC_MOTOR_UV,
+                GTItems.ELECTRIC_MOTOR_UHV, GTItems.ELECTRIC_MOTOR_UEV })
+            effort.inputItems(new net.minecraft.world.item.ItemStack(motor.get(), 100_000));
+        effort.inputFluids(GTMaterials.Lubricant.getFluid(1_000_000_000))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.CONCENTRATED_EFFORT)
+                .duration(99_999_999 * 20).EUt(VA[MAX]).save(provider);
+
+        var proof = top.recipeBuilder("gtapexadditions:maxwell/proof_of_heroes").circuitMeta(7);
+        for (var def : new com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition[] {
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MIRACLE_TOP,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.BLACK_HOLE_COMPRESSOR,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.NANOCHIP_ASSEMBLY_COMPLEX,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.PLASMA_FORGE_PROTOTYPE,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.STRANGE_MATTER_AGGREGATOR,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MASS_FABRICATOR_GENESIS,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.MICRO_SPACETIME_FABRICATORIO,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.DIVINE_ISA_FORGE,
+                com.omnicrox.gtaa.common.data.GTAAGTNHMachines.SINGULARITY_DATA_HUB,
+                com.omnicrox.gtaa.common.data.GTAAMachines.QUANTUM_FORCE_TRANSFORMER,
+                com.omnicrox.gtaa.common.data.GTAAMachines.DYSON_LAUNCH_SITE })
+            proof.inputItems(def.asStack(64));
+        for (var m : new com.gregtechceu.gtceu.api.data.chemical.material.Material[] { GTMaterials.Neutronium,
+                GTMaterials.Tritanium, GTMaterials.Duranium, GTMaterials.Naquadria, GTMaterials.Trinium,
+                GTMaterials.Americium, GTMaterials.Europium })
+            proof.inputFluids(m.getFluid(114_514_000));
+        proof.outputItems(com.omnicrox.gtaa.common.data.GTAAItems.PROOF_OF_HEROES)
+                .duration(1_919_810 * 20).EUt(VA[MAX]).save(provider);
+
+        // Giga Chad Token: the plasma forge, as hot as the pack's forge recipes go
+        var dtpf = com.gregtechceu.gtceu.api.registry.GTRegistries.RECIPE_TYPES.get(
+                new net.minecraft.resources.ResourceLocation("gtna", "plasma_forge"));
+        var chad = (dtpf != null ? dtpf : top).recipeBuilder("gtapexadditions:maxwell/giga_chad_token")
+                .inputItems(GTItems.GRAVI_STAR, 64)
+                .inputItems(GTItems.QUANTUM_STAR, 64)
+                .inputItems(GTItems.QUANTUM_EYE, 64)
+                .inputFluids(GTMaterials.Neutronium.getFluid(100_000_000))
+                .inputFluids(GTMaterials.Naquadria.getFluid(165_000))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.GIGA_CHAD_TOKEN)
+                .duration(172_800 * 20).EUt(2_000_000_000L);
+        if (dtpf != null) chad.blastFurnaceTemp(10800);
+        chad.save(provider);
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/space_warper")
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 16)
+                .inputItems(GTItems.EMITTER_UIV, 16)
+                .inputItems(GTItems.GRAVI_STAR, 8)
+                .inputItems(GTItems.SENSOR_UIV, 16)
+                .inputItems(CustomTags.UIV_CIRCUITS, 1)
+                .inputFluids(GTMaterials.Neutronium.getFluid(9216))
+                .inputFluids(GTMaterials.Tritanium.getFluid(2304))
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAItems.SPACE_WARPER)
+                .duration(512 * 20).EUt(VA[UIV]).save(provider);
+
+        // Liquid Stargate: sixteen whole Stargates, melted
+        var universium = com.gregtechceu.gtceu.api.GTCEuAPI.materialManager.getMaterial("gtna:universium");
+        var solvent = universium != null && !universium.isNull() && !universium.getFluid(1).isEmpty()
+                ? universium.getFluid(1000) : GTMaterials.Neutronium.getFluid(1000);
+        top.recipeBuilder("gtapexadditions:maxwell/liquid_stargate")
+                .circuitMeta(8)
+                .inputItems(S1, 4).inputItems(S2, 4).inputItems(S3, 4).inputItems(S4, 4)
+                .inputFluids(solvent)
+                .outputFluids(com.omnicrox.gtaa.common.data.GTAAMaterials.LIQUID_STARGATE.getFluid(1000))
+                .duration(99_999_999 * 20).EUt(VA[MAX])
+                .save(needing(provider, "sgjourney", Map.of(S1, "sgjourney:milky_way_stargate",
+                        S2, "sgjourney:pegasus_stargate", S3, "sgjourney:universe_stargate",
+                        S4, "sgjourney:tollan_stargate")));
     }
 
     /** sources for the elements GTAA gave dust forms (Rhenium, Erbium, Praseodymium) */

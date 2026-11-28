@@ -52,6 +52,8 @@ legacyForge {
         }
         data {
             data()
+            // the Apex Guide loads in data runs too and needs its shaded libraries
+            additionalRuntimeClasspathConfiguration.extendsFrom apexGuideProject.configurations.shaded
             programArguments.addAll('--mod', project.mod_id, '--all',
                     '--output', file('src/generated/resources').absolutePath,
                     '--existing', file('src/main/resources').absolutePath,

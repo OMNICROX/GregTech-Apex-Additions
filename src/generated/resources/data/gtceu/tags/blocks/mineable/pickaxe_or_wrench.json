@@ -76,17 +76,13 @@
     "gtapexadditions:space_elevator_motor_mk3",
     "gtapexadditions:space_elevator_motor_mk4",
     "gtapexadditions:space_elevator_motor_mk5",
+    "gtapexadditions:personal_space_portal",
     "gtapexadditions:space_elevator_cable",
     "gtapexadditions:defc_casing",
     "gtapexadditions:defc_core_t1",
     "gtapexadditions:defc_core_t2",
     "gtapexadditions:defc_core_t3",
     "gtapexadditions:defc_core_t4",
-    "gtapexadditions:suit_casing_t1",
-    "gtapexadditions:suit_casing_t2",
-    "gtapexadditions:suit_casing_t3",
-    "gtapexadditions:suit_casing_t4",
-    "gtapexadditions:suit_monitor",
     "gtapexadditions:nanochip_mesh_interface_casing",
     "gtapexadditions:nanochip_reinforcement_casing",
     "gtapexadditions:nanochip_computational_matrix_casing",
@@ -109,10 +105,6 @@
     "gtapexadditions:bloody_ichorium_block",
     "gtapexadditions:bloody_thaumium_block",
     "gtapexadditions:bloody_void_block",
-    "gtapexadditions:gate_ring",
-    "gtapexadditions:gate_base",
-    "gtapexadditions:gate_pedestal",
-    "gtapexadditions:gate_chevron",
     "gtapexadditions:borosilicate_glass",
     "gtapexadditions:titanium_reinforced_borosilicate_glass",
     "gtapexadditions:tungstensteel_reinforced_borosilicate_glass",
@@ -123,7 +115,6 @@
     "gtapexadditions:infinity_reinforced_borosilicate_glass",
     "gtapexadditions:transcendentally_reinforced_borosilicate_glass",
     "gtapexadditions:hexanite_reinforced_borosilicate_glass",
-    "gtapexadditions:universium_reinforced_borosilicate_glass",
-    "gtapexadditions:personal_space_portal"
+    "gtapexadditions:universium_reinforced_borosilicate_glass"
   ]
 }

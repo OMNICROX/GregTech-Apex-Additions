@@ -178,7 +178,7 @@ public class GTAARecipeTypes {
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
         MIRACLE_TOP = register("miracle_top", "multiblock", "Miracle Top")
-                .setMaxIOSize(16, 1, 4, 0).setEUIO(IO.IN)
+                .setMaxIOSize(16, 1, 8, 1).setEUIO(IO.IN)
                 .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .addDataInfo(data -> "No parallels, no overclocks: only more rings make it faster")
                 .addDataInfo(data -> "Original recipe idea: Twist Space Technology");

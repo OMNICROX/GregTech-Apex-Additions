@@ -27,6 +27,20 @@ public class GTAAItems {
         }
     }
 
+    /** The steps to Maxwell (after Twist Space Technology's token chain): each is one absurd recipe. */
+    public static final ItemEntry<Item> CONCENTRATED_EFFORT = trophy("concentrated_effort", "Concentrated Effort");
+    public static final ItemEntry<Item> PROOF_OF_HEROES = trophy("proof_of_heroes", "Proof of Heroes");
+    public static final ItemEntry<Item> GIGA_CHAD_TOKEN = trophy("giga_chad_token", "Giga Chad Token");
+    public static final ItemEntry<Item> SPACE_WARPER = trophy("space_warper", "Space Warper");
+
+    private static ItemEntry<Item> trophy(String id, String name) {
+        return REGISTRATE.item(id, Item::new)
+                .properties(p -> p.rarity(net.minecraft.world.item.Rarity.EPIC))
+                .lang(name)
+                .model(NonNullBiConsumer.noop())
+                .register();
+    }
+
     /** Launched by the Dyson Sphere Launch Site. */
     public static final ItemEntry<Item> DYSON_SWARM_MODULE = REGISTRATE.item("dyson_swarm_module", Item::new)
             .lang("Dyson Swarm Module")

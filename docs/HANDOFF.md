@@ -56,3 +56,7 @@ Maxwell and his four friends are made in the Miracle Top with its own recipe typ
 assembly line recipes are gone. The joke alternative is the Maxwell Maker (`GTAAMachines.MAXWELL_MAKER`, 3x3x3 steel
 casings, one energy hatch, no recipe modifiers): 8 EU/t for 16,000,000 s. Switch: `maxwell.maxwellMaker` in the common
 config.
+Maxwell's own recipe also takes four step items and a fluid, each one absurd recipe (`maxwellSteps` in
+GTAACompatRecipes): Concentrated Effort, Proof of Heroes and Liquid Stargate in the Miracle Top, the Giga Chad Token in
+GTNA's plasma forge (10,800 K), Space Warpers on the assembly line. After adding a machine, item or recipe type run
+`./gradlew runData` (it writes blockstates, models and names into `src/generated`); without it the block has no model.

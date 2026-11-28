@@ -26,6 +26,7 @@ public class GTAAMaterials {
     public static Material THORIUM_FUEL, THORIUM_FUEL_EXCITED, THORIUM_FUEL_DEPLETED;
     public static Material PLUTONIUM_FUEL, PLUTONIUM_FUEL_EXCITED, PLUTONIUM_FUEL_DEPLETED;
     public static Material NAQUADAH_SOLUTION, LIGHT_NAQUADAH_FUEL, HEAVY_NAQUADAH_FUEL, NAQUADAH_GAS, NAQUADAH_ASPHALT;
+    public static Material LIQUID_STARGATE;
     public static Material EXTREMELY_UNSTABLE_NAQUADAH, ATOMIC_SEPARATION_CATALYST;
     /** index 1..6 = Mk I..VI */
     public static final Material[] NAQUADAH_FUEL = new Material[7];
@@ -96,6 +97,9 @@ public class GTAAMaterials {
         NAQUADAH_GAS = new Material.Builder(GTAA.id("naquadah_gas")).langValue("Naquadah Gas")
                 .gas(new FluidBuilder()).color(0x575757).flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
         NAQUADAH_ASPHALT = fluid("naquadah_asphalt", "Naquadah Asphalt", 0x1E1E1E, 300, false);
+        LIQUID_STARGATE = new Material.Builder(GTAA.id("liquid_stargate")).langValue("Liquid Stargate")
+                .liquid(new FluidBuilder().temperature(300)).color(0x3C8CDC)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION).buildAndRegister();
         EXTREMELY_UNSTABLE_NAQUADAH = new Material.Builder(GTAA.id("extremely_unstable_naquadah"))
                 .langValue("Extremely Unstable Naquadah").dust().color(0x1A2D1A)
                 .iconSet(com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY)
