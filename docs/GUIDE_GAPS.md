@@ -29,9 +29,6 @@ Compared on 2026-11-27. "Filled" means a page now exists; "open" means it still 
 
 1. **Add-on multiblock pages without a description** (68 of them, mostly GTCA and GTSE: their mods have no tooltip
    text). They show the structure, recipe type and controller recipe; a sentence or two each would help.
-2. **Quest links**: GuideNH links pages to quests both ways; Apex Guide doesn't have quest tags yet. Waiting on the
-   quest book.
-
 ## Filled 2026-11-27
 
 * Ore processing in depth (`gregtech/ore-processing.md`): every step with its byproduct slot, chemical bath,
@@ -42,3 +39,5 @@ Compared on 2026-11-27. "Filled" means a page now exists; "open" means it still 
 * Tools (`gregtech/tools.md`): what each tool does to machines, pipes and maintenance; crafting and electric tools.
 * Programmed circuits (`gregtech/programmed-circuits.md`): the ghost slot, distinct buses, conflicts, AE2.
 * Screenshots: all six are real now (the AE2 subnet one is from the owner's world).
+* Quest links: quests open guide pages (a gold "Read more in the Apex Guide" line, run through `/apexpage`), and guide
+  pages list their quests (`<QuestLink>`; the list is generated from `tools/guide/quest_links.json`).

@@ -25,3 +25,10 @@ Structure Upgrader stages for Miracle Top / Bloody Hell / LMM / SMA / Mega Disti
 1. Get the multiblock preview fully working and matching GTNH's NEI page.
 2. "apexguide" guide mod working together with the questbook (see ROADMAP.md).
 3. Blood Magic tier gating vs GregTech (GTNH NHCore ScriptBloodMagic as reference).
+
+## Quest book (2026-11-27)
+`tools/quests/book/build.py` writes the whole book: 16 chapters, 580 quests (Stone to MAX, plus Worlds, Magic, AE2,
+Heroes). `out/release/` is the pack copy (no GTNH reference chapters); it is installed in the instance's
+`config/ftbquests/quests`. Quest ids must stay below 0x8000... (FTB Quests re-ids anything higher and drops its links).
+A quest's `guide=` (or `guide_map.py` for the first four chapters) adds the guide line and feeds the guide's Quests lists:
+rebuild the quests first, then `tools/guide/build_guide.py`. Chapters arranged by hand in game go in `book/locked/`.
