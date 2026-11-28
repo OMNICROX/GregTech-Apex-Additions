@@ -174,17 +174,36 @@ q('donut', 'A Donut', ['satsu_iron_man_addon:donuts/donut_chocolate'], [
 
 # ---------------------------------------------------------------- the Infinity Gauntlet
 q('dwarf_star', 'Dwarf Star Alloy', ['infinity:dwarf_star_alloy_ingot*4'], [
-    'The metal of the gauntlet.',
+    'The metal of the gauntlet. &eDwarf Star Meteors&r lie scattered across the Overworld: mine one for the raw material.',
 ], ['start'])
 q('gauntlet', '&6Infinity Gauntlet', ['infinity:infinity_gauntlet'], [
-    'Empty, it is a glove.',
+    'Empty, it is a glove. The six stones are not crafted: each one sits in a structure, three in the Overworld and the End and three on planets of their own.',
+    'Most of those structures have &efakes&r: the same building with nothing in it. An empty one means keep looking.',
 ], ['dwarf_star'], kind='main')
-q('space_stone', 'Space Stone', ['infinity:space_stone'], ['One of six. None of them is crafted.'], ['gauntlet'])
-q('mind_stone', 'Mind Stone', ['infinity:mind_stone'], ['Two.'], ['gauntlet'])
-q('reality_stone', 'Reality Stone', ['infinity:reality_stone'], ['Three.'], ['gauntlet'])
-q('power_stone', 'Power Stone', ['infinity:power_stone'], ['Four.'], ['gauntlet'])
-q('time_stone', 'Time Stone', ['infinity:time_stone'], ['Five.'], ['gauntlet'])
-q('soul_stone', 'Soul Stone', ['infinity:soul_stone'], ['Six.'], ['gauntlet'])
+q('space_stone', 'Space Stone', ['infinity:tesseract'], [
+    'Inside the &eTesseract&r, in the treasure room of a &eNorse Village&r in the Overworld.',
+], ['gauntlet'])
+q('time_stone', 'Time Stone', ['infinity:eye_of_agamotto'], [
+    'Inside the &eEye of Agamotto&r, in a &eSanctum Sanctorum&r in the Overworld.',
+], ['gauntlet'])
+q('mind_stone', 'Mind Stone', ['infinity:scepter'], [
+    'In the &eScepter&r, in the &eSanctuary&r. The Sanctuary is in the End.',
+], ['gauntlet', 'worlds/end'])
+q('power_stone', 'Power Stone', ['infinity:orb'], [
+    'In the &eOrb&r, in a temple on &eMorag&r. Morag, Vormir and Svartelheim are planets of their own solar system and need a tier 4 rocket.',
+], ['gauntlet', 'worlds/glacio'])
+q('reality_stone', 'Reality Stone', ['infinity:aether'], [
+    'The &eAether&r, in a chamber on &eSvartelheim&r. Malekith is in there with it.',
+], ['gauntlet', 'worlds/glacio'])
+q('soul_stone', 'Soul Stone', ['infinity:soul_stone'], [
+    'On &eVormir&r, where the Soul Guardian waits. It has a price.',
+], ['gauntlet', 'worlds/glacio'])
+q('kree_ship', 'Crashed Kree Ship', ['infinity:cosmi-rod'], [
+    'Wrecks in the plains of the Overworld. The &eCosmi-Rod&r is in the wreck.',
+], ['start'], kind='opt')
+q('temple', 'Infinity Temple', ['infinity:shards_of_existance'], [
+    'Temples in the Overworld hold &eShards of Existence&r.',
+], ['start'], kind='opt')
 q('thanos', 'Dressed for It', ['infinity:thanos_mcu_chestplate'], [
     'The armour to go with the glove.',
 ], ['dwarf_star'], kind='opt')
