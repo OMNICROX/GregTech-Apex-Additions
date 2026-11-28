@@ -78,6 +78,30 @@ public final class GTGuideRecipes {
         return g;
     }
 
+    private static final com.omnicrox.apexguide.style.TextStyle DETAIL = com.omnicrox.apexguide.style.TextStyle.builder()
+            .color(com.omnicrox.apexguide.color.SymbolicColor.CRAFTING_RECIPE_TYPE).fontScale(0.85f).build();
+
+    private static LytParagraph line(String text) {
+        var p = LytParagraph.of(text);
+        p.setStyle(DETAIL);
+        return p;
+    }
+
+    /** a vertical box that never grows wider than {@code max} */
+    static final class MaxWidthVBox extends com.omnicrox.apexguide.document.block.LytVBox {
+        private final int max;
+
+        MaxWidthVBox(int max) {
+            this.max = max;
+        }
+
+        @Override
+        protected com.omnicrox.apexguide.document.LytRect computeBoxLayout(com.omnicrox.apexguide.layout.LayoutContext context,
+                int x, int y, int availableWidth) {
+            return super.computeBoxLayout(context, x, y, Math.min(availableWidth, max));
+        }
+    }
+
     public static LytBlock box(GTRecipe r) {
         List<String> notes = new ArrayList<>();
         List<Ingredient> in = items(r.inputs, notes, true);
@@ -99,10 +123,15 @@ public final class GTGuideRecipes {
                 .icon(icon.isEmpty() ? new ItemStack(Items.FURNACE) : icon)
                 .input(grid(in))
                 .output(grid(out));
-        if (!fin.isEmpty()) b.addBottom(LytParagraph.of("Fluids in: " + fin));
-        if (!fout.isEmpty()) b.addBottom(LytParagraph.of("Fluids out: " + fout));
-        b.addBottom(LytParagraph.of(info.toString()));
-        for (String n : notes) b.addBottom(LytParagraph.of(n));
+        // compact: the details wrap at a fixed width (so the box doesn't stretch across the page) in dark text
+        // that reads on the light recipe panel
+        var details = new MaxWidthVBox(200);
+        details.setGap(1);
+        if (!fin.isEmpty()) details.append(line("Fluids in: " + fin));
+        if (!fout.isEmpty()) details.append(line("Fluids out: " + fout));
+        details.append(line(info.toString()));
+        for (String n : notes) details.append(line(n));
+        b.addBottom(details);
         return b.build(r);
     }
 }

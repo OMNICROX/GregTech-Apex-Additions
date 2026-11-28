@@ -57,6 +57,13 @@ public class MultiblockTag extends FlowTagCompiler {
             }
         }
         block.setMarginBottom(6);
+        if (inline.getAlignment() != InlineBlockAlignment.INLINE) {
+            // a scene starts below the previous floating scene instead of squeezing the text between the two
+            var clear = new com.omnicrox.apexguide.document.flow.LytFlowBreak();
+            clear.setClearLeft(true);
+            clear.setClearRight(true);
+            parent.append(clear);
+        }
         parent.append(inline);
     }
 

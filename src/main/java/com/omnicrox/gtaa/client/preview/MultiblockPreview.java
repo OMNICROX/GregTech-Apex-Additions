@@ -241,6 +241,7 @@ public final class MultiblockPreview {
 
     private void build() {
         dirty = false;
+        hiddenForLayer.clear();
         placed.clear();
         predicates = Map.of();
         world = new TrackedDummyWorld();
@@ -388,8 +389,22 @@ public final class MultiblockPreview {
         applyLayer();
     }
 
+    /** blocks taken out of the scene world while one layer is shown, so their neighbours don't hide its faces */
+    private final Map<BlockPos, BlockInfo> hiddenForLayer = new HashMap<>();
+
     private void applyLayer() {
-        if (renderer == null) return;
+        if (renderer == null || world == null) return;
+        // put back what the previous layer view took out, then take out everything outside this layer:
+        // blocks left in the world (even if not drawn) make the renderer cull the faces touching them
+        for (var e : hiddenForLayer.entrySet()) {
+            if (e.getValue() != null) world.addBlock(e.getKey(), e.getValue());
+        }
+        hiddenForLayer.clear();
+        if (layer != 0) {
+            for (BlockPos p : placed.keySet()) {
+                if (p.getY() != minY + layer - 1) hiddenForLayer.put(p, world.removeBlock(p));
+            }
+        }
         List<BlockPos> shown = new ArrayList<>();
         for (BlockPos p : placed.keySet()) if (layer == 0 || p.getY() == minY + layer - 1) shown.add(p);
         renderer.renderedBlocksMap.clear();
@@ -401,6 +416,12 @@ public final class MultiblockPreview {
         l = Math.max(0, Math.min(layers(), l));
         if (l == layer) return;
         layer = l;
+        if (l == 0 && !hiddenForLayer.isEmpty()) {
+            // back to the whole structure: rebuild it so formed hatches keep their casing look
+            hiddenForLayer.clear();
+            markDirty();
+            return;
+        }
         applyLayer();
     }
 

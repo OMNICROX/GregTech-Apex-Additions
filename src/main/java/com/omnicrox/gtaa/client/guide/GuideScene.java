@@ -34,11 +34,6 @@ final class GuideScene {
     private enum Target { NONE, ROTATE, ZOOM, PAN, TIER, LAYER }
     private enum Tool { ZOOM_IN, ZOOM_OUT, RESET, SHAPE, HATCHES, BLOCKS }
 
-    private static MultiblockPreview owner;
-    private static Target target = Target.NONE;
-    private static final boolean[] wasDown = new boolean[3];
-    private static double lastX, lastY;
-    private static long lastFrame;
 
     private GuideScene() {}
 
@@ -92,6 +87,11 @@ final class GuideScene {
     /** per-scene toggles that GuideNH keeps on the scene, not the structure */
     static final class GuideState {
         boolean showBlocks;
+        // mouse state is per scene: a page with two scenes must not have them reset each other's drags
+        Target target = Target.NONE;
+        final boolean[] wasDown = new boolean[3];
+        double lastX, lastY;
+        long lastFrame;
     }
 
     static void draw(MultiblockPreview p, GuideState st, GuiGraphics g, int w, int h) {
@@ -121,7 +121,7 @@ final class GuideScene {
             }
             if (p.isCompiling())
                 g.drawString(font, "Loading " + (int) (p.compileProgress() * 100) + "%", 4, h - 12, ApexTheme.TEXT_MUTED, false);
-            if (hovered != null && target == Target.NONE && !st.showBlocks) tip = p.tooltip(hovered);
+            if (hovered != null && st.target == Target.NONE && !st.showBlocks) tip = p.tooltip(hovered);
         }
 
         // what the selected spot accepts
@@ -197,26 +197,26 @@ final class GuideScene {
         boolean[] down = new boolean[3];
         for (int b = 0; b < 3; b++) down[b] = GLFW.glfwGetMouseButton(win, b) == GLFW.GLFW_PRESS;
         long now = System.nanoTime();
-        if (owner != p || now - lastFrame > 200_000_000L) {
-            if (owner != p) target = Target.NONE;
-            System.arraycopy(down, 0, wasDown, 0, 3);
-            lastX = mx;
-            lastY = my;
-            owner = p;
+        if (now - st.lastFrame > 200_000_000L) {
+            st.target = Target.NONE;
+            System.arraycopy(down, 0, st.wasDown, 0, 3);
+            st.lastX = mx;
+            st.lastY = my;
         }
-        lastFrame = now;
-        double dx = mx - lastX, dy = my - lastY;
+        st.lastFrame = now;
+        double dx = mx - st.lastX, dy = my - st.lastY;
         boolean inScene = in(mx, my, 0, 0, w, h);
-        if (target == Target.NONE) {
-            if (down[0] && !wasDown[0]) leftPress(p, st, w, h, mx, my, inScene);
-            else if (down[1] && !wasDown[1] && inScene) {
-                target = Target.PAN;
+        boolean inPanel = in(mx, my, 0, 0, w + BAR, totalHeight(p, h));
+        if (st.target == Target.NONE && inPanel) {
+            if (down[0] && !st.wasDown[0]) leftPress(p, st, w, h, mx, my, inScene);
+            else if (down[1] && !st.wasDown[1] && inScene) {
+                st.target = Target.PAN;
                 p.selected = p.hoveredBlock();
-            } else if (down[2] && !wasDown[2] && inScene) target = Target.PAN;
+            } else if (down[2] && !st.wasDown[2] && inScene) st.target = Target.PAN;
         }
-        switch (target) {
+        switch (st.target) {
             case ROTATE -> {
-                if (!down[0]) target = Target.NONE;
+                if (!down[0]) st.target = Target.NONE;
                 else {
                     float sp = GTAAClientConfig.PREVIEW_ROTATE_SPEED.get().floatValue();
                     p.rotH = (p.rotH + (float) dx * (GTAAClientConfig.PREVIEW_INVERT_X.get() ? -sp : sp) + 360) % 360;
@@ -224,18 +224,18 @@ final class GuideScene {
                 }
             }
             case PAN -> {
-                if (!down[1] && !down[2]) target = Target.NONE;
+                if (!down[1] && !down[2]) st.target = Target.NONE;
                 else p.pan(dx, dy);
             }
             case TIER, LAYER -> {
-                if (!down[0]) target = Target.NONE;
-                else setSlider(p, target, w, mx);
+                if (!down[0]) st.target = Target.NONE;
+                else setSlider(p, st.target, w, mx);
             }
             default -> {}
         }
-        System.arraycopy(down, 0, wasDown, 0, 3);
-        lastX = mx;
-        lastY = my;
+        System.arraycopy(down, 0, st.wasDown, 0, 3);
+        st.lastX = mx;
+        st.lastY = my;
     }
 
     private static void leftPress(MultiblockPreview p, GuideState st, int w, int h, double mx, double my, boolean inScene) {
@@ -260,18 +260,18 @@ final class GuideScene {
         int row = 0;
         if (p.maxTier() > 1) {
             if (in(mx, my, 0, h + 4, w, SLIDER_H)) {
-                target = Target.TIER;
-                setSlider(p, target, w, mx);
+                st.target = Target.TIER;
+                setSlider(p, st.target, w, mx);
                 return;
             }
             row++;
         }
         if (in(mx, my, 0, h + 4 + ROW * row, w, SLIDER_H)) {
-            target = Target.LAYER;
-            setSlider(p, target, w, mx);
+            st.target = Target.LAYER;
+            setSlider(p, st.target, w, mx);
             return;
         }
-        if (inScene && !st.showBlocks) target = Target.ROTATE;
+        if (inScene && !st.showBlocks) st.target = Target.ROTATE;
     }
 
     private static void zoom(MultiblockPreview p, double steps) {
