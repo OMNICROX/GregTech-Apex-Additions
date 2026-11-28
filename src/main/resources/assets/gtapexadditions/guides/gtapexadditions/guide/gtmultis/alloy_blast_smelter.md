@@ -30,3 +30,9 @@ The GTNA [Mega Alloy Blast Smelter](mega_alloy_blast_smelter.md) is the late upg
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="2E187C9F4A160184">Alloy Blast Smelter</QuestLink> (Tier 4 - EV)

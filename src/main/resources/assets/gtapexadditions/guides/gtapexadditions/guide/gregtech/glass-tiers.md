@@ -37,3 +37,15 @@ Each tier is a borosilicate block solidified with 8 ingots of molten metal:
 
 Upgrading: the [Structure Upgrader](../items/structure-upgrader.md) swaps all glass in a multi to a better tier.
 (Server owners can turn the energy rule off: `glassTierLimitsEnergyHatches` in gtapexadditions-common.toml.)
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="00EDB1B21E0B53D7">Glass for Multiblocks</QuestLink> (Tier 3 - HV)
+* <QuestLink id="043C530924BFAB3C">Tungstensteel Glass</QuestLink> (Tier 5 - IV)
+* <QuestLink id="13274D8B0F871BFF">Titanium Glass</QuestLink> (Tier 4 - EV)
+* <QuestLink id="2B53170302E75951">Osmium Glass</QuestLink> (Tier 8 - UV)
+* <QuestLink id="2D2CBD1DD32375D3">Iridium Glass</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="5B6B4677EF343328">Rhodium-Plated Palladium Glass</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="72C1359FFC3BF38F">Neutronium Glass</QuestLink> (Tier 9 - UHV)

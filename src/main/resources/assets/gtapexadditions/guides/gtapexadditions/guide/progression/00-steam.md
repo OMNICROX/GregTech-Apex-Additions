@@ -46,3 +46,9 @@ in the middle of one side. Coal becomes **coal coke** (a better fuel) and **creo
 
 <ItemLink id="gtceu:firebricks" />, 3 wide, 4 tall, hollow in the middle and open on top, controller low on one side.
 Iron + coal / coal coke / charcoal -> **steel** (and ash). Slow, so build several.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="7E151282B75B046F">Steam Power</QuestLink> (Tier 0 - Stone Age)

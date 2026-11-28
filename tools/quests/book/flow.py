@@ -10,7 +10,7 @@ def merge_deps(chapters, derived):
     for ch in chapters:
         keys = {q.key for q in ch.quests}
         for q in ch.quests:
-            if q.kind == 'tip':
+            if q.kind == 'tip' or not getattr(ch, 'derive', True):   # hand-written links only
                 q.deps = list(q.deps0); continue
             extra = [d for d in derived.get(q.key, []) if d in keys and (q.key, d) not in BAN]
             q.deps = list(dict.fromkeys(q.deps0 + extra))

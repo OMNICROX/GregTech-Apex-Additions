@@ -27,3 +27,9 @@ small **indicator rocks** of its main ore.
 | Undergarden | Pitchblende / uraninite / thorium, rare earths, tantalite / pyrochlore, cinnabar |
 | End | Platinum line (sheldonite), naquadah, scheelite / tungstate, bauxite, chromite, pitchblende |
 | Moon, Mars, Venus, Mercury, Glacio | Planet veins (GTNA): tungsten on Mars, then heavier metals further out |
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="36ADDFCA5951ECE4">How Ores Work Here</QuestLink> (Tier 0 - Stone Age)

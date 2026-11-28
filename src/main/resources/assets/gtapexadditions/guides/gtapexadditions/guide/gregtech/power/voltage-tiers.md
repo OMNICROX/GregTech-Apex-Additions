@@ -39,3 +39,9 @@ The [tier ladder](../../progression/tier-ladder.md) says what each tier unlocks 
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="134D11CBB41215B1">Voltage, Amps and Explosions</QuestLink> (Tier 1 - LV)

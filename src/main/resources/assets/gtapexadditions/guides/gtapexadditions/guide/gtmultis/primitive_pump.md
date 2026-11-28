@@ -23,3 +23,9 @@ swamps) and more with a better output hatch. Pipe the water out of its pump hatc
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="71294E4435892222">Primitive Pump</QuestLink> (Tier 0.5 - Steam Age)

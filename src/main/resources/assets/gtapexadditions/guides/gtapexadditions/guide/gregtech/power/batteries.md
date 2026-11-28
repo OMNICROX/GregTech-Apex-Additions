@@ -73,3 +73,13 @@ real-time day. See [Power Substation](../../gtmultis/power_substation.md).
 | MV-HV | Buffers of your main tier; energy crystals at HV |
 | EV-IV | Lapotron crystals and lapotronic orbs in buffers; plan the Power Substation |
 | LuV+ | Power Substation with lapotronic capacitors |
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="1C9282C5C8C062F7">Battery Buffer</QuestLink> (Tier 1 - LV)
+* <QuestLink id="1D00CD3B85A58385">Batteries</QuestLink> (Tier 1 - LV)
+* <QuestLink id="21E790755EB2D8AE">HV Batteries</QuestLink> (Tier 3 - HV)
+* <QuestLink id="340F3224E6F0203F">Lapotron Crystal</QuestLink> (Tier 4 - EV)
+* <QuestLink id="4DAE8F9266318AAE">MV Batteries</QuestLink> (Tier 2 - MV)

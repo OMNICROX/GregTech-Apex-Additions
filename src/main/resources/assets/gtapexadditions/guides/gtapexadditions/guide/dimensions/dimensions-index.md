@@ -21,3 +21,9 @@ rockets are how you get there; the ores and the worlds' own materials are why.
 | [Personal dimension](personal-space.md) | GTNA | Your own world |
 
 <SubPages />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="158397CE020EEB67">Other Worlds</QuestLink> (Worlds and Space)

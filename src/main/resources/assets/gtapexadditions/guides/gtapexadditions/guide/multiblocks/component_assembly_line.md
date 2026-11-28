@@ -28,3 +28,9 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:component_assembly_line" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="4759B4D71963089C">Component Assembly Line</QuestLink> (Tier 5 - IV)

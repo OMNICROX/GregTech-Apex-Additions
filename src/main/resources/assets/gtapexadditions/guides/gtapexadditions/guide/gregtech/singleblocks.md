@@ -57,3 +57,10 @@ machines (that GTCEu option is off); only overvoltage does.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="28471CD55141152D">High Pressure Machines</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="306D120352961847">Steam Macerator</QuestLink> (Tier 0.5 - Steam Age)

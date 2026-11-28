@@ -38,3 +38,11 @@ network, and to limit amps.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="21C3AC872D4C56BE">Stepping Up</QuestLink> (Tier 2 - MV)
+* <QuestLink id="5BB63F5B1CB40856">Transformer</QuestLink> (Tier 1 - LV)
+* <QuestLink id="60576C2734700A2E">HV Transformer</QuestLink> (Tier 3 - HV)

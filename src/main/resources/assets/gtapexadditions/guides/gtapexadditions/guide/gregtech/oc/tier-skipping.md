@@ -20,3 +20,14 @@ or research data for the Assembly Line. JEI shows these under the recipe.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="26262C22AF012BF8">EV Energy Hatch</QuestLink> (Tier 4 - EV)
+* <QuestLink id="44EC3DFE3B5B82D5">LuV Energy Hatch</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="5202DDF807CC9C78">MV Energy Hatch</QuestLink> (Tier 2 - MV)
+* <QuestLink id="54146F9CE2D62137">HV Energy Hatch</QuestLink> (Tier 3 - HV)
+* <QuestLink id="67DCE5C682E5FB57">IV Energy Hatch</QuestLink> (Tier 5 - IV)
+* <QuestLink id="70BF6AE206D59B2F">Powering the EBF</QuestLink> (Tier 1 - LV)

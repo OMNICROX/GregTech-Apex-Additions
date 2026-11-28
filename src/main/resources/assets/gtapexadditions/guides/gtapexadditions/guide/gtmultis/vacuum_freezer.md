@@ -29,3 +29,9 @@ The GCYM **Bulk Blast Chiller** is the large version, with parallels (see [GCYM 
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="26339FB63FAAB754">Vacuum Freezer</QuestLink> (Tier 3 - HV)

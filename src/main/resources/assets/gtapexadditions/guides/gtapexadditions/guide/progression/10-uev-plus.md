@@ -20,3 +20,9 @@ The endgame: antimatter, spacetime and the Avaritia finale.
 * **Avaritia**: the extreme crafting table needs a Nether Star (Wither), the neutronium compressor needs a Void
   Thorn and a Blazing Eye (Bosses of Mass Destruction) and a Terrasteel block; the Infinity Catalyst needs every
   singularity plus Botania's top materials.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="0A9663DF92B2EC1B">The Endgame</QuestLink> (The Endgame)

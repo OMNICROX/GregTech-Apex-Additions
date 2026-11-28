@@ -28,3 +28,9 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:nanochip_assembly_complex" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="03EECD4278ED6707">Nanochip Assembly Complex</QuestLink> (Tier 8 - UV)

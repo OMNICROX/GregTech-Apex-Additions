@@ -28,3 +28,10 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:mystical_cultivation_array" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="23DE5D4A1A4CA8CD">Mystical Cultivation Array</QuestLink> (Magic)
+* <QuestLink id="68DF90F37FAAC2F1">Mystical Cultivation Array</QuestLink> (Tier 1 - LV)

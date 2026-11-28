@@ -28,3 +28,9 @@ precursors.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="212D8D6B76C42322">Pyrolyse Oven</QuestLink> (Tier 2 - MV)

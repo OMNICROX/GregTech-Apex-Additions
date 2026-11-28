@@ -181,9 +181,6 @@ q('ebf_steel', 'Steel, the Fast Way', ['check'], [
 ], ['ebf_power'], kind='tip')
 
 # ---------------------------------------------------------------- the rest of the pack at LV
-q('arbiter', 'Sylvan Arbiter', ['gtapexadditions:mana_nexus'], [
-    'Botania as a GregTech multiblock: an LV machine hull, a mana pool, a runic altar and managlass in the assembler. It runs every Botania altar craft with parallels. See the &dBotania&r chapter.',
-], ['assembler'], kind='opt')
 q('cultivation', 'Mystical Cultivation Array', ['gtapexadditions:mystical_cultivation_array'], [
     'Mystical Agriculture crops grown inside a GregTech multiblock, faster and without farmland.',
 ], ['assembler'], kind='opt')
@@ -226,7 +223,7 @@ place(C, col=3.6, row=2.9, cells={
     'start': ['voltage', 'components', 'robot_arm'],
     'wiremill': ['fine_wire'],
     'bender': ['foil'],
-    'assembler': ['emitter', 'arbiter', 'cultivation', 'lava_maker'],
+    'assembler': ['emitter', 'cultivation', 'lava_maker'],
     'circuits': ['ae2', 'pipes', 'wand'],
     'turbine': ['combustion', 'gas_turbine', 'large_boiler', 'generator_array'],
     'buffer': ['transformer', 'charger'],

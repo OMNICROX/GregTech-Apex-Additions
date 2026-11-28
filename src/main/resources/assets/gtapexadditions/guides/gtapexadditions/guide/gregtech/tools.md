@@ -68,3 +68,10 @@ From LV on you can make battery-powered tools. They use EU instead of durability
 Also useful early: the <ItemLink id="gtceu:portable_scanner" /> (machine and pipe info), the
 <ItemLink id="gtceu:prospector.lv" /> (finds ore veins) and the <ItemLink id="gtceu:terminal" /> (builds
 multiblocks for you; see [Multiblock preview](../getting-started/multiblock-preview.md)).
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="54D43D2056D4C7CF">Wrench</QuestLink> (Tier 0 - Stone Age)
+* <QuestLink id="575AAA1C7BD5B815">GregTech Tools</QuestLink> (Tier 0 - Stone Age)

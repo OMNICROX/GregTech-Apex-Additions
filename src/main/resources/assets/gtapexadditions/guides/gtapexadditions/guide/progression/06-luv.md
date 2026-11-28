@@ -20,3 +20,9 @@ navigation:
 [General Ore Processing Factory](../multiblocks/ore_processing_factory.md).
 
 <GTRecipesFor id="gtceu:luv_machine_hull" limit="1" />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="33155745F70EFF0B">Tier 6: LuV</QuestLink> (Tier 6 - LuV)

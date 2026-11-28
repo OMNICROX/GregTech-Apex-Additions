@@ -26,3 +26,10 @@ Nuclear materials and rare earths make it an **EV** destination.
 * <ItemLink id="undergarden:utherium_crystal" /> and utheric shards centrifuge into uranium-238 and thorium.
 * <ItemLink id="undergarden:regalium_crystal" /> gives gold and diamond dust; cloggrum and froststeel macerate into
   iron / tin and steel.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="14868AD80601CD4C">The Undergarden</QuestLink> (Worlds and Space)
+* <QuestLink id="29D2DEB65CC25660">The Undergarden</QuestLink> (Tier 4 - EV)

@@ -27,3 +27,10 @@ trophies build the [Library of Ruina](../multiblocks/library_of_ruina.md), which
 * Ironwood and knightmetal macerate into iron / gold and steel dust; steeleaf centrifuges into steel and plant balls.
 * Carminite centrifuges into redstone and ruby; fiery ingots into iron and blaze dust.
 * Trophies (Naga, Lich, Hydra, Ur-Ghast and more) are ingredients for the Library of Ruina.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="45E9D14FB054809A">The Twilight Forest</QuestLink> (Worlds and Space)
+* <QuestLink id="6568C9D3A3E6E7B7">The Twilight Forest</QuestLink> (Tier 3 - HV)

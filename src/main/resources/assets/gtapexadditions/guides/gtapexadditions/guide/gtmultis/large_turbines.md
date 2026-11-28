@@ -46,3 +46,11 @@ The big generators of the mid game. All output through a **Dynamo Hatch**.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="67110AC24B25E49A">Large Steam Turbine</QuestLink> (Tier 3 - HV)
+* <QuestLink id="7C367A13D3B92127">Plasma Power</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="7EA44250F64E3941">Large Gas Turbine</QuestLink> (Tier 4 - EV)

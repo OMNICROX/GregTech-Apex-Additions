@@ -48,3 +48,10 @@ If a machine picks the wrong recipe:
    two distinct buses or two machines.
 3. AE2 autocrafting: set the circuit in the machine or bus, not in the pattern. Circuits aren't used up, so a
    pattern that includes one sends a new circuit every craft and they pile up in the bus.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="12D72A16D7211EC4">Chemical Reactor</QuestLink> (Tier 1 - LV)
+* <QuestLink id="3C2E167CBB72DC3A">Autocrafting</QuestLink> (AE2 and Automation)

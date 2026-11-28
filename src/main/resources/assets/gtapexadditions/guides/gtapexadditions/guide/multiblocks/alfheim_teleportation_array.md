@@ -28,3 +28,10 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:alfheim_teleportation_array" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="31291ACE365AF4C1">Alfheim Teleportation Array</QuestLink> (Tier 5 - IV)
+* <QuestLink id="72EA9D6F7117DED4">Alfheim Teleportation Array</QuestLink> (Magic)

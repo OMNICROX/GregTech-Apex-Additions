@@ -15,3 +15,10 @@ navigation:
 
 3. Light fuel + heavy fuel -> **diesel**; with tetranitromethane -> **cetane-boosted diesel** (best LCE fuel).
 4. Naphtha / gases -> ethylene, propene, benzene for plastics. Ad Astra rockets burn GregTech rocket fuel.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="1B04CE0E1FC6CB6F">Oil</QuestLink> (Tier 2 - MV)
+* <QuestLink id="5BC87FDA498AD732">Oil</QuestLink> (Tier 3 - HV)

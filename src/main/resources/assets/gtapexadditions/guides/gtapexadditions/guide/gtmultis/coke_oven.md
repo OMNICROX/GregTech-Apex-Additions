@@ -30,3 +30,9 @@ Creosote fuels a steam boiler or treats wood.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="655C44DA4C464D73">Coke Oven</QuestLink> (Tier 0 - Stone Age)

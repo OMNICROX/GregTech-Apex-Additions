@@ -28,3 +28,9 @@ Apex uses GT6-style pipes and cables: they connect only where you connect them, 
 
 
 <Color id="gray">Written for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="6B86EC0315CC1789">Item Pipes</QuestLink> (Tier 1 - LV)

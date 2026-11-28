@@ -70,3 +70,9 @@ work the same way:
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="08B42E20D7132FA1">Large Machines</QuestLink> (Tier 4 - EV)

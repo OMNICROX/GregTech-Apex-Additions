@@ -28,3 +28,9 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:exothermic_hearth" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="3AE4F15F94500B17">Exothermic Hearth</QuestLink> (Tier 7 - ZPM)

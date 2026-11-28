@@ -13,3 +13,10 @@ navigation:
 * The **Simulation Chamber** (MV) trains models and makes **predictions**; it uses an eighth of HNN's usual power.
 * Put a **prediction** in a GregTech **Extractor**: you get every drop the model lists (MV, 4 s). The Loot Fabricator is removed.
 * A trained model also works in the [Extreme Entity Crusher](../multiblocks/extreme_entity_crusher.md): its tier adds bonus loot rolls.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="152C410C4F1076D7">Hostile Neural Networks</QuestLink> (AE2 and Automation)
+* <QuestLink id="5D04C5DDE505BEC5">Simulation Chamber</QuestLink> (AE2 and Automation)

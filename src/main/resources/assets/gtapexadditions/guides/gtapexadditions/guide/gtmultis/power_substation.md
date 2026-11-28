@@ -29,3 +29,9 @@ Point a Jade or a Portable Scanner at it, or open the controller, to see the ave
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="5A8DD8B2F88A3C37">Power Substation</QuestLink> (Tier 5 - IV)

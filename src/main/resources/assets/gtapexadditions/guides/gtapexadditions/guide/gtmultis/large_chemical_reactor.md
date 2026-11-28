@@ -33,3 +33,9 @@ The GTNA [Chemical Plant](chemical_plant.md) runs the same recipes with parallel
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="6EFD43406980BC16">Large Chemical Reactor</QuestLink> (Tier 3 - HV)

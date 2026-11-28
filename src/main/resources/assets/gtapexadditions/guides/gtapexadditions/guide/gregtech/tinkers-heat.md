@@ -18,3 +18,9 @@ The smeltery's heat follows GregTech:
 
 Melting and casting temperatures of every Tinkers metal that is also a GregTech metal are raised to its GT blast
 temperature, so the smeltery never skips the Electric Blast Furnace.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="20D2E6B16296FA1C">The Smeltery</QuestLink> (Tier 0 - Stone Age)

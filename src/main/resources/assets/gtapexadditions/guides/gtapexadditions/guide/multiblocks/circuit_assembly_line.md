@@ -28,3 +28,9 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:circuit_assembly_line" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="2BF98E1D590187B8">Circuit Assembly Line</QuestLink> (Tier 6 - LuV)

@@ -35,3 +35,9 @@ Steel unlocks the steam age and the first real machines. Build a
 You got this guide on your first join. If you lose it, craft a new one from a book and any planks.
 
 <RecipeFor id="guideme:guide" fallbackText="(book + planks)" />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="456BCAD5A9C7336E">And So It Begins</QuestLink> (Tier 0 - Stone Age)

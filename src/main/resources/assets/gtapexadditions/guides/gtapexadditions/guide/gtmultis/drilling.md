@@ -38,3 +38,9 @@ with cobblestone in this pack.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="147825E819947CF9">Large Miner</QuestLink> (Tier 4 - EV)

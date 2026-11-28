@@ -16,3 +16,9 @@ navigation:
 [Mega Distillation Tower](../multiblocks/mega_distillation_tower.md), [Eden Garden](../multiblocks/eden_garden.md).
 
 <GTRecipesFor id="gtceu:zpm_machine_hull" limit="1" />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="4CFCC33F2B89BC3F">Tier 7: ZPM</QuestLink> (Tier 7 - ZPM)

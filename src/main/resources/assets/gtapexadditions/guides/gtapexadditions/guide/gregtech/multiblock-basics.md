@@ -100,3 +100,12 @@ Open the controller and read the status line.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="25DA726CF65BBC6E">ME Hatches for GregTech</QuestLink> (AE2 and Automation)
+* <QuestLink id="36E5F25895DA7063">Input and Output Buses</QuestLink> (Tier 1 - LV)
+* <QuestLink id="4DA266FD6F806FB9">Maintenance Hatch</QuestLink> (Tier 1 - LV)
+* <QuestLink id="7BA7ED1EDB91332A">Muffler Hatch</QuestLink> (Tier 1 - LV)

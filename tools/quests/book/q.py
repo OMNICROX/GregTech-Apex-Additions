@@ -12,7 +12,8 @@ def fl_recipes(f):
     if not rs: return []
     lo=min(r.get('tier',0) for r in rs); return [r for r in rs if r.get('tier',0)==lo]
 def show(r): return f"  [{r['t'].split(':')[1]} T{r.get('tier','')} {r.get('d','')}t] {', '.join(nm(a[0])+('*' if len(a)>1 else '') for a in r['i'])} {'FL:'+','.join(x.split(':')[1] for x in r.get('fi',[])) if r.get('fi') else ''} -> {', '.join(nm(o) for o in r['o'])} {'FO:'+','.join(x.split(':')[1] for x in r.get('fo',[])) if r.get('fo') else ''}"
-n=int(__import__('os').environ.get('N','3'))
+n=int(__import__("os").environ.get("N","3"))
+if __name__ != "__main__": sys.argv=sys.argv[:1]
 for a in sys.argv[1:]:
     rs=[r for r in rgraph.recipes(a) if r['t'].split(':')[1] not in BAD] or fl_recipes(a)
     print(a, len(rs))

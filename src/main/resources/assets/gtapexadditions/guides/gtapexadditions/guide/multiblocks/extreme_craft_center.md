@@ -28,3 +28,10 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:extreme_craft_center" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="1DFAFA2042E8456C">Extreme Craft Center</QuestLink> (Tier 5 - IV)
+* <QuestLink id="5BBB1BCB038C2D6B">Extreme Craft Center</QuestLink> (AE2 and Automation)

@@ -98,3 +98,19 @@ Some ores give more than two crushed ores per raw ore (redstone, for example, gi
   with parallels; see [GCYM Large Machines](../gtmultis/gcym.md).
 * The [General Ore Processing Factory](../multiblocks/ore_processing_factory.md) (LuV) runs the whole chain in
   one block.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="0782B27FB9EF0B39">Electromagnetic Separator</QuestLink> (Tier 2 - MV)
+* <QuestLink id="0F623F3849B53B67">Macerator</QuestLink> (Tier 1 - LV)
+* <QuestLink id="2C9EE65E5132DFC7">Doubling Your Ore</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="3E685C5FD6409D41">Aether Bauxite</QuestLink> (Worlds and Space)
+* <QuestLink id="5B9E1F5CF58BE9A9">Byproducts Matter</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="5CEE957BC41498DB">Ore Washer</QuestLink> (Tier 1 - LV)
+* <QuestLink id="690D41F27017971D">Centrifuge</QuestLink> (Tier 1 - LV)
+* <QuestLink id="703D7171C3817BE3">Sifter</QuestLink> (Tier 2 - MV)
+* <QuestLink id="7573CC4AB7CFE3D4">Chemical Bath</QuestLink> (Tier 1 - LV)
+* <QuestLink id="7990B3AA204C961A">Thermal Centrifuge</QuestLink> (Tier 1 - LV)
+* <QuestLink id="7F371F6AF478FCD8">First Platinum</QuestLink> (Tier 4 - EV)

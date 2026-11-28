@@ -28,3 +28,9 @@ laser pipes.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="158EEF40E4B5628E">Laser Hatches</QuestLink> (Tier 6 - LuV)

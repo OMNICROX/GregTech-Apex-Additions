@@ -51,3 +51,12 @@ hatch.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="0EC324E604C3E039">Research Station</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="1AFA5529A58B0003">Research Data</QuestLink> (Tier 5 - IV)
+* <QuestLink id="55518BC71F8EB28C">High Performance Computation Array</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="66375A050802CCB4">Data Bank</QuestLink> (Tier 6 - LuV)

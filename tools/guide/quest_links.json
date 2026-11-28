@@ -1,0 +1,1562 @@
+[
+[
+"automation/ae2.md",
+"1D174BA0FA98E25D",
+"Applied Energistics Begins",
+"Tier 1 - LV"
+],
+[
+"automation/ae2.md",
+"21E356D1F3E106AA",
+"Subnets",
+"AE2 and Automation"
+],
+[
+"automation/ae2.md",
+"36D26A05E1C2D161",
+"MEGA 64M Cells",
+"Tier 8 - UV"
+],
+[
+"automation/ae2.md",
+"4B2CEFC0C3D8C2CA",
+"MEGA Cells",
+"Tier 7 - ZPM"
+],
+[
+"automation/ae2.md",
+"5B0918EBF064B8B7",
+"Quantum Network Bridge",
+"Tier 4 - EV"
+],
+[
+"automation/ae2.md",
+"7EDDDB0528C4EFDC",
+"Applied Energistics",
+"AE2 and Automation"
+],
+[
+"automation/hostile-neural-networks.md",
+"152C410C4F1076D7",
+"Hostile Neural Networks",
+"AE2 and Automation"
+],
+[
+"automation/hostile-neural-networks.md",
+"5D04C5DDE505BEC5",
+"Simulation Chamber",
+"AE2 and Automation"
+],
+[
+"dimensions/aether.md",
+"0FCA4B1F3185D9BB",
+"The Aether",
+"Worlds and Space"
+],
+[
+"dimensions/aether.md",
+"4B66DFC1E552EC38",
+"Where Aluminium Comes From",
+"Tier 1 - LV"
+],
+[
+"dimensions/dimensions-index.md",
+"158397CE020EEB67",
+"Other Worlds",
+"Worlds and Space"
+],
+[
+"dimensions/nether.md",
+"1BEA380F562122A4",
+"Into the Nether",
+"Tier 0.5 - Steam Age"
+],
+[
+"dimensions/nether.md",
+"2062E46BE42DE6E6",
+"The Nether",
+"Worlds and Space"
+],
+[
+"dimensions/personal-space.md",
+"0B753B575C42D033",
+"A World of Your Own",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"0C801A5F15BDA343",
+"Mars",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"1A61D17A77D22E5F",
+"The Moon",
+"Tier 3 - HV"
+],
+[
+"dimensions/space.md",
+"1E8336F7D8669A15",
+"Glacio",
+"Tier 6 - LuV"
+],
+[
+"dimensions/space.md",
+"343ACDA81D0C01E0",
+"Jupiter",
+"Tier 7 - ZPM"
+],
+[
+"dimensions/space.md",
+"3EA19D924FA5C822",
+"Venus and Mercury",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"3F3AC6EB23B10E68",
+"Mars",
+"Tier 4 - EV"
+],
+[
+"dimensions/space.md",
+"48BCD3B395F5F5E1",
+"Venus and Mercury",
+"Tier 5 - IV"
+],
+[
+"dimensions/space.md",
+"4956C90661F3663F",
+"The Moon",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"4EFC842243C7EAD9",
+"Jet Suit",
+"Heroes"
+],
+[
+"dimensions/space.md",
+"51C99A0311F08FA5",
+"Glacio",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"6D32C7D1D4172DF3",
+"Space Suit",
+"Worlds and Space"
+],
+[
+"dimensions/space.md",
+"76163813AD8A6FCF",
+"Saturn",
+"Tier 8 - UV"
+],
+[
+"dimensions/space.md",
+"7B2354790BE191BA",
+"Uranus and Neptune",
+"Tier 9 - UHV"
+],
+[
+"dimensions/space.md",
+"7D3F36CCA52FF09F",
+"The Outer Planets",
+"Worlds and Space"
+],
+[
+"dimensions/the-end.md",
+"242292651C2CAE3C",
+"The End",
+"Worlds and Space"
+],
+[
+"dimensions/the-end.md",
+"2C879007BD79DC7F",
+"The End",
+"Tier 4 - EV"
+],
+[
+"dimensions/twilight-forest.md",
+"45E9D14FB054809A",
+"The Twilight Forest",
+"Worlds and Space"
+],
+[
+"dimensions/twilight-forest.md",
+"6568C9D3A3E6E7B7",
+"The Twilight Forest",
+"Tier 3 - HV"
+],
+[
+"dimensions/undergarden.md",
+"14868AD80601CD4C",
+"The Undergarden",
+"Worlds and Space"
+],
+[
+"dimensions/undergarden.md",
+"29D2DEB65CC25660",
+"The Undergarden",
+"Tier 4 - EV"
+],
+[
+"getting-started/first-days.md",
+"456BCAD5A9C7336E",
+"And So It Begins",
+"Tier 0 - Stone Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"06127E82742E1D33",
+"Why Boilers Explode",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"08DEADE3AAD93436",
+"High Pressure Boilers",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"0C82E3AE5EDAF149",
+"Mind the Exhaust",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"1767C233669E14D1",
+"Solar Boiler",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"38128FAF517ED63A",
+"Steam Into Power",
+"Tier 1 - LV"
+],
+[
+"gregtech/boilers-and-steam.md",
+"5E6C4C3915ED19FE",
+"Infinite Water",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/boilers-and-steam.md",
+"7F7588DE49CC05E8",
+"Stoke the Boiler",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/circuits.md",
+"08800008C4E0242A",
+"Wetware Processor",
+"Tier 7 - ZPM"
+],
+[
+"gregtech/circuits.md",
+"1507F3452A8DAC64",
+"Quantum Mainframe",
+"Tier 6 - LuV"
+],
+[
+"gregtech/circuits.md",
+"17669CA0EBA30B03",
+"Optical Assembly",
+"Tier 9 - UHV"
+],
+[
+"gregtech/circuits.md",
+"1C70F4029AC69445",
+"Optical Processor",
+"Tier 8 - UV"
+],
+[
+"gregtech/circuits.md",
+"1F46D19512C78E67",
+"Basic Electronic Circuit",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/circuits.md",
+"2A02A3C68248D51E",
+"Microprocessor",
+"Tier 3 - HV"
+],
+[
+"gregtech/circuits.md",
+"31D8DD6849CFF4DC",
+"Cosmic Circuits",
+"The Endgame"
+],
+[
+"gregtech/circuits.md",
+"36F648EE5AC76526",
+"Microprocessor Mainframe",
+"Tier 4 - EV"
+],
+[
+"gregtech/circuits.md",
+"481F2373E5B7E65E",
+"Advanced Integrated Circuit",
+"Tier 3 - HV"
+],
+[
+"gregtech/circuits.md",
+"52D5DA94E29942E0",
+"Nanoprocessor",
+"Tier 4 - EV"
+],
+[
+"gregtech/circuits.md",
+"5B0C1F6E3C099004",
+"Wetware Mainframe",
+"Tier 8 - UV"
+],
+[
+"gregtech/circuits.md",
+"60D02B732F870A19",
+"Quantum Processor",
+"Tier 5 - IV"
+],
+[
+"gregtech/circuits.md",
+"61136ED80B3C510A",
+"Mass-Produced Circuits",
+"Tier 1 - LV"
+],
+[
+"gregtech/circuits.md",
+"6428314E1DBFC89A",
+"Transcendent Circuits",
+"The Endgame"
+],
+[
+"gregtech/circuits.md",
+"6B5F22FB7766B796",
+"Crystal Mainframe",
+"Tier 7 - ZPM"
+],
+[
+"gregtech/circuits.md",
+"7383FF582EC18CDE",
+"Crystal Processor",
+"Tier 6 - LuV"
+],
+[
+"gregtech/circuits.md",
+"7E5CA35C9D23731A",
+"Good Electronic Circuit",
+"Tier 2 - MV"
+],
+[
+"gregtech/cleanroom.md",
+"0C5D349ECFADB3AD",
+"Stem Cells",
+"Tier 6 - LuV"
+],
+[
+"gregtech/cleanroom.md",
+"65DFA1E47A5DE093",
+"Cleanroom",
+"Tier 3 - HV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"0116C52B2F76769A",
+"Electric Blast Furnace",
+"Tier 1 - LV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"074C2D87D3528D5C",
+"Trinium Coils",
+"Tier 7 - ZPM"
+],
+[
+"gregtech/ebf-and-coils.md",
+"0F297ECA9F2BA990",
+"Nichrome Coils",
+"Tier 4 - EV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"156EC5914C56EBE7",
+"Stainless Steel",
+"Tier 2 - MV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"420224800D523C8A",
+"HSS-G Coils",
+"Tier 5 - IV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"53CA5ADEF4FFDC2D",
+"Cupronickel Coils",
+"Tier 1 - LV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"75C8E59308A65961",
+"Naquadah Coils",
+"Tier 6 - LuV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"7870AF3E3C00E3A2",
+"Tritanium Coils",
+"Tier 8 - UV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"79B95D2DDA485860",
+"Kanthal Coils",
+"Tier 3 - HV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"7C764C7102119213",
+"RTM Alloy Coils",
+"Tier 5 - IV"
+],
+[
+"gregtech/glass-tiers.md",
+"00EDB1B21E0B53D7",
+"Glass for Multiblocks",
+"Tier 3 - HV"
+],
+[
+"gregtech/glass-tiers.md",
+"043C530924BFAB3C",
+"Tungstensteel Glass",
+"Tier 5 - IV"
+],
+[
+"gregtech/glass-tiers.md",
+"13274D8B0F871BFF",
+"Titanium Glass",
+"Tier 4 - EV"
+],
+[
+"gregtech/glass-tiers.md",
+"2B53170302E75951",
+"Osmium Glass",
+"Tier 8 - UV"
+],
+[
+"gregtech/glass-tiers.md",
+"2D2CBD1DD32375D3",
+"Iridium Glass",
+"Tier 7 - ZPM"
+],
+[
+"gregtech/glass-tiers.md",
+"5B6B4677EF343328",
+"Rhodium-Plated Palladium Glass",
+"Tier 6 - LuV"
+],
+[
+"gregtech/glass-tiers.md",
+"72C1359FFC3BF38F",
+"Neutronium Glass",
+"Tier 9 - UHV"
+],
+[
+"gregtech/multiblock-basics.md",
+"25DA726CF65BBC6E",
+"ME Hatches for GregTech",
+"AE2 and Automation"
+],
+[
+"gregtech/multiblock-basics.md",
+"36E5F25895DA7063",
+"Input and Output Buses",
+"Tier 1 - LV"
+],
+[
+"gregtech/multiblock-basics.md",
+"4DA266FD6F806FB9",
+"Maintenance Hatch",
+"Tier 1 - LV"
+],
+[
+"gregtech/multiblock-basics.md",
+"7BA7ED1EDB91332A",
+"Muffler Hatch",
+"Tier 1 - LV"
+],
+[
+"gregtech/oc/overclocking-rules.md",
+"503B56BFD3E03728",
+"An MV Workshop",
+"Tier 2 - MV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"26262C22AF012BF8",
+"EV Energy Hatch",
+"Tier 4 - EV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"44EC3DFE3B5B82D5",
+"LuV Energy Hatch",
+"Tier 6 - LuV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"5202DDF807CC9C78",
+"MV Energy Hatch",
+"Tier 2 - MV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"54146F9CE2D62137",
+"HV Energy Hatch",
+"Tier 3 - HV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"67DCE5C682E5FB57",
+"IV Energy Hatch",
+"Tier 5 - IV"
+],
+[
+"gregtech/oc/tier-skipping.md",
+"70BF6AE206D59B2F",
+"Powering the EBF",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"0782B27FB9EF0B39",
+"Electromagnetic Separator",
+"Tier 2 - MV"
+],
+[
+"gregtech/ore-processing.md",
+"0F623F3849B53B67",
+"Macerator",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"2C9EE65E5132DFC7",
+"Doubling Your Ore",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/ore-processing.md",
+"3E685C5FD6409D41",
+"Aether Bauxite",
+"Worlds and Space"
+],
+[
+"gregtech/ore-processing.md",
+"5B9E1F5CF58BE9A9",
+"Byproducts Matter",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/ore-processing.md",
+"5CEE957BC41498DB",
+"Ore Washer",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"690D41F27017971D",
+"Centrifuge",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"703D7171C3817BE3",
+"Sifter",
+"Tier 2 - MV"
+],
+[
+"gregtech/ore-processing.md",
+"7573CC4AB7CFE3D4",
+"Chemical Bath",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"7990B3AA204C961A",
+"Thermal Centrifuge",
+"Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"7F371F6AF478FCD8",
+"First Platinum",
+"Tier 4 - EV"
+],
+[
+"gregtech/ore-veins.md",
+"36ADDFCA5951ECE4",
+"How Ores Work Here",
+"Tier 0 - Stone Age"
+],
+[
+"gregtech/pipes.md",
+"6B86EC0315CC1789",
+"Item Pipes",
+"Tier 1 - LV"
+],
+[
+"gregtech/power/batteries.md",
+"1C9282C5C8C062F7",
+"Battery Buffer",
+"Tier 1 - LV"
+],
+[
+"gregtech/power/batteries.md",
+"1D00CD3B85A58385",
+"Batteries",
+"Tier 1 - LV"
+],
+[
+"gregtech/power/batteries.md",
+"21E790755EB2D8AE",
+"HV Batteries",
+"Tier 3 - HV"
+],
+[
+"gregtech/power/batteries.md",
+"340F3224E6F0203F",
+"Lapotron Crystal",
+"Tier 4 - EV"
+],
+[
+"gregtech/power/batteries.md",
+"4DAE8F9266318AAE",
+"MV Batteries",
+"Tier 2 - MV"
+],
+[
+"gregtech/power/cables.md",
+"39885B3A2873D505",
+"Tin Cable",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/power/distribution.md",
+"21C3AC872D4C56BE",
+"Stepping Up",
+"Tier 2 - MV"
+],
+[
+"gregtech/power/distribution.md",
+"5BB63F5B1CB40856",
+"Transformer",
+"Tier 1 - LV"
+],
+[
+"gregtech/power/distribution.md",
+"60576C2734700A2E",
+"HV Transformer",
+"Tier 3 - HV"
+],
+[
+"gregtech/power/generation-and-consumption.md",
+"4783EFC6D3D000F3",
+"HV Power",
+"Tier 3 - HV"
+],
+[
+"gregtech/power/generation-and-consumption.md",
+"585B193636234A45",
+"Large Combustion Engine",
+"Tier 4 - EV"
+],
+[
+"gregtech/power/generation-and-consumption.md",
+"730E51BBEB6ED14A",
+"MV Power",
+"Tier 2 - MV"
+],
+[
+"gregtech/power/voltage-tiers.md",
+"134D11CBB41215B1",
+"Voltage, Amps and Explosions",
+"Tier 1 - LV"
+],
+[
+"gregtech/programmed-circuits.md",
+"12D72A16D7211EC4",
+"Chemical Reactor",
+"Tier 1 - LV"
+],
+[
+"gregtech/programmed-circuits.md",
+"3C2E167CBB72DC3A",
+"Autocrafting",
+"AE2 and Automation"
+],
+[
+"gregtech/singleblocks.md",
+"28471CD55141152D",
+"High Pressure Machines",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/singleblocks.md",
+"306D120352961847",
+"Steam Macerator",
+"Tier 0.5 - Steam Age"
+],
+[
+"gregtech/tinkers-heat.md",
+"20D2E6B16296FA1C",
+"The Smeltery",
+"Tier 0 - Stone Age"
+],
+[
+"gregtech/tools.md",
+"54D43D2056D4C7CF",
+"Wrench",
+"Tier 0 - Stone Age"
+],
+[
+"gregtech/tools.md",
+"575AAA1C7BD5B815",
+"GregTech Tools",
+"Tier 0 - Stone Age"
+],
+[
+"gtmultis/active_transformer.md",
+"158EEF40E4B5628E",
+"Laser Hatches",
+"Tier 6 - LuV"
+],
+[
+"gtmultis/alloy_blast_smelter.md",
+"2E187C9F4A160184",
+"Alloy Blast Smelter",
+"Tier 4 - EV"
+],
+[
+"gtmultis/assembly_line.md",
+"4C0004B8AC067C32",
+"Assembly Line",
+"Tier 5 - IV"
+],
+[
+"gtmultis/assembly_line.md",
+"734D5E2C8E00EF74",
+"LuV Components",
+"Tier 6 - LuV"
+],
+[
+"gtmultis/coke_oven.md",
+"655C44DA4C464D73",
+"Coke Oven",
+"Tier 0 - Stone Age"
+],
+[
+"gtmultis/cracker.md",
+"5D6460664D4AD597",
+"Cracker",
+"Tier 3 - HV"
+],
+[
+"gtmultis/distillation_tower.md",
+"114B377496C3DCC0",
+"Distillation Tower",
+"Tier 3 - HV"
+],
+[
+"gtmultis/drilling.md",
+"147825E819947CF9",
+"Large Miner",
+"Tier 4 - EV"
+],
+[
+"gtmultis/eye_of_harmony.md",
+"231582344DCCC75C",
+"Eye of Harmony",
+"The Endgame"
+],
+[
+"gtmultis/gcym.md",
+"08B42E20D7132FA1",
+"Large Machines",
+"Tier 4 - EV"
+],
+[
+"gtmultis/implosion_compressor.md",
+"33976BB0485E9B4A",
+"Implosion Compressor",
+"Tier 4 - EV"
+],
+[
+"gtmultis/large_boilers.md",
+"4FE1AFB64870D223",
+"Large Bronze Boiler",
+"Tier 1 - LV"
+],
+[
+"gtmultis/large_chemical_reactor.md",
+"6EFD43406980BC16",
+"Large Chemical Reactor",
+"Tier 3 - HV"
+],
+[
+"gtmultis/large_turbines.md",
+"67110AC24B25E49A",
+"Large Steam Turbine",
+"Tier 3 - HV"
+],
+[
+"gtmultis/large_turbines.md",
+"7C367A13D3B92127",
+"Plasma Power",
+"Tier 6 - LuV"
+],
+[
+"gtmultis/large_turbines.md",
+"7EA44250F64E3941",
+"Large Gas Turbine",
+"Tier 4 - EV"
+],
+[
+"gtmultis/power_substation.md",
+"5A8DD8B2F88A3C37",
+"Power Substation",
+"Tier 5 - IV"
+],
+[
+"gtmultis/primitive_blast_furnace.md",
+"49B1EB40F8824DCB",
+"Primitive Blast Furnace",
+"Tier 0.5 - Steam Age"
+],
+[
+"gtmultis/primitive_pump.md",
+"71294E4435892222",
+"Primitive Pump",
+"Tier 0.5 - Steam Age"
+],
+[
+"gtmultis/pyrolyse_oven.md",
+"212D8D6B76C42322",
+"Pyrolyse Oven",
+"Tier 2 - MV"
+],
+[
+"gtmultis/research.md",
+"0EC324E604C3E039",
+"Research Station",
+"Tier 7 - ZPM"
+],
+[
+"gtmultis/research.md",
+"1AFA5529A58B0003",
+"Research Data",
+"Tier 5 - IV"
+],
+[
+"gtmultis/research.md",
+"55518BC71F8EB28C",
+"High Performance Computation Array",
+"Tier 7 - ZPM"
+],
+[
+"gtmultis/research.md",
+"66375A050802CCB4",
+"Data Bank",
+"Tier 6 - LuV"
+],
+[
+"gtmultis/steam-multiblocks.md",
+"200C7BEEEAA0B5B5",
+"Steam Multiblocks",
+"Tier 0.5 - Steam Age"
+],
+[
+"gtmultis/steam-multiblocks.md",
+"29778D2F7DCD3B6F",
+"Steam Grinder",
+"Tier 0.5 - Steam Age"
+],
+[
+"gtmultis/vacuum_freezer.md",
+"26339FB63FAAB754",
+"Vacuum Freezer",
+"Tier 3 - HV"
+],
+[
+"items/angel-ring.md",
+"2A54DE6B1119D5F1",
+"Angel Ring",
+"Tier 3 - HV"
+],
+[
+"items/structure-upgrader.md",
+"7BDDCE0C1E830762",
+"Structure Upgrader",
+"AE2 and Automation"
+],
+[
+"lines/antimatter.md",
+"348C8F5CBEEC525C",
+"Antimatter",
+"The Endgame"
+],
+[
+"lines/avaritia.md",
+"4AA5315E5ED12561",
+"Extreme Crafting Table",
+"Tier 8 - UV"
+],
+[
+"lines/avaritia.md",
+"6B0D0878EB8A38AB",
+"Infinity",
+"Tier 8 - UV"
+],
+[
+"lines/avaritia.md",
+"7EAF3E9A60672344",
+"Neutronium Compressor",
+"Tier 8 - UV"
+],
+[
+"lines/draconic-evolution.md",
+"02727BE6B86A6D76",
+"Wyvern Armour",
+"Heroes"
+],
+[
+"lines/draconic-evolution.md",
+"11B19E5004069A9D",
+"Draconic Evolution",
+"Tier 5 - IV"
+],
+[
+"lines/draconic-evolution.md",
+"43CCCB9B23D09EE9",
+"Chaotic Tier",
+"Tier 8 - UV"
+],
+[
+"lines/draconic-evolution.md",
+"43FD5EA657FE6D11",
+"Draconic Tier",
+"Tier 7 - ZPM"
+],
+[
+"lines/fusion.md",
+"044343F05C24DBD2",
+"Fusion Reactor MK II",
+"Tier 7 - ZPM"
+],
+[
+"lines/fusion.md",
+"09A84EE083C6F8CE",
+"Fusion Reactor MK V",
+"The Endgame"
+],
+[
+"lines/fusion.md",
+"237E890482CC80F9",
+"Fusion Reactor MK IV",
+"Tier 9 - UHV"
+],
+[
+"lines/fusion.md",
+"6E0398DFD3102574",
+"Fusion Reactor MK III",
+"Tier 8 - UV"
+],
+[
+"lines/fusion.md",
+"6FB228B99E29D490",
+"Fusion Reactor MK I",
+"Tier 6 - LuV"
+],
+[
+"lines/fusion.md",
+"77F86F742034004D",
+"Compact Fusion Computer",
+"Tier 6 - LuV"
+],
+[
+"lines/heroes.md",
+"2E765D8F993380C5",
+"Heroes",
+"Heroes"
+],
+[
+"lines/naquadah.md",
+"278915F0CD4CCCEF",
+"Naquadah Ore",
+"Worlds and Space"
+],
+[
+"lines/naquadah.md",
+"2F5D58A34E9AB8E9",
+"Naquadah Fuel Refinery",
+"Tier 8 - UV"
+],
+[
+"lines/naquadah.md",
+"3BCE72CB14475AB6",
+"Hyper Naquadah Reactor",
+"Tier 9 - UHV"
+],
+[
+"lines/naquadah.md",
+"3BD0D67257077D93",
+"Naquadah",
+"Tier 6 - LuV"
+],
+[
+"lines/oil.md",
+"1B04CE0E1FC6CB6F",
+"Oil",
+"Tier 2 - MV"
+],
+[
+"lines/oil.md",
+"5BC87FDA498AD732",
+"Oil",
+"Tier 3 - HV"
+],
+[
+"lines/platinum.md",
+"1D2446BA57863A19",
+"The Platinum Group",
+"Tier 5 - IV"
+],
+[
+"lines/platinum.md",
+"49555E36198CADF9",
+"Sheldonite",
+"Worlds and Space"
+],
+[
+"lines/platinum.md",
+"4AEBC9A50B38207B",
+"Platinum Group Sludge",
+"Tier 5 - IV"
+],
+[
+"lines/rare-earths.md",
+"0AB10A163C1C25FF",
+"Uranium and Thorium",
+"Worlds and Space"
+],
+[
+"lines/rare-earths.md",
+"6FB549F9CF880BAB",
+"Neodymium",
+"Tier 4 - EV"
+],
+[
+"lines/rare-earths.md",
+"73236DC56F460FA0",
+"Rare Earths",
+"Worlds and Space"
+],
+[
+"lines/rubber-and-plastics.md",
+"230498FADB1E1FD2",
+"Silicone Rubber",
+"Tier 2 - MV"
+],
+[
+"lines/rubber-and-plastics.md",
+"4D9E85AE454FB9F7",
+"PTFE",
+"Tier 3 - HV"
+],
+[
+"lines/rubber-and-plastics.md",
+"4E6256B6B8706386",
+"Rubber",
+"Tier 0.5 - Steam Age"
+],
+[
+"lines/rubber-and-plastics.md",
+"50C21D150019CDBE",
+"Polybenzimidazole",
+"Tier 5 - IV"
+],
+[
+"lines/rubber-and-plastics.md",
+"567788FABAA163E3",
+"Polyethylene",
+"Tier 2 - MV"
+],
+[
+"lines/titanium.md",
+"28085F9F4636D68B",
+"Rutile",
+"Tier 3 - HV"
+],
+[
+"lines/titanium.md",
+"754AA07F53A94122",
+"Titanium",
+"Tier 3 - HV"
+],
+[
+"lines/tungsten.md",
+"07641ED9BEA6C20A",
+"Tungsten Ore",
+"Worlds and Space"
+],
+[
+"lines/tungsten.md",
+"10088885701F6931",
+"Tungsten",
+"Tier 4 - EV"
+],
+[
+"lines/tungsten.md",
+"3C085A433E8E021F",
+"Tungstensteel",
+"Tier 4 - EV"
+],
+[
+"magic/blood-magic.md",
+"01DE3F1A0F9590C9",
+"Magician Blood Orb",
+"Tier 3 - HV"
+],
+[
+"magic/blood-magic.md",
+"0D991DD64789605C",
+"Blood Magic",
+"Magic"
+],
+[
+"magic/blood-magic.md",
+"5C86830303D7C528",
+"Archmage Blood Orb",
+"Tier 5 - IV"
+],
+[
+"magic/blood-magic.md",
+"5FDAEB5FD95004C9",
+"Master Blood Orb",
+"Tier 4 - EV"
+],
+[
+"magic/botania.md",
+"382016385A4AB888",
+"Botania",
+"Magic"
+],
+[
+"magic/botania.md",
+"5DE478503A65F256",
+"Gaia Pylons",
+"Tier 3 - HV"
+],
+[
+"magic/magic-index.md",
+"2EE731208A6F9783",
+"Magic Follows the Tiers",
+"Magic"
+],
+[
+"magic/mystical-agriculture.md",
+"058C573D8068FC3E",
+"Mystical Agriculture",
+"Magic"
+],
+[
+"magic/mystical-agriculture.md",
+"0D9431AA007A347D",
+"Seed Synthesizer",
+"Magic"
+],
+[
+"multiblocks/alfheim_teleportation_array.md",
+"31291ACE365AF4C1",
+"Alfheim Teleportation Array",
+"Tier 5 - IV"
+],
+[
+"multiblocks/alfheim_teleportation_array.md",
+"72EA9D6F7117DED4",
+"Alfheim Teleportation Array",
+"Magic"
+],
+[
+"multiblocks/antimatter_generator.md",
+"0E2D7C8332A8A1C2",
+"Antimatter Power",
+"The Endgame"
+],
+[
+"multiblocks/black_hole_compressor.md",
+"12F97A3E49D8DB06",
+"Black Hole Compressor",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/bloody_hell.md",
+"430F30070F4F41DC",
+"Bloody Hell",
+"Magic"
+],
+[
+"multiblocks/bloody_hell.md",
+"56C10EAAE068C6D7",
+"Bloody Hell",
+"Tier 5 - IV"
+],
+[
+"multiblocks/circuit_assembly_line.md",
+"2BF98E1D590187B8",
+"Circuit Assembly Line",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/component_assembly_line.md",
+"4759B4D71963089C",
+"Component Assembly Line",
+"Tier 5 - IV"
+],
+[
+"multiblocks/crystalline_infinitier.md",
+"64CC2F7FDCEA2BF6",
+"Crystalline Infinitier",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/divine_isa_forge.md",
+"3F76ADA4B5B86DAD",
+"Divine Isa Forge",
+"The Endgame"
+],
+[
+"multiblocks/draconic_fusion_crafting.md",
+"7BAE88CB5EA0E029",
+"Draconic Fusion Crafting",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/eden_garden.md",
+"49A1319C071AA9BA",
+"Eden Garden",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/electric_implosion_compressor.md",
+"267C243E707A26B2",
+"Electric Implosion Compressor",
+"Tier 8 - UV"
+],
+[
+"multiblocks/exothermic_hearth.md",
+"3AE4F15F94500B17",
+"Exothermic Hearth",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/extreme_craft_center.md",
+"1DFAFA2042E8456C",
+"Extreme Craft Center",
+"Tier 5 - IV"
+],
+[
+"multiblocks/extreme_craft_center.md",
+"5BBB1BCB038C2D6B",
+"Extreme Craft Center",
+"AE2 and Automation"
+],
+[
+"multiblocks/extreme_entity_crusher.md",
+"36D14EB296DBA493",
+"Extreme Entity Crusher",
+"AE2 and Automation"
+],
+[
+"multiblocks/fuel_refining_complex.md",
+"273F992B1A559858",
+"Fuel Refining Complex",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/industrial_rock_breaker.md",
+"564BB1F0C49EF866",
+"Industrial Rock Breaker",
+"AE2 and Automation"
+],
+[
+"multiblocks/integrated_assembly_matrix.md",
+"1301F2DF66035A96",
+"Integrated Assembly Matrix",
+"Tier 8 - UV"
+],
+[
+"multiblocks/large_naquadah_reactor.md",
+"529BC3CF47BCAFA6",
+"Large Naquadah Reactor",
+"Tier 5 - IV"
+],
+[
+"multiblocks/laser_meteor_miner.md",
+"4E767FBEC4A790E9",
+"Laser Meteor Miner",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/library_of_ruina.md",
+"0ADB419898132BFB",
+"Library of Ruina",
+"Tier 5 - IV"
+],
+[
+"multiblocks/library_of_ruina.md",
+"33704C21DACAB3FD",
+"Library of Ruina",
+"Worlds and Space"
+],
+[
+"multiblocks/lightning_spire.md",
+"3287894507A3671F",
+"Lightning Spire",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/mass_fabricator_genesis.md",
+"332780602C19F535",
+"Mass Fabricator Genesis",
+"The Endgame"
+],
+[
+"multiblocks/matter_fabricator.md",
+"2CC3B2074958707E",
+"Matter Fabricator",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/mega_distillation_tower.md",
+"120782152401F3F1",
+"Mega Distillation Tower",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/micro_spacetime_fabricatorio.md",
+"5DE1D02FECD16D09",
+"Micro SpaceTime Fabricatorio",
+"The Endgame"
+],
+[
+"multiblocks/miracle_top.md",
+"3DE72B2335627D72",
+"Miracle Top",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/mystical_cultivation_array.md",
+"23DE5D4A1A4CA8CD",
+"Mystical Cultivation Array",
+"Magic"
+],
+[
+"multiblocks/mystical_cultivation_array.md",
+"68DF90F37FAAC2F1",
+"Mystical Cultivation Array",
+"Tier 1 - LV"
+],
+[
+"multiblocks/nanochip_assembly_complex.md",
+"03EECD4278ED6707",
+"Nanochip Assembly Complex",
+"Tier 8 - UV"
+],
+[
+"multiblocks/nether_interface.md",
+"4BBBE803E9FB9901",
+"Nether Interface",
+"Tier 5 - IV"
+],
+[
+"multiblocks/ore_processing_factory.md",
+"22E707F07C3FCAE7",
+"General Ore Processing Factory",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/plasma_forge_prototype_mk2.md",
+"1A54F2B308018132",
+"DTPF Prototype MK-II",
+"The Endgame"
+],
+[
+"multiblocks/purification_plant.md",
+"74889725FE75A85B",
+"Water Purification Plant",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/quantum_force_transformer.md",
+"54344366EFEABF73",
+"Quantum Force Transformer",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/real_annihilation_generator.md",
+"6740CF71306DCF25",
+"Real Annihilation Generator",
+"The Endgame"
+],
+[
+"multiblocks/silicon_rock_synthesizer.md",
+"285274AAEBD8FF64",
+"Silicon Rock Synthesizer",
+"Tier 5 - IV"
+],
+[
+"multiblocks/singularity_data_hub.md",
+"59841907ECC75747",
+"Singularity Data Hub",
+"AE2 and Automation"
+],
+[
+"multiblocks/singularity_data_hub.md",
+"737D7C701B1ECF89",
+"Singularity Data Hub",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"0F10170FF2A436FD",
+"Space Mining Module",
+"Tier 8 - UV"
+],
+[
+"multiblocks/space_elevator.md",
+"450D96AB634E7D8F",
+"Space Elevator",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"4976FBBD58869C49",
+"Space Mining Module",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"603DB9863686AE53",
+"Space Pumping Module",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"69625471E6F4B8E6",
+"Space Assembler Module",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/spinmatron.md",
+"42E44934AF2FE184",
+"Spinmatron-2737",
+"Tier 8 - UV"
+],
+[
+"multiblocks/strange_matter_aggregator.md",
+"3171DEB34A00CFB5",
+"Strange Matter Aggregator",
+"The Endgame"
+],
+[
+"multiblocks/super_water_purifier.md",
+"1371B3FD0CB9D361",
+"Super Water Purifier",
+"Tier 9 - UHV"
+],
+[
+"progression/00-steam.md",
+"7E151282B75B046F",
+"Steam Power",
+"Tier 0 - Stone Age"
+],
+[
+"progression/01-lv.md",
+"59173BF27618B570",
+"Electricity",
+"Tier 0.5 - Steam Age"
+],
+[
+"progression/01-lv.md",
+"5F8B83C09B5FEAED",
+"Tier 1: LV",
+"Tier 1 - LV"
+],
+[
+"progression/02-mv.md",
+"6AEC7FE83A12C442",
+"Tier 2: MV",
+"Tier 2 - MV"
+],
+[
+"progression/03-hv.md",
+"03A7330D720089B0",
+"On to HV",
+"Tier 2 - MV"
+],
+[
+"progression/03-hv.md",
+"152D26A34E4E4556",
+"Tier 3: HV",
+"Tier 3 - HV"
+],
+[
+"progression/04-ev.md",
+"3EF8B8FCDA13AE72",
+"Tier 4: EV",
+"Tier 4 - EV"
+],
+[
+"progression/05-iv.md",
+"0DFED0A7BEC65281",
+"Tier 5: IV",
+"Tier 5 - IV"
+],
+[
+"progression/06-luv.md",
+"33155745F70EFF0B",
+"Tier 6: LuV",
+"Tier 6 - LuV"
+],
+[
+"progression/07-zpm.md",
+"4CFCC33F2B89BC3F",
+"Tier 7: ZPM",
+"Tier 7 - ZPM"
+],
+[
+"progression/08-uv.md",
+"6DAD7F9045B6FAF7",
+"Tier 8: UV",
+"Tier 8 - UV"
+],
+[
+"progression/09-uhv.md",
+"3FCE328F6E42B64B",
+"Tier 9: UHV",
+"Tier 9 - UHV"
+],
+[
+"progression/10-uev-plus.md",
+"0A9663DF92B2EC1B",
+"The Endgame",
+"The Endgame"
+]
+]

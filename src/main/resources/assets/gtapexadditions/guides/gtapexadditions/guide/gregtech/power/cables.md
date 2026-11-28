@@ -25,3 +25,9 @@ Some materials have no loss at all, the **superconductors**.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="39885B3A2873D505">Tin Cable</QuestLink> (Tier 0.5 - Steam Age)

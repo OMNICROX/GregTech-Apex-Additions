@@ -37,3 +37,9 @@ The **Large Boilers** burn solid or liquid fuel and make a lot of steam for stea
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="4FE1AFB64870D223">Large Bronze Boiler</QuestLink> (Tier 1 - LV)

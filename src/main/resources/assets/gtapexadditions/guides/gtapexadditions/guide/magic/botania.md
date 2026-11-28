@@ -23,3 +23,10 @@ the IV [Alfheim Teleportation Array](../multiblocks/alfheim_teleportation_array.
 * After the Gaia Guardian, recipes with Gaia Spirit are made on the Alfheim Teleportation Array.
 * Removed exploits: Orechid (stone to ores) and the Elven Mana Fluxfield (mana to FE).
 * Terrasteel blocks are part of Avaritia's neutronium compressor; the Infinity Catalyst needs Botania's top materials.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="382016385A4AB888">Botania</QuestLink> (Magic)
+* <QuestLink id="5DE478503A65F256">Gaia Pylons</QuestLink> (Tier 3 - HV)

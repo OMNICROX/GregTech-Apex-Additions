@@ -19,3 +19,9 @@ navigation:
 [Crystalline Infinitier](../multiblocks/crystalline_infinitier.md), [Fuel Refining Complex](../multiblocks/fuel_refining_complex.md).
 
 <GTRecipesFor id="gtceu:uhv_machine_hull" limit="1" />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="3FCE328F6E42B64B">Tier 9: UHV</QuestLink> (Tier 9 - UHV)

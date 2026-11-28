@@ -29,3 +29,9 @@ explosives, later.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="33976BB0485E9B4A">Implosion Compressor</QuestLink> (Tier 4 - EV)

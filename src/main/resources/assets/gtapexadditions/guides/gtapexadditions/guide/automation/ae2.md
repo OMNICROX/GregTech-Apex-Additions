@@ -26,3 +26,14 @@ InsaneAE's machine acceleration cards are disabled. GregTech machines connect to
 and hatches; the [Extreme Craft Center](../multiblocks/extreme_craft_center.md) is an ME crafting provider with pattern magnification.
 
 ![An ME drive subnet: a separate cable line with its own drives, linked to the main network](../assets/images/ae2_subnet.png)
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="1D174BA0FA98E25D">Applied Energistics Begins</QuestLink> (Tier 1 - LV)
+* <QuestLink id="21E356D1F3E106AA">Subnets</QuestLink> (AE2 and Automation)
+* <QuestLink id="36D26A05E1C2D161">MEGA 64M Cells</QuestLink> (Tier 8 - UV)
+* <QuestLink id="4B2CEFC0C3D8C2CA">MEGA Cells</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="5B0918EBF064B8B7">Quantum Network Bridge</QuestLink> (Tier 4 - EV)
+* <QuestLink id="7EDDDB0528C4EFDC">Applied Energistics</QuestLink> (AE2 and Automation)

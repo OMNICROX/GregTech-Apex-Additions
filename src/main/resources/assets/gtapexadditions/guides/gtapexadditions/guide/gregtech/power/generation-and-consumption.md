@@ -34,3 +34,11 @@ cover set to "prevent power fail" stops that).
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="4783EFC6D3D000F3">HV Power</QuestLink> (Tier 3 - HV)
+* <QuestLink id="585B193636234A45">Large Combustion Engine</QuestLink> (Tier 4 - EV)
+* <QuestLink id="730E51BBEB6ED14A">MV Power</QuestLink> (Tier 2 - MV)

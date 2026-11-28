@@ -28,3 +28,10 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:singularity_data_hub" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="59841907ECC75747">Singularity Data Hub</QuestLink> (AE2 and Automation)
+* <QuestLink id="737D7C701B1ECF89">Singularity Data Hub</QuestLink> (Tier 9 - UHV)

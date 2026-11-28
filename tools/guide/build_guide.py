@@ -25,6 +25,16 @@ if __name__ == '__main__':
         if d != 'assets':
             pth = os.path.join(ROOT, d)
             shutil.rmtree(pth) if os.path.isdir(pth) else os.remove(pth)
+    # quests that point at a page are listed on it (written by tools/quests/book/build.py)
+    ql = os.path.join(os.path.dirname(__file__), 'quest_links.json')
+    if os.path.exists(ql):
+        import json, collections
+        by = collections.defaultdict(list)
+        for page, qid, title, chap in json.load(open(ql)): by[page].append((chap, title, qid))
+        for page, rows in by.items():
+            if page not in P: print('quest link to unknown page', page); continue
+            lines = '\n'.join(f'* <QuestLink id="{qid}">{title}</QuestLink> ({chap})' for chap, title, qid in rows)
+            P[page]['body'] += f'\n## Quests\n\nThese quests cover this page. Click one to open it in the quest book.\n\n{lines}\n'
     for path, p in P.items():
         out = os.path.join(ROOT, path)
         os.makedirs(os.path.dirname(out), exist_ok=True)

@@ -32,3 +32,9 @@ coming for free while the EBF does other metals.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="49B1EB40F8824DCB">Primitive Blast Furnace</QuestLink> (Tier 0.5 - Steam Age)

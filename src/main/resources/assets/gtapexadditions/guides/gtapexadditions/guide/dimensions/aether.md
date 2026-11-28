@@ -34,3 +34,10 @@ These are the richest aluminium source in the game, so the Aether is an **MV** d
 * Holystone macerates to stone dust. Golden aerclouds give helium-3.
 
 <GTRecipesFor id="aether:zanite_gemstone" limit="1" type="gtceu:centrifuge" fallbackText="Zanite centrifuging: see JEI." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="0FCA4B1F3185D9BB">The Aether</QuestLink> (Worlds and Space)
+* <QuestLink id="4B66DFC1E552EC38">Where Aluminium Comes From</QuestLink> (Tier 1 - LV)

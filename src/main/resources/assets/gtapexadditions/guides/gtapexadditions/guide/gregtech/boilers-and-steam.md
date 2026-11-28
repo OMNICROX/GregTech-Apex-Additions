@@ -75,3 +75,15 @@ with what you have and add boilers. This is the normal way to power your first L
 * [Large Boilers](../gtmultis/large_boilers.md) (bronze, steel, titanium, tungstensteel) make thousands of mB per
   tick and feed large steam turbines.
 * [Steam Multiblocks](../gtmultis/steam-multiblocks.md) run steam recipes with up to 8 parallels in Apex.
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="06127E82742E1D33">Why Boilers Explode</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="08DEADE3AAD93436">High Pressure Boilers</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="0C82E3AE5EDAF149">Mind the Exhaust</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="1767C233669E14D1">Solar Boiler</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="38128FAF517ED63A">Steam Into Power</QuestLink> (Tier 1 - LV)
+* <QuestLink id="5E6C4C3915ED19FE">Infinite Water</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="7F7588DE49CC05E8">Stoke the Boiler</QuestLink> (Tier 0.5 - Steam Age)

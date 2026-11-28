@@ -27,3 +27,9 @@ products (for example heavy fuel into light fuel and naphtha, ethane into ethyle
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="5D6460664D4AD597">Cracker</QuestLink> (Tier 3 - HV)

@@ -76,3 +76,18 @@ Metals hotter than **1,750 K** come out as **hot ingots**: cool them in a
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="0116C52B2F76769A">Electric Blast Furnace</QuestLink> (Tier 1 - LV)
+* <QuestLink id="074C2D87D3528D5C">Trinium Coils</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="0F297ECA9F2BA990">Nichrome Coils</QuestLink> (Tier 4 - EV)
+* <QuestLink id="156EC5914C56EBE7">Stainless Steel</QuestLink> (Tier 2 - MV)
+* <QuestLink id="420224800D523C8A">HSS-G Coils</QuestLink> (Tier 5 - IV)
+* <QuestLink id="53CA5ADEF4FFDC2D">Cupronickel Coils</QuestLink> (Tier 1 - LV)
+* <QuestLink id="75C8E59308A65961">Naquadah Coils</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="7870AF3E3C00E3A2">Tritanium Coils</QuestLink> (Tier 8 - UV)
+* <QuestLink id="79B95D2DDA485860">Kanthal Coils</QuestLink> (Tier 3 - HV)
+* <QuestLink id="7C764C7102119213">RTM Alloy Coils</QuestLink> (Tier 5 - IV)

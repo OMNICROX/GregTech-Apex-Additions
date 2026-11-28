@@ -23,12 +23,13 @@ KIND = {'hub': (2.25, 'gear'), 'main': (1.75, 'square'), 'quest': (1.0, 'square'
 
 class Q:
     def __init__(self, key, title, tasks, desc, deps=(), at=(0, 0), kind='quest', bag=None, pick=None, xp=None,
-                 any_dep=False, icon=None, hide=False, sub=None):
+                 any_dep=False, icon=None, hide=False, sub=None, guide=None):
         self.key, self.title, self.tasks, self.desc = key, title, list(tasks), desc
         self.deps = list(deps)
         self.x, self.y = float(at[0]), float(at[1])
         self.kind, self.bag, self.pick, self.xp = kind, bag, pick, xp
         self.any_dep, self.icon, self.hide, self.sub = any_dep, icon, hide, sub
+        self.guide = guide   # Apex Guide page ('gregtech/tools.md'): adds a line that opens it, and the page links back
 
     @property
     def id(self):
@@ -63,6 +64,17 @@ def _task(qid, i, t):
     return d
 
 
+GUIDE_ID = 'gtapexadditions:guide'
+GUIDE_NS = 'gtapexadditions'
+GUIDE_LINKS = []   # (page, quest id, quest title, chapter title) for the guide's "Quests" sections
+
+
+def guide_line(page, text='Read more in the Apex Guide'):
+    return json.dumps({'text': '\u2139 ' + text, 'color': 'gold', 'underlined': True,
+                       'clickEvent': {'action': 'run_command', 'value': f'/apexguidec {GUIDE_ID} open {GUIDE_NS}:{page}'},
+                       'hoverEvent': {'action': 'show_text', 'contents': 'Opens the Apex Guide'}})
+
+
 def _desc(desc, idmap, key):
     if isinstance(desc, str): desc = [desc]
     out = []
@@ -94,7 +106,11 @@ def quest_snbt(ch, q, idmap):
             MISSING.append((q.key, t))
     if not tasks: tasks = ['check']
     size, shape = KIND[q.kind]
-    d = {'id': q.id, 'x': Dbl(q.x), 'y': Dbl(q.y), 'title': q.title, 'description': _desc(q.desc, idmap, q.key),
+    desc = _desc(q.desc, idmap, q.key)
+    if q.guide:
+        desc += ['', guide_line(q.guide)]
+        GUIDE_LINKS.append((q.guide, q.id, re.sub('&.', '', q.title), re.sub('&.', '', ch.title)))
+    d = {'id': q.id, 'x': Dbl(q.x), 'y': Dbl(q.y), 'title': q.title, 'description': desc,
          'tasks': [_task(q.id, i, t) for i, t in enumerate(tasks)], 'size': Dbl(size)}
     if shape: d['shape'] = shape
     if q.sub: d['subtitle'] = q.sub

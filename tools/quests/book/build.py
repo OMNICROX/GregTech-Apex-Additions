@@ -8,8 +8,8 @@ import picks
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
-CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv']
-GROUPS = [('gtnh_ref', '&8GTNH Reference (dev only)')]
+CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv', 'ch_hv', 'ch_ev', 'ch_iv', 'ch_luv', 'ch_zpm', 'ch_uv', 'ch_uhv', 'ch_endgame', 'ch_worlds', 'ch_magic', 'ch_ae2', 'ch_heroes']
+GROUPS = [('side', '&dWorlds, Magic and Automation'), ('gtnh_ref', '&8GTNH Reference (dev only)')]
 
 
 def render(ch, path):
@@ -72,6 +72,11 @@ def keep_user_layout(ch, d):
 
 def main():
     chapters = [importlib.import_module(m).C for m in CHAPTERS]
+    import guide_map
+    byk = {q.key: q for ch in chapters for q in ch.quests}
+    for k, page in guide_map.MAP.items():
+        if k not in byk: fw.ERRORS.append(f'guide_map: no quest {k}')
+        elif not byk[k].guide: byk[k].guide = page
     # links from the recipes, merged with the hand-written ones, then reduced and laid out as a flow
     import rgraph2, flow
     allq = {q.key: q for ch in chapters for q in ch.quests}
@@ -106,11 +111,22 @@ def main():
         open(f'{OUT}/reward_tables/{key}.snbt', 'w').write(to_snbt(t) + '\n')
     data = '/mnt/user-data/uploads/Apex Ascension/config/ftbquests/quests/data.snbt'
     if os.path.exists(data): shutil.copy(data, f'{OUT}/data.snbt')
+    # the pack copy: everything except the GTNH reference chapters
+    REL = os.path.join(HERE, 'out', 'release', 'config', 'ftbquests', 'quests')
+    if os.path.exists(REL): shutil.rmtree(REL)
+    shutil.copytree(OUT, REL, ignore=lambda d, names: [n for n in names if n.startswith('gtnh_')])
+    open(f'{REL}/chapter_groups.snbt', 'w').write(to_snbt({'chapter_groups': [{'id': hid('b2/group/' + g), 'title': t} for g, t in GROUPS if g != 'gtnh_ref']}) + '\n')
     print(f'{len(chapters)} chapters, {total} quests')
     for ch in chapters:
         kinds = {}
         for q in ch.quests: kinds[q.kind] = kinds.get(q.kind, 0) + 1
         print(' ', ch.key, len(ch.quests), kinds)
+    groot = os.path.normpath(os.path.join(HERE, '../../../src/main/resources/assets/gtapexadditions/guides/gtapexadditions/guide'))
+    for page, qid, title, chap in fw.GUIDE_LINKS:
+        if not os.path.exists(os.path.join(groot, page)): fw.ERRORS.append(f'guide page missing: {page} ({title})')
+    import json
+    json.dump(sorted(set(fw.GUIDE_LINKS)), open(os.path.normpath(os.path.join(HERE, '../../guide/quest_links.json')), 'w'), indent=0)
+    print('guide links:', len(fw.GUIDE_LINKS))
     print('missing items:', fw.MISSING + picks.MISSING)
     print('errors:', fw.ERRORS)
 

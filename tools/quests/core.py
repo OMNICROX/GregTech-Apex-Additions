@@ -11,7 +11,8 @@ MISSING = set()
 
 
 def hid(key):
-    return hashlib.sha1(('apex_quests:' + key).encode()).hexdigest()[:16].upper()
+    # FTB Quests reads ids as signed hex longs; anything above 7FFF... gets a new random id and loses its links
+    return format(int(hashlib.sha1(('apex_quests:' + key).encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF, '016X')
 
 
 def table_hex(name):

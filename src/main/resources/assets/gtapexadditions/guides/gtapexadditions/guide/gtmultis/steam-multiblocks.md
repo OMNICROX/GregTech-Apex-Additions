@@ -66,3 +66,10 @@ two; GTNA adds the GT New Horizons steam machines.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="200C7BEEEAA0B5B5">Steam Multiblocks</QuestLink> (Tier 0.5 - Steam Age)
+* <QuestLink id="29778D2F7DCD3B6F">Steam Grinder</QuestLink> (Tier 0.5 - Steam Age)

@@ -33,6 +33,7 @@ public final class ApexGuide {
                 .extension(RecipeTypeMappingSupplier.EXTENSION_POINT, GTGuideRecipes::collect)
                 .extension(TagCompiler.EXTENSION_POINT, new GTRecipesTag())
                 .extension(TagCompiler.EXTENSION_POINT, new MultiblockTag())
+                .extension(TagCompiler.EXTENSION_POINT, new QuestLinkTag())
                 .build();
     }
 }

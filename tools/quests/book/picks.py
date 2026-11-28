@@ -26,6 +26,37 @@ PICKS = {
         ('gtceu:aluminium_ingot', 16), ('gtceu:cupronickel_ingot', 16), ('gtceu:silicon_dust', 16), ('gtceu:electrum_ingot', 12),
         ('gtceu:good_electronic_circuit', 2), ('gtceu:diode', 8), ('gtceu:gallium_arsenide_dust', 2), ('gtceu:silicone_rubber_plate', 8),
         ('gtceu:polyethylene_plate', 8), ('gtceu:chromium_dust', 4), ('gtceu:manganese_dust', 4), ('minecraft:emerald', 4)]),
+    'pick_hv': ('HV Supplies', 'gtceu:stainless_steel_crate', [
+        ('gtceu:stainless_steel_ingot', 16), ('gtceu:kanthal_ingot', 8), ('gtceu:electrum_ingot', 16), ('gtceu:polyethylene_plate', 16),
+        ('gtceu:advanced_integrated_circuit', 2), ('gtceu:silicon_wafer', 8), ('gtceu:chromium_ingot', 8), ('minecraft:gold_ingot', 16),
+        ('gtceu:polytetrafluoroethylene_plate', 8), ('minecraft:ender_pearl', 8), ('gtceu:black_steel_ingot', 8), ('minecraft:diamond', 4)]),
+    'pick_ev': ('EV Supplies', 'gtceu:titanium_crate', [
+        ('gtceu:titanium_ingot', 16), ('gtceu:nichrome_ingot', 8), ('gtceu:tungsten_steel_ingot', 8), ('gtceu:platinum_ingot', 4),
+        ('gtceu:micro_processor_computer', 2), ('gtceu:epoxy_plate', 16), ('gtceu:neodymium_ingot', 8), ('gtceu:aluminium_ingot', 32),
+        ('gtceu:vanadium_steel_ingot', 8), ('gtceu:silicone_rubber_plate', 16), ('gtceu:nano_cpu_chip', 2), ('minecraft:nether_star', 1)]),
+    'pick_iv': ('IV Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:tungsten_steel_ingot', 16), ('gtceu:tungsten_ingot', 16), ('gtceu:platinum_ingot', 8), ('gtceu:palladium_ingot', 6),
+        ('gtceu:nano_processor_computer', 2), ('gtceu:polytetrafluoroethylene_plate', 32), ('gtceu:iridium_ingot', 2), ('gtceu:rhodium_ingot', 2),
+        ('gtceu:hssg_ingot', 8), ('gtceu:niobium_titanium_ingot', 8), ('gtceu:quantum_eye', 4), ('minecraft:nether_star', 2)]),
+    'pick_luv': ('LuV Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:rhodium_plated_palladium_ingot', 8), ('gtceu:hsss_ingot', 8), ('gtceu:iridium_ingot', 8), ('gtceu:osmium_ingot', 4),
+        ('gtceu:naquadah_ingot', 8), ('gtceu:niobium_titanium_ingot', 16), ('gtceu:quantum_processor_computer', 1), ('gtceu:polybenzimidazole_plate', 16),
+        ('gtceu:quantum_star', 1), ('gtceu:samarium_ingot', 4), ('gtceu:ruridit_ingot', 8), ('gtceu:indium_ingot', 4)]),
+    'pick_zpm': ('ZPM Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:naquadah_alloy_ingot', 16), ('gtceu:osmiridium_ingot', 8), ('gtceu:europium_ingot', 4), ('gtceu:enriched_naquadah_ingot', 8),
+        ('gtceu:trinium_ingot', 4), ('gtceu:vanadium_gallium_ingot', 16), ('gtceu:crystal_processor_computer', 1), ('gtceu:polybenzimidazole_plate', 32),
+        ('gtceu:quantum_star', 2), ('gtceu:naquadria_ingot', 4), ('gtceu:duranium_ingot', 8), ('gtceu:iridium_ingot', 16)]),
+    'pick_uv': ('UV Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:darmstadtium_ingot', 8), ('gtceu:tritanium_ingot', 8), ('gtceu:americium_ingot', 4), ('gtceu:naquadria_ingot', 8),
+        ('gtceu:yttrium_barium_cuprate_ingot', 16), ('gtceu:europium_ingot', 8), ('gtceu:wetware_processor_assembly', 1), ('gtceu:trinium_ingot', 8),
+        ('gtceu:gravi_star', 1), ('gtceu:neutronium_ingot', 2), ('gtceu:osmiridium_ingot', 16), ('gtceu:naquadah_alloy_ingot', 32)]),
+    'pick_uhv': ('UHV Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:neutronium_ingot', 8), ('gtceu:tritanium_ingot', 16), ('gtceu:americium_ingot', 8), ('gtceu:darmstadtium_ingot', 16),
+        ('gtceu:gravi_star', 2), ('gtceu:europium_ingot', 16), ('gtceu:wetware_processor_computer', 1), ('gtceu:naquadria_ingot', 16),
+        ('avaritia:neutron_ingot', 2), ('gtceu:trinium_ingot', 16)]),
+    'pick_end': ('Endgame Supplies', 'gtceu:tungstensteel_crate', [
+        ('gtceu:neutronium_ingot', 16), ('gtceu:gravi_star', 4), ('gtceu:tritanium_ingot', 32), ('gtceu:americium_ingot', 16),
+        ('gtceu:darmstadtium_ingot', 32), ('gtceu:wetware_processor_mainframe', 1), ('avaritia:neutron_ingot', 4), ('gtceu:europium_ingot', 32)]),
 }
 
 # loot bags: one random entry
@@ -50,6 +81,11 @@ BAGS = {
         ('gtceu:mv_conveyor_module', 1, 2), ('gtceu:silicone_rubber_plate', 8, 4), ('gtceu:polyethylene_plate', 8, 4), ('gtceu:gallium_arsenide_dust', 2, 3),
         ('gtceu:chromium_dust', 6, 3), ('gtceu:manganese_dust', 6, 3), ('gtceu:silicon_wafer', 4, 2), ('minecraft:emerald', 6, 3)]),
 }
+
+
+for _t in ('hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'end'):
+    _n, _ic, _it = PICKS['pick_' + _t]
+    BAGS[_t] = (_n.replace('Supplies', 'Bag'), _ic, [(i, n * 2 if n < 16 else n, 10 - min(j, 7)) for j, (i, n) in enumerate(_it)])
 
 
 def tables():

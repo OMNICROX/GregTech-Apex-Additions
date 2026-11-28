@@ -31,3 +31,9 @@ See the [oil processing](../lines/oil.md) line for what to do with each fraction
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="114B377496C3DCC0">Distillation Tower</QuestLink> (Tier 3 - HV)

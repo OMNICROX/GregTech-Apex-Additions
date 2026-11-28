@@ -41,3 +41,10 @@ already reads each bus by position. Many players feed each bus from its own ME I
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="4C0004B8AC067C32">Assembly Line</QuestLink> (Tier 5 - IV)
+* <QuestLink id="734D5E2C8E00EF74">LuV Components</QuestLink> (Tier 6 - LuV)
