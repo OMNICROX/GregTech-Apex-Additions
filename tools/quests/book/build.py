@@ -88,6 +88,14 @@ def main():
     flow.reduce(allq)
     for ch in chapters:
         import grid
+        mine = os.path.join(LOCKED, ch.key + '.snbt')
+        if os.path.exists(mine):   # arranged by hand in game: positions and links stay exactly as they are
+            import snbt_read
+            user, _ = snbt_read.layout(mine)
+            for q in ch.quests:
+                if q.id in user: q.x, q.y = user[q.id]['x'], user[q.id]['y']
+            print(f"{ch.key:7} arranged by hand: left alone")
+            continue
         plan = grid.layout(ch, one_path=ch.key not in MANY_LINES)
         cf = flow.conflicts(ch)
         xs = [q.x for q in ch.quests]; ys = [q.y for q in ch.quests]

@@ -33,10 +33,13 @@ Heroes). `out/release/` is the pack copy (no GTNH reference chapters); it is ins
 A quest's `guide=` (or `guide_map.py` for the first four chapters) adds the guide line and feeds the guide's Quests lists:
 rebuild the quests first, then `tools/guide/build_guide.py`. Chapters arranged by hand in game go in `book/locked/`.
 
-Layout (`book/grid.py`, 2026-11-28): one obvious path per tier chapter. The big quests the door quest rests on are put in
-one order (written order where requirements allow), each REQUIRES the one before, and they run along one row. Optional
-big quests branch off or sit as unlinked rows above/below the path, about where they were written in. Each small quest
-belongs to one big quest and sits in a free cell next to it. Links that would cross the page are dropped (when the quest
-has a nearer requirement) or kept but not drawn (`hide_dependency_lines`); the build prints the counts per chapter.
-Worlds, Magic, AE2 and Heroes (`MANY_LINES` in build.py) keep their real links: every line is a row of its own.
+Layout (`book/grid.py`, 2026-11-28): modelled on the Stone page the owner arranged by hand (`book/locked/stone.snbt`;
+a chapter with a file in `locked/` is never laid out or re-linked by the build, and its file on the instance is not
+overwritten). Quests stand almost shoulder to shoulder (0.125 between them). In a tier chapter the big quests the door
+quest rests on are one chain (written order where requirements allow, each REQUIRES the one before) that folds into
+rows like a snake: right along one row, down, back left along the next. Optional big quests and all small quests are
+placed in the free cells next to what they belong to, then moved by a search (short, straight, uncrossed links; small
+page). Links that would cross the page are dropped (when the quest has a nearer requirement) or kept but not drawn
+(`hide_dependency_lines`); the build prints the counts. Worlds, Magic, AE2 and Heroes (`MANY_LINES` in build.py) keep
+their real links: every line is a row of its own.
 Positions are cached in `out/layout_cache.json` (keyed by the chapter's quests and grid.py); a clean build takes ~3 min.

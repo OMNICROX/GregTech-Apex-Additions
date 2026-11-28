@@ -22,10 +22,11 @@ import hashlib, json, math, os, random, time
 import numpy as np
 from fw import KIND
 
-GX = 0.75   # clear space between two columns
-GY = 0.5    # clear space between two rows
-OVER, CROSS = 300.0, 3.0
-BAND = 6    # grid rows between two rows of big quests (unused ones take no room)
+GX = 0.125  # clear space between two columns: quests stand almost shoulder to shoulder, as on the hand-made Stone page
+GY = 0.125  # clear space between two rows
+LINK = 0.75 # the least room between two big quests on a line, so the link between them shows
+OVER, CLIP, CROSS = 300.0, 2.5, 3.0   # a link through a quest / clipping a quest's edge / crossing another link
+BAND = 7    # grid rows between two rows of big quests (unused ones take no room)
 BUDGET = 6.0   # seconds of search per chapter and seed
 CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out', 'layout_cache.json')
 
@@ -134,54 +135,76 @@ def prepare(ch, one_path=True):
     def far(b):
         if b not in reach: reach[b] = 1 + max([far(x) for x in bkids.get(b, [])], default=0)
         return reach[b]
-    def step(k):   # columns from the big quest before it: room for what sits between and around them
+    def step(k):   # columns from the big quest before it: one between them at least, more if a lot sits around them
         b = bpar[k]
         load = nX.get(b, 0) / (4 if b == root else 2) + nP.get(k, 0) + nX.get(k, 0) / 2
-        return 1 + max(via[k], int(math.ceil(max(0.0, load - 3) / 4)))
-    lanes, lane = [], {}
-    def run(b, l):
-        lane[b] = l; lanes[l].append(b)
-        ks = sorted(bkids.get(b, []), key=lambda x: (x not in sidx, -far(x), order[x]))
-        for i, k in enumerate(ks):
-            if i == 0: run(k, l)
-            else: lanes.append([]); run(k, len(lanes) - 1)
-    lanes.append([]); run(root, 0)
-    bcol, brow, used, floating = {}, {}, set(), set()
-    path_cols = []
-    def fits(r, a, b): return all((r, c) not in used for c in range(a, b + 1))
-    for l, members in enumerate(lanes):
-        rel = [0]
-        for k in members[1:]: rel.append(rel[-1] + step(k))
-        f = members[0]
-        if l == 0:
-            s, r = 0, 0
-        elif one_path and bpar[f] == root:
-            # an optional line of this tier: it goes above or below the path, about where it was written in
-            before = [k for k in spine if order[k] < order[f]]
-            t = max(1, bcol[before[-1]] if before else 1)
-            end = max(path_cols)
-            home = lambda b, c: c == 1 + via[f] and abs(b) == 1   # right beside the first quest: keeps its link
-            opts = sorted((abs(c - t) + 7 * (abs(b) - 1) + 3 * max(0, c + rel[-1] - end) - 6 * home(b, c)
-                           + 0.1 * (b > 0) + 0.01 * c, b, c)
-                          for b in (-1, 1, -2, 2, -3, 3, -4, 4) for c in range(1, max(path_cols) + 6))
-            r, s = next((b, c) for _, b, c in opts if fits(b, c - 1, c + rel[-1] + 1))
-            if not home(r, s): floating.add(f)   # too far from the first quest for a link
-        else:
-            p = bpar[f]
-            s = bcol[p] + step(f)
-            base = brow[p]
-            above = sum(1 for x in brow.values() if x < base); below = sum(1 for x in brow.values() if x > base)
-            sides = (1, -1) if below <= above else (-1, 1)
-            r = next(base + sd * d for d in range(1, 99) for sd in sides if fits(base + sd * d, s - 1, s + rel[-1] + 1))
-        for k, x in zip(members, rel): bcol[k], brow[k] = s + x, r
-        for c in range(s - (1 if l else 0), s + rel[-1] + 2): used.add((r, c))
-        if l == 0: path_cols = [bcol[k] for k in members]
-    cells = {b: (bcol[b], brow[b] * BAND) for b in bcol}
-    reserved = set()
-    for members in lanes:   # the cells a path link runs through stay empty
-        for a, b in zip(members, members[1:]):
-            if via[b]: continue   # no direct link: the quests between them may stand on the row
-            for c in range(bcol[a] + 1, bcol[b]): reserved.add((c, cells[a][1]))
+        return max(2, 1 + via[k]) + int(math.ceil(max(0.0, load - 6) / 4))
+    cells, reserved, gap_cols, gap_rows, anchor, floating = {}, set(), set(), set(), {}, set()
+    if one_path:
+        # the path folds into rows like a snake: right along one row, down, back left along the next
+        pos = [0]
+        for k in spine[1:]: pos.append(pos[-1] + step(k))
+        # as many rows as bring the page nearest to twice as wide as tall (a screenful)
+        R = min(range(1, 6), key=lambda n: abs((pos[-1] / n * 1.5 + 2) / (n * 5.0) - 2.0) if len(spine) >= 2 * n else 99)
+        per = pos[-1] / R
+        rows, cur = [], [0]
+        for i in range(1, len(spine)):
+            if len(rows) < R - 1 and len(cur) >= 2 and pos[i] - pos[cur[0]] > per + 0.5: rows.append(cur); cur = [i]
+            else: cur.append(i)
+        rows.append(cur)
+        c0 = 0
+        for n, members in enumerate(rows):
+            sgn = 1 if n % 2 == 0 else -1
+            r = n * BAND
+            for i in members: cells[spine[i]] = (c0 + sgn * (pos[i] - pos[members[0]]), r)
+            for i, j in zip(members, members[1:]):
+                ca, cb = cells[spine[i]][0], cells[spine[j]][0]
+                for c in range(min(ca, cb) + 1, max(ca, cb)): reserved.add((c, r))
+                gap_cols.add(ca + sgn)
+            c0 = cells[spine[members[-1]]][0]
+            if n < len(rows) - 1:   # the turn: straight down to the next row
+                for x in range(r + 1, r + BAND): reserved.add((c0, x))
+                gap_rows.add(r + 1)
+        # optional big quests are placed like side quests: next to what they follow from, or, when that is only the
+        # first quest of the tier, next to the path quest they were written in after (unlinked)
+        home = 0
+        for b in sorted((k for k in byk if big[k] and k not in sidx), key=lambda k: order[k]):
+            if bpar[b] != root: anchor[b] = bpar[b]; continue
+            before = [k for k in spine if order[k] < order[b]]
+            if home < 2 or len(before) <= 2: anchor[b] = root; home += 1
+            else: anchor[b] = before[-1]; floating.add(b)
+    else:
+        # independent lines: each runs along a row of its own, branching off where it starts
+        lanes, lane = [], {}
+        def run(b, l):
+            lane[b] = l; lanes[l].append(b)
+            ks = sorted(bkids.get(b, []), key=lambda x: (-far(x), order[x]))
+            for i, k in enumerate(ks):
+                if i == 0: run(k, l)
+                else: lanes.append([]); run(k, len(lanes) - 1)
+        lanes.append([]); run(root, 0)
+        bcol, brow, used = {}, {}, set()
+        def fits(r, a, b): return all((r, c) not in used for c in range(a, b + 1))
+        for l, members in enumerate(lanes):
+            rel = [0]
+            for k in members[1:]: rel.append(rel[-1] + step(k))
+            f = members[0]
+            if l == 0: s, r = 0, 0
+            else:
+                p = bpar[f]
+                s = bcol[p] + step(f)
+                base = brow[p]
+                above = sum(1 for x in brow.values() if x < base); below = sum(1 for x in brow.values() if x > base)
+                sides = (1, -1) if below <= above else (-1, 1)
+                r = next(base + sd * d for d in range(1, 99) for sd in sides if fits(base + sd * d, s - 1, s + rel[-1] + 1))
+            for k, x in zip(members, rel): bcol[k], brow[k] = s + x, r
+            for c in range(s - (1 if l else 0), s + rel[-1] + 2): used.add((r, c))
+        cells = {b: (bcol[b], brow[b] * BAND) for b in bcol}
+        for members in lanes:   # the cells a line's link runs through stay empty
+            for a, b in zip(members, members[1:]):
+                if via[b]: continue   # no direct link: the quests between them may stand on the row
+                for c in range(bcol[a] + 1, bcol[b]): reserved.add((c, cells[a][1]))
+                gap_cols.add(bcol[a] + 1)
 
     # ---- links that would run across the page
     def near(d, x):
@@ -209,7 +232,7 @@ def prepare(ch, one_path=True):
         if red:
             ins[k] = [d for d in ins[k] if d not in red]
             q.deps = [d for d in q.deps if d not in red]
-    return {'cells': cells, 'reserved': reserved, 'ins': ins, 'big': big, 'bpar': bpar, 'spine': spine, 'cl': cl,
+    return {'anchor': anchor, 'gap_cols': gap_cols, 'gap_rows': gap_rows, 'cells': cells, 'reserved': reserved, 'ins': ins, 'big': big, 'bpar': bpar, 'spine': spine, 'cl': cl,
             'role': role, 'dropped': dropped, 'hidden': hidden, 'floating': sorted(floating)}
 
 
@@ -218,28 +241,29 @@ def _layout(ch, plan, seed):
     keys = [q.key for q in qs]
     ix = {k: i for i, k in enumerate(keys)}
     N = len(keys)
-    ins, bigk, cl, role = plan['ins'], plan['big'], plan['cl'], plan['role']
+    ins, cl, anchor = plan['ins'], plan['cl'], plan['anchor']
     sz = [KIND[q.kind][0] for q in qs]
-    isbig = [bigk[k] for k in keys]
     deps = [[ix[d] for d in ins[k]] for k in keys]
     users = [[] for _ in keys]
     for i in range(N):
         for d in deps[i]: users[d].append(i)
-    small = [i for i in range(N) if not isbig[i]]
-    CL = np.array([ix[cl[k]] if k in cl else i for i, k in enumerate(keys)])
-    SMALL = np.array([not b for b in isbig])
-    PREP = np.array([role.get(k) == 'prep' for k in keys])
-    EXTRA = np.array([role.get(k) == 'extra' for k in keys])
-    E = [(d, i) for i in range(N) for d in deps[i]]
-    if not E: E = [(0, 0)]
+    bcells, reserved = plan['cells'], plan['reserved']
+    loose = [i for i, k in enumerate(keys) if k not in bcells]
+    # what a loose quest belongs to: its big quest, or for an optional big quest the quest it stands next to
+    CL = np.array([ix[cl[k]] if k in cl else ix[anchor[k]] if k in anchor else i for i, k in enumerate(keys)])
+    LOOSE = np.zeros(N, bool); LOOSE[loose] = True
+    PULL = np.array([LOOSE[i] and (k not in anchor or k in plan['floating']) for i, k in enumerate(keys)])
+    E = [(d, i) for i in range(N) for d in deps[i]] or [(0, 0)]
     EA = np.array([a for a, b in E]); EB = np.array([b for a, b in E])
     shown = np.array([0.0 if (qs[b].hide or a == b) else 1.0 for a, b in E])
     NOTEND = np.ones((len(E), N), bool)
     for e, (a, b) in enumerate(E): NOTEND[e, a] = NOTEND[e, b] = False
-    R2 = np.array([(s / 2 + 0.15) ** 2 for s in sz])
+    HARD = np.array([(0.35 * s) ** 2 for s in sz])        # through the middle of a quest
+    SOFT = np.array([(s / 2 + 0.05) ** 2 for s in sz])    # clipping its edge
+    HALF = np.array([x / 2 for x in sz])
+    BIGPAIR = np.array([1.0 if sz[a] >= 1.5 and sz[b] >= 1.5 else 0.0 for a, b in E])
     NOSHARE = np.triu(np.array([[len({a, b, c, d}) == 4 for (c, d) in E] for (a, b) in E]), 1)
 
-    bcells, reserved = plan['cells'], plan['reserved']
     col = [0] * N; row = [0] * N
     placed = np.zeros(N, bool)
     occ = {}
@@ -253,7 +277,7 @@ def _layout(ch, plan, seed):
             out[i] = at; prev = i
         return out
     def places():
-        cw, rh = {}, {}
+        cw = {c: LINK for c in plan['gap_cols']}; rh = {r: LINK for r in plan['gap_rows']}
         for i in range(N):
             if not placed[i]: continue
             s = sz[i]
@@ -269,32 +293,38 @@ def _layout(ch, plan, seed):
         vis = shown * placed[EA] * placed[EB]
         L2 = dx * dx + dy * dy + 1e-9
         t = float((np.sqrt(L2) * vis).sum())
-        t += 0.4 * float(((dx < -0.1) * vis).sum())   # a link running right to left reads backwards
-        # side quests hug their big quest; preparation sits before it, extras not before it
+        t += 0.3 * float((np.minimum(np.abs(dx), np.abs(dy)) * vis).sum())   # straight links read best
+        t += 3.0 * float(((np.sqrt(L2) - HALF[EA] - HALF[EB] < 0.5) * BIGPAIR * vis).sum())   # two big quests: show the link
         cx, cy = X - X[CL], Y - Y[CL]
-        mine = SMALL & placed
-        t += 0.45 * float((np.sqrt(cx * cx + cy * cy) * mine).sum())
-        t += 0.6 * float(((cx > 0.1) & PREP & placed).sum()) + 0.3 * float(((cx < -0.1) & EXTRA & placed).sum())
+        t += 0.45 * float((np.sqrt(cx * cx + cy * cy) * (PULL & placed)).sum())   # stay by what you belong to
+        t += 1.0 * float((np.minimum(np.abs(dx), np.abs(dy)) * BIGPAIR * vis).sum())  # lines of big quests run straight
         px = X[None, :] - ax[:, None]; py = Y[None, :] - ay[:, None]
         u = np.clip((px * dx[:, None] + py * dy[:, None]) / L2[:, None], 0.0, 1.0)
         ex = px - u * dx[:, None]; ey = py - u * dy[:, None]
-        t += OVER * float(((ex * ex + ey * ey < R2[None, :]) & NOTEND & (vis[:, None] > 0) & placed[None, :]).sum())
+        d2 = ex * ex + ey * ey
+        live = NOTEND & (vis[:, None] > 0) & placed[None, :]
+        t += OVER * float(((d2 < HARD[None, :]) & live).sum()) + CLIP * float(((d2 < SOFT[None, :]) & live).sum())
         M1 = dx[:, None] * (ay[None, :] - ay[:, None]) - dy[:, None] * (ax[None, :] - ax[:, None])
         M2 = dx[:, None] * (by[None, :] - ay[:, None]) - dy[:, None] * (bx[None, :] - ax[:, None])
         t += CROSS * float(((M1 * M2 < -1e-9) & (M1.T * M2.T < -1e-9) & NOSHARE & (vis[:, None] * vis[None, :] > 0)).sum())
         xs, ys = X[placed], Y[placed]
-        return t + 0.5 * float(ys.max() - ys.min()) + 0.25 * float(xs.max() - xs.min())
+        return t + 0.8 * float(ys.max() - ys.min()) + 0.4 * float(xs.max() - xs.min())
 
-    # ---- side quests, one at a time, each into the best free cell near what it belongs to
-    todo = sorted(small, key=lambda i: (col[CL[i]], not PREP[i], i))
-    done = set(i for i in range(N) if isbig[i])
+    # ---- loose quests, one at a time, each into the best free cell near what it belongs to:
+    # optional big quests first (what follows from them goes around them), then the side quests in the order of play
+    isbigl = [k in anchor for k in keys]
+    todo = [i for i in loose if isbigl[i]] + sorted((i for i in loose if not isbigl[i]), key=lambda i: (col[CL[i]], i))
+    done = set(ix[k] for k in bcells)
     while todo:
-        i = next((i for i in todo if all(d in done for d in deps[i])), todo[0])
+        ready = lambda i: placed[CL[i]] and (isbigl[i] or all(d in done for d in deps[i]))
+        i = next((i for i in todo if ready(i)), None)
+        if i is None: i = next((i for i in todo if placed[CL[i]]), todo[0])
         todo.remove(i); done.add(i)
-        b = int(CL[i])
-        cand = {(c, r) for c in range(col[b] - 3, col[b] + 4) for r in range(row[b] - 5, row[b] + 6)}
-        for d in deps[i]:
-            if placed[d]: cand |= {(c, r) for c in range(col[d] - 2, col[d] + 3) for r in range(row[d] - 2, row[d] + 3)}
+        cand = set()
+        for j in [int(CL[i])] + deps[i] + users[i]:
+            if not placed[j]: continue
+            w = 4 if j == CL[i] else 2
+            cand |= {(c, r) for c in range(col[j] - w, col[j] + w + 1) for r in range(row[j] - w, row[j] + w + 1)}
         placed[i] = True
         best = None
         for c, r in sorted(cand):
@@ -304,15 +334,18 @@ def _layout(ch, plan, seed):
             if best is None or v < best[0] - 1e-9: best = (v, c, r)
         col[i], row[i] = best[1], best[2]; occ[(best[1], best[2])] = i
 
-    # ---- search: move side quests (alone, with what hangs off them, or swapped) while the page gets better
-    first = [deps[i][0] if deps[i] and not isbig[deps[i][0]] else None for i in range(N)]
+    # ---- search: move loose quests (alone, with what hangs off them, or swapped) while the page gets better
     hang = [[] for _ in range(N)]
-    for i in small:
-        if first[i] is not None: hang[first[i]].append(i)
+    for i in loose:
+        first = deps[i][0] if deps[i] and LOOSE[deps[i][0]] and not isbigl[i] else None
+        up = first if first is not None else (int(CL[i]) if LOOSE[CL[i]] else None)
+        if up is not None and up != i: hang[up].append(i)
     def subtree(i):
-        out, stack = [], [i]
+        out, stack, seen = [], [i], {i}
         while stack:
-            j = stack.pop(); out.append(j); stack += hang[j]
+            j = stack.pop(); out.append(j)
+            for x in hang[j]:
+                if x not in seen: seen.add(x); stack.append(x)
         return out
     def shifted(group, dc, dr):
         old = [(col[i], row[i]) for i in group]
@@ -338,7 +371,7 @@ def _layout(ch, plan, seed):
     STEP = [(dc, dr) for dc in range(-2, 3) for dr in range(-3, 4) if (dc, dr) != (0, 0)]
     def sweep():
         got = False
-        ids = list(small); rnd.shuffle(ids)
+        ids = list(loose); rnd.shuffle(ids)
         for i in ids:
             b = int(CL[i])
             moves = set(NEAR) | {(col[b] + dc - col[i], row[b] + dr - row[i]) for dc in range(-2, 3) for dr in range(-3, 4)}
@@ -346,7 +379,7 @@ def _layout(ch, plan, seed):
             got |= try_group([i], sorted(moves))
             g = subtree(i)
             if len(g) > 1: got |= try_group(g, STEP)
-            for j in ids:   # swap with another side quest nearby
+            for j in ids:   # swap with another loose quest nearby
                 if j <= i or abs(col[i] - col[j]) > 3 or abs(row[i] - row[j]) > 4: continue
                 ci, cj = (col[i], row[i]), (col[j], row[j])
                 col[i], row[i] = cj; col[j], row[j] = ci; occ[cj] = i; occ[ci] = j
@@ -361,12 +394,12 @@ def _layout(ch, plan, seed):
         for i in range(N): occ[(col[i], row[i])] = i
 
     t0 = time.time()
-    if small:
+    if loose:
         while sweep() and time.time() - t0 < BUDGET: pass
         best = (state['best'], snapshot())
         while time.time() - t0 < BUDGET:   # kicks: shake a few loose, settle again, keep it if the page got better
             for _ in range(3):
-                shifted(subtree(rnd.choice(small)), rnd.choice([-2, -1, 1, 2]), rnd.choice([-2, -1, 1, 2]))
+                shifted(subtree(rnd.choice(loose)), rnd.choice([-2, -1, 1, 2]), rnd.choice([-2, -1, 1, 2]))
             state['best'] = cost()
             while sweep() and time.time() - t0 < BUDGET: pass
             if state['best'] < best[0] - 1e-6: best = (state['best'], snapshot())

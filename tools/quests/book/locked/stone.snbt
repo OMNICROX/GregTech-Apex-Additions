@@ -1,0 +1,2679 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "stone"
+	group: ""
+	icon: {
+		Count: 1
+		id: "gtceu:flint_mortar"
+		tag: {
+			Damage: 0
+			GT.Tool: { }
+		}
+	}
+	id: "344D30FC7A6DC8E4"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Welcome to &6Apex Ascension&r: a GregTech pack that goes from a flint mortar all the way to charging a Stargate with more energy than GregTech can count."
+				""
+				"This book is your guide. Each &eTier&r chapter covers one stage of the climb. &eBig quests&r are the spine of the tier: follow them and you will never be stuck. &eSmall quests&r around them teach a trick, show a better way to do something, or point at something worth having. &eRound quests&r are optional."
+				""
+				"Read the descriptions. They are written to save you hours: where an ore spawns, what a machine is really for, which shortcut is a trap."
+				""
+				"&7&oMost quests let you pick a reward from a short list. Big quests also give a loot bag of the tier."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage getting-started/first-days.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "456BCAD5A9C7336E"
+			min_width: 300
+			rewards: [
+				{
+					id: "014675FE139557A5"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "512BC250CD50908B"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "4D5FFB8DC018358B"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "gear"
+			size: 2.25d
+			tasks: [
+				{
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "050FD160A8A773E6"
+					type: "checkmark"
+				}
+				{
+					count: 8L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "0E5AE469BEE55987"
+					item: { Count: 8, id: "minecraft:dirt" }
+					type: "item"
+				}
+			]
+			title: "&6&lAnd So It Begins"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["456BCAD5A9C7336E"]
+			description: [
+				"Every journey starts with a log. Get a few, make planks, a crafting table and some sticks."
+				""
+				"GregTech is gentle here: wooden and stone tools work as usual. It starts asking more of you once you have iron."
+				""
+				"&7&oCheck this off once you have a crafting table."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "24428B6FDE6CC4F6"
+			min_width: 300
+			rewards: [{
+				id: "64400C54B92AFA44"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "1F6DBC62C5E89BEB"
+				type: "checkmark"
+			}]
+			title: "Punch a Tree"
+			x: 1.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["24428B6FDE6CC4F6"]
+			description: [
+				"Dig gravel. Flint is the first thing GregTech really wants: the &eFlint Mortar&r is your first GregTech tool and it needs two."
+				""
+				"Keep a stack. Flint dust goes into glass, and flint tools are a fine stopgap."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "131F0671C66723F6"
+			min_width: 300
+			rewards: [
+				{
+					id: "0763F24BD8689A0C"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "13EE545D958443E4"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 4L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "1B81756B6F73C851"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			title: "Flint"
+			x: 2.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["131F0671C66723F6"]
+			description: [
+				"GregTech has a lot of items. A lot. Four leather, a chest and string make a &eBackpack&r."
+				""
+				"Upgrade it with iron, gold, diamond and netherite as you go. The &ePickup&r, &eMagnet&r, &eFilter&r and &eCrafting&r upgrades are all worth their cost."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "787588D177065EA9"
+			min_width: 300
+			rewards: [
+				{
+					id: "156849AB56C42A58"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "7500CDAFF482A626"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "5911639CA08EAFDC"
+				item: "sophisticatedbackpacks:backpack"
+				type: "item"
+			}]
+			title: "Somewhere to Put It All"
+			x: 4.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["24428B6FDE6CC4F6"]
+			description: [
+				"Farmer's Delight's &eCooking Pot&r (on a campfire or a &eStove&r) turns a few crops into meals that heal a lot and give buffs."
+				""
+				"You will be underground a lot. Good food keeps you there longer. Varied food is better food."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "2F49A377AB19EFFC"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "659CD3AFBDC3AC29"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "5BA5B1E718D4CDE6"
+				item: "farmersdelight:cooking_pot"
+				type: "item"
+			}]
+			title: "Something Better Than Bread"
+			x: 2.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["456BCAD5A9C7336E"]
+			description: [
+				"Open the map (&eM&r by default) and drag over chunks to claim them. Claimed chunks are safe from other players and from explosions."
+				""
+				"Later you can &eforce-load&r claimed chunks so your machines keep running while you are away. GregTech machines only work in loaded chunks."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "5185C7BC547C9502"
+			min_width: 300
+			rewards: [
+				{
+					id: "04D5A1415DCB63DD"
+					type: "xp"
+					xp: 5
+				}
+				{
+					command: "/ftbchunks admin extra_claim_chunks @s set 750"
+					id: "59270B109292A4C1"
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "415C62DAF67BD363"
+				type: "checkmark"
+			}]
+			title: "Claim Your Land"
+			x: 1.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5185C7BC547C9502"]
+			description: [
+				"Xaero's Minimap and World Map are in the pack. Press &eB&r to add a waypoint where you stand. Put one on every ore vein you find: you will want to come back."
+				""
+				"Your death point gets a waypoint automatically."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "5A158BBEF9941923"
+			min_width: 300
+			rewards: [{
+				id: "1A3809AF02209762"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "6D76437CC07BB482"
+				type: "checkmark"
+			}]
+			title: "Never Get Lost"
+			x: 2.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["456BCAD5A9C7336E"]
+			description: [
+				"When you die your items go into a &egrave&r where you fell. Walk back and open it to get everything back, armor and all."
+				""
+				"Die in lava and the grave still appears on solid ground nearby."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "72F0BF5BD6967402"
+			min_width: 300
+			rewards: [{
+				id: "4ED85B05334B25D9"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "63D616D4B5BD3795"
+				type: "checkmark"
+			}]
+			title: "Death Is Not the End"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["72F0BF5BD6967402"]
+			description: [
+				"The &eNature's Compass&r finds any biome. Its partner, the &eExplorer's Compass&r (cobwebs and cracked stone bricks), finds any structure: dungeons, villages, towers."
+				""
+				"Rubber trees grow in forests, swamps and jungles. A compass to a swamp is a good first use."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "0EF7BCECE825444E"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "6801B540FD3887F2"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "2AF1540ABCBFD06E"
+				item: "naturescompass:naturescompass"
+				type: "item"
+			}]
+			title: "Point Me There"
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["456BCAD5A9C7336E"]
+			description: [
+				"Some monsters spawn as &eElite&r, &6Ultra&r or &4Infernal&r. Their name tells you. They have far more health and nasty extra abilities, but they also drop far better loot."
+				""
+				"Early on, run. Later you will build a machine that farms them on purpose."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "78E64D1C350B0594"
+			min_width: 300
+			rewards: [{
+				id: "4274CF34E4B9A0C8"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "32CAC79CCC476F1D"
+				type: "checkmark"
+			}]
+			title: "Not All Monsters Are Equal"
+			x: 1.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["456BCAD5A9C7336E"]
+			description: [
+				"GregTech tools are &ecrafting tools&r. You put them in the crafting grid with your materials and they lose a little durability instead of being used up."
+				""
+				"The &eHammer&r is the first one you need: one hammer and two ingots make a &eplate&r, and almost every GregTech recipe starts with plates."
+				""
+				"Tools can be made from any metal: iron, bronze, steel, later much better ones. Better metal, more durability. Iron is fine for now."
+				""
+				"&7&oA hammer also mines like a pickaxe, slowly. Do not use it as one."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage gregtech/tools.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "575AAA1C7BD5B815"
+			min_width: 300
+			rewards: [
+				{
+					id: "5AE448966BD1F1BB"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "29AFAA46B59BB049"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "4D04E7D18C8ABC33"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "4B61824302672907"
+				item: {
+					Count: 1
+					id: "gtceu:iron_hammer"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "&eGregTech Tools"
+			x: 0.0d
+			y: 7.0d
+		}
+		{
+			dependencies: [
+				"575AAA1C7BD5B815"
+				"131F0671C66723F6"
+			]
+			description: [
+				"Two flint and stone. The mortar grinds one ingot, gem or brick into one &edust&r in the crafting grid."
+				""
+				"That matters because GregTech mixes alloys from dusts: three copper dust and one tin dust make four &ebronze dust&r right in the grid. No machine needed."
+				""
+				"It also turns bricks into brick dust and clay into clay dust, which you will want for fireclay soon."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "15C1DCFCBF2F9D0E"
+			min_width: 300
+			rewards: [
+				{
+					id: "4C0886169FD9CF6A"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "3E1F82789BBD93E4"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "4CA3510254013210"
+				item: {
+					Count: 1
+					id: "gtceu:flint_mortar"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Flint Mortar"
+			x: 1.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: ["Files shape metal into &erods&r, and turn bolts into &escrews&r. Rods and screws are in half the recipes after plates."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "328F94501312F280"
+			min_width: 300
+			rewards: [
+				{
+					id: "5806FA908B8DFB50"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "03E9682B84313E6C"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "73DFC8C4EA81131C"
+				item: {
+					Count: 1
+					id: "gtceu:iron_file"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "File"
+			x: 1.5d
+			y: 8.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: [
+				"The wrench is the right tool for mining GregTech machines. Right-click a side to rotate a machine or set the side it outputs to."
+				""
+				"Pipes and cables: right-click with a wrench to connect or disconnect a side."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage gregtech/tools.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "54D43D2056D4C7CF"
+			min_width: 300
+			rewards: [
+				{
+					id: "59C458F3769794CA"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "6F348E17C0C21032"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "3084F0025FBDD6DB"
+				item: {
+					Count: 1
+					id: "gtceu:iron_wrench"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Wrench"
+			x: 1.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: ["A saw cuts logs into more planks than your hands can, cuts long rods in half, and makes the &eEmpty Wooden Form&r from planks."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "1E1809E0BD81E6DC"
+			min_width: 300
+			rewards: [
+				{
+					id: "70A93295A90C200F"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "1861E11923930C74"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "35FEC41378F9D280"
+				item: {
+					Count: 1
+					id: "gtceu:iron_saw"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Saw"
+			x: 1.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: ["Needed in rotor, primitive pump and many machine recipes. On a machine, the screwdriver toggles settings like auto-output; on covers it opens their options."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "29F9990A54C64F24"
+			min_width: 300
+			rewards: [
+				{
+					id: "4C40BA28B655126F"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "42EB533FA3CA05A8"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "7B32ED3A9A518145"
+				item: {
+					Count: 1
+					id: "gtceu:iron_screwdriver"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Screwdriver"
+			x: 1.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: ["Mostly for one thing right now: carving an &eEmpty Wooden Form&r into a &eBrick Wooden Form&r. Any GregTech knife works."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "7CBAE6D4A2F4E6C4"
+			min_width: 300
+			rewards: [
+				{
+					id: "41992ADF4A41483D"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "00A1BFA928BD4E8E"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "007919C5C35A775E"
+				item: {
+					Count: 1
+					id: "gtceu:iron_knife"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Knife"
+			x: 3.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: [
+				"A plate and a wire cutter make a &e1x wire&r. Copper wire goes into resistors, vacuum tubes and your first motors; tin wire becomes cable."
+				""
+				"Wire is lossy and shocks you. Add a rubber sheet in the grid to make insulated &ecable&r."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "20B8A30B4602F188"
+			min_width: 300
+			rewards: [
+				{
+					id: "621DD76D5FD2E849"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "15D338F37EB99F20"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "5B750A9E43D8CEF4"
+				item: {
+					Count: 1
+					id: "gtceu:iron_wire_cutter"
+					tag: {
+						Damage: 0
+						GT.Tool: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Wire Cutter"
+			x: -1.5d
+			y: 7.0d
+		}
+		{
+			dependencies: [
+				"328F94501312F280"
+				"54D43D2056D4C7CF"
+				"1E1809E0BD81E6DC"
+				"29F9990A54C64F24"
+			]
+			description: [
+				"The basic shapes of GregTech. By hand, two ingots make one plate: that is expensive, and on purpose. Machines later make one plate per ingot."
+				""
+				"Check any recipe with &eR&r: if it wants a shape you do not know how to make, look that shape up too. The recipe viewer is your best friend."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "78A1295E283EBFF7"
+			min_width: 300
+			rewards: [
+				{
+					id: "0EB938BBA6D9AF3C"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "15F793E7C9B63AD0"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "6E96A7DF6E0221C8"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [
+				{
+					count: 8L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "2DA728C2355A669E"
+					item: "gtceu:iron_plate"
+					type: "item"
+				}
+				{
+					count: 4L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "3CB26114BF3C0EA3"
+					item: "gtceu:iron_rod"
+					type: "item"
+				}
+				{
+					count: 2L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "57158DD85759BF58"
+					item: "gtceu:iron_screw"
+					type: "item"
+				}
+			]
+			title: "&ePlates, Rods, Screws"
+			x: 3.5d
+			y: 8.75d
+		}
+		{
+			dependencies: ["78A1295E283EBFF7"]
+			description: [
+				"Tinkers' Construct is in the pack and its smeltery works early: seared bricks from &eGrout&r (clay, sand, gravel), a controller, a drain, a faucet and casting tables."
+				""
+				"Casting tables can pour plates, rods and gears, though here they cost at least as much metal as GregTech does. Where the smeltery shines is &etools&r: Tinkers' tools are the only modular tools in the pack and they get very good."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage gregtech/tinkers-heat.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "20D2E6B16296FA1C"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "745C7EC6D7EB1142"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "6B1E0AD3C9959B45"
+				item: "tconstruct:smeltery_controller"
+				type: "item"
+			}]
+			title: "The Smeltery"
+			x: 4.991071428571431d
+			y: 8.8017857142857d
+		}
+		{
+			dependencies: ["575AAA1C7BD5B815"]
+			description: [
+				"There are no scattered ores. GregTech ore comes in &eveins&r: big mixed clusters a few chunks apart, each with a fixed set of related ores at a fixed depth."
+				""
+				"Look for &esurface rocks&r: small stones on the ground with an ore's colour. They sit right above a vein. Dig straight down and you will hit it."
+				""
+				"Mine every block of a vein. A vein is hundreds of ores, and every ore type in it is useful sooner or later."
+				""
+				"Mined ore drops &eraw ore&r. Smelting it gives one ingot. Later, crushing and washing it gives two or more, plus byproducts. Early on, just smelt what you need."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage gregtech/ore-veins.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "36ADDFCA5951ECE4"
+			min_width: 300
+			rewards: [
+				{
+					id: "247CAB6856F63169"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "1FEBF73B45CDA0E1"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "1839D0B5376F7FB0"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "3877048514FA293D"
+				type: "checkmark"
+			}]
+			title: "&eHow Ores Work Here"
+			x: 1.75d
+			y: 12.25d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eCopper-Tin vein&r: Chalcopyrite (copper), Zeolite, Cassiterite (tin) and a little Realgar. It spawns in stone anywhere from Y -10 to 160, so you often find it on the surface or in a cave wall."
+				""
+				"You need lots of both: bronze is three parts copper to one part tin."
+				""
+				"&7&oVanilla copper ore also generates in the deep copper vein (Chalcopyrite, Iron, Pyrite, Copper) between Y -40 and 10."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "5E3A9A0077581F18"
+			min_width: 300
+			rewards: [
+				{
+					id: "1ED8D56FDD10BDEC"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "18BCDBB1F0CBF08F"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "10D1E59125B83429"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [
+				{
+					count: 16L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "0352A4FFDE9B6F72"
+					item: "gtceu:raw_chalcopyrite"
+					type: "item"
+				}
+				{
+					count: 16L
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "47024DB8462570FE"
+					item: "gtceu:raw_cassiterite"
+					type: "item"
+				}
+			]
+			title: "Copper and Tin"
+			x: 4.375d
+			y: 12.25d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eIron vein&r: Goethite, Limonite, Hematite and Malachite, Y -10 to 60. All four smelt into iron (Malachite into copper)."
+				""
+				"This is the most common vein. You will need a frankly ridiculous amount of iron."
+				""
+				"&7&oThe Magnetite vein (Magnetite, Vanadium Magnetite, Gold, Y 10 to 60) is the other iron source, and gold comes with it."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "64603E64DA253AAA"
+			min_width: 300
+			rewards: [
+				{
+					id: "16DD6FE36808DE26"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "6B11A8C9527FEA99"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 16L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "102F7A0AA42E5BDC"
+				item: "gtceu:raw_goethite"
+				type: "item"
+			}]
+			title: "Iron"
+			x: 4.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eCoal vein&r, Y 10 to 140. Coal fuels your furnaces now, bakes into coke soon, and steel needs it as the carbon."
+				""
+				"Charcoal works almost everywhere coal does if you have trees and no vein yet."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "273AD138229B5100"
+			min_width: 300
+			rewards: [
+				{
+					id: "5620B82FF16F1F79"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "26DFC125E13E7813"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 32L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "588180353774E7F1"
+				item: "gtceu:raw_coal"
+				type: "item"
+			}]
+			title: "Coal"
+			x: 3.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eGalena vein&r: Galena, Silver and Lead, Y -15 to 45. Galena smelts to lead, and gives silver when processed properly."
+				""
+				"Lead goes into &ePotin&r (for the Steam Grinder) and later batteries; &esilver plates&r make the solar boiler."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "562783326243F188"
+			min_width: 300
+			rewards: [
+				{
+					id: "0E4045E8B651DDEC"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "261B1FCA47080E13"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 16L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "7A816A1DCE203482"
+				item: "gtceu:raw_galena"
+				type: "item"
+			}]
+			title: "Lead and Silver"
+			x: 1.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eNickel vein&r: Garnierite, Nickel, Cobaltite and Pentlandite, Y -10 to 60. Rarer than the others."
+				""
+				"One nickel and two iron make &eInvar&r. You need invar gears for the Steam Oven and many machines after."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "76F4F908128773FB"
+			min_width: 300
+			rewards: [
+				{
+					id: "04CDFC92B5B77F27"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "32674140089E67DE"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 8L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "3BAC671DC99879BF"
+				item: "gtceu:raw_garnierite"
+				type: "item"
+			}]
+			title: "Nickel"
+			x: 5.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"The &eDiamond vein&r is deep: Graphite, Diamond and Coal in deepslate, Y -55 to -30."
+				""
+				"You need diamonds early: the steam &eMacerator&r and &eRock Crusher&r each take two. Bring a pickaxe that can mine deepslate and plenty of torches."
+				""
+				"&7&oThe Redstone vein (Redstone, Ruby, Cinnabar) is down there too, Y -65 to -10."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "619FE1040C16C5EF"
+			min_width: 300
+			rewards: [
+				{
+					id: "14229D78CCDF8446"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "33ECDBBAA5BB8491"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 4L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "55FFDE9AB8C66CE8"
+				item: "gtceu:raw_diamond"
+				type: "item"
+			}]
+			title: "Diamonds Before Machines"
+			x: 2.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"Two veins you will come back for: the &eSalts vein&r (Rock Salt, Salt, Lepidolite, Spodumene; Y 30 to 70) for sodium, lithium and chlorine later, and the &eGarnet Tin vein&r (Cassiterite Sand, Garnet Sand, Asbestos, Diatomite; Y 30 to 60), an easy extra source of tin."
+				""
+				"Mark them on your map when you see them. You do not need them yet."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "1C3B2189BDFCC441"
+			min_width: 300
+			rewards: [{
+				id: "6772092BD840AB0D"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "149E84EE341CF7E6"
+				type: "checkmark"
+			}]
+			title: "Salt and Sand Veins"
+			x: 6.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["273AD138229B5100"]
+			description: [
+				"Clay balls smelt into bricks, and four bricks make a brick block. You need brick blocks for every steam machine and the boiler."
+				""
+				"Find clay in rivers, swamps and lush caves. Take more than you think: the coke oven and fireclay eat it too."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "0545CFA8E5773D9D"
+			min_width: 300
+			rewards: [
+				{
+					id: "379F8657904C599F"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "0E0C2B2112726722"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "663721DC0CBE7D35"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				count: 16L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "22F2C4E42B272E2A"
+				item: "minecraft:bricks"
+				type: "item"
+			}]
+			title: "&eFire and Clay"
+			x: 7.875d
+			y: 8.75d
+		}
+		{
+			dependencies: [
+				"0545CFA8E5773D9D"
+				"7CBAE6D4A2F4E6C4"
+			]
+			description: [
+				"Saw some planks into an &eEmpty Wooden Form&r, then carve it with a knife into a &eBrick Wooden Form&r. The form is a crafting tool: it is not used up."
+				""
+				"Clay balls, sand and the form make &eCompressed Coke Clay&r."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "1F21A6DF6DB5384C"
+			min_width: 300
+			rewards: [
+				{
+					id: "1E9A589EE763BC4F"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "2833A1753A5F0E67"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "3657814C37C35EA4"
+				item: "gtceu:brick_wooden_form"
+				type: "item"
+			}]
+			title: "A Wooden Form"
+			x: 6.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1F21A6DF6DB5384C"]
+			description: ["Smelt Compressed Coke Clay into Coke Oven Bricks (the item), and craft four into a block. A Coke Oven is a hollow 3x3x3 cube: &e25 brick blocks&r for the walls, and the controller in the middle of one side takes 4 more."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "1CD4B33F06B6534D"
+			min_width: 300
+			rewards: [
+				{
+					id: "6D7E6B1362E25889"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "1E2D3B6D9CC26787"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "4B7D6B686435E409"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				count: 29L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "144AA62645E91F00"
+				item: "gtceu:coke_oven_bricks"
+				type: "item"
+			}]
+			title: "Coke Oven Bricks"
+			x: 7.875d
+			y: 7.0d
+		}
+		{
+			dependencies: ["1CD4B33F06B6534D"]
+			description: [
+				"Your first multiblock. It bakes &ecoal into coke&r and &elogs into charcoal&r, slowly, with no fuel at all, and fills itself with &eCreosote&r while it works."
+				""
+				"Coke burns twice as long as coal and makes steel faster. Build two or three ovens: they are cheap and they never stop."
+				""
+				"Right-click the controller to see the preview. Every GregTech multiblock shows its shape there, layer by layer."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage gtmultis/coke_oven.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "655C44DA4C464D73"
+			min_width: 300
+			rewards: [
+				{
+					id: "4B98A40CA1C11AAE"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "1B7BCB1D347688FD"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "4054EBFFA45092E9"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "7528D742D7D7FD60"
+				item: "gtceu:coke_oven"
+				type: "item"
+			}]
+			title: "&eCoke Oven"
+			x: 11.375d
+			y: 7.0d
+		}
+		{
+			dependencies: ["655C44DA4C464D73"]
+			description: [
+				"Swap one wall block for a &eCoke Oven Hatch&r and hoppers and pipes can feed coal in and pull coke and creosote out. Automation, Stone Age style."
+				""
+				"You also need one for the &eBrick Kiln&r."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "51EC8D753C86546F"
+			min_width: 300
+			rewards: [
+				{
+					id: "135AFA7E1D6E9E82"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "2B15FC5214087935"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "2759671160F109C3"
+				item: "gtceu:coke_oven_hatch"
+				type: "item"
+			}]
+			title: "Coke Oven Hatch"
+			x: 10.848214285714278d
+			y: 5.5517857142857d
+		}
+		{
+			dependencies: ["655C44DA4C464D73"]
+			description: ["Pull it out of the coke oven with a bucket. Creosote soaks planks into &eTreated Wood&r and is a fine fuel for liquid boilers."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "34F17D5F1F34A809"
+			min_width: 300
+			rewards: [
+				{
+					id: "34C41F3F1D837B19"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "22835C880401D32A"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "2DB5B94A4B15D511"
+				item: "gtceu:creosote_bucket"
+				type: "item"
+			}]
+			title: "Creosote"
+			x: 12.062499999999993d
+			y: 5.5517857142857d
+		}
+		{
+			dependencies: ["34F17D5F1F34A809"]
+			description: ["Eight planks around a creosote bucket. Treated wood makes the &ePrimitive Pump&r, wooden fluid pipes and rubber-free item holders."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "2A36D9A8CB99F3CF"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "583636FC226F6043"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				count: 8L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "2AEF812599CF8DD8"
+				item: "gtceu:treated_wood_planks"
+				type: "item"
+			}]
+			title: "Treated Wood"
+			x: 13.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["655C44DA4C464D73"]
+			description: ["Coke: better fuel, and the best carbon for steel in the Primitive Blast Furnace. Keep your coke ovens running from now until the end of LV."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "579117EABC54A28D"
+			min_width: 300
+			rewards: [
+				{
+					id: "0BFF309E962DA27D"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "3A39E215A93A1170"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "4D17CAB175086BCC"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				count: 32L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "1E776C7CB7EA81E3"
+				item: "gtceu:coke_gem"
+				type: "item"
+			}]
+			title: "Coke"
+			x: 14.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["0545CFA8E5773D9D"]
+			description: [
+				"Smelt &eiron nuggets&r and you get &ewrought iron nuggets&r. Nine make an ingot. It is purer iron: GregTech wants it for the Brick Kiln, steam machine hulls, the LV machine hull and wrought iron pipes."
+				""
+				"Annoying to make by hand. The Primitive Blast Furnace also turns wrought iron into steel faster than plain iron."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "5F71989778DE4D5A"
+			min_width: 300
+			rewards: [
+				{
+					id: "6FF5BFFAA88990DB"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "004790ECE34D9ED5"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 8L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "2A4BB18615196ED5"
+				item: "gtceu:wrought_iron_ingot"
+				type: "item"
+			}]
+			title: "Wrought Iron"
+			x: 9.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["51EC8D753C86546F"]
+			description: [
+				"A primitive multiblock that fires &ebricks, coke oven bricks and firebricks&r from their compressed clays and coal, many at once, and makes &eClay Compound&r from clay, stone and flint dust."
+				""
+				"Clay compound becomes the plates and gears of the &eHydraulic&r parts in the Steam Age. You will want this soon."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "353247728A1F59D1"
+			min_width: 300
+			rewards: [
+				{
+					id: "05F394FDF2EBF598"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "1ECFFD0093EC5B40"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "61F3E5D3E6B6D2BE"
+				item: "gtna:brick_kiln"
+				type: "item"
+			}]
+			title: "Brick Kiln"
+			x: 9.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["0545CFA8E5773D9D"]
+			description: ["Eight stone around a furnace makes the controller of a small multiblock that smelts like a furnace, with no fuel at all. Free smelting for the hundreds of raw ores a vein gives."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "61035694DE84FBD5"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "50FE1573B1ED39E4"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "5762EFC29C263F29"
+				item: "gtna:primitive_stone_furnace"
+				type: "item"
+			}]
+			title: "Primitive Stone Furnace"
+			x: 7.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["61035694DE84FBD5"]
+			description: ["Iron Furnaces: copper, iron, gold, diamond and up. Each tier smelts faster and uses less fuel. Craft the copper or iron one now and upgrade it in place later."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "4423A2139325E247"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "3E5FFE682C283F9F"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "0104D8C0AC8BC1FC"
+				item: "ironfurnaces:iron_furnace"
+				type: "item"
+			}]
+			title: "Faster Furnaces"
+			x: 8.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["4423A2139325E247"]
+			description: ["Iron Chests: copper, iron, gold, diamond... Upgrade a chest in place without emptying it using the upgrade items. Sophisticated Storage barrels and chests are the other option, with upgrades like compacting and voiding."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "0C3F584AD966826E"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "346F682C9BADC3DB"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "362102816895EADF"
+				item: "ironchest:iron_chest"
+				type: "item"
+			}]
+			title: "Bigger Chests"
+			x: 9.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["36ADDFCA5951ECE4"]
+			description: [
+				"Rubber trees grow in forests, swamps and jungles. Breaking naturally grown rubber logs sometimes drops &eSticky Resin&r. Plant the saplings: you will want a farm."
+				""
+				"Resin makes the &eResin Circuit Board&r and your first resistors, and it is the start of rubber. Slimeballs also smelt into resin."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "6B4A24F427419767"
+			min_width: 300
+			rewards: [
+				{
+					id: "725DD3450B6ACE87"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "0B023A02ED9A06BB"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 8L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "6538259074DEF4A5"
+				item: "gtceu:sticky_resin"
+				type: "item"
+			}]
+			title: "Sticky Resin"
+			x: 3.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["5E3A9A0077581F18"]
+			description: [
+				"Grind copper and tin with the mortar, mix &e3 copper dust + 1 tin dust&r into 4 bronze dust in the grid, and smelt."
+				""
+				"Bronze is the metal of the whole Steam Age: plates, pipes, casings, gears. You need a lot, so mine a lot of copper."
+				""
+				"&7&oOnce you have a steam Alloy Smelter it makes bronze straight from ingots, no grinding needed."
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "7BC8424F3F23328D"
+			min_width: 300
+			rewards: [
+				{
+					id: "7B6BA9C6318F4751"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "0F237C3B9800094C"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "47D904C82A988786"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [{
+				count: 16L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "27496A58D99D18F7"
+				item: "gtceu:bronze_ingot"
+				type: "item"
+			}]
+			title: "&6Bronze"
+			x: 7.875d
+			y: 12.25d
+		}
+		{
+			dependencies: ["7BC8424F3F23328D"]
+			description: ["Bronze tools last longer than iron ones. If your iron hammer is about to break, make the next one bronze."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "252211C8DB147DF5"
+			min_width: 300
+			optional: true
+			rewards: [{
+				id: "5961B6FBBA32A53D"
+				type: "xp"
+				xp: 5
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [
+				{
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "25E24F1FF0FEC948"
+					item: {
+						Count: 1
+						id: "gtceu:bronze_hammer"
+						tag: {
+							Damage: 0
+							GT.Tool: { }
+						}
+					}
+					type: "item"
+				}
+				{
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "3AC5B542E6174ADF"
+					item: {
+						Count: 1
+						id: "gtceu:bronze_wrench"
+						tag: {
+							Damage: 0
+							GT.Tool: { }
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Bronze Tools"
+			x: 8.0d
+			y: 13.5d
+		}
+		{
+			dependencies: [
+				"7BC8424F3F23328D"
+				"0545CFA8E5773D9D"
+			]
+			description: ["Steam machines are built around two casings: the &eBricked Bronze Casing&r (bronze plates and bricks) for heat machines like the alloy smelter and furnace, and the &eBronze Machine Casing&r (eight plates) for the rest."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "49A64E7519FE235F"
+			min_width: 300
+			rewards: [
+				{
+					id: "7121EB7CD366B32C"
+					type: "xp"
+					xp: 15
+				}
+				{
+					id: "251319218E26A5C6"
+					table_id: 1086628351738715075L
+					type: "random"
+				}
+				{
+					id: "5AFB183B4713097C"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.75d
+			tasks: [
+				{
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "28F989B21A40FCA2"
+					item: "gtceu:bronze_brick_casing"
+					type: "item"
+				}
+				{
+					extraquests_options: {
+						aggregation: "AUTO"
+						duration: 600L
+						minimum_contribution: 0L
+						reset_damage: 0b
+						reset_death: 1b
+						reset_logout: 0b
+						shared: 0b
+						timer_enabled: 0b
+						timer_start: "FIRST_PROGRESS"
+					}
+					id: "1855458353F21572"
+					item: "gtceu:bronze_machine_casing"
+					type: "item"
+				}
+			]
+			title: "Bronze Casings"
+			x: 11.375d
+			y: 8.75d
+		}
+		{
+			dependencies: ["7BC8424F3F23328D"]
+			description: ["A bronze plate, a wrench and a hammer make a Small Bronze Fluid Pipe. Steam machines need them in their recipes, and they carry steam from your boiler to your machines."]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "4987AA82E74DE543"
+			min_width: 300
+			rewards: [
+				{
+					id: "6209C37E8F3B0EAA"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "25480F5F7097C399"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "square"
+			size: 1.0d
+			tasks: [{
+				count: 8L
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "5064BF1D8C93070F"
+				item: "gtceu:bronze_small_fluid_pipe"
+				type: "item"
+			}]
+			title: "Bronze Fluid Pipes"
+			x: 11.38392857142857d
+			y: 10.016071428571415d
+		}
+		{
+			dependencies: [
+				"49A64E7519FE235F"
+				"4987AA82E74DE543"
+			]
+			description: [
+				"Bronze plates, bricks and a furnace: the &eLow Pressure Steam Solid Boiler&r. Burn coal, coke, charcoal or wood in it, give it water, and it makes steam for every steam machine."
+				""
+				"This is the end of the Stone Age. Open &6Tier 0.5 - Steam Age&r."
+				""
+				"&7&oRead the Steam Age's first quest before you place this. Boilers explode."
+				""
+				"{\"text\": \"\\u2139 Read more in the Apex Guide\", \"color\": \"gold\", \"underlined\": true, \"clickEvent\": {\"action\": \"run_command\", \"value\": \"/apexpage progression/00-steam.md\"}, \"hoverEvent\": {\"action\": \"show_text\", \"contents\": \"Opens the Apex Guide\"}}"
+			]
+			entity_vis_size: 1.0f
+			extraquests_calendar: {
+				active_quests: 3
+				enabled: 0b
+				pool: ""
+				reset_time: "06:00"
+				timezone: "UTC"
+				weekday: 1
+				weekly: 0b
+			}
+			id: "7E151282B75B046F"
+			min_width: 300
+			rewards: [
+				{
+					id: "7D51D901BC4DF012"
+					type: "xp"
+					xp: 25
+				}
+				{
+					id: "51C94BDDC49BB0C9"
+					table_id: 1633202837859619661L
+					type: "random"
+				}
+				{
+					id: "709957FB9BE21AE0"
+					table_id: 5928622851909904658L
+					type: "choice"
+				}
+			]
+			shape: "gear"
+			size: 2.25d
+			tasks: [{
+				extraquests_options: {
+					aggregation: "AUTO"
+					duration: 600L
+					minimum_contribution: 0L
+					reset_damage: 0b
+					reset_death: 1b
+					reset_logout: 0b
+					shared: 0b
+					timer_enabled: 0b
+					timer_start: "FIRST_PROGRESS"
+				}
+				id: "4CA282EA833C1639"
+				item: "gtceu:lp_steam_solid_boiler"
+				type: "item"
+			}]
+			title: "&6&lSteam Power"
+			x: 13.49107142857143d
+			y: 8.8017857142857d
+		}
+	]
+	subtitle: ["Flint, ore veins, fire and bronze"]
+	title: "&7Tier 0 - Stone Age"
+}
