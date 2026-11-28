@@ -131,3 +131,77 @@ q('uv_quantum', 'UV Quantum Chest', ['gtceu:uv_quantum_chest'], [
 q('adv_quarktech', 'Advanced QuarkTech', ['gtceu:advanced_quarktech_chestplate'], [
     'QuarkTech with a jetpack built in.',
 ], ['gravi_star'], kind='opt')
+
+
+# ================================================================ the multis and materials of UV (2026-11-28, second pass)
+q('special_lens', '&eSpecial Laser Lens', ['gtna:laser_lens_special'], [
+    'Assembly Line: a diamond lens, dense duranium plates, a Quantum Star and a Crystal Mainframe in naquadria.',
+    'It engraves ordinary dusts into the metals of the endgame: advanced nitinol now, astral titanium, chronomatic glass and celestial tungsten later.',
+], ['parts'], kind='main')
+q('adv_nitinol', 'Advanced Nitinol', ['gtna:advanced_nitinol_ingot*4'], [
+    'Nitinol 60 dust under the special lens in a UV laser engraver, then blasted.',
+], ['special_lens'])
+q('stellar_alloy', 'Stellar Alloy', ['gtna:stellar_alloy_ingot*4'], [
+    'Alloy Blast Smelter: neutron dust, naquadria dust and trinium dust.',
+], ['start'], kind='opt')
+q('uv_assembler', 'Ultimate Assembler', ['gtceu:uv_assembler'], [
+    'Most UV controllers that are not on the Assembly Line are made in one.',
+], ['robot_arm'])
+q('uv_4a', 'UV 4A Energy Hatch', ['gtceu:uv_energy_input_hatch_4a'], [
+    'Four amps through one hatch. Long recipes in this pack ask for more amps, not more volts.',
+], ['energy_hatch'], kind='opt', guide='gregtech/oc/oc-index.md')
+q('drone', 'UV Mining Drone', ['gtapexadditions:mining_drone_uv'], [
+    'Drones are built in a chain from LV: each is the one before it with this tier\'s motor, sensor and circuit.',
+], ['sensor'])
+q('motor1', 'Space Elevator Motor MK-I', ['gtapexadditions:space_elevator_motor_mk1'], [
+    'A neutronium frame, a UV motor and a Crystal Mainframe. The Space Elevator at UHV needs motors.',
+], ['parts', 'neutronium'], kind='opt', guide='multiblocks/space_elevator.md')
+q('water5', 'Grade 5 Purified Water', ['gtapexadditions:purification_unit_plasma_heater'], [
+    'The Plasma Heater unit: grade 4 water, helium plasma and liquid helium.',
+], ['parts', 'zpm/water4'], kind='opt', guide='multiblocks/purification_plant.md')
+q('water6', 'Grade 6 Purified Water', ['gtapexadditions:purification_unit_uv_treatment'], [
+    'The High Energy Laser unit: grade 5 water under nine lenses, from glass to amethyst.',
+], ['water5'], kind='opt', guide='multiblocks/purification_plant.md')
+q('compact3', 'Compact Fusion Computer MK-III', ['gtapexadditions:compact_fusion_mk3'], [
+    'The MK III reactor, a compact coil, a UV field generator and dense tritanium plates.',
+], ['fusion3', 'field_gen'], kind='opt', guide='lines/fusion.md')
+q('nac_casings', 'Nanochip Casings', ['gtapexadditions:nanochip_mesh_interface_casing*8', 'gtapexadditions:nanochip_computational_matrix_casing*4'], [
+    'The body of the Nanochip Assembly Complex.',
+], ['start'])
+q('nac_modules', 'Nanochip Modules', ['gtapexadditions:nac_module_assembly_matrix', 'gtapexadditions:nac_module_board_processor', 'gtapexadditions:nac_module_wire_tracer'], [
+    'The complex is built from modules, nine kinds in all. Each is a computational matrix casing around the UV machine that does its job.',
+], ['nac_casings'], kind='opt', guide='multiblocks/nanochip_assembly_complex.md')
+q('coil_t1', 'Field Restriction Coil', ['gtapexadditions:field_restriction_coil_t1*4'], [
+    'Dense naquadah alloy, ZPM superconductor and a UV field generator. The Naquadah Fuel Refinery\'s coil; better coils let it refine better fuel.',
+], ['field_gen'], guide='multiblocks/naquadah_fuel_refinery.md')
+q('naq_fuels', 'Naquadah Fuels', ['gtapexadditions:light_naquadah_fuel_bucket', 'gtapexadditions:heavy_naquadah_fuel_bucket'], [
+    'Light fuel is distilled from naquadah solution, heavy fuel from naquadah asphalt in a distillation tower. Every liquid naquadah fuel starts from these two.',
+], ['start'], kind='opt', guide='lines/naquadah.md')
+q('collapser', 'Black Hole Collapser', ['gtapexadditions:black_hole_collapser'], [
+    'A Gravi-Star, a neutronium plate and a Crystal Mainframe. It closes the black hole of the UHV compressor; make it before you need it.',
+], ['gravi_star'], kind='opt', guide='multiblocks/black_hole_compressor.md')
+q('nano_forge', 'Nano Forge', ['gtna:nano_forge', 'gtna:carbon_nanites'], [
+    'The Nanite Fabricator. A nanite in an input bus sets its tier and is never used up: carbon is tier 1.',
+    'Carbon nanites are an Assembly Line recipe; the forge makes the rest.',
+], ['parts'], kind='opt')
+q('wireless', 'Wireless Energy', ['gtna:nexus_flux_matrix', 'gtna:wireless_energy_hatch_1a_uv'], [
+    'A &eNexus Flux Matrix&r is a wireless energy store that reaches everywhere. Wireless energy hatches pull from it, wireless dynamo hatches push into it.',
+], ['sensor'], kind='opt')
+q('thread', 'Thread Hatch', ['gtna:thread_hatch_uv'], [
+    'Gives a GTNA multiblock extra threads, so it can run different recipes at the same time.',
+], ['robot_arm'], kind='opt')
+q('optical_proc', 'Optical Processor', ['gtna:optical_processor*4'], [
+    'A UV circuit assembler recipe on a wetware board, in Indalloy 140. The first of the optical line.',
+], ['start'], guide='gregtech/circuits.md')
+q('crystal_matrix', 'Crystal Matrix', ['avaritia:crystal_matrix_ingot*4'], [
+    'The heart of the infinity ingot: the extreme crafting recipe is neutronium ingots around crystal matrix.',
+], ['extreme_table'], guide='lines/avaritia.md')
+q('singularity', 'Eternal Singularity', ['avaritia:eternal_singularity'], [
+    'One of every singularity, crafted together. The Neutronium Compressor makes each one from thousands of a material.',
+], ['compressor'], kind='opt', guide='lines/avaritia.md')
+q('catalyst', 'Infinity Catalyst', ['avaritia:infinity_catalyst'], [
+    'Crystal matrix, neutronium, cosmic meatballs, ultimate stew, an endest pearl, a record fragment, life essence, terrasteel and alfsteel, among others.',
+], ['singularity', 'crystal_matrix'], kind='opt', guide='lines/avaritia.md')
+also('infinity', 'crystal_matrix')
+also('nanochip', 'nac_casings')
+also('fuel_refinery', 'coil_t1')

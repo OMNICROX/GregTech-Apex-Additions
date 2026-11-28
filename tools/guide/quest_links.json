@@ -13,9 +13,21 @@
 ],
 [
 "automation/ae2.md",
+"313BF2CFD1802BD0",
+"ME Storage Multiblock",
+"Tier 7 - ZPM"
+],
+[
+"automation/ae2.md",
 "36D26A05E1C2D161",
 "MEGA 64M Cells",
 "Tier 8 - UV"
+],
+[
+"automation/ae2.md",
+"420128C2362B7294",
+"Nexus Molecular Forge",
+"Tier 7 - ZPM"
 ],
 [
 "automation/ae2.md",
@@ -259,6 +271,18 @@
 ],
 [
 "gregtech/circuits.md",
+"0A7D86AEF7E61156",
+"Cosmic Circuits",
+"Tier 11 - UIV"
+],
+[
+"gregtech/circuits.md",
+"0CD01D4A1AF0D729",
+"OpV Universal Circuit",
+"Tier 12 - UXV"
+],
+[
+"gregtech/circuits.md",
 "1507F3452A8DAC64",
 "Quantum Mainframe",
 "Tier 6 - LuV"
@@ -289,15 +313,15 @@
 ],
 [
 "gregtech/circuits.md",
-"31D8DD6849CFF4DC",
-"Cosmic Circuits",
-"The Endgame"
-],
-[
-"gregtech/circuits.md",
 "36F648EE5AC76526",
 "Microprocessor Mainframe",
 "Tier 4 - EV"
+],
+[
+"gregtech/circuits.md",
+"3F423F0167DEC69F",
+"Optical Mainframe",
+"Tier 10 - UEV"
 ],
 [
 "gregtech/circuits.md",
@@ -307,15 +331,33 @@
 ],
 [
 "gregtech/circuits.md",
+"5175F610B7C2C2B0",
+"Exotic Mainframe",
+"Tier 11 - UIV"
+],
+[
+"gregtech/circuits.md",
 "52D5DA94E29942E0",
 "Nanoprocessor",
 "Tier 4 - EV"
 ],
 [
 "gregtech/circuits.md",
+"54401936420F4958",
+"Transcendent Circuits",
+"Tier 11 - UIV"
+],
+[
+"gregtech/circuits.md",
 "5B0C1F6E3C099004",
 "Wetware Mainframe",
 "Tier 8 - UV"
+],
+[
+"gregtech/circuits.md",
+"5EF7EB95839BAEAA",
+"MAX Universal Circuit",
+"Tier 13 - OpV"
 ],
 [
 "gregtech/circuits.md",
@@ -331,15 +373,15 @@
 ],
 [
 "gregtech/circuits.md",
-"6428314E1DBFC89A",
-"Transcendent Circuits",
-"The Endgame"
-],
-[
-"gregtech/circuits.md",
 "6B5F22FB7766B796",
 "Crystal Mainframe",
 "Tier 7 - ZPM"
+],
+[
+"gregtech/circuits.md",
+"70ED7FA262C562EF",
+"Optical Processor",
+"Tier 8 - UV"
 ],
 [
 "gregtech/circuits.md",
@@ -469,9 +511,27 @@
 ],
 [
 "gregtech/glass-tiers.md",
+"5800D20329CD8D40",
+"Infinity Glass",
+"Tier 9 - UHV"
+],
+[
+"gregtech/glass-tiers.md",
 "5B6B4677EF343328",
 "Rhodium-Plated Palladium Glass",
 "Tier 6 - LuV"
+],
+[
+"gregtech/glass-tiers.md",
+"659319F590308838",
+"Hexanite and Universium Glass",
+"Tier 13 - OpV"
+],
+[
+"gregtech/glass-tiers.md",
+"71131891B960C89D",
+"Transcendent Glass",
+"Tier 11 - UIV"
 ],
 [
 "gregtech/glass-tiers.md",
@@ -502,6 +562,24 @@
 "7BA7ED1EDB91332A",
 "Muffler Hatch",
 "Tier 1 - LV"
+],
+[
+"gregtech/oc/oc-index.md",
+"09D3570B423FFDBC",
+"UIV Energy Hatch",
+"Tier 11 - UIV"
+],
+[
+"gregtech/oc/oc-index.md",
+"43A1992C07DEC6FD",
+"UEV Energy Hatch",
+"Tier 10 - UEV"
+],
+[
+"gregtech/oc/oc-index.md",
+"61671FDB6D55D561",
+"UV 4A Energy Hatch",
+"Tier 8 - UV"
 ],
 [
 "gregtech/oc/overclocking-rules.md",
@@ -798,12 +876,6 @@
 "Tier 4 - EV"
 ],
 [
-"gtmultis/eye_of_harmony.md",
-"231582344DCCC75C",
-"Eye of Harmony",
-"The Endgame"
-],
-[
 "gtmultis/gcym.md",
 "08B42E20D7132FA1",
 "Large Machines",
@@ -925,9 +997,27 @@
 ],
 [
 "lines/antimatter.md",
-"348C8F5CBEEC525C",
+"46EED11A0656B44C",
 "Antimatter",
-"The Endgame"
+"Tier 11 - UIV"
+],
+[
+"lines/avaritia.md",
+"0B2EF0805FD11B72",
+"Infinity Catalyst",
+"Tier 8 - UV"
+],
+[
+"lines/avaritia.md",
+"1AE6C881BF679E88",
+"Crystal Matrix",
+"Tier 8 - UV"
+],
+[
+"lines/avaritia.md",
+"47A5BD8920D4D70C",
+"Eternal Singularity",
+"Tier 8 - UV"
 ],
 [
 "lines/avaritia.md",
@@ -973,21 +1063,45 @@
 ],
 [
 "lines/fusion.md",
+"017D91A15521E3D9",
+"Compact Fusion Computer MK-II",
+"Tier 7 - ZPM"
+],
+[
+"lines/fusion.md",
 "044343F05C24DBD2",
 "Fusion Reactor MK II",
 "Tier 7 - ZPM"
 ],
 [
 "lines/fusion.md",
-"09A84EE083C6F8CE",
-"Fusion Reactor MK V",
-"The Endgame"
+"047F5DA7BDFD21CC",
+"Compact Fusion Computer MK-III",
+"Tier 8 - UV"
+],
+[
+"lines/fusion.md",
+"09A745F5E168A230",
+"Compact Fusion Computer MK-IV",
+"Tier 9 - UHV"
 ],
 [
 "lines/fusion.md",
 "237E890482CC80F9",
 "Fusion Reactor MK IV",
 "Tier 9 - UHV"
+],
+[
+"lines/fusion.md",
+"5E1174DD38EB231E",
+"Fusion Reactor MK V",
+"Tier 10 - UEV"
+],
+[
+"lines/fusion.md",
+"600F9450BB7AA6FE",
+"Advanced Fusion Reactor",
+"Tier 6 - LuV"
 ],
 [
 "lines/fusion.md",
@@ -1003,6 +1117,12 @@
 ],
 [
 "lines/fusion.md",
+"71178A70B20507AD",
+"Compact Fusion Computer MK-V",
+"Tier 10 - UEV"
+],
+[
+"lines/fusion.md",
 "77F86F742034004D",
 "Compact Fusion Computer",
 "Tier 6 - LuV"
@@ -1015,14 +1135,38 @@
 ],
 [
 "lines/naquadah.md",
+"2276319058EDEB99",
+"Advanced Hyper Naquadah Reactor",
+"Tier 13 - OpV"
+],
+[
+"lines/naquadah.md",
 "278915F0CD4CCCEF",
 "Naquadah Ore",
 "Worlds and Space"
 ],
 [
 "lines/naquadah.md",
+"284D8A4FE8DCAFB2",
+"Naquadah Fuel MkVI",
+"Tier 14 - MAX"
+],
+[
+"lines/naquadah.md",
 "2F5D58A34E9AB8E9",
 "Naquadah Fuel Refinery",
+"Tier 8 - UV"
+],
+[
+"lines/naquadah.md",
+"33409C30D043B4A5",
+"Naquadah Fuel MkIV",
+"Tier 12 - UXV"
+],
+[
+"lines/naquadah.md",
+"3B7BEA460F3FD620",
+"Naquadah Fuels",
 "Tier 8 - UV"
 ],
 [
@@ -1036,6 +1180,18 @@
 "3BD0D67257077D93",
 "Naquadah",
 "Tier 6 - LuV"
+],
+[
+"lines/naquadah.md",
+"65183FA3AD199D1B",
+"Naquadah Fuel MkI",
+"Tier 9 - UHV"
+],
+[
+"lines/naquadah.md",
+"65C18518605DAAD8",
+"Naquadah Fuel MkII",
+"Tier 10 - UEV"
 ],
 [
 "lines/oil.md",
@@ -1213,14 +1369,26 @@
 ],
 [
 "multiblocks/antimatter_generator.md",
-"0E2D7C8332A8A1C2",
+"2F0E4D7BE74D8938",
 "Antimatter Power",
-"The Endgame"
+"Tier 11 - UIV"
+],
+[
+"multiblocks/black_hole_compressor.md",
+"0585EEE56FD42B0E",
+"Black Hole Collapser",
+"Tier 8 - UV"
 ],
 [
 "multiblocks/black_hole_compressor.md",
 "12F97A3E49D8DB06",
 "Black Hole Compressor",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/black_hole_compressor.md",
+"200F028C50BC4306",
+"Black Hole Seed",
 "Tier 9 - UHV"
 ],
 [
@@ -1255,9 +1423,9 @@
 ],
 [
 "multiblocks/divine_isa_forge.md",
-"3F76ADA4B5B86DAD",
+"4FE69376CBFD9BF2",
 "Divine Isa Forge",
-"The Endgame"
+"Tier 12 - UXV"
 ],
 [
 "multiblocks/draconic_fusion_crafting.md",
@@ -1351,9 +1519,9 @@
 ],
 [
 "multiblocks/mass_fabricator_genesis.md",
-"332780602C19F535",
+"0505FF85B888BFC7",
 "Mass Fabricator Genesis",
-"The Endgame"
+"Tier 11 - UIV"
 ],
 [
 "multiblocks/matter_fabricator.md",
@@ -1369,9 +1537,15 @@
 ],
 [
 "multiblocks/micro_spacetime_fabricatorio.md",
-"5DE1D02FECD16D09",
+"5F81100196DE1779",
 "Micro SpaceTime Fabricatorio",
-"The Endgame"
+"Tier 11 - UIV"
+],
+[
+"multiblocks/miracle_top.md",
+"0A9663DF92B2EC1B",
+"Endgame Goals",
+"Endgame Goals"
 ],
 [
 "multiblocks/miracle_top.md",
@@ -1398,6 +1572,18 @@
 "Tier 8 - UV"
 ],
 [
+"multiblocks/nanochip_assembly_complex.md",
+"671ADED46280F76C",
+"Nanochip Modules",
+"Tier 8 - UV"
+],
+[
+"multiblocks/naquadah_fuel_refinery.md",
+"38E8D546E9902CE9",
+"Field Restriction Coil",
+"Tier 8 - UV"
+],
+[
 "multiblocks/nether_interface.md",
 "4BBBE803E9FB9901",
 "Nether Interface",
@@ -1411,9 +1597,57 @@
 ],
 [
 "multiblocks/plasma_forge_prototype_mk2.md",
-"1A54F2B308018132",
+"0439F9201D209211",
 "DTPF Prototype MK-II",
-"The Endgame"
+"Tier 10 - UEV"
+],
+[
+"multiblocks/purification_plant.md",
+"02997F79AF293504",
+"Grade 4 Purified Water",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/purification_plant.md",
+"1CA71D0F416A4A64",
+"Grade 6 Purified Water",
+"Tier 8 - UV"
+],
+[
+"multiblocks/purification_plant.md",
+"24AF7285EBDFF7C6",
+"Grade 1 Purified Water",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/purification_plant.md",
+"265B817DF7D23C4A",
+"Grade 2 Purified Water",
+"Tier 6 - LuV"
+],
+[
+"multiblocks/purification_plant.md",
+"26898F725011800D",
+"Grade 8 Purified Water",
+"Tier 10 - UEV"
+],
+[
+"multiblocks/purification_plant.md",
+"28CCFAB026BDDBC2",
+"Grade 7 Purified Water",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/purification_plant.md",
+"520601BEE8CB6C22",
+"Grade 3 Purified Water",
+"Tier 7 - ZPM"
+],
+[
+"multiblocks/purification_plant.md",
+"60241284C189AB35",
+"Grade 5 Purified Water",
+"Tier 8 - UV"
 ],
 [
 "multiblocks/purification_plant.md",
@@ -1423,21 +1657,51 @@
 ],
 [
 "multiblocks/quantum_force_transformer.md",
+"04783DD3CA5C7092",
+"Infinity Infused Manipulator",
+"Tier 11 - UIV"
+],
+[
+"multiblocks/quantum_force_transformer.md",
+"34880A6A2BC1FC95",
+"Cosmic Fabric Manipulator",
+"Tier 10 - UEV"
+],
+[
+"multiblocks/quantum_force_transformer.md",
+"4C74B65EF71F8365",
+"Catalysts",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/quantum_force_transformer.md",
+"4DF897746D26126B",
+"SpaceTime Continuum Ripper",
+"Tier 12 - UXV"
+],
+[
+"multiblocks/quantum_force_transformer.md",
 "54344366EFEABF73",
 "Quantum Force Transformer",
 "Tier 9 - UHV"
 ],
 [
 "multiblocks/real_annihilation_generator.md",
-"6740CF71306DCF25",
+"31B3429625E8CFC8",
 "Real Annihilation Generator",
-"The Endgame"
+"Tier 12 - UXV"
 ],
 [
 "multiblocks/silicon_rock_synthesizer.md",
 "285274AAEBD8FF64",
 "Silicon Rock Synthesizer",
 "Tier 5 - IV"
+],
+[
+"multiblocks/singularity_data_hub.md",
+"108642CA9F41E1A0",
+"One Type per Cell",
+"Tier 9 - UHV"
 ],
 [
 "multiblocks/singularity_data_hub.md",
@@ -1459,6 +1723,24 @@
 ],
 [
 "multiblocks/space_elevator.md",
+"3B0E297F7184F49C",
+"Space Elevator Motor MK-II",
+"Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"40531365C60AE994",
+"Space Elevator Motor MK-V",
+"Tier 12 - UXV"
+],
+[
+"multiblocks/space_elevator.md",
+"439E6492F409C138",
+"Space Elevator Motor MK-I",
+"Tier 8 - UV"
+],
+[
+"multiblocks/space_elevator.md",
 "450D96AB634E7D8F",
 "Space Elevator",
 "Tier 9 - UHV"
@@ -1471,15 +1753,33 @@
 ],
 [
 "multiblocks/space_elevator.md",
+"5EB8113C323CFBD5",
+"UIV Emitter and Sensor",
+"Tier 11 - UIV"
+],
+[
+"multiblocks/space_elevator.md",
 "603DB9863686AE53",
 "Space Pumping Module",
 "Tier 9 - UHV"
 ],
 [
 "multiblocks/space_elevator.md",
+"680E31FFA2E82044",
+"Space Elevator Motor MK-IV",
+"Tier 11 - UIV"
+],
+[
+"multiblocks/space_elevator.md",
 "69625471E6F4B8E6",
 "Space Assembler Module",
 "Tier 9 - UHV"
+],
+[
+"multiblocks/space_elevator.md",
+"73F36F5D9B344821",
+"Space Elevator Motor MK-III",
+"Tier 10 - UEV"
 ],
 [
 "multiblocks/spinmatron.md",
@@ -1489,9 +1789,9 @@
 ],
 [
 "multiblocks/strange_matter_aggregator.md",
-"3171DEB34A00CFB5",
+"3903A2D3D24853BF",
 "Strange Matter Aggregator",
-"The Endgame"
+"Tier 11 - UIV"
 ],
 [
 "multiblocks/super_water_purifier.md",
@@ -1573,8 +1873,32 @@
 ],
 [
 "progression/10-uev-plus.md",
-"0A9663DF92B2EC1B",
-"The Endgame",
-"The Endgame"
+"06F44CF12CFEF9D1",
+"Tier 12: UXV",
+"Tier 12 - UXV"
+],
+[
+"progression/10-uev-plus.md",
+"139BFDDC97623510",
+"Tier 14: MAX",
+"Tier 14 - MAX"
+],
+[
+"progression/10-uev-plus.md",
+"2376C5105B7AD7C6",
+"Tier 11: UIV",
+"Tier 11 - UIV"
+],
+[
+"progression/10-uev-plus.md",
+"469B9ECD7426A918",
+"Tier 10: UEV",
+"Tier 10 - UEV"
+],
+[
+"progression/10-uev-plus.md",
+"601364F297C2844E",
+"Tier 13: OpV",
+"Tier 13 - OpV"
 ]
 ]

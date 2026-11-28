@@ -8,7 +8,7 @@ import picks
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
-CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv', 'ch_hv', 'ch_ev', 'ch_iv', 'ch_luv', 'ch_zpm', 'ch_uv', 'ch_uhv', 'ch_endgame', 'ch_worlds', 'ch_magic', 'ch_ae2', 'ch_heroes']
+CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv', 'ch_hv', 'ch_ev', 'ch_iv', 'ch_luv', 'ch_zpm', 'ch_uv', 'ch_uhv', 'ch_uev', 'ch_uiv', 'ch_uxv', 'ch_opv', 'ch_max', 'ch_endgame', 'ch_worlds', 'ch_magic', 'ch_ae2', 'ch_heroes']
 NUDGES = json.load(open(os.path.join(HERE, 'nudges.json'))) if os.path.exists(os.path.join(HERE, 'nudges.json')) else {}
 MANY_LINES = {'worlds', 'magic', 'ae2', 'heroes'}   # chapters of independent lines: no single path through them
 GROUPS = [('side', '&dWorlds, Magic and Automation'), ('gtnh_ref', '&8GTNH Reference (dev only)')]

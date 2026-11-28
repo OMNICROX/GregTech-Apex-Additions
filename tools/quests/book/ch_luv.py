@@ -181,3 +181,54 @@ q('luv_battery', 'LuV Lapotronic Capacitor', ['gtceu:luv_lapotronic_battery'], [
 q('adv_data_hatch', 'Advanced Data Access Hatch', ['gtceu:advanced_data_access_hatch'], [
     'Holds more research than the plain hatch.',
 ], ['data_bank'], kind='opt')
+
+
+# ================================================================ the multis of LuV (2026-11-28, second pass)
+def also2(key, *deps):
+    x = next(x for x in C.quests if x.key == 'luv/' + key)
+    x.deps += [d if '/' in d else 'luv/' + d for d in deps if (d if '/' in d else 'luv/' + d) not in x.deps]
+
+
+q('filter_mesh', 'Activated Carbon Filter Mesh', ['gtapexadditions:activated_carbon_filter_mesh*4'], [
+    'Activated carbon dust and zinc foil. The Clarifier uses one up for every batch.',
+], ['purification'])
+q('water1', 'Grade 1 Purified Water', ['gtapexadditions:purification_unit_clarifier'], [
+    'The Clarifier unit filters plain water through a filter mesh. Place it within 32 blocks of the Purification Plant; the plant powers every unit linked to it.',
+], ['filter_mesh'], kind='opt', guide='multiblocks/purification_plant.md')
+q('water2', 'Grade 2 Purified Water', ['gtapexadditions:purification_unit_ozonation'], [
+    'The Ozonation unit: grade 1 water and ozone. Ozone is air under a glass lens in a LuV laser engraver.',
+], ['water1'], kind='opt', guide='multiblocks/purification_plant.md')
+q('adv_fusion', 'Advanced Fusion Reactor', ['gtna:advanced_fusion_reactor'], [
+    'Runs every fusion recipe, with Parallel, Accelerate, Thread and Overclock hatches. It starts at LuV; each extension structure built in order raises it one tier, up to UEV.',
+], ['fusion'], kind='opt', guide='lines/fusion.md')
+q('chem_plant', 'Chemical Plant', ['gtna:chemical_plant'], [
+    'Large Chemical Reactor recipes with a perfect overclock. Every coil tier above cupronickel cuts energy and time by 5%.',
+], ['parts'], kind='opt')
+q('isa_mill', 'ISA Mill', ['gtna:isa_mill'], [
+    'Wet-grinds ores into milled ore with a perfect overclock. It needs a Ball Hatch with a grinding ball, which wears down.',
+], ['parts'], kind='opt')
+q('flotation', 'Industrial Flotation Cell', ['gtna:industrial_flotation_cell'], [
+    'Floats 64 milled ore with 32 ethylxanthate dust and turpentine into a bucket of ore foam.',
+], ['isa_mill'], kind='opt')
+q('vacuum_drying', 'Vacuum Drying Furnace', ['gtna:vacuum_drying_furnace'], [
+    'Dries four buckets of ore foam into six stacks of dust, red mud and water. The coils must reach the recipe\'s temperature.',
+], ['flotation'], kind='opt')
+q('greenhouse', 'Large Greenhouse', ['gtna:large_greenhouse'], [
+    'Grows crops and trees, in two recipe modes.',
+], ['parts'], kind='opt')
+q('sc_turbine', 'Supercritical Steam Turbine', ['gtna:supercritical_steam_turbine'], [
+    'Expands supercritical steam through a rotor. Base output 16,384 EU/t.',
+], ['parts'], kind='opt')
+q('luv_miner', 'Elite Large Miner II', ['gtceu:luv_large_miner'], [
+    'The biggest of the large miners.',
+], ['parts'], kind='opt')
+q('drone', 'LuV Mining Drone', ['gtapexadditions:mining_drone_luv'], [
+    'Drones are built in a chain from LV. The Space Mining Modules send them out much later, so the chain can wait, but it is cheap now.',
+], ['emitter'], kind='opt')
+q('seed_synth', 'Seed Synthesizer', ['gtapexadditions:luv_seed_synthesizer'], [
+    'Turns a block of a GregTech material, a circuit and a prosperity seed base into that material\'s seeds. Higher synthesizers make the seeds of higher materials.',
+], ['field_gen'], kind='opt')
+q('compact_coil', 'Compact Fusion Coil', ['gtapexadditions:compact_fusion_coil_mk1*4'], [
+    'Naquadah alloy plates, LuV superconductor and a Nano Mainframe.',
+], ['fusion'])
+also2('compact_fusion', 'compact_coil')

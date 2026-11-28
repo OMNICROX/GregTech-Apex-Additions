@@ -163,3 +163,36 @@ q('zpm_superconductor', 'ZPM Superconductor', ['gtceu:uranium_rhodium_dinaquadid
 q('mega_freezer', 'Bulk Blast Chiller', ['gtceu:mega_vacuum_freezer'], [
     'The blast furnace\'s partner at the same scale.',
 ], ['rhf'], kind='opt')
+
+
+# ================================================================ the multis of ZPM (2026-11-28, second pass)
+q('water3', 'Grade 3 Purified Water', ['gtapexadditions:purification_unit_flocculation'], [
+    'The Flocculation unit: grade 2 water, better with polyaluminium chloride (aluminium dust in hydrochloric acid).',
+], ['parts', 'luv/water2'], kind='opt', guide='multiblocks/purification_plant.md')
+q('water4', 'Grade 4 Purified Water', ['gtapexadditions:purification_unit_ph_adjustment'], [
+    'The pH Neutralization unit: grade 3 water with sodium hydroxide dust and hydrochloric acid.',
+], ['water3'], kind='opt', guide='multiblocks/purification_plant.md')
+q('compact2', 'Compact Fusion Computer MK-II', ['gtapexadditions:compact_fusion_mk2'], [
+    'The MK II reactor, an advanced compact coil, a ZPM field generator and dense duranium plates.',
+], ['fusion2'], kind='opt', guide='lines/fusion.md')
+q('mega_abs', 'Mega Alloy Blast Smelter', ['gtna:mega_alloy_blast_smelter'], [
+    'Alloy Blast Smelter recipes with a Parallel Hatch, at 80% of the energy and 60% of the time.',
+], ['field_gen'], kind='opt')
+q('me_storage', 'ME Storage Multiblock', ['gtna:me_storage'], [
+    'An expandable ME store: repeat the core slice for up to 128 storage sections.',
+], ['field_gen'], kind='opt', guide='automation/ae2.md')
+q('molecular_forge', 'Nexus Molecular Forge', ['gtna:nexus_molecular_forge'], [
+    'AE2 mass crafting: it queues jobs from pattern hatches and makes every queued output at once, for 1 EU per crafted item.',
+], ['field_gen'], kind='opt', guide='automation/ae2.md')
+q('trinaquadalloy', 'Trinaquadalloy', ['gtna:trinaquadalloy_ingot*8'], [
+    'Trinium, naquadah and carbon dust, alloyed and blasted.',
+], ['trinium'], kind='opt')
+q('magneto', 'Magneto Resonatic Gem', ['gtna:magneto_resonatic_gem'], [
+    'Amethyst, bismuth, zirconium and magnetic steel dust mixed, then grown in an autoclave. The lenses of the Nano Forge are cut from it.',
+], ['start'], kind='opt')
+q('drone', 'ZPM Mining Drone', ['gtapexadditions:mining_drone_zpm'], [
+    'A ZPM drone reaches naquadah asteroids once the Space Elevator stands.',
+], ['emitter'], kind='opt')
+q('zpm_assembler', 'ZPM Assembler', ['gtceu:zpm_assembler'], [
+    'A tier up.',
+], ['robot_arm'])

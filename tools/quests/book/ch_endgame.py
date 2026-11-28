@@ -1,121 +1,67 @@
-"""The Endgame - UEV to MAX: antimatter, the DTPF, spacetime, GTNA's capstones and the MAX circuit."""
+"""Endgame Goals: the things to do when the ladder is climbed. Maxwell and his friends, the Stargates, the trophies."""
 from fw import Chapter
 
-C = Chapter('end', '&aThe Endgame', 'gtceu:uev_machine_hull', '', 11, 'UEV, UIV, UXV, OpV and MAX', 'end', 'pick_end', xp_base=150)
+C = Chapter('end', '&dEndgame Goals', 'placeablemaxwell:maxwell', '', 16, 'A cat, four more cats, and a gate to the stars', 'end', 'pick_end', xp_base=250)
 C.derive = False
 q = C.q
 
-q('start', '&a&lThe Endgame', ['gtceu:uev_machine_hull'], [
-    'Five tiers remain: &aUEV&r, &2UIV&r, &eUXV&r, &9OpV&r and &cMAX&r. Each multiplies power by four again.',
-    'There is no single path any more. The big projects are &eantimatter&r, the &ePlasma Forge&r, &espacetime&r and GTNA\'s three capstones.',
-], ['uhv/uev'], kind='hub', guide='progression/10-uev-plus.md')
+q('start', '&d&lEndgame Goals', ['gtapexadditions:miracle_top'], [
+    'The ladder ends at MAX. This page is for after that, though some of it can be started much earlier.',
+    'The goal is a cat. Four cats, then a fifth. All of them are made in the &eMiracle Top&r.',
+], ['uhv/miracle_top'], kind='hub', guide='multiblocks/miracle_top.md')
+q('maker', 'The Patient Way', ['gtapexadditions:maxwell_maker'], [
+    'The &eMaxwell Maker&r is an LV multiblock: a 3x3x3 box of solid steel casings with one input bus, one output bus and one energy hatch.',
+    '64 cod, 64 salmon, 64 string, a black wool and a bucket of milk, at 8 EU/t, for 16,000,000 seconds. That is about 185 days.',
+    'It cannot be overclocked and takes no parallels. Progress is kept when you log off; the chunk has to be loaded.',
+], ['lv/start'], kind='opt')
 
-# ---------------------------------------------------------------- UEV
-q('uev_parts', '&aUEV Components', ['gtceu:uev_electric_motor', 'gtceu:uev_field_generator'], [
-    'UHV-voltage Assembly Line recipes. The Space Assembler takes over from UIV.',
-], ['start'], kind='main')
-q('fusion5', 'Fusion Reactor MK V', ['gtapexadditions:uev_fusion_reactor'], [
-    'Made in the Space Assembler with ultimate fusion coils and optical computers. It fuses the heaviest plasmas, and the celestial tungsten the Forge of the Gods starts from.',
-], ['uev_parts'], kind='opt', guide='lines/fusion.md')
-q('sass', '&e&lAntimatter', ['gtapexadditions:antimatter_forge'], [
-    'The &eSemi-Stable Antimatter Stabilization Sequencer&r turns protomatter into antimatter, held in an Antimatter Hatch.',
-], ['uev_parts'], kind='hub', guide='lines/antimatter.md')
-q('slam', '&eAntimatter Power', ['gtapexadditions:antimatter_generator'], [
-    'The &eShielded Lagrangian Annihilation Matrix&r reacts antimatter with matter. Nothing else in the pack makes this much power.',
-], ['sass'], kind='main', guide='multiblocks/antimatter_generator.md')
-q('dtpf', '&eDTPF Prototype MK-II', ['gtapexadditions:plasma_forge_prototype_mk2'], [
-    'The Dimensionally Transcendent Plasma Forge prototype: 65x43x65 blocks. It smelts what no blast furnace can, with catalysts.',
-    '> The Structure Upgrader builds it for you.',
-], ['uev_parts'], kind='main', guide='multiblocks/plasma_forge_prototype_mk2.md')
-q('cosmic', 'Cosmic Circuits', ['gtapexadditions:cosmic_processor'], [
-    'Cosmic and transcendent circuits are Apex\'s own top circuit lines, built on optical parts with infinity and beyond.',
-], ['start'], kind='opt', guide='gregtech/circuits.md')
-
-# ---------------------------------------------------------------- UIV
-q('uiv', '&2&lUIV', ['gtceu:uiv_machine_hull', 'gtna:optical_mainframe'], [
-    '&2UIV&r: 134,217,728 EU/t. Its circuit is the &eOptical Mainframe&r.',
-], ['uev_parts'], kind='hub')
-q('nuclear_star', 'Nuclear Star', ['gtapexadditions:nuclear_star'], [
-    'A Gravi-Star grown in molten infinity. UIV controllers are built around them.',
-], ['uiv'])
-q('spacetime', 'Micro SpaceTime Fabricatorio', ['gtapexadditions:micro_spacetime_fabricatorio'], [
-    'Quantum anomalies and nuclear stars in bulk.',
-], ['uiv'], kind='opt', guide='multiblocks/micro_spacetime_fabricatorio.md')
-q('sma', 'Strange Matter Aggregator', ['gtapexadditions:strange_matter_aggregator'], [
-    'Breeds antimatter. Rings of field generators set its tier.',
-], ['nuclear_star', 'sass'], kind='opt', guide='multiblocks/strange_matter_aggregator.md')
-q('mfg', 'Mass Fabricator Genesis', ['gtapexadditions:mass_fabricator_genesis'], [
-    'UU-matter with perfect overclocks.',
-], ['nuclear_star'], kind='opt', guide='multiblocks/mass_fabricator_genesis.md')
-q('dyson', 'Dyson Sphere Launch Site', ['gtapexadditions:dyson_sphere_launch_site'], [
-    'Launches Dyson swarm modules into orbit around the sun. Power from a star.',
-], ['uiv'], kind='opt')
-q('transcendent', 'Transcendent Circuits', ['gtapexadditions:transcendent_processor'], [
-    'The line above cosmic.',
-], ['cosmic', 'uiv'], kind='opt', guide='gregtech/circuits.md')
-
-# ---------------------------------------------------------------- UXV, OpV, MAX
-q('uxv', '&e&lUXV', ['gtceu:uxv_machine_hull', 'gtna:exotic_mainframe'], [
-    '&eUXV&r: 536,870,912 EU/t. Its circuit is the &eExotic Mainframe&r.',
-], ['uiv'], kind='hub')
-q('isa', 'Divine Isa Forge', ['gtapexadditions:divine_isa_forge'], [
-    'Two IsaMills and a Space Assembler in one multiblock.',
-], ['uxv'], kind='opt', guide='multiblocks/divine_isa_forge.md')
-q('rag', 'Real Annihilation Generator', ['gtapexadditions:real_annihilation_generator'], [
-    'Antimatter straight into wireless EU.',
-], ['uxv', 'slam'], kind='opt', guide='multiblocks/real_annihilation_generator.md')
-q('opv', '&9&lOpV', ['gtceu:opv_machine_hull', 'extendedfeatures:opv_universal_circuit'], [
-    '&9OpV&r: 2,147,483,648 EU/t. The only OpV circuit is made in the Space Assembler from two UXV circuits.',
-], ['uxv'], kind='hub')
-
-# ---------------------------------------------------------------- capstones
-q('eoh', '&d&lEye of Harmony', ['gtna:eye_of_harmony'], [
-    'GTNA\'s first capstone: it compresses whole planets into materials and power.',
-], ['opv'], kind='main', guide='gtmultis/eye_of_harmony.md')
-q('fog', '&6&lForge of the Gods', ['gtna:forge_of_gods'], [
-    'A star in a box, with modules for smelting, plasma, molten metal and exotic matter.',
-], ['opv'], kind='main')
-q('tpm', '&b&lTranscendent Plasma Mixer', ['gtna:transcendent_plasma_mixer'], [
-    'Mixes the plasmas the other two capstones are fed with.',
-], ['opv'], kind='main')
-q('max', '&c&lMAX', ['gtapexadditions:max_universal_circuit', 'gtceu:max_machine_hull'], [
-    'The &cMAX Universal Circuit&r: an OpV circuit, an OpV emitter and sensor and neutronium foil, in the Space Assembler.',
-    'This is the top of Apex Ascension. Everything after it is what you decide to build.',
-], ['eoh', 'fog', 'tpm'], kind='hub', bag='end')
-
-
-# ================================================================ more to do in the endgame (2026-11-28)
-def also(key, *deps):
-    x = next(x for x in C.quests if x.key == 'end/' + key)
-    x.deps += [d if '/' in d else 'end/' + d for d in deps if (d if '/' in d else 'end/' + d) not in x.deps]
-
-
-q('uev_fg', 'UEV Field Generator', ['gtceu:uev_field_generator'], [
-    'A tier up, as ever.',
-], ['uev_parts'])
-q('uiv_fg', 'UIV Field Generator', ['gtceu:uiv_field_generator'], [
-    'And again.',
-], ['uiv'])
-q('uxv_fg', 'UXV Field Generator', ['gtceu:uxv_field_generator'], [
-    'And again.',
-], ['uxv'])
-q('opv_fg', 'OpV Field Generator', ['gtceu:opv_field_generator'], [
-    'The last one.',
-], ['opv'])
+# ---- the four friends
 q('mars_cat', '&dMars', ['placeablemaxwell:mars'], [
-    'The other way to finish the pack is a cat. Four cats, then a fifth.',
-    'Each of Maxwell\'s friends is one &eMiracle Top&r recipe at MAX: a thousand of several dusts, 64 of the tier\'s parts and 9,999,999 seconds. Parallels and overclocks do not apply; only more rings make it faster.',
-], ['start', 'uhv/miracle_top'], kind='main')
+    'Each of Maxwell\'s friends is one Miracle Top recipe at MAX voltage, 9,999,999 seconds long. Parallels and overclocks do not apply; only more rings make the Top faster.',
+    'Mars: a UHV field generator, a nether star, an infinity ingot and a thousand each of several dusts, in neutronium and lava.',
+], ['start'], kind='main')
 q('poomba', '&dPoomba', ['placeablemaxwell:poomba'], [
-    'The second friend.',
+    'A UEV field generator and sensor, an infinity block, a chaotic core and sugar, in neutronium and milk.',
 ], ['mars_cat'], kind='main')
 q('valenok', '&dValenok', ['placeablemaxwell:valenok'], [
-    'The third.',
+    'A UIV field generator and robot arm, a magmatter ingot, an eternal singularity and ice dust, in neutronium and water.',
 ], ['poomba'], kind='main')
 q('vasilisa', '&dVasilisa', ['placeablemaxwell:vasilisa'], [
-    'The fourth.',
+    'A UXV field generator and emitter, a magmatter ingot, an eternal singularity and an infinity ingot, in neutronium and milk.',
 ], ['valenok'], kind='main')
+
+# ---- the steps
+q('effort', '&eConcentrated Effort', ['gtapexadditions:concentrated_effort'], [
+    'A hundred thousand of every electric motor from LV to UEV, in a billion millibuckets of lubricant. Miracle Top.',
+], ['start'], kind='main')
+q('heroes', '&eProof of Heroes', ['gtapexadditions:proof_of_heroes'], [
+    '64 each of eleven of the pack\'s biggest controllers, the Miracle Top itself among them. 1,919,810 seconds.',
+], ['effort'], kind='main')
+q('chad', '&eGiga Chad Token', ['gtapexadditions:giga_chad_token'], [
+    'Plasma Forge: a Gravi-Star, a Quantum Star and a Quantum Eye in neutronium and naquadria, at 2,000,000,000 EU/t for 172,800 seconds. Two days.',
+], ['heroes'], kind='main')
+q('warper', '&eSpace Warper', ['gtapexadditions:space_warper*16'], [
+    'An Assembly Line recipe at UIV. Maxwell wants sixteen.',
+], ['chad'], kind='main')
+
+# ---- the stargates
+q('gate_milky', 'Milky Way Stargate', ['sgjourney:milky_way_stargate'], [
+    'The first of four gates. Liquid Stargate takes four of each kind.',
+], ['start'])
+q('gate_pegasus', 'Pegasus Stargate', ['sgjourney:pegasus_stargate'], [
+    'The second.',
+], ['gate_milky'])
+q('gate_universe', 'Universe Stargate', ['sgjourney:universe_stargate'], [
+    'The third.',
+], ['gate_pegasus'])
+q('gate_tollan', 'Tollan Stargate', ['sgjourney:tollan_stargate'], [
+    'The fourth.',
+], ['gate_universe'])
+q('stargate', '&eLiquid Stargate', ['gtapexadditions:liquid_stargate_bucket'], [
+    'Four Milky Way, four Pegasus, four Universe and four Tollan Stargates dissolved in universium in the Miracle Top, for 99,999,999 seconds.',
+], ['gate_tollan', 'warper'], kind='main')
+
 q('maxwell', '&d&lMaxwell', ['placeablemaxwell:maxwell'], [
     'All four friends, Concentrated Effort, a Proof of Heroes, a Giga Chad Token, sixteen Space Warpers and a bucket of Liquid Stargate, in the Miracle Top for 99,999,999 seconds.',
-    'Or 64 cod, 64 salmon, 64 string, a black wool and a bucket of milk in a &eMaxwell Maker&r at LV, for 16,000,000 seconds. He does not mind which.',
-], ['vasilisa'], kind='hub')
+    'Or the Maxwell Maker. He does not mind which.',
+], ['vasilisa', 'stargate'], kind='hub', bag='end')

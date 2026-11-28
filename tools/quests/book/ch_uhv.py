@@ -117,3 +117,99 @@ q('uhv_superconductor', 'UHV Superconductor', ['gtceu:ruthenium_trinium_americiu
 q('ultimate_battery', 'Ultimate Battery', ['gtceu:max_battery'], [
     'A battery you are not expected to fill.',
 ], ['start'], kind='opt')
+
+
+# ================================================================ the multis and materials of UHV (2026-11-28, second pass)
+q('oganesson', '&eMetastable Oganesson', ['gtna:metastable_oganesson_ingot*4'], [
+    'Fusion: enriched naquadah with xenon, or with oganesson once a Space Pump brings it down.',
+    'Fusion coils, the antimatter machines and the Eye of Harmony are all assembled in it.',
+], ['start'], kind='main')
+q('se_casings', 'Space Elevator Casings', ['gtapexadditions:space_elevator_base_casing*16', 'gtapexadditions:space_elevator_support_structure*8', 'gtapexadditions:space_elevator_internal_structure*8'], [
+    'The body of the Space Elevator. Every module controller takes a base casing too.',
+], ['start'])
+q('se_cable', 'Space Elevator Cable', ['gtapexadditions:space_elevator_cable'], [
+    'Fine neutronium wire, dense neutronium plates and a UHV field generator in polybenzimidazole.',
+], ['field_gen'])
+q('motor2', 'Space Elevator Motor MK-II', ['gtapexadditions:space_elevator_motor_mk2'], [
+    'The motor tier limits which modules the elevator can hold and how many.',
+], ['parts'], guide='multiblocks/space_elevator.md')
+q('drone', 'UHV Mining Drone', ['gtapexadditions:mining_drone_uhv'], [
+    'The Mining Module Mk-II needs one, and so do the exotic asteroids at UEV.',
+], ['emitter'])
+q('mining2', 'Space Mining Module Mk-II', ['gtapexadditions:space_mining_module_mk2'], [
+    'Space Assembler. At UHV the drones reach tungsten, chrome, platinum, sulfur, nether quartz and naquadah asteroids.',
+    'Every asteroid needs its drone (not used up), a programmed circuit and a plasma: helium, iron, nickel, nitrogen or oxygen.',
+], ['drone', 'assembler_module'], kind='opt')
+q('gases', 'Gas from Orbit', ['gtceu:deuterium_bucket', 'gtceu:helium_bucket'], [
+    'The Space Pumping Module at UHV: hydrogen, deuterium, helium, nitrogen and methane, each picked with a programmed circuit.',
+], ['pumping_module'], kind='opt')
+q('fcasing4', 'Fusion Casing MK IV', ['gtapexadditions:fusion_casing_mk4*8'], [
+    'A MK III casing, dense neutronium plates, a UV field generator and a Wetware Mainframe.',
+], ['start'])
+q('fcoil4', 'Advanced Fusion Coil', ['gtapexadditions:fusion_coil_mk4*4'], [
+    'Space Assembler: a fusion coil, UHV superconductor, a UV field generator and a Wetware Mainframe.',
+], ['assembler_module'])
+q('compact4', 'Compact Fusion Computer MK-IV', ['gtapexadditions:compact_fusion_mk4'], [
+    'The MK IV reactor with parallels.',
+], ['fusion4'], kind='opt', guide='lines/fusion.md')
+q('water7', 'Grade 7 Purified Water', ['gtapexadditions:purification_unit_degasser'], [
+    'The Degasser unit: grade 6 water with helium, neon and krypton, over UHV superconductor wire.',
+    'The Space Assembler uses grades 5 to 8 in its bigger recipes.',
+], ['parts', 'uv/water6'], kind='opt', guide='multiblocks/purification_plant.md')
+q('qft_parts', 'Quantum Force Parts', ['gtapexadditions:qft_manipulator_t1', 'gtapexadditions:qft_shielding_t1', 'gtapexadditions:qft_coil*4', 'gtapexadditions:qft_containment_casing*8'], [
+    'A Neutron Pulse Manipulator, a Neutron Shielding Core, Quantum Force Conductors and Particle Containment Casings.',
+], ['field_gen'])
+q('qft_catalyst', 'Catalysts', ['gtapexadditions:platinum_group_catalyst'], [
+    'Every Quantum Force Transformer recipe needs its catalyst in an input bus; it is not used up.',
+    'With the platinum group catalyst, platinum group sludge becomes platinum, palladium, iridium, osmium, rhodium and ruthenium in one step.',
+], ['qft_parts'], guide='multiblocks/quantum_force_transformer.md')
+q('seed', 'Black Hole Seed', ['gtapexadditions:black_hole_seed'], [
+    'A Gravi-Star, neutron dust and a Wetware Mainframe in neutronium. It opens the black hole at 100 stability.',
+], ['field_gen'], guide='multiblocks/black_hole_compressor.md')
+q('sep_catalyst', 'Atomic Separation Catalyst', ['gtna:atomic_separation_catalyst_dust*4'], [
+    'Orundum plates are a naquadria plate pressed onto a silicon plate. Blast them with naquadria dust in molten plutonium.',
+    'Naquadah fuel refining needs the catalyst, and so does mellion at UIV.',
+], ['start'])
+q('fuel1', 'Naquadah Fuel MkI', ['gtapexadditions:naquadah_based_liquid_fuel_mki_bucket'], [
+    'Fuel Refining Complex: light and heavy naquadah fuel, atomic separation catalyst and duranium.',
+    'The Hyper Naquadah Reactor burns it with hydrogen, or with oxygen plasma.',
+], ['fuel_complex', 'sep_catalyst'], kind='opt', guide='lines/naquadah.md')
+q('astral', 'Astral Titanium', ['gtna:astral_titanium_ingot*4'], [
+    'Titanium dust under the Special Laser Lens in a UHV laser engraver, then blasted.',
+], ['start', 'uv/special_lens'])
+q('chronomatic', 'Chronomatic Glass', ['gtna:chronomatic_glass_ingot*4'], [
+    'Glass dust under the same lens. Both go into six-phased copper at UXV.',
+], ['astral'])
+q('boson', 'Stable Boson Containment Unit', ['gtna:stable_boson_containment_unit'], [
+    'A Gravi-Star, a UHV field generator and a neutronium plate in krypton.',
+], ['field_gen'], kind='opt')
+q('star_fuel', 'Star Fuel', ['avaritia:star_fuel'], [
+    'A neutronium block and a refined coal block in a UHV assembler. Extracted at UEV it is raw star matter.',
+], ['start'], kind='opt')
+q('inf_glass', 'Infinity Glass', ['gtapexadditions:infinity_reinforced_borosilicate_glass*8'], [
+    'Borosilicate glass solidified in molten infinity.',
+], ['start'], kind='opt', guide='gregtech/glass-tiers.md')
+q('parallel', 'Parallel Hatch', ['gtna:parallel_hatch_uhv'], [
+    'Enables huge parallel processing for GTNA\'s multiblocks.',
+], ['field_gen'], kind='opt')
+q('oc_hatches', 'Overclock and Accelerate Hatches', ['gtna:overclock_hatch_uhv', 'gtna:accelerate_hatch_uhv'], [
+    'An Overclock Hatch changes the overclock scaling itself; an Accelerate Hatch is a multiplier on the final duration.',
+], ['field_gen'], kind='opt')
+q('ore_proc', 'Advanced Integrated Ore Processor', ['gtna:advanced_integrated_ore_processor'], [
+    'Whole ore processing lines in one step, with as many parallels as you can power.',
+], ['field_gen'], kind='opt')
+q('uhv_assembler', 'Epic Assembler', ['gtceu:uhv_assembler'], [
+    'The Space Elevator and its first modules are UHV assembler recipes.',
+], ['robot_arm'])
+q('uhv_16a', 'UHV 16A Energy Hatch', ['gtceu:uhv_energy_input_hatch_16a'], [
+    'Sixteen amps through one hatch.',
+], ['energy_hatch'], kind='opt')
+q('one_type', 'One Type per Cell', ['insaneae:cell_component_1t'], [
+    'InsaneAE\'s cells hold enormous amounts, but in this pack &eone type each&r, like GT New Horizons\' singularity cells.',
+    'Many types at that scale is the job of the &eSingularity Data Hub&r.',
+], ['start'], kind='opt', guide='multiblocks/singularity_data_hub.md')
+also('elevator', 'se_casings', 'se_cable', 'motor2', 'uhv_assembler')
+also('fusion4', 'fcasing4', 'fcoil4')
+also('qft', 'qft_parts')
+also('black_hole', 'seed')
+also('data_hub', 'one_type')
