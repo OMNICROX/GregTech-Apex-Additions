@@ -3,6 +3,7 @@ Laser Engraver, and the road to stainless steel and HV. Every link below is a re
 from fw import Chapter
 
 C = Chapter('mv', '&bTier 2 - MV', 'gtceu:mv_machine_hull', '', 3, '128 EU/t: medium voltage', 'mv', 'pick_mv', xp_base=20)
+C.derive = False   # hand-written links only: the grid layout reads best with one clear path per quest
 q = C.q
 
 # ---------------------------------------------------------------- the start

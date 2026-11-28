@@ -9,6 +9,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out', 'config', 'ftbquests', 'quests')
 PREVIEW = os.path.join(HERE, 'out', 'preview')
 CHAPTERS = ['ch_stone', 'ch_steam', 'ch_lv', 'ch_mv', 'ch_hv', 'ch_ev', 'ch_iv', 'ch_luv', 'ch_zpm', 'ch_uv', 'ch_uhv', 'ch_endgame', 'ch_worlds', 'ch_magic', 'ch_ae2', 'ch_heroes']
+MANY_LINES = {'worlds', 'magic', 'ae2', 'heroes'}   # chapters of independent lines: no single path through them
 GROUPS = [('side', '&dWorlds, Magic and Automation'), ('gtnh_ref', '&8GTNH Reference (dev only)')]
 
 
@@ -86,7 +87,13 @@ def main():
     flow.merge_deps(chapters, derived)
     flow.reduce(allq)
     for ch in chapters:
-        flow.flow(ch); print(ch.key, 'line conflicts:', len(flow.conflicts(ch)))
+        import grid
+        plan = grid.layout(ch, one_path=ch.key not in MANY_LINES)
+        cf = flow.conflicts(ch)
+        xs = [q.x for q in ch.quests]; ys = [q.y for q in ch.quests]
+        print(f"{ch.key:7} path of {len(plan['spine']):2}  {max(xs) - min(xs):4.1f} x {max(ys) - min(ys):4.1f}  links over a quest: "
+              f"{sum(1 for c in cf if c[0] == 'over')}  crossings: {sum(1 for c in cf if c[0] == 'cross')}  "
+              f"far links dropped: {len(plan['dropped'])}  not drawn: {len(plan['hidden'])}")
     import gtnh_ref
     refs = gtnh_ref.chapters()
     chapters = chapters + refs

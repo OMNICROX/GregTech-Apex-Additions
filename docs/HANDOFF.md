@@ -32,3 +32,11 @@ Heroes). `out/release/` is the pack copy (no GTNH reference chapters); it is ins
 `config/ftbquests/quests`. Quest ids must stay below 0x8000... (FTB Quests re-ids anything higher and drops its links).
 A quest's `guide=` (or `guide_map.py` for the first four chapters) adds the guide line and feeds the guide's Quests lists:
 rebuild the quests first, then `tools/guide/build_guide.py`. Chapters arranged by hand in game go in `book/locked/`.
+
+Layout (`book/grid.py`, 2026-11-28): one obvious path per tier chapter. The big quests the door quest rests on are put in
+one order (written order where requirements allow), each REQUIRES the one before, and they run along one row. Optional
+big quests branch off or sit as unlinked rows above/below the path, about where they were written in. Each small quest
+belongs to one big quest and sits in a free cell next to it. Links that would cross the page are dropped (when the quest
+has a nearer requirement) or kept but not drawn (`hide_dependency_lines`); the build prints the counts per chapter.
+Worlds, Magic, AE2 and Heroes (`MANY_LINES` in build.py) keep their real links: every line is a row of its own.
+Positions are cached in `out/layout_cache.json` (keyed by the chapter's quests and grid.py); a clean build takes ~3 min.

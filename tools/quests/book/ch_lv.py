@@ -2,6 +2,7 @@
 from fw import Chapter, place
 
 C = Chapter('lv', '&7Tier 1 - LV', 'gtceu:lv_machine_hull', '', 2, '32 EU/t: low voltage', 'lv', 'pick_lv', xp_base=12)
+C.derive = False   # hand-written links only: the grid layout reads best with one clear path per quest
 q = C.q
 
 # ---------------------------------------------------------------- the start

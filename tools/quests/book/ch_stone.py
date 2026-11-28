@@ -3,6 +3,7 @@ from fw import Chapter
 
 C = Chapter('stone', '&7Tier 0 - Stone Age', 'gtceu:flint_mortar', '', 0,
             'Flint, ore veins, fire and bronze', 'stone', 'pick_stone', xp_base=5)
+C.derive = False   # hand-written links only: the grid layout reads best with one clear path per quest
 q = C.q
 
 # ---------------------------------------------------------------- the start

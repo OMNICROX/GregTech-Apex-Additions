@@ -4,6 +4,7 @@ from fw import Chapter
 
 C = Chapter('steam', '&6Tier 0.5 - Steam Age', 'gtceu:lp_steam_solid_boiler', '', 1,
             'Steam to electricity', 'steam', 'pick_steam', xp_base=8)
+C.derive = False   # hand-written links only: the grid layout reads best with one clear path per quest
 q = C.q
 
 # ---------------------------------------------------------------- the boiler
