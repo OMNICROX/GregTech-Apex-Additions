@@ -361,6 +361,12 @@
 ],
 [
 "gregtech/cleanroom.md",
+"4A9F2DEF4B0DC611",
+"Cleaning Maintenance Hatch",
+"Tier 3 - HV"
+],
+[
+"gregtech/cleanroom.md",
 "65DFA1E47A5DE093",
 "Cleanroom",
 "Tier 3 - HV"
@@ -388,6 +394,12 @@
 "156EC5914C56EBE7",
 "Stainless Steel",
 "Tier 2 - MV"
+],
+[
+"gregtech/ebf-and-coils.md",
+"24B8C3ED03DB89B9",
+"Coils and Heat",
+"Tier 3 - HV"
 ],
 [
 "gregtech/ebf-and-coils.md",
@@ -490,6 +502,12 @@
 "7BA7ED1EDB91332A",
 "Muffler Hatch",
 "Tier 1 - LV"
+],
+[
+"gregtech/oc/overclocking-rules.md",
+"0F3CF751A5DCFCD1",
+"Faster, Not Just Bigger",
+"Tier 2 - MV"
 ],
 [
 "gregtech/oc/overclocking-rules.md",

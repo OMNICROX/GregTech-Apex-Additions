@@ -199,3 +199,112 @@ q('mana_pool', 'Mechanical Mana Pool', ['botanicalmachinery:mechanical_mana_pool
 q('greenhouse', 'Greenhouse', ['gtna:greenhouse'], [
     'A multiblock farm: saplings and crops in, wood and produce out. Pairs with the Brewery and Pyrolyse Oven.',
 ], ['biomass'], kind='opt')
+
+
+# ================================================================ more to do in MV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'mv/' + key)
+    x.deps += [d if '/' in d else 'mv/' + d for d in deps if (d if '/' in d else 'mv/' + d) not in x.deps]
+
+
+q('oc', 'Faster, Not Just Bigger', ['check'], [
+    'A machine one tier above its recipe runs it &etwice as fast for four times the power&r. Two tiers above: four times as fast, sixteen times the power.',
+    'So an MV macerator on an LV recipe finishes in half the time but uses twice the energy per item. Upgrade the machines that are the bottleneck, not all of them.',
+], ['start'], kind='tip', guide='gregtech/oc/overclocking-rules.md')
+q('mv_cables', 'MV Cables', ['gtceu:copper_single_cable*16'], [
+    'Tin cable is rated for LV and burns at MV. &eCopper&r carries MV; annealed copper and cupronickel do too.',
+    'The rating is in the cable\'s tooltip. A transformer between two voltages is not optional.',
+], ['start'])
+q('bauxite', 'Bauxite', ['gtceu:raw_bauxite*32'], [
+    'The real aluminium ore. Electrolyze bauxite dust for aluminium, with &erutile&r (titanium\'s ore) on the side.',
+    'From here on aluminium is ordinary: machine hulls, cables, cells and crates.',
+], ['mv_machines'])
+q('alu_drum', 'Aluminium Drum', ['gtceu:aluminium_drum'], [
+    'Holds far more than the steel drum and keeps its fluid when moved.',
+], ['bauxite'], kind='opt')
+q('alu_crate', 'Aluminium Crate', ['gtceu:aluminium_crate'], [
+    'More slots again than the steel crate.',
+], ['bauxite'], kind='opt')
+q('mv_super_chest', 'A Bigger Super Chest', ['gtceu:mv_super_chest'], [
+    'Each tier of super chest holds several times the one before.',
+], ['start'], kind='opt')
+q('extruder', '&eExtruder', ['gtceu:mv_extruder'], [
+    'An ingot and a &eshape&r in, a finished part out: pipes, rods, gears, rings, wire, plates, all in one step and without loss.',
+    'It replaces half the hand tools and most of the lathe and bender for bulk parts.',
+], ['piston'], kind='main')
+q('mv_ca', 'Circuit Assembler, Again', ['gtceu:mv_circuit_assembler'], [
+    'Faster, and some of the circuits ahead ask for it. This machine gets upgraded every tier from now on.',
+], ['good_circuit'], kind='opt')
+q('sensor', 'Sensor', ['gtceu:mv_sensor'], [
+    'The emitter\'s twin. Sensors go into scanners and a good many machines of the tiers ahead.',
+], ['emitter'])
+q('mv_field', 'Field Generator', ['gtceu:mv_field_generator'], [
+    'An ender eye in a cage of circuits. You will not need many yet; from HV on they gate the best machines of each tier.',
+], ['emitter'], kind='opt')
+q('mv_gens', 'Other Ways to Make Power', ['gtceu:mv_combustion'], [
+    'Combustion generators burn diesel, bio diesel and other liquid fuels; gas turbines burn methane, LPG and refinery gas.',
+    'Steam still works. But the fuels you are about to make hold far more energy per bucket.',
+], ['mv_power'], kind='opt')
+q('steel_boiler', 'Steel Large Boiler', ['gtceu:steel_large_boiler'], [
+    'The next large boiler. One of these feeds a row of MV turbines.',
+], ['mv_power'], kind='opt')
+
+# ---------------------------------------------------------------- electronics
+q('transistor', 'Transistors', ['gtceu:transistor*8'], [
+    'A silicon plate, fine tin wire and polyethylene in the assembler.',
+], ['polyethylene', 'silicon'])
+q('capacitor', 'Capacitors', ['gtceu:capacitor*8'], [
+    'Polyethylene foil between aluminium foil.',
+], ['polyethylene', 'bauxite'])
+q('inductor', 'Inductors', ['gtceu:inductor*8'], [
+    'A ring wound with fine annealed copper wire.',
+    'Transistors, capacitors and inductors go into every circuit from the microprocessor on. Make them by the stack.',
+], ['start'])
+
+# ---------------------------------------------------------------- chemistry
+q('hcl', 'Hydrochloric Acid', ['gtceu:hydrochloric_acid_bucket'], [
+    'Hydrogen and chlorine in the chemical reactor. Electrolyzing salt water gives you both at once.',
+    'It dissolves a long list of things over the next tiers.',
+], ['chem_reactor'])
+q('distilled', 'Distilled Water', ['gtceu:distilled_water_bucket'], [
+    'Water through the distillery. Many recipes take it in place of water and run faster or give more for it.',
+], ['distillery'], kind='opt')
+q('biodiesel', 'Bio Diesel', ['gtceu:bio_diesel_bucket'], [
+    'Seed oil or fish oil, ethanol or methanol and a pinch of sodium hydroxide. A liquid fuel that grows on a farm.',
+    'The glycerol that comes with it is worth keeping.',
+], ['ethanol'])
+q('pvc', 'PVC', ['gtceu:polyvinyl_chloride_plate*8'], [
+    'Ethylene and chlorine make vinyl chloride; polymerize it like polyethylene. PVC makes better item pipes than tin.',
+], ['ethylene', 'hcl'], kind='opt')
+
+# ---------------------------------------------------------------- metals
+q('manganese', 'Manganese', ['gtceu:manganese_dust*4'], [
+    'From &epyrolusite&r. Stainless steel is iron, chrome, nickel and manganese: this is the one people forget.',
+], ['mv_machines'])
+also('stainless_dust', 'manganese')
+q('vanadium', 'Vanadium Steel', ['gtceu:vanadium_steel_ingot*8'], [
+    'Vanadium comes out of &evanadium magnetite&r. Mixed into steel with a little chrome it makes a tougher steel for tools and drills.',
+], ['mv_machines', 'chrome'], kind='opt')
+q('electrum', 'Electrum', ['gtceu:electrum_ingot*8'], [
+    'Gold and silver, one to one. It carries HV.',
+], ['start'], kind='opt')
+
+# ---------------------------------------------------------------- tools and covers
+q('mv_drill', 'A Bigger Drill', ['gtceu:mv_aluminium_drill'], [
+    'Each tier of drill mines a bigger square and holds more charge.',
+], ['mv_battery'], kind='opt')
+q('voiding', 'Voiding Covers', ['gtceu:item_voiding_cover', 'gtceu:fluid_voiding_cover'], [
+    'A cover that destroys what reaches it. Put one on the tank or chest that fills with a byproduct you do not want, so the line never stops.',
+], ['conveyor'], kind='opt')
+q('tag_filter', 'Tag Filter', ['gtceu:item_tag_filter'], [
+    'A filter that matches tags instead of single items: all dusts, all ingots, all crushed ores with one line.',
+], ['conveyor'], kind='opt')
+q('mv_miner', 'MV Miner', ['gtceu:mv_miner'], [
+    'Wider and faster than the LV one.',
+], ['pump'], kind='opt')
+q('jetpack', 'Electric Jetpack', ['gtceu:electric_jetpack'], [
+    'Flight, on a battery. Building a multiblock stops involving scaffolding.',
+], ['mv_battery'], kind='opt')
+q('goggles', 'Night Vision Goggles', ['gtceu:nightvision_goggles'], [
+    'Night vision while charged.',
+], ['mv_battery'], kind='opt')
