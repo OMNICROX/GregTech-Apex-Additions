@@ -25,4 +25,4 @@ GregTech assembler at a tier (same ingredients + soldering alloy):
 InsaneAE's machine acceleration cards are disabled. GregTech machines connect to AE2 with ME input / output buses
 and hatches; the [Extreme Craft Center](../multiblocks/extreme_craft_center.md) is an ME crafting provider with pattern magnification.
 
-![An AE2 subnet feeding a drive](../assets/images/ae2_subnet.png)
+![An ME drive subnet: a separate cable line with its own drives, linked to the main network](../assets/images/ae2_subnet.png)

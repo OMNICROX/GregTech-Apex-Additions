@@ -29,10 +29,16 @@ Compared on 2026-11-27. "Filled" means a page now exists; "open" means it still 
 
 1. **Add-on multiblock pages without a description** (68 of them, mostly GTCA and GTSE: their mods have no tooltip
    text). They show the structure, recipe type and controller recipe; a sentence or two each would help.
-2. **Ore processing in depth**: byproducts per step, which machine for which ore, washing vs thermal centrifuge.
-3. **Batteries and energy storage**: battery tiers, lapotronic orbs, which buffer to use when.
-4. **Tools**: GregTech hand tools, electric tools, what each tool does to machines.
-5. **Boilers and the steam age**: small boilers, water, steam math (the progression page covers it briefly).
-6. **Programmed circuits** and recipe conflicts.
-7. **Screenshots**: steam setup, LV power, ore line, cleanroom and assembly line are real in-game shots now; the AE2 subnet one is still a placeholder (AE2 is not in the dev run).
-8. **Quest links**: GuideNH links pages to quests both ways; Apex Guide doesn't have quest tags yet.
+2. **Quest links**: GuideNH links pages to quests both ways; Apex Guide doesn't have quest tags yet. Waiting on the
+   quest book.
+
+## Filled 2026-11-27
+
+* Ore processing in depth (`gregtech/ore-processing.md`): every step with its byproduct slot, chemical bath,
+  sifter, electromagnetic separator, byproduct table for 24 ores. From GTCEu's OreRecipeHandler and ore properties.
+* Boilers and steam (`gregtech/boilers-and-steam.md`): boiler outputs, heat-up, explosions, steam per EU,
+  turbine math.
+* Batteries and storage (`gregtech/power/batteries.md`): every battery's capacity, buffers, chargers, the PSS.
+* Tools (`gregtech/tools.md`): what each tool does to machines, pipes and maintenance; crafting and electric tools.
+* Programmed circuits (`gregtech/programmed-circuits.md`): the ghost slot, distinct buses, conflicts, AE2.
+* Screenshots: all six are real now (the AE2 subnet one is from the owner's world).

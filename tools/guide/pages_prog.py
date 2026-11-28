@@ -65,6 +65,9 @@ page('progression/00-steam.md', 'Stone Age and Steam', '''
 
 ![A steam start: a coke oven, a coal boiler piping steam into four steam machines, and a Primitive Blast Furnace](../assets/images/steam_setup.png)
 
+How boilers heat up, how much steam each machine uses, and how not to blow one up:
+[Boilers and Steam](../gregtech/boilers-and-steam.md).
+
 The steam-age multis from GTNA (large steam machines) are good, but the Steam Lava Maker and the
 Dimensionally Transcendent Steam Oven are LV / MV recipes in Apex.
 ''' + STEAM_SCENES, parent='progression/progression-index.md', pos=10, icon='gtceu:lp_steam_solid_boiler')
@@ -82,7 +85,9 @@ tier('01-lv.md', 'LV (32 V)', 20, 'gtceu:lv_machine_hull', '''
 1. <ItemLink id="gtceu:lv_machine_hull" /> needs steel and tin cables. **LV circuits**:
    <ItemLink id="gtceu:basic_electronic_circuit" /> (vacuum tubes, resistors, boards).
 2. Power: <ItemLink id="gtceu:lv_steam_turbine" /> off your boilers, or <ItemLink id="gtceu:lv_combustion" /> on
-   biodiesel / creosote / oil fuels. Store it in a battery buffer.
+   biodiesel / creosote / oil fuels. Store it in a battery buffer
+   (see [Batteries](../gregtech/power/batteries.md)). Learn the [tools](../gregtech/tools.md) now: wrench,
+   screwdriver and wire cutter set up every machine and cable.
 
    ![LV power: two steam turbines and a battery buffer feeding four machines over one tin cable](../assets/images/lv_power.png)
 3. Machines: Macerator, Ore Washer, Centrifuge, Electrolyzer, Wiremill, Bender, Lathe, Extruder, **Assembler**

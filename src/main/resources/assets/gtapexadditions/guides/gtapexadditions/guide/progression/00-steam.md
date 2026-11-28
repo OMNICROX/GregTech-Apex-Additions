@@ -26,6 +26,9 @@ navigation:
 
 ![A steam start: a coke oven, a coal boiler piping steam into four steam machines, and a Primitive Blast Furnace](../assets/images/steam_setup.png)
 
+How boilers heat up, how much steam each machine uses, and how not to blow one up:
+[Boilers and Steam](../gregtech/boilers-and-steam.md).
+
 The steam-age multis from GTNA (large steam machines) are good, but the Steam Lava Maker and the
 Dimensionally Transcendent Steam Oven are LV / MV recipes in Apex.
 

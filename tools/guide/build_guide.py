@@ -2,7 +2,7 @@
 import os, sys, shutil
 sys.path.insert(0, os.path.dirname(__file__))
 from pages_core import P
-import pages_prog, pages_world, pages_multis, pages_lines, pages_ref, pages_addons  # noqa: F401 (register pages)
+import pages_prog, pages_world, pages_multis, pages_lines, pages_ref, pages_addons, pages_mech  # noqa: F401 (register pages)
 
 ROOT = os.path.join(os.path.dirname(__file__), '../../src/main/resources/assets/gtapexadditions/guides/gtapexadditions/guide')
 ROOT = os.path.normpath(ROOT)
