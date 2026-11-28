@@ -13,6 +13,7 @@ public final class GTAACommonConfig {
     public static final ForgeConfigSpec.BooleanValue HNN_EXTRACTOR;
     public static final ForgeConfigSpec.BooleanValue GIVE_GUIDE;
     public static final ForgeConfigSpec.BooleanValue MAXWELL_MAKER;
+    public static final ForgeConfigSpec.IntValue INSANE_CELL_TYPES;
     public static final ForgeConfigSpec.DoubleValue HNN_SIM_COST;
 
     static {
@@ -38,6 +39,12 @@ public final class GTAACommonConfig {
                 .define("extractorPredictions", true);
         HNN_SIM_COST = b.comment("Simulation Chamber power (FE/t per data model) is multiplied by this. 0.125 = an eighth of HNN's cost.")
                 .defineInRange("simCostMultiplier", 0.125, 0.0, 10.0);
+        b.pop();
+        b.push("insaneAE");
+        INSANE_CELL_TYPES = b.comment("How many different items (or fluids) one InsaneAE storage cell holds. 1 = one type per cell, like",
+                "GT New Horizons' singularity cells; storing many types at that scale is the Singularity Data Hub's job.",
+                "0 = leave InsaneAE's own numbers (up to millions of types per cell). Needs a restart.")
+                .defineInRange("typesPerCell", 1, 0, 63);
         b.pop();
         b.push("maxwell");
         MAXWELL_MAKER = b.comment("The Maxwell Maker: an LV multiblock that makes Maxwell at 8 EU/t in 16,000,000 seconds (about 185 days).",

@@ -62,3 +62,10 @@ Maxwell's own recipe also takes four step items and a fluid, each one absurd rec
 GTAACompatRecipes): Concentrated Effort, Proof of Heroes and Liquid Stargate in the Miracle Top, the Giga Chad Token in
 GTNA's plasma forge (10,800 K), Space Warpers on the assembly line. After adding a machine, item or recipe type run
 `./gradlew runData` (it writes blockstates, models and names into `src/generated`); without it the block has no model.
+
+## InsaneAE cells hold one type (2026-11-28)
+The owner found InsaneAE's storage cells too strong (up to millions of types per cell). `InsaneCellTypesMixin` replaces
+`ModCells.totalTypes(...)` with `insaneAE.typesPerCell` from the common config (default 1, 0 = the mod's own numbers),
+so a cell is like GTNH's singularity cell: one item or fluid, a huge amount. Storing many types at that scale is the
+Singularity Data Hub's job. InsaneAE is not in the dev environment: the mixin is `@Pseudo` with `require = 0` and has
+only been checked against the decompiled jar (1.1.3), not in a running game.

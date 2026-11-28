@@ -11,7 +11,8 @@
     "AutoBuildCasingFirstMixin",
     "GlassTierElectricMixin",
     "GlassTierWorkingMixin",
-    "HnnSimCostMixin"
+    "HnnSimCostMixin",
+    "InsaneCellTypesMixin"
   ],
   "injectors": {
     "defaultRequire": 0
