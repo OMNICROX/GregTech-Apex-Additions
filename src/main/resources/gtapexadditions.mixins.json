@@ -17,6 +17,7 @@
     "defaultRequire": 0
   },
   "client": [
-    "MouseHandlerScrollMixin"
+    "MouseHandlerScrollMixin",
+    "ClientCommandClickMixin"
   ]
 }
