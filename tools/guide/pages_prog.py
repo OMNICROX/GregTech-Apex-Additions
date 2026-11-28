@@ -63,7 +63,7 @@ page('progression/00-steam.md', 'Stone Age and Steam', '''
 7. **Botania basics** work at steam level: Pure Daisy, Petal Apothecary, Mana Pool, generating flowers
    (see [Botania](../magic/botania.md)).
 
-![A steam setup: boilers feeding a row of steam machines](../assets/images/steam_setup.png)
+![A steam start: a coke oven, a coal boiler piping steam into four steam machines, and a Primitive Blast Furnace](../assets/images/steam_setup.png)
 
 The steam-age multis from GTNA (large steam machines) are good, but the Steam Lava Maker and the
 Dimensionally Transcendent Steam Oven are LV / MV recipes in Apex.
@@ -84,7 +84,7 @@ tier('01-lv.md', 'LV (32 V)', 20, 'gtceu:lv_machine_hull', '''
 2. Power: <ItemLink id="gtceu:lv_steam_turbine" /> off your boilers, or <ItemLink id="gtceu:lv_combustion" /> on
    biodiesel / creosote / oil fuels. Store it in a battery buffer.
 
-   ![LV power: generators, a battery buffer and cables](../assets/images/lv_power.png)
+   ![LV power: two steam turbines and a battery buffer feeding four machines over one tin cable](../assets/images/lv_power.png)
 3. Machines: Macerator, Ore Washer, Centrifuge, Electrolyzer, Wiremill, Bender, Lathe, Extruder, **Assembler**
    (most mods' recipes run in it), Chemical Reactor, Fluid Solidifier.
 4. The <ItemLink id="gtceu:electric_blast_furnace" /> with cupronickel coils (see
@@ -191,7 +191,7 @@ tier('05-iv.md', 'IV (8,192 V)', 60, 'gtceu:iv_machine_hull', '''
 
    <Multiblock id="gtceu:assembly_line" />
 
-   ![An Assembly Line with its input buses and data hatch](../assets/images/assembly_line.png)
+   ![An Assembly Line: controller, data access hatch, laminated glass and an input hatch on the front, input buses underneath](../assets/images/assembly_line.png)
 4. Power: <ItemLink id="gtceu:steam_large_turbine" /> / <ItemLink id="gtceu:gas_large_turbine" />, or the
    [Large Naquadah Reactor](../multiblocks/large_naquadah_reactor.md).
 

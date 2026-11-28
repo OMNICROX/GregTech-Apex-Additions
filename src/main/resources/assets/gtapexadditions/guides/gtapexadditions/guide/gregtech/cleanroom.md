@@ -46,7 +46,7 @@ Keep it powered: if it loses power or the structure breaks, it gets dirty again.
 In Apex, **multiblocks follow cleanroom rules too** (the pack doesn't exempt them). Give a multiblock that runs
 cleanroom recipes a **Cleaning Maintenance Hatch** (a small built-in cleanroom), or build it inside a cleanroom.
 
-![A finished cleanroom](../assets/images/cleanroom.png)
+![A 5x5x5 cleanroom: plascrete walls, filter ceiling, iron door, cleanroom glass and an energy hatch](../assets/images/cleanroom.png)
 
 <GTRecipesFor id="gtceu:cleanroom" limit="1" />
 

@@ -24,7 +24,7 @@ navigation:
 7. **Botania basics** work at steam level: Pure Daisy, Petal Apothecary, Mana Pool, generating flowers
    (see [Botania](../magic/botania.md)).
 
-![A steam setup: boilers feeding a row of steam machines](../assets/images/steam_setup.png)
+![A steam start: a coke oven, a coal boiler piping steam into four steam machines, and a Primitive Blast Furnace](../assets/images/steam_setup.png)
 
 The steam-age multis from GTNA (large steam machines) are good, but the Steam Lava Maker and the
 Dimensionally Transcendent Steam Oven are LV / MV recipes in Apex.

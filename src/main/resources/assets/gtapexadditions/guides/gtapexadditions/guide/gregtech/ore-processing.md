@@ -19,6 +19,6 @@ Raw ore can be smelted for one ingot, but processing it gives 2-4x and **byprodu
 
 Shortcut later: the [General Ore Processing Factory](../multiblocks/ore_processing_factory.md) (LuV) does it in bulk.
 
-![An early ore processing line](../assets/images/ore_processing_line.png)
+![An early ore line, left to right: chest, macerator, ore washer (water pipe at the back), thermal centrifuge, centrifuge, chest](../assets/images/ore_processing_line.png)
 
 Byproducts matter: gallium, indium, platinum group metals and rare earths mostly come from byproducts.

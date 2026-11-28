@@ -34,5 +34,5 @@ Compared on 2026-11-27. "Filled" means a page now exists; "open" means it still 
 4. **Tools**: GregTech hand tools, electric tools, what each tool does to machines.
 5. **Boilers and the steam age**: small boilers, water, steam math (the progression page covers it briefly).
 6. **Programmed circuits** and recipe conflicts.
-7. **Screenshots** still placeholders: steam setup, LV power, ore processing line, cleanroom, assembly line, AE2 subnet.
+7. **Screenshots**: steam setup, LV power, ore line, cleanroom and assembly line are real in-game shots now; the AE2 subnet one is still a placeholder (AE2 is not in the dev run).
 8. **Quest links**: GuideNH links pages to quests both ways; Apex Guide doesn't have quest tags yet.

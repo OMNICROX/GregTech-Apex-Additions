@@ -229,7 +229,7 @@ Raw ore can be smelted for one ingot, but processing it gives 2-4x and **byprodu
 
 Shortcut later: the [General Ore Processing Factory](../multiblocks/ore_processing_factory.md) (LuV) does it in bulk.
 
-![An early ore processing line](../assets/images/ore_processing_line.png)
+![An early ore line, left to right: chest, macerator, ore washer (water pipe at the back), thermal centrifuge, centrifuge, chest](../assets/images/ore_processing_line.png)
 
 Byproducts matter: gallium, indium, platinum group metals and rare earths mostly come from byproducts.
 ''', parent='gregtech/gregtech-index.md', pos=40, icon='gtceu:lv_macerator')
@@ -323,7 +323,7 @@ are needed for wetware, optical and higher circuits.
 
 <Multiblock id="gtceu:cleanroom" />
 
-![A finished cleanroom](../assets/images/cleanroom.png)
+![A 5x5x5 cleanroom: plascrete walls, filter ceiling, iron door, cleanroom glass and an energy hatch](../assets/images/cleanroom.png)
 
 <GTRecipesFor id="gtceu:cleanroom" limit="1" />
 ''', parent='gregtech/gregtech-index.md', pos=80, icon='gtceu:cleanroom')
