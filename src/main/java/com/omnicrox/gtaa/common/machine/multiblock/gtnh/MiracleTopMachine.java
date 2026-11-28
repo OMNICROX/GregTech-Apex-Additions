@@ -68,6 +68,9 @@ public class MiracleTopMachine extends WorkableElectricMultiblockMachine
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof MiracleTopMachine mt)) return ModifierFunction.NULL;
         int r = Math.max(1, mt.rings);
+        // the Miracle Top's own recipes (Maxwell and his friends) take what they take: only the rings' speed helps
+        if (recipe.recipeType == com.omnicrox.gtaa.common.data.GTAARecipeTypes.MIRACLE_TOP)
+            return ModifierFunction.builder().durationMultiplier(1.0 / (4.0 * r)).build();
         ModifierFunction par = ApexModifiers.parallel(m -> 128 * r, m -> 1.0 / (4.0 * r), 1.0).getModifier(machine, recipe);
         if (par == ModifierFunction.NULL) return par;
         var oc = r >= 8 ? GTRecipeModifiers.OC_PERFECT : GTRecipeModifiers.OC_NON_PERFECT;

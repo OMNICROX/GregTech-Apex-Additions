@@ -238,3 +238,157 @@ place(C, col=3.6, row=2.9, cells={
     'ebf': ['maintenance', 'muffler', 'buses'],
     'ebf_power': ['ebf_steel'],
 })
+
+
+# ================================================================ more to do in LV (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'lv/' + key)
+    x.deps += [d if '/' in d else 'lv/' + d for d in deps if (d if '/' in d else 'lv/' + d) not in x.deps]
+
+
+# ---------------------------------------------------------------- the rest of the LV machines
+q('e_furnace', 'Electric Furnace', ['gtceu:lv_electric_furnace'], [
+    'Smelts faster than a furnace and takes power instead of fuel. The first machine most people build after the generator.',
+], ['start'])
+q('alloy_smelter', 'Alloy Smelter', ['gtceu:lv_alloy_smelter'], [
+    'Same recipes as the steam one, faster, and it does not need venting. It also shapes metal with a &emold&r in the second slot.',
+], ['start'])
+q('compressor', 'Compressor', ['gtceu:lv_compressor'], [
+    'Plates into dense plates, dust into blocks, and a handful of things nothing else makes.',
+], ['start'], kind='opt')
+q('forge_hammer', 'Forge Hammer', ['gtceu:lv_forge_hammer'], [
+    'Crushes raw ore without the byproducts of a macerator, turns stone to gravel to sand, and hammers ingots into plates when the bender is busy.',
+], ['start'], kind='opt')
+q('cutter', 'Cutting Machine', ['gtceu:lv_cutter'], [
+    'Cuts blocks into plates and rods into bolts. It needs &ewater&r; lubricant makes it much faster. The saw can retire.',
+], ['lathe'])
+q('forming_press', 'Forming Press', ['gtceu:lv_forming_press'], [
+    'Presses items into shapes with a mold. Mostly used later, but AE2\'s printed circuits can be pressed here.',
+], ['bender'], kind='opt')
+q('polarizer', 'Polarizer', ['gtceu:lv_polarizer'], [
+    'Magnetises iron and steel rods with power instead of redstone. Motors get cheaper.',
+], ['wiremill'])
+q('packer', 'Packer', ['gtceu:lv_packer'], [
+    'Four small dusts or nine tiny dusts into one dust. Ore processing leaves a lot of both behind.',
+], ['macerator'], kind='opt')
+q('sifter', 'Sifter', ['gtceu:lv_sifter'], [
+    'Sifts purified gem ore into gems of every quality instead of one dust. Diamond, emerald, sapphire, ruby: all worth sifting.',
+], ['ore_washer'])
+q('separator', 'Electromagnetic Separator', ['gtceu:lv_electromagnetic_separator'], [
+    'Pulls the magnetic part out of purified dust: iron, nickel or neodymium from ores that carry it. The byproduct slot of the ore tells you.',
+], ['thermal'], kind='opt')
+q('autoclave', 'Autoclave', ['gtceu:lv_autoclave'], [
+    'Grows gems from dust in water. The way to turn the gem dust your macerator makes back into something useful.',
+], ['mixer'], kind='opt')
+q('distillery', 'Distillery', ['gtceu:lv_distillery'], [
+    'Takes one product out of a fluid, picked by the programmed circuit. A distillation tower takes all of them at once, but that is two tiers away.',
+], ['chem_reactor'])
+q('fluid_heater', 'Fluid Heater', ['gtceu:lv_fluid_heater'], [
+    'Heats fluids. Mostly water into steam for a chemistry step or two.',
+], ['chem_reactor'], kind='opt')
+q('brewery', 'Brewery and Fermenter', ['gtceu:lv_brewery', 'gtceu:lv_fermenter'], [
+    'Plants into &eBiomass&r in the brewery, biomass into fermented biomass in the fermenter. This is the road to plastic and to ethanol in MV.',
+    'Lubricant is brewed here as well: redstone or talc in oil or creosote.',
+], ['mixer'])
+q('arc_furnace', 'Arc Furnace', ['gtceu:lv_arc_furnace'], [
+    'Melts parts back into ingots with a little &eoxygen&r, and makes wrought iron and annealed copper outright.',
+    'Old tools, wrong machines, spare cables: all of it comes back as metal.',
+], ['electrolyzer'])
+q('rock_crusher', 'Rock Crusher', ['gtceu:lv_rock_crusher'], [
+    'Cobblestone and stone forever, with water on one side and lava on the other. Feed it to a macerator for endless stone dust.',
+], ['start'], kind='opt')
+q('gas_collector', 'Gas Collector', ['gtceu:lv_gas_collector'], [
+    'Collects &eair&r. Air in a centrifuge gives nitrogen and oxygen, and oxygen speeds up many blast furnace recipes.',
+], ['centrifuge'])
+q('circuit_assembler', '&eCircuit Assembler', ['gtceu:lv_circuit_assembler'], [
+    'Circuits made here cost less than the hand recipe and give two instead of one for the first tier.',
+    'It needs &esoldering alloy&r (or tin, at double the amount) as a fluid.',
+], ['circuits', 'soldering'], kind='main')
+
+# ---------------------------------------------------------------- automation without AE2
+q('conveyor', 'Conveyor Module', ['gtceu:lv_conveyor_module'], [
+    'Stick it on the side of a machine as a &ecover&r and it moves items in or out through that side. Right-click it with a screwdriver to open its settings.',
+], ['components'])
+q('regulator', 'Fluid Regulator', ['gtceu:lv_fluid_regulator'], [
+    'A pump that moves an exact amount per tick. For recipes that must not be overfed.',
+], ['components'], kind='opt')
+q('filters', 'Filters', ['gtceu:item_filter', 'gtceu:fluid_filter'], [
+    'Put a filter in a conveyor, a pump or a robot arm and it only moves what is on the list.',
+    'One conveyor with a filter per product sorts a macerator\'s four outputs into four chests.',
+], ['conveyor'])
+q('controller', 'Machine Controller', ['gtceu:machine_controller_cover'], [
+    'A cover that turns the machine on or off from a redstone signal. With an &eActivity Detector&r on another machine you can make one wait for the other.',
+], ['conveyor'], kind='opt')
+q('prog_circuit', 'Programmed Circuit', ['gtceu:programmed_circuit'], [
+    'Many machines have several recipes for the same input. The number on the &eProgrammed Circuit&r picks one; click the circuit slot of the machine to set it without crafting anything.',
+], ['assembler'], kind='tip')
+q('output_sides', 'Which Side Is Out?', ['check'], [
+    'Every electric machine has one output side, marked with a dot. A wrench moves it to another side, and the machine can be set to push items and fluids out through it on its own (the buttons are in its screen).',
+    'A machine that stops for no reason usually has a full output slot.',
+], ['start'], kind='tip')
+q('super_chest', 'Super Chest', ['gtceu:lv_super_chest'], [
+    'One item type, a great many of it. The right home for cobblestone, dusts and anything else that comes in thousands.',
+], ['start'], kind='opt')
+q('super_tank', 'Super Tank', ['gtceu:lv_super_tank'], [
+    'The same idea for one fluid. It keeps its contents when you wrench it.',
+], ['start'], kind='opt')
+q('fluid_cell', 'Fluid Cells', ['gtceu:fluid_cell*8'], [
+    'A cell holds one bucket and stacks. Most machines fill and empty them in their fluid slots.',
+], ['bender'], kind='opt')
+
+# ---------------------------------------------------------------- powered tools and finding ore
+q('drill', 'Electric Drill', ['gtceu:lv_steel_drill'], [
+    'Mines a 3x3 and runs on a battery in its recipe: recharge it in a charger or a battery buffer.',
+], ['batteries'])
+q('power_wrench', 'Electric Wrench', ['gtceu:lv_steel_wrench'], [
+    'No durability, only charge. One of these and the hand wrench is done.',
+], ['batteries'], kind='opt')
+q('prospector', '&eProspector', ['gtceu:prospector.lv'], [
+    'Right-click to scan the chunks around you and see every ore vein on a map. Charge it first.',
+    'This is how you find the veins the surface rocks did not show you.',
+], ['batteries', 'circuits'], kind='main')
+q('terminal', 'Terminal', ['gtceu:terminal'], [
+    'Right-click a multiblock controller with the &eTerminal&r to build its structure from your inventory.',
+], ['circuits'], kind='opt')
+
+# ---------------------------------------------------------------- machines that work on their own
+q('e_miner', 'Electric Miner', ['gtceu:lv_miner'], [
+    'The steam miner\'s bigger brother: a wider square and faster. It still only takes ores.',
+], ['components'])
+q('e_pump', 'Pump', ['gtceu:lv_pump'], [
+    'Stands over a lake of water, lava or oil and drains it into its tank. Lava from the Nether this way feeds a boiler for days.',
+], ['components'], kind='opt')
+q('fisher', 'Fisher', ['gtceu:lv_fisher'], [
+    'String in, fish and treasure out, over a pool of water. Food without a farm.',
+], ['components'], kind='opt')
+q('item_collector', 'Item Collector', ['gtceu:lv_item_collector'], [
+    'Picks up dropped items in a radius. Under a mob farm or a tree farm it replaces a field of hoppers.',
+], ['components'], kind='opt')
+q('block_breaker', 'Block Breaker', ['gtceu:lv_block_breaker'], [
+    'Breaks the block in front of it. With a rock crusher or a cobblestone generator, an endless supply of whatever that makes.',
+], ['components'], kind='opt')
+
+# ---------------------------------------------------------------- chemistry starts here
+q('salt', 'Salt', ['gtceu:salt_dust*16'], [
+    'Electrolyze salt for &esodium&r and &echlorine&r. Sodium goes into batteries, chlorine into nearly all the chemistry ahead.',
+], ['electrolyzer'])
+q('naoh', 'Sodium Hydroxide', ['gtceu:sodium_hydroxide_dust*4'], [
+    'Sodium and water. A base you will keep needing: the first use is cleaning aluminium ore in MV.',
+], ['salt', 'chem_reactor'], kind='opt')
+q('oxygen', 'Oxygen', ['gtceu:oxygen_bucket'], [
+    'From air in a centrifuge or from water in an electrolyzer. Steel and many other blast furnace recipes take oxygen and run much faster for it.',
+], ['gas_collector'])
+also('ebf_steel', 'oxygen')
+q('lithium_battery', 'Better Batteries', ['gtceu:lv_lithium_battery'], [
+    'Sodium is the cheapest battery. &eCadmium&r holds more and &elithium&r more again, for the same hull.',
+], ['batteries'], kind='opt')
+q('annealed', 'Annealed Copper', ['gtceu:annealed_copper_ingot*8'], [
+    'Copper smelted with oxygen in the arc furnace. It carries a little more than copper and loses less.',
+], ['arc_furnace'], kind='opt')
+q('frames', 'Frames', ['gtceu:steel_frame*4'], [
+    'Four rods and a wrench. Frames are climbable, cheap, and part of many multiblocks.',
+], ['lathe'], kind='opt')
+q('hatches', 'Fluid Hatches', ['gtceu:lv_input_hatch', 'gtceu:lv_output_hatch'], [
+    'Buses carry items in and out of a multiblock; &ehatches&r carry fluids. The blast furnace wants an input hatch as soon as you feed it oxygen.',
+], ['buses'])
+also('ebf_steel', 'hatches')

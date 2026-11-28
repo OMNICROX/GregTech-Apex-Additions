@@ -254,7 +254,7 @@ public final class GTAAGTNHMachines {
             .multiblock("miracle_top", MiracleTopMachine::new)
             .langValue("Miracle Top")
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES)
+            .recipeTypes(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES, GTAARecipeTypes.MIRACLE_TOP)
             .recipeModifiers(MiracleTopMachine::recipeModifier)
             .tooltips(
                     Component.literal("§7Machine Type: §eCircuit Assembler"),
@@ -262,6 +262,7 @@ public final class GTAAGTNHMachines {
                     Component.literal("§7A ring section and a conveying section; §62-16§7 rings"),
                     Component.literal("§b128 parallels§7 per ring, §a400% speed§7 per ring"),
                     Component.literal("§aPerfect overclocks§7 with 8 or more rings"),
+                    Component.literal("§7Its own §eMiracle Top§7 recipes only get the speed of the rings"),
                     Component.literal("§8After Twist Space Technology (GTNH addon)"))
             .appearanceBlock(() -> modBlock("gtna:molecular_casing", GTBlocks.FUSION_CASING_MK3::get))
             .pattern(definition -> miracleTopPattern(definition, 2))

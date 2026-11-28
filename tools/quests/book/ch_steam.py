@@ -313,3 +313,99 @@ place(C, col=3.6, row=2.9, cells={
     'vacuum': ['glass_tube'],
     'circuit': ['magnet', 'lv_motor', 'lv_casing'],
 })
+
+
+# ================================================================ more to do in the Steam Age (2026-11-28)
+def also(key, *deps):
+    x = next(x for x in C.quests if x.key == 'steam/' + key)
+    x.deps += [d if '/' in d else 'steam/' + d for d in deps if (d if '/' in d else 'steam/' + d) not in x.deps]
+
+
+# ---------------------------------------------------------------- tools of the trade
+q('mallet', 'Soft Mallet', ['gtceu:wood_mallet'], [
+    'Hit a machine with a &eSoft Mallet&r to pause it; hit it again to let it run. A paused machine finishes nothing and wastes nothing.',
+], ['boiler'])
+q('crowbar', 'Crowbar', ['gtceu:iron_crowbar'], [
+    'The &eCrowbar&r takes covers off machines and pipes without breaking them.',
+], ['boiler'], kind='opt')
+q('plunger', 'Plunger', ['gtceu:rubber_plunger'], [
+    'The wrong fluid in a machine or a pipe? The &ePlunger&r empties it, one bucket per use.',
+], ['rubber'], kind='opt')
+q('bronze_pipe', 'Bigger Pipes', ['gtceu:bronze_normal_fluid_pipe*8'], [
+    'A small bronze pipe moves enough steam for one or two machines. A row of them needs a &enormal&r or &elarge&r pipe as the main line.',
+    'Every pipe has a temperature limit in its tooltip. Bronze is fine for steam.',
+], ['boiler'])
+q('item_pipe', 'Item Pipes', ['gtceu:tin_small_item_pipe*8'], [
+    'Item pipes do not push anything: something has to push into them (a hopper, later a conveyor cover), and items go to the nearest inventory that takes them.',
+], ['macerator'])
+q('hopper', 'Hoppers', ['minecraft:hopper*4'], [
+    'A hopper on top of a steam machine feeds it, and one underneath empties it.',
+    'Chain a macerator into a furnace this way and you have your first production line.',
+], ['macerator'], kind='opt')
+q('bronze_crate', 'Bronze Crate', ['gtceu:bronze_crate'], [
+    'Twice a chest in one block. Steel and aluminium crates later hold more again.',
+], ['boiler'], kind='opt')
+q('miner', 'Steam Miner', ['gtceu:lp_steam_miner'], [
+    'Set a &eSteam Miner&r on a vein, give it steam and somewhere to put the ore, and it digs the ores below it in a small square.',
+    'It is slow and it only takes ores. It is also the first time the mine comes to you.',
+], ['hammer'])
+
+# ---------------------------------------------------------------- bronze and steel parts
+q('gears', 'Gears', ['gtceu:bronze_gear*2', 'gtceu:small_bronze_gear*4'], [
+    'Gears are hammered and filed by hand for now. Bronze ones go into the steam multiblocks and the hydraulic parts.',
+], ['alloy'])
+q('steel_parts', 'Steel Plates and Rods', ['gtceu:steel_plate*16', 'gtceu:steel_rod*8'], [
+    'Every LV machine hull is steel. Hammer plates now; the bending machine takes over once you have power.',
+], ['steel'])
+q('steel_tools', 'Steel Tools', ['gtceu:steel_hammer', 'gtceu:steel_wrench'], [
+    'Steel tools last about four times as long as iron ones. Replace the hammer and the wrench first: they do the most work.',
+], ['steel'], kind='opt')
+q('steel_casing', 'Solid Steel Casing', ['gtceu:solid_machine_casing*8'], [
+    'The casing of the first electric multiblocks. You will need stacks of it soon after LV, so a second blast furnace is not a luxury.',
+], ['steel_parts'])
+q('steel_drum', 'Steel Drum', ['gtceu:steel_drum'], [
+    'Holds far more than the bronze drum and keeps its fluid when moved.',
+], ['steel_parts'], kind='opt')
+q('steel_block', 'A Second Blast Furnace', ['gtceu:steel_block*2'], [
+    'One Primitive Blast Furnace makes steel very slowly. They share walls: two side by side cost fewer bricks than two apart.',
+    '> Eighteen steel is the point where one furnace has clearly been too few.',
+], ['steel'], kind='tip')
+
+# ---------------------------------------------------------------- the Nether, a little further
+q('quartz', 'Nether Quartz', ['minecraft:quartz*32'], [
+    'Quartz veins fill the Nether. Quartz goes into glass tubes now and into circuits and AE2 later.',
+], ['nether'])
+q('glowstone', 'Glowstone', ['minecraft:glowstone_dust*16'], [
+    'Light, and an ingredient in a few alloys and in AE2. Take what you see on the way.',
+], ['nether'], kind='opt')
+q('zinc', 'Zinc', ['gtceu:raw_sphalerite*16'], [
+    '&eSphalerite&r is the zinc ore, found with sulfur in the Nether. Zinc and copper make brass.',
+], ['nether'])
+also('brass', 'zinc')
+
+# ---------------------------------------------------------------- towards the first circuit
+q('wire', 'Copper Wire', ['gtceu:copper_single_wire*8'], [
+    'A plate and a &eWire Cutter&r make wire by hand. It is wasteful: the wiremill is one of the first machines you will want.',
+], ['rubber'])
+q('raw_rubber', 'Raw Rubber', ['gtceu:raw_rubber_dust*8'], [
+    'Sticky resin in the extractor gives raw rubber. Raw rubber and sulfur in the alloy smelter give rubber.',
+], ['extractor'])
+also('rubber', 'raw_rubber')
+q('coated_board', 'Coated Board', ['gtceu:resin_circuit_board'], [
+    'A wooden plate glued over with sticky resin. Copper wire on top of it makes the printed board.',
+], ['rubber'])
+also('board', 'coated_board', 'wire')
+
+# ---------------------------------------------------------------- comfort
+q('megatorch', 'No More Night Visitors', ['torchmaster:megatorch'], [
+    'A &eMega Torch&r stops hostile mobs from spawning naturally in a wide area around it. One covers a base.',
+], ['steel'], kind='opt')
+q('travel_staff', 'Travel Staff', ['travelanchors:travel_staff'], [
+    'Look at a &eTravel Anchor&r and jump to go there, or sneak and click with the staff for a short hop in the direction you face.',
+], ['nether'], kind='opt')
+q('iron_backpack', 'Iron Backpack', ['sophisticatedbackpacks:iron_backpack'], [
+    'Upgrade the backpack in the crafting grid: it keeps its contents and its upgrades and gains rows and upgrade slots.',
+], ['boiler'], kind='opt')
+q('fuel_tank', 'Smeltery Fuel', ['tconstruct:seared_fuel_tank'], [
+    'A Smeltery burns lava (or better) from a fuel tank in its wall. Now that you can reach the Nether, lava is not scarce.',
+], ['nether'], kind='opt')

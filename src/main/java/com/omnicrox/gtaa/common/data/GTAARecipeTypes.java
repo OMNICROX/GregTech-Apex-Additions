@@ -28,6 +28,8 @@ public class GTAARecipeTypes {
     public static final GTRecipeType[] PURIFICATION = new GTRecipeType[9];
     public static GTRecipeType PURIFICATION_PLANT;
     public static GTRecipeType ENTITY_CRUSHER;
+    public static GTRecipeType MIRACLE_TOP;
+    public static GTRecipeType MAXWELL_MAKER;
     public static GTRecipeType INDUSTRIAL_ROCK_BREAKER;
     public static GTRecipeType SUPER_WATER_PURIFIER;
     public static GTRecipeType ELECTRIC_IMPLOSION;
@@ -175,6 +177,15 @@ public class GTAARecipeTypes {
                 .setProgressBar(GuiTextures.PROGRESS_BAR_MASS_FAB, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
         ENTITY_CRUSHER = register("extreme_entity_crusher", "multiblock", "Extreme Entity Crusher")
                 .setMaxIOSize(0, 0, 0, 0).setEUIO(IO.IN);
+        MIRACLE_TOP = register("miracle_top", "multiblock", "Miracle Top")
+                .setMaxIOSize(16, 1, 4, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> "No parallels, no overclocks: only more rings make it faster")
+                .addDataInfo(data -> "Original recipe idea: Twist Space Technology");
+        MAXWELL_MAKER = register("maxwell_maker", "multiblock", "Maxwell Maker")
+                .setMaxIOSize(6, 1, 0, 0).setEUIO(IO.IN)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .addDataInfo(data -> "That is about 185 days. He will not be rushed.");
         CULTIVATION = register("mystical_cultivation_array", "multiblock", "Mystical Cultivation Array")
                 .setMaxIOSize(1, 2, 1, 0).setEUIO(IO.IN)
                 .addDataInfo(data -> "Shown for plain soil; better farmland multiplies it")

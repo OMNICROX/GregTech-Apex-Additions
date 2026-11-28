@@ -12,6 +12,7 @@ public final class GTAACommonConfig {
     public static final ForgeConfigSpec.BooleanValue MOVE_OVERWORLD_VEINS;
     public static final ForgeConfigSpec.BooleanValue HNN_EXTRACTOR;
     public static final ForgeConfigSpec.BooleanValue GIVE_GUIDE;
+    public static final ForgeConfigSpec.BooleanValue MAXWELL_MAKER;
     public static final ForgeConfigSpec.DoubleValue HNN_SIM_COST;
 
     static {
@@ -37,6 +38,11 @@ public final class GTAACommonConfig {
                 .define("extractorPredictions", true);
         HNN_SIM_COST = b.comment("Simulation Chamber power (FE/t per data model) is multiplied by this. 0.125 = an eighth of HNN's cost.")
                 .defineInRange("simCostMultiplier", 0.125, 0.0, 10.0);
+        b.pop();
+        b.push("maxwell");
+        MAXWELL_MAKER = b.comment("The Maxwell Maker: an LV multiblock that makes Maxwell at 8 EU/t in 16,000,000 seconds (about 185 days).",
+                "Off: the machine has no recipes (its controller can still be made). Needs a restart or /reload.")
+                .define("maxwellMaker", true);
         b.pop();
         b.push("personalSpace");
         PERSONAL_SPACE = b.comment("Personal Space Portals (GT New Horizons): each player can make one world of their own.",

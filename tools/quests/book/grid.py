@@ -138,7 +138,7 @@ def prepare(ch, one_path=True):
     def step(k):   # columns from the big quest before it: one between them at least, more if a lot sits around them
         b = bpar[k]
         load = nX.get(b, 0) / (4 if b == root else 2) + nP.get(k, 0) + nX.get(k, 0) / 2
-        return max(2, 1 + via[k]) + int(math.ceil(max(0.0, load - 6) / 4))
+        return max(2, 1 + via[k]) + int(math.ceil(max(0.0, load - 8) / 8))   # a crowd spreads up and down first
     cells, reserved, gap_cols, gap_rows, anchor, floating = {}, set(), set(), set(), {}, set()
     if one_path:
         # the path folds into rows like a snake: right along one row, down, back left along the next

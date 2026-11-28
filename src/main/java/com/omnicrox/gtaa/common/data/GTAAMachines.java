@@ -1337,6 +1337,36 @@ public class GTAAMachines {
             .register();
 
 
+    // ---------------- Maxwell Maker (Apex original, a joke with a real cat at the end) ----------------
+    public static final MultiblockMachineDefinition MAXWELL_MAKER = REGISTRATE
+            .multiblock("maxwell_maker", com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine::new)
+            .langValue("Maxwell Maker")
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTAARecipeTypes.MAXWELL_MAKER)
+            .noRecipeModifier()
+            .tooltips(
+                    Component.literal("\u00a77Makes \u00a7eMaxwell\u00a77. Eventually."),
+                    Component.literal("\u00a7a8 EU/t\u00a77 for \u00a7616,000,000 seconds\u00a77: about \u00a76185 days"),
+                    Component.literal("\u00a77Cannot be overclocked, takes no parallels. He will not be rushed."),
+                    Component.literal("\u00a77Progress is kept when you log off; the chunk has to be loaded to count"),
+                    Component.literal("\u00a78The patient way around the Miracle Top"))
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("CCC", "CCC", "CCC")
+                    .aisle("CCC", "C#C", "CCC")
+                    .aisle("CSC", "CCC", "CCC")
+                    .where('S', controller(blocks(definition.get())))
+                    .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get()).setMinGlobalLimited(20)
+                            .or(abilities(PartAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
+                            .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(1).setPreviewCount(1)))
+                    .where('#', air())
+                    .build())
+            .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
+            .model(createWorkableCasingMachineModel(new net.minecraft.resources.ResourceLocation("gtceu", "block/casings/solid/machine_casing_solid_steel"),
+                    new net.minecraft.resources.ResourceLocation("gtceu", "block/multiblock/assembly_line")))
+            .register();
+
     public static void init() {
         GTAAGTNHMachines.init();
     }

@@ -272,73 +272,115 @@ public final class GTAACompatRecipes {
 
 
     /**
-     * The other final goal (like Twist Space Technology's): Placeable Maxwell's cats. Mars, Poomba, Valenok and
-     * Vasilisa are one per tier from UHV to UXV; Maxwell himself needs all four at OpV.
+     * The other final goal: Placeable Maxwell's cats, made the way Twist Space Technology makes its token: in the
+     * Miracle Top, at MAX, out of a thousand of everything, for an absurd time (only the rings' speed helps).
+     * Mars, Poomba, Valenok and Vasilisa take 9,999,999 seconds each; Maxwell needs all four and 99,999,999.
+     * The patient way is the Maxwell Maker: LV, 8 EU/t, 16,000,000 seconds.
      */
     private static void maxwellCats(Consumer<FinishedRecipe> provider) {
         String[] mods = { "placeablemaxwell", "gtna", "avaritia", "draconicevolution" };
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/mars")
-                .inputItems(GTItems.FIELD_GENERATOR_UHV, 4)
-                .inputItems(GTItems.ROBOT_ARM_UHV, 4)
-                .inputItems(GTItems.ELECTRIC_MOTOR_UHV, 4)
-                .inputItems(CustomTags.UHV_CIRCUITS, 8)
-                .inputItems(S1, 16)
-                .inputItems(Items.NETHER_STAR, 16)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 32))
+        var top = com.omnicrox.gtaa.common.data.GTAARecipeTypes.MIRACLE_TOP;
+        int friend = 9_999_999 * 20, maxwell = 99_999_999 * 20;
+        top.recipeBuilder("gtapexadditions:maxwell/mars")
+                .circuitMeta(1)
+                .inputItems(GTItems.FIELD_GENERATOR_UHV, 64)
+                .inputItems(Items.NETHER_STAR, 64)
+                .inputItems(S1, 64)
+                .inputItems(dust, GTMaterials.Neutronium, 1000)
+                .inputItems(dust, GTMaterials.Naquadria, 1000)
+                .inputItems(dust, GTMaterials.Iron, 1000)
+                .inputItems(dust, GTMaterials.Redstone, 1000)
+                .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
+                .inputFluids(GTMaterials.Lava.getFluid(1000))
                 .outputItems(S10)
-                .duration(6000).EUt(VA[UHV])
+                .duration(friend).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S1, "gtna:infinity_ingot", S10, "placeablemaxwell:mars")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/poomba")
-                .inputItems(GTItems.FIELD_GENERATOR_UEV, 4)
-                .inputItems(GTItems.EMITTER_UEV, 4)
-                .inputItems(GTItems.SENSOR_UEV, 4)
-                .inputItems(CustomTags.UEV_CIRCUITS, 8)
-                .inputItems(S1, 4)
-                .inputItems(S2)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+        top.recipeBuilder("gtapexadditions:maxwell/poomba")
+                .circuitMeta(2)
+                .inputItems(GTItems.FIELD_GENERATOR_UEV, 64)
+                .inputItems(GTItems.SENSOR_UEV, 64)
+                .inputItems(S1, 64)
+                .inputItems(S2, 64)
+                .inputItems(dust, GTMaterials.Neutronium, 1000)
+                .inputItems(dust, GTMaterials.Tritanium, 1000)
+                .inputItems(dust, GTMaterials.Sugar, 1000)
+                .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
+                .inputFluids(GTMaterials.Milk.getFluid(1000))
                 .outputItems(S10)
-                .duration(8000).EUt(VA[UEV])
+                .duration(friend).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S1, "gtna:infinity_block", S2, "draconicevolution:chaotic_core",
                         S10, "placeablemaxwell:poomba")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/valenok")
-                .inputItems(GTItems.FIELD_GENERATOR_UIV, 4)
-                .inputItems(GTItems.ROBOT_ARM_UIV, 4)
-                .inputItems(CustomTags.UIV_CIRCUITS, 8)
-                .inputItems(S1, 4)
-                .inputItems(S2)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 64))
+        top.recipeBuilder("gtapexadditions:maxwell/valenok")
+                .circuitMeta(3)
+                .inputItems(GTItems.FIELD_GENERATOR_UIV, 64)
+                .inputItems(GTItems.ROBOT_ARM_UIV, 64)
+                .inputItems(S1, 64)
+                .inputItems(S2, 64)
+                .inputItems(dust, GTMaterials.Neutronium, 1000)
+                .inputItems(dust, GTMaterials.Duranium, 1000)
+                .inputItems(dust, GTMaterials.Ice, 1000)
+                .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
+                .inputFluids(GTMaterials.Water.getFluid(1000))
                 .outputItems(S10)
-                .duration(10000).EUt(VA[UIV])
+                .duration(friend).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot", S2, "avaritia:eternal_singularity",
                         S10, "placeablemaxwell:valenok")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/vasilisa")
-                .inputItems(GTItems.FIELD_GENERATOR_UXV, 4)
-                .inputItems(GTItems.EMITTER_UXV, 4)
-                .inputItems(CustomTags.UXV_CIRCUITS, 8)
-                .inputItems(S1, 16)
-                .inputItems(S2, 4)
-                .inputItems(S3, 16)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 96))
+        top.recipeBuilder("gtapexadditions:maxwell/vasilisa")
+                .circuitMeta(4)
+                .inputItems(GTItems.FIELD_GENERATOR_UXV, 64)
+                .inputItems(GTItems.EMITTER_UXV, 64)
+                .inputItems(S1, 64)
+                .inputItems(S2, 64)
+                .inputItems(S3, 64)
+                .inputItems(dust, GTMaterials.Neutronium, 1000)
+                .inputItems(dust, GTMaterials.Darmstadtium, 1000)
+                .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
+                .inputFluids(GTMaterials.Milk.getFluid(1000))
                 .outputItems(S10)
-                .duration(12000).EUt(VA[UXV])
+                .duration(friend).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S1, "gtna:magmatter_ingot", S2, "avaritia:eternal_singularity",
                         S3, "avaritia:infinity_ingot", S10, "placeablemaxwell:vasilisa")));
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("gtapexadditions:maxwell/maxwell")
+        top.recipeBuilder("gtapexadditions:maxwell/maxwell")
+                .circuitMeta(5)
                 .inputItems(S5)
                 .inputItems(S6)
                 .inputItems(S7)
                 .inputItems(S8)
-                .inputItems(GTItems.FIELD_GENERATOR_OpV, 8)
-                .inputItems(CustomTags.OpV_CIRCUITS, 16)
-                .inputItems(S1, 4)
-                .inputItems(S2, 16)
-                .inputItems(S3, 4)
-                .inputFluids(GTMaterials.Neutronium.getFluid(L * 144))
+                .inputItems(GTItems.FIELD_GENERATOR_OpV, 64)
+                .inputItems(S1, 64)
+                .inputItems(S2, 64)
+                .inputItems(S3, 64)
+                .inputItems(dust, GTMaterials.Neutronium, 1000)
+                .inputItems(dust, GTMaterials.Tritanium, 1000)
+                .inputItems(dust, GTMaterials.Naquadria, 1000)
+                .inputItems(dust, GTMaterials.Darmstadtium, 1000)
+                .inputFluids(GTMaterials.Neutronium.getFluid(50_000))
+                .inputFluids(GTMaterials.Milk.getFluid(1000))
                 .outputItems(S10)
-                .duration(20000).EUt(VA[OpV])
+                .duration(maxwell).EUt(VA[MAX])
                 .save(needing(provider, mods, Map.of(S5, "placeablemaxwell:mars", S6, "placeablemaxwell:poomba",
                         S7, "placeablemaxwell:valenok", S8, "placeablemaxwell:vasilisa", S1, "gtna:magmatter_block",
                         S2, "avaritia:eternal_singularity", S3, "avaritia:infinity_catalyst", S10, "placeablemaxwell:maxwell")));
+
+        // the patient way: fish, yarn, a warm box and half a year
+        ASSEMBLER_RECIPES.recipeBuilder("gtapexadditions:maxwell_maker")
+                .inputItems(com.gregtechceu.gtceu.common.data.GTMachines.HULL[LV].asStack())
+                .inputItems(CustomTags.LV_CIRCUITS, 2)
+                .inputItems(Items.COD, 8)
+                .inputItems(Items.WHITE_WOOL, 4)
+                .inputItems(plate, GTMaterials.Steel, 8)
+                .outputItems(com.omnicrox.gtaa.common.data.GTAAMachines.MAXWELL_MAKER.asStack())
+                .duration(400).EUt(VA[LV]).save(provider);
+        if (com.omnicrox.gtaa.config.GTAACommonConfig.MAXWELL_MAKER.get())
+            com.omnicrox.gtaa.common.data.GTAARecipeTypes.MAXWELL_MAKER.recipeBuilder("gtapexadditions:maxwell_maker/maxwell")
+                    .inputItems(Items.COD, 64)
+                    .inputItems(Items.SALMON, 64)
+                    .inputItems(Items.STRING, 64)
+                    .inputItems(Items.BLACK_WOOL, 1)
+                    .inputItems(Items.MILK_BUCKET, 1)
+                    .outputItems(S10)
+                    .duration(16_000_000 * 20).EUt(8)
+                    .save(needing(provider, "placeablemaxwell", Map.of(S10, "placeablemaxwell:maxwell")));
     }
 
     /** Mana Bloom Leaves: the Great Mana Tree's canopy in the Mana Nexus */

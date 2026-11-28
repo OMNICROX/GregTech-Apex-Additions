@@ -226,3 +226,205 @@ place(C, cells={
     'coke_oven': ['hatch', 'creosote', 'treated', 'kiln'],
     'casing': ['pipe'],
 })
+
+
+# ================================================================ more to do in the Stone Age (2026-11-28)
+def also(key, *deps):
+    """an extra requirement for a quest written further up"""
+    x = next(x for x in C.quests if x.key == 'stone/' + key)
+    x.deps += ['stone/' + d for d in deps if 'stone/' + d not in x.deps]
+
+
+# ---------------------------------------------------------------- settling in
+q('torch', 'Let There Be Light', ['minecraft:torch*16'], [
+    'Coal or charcoal on a stick. Light your base and every cave you plan to come back to: monsters only spawn in the dark.',
+], ['wood'])
+q('bed', 'A Place to Sleep', ['check'], [
+    'Three wool and three planks. Sleeping sets your spawn point and skips the night.',
+    '> Check this off once you have slept in a bed.',
+], ['wood'], kind='tip')
+q('sleeping_mat', 'Sleeping Outside', ['cyclic:sleeping_mat'], [
+    'A &eSleeping Mat&r lets you skip the night without moving your spawn point. Good for long trips to a far vein.',
+], ['bed'], kind='opt')
+q('furnace', 'Fire in a Box', ['minecraft:furnace'], [
+    'Eight cobblestone. You will smelt a lot of ore dust in these before the first machine does it for you.',
+    'A furnace smelts one item at a time, slowly. Build three or four.',
+], ['wood'])
+q('glass', 'Glass', ['minecraft:glass*8'], [
+    'Smelt sand. Glass goes into tanks, tubes and lenses for the rest of the pack, so remember where the nearest desert or beach is.',
+], ['furnace'])
+q('chest', '&eSomewhere to Put Things', ['minecraft:chest*2'], [
+    'GregTech fills chests faster than any other mod. Start with a few plain ones and label them: ores, dusts, ingots, parts, tools.',
+    'The small quests around this one are the ways to store more in less room.',
+], ['wood'], kind='main')
+q('barrel', 'Better Than Barrels', ['sophisticatedstorage:barrel'], [
+    'A &eSophisticated Storage&r barrel is a chest you can upgrade in place: copper, iron, gold, diamond, each tier bigger.',
+    'It takes the same upgrades as the backpack: stack upgrades multiply how much every slot holds.',
+], ['chest'])
+q('crate', 'Wooden Crate', ['gtceu:wood_crate'], [
+    'GregTech\'s own chest. The bronze, steel and aluminium crates that follow hold more and more in one block.',
+], ['chest'], kind='opt')
+q('copper_chest', 'Copper Chest', ['ironchest:copper_chest'], [
+    'Iron Chests start at copper. A copper chest holds more than a chest in one block.',
+], ['chest', 'copper_tin'], kind='opt')
+q('pickup', 'Pick It All Up', ['sophisticatedbackpacks:pickup_upgrade'], [
+    'A &ePickup Upgrade&r sends what you pick up straight into the backpack. Set its filter to ores and your inventory stays clean while you mine.',
+], ['backpack'], kind='opt')
+q('stack_up', 'Deeper Pockets', ['sophisticatedbackpacks:stack_upgrade_tier_1'], [
+    'A &eStack Upgrade&r multiplies how many items fit in every slot of the backpack.',
+], ['backpack'], kind='opt')
+q('carry', 'Carry It', ['check'], [
+    'With empty hands, &esneak and right-click&r a chest, a furnace or a barrel to pick it up with everything inside. Works on animals too.',
+    'Rearranging a base stops being a chore.',
+], ['chest'], kind='tip')
+q('shield', 'Hold the Line', ['minecraft:shield'], [
+    'One iron ingot and six planks. Not every monster in this pack is a vanilla one, and a shield blocks most of what they throw at you.',
+], ['night'])
+q('bow', 'From a Distance', ['minecraft:bow'], [
+    'Three sticks, three string. Some things are better dealt with from far away.',
+], ['night'], kind='opt')
+
+# ---------------------------------------------------------------- knowing things
+q('jei', 'Every Recipe, One Key', ['check'], [
+    'Hover an item and press &eR&r to see how it is made, &eU&r to see what it is used for. Click through an ingredient to see how that is made.',
+    'GregTech recipes show the machine, the power and the time. If a recipe needs a machine you do not have yet, that is the pack telling you what to build next.',
+], ['begin'], kind='tip')
+q('jei2', 'Bookmarks', ['check'], [
+    'Hover an item in the list and press &eA&r to bookmark it; bookmarks stay on the left of your inventory.',
+    'Bookmark the parts of whatever you are working towards. It is the cheapest to-do list there is.',
+], ['jei'], kind='tip')
+q('jade', 'What Am I Looking At?', ['check'], [
+    'The box at the top of the screen names the block you are looking at and the mod it comes from.',
+    'On a machine it also shows progress, stored energy and fluids, so you rarely need to open one to see if it is working.',
+], ['begin'], kind='tip')
+q('ultimine', 'Mine the Whole Vein', ['check'], [
+    'Hold the &eUltimine&r key (the key left of 1 by default) while you break a block and every connected block of the same kind breaks with it.',
+    'It costs hunger and tool durability for each block. On an ore vein or a tree it saves a lot of clicking.',
+], ['wood'], kind='tip')
+q('lootr', 'Loot Is Personal', ['check'], [
+    'Loot chests in dungeons and structures give every player their own loot. Nothing is taken from anyone by opening one first.',
+    'Structures are worth the detour: this pack adds many, and some hold things you cannot craft yet.',
+], ['map'], kind='tip')
+q('waystone', 'A Quicker Way Around', ['waystones:waystone'], [
+    'Activate a &eWaystone&r and you can travel to it from any other one. Villages often have one; you can also craft your own.',
+    'Put one at your base before you go looking for far veins.',
+], ['map'])
+q('warp', 'Warp Stone', ['waystones:warp_stone'], [
+    'A reusable stone that takes you to any waystone you have activated, from anywhere. It has a cooldown.',
+], ['waystone'], kind='opt')
+q('wand', 'Build Faster', ['constructionwand:stone_wand'], [
+    'A &eConstruction Wand&r places a whole row or face of blocks at once, taking them from your inventory. Walls and floors go up in seconds.',
+], ['wood'], kind='opt')
+
+# ---------------------------------------------------------------- flint and food
+q('flint_tools', 'Flint Tools', ['gtceu:flint_pickaxe', 'gtceu:flint_axe'], [
+    'GregTech\'s flint tools are made in the crafting grid from flint and sticks, and cost nothing but gravel.',
+    'They carry you to iron.',
+], ['flint'])
+q('flint_knife', 'A Knife for the Kitchen', ['farmersdelight:flint_knife'], [
+    'Break tall grass with a knife for &eStraw&r, and use it on a cutting board to slice food and strip wood.',
+], ['flint'])
+q('cutting', 'Cutting Board', ['farmersdelight:cutting_board'], [
+    'Put an item on the board and use a knife (or an axe, or a pickaxe, depending on the item). Meat becomes cuts, vegetables become slices, logs give bark.',
+], ['flint_knife'], kind='opt')
+q('rope', 'Rope', ['farmersdelight:rope*8'], [
+    'Straw makes rope. It hangs down from where you place it and you can climb it: a cheap way into and out of a ravine.',
+], ['flint_knife'], kind='opt')
+q('stove', 'A Proper Stove', ['farmersdelight:stove'], [
+    'A &eStove&r heats a cooking pot or a skillet without a campfire, and cooks up to six items laid on top of it.',
+], ['food'], kind='opt')
+q('compost', 'Rich Soil', ['farmersdelight:organic_compost'], [
+    '&eOrganic Compost&r slowly turns into &eRich Soil&r, faster next to mushrooms and in the dark. Crops on rich soil grow faster.',
+], ['food'], kind='opt')
+also('food', 'flint_knife')
+
+# ---------------------------------------------------------------- Tinkers' Construct
+q('crafting_station', '&eA Better Crafting Table', ['tconstruct:crafting_station'], [
+    'A &eCrafting Station&r keeps its items when you close it and shows the chest next to it. Craft one and stop using the crafting table.',
+    'It is also the first step into &eTinkers\' Construct&r: tools made of parts that you repair and improve instead of replacing.',
+], ['wood'], kind='main')
+q('part_builder', 'Part Builder', ['tconstruct:part_builder', 'tconstruct:pattern*4'], [
+    'Put a &ePattern&r and a material in the &ePart Builder&r and pick a part. Wood, stone, flint and bone work here; metals need casting.',
+], ['crafting_station'])
+q('tinker_station', '&eTinker Station', ['tconstruct:tinker_station'], [
+    'The &eTinker Station&r puts parts together into a tool and repairs it later with more of the head\'s material.',
+    'A tool\'s head decides how hard a block it can mine and how fast; the other parts add durability and traits.',
+], ['part_builder'], kind='main')
+q('tic_pick', 'Making Better Tools', ['tconstruct:pickaxe'], [
+    'A pickaxe head, a handle and a binding. A flint head is a fine start, and the tool never needs replacing: repair it at the station.',
+], ['tinker_station', 'flint'])
+q('hand_axe', 'Hand Axe', ['tconstruct:hand_axe'], [
+    'A Tinkers\' axe fells and strips. Same rules as the pickaxe: head, handle, binding.',
+], ['tinker_station'], kind='opt')
+q('grout', 'Grout', ['tconstruct:grout*8'], [
+    'Clay, sand and gravel. Smelt &eGrout&r into &eSeared Bricks&r: everything Tinkers\' builds for molten metal is made of them.',
+], ['fire'])
+q('melter', 'Seared Melter', ['tconstruct:seared_melter'], [
+    'A small tank that melts ore and metal over a heater with fuel in it. Slow, but it works long before the Smeltery does.',
+], ['grout'])
+q('casting', 'Casting', ['tconstruct:seared_table', 'tconstruct:seared_faucet'], [
+    'A &eFaucet&r on the melter pours into a &eCasting Table&r below it. Cast an ingot, or pour gold over a part to make a reusable cast of it.',
+], ['melter'])
+also('tinkers', 'casting')
+
+# ---------------------------------------------------------------- more ore
+q('indicator', 'Read the Ground', ['check'], [
+    'Small ore rocks lying on the surface mark the vein underneath them. Different rocks, different vein.',
+    'Walk before you dig: one lap around your base usually finds copper, tin, coal and iron.',
+    '> Check this off once you have found an indicator and dug down to its vein.',
+], ['veins'], kind='tip')
+q('tetra', 'Copper, the Other Way', ['gtceu:raw_tetrahedrite*16'], [
+    '&eTetrahedrite&r is the second copper ore. It smelts to copper just the same, and later gives antimony as a byproduct.',
+], ['veins'], kind='opt')
+q('magnetite', 'Magnetite and Gold', ['gtceu:raw_magnetite*16'], [
+    'Magnetite veins are iron with &egold&r mixed in. This is where your first gold comes from.',
+], ['veins'])
+q('redstone', 'Redstone', ['gtceu:raw_redstone*16'], [
+    'Redstone veins sit deep. You need a little now and a great deal from the first circuit on, so mark the vein when you find one.',
+], ['veins'])
+q('lapis', 'Lapis', ['gtceu:raw_lazurite*8'], [
+    'Lapis veins come with lazurite and sodalite. Lapis for enchanting now; the others matter much later.',
+], ['veins'], kind='opt')
+q('clay', 'Clay: The Gathering', ['minecraft:clay_ball*64'], [
+    'Rivers, swamps and lush caves. Bricks, coke oven bricks and fire clay all start here, and they add up to several stacks.',
+], ['veins'])
+also('fire', 'clay')
+
+# ---------------------------------------------------------------- working ore by hand
+q('crush', 'Hammer the Ore', ['gtceu:crushed_cassiterite_ore*8'], [
+    'A raw ore and a &eHammer&r in the crafting grid give &eCrushed Ore&r. Smelting crushed ore instead of raw ore is the first step of ore processing.',
+], ['tools', 'copper_tin'])
+q('wash', 'Wash It', ['gtceu:purified_cassiterite_ore*8'], [
+    'Throw crushed ore into a &ecauldron of water&r and it comes out &ePurified&r. Each batch uses some of the water.',
+    'Purified ore hammered into dust and smelted gives more metal than the raw ore did, long before you own a machine.',
+], ['crush'])
+q('dust', '&eGrind It', ['gtceu:copper_dust*6', 'gtceu:tin_dust*2'], [
+    'The &eMortar&r turns an ingot into dust; the hammer turns purified ore into dust. Dust is how GregTech mixes metals.',
+], ['mortar', 'copper_tin'], kind='main')
+q('bronze_dust', 'Bronze by Hand', ['gtceu:bronze_dust*4'], [
+    'Three copper dust and one tin dust in the crafting grid make &eBronze Dust&r. Smelt it for bronze.',
+    'Hand mixing loses a little. A mixer later does it without loss.',
+], ['dust'])
+also('bronze', 'bronze_dust')
+q('bucket', 'Something to Carry Liquids', ['minecraft:bucket'], [
+    'Iron plates and a hammer: buckets are made of plates here.',
+], ['plates'])
+q('shears', 'Shears', ['minecraft:shears'], [
+    'Also plates and a hammer. Wool for beds, leaves for decoration.',
+], ['plates'], kind='opt')
+q('armor', 'Iron Armour', ['minecraft:iron_chestplate'], [
+    'Armour is made of plates too. A full iron set is worth the iron before you go deep.',
+], ['plates'], kind='opt')
+
+# ---------------------------------------------------------------- fuel and water
+q('charcoal', 'Charcoal Pile', ['gtceu:charcoal_pile_igniter', 'minecraft:charcoal*32'], [
+    'The &eCharcoal Pile Igniter&r burns a buried pile of logs into charcoal, a lot at a time. Its tooltip and the multiblock preview show the pit.',
+    'No coal vein nearby? This is the answer.',
+], ['fire'])
+q('wood_tank', 'A Tank Made of Wood', ['gtceu:wooden_multiblock_tank'], [
+    'A 3x3x3 of &eWood Walls&r with the controller on one face holds a lot of water or creosote for very little.',
+    'Add a &eWooden Tank Valve&r to pipe fluid in and out.',
+], ['plates'])
+q('sapling', 'Rubber Trees', ['gtceu:rubber_sapling*4'], [
+    'Rubber trees drop saplings. Plant a row near your base: resin is needed in every tier.',
+], ['resin'], kind='opt')
