@@ -26,6 +26,11 @@ const APEX_DUR = {
   EU_EXP: 1.0,               // power curve (1.0 = same total energy, 0.5 = gentler, 0 = no power change)
   MAX_AMP_MULT: 64,          // safety cap on the amp multiplier
   SKIP_TYPES: [              // recipe type ids to leave alone, e.g. 'gtceu:fusion_reactor'
+    'gtapexadditions:maxwell_maker', // 16,000,000 s is the joke: do not shorten it
+    'gtapexadditions:miracle_top'    // Maxwell, his friends and their step items keep their absurd times
+  ],
+  SKIP_ID_PARTS: [           // recipes whose id contains one of these are left alone
+    '/maxwell/'
   ],
   LOG_EACH: false            // true = log every changed recipe
 }
@@ -48,6 +53,8 @@ ServerEvents.recipes(event => {
     let type = ''
     try { type = String(r.json.get('type').getAsString()) } catch (e) { type = '' }
     if (APEX_DUR.SKIP_TYPES.indexOf(type) >= 0) return
+    let rid = String(r.getId())
+    if (APEX_DUR.SKIP_ID_PARTS.some(p => rid.indexOf(p) >= 0)) return
     if (euEntries(json, 'tickOutputs') || euEntries(json, 'outputs')) return // generator: skip
 
     let old
