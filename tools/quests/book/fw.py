@@ -71,7 +71,7 @@ GUIDE_LINKS = []   # (page, quest id, quest title, chapter title) for the guide'
 
 def guide_line(page, text='Read more in the Apex Guide'):
     return json.dumps({'text': '\u2139 ' + text, 'color': 'gold', 'underlined': True,
-                       'clickEvent': {'action': 'run_command', 'value': f'/apexguidec {GUIDE_ID} open {GUIDE_NS}:{page}'},
+                       'clickEvent': {'action': 'run_command', 'value': f'/apexpage {page}'},
                        'hoverEvent': {'action': 'show_text', 'contents': 'Opens the Apex Guide'}})
 
 
