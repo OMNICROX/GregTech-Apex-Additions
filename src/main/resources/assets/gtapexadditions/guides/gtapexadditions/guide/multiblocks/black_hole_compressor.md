@@ -33,4 +33,6 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="0585EEE56FD42B0E">Black Hole Collapser</QuestLink> (Tier 8 - UV)
 * <QuestLink id="12F97A3E49D8DB06">Black Hole Compressor</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="200F028C50BC4306">Black Hole Seed</QuestLink> (Tier 9 - UHV)

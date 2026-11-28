@@ -41,4 +41,5 @@ Apex also shortens very long endgame recipes with the [recipe time curve](../dur
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="0F3CF751A5DCFCD1">Faster, Not Just Bigger</QuestLink> (Tier 2 - MV)
 * <QuestLink id="503B56BFD3E03728">An MV Workshop</QuestLink> (Tier 2 - MV)

@@ -19,6 +19,9 @@ navigation:
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="0B2EF0805FD11B72">Infinity Catalyst</QuestLink> (Tier 8 - UV)
+* <QuestLink id="1AE6C881BF679E88">Crystal Matrix</QuestLink> (Tier 8 - UV)
+* <QuestLink id="47A5BD8920D4D70C">Eternal Singularity</QuestLink> (Tier 8 - UV)
 * <QuestLink id="4AA5315E5ED12561">Extreme Crafting Table</QuestLink> (Tier 8 - UV)
 * <QuestLink id="6B0D0878EB8A38AB">Infinity</QuestLink> (Tier 8 - UV)
 * <QuestLink id="7EAF3E9A60672344">Neutronium Compressor</QuestLink> (Tier 8 - UV)

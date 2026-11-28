@@ -69,3 +69,17 @@ The owner found InsaneAE's storage cells too strong (up to millions of types per
 so a cell is like GTNH's singularity cell: one item or fluid, a huge amount. Storing many types at that scale is the
 Singularity Data Hub's job. InsaneAE is not in the dev environment: the mixin is `@Pseudo` with `require = 0` and has
 only been checked against the decompiled jar (1.1.3), not in a running game.
+
+## Quest book: a page per tier and per mod (2026-11-28)
+Tier pages now run to the top: `ch_uev`, `ch_uiv`, `ch_uxv`, `ch_opv`, `ch_max`, then `ch_endgame` (Endgame Goals:
+Maxwell, the Stargates). They follow the recipe chain found in the game's recipe dump, not the tier a controller is
+crafted at: e.g. antimatter is a UIV line (protomatter needs DT residue and transcendent metal), the Transcendent Plasma
+Mixer is a UXV machine (creon for UXV components only comes out of it), SpaceTime is a failed Eye of Harmony cycle.
+Mod pages are carved out of the broad chapters in `ch_pages.py` (`carve.py` moves the quests and renames requirements):
+Botania (key `magic`, so its file replaces the old Magic chapter), Blood Magic, Mystical Agriculture, Aether, Twilight
+Forest, Undergarden, Space Race, Ice and Fire, mob farming, Infinity Stones. New quests for a mod go in its block there.
+Still to write (owner wants GTNH's breadth): pages for Draconic Evolution, Avaritia, Tinkers' Construct, Powah, Cyclic,
+Vampirism/Werewolves, Stargate Journey, storage, food, travel, power generation, multiblock goals (about 160 multiblocks
+in `apex_multis_named.txt` still have no quest; GTCA's have no recipes loaded and are left out on purpose).
+The pack's `apex_gt_duration_curve.js` shortens every GT recipe over 10 minutes; the Maxwell recipes are exempt
+(`SKIP_TYPES`, `SKIP_ID_PARTS`), otherwise the 16,000,000 s Maxwell Maker ran in 86 minutes.

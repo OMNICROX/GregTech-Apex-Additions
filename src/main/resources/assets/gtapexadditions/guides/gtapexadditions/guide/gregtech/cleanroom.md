@@ -58,4 +58,5 @@ cleanroom recipes a **Cleaning Maintenance Hatch** (a small built-in cleanroom),
 These quests cover this page. Click one to open it in the quest book.
 
 * <QuestLink id="0C5D349ECFADB3AD">Stem Cells</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="4A9F2DEF4B0DC611">Cleaning Maintenance Hatch</QuestLink> (Tier 3 - HV)
 * <QuestLink id="65DFA1E47A5DE093">Cleanroom</QuestLink> (Tier 3 - HV)

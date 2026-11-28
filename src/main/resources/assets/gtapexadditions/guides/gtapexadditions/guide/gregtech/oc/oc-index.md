@@ -27,3 +27,11 @@ The recipe's own amperage still has to fit, and the multi's controller shows the
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="09D3570B423FFDBC">UIV Energy Hatch</QuestLink> (Tier 11 - UIV)
+* <QuestLink id="43A1992C07DEC6FD">UEV Energy Hatch</QuestLink> (Tier 10 - UEV)
+* <QuestLink id="61671FDB6D55D561">UV 4A Energy Hatch</QuestLink> (Tier 8 - UV)

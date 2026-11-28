@@ -28,3 +28,9 @@ list every block you need; the sliders under it pick a tier or show one layer at
 ## Controller recipe
 
 <GTRecipesFor id="gtapexadditions:naquadah_fuel_refinery" limit="1" fallbackText="See JEI for the controller recipe." />
+
+## Quests
+
+These quests cover this page. Click one to open it in the quest book.
+
+* <QuestLink id="38E8D546E9902CE9">Field Restriction Coil</QuestLink> (Tier 8 - UV)

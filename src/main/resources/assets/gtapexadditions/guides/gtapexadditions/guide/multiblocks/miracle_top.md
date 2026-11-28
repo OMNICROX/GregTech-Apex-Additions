@@ -33,4 +33,5 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="0A9663DF92B2EC1B">Endgame Goals</QuestLink> (Endgame Goals)
 * <QuestLink id="3DE72B2335627D72">Miracle Top</QuestLink> (Tier 9 - UHV)

@@ -17,6 +17,6 @@ navigation:
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="0AB10A163C1C25FF">Uranium and Thorium</QuestLink> (Worlds and Space)
+* <QuestLink id="2110DA9F402BCD74">Rare Earths</QuestLink> (The Undergarden)
 * <QuestLink id="6FB549F9CF880BAB">Neodymium</QuestLink> (Tier 4 - EV)
-* <QuestLink id="73236DC56F460FA0">Rare Earths</QuestLink> (Worlds and Space)
+* <QuestLink id="7773835BAA30078B">Uranium and Thorium</QuestLink> (The Undergarden)

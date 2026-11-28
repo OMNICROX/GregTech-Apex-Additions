@@ -28,5 +28,6 @@ the IV [Alfheim Teleportation Array](../multiblocks/alfheim_teleportation_array.
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="382016385A4AB888">Botania</QuestLink> (Magic)
+* <QuestLink id="2EE731208A6F9783">Flower Power</QuestLink> (Flower Power)
+* <QuestLink id="382016385A4AB888">Botania</QuestLink> (Flower Power)
 * <QuestLink id="5DE478503A65F256">Gaia Pylons</QuestLink> (Tier 3 - HV)

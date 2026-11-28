@@ -33,5 +33,5 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="430F30070F4F41DC">Bloody Hell</QuestLink> (Magic)
+* <QuestLink id="3D26F8F9C3447521">Bloody Hell</QuestLink> (Paying the Highest Price)
 * <QuestLink id="56C10EAAE068C6D7">Bloody Hell</QuestLink> (Tier 5 - IV)

@@ -33,4 +33,4 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="36D14EB296DBA493">Extreme Entity Crusher</QuestLink> (AE2 and Automation)
+* <QuestLink id="019484B8547C1E4A">Extreme Entity Crusher</QuestLink> (Kill All the Things)

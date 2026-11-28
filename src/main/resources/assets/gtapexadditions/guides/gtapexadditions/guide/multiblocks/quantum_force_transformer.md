@@ -33,4 +33,8 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="04783DD3CA5C7092">Infinity Infused Manipulator</QuestLink> (Tier 11 - UIV)
+* <QuestLink id="34880A6A2BC1FC95">Cosmic Fabric Manipulator</QuestLink> (Tier 10 - UEV)
+* <QuestLink id="4C74B65EF71F8365">Catalysts</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="4DF897746D26126B">SpaceTime Continuum Ripper</QuestLink> (Tier 12 - UXV)
 * <QuestLink id="54344366EFEABF73">Quantum Force Transformer</QuestLink> (Tier 9 - UHV)

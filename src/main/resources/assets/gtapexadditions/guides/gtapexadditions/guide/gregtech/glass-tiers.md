@@ -47,5 +47,8 @@ These quests cover this page. Click one to open it in the quest book.
 * <QuestLink id="13274D8B0F871BFF">Titanium Glass</QuestLink> (Tier 4 - EV)
 * <QuestLink id="2B53170302E75951">Osmium Glass</QuestLink> (Tier 8 - UV)
 * <QuestLink id="2D2CBD1DD32375D3">Iridium Glass</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="5800D20329CD8D40">Infinity Glass</QuestLink> (Tier 9 - UHV)
 * <QuestLink id="5B6B4677EF343328">Rhodium-Plated Palladium Glass</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="659319F590308838">Hexanite and Universium Glass</QuestLink> (Tier 13 - OpV)
+* <QuestLink id="71131891B960C89D">Transcendent Glass</QuestLink> (Tier 11 - UIV)
 * <QuestLink id="72C1359FFC3BF38F">Neutronium Glass</QuestLink> (Tier 9 - UHV)

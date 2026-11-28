@@ -33,5 +33,5 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="23DE5D4A1A4CA8CD">Mystical Cultivation Array</QuestLink> (Magic)
+* <QuestLink id="1388D269070E7307">Mystical Cultivation Array</QuestLink> (The Green Revolution)
 * <QuestLink id="68DF90F37FAAC2F1">Mystical Cultivation Array</QuestLink> (Tier 1 - LV)

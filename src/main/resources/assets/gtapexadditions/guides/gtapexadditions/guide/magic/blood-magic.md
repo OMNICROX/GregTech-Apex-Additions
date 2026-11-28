@@ -46,6 +46,7 @@ from a pool of Life Essence.
 These quests cover this page. Click one to open it in the quest book.
 
 * <QuestLink id="01DE3F1A0F9590C9">Magician Blood Orb</QuestLink> (Tier 3 - HV)
-* <QuestLink id="0D991DD64789605C">Blood Magic</QuestLink> (Magic)
+* <QuestLink id="3EC791ECD8274156">Paying the Highest Price</QuestLink> (Paying the Highest Price)
 * <QuestLink id="5C86830303D7C528">Archmage Blood Orb</QuestLink> (Tier 5 - IV)
+* <QuestLink id="5F55570D7A865CFC">Blood Magic</QuestLink> (Paying the Highest Price)
 * <QuestLink id="5FDAEB5FD95004C9">Master Blood Orb</QuestLink> (Tier 4 - EV)

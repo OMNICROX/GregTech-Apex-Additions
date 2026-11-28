@@ -39,5 +39,6 @@ These are the richest aluminium source in the game, so the Aether is an **MV** d
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="0FCA4B1F3185D9BB">The Aether</QuestLink> (Worlds and Space)
+* <QuestLink id="4ADD0732EF4D1138">The Aether</QuestLink> (The Aether)
 * <QuestLink id="4B66DFC1E552EC38">Where Aluminium Comes From</QuestLink> (Tier 1 - LV)
+* <QuestLink id="4F472241BEC99173">The Aether</QuestLink> (The Aether)

@@ -33,4 +33,12 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="02997F79AF293504">Grade 4 Purified Water</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="1CA71D0F416A4A64">Grade 6 Purified Water</QuestLink> (Tier 8 - UV)
+* <QuestLink id="24AF7285EBDFF7C6">Grade 1 Purified Water</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="265B817DF7D23C4A">Grade 2 Purified Water</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="26898F725011800D">Grade 8 Purified Water</QuestLink> (Tier 10 - UEV)
+* <QuestLink id="28CCFAB026BDDBC2">Grade 7 Purified Water</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="520601BEE8CB6C22">Grade 3 Purified Water</QuestLink> (Tier 7 - ZPM)
+* <QuestLink id="60241284C189AB35">Grade 5 Purified Water</QuestLink> (Tier 8 - UV)
 * <QuestLink id="74889725FE75A85B">Water Purification Plant</QuestLink> (Tier 6 - LuV)

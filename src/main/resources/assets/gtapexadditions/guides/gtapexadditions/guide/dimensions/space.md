@@ -30,17 +30,17 @@ Ad Astra's rockets, launch pad, NASA workbench and machines are made in GregTech
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="0C801A5F15BDA343">Mars</QuestLink> (Worlds and Space)
+* <QuestLink id="0EB2291150E55225">Space Suit</QuestLink> (Space Race)
 * <QuestLink id="1A61D17A77D22E5F">The Moon</QuestLink> (Tier 3 - HV)
+* <QuestLink id="1E147FB683EB9258">The Moon</QuestLink> (Space Race)
 * <QuestLink id="1E8336F7D8669A15">Glacio</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="225775CB8F730A72">The Outer Planets</QuestLink> (Space Race)
 * <QuestLink id="343ACDA81D0C01E0">Jupiter</QuestLink> (Tier 7 - ZPM)
-* <QuestLink id="3EA19D924FA5C822">Venus and Mercury</QuestLink> (Worlds and Space)
 * <QuestLink id="3F3AC6EB23B10E68">Mars</QuestLink> (Tier 4 - EV)
+* <QuestLink id="4867E10F7A6233EA">Glacio</QuestLink> (Space Race)
 * <QuestLink id="48BCD3B395F5F5E1">Venus and Mercury</QuestLink> (Tier 5 - IV)
-* <QuestLink id="4956C90661F3663F">The Moon</QuestLink> (Worlds and Space)
 * <QuestLink id="4EFC842243C7EAD9">Jet Suit</QuestLink> (Heroes)
-* <QuestLink id="51C99A0311F08FA5">Glacio</QuestLink> (Worlds and Space)
-* <QuestLink id="6D32C7D1D4172DF3">Space Suit</QuestLink> (Worlds and Space)
+* <QuestLink id="5824497717CC1294">Venus and Mercury</QuestLink> (Space Race)
+* <QuestLink id="619ECC7031701EB1">Mars</QuestLink> (Space Race)
 * <QuestLink id="76163813AD8A6FCF">Saturn</QuestLink> (Tier 8 - UV)
 * <QuestLink id="7B2354790BE191BA">Uranus and Neptune</QuestLink> (Tier 9 - UHV)
-* <QuestLink id="7D3F36CCA52FF09F">The Outer Planets</QuestLink> (Worlds and Space)

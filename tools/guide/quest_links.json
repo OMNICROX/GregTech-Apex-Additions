@@ -49,27 +49,33 @@
 ],
 [
 "automation/hostile-neural-networks.md",
-"152C410C4F1076D7",
+"2E406919BDB43999",
 "Hostile Neural Networks",
-"AE2 and Automation"
+"Kill All the Things"
 ],
 [
 "automation/hostile-neural-networks.md",
-"5D04C5DDE505BEC5",
+"65469A19D67171D4",
 "Simulation Chamber",
-"AE2 and Automation"
+"Kill All the Things"
 ],
 [
 "dimensions/aether.md",
-"0FCA4B1F3185D9BB",
+"4ADD0732EF4D1138",
 "The Aether",
-"Worlds and Space"
+"The Aether"
 ],
 [
 "dimensions/aether.md",
 "4B66DFC1E552EC38",
 "Where Aluminium Comes From",
 "Tier 1 - LV"
+],
+[
+"dimensions/aether.md",
+"4F472241BEC99173",
+"The Aether",
+"The Aether"
 ],
 [
 "dimensions/dimensions-index.md",
@@ -91,15 +97,15 @@
 ],
 [
 "dimensions/personal-space.md",
-"0B753B575C42D033",
+"108B065FA118DAD2",
 "A World of Your Own",
-"Worlds and Space"
+"Space Race"
 ],
 [
 "dimensions/space.md",
-"0C801A5F15BDA343",
-"Mars",
-"Worlds and Space"
+"0EB2291150E55225",
+"Space Suit",
+"Space Race"
 ],
 [
 "dimensions/space.md",
@@ -109,9 +115,21 @@
 ],
 [
 "dimensions/space.md",
+"1E147FB683EB9258",
+"The Moon",
+"Space Race"
+],
+[
+"dimensions/space.md",
 "1E8336F7D8669A15",
 "Glacio",
 "Tier 6 - LuV"
+],
+[
+"dimensions/space.md",
+"225775CB8F730A72",
+"The Outer Planets",
+"Space Race"
 ],
 [
 "dimensions/space.md",
@@ -121,15 +139,15 @@
 ],
 [
 "dimensions/space.md",
-"3EA19D924FA5C822",
-"Venus and Mercury",
-"Worlds and Space"
-],
-[
-"dimensions/space.md",
 "3F3AC6EB23B10E68",
 "Mars",
 "Tier 4 - EV"
+],
+[
+"dimensions/space.md",
+"4867E10F7A6233EA",
+"Glacio",
+"Space Race"
 ],
 [
 "dimensions/space.md",
@@ -139,27 +157,21 @@
 ],
 [
 "dimensions/space.md",
-"4956C90661F3663F",
-"The Moon",
-"Worlds and Space"
-],
-[
-"dimensions/space.md",
 "4EFC842243C7EAD9",
 "Jet Suit",
 "Heroes"
 ],
 [
 "dimensions/space.md",
-"51C99A0311F08FA5",
-"Glacio",
-"Worlds and Space"
+"5824497717CC1294",
+"Venus and Mercury",
+"Space Race"
 ],
 [
 "dimensions/space.md",
-"6D32C7D1D4172DF3",
-"Space Suit",
-"Worlds and Space"
+"619ECC7031701EB1",
+"Mars",
+"Space Race"
 ],
 [
 "dimensions/space.md",
@@ -172,12 +184,6 @@
 "7B2354790BE191BA",
 "Uranus and Neptune",
 "Tier 9 - UHV"
-],
-[
-"dimensions/space.md",
-"7D3F36CCA52FF09F",
-"The Outer Planets",
-"Worlds and Space"
 ],
 [
 "dimensions/the-end.md",
@@ -193,9 +199,9 @@
 ],
 [
 "dimensions/twilight-forest.md",
-"45E9D14FB054809A",
+"42B07586E82E94FC",
 "The Twilight Forest",
-"Worlds and Space"
+"The Twilight Forest"
 ],
 [
 "dimensions/twilight-forest.md",
@@ -205,15 +211,15 @@
 ],
 [
 "dimensions/undergarden.md",
-"14868AD80601CD4C",
-"The Undergarden",
-"Worlds and Space"
-],
-[
-"dimensions/undergarden.md",
 "29D2DEB65CC25660",
 "The Undergarden",
 "Tier 4 - EV"
+],
+[
+"dimensions/undergarden.md",
+"73C77A437C8B79F9",
+"The Undergarden",
+"The Undergarden"
 ],
 [
 "getting-started/first-days.md",
@@ -649,12 +655,6 @@
 ],
 [
 "gregtech/ore-processing.md",
-"3E685C5FD6409D41",
-"Aether Bauxite",
-"Worlds and Space"
-],
-[
-"gregtech/ore-processing.md",
 "5B9E1F5CF58BE9A9",
 "Byproducts Matter",
 "Tier 0.5 - Steam Age"
@@ -664,6 +664,12 @@
 "5CEE957BC41498DB",
 "Ore Washer",
 "Tier 1 - LV"
+],
+[
+"gregtech/ore-processing.md",
+"609CAAA7587AC5E1",
+"Aether Bauxite",
+"The Aether"
 ],
 [
 "gregtech/ore-processing.md",
@@ -1225,9 +1231,9 @@
 ],
 [
 "lines/rare-earths.md",
-"0AB10A163C1C25FF",
-"Uranium and Thorium",
-"Worlds and Space"
+"2110DA9F402BCD74",
+"Rare Earths",
+"The Undergarden"
 ],
 [
 "lines/rare-earths.md",
@@ -1237,9 +1243,9 @@
 ],
 [
 "lines/rare-earths.md",
-"73236DC56F460FA0",
-"Rare Earths",
-"Worlds and Space"
+"7773835BAA30078B",
+"Uranium and Thorium",
+"The Undergarden"
 ],
 [
 "lines/rubber-and-plastics.md",
@@ -1309,9 +1315,9 @@
 ],
 [
 "magic/blood-magic.md",
-"0D991DD64789605C",
-"Blood Magic",
-"Magic"
+"3EC791ECD8274156",
+"Paying the Highest Price",
+"Paying the Highest Price"
 ],
 [
 "magic/blood-magic.md",
@@ -1321,15 +1327,27 @@
 ],
 [
 "magic/blood-magic.md",
+"5F55570D7A865CFC",
+"Blood Magic",
+"Paying the Highest Price"
+],
+[
+"magic/blood-magic.md",
 "5FDAEB5FD95004C9",
 "Master Blood Orb",
 "Tier 4 - EV"
 ],
 [
 "magic/botania.md",
+"2EE731208A6F9783",
+"Flower Power",
+"Flower Power"
+],
+[
+"magic/botania.md",
 "382016385A4AB888",
 "Botania",
-"Magic"
+"Flower Power"
 ],
 [
 "magic/botania.md",
@@ -1338,22 +1356,22 @@
 "Tier 3 - HV"
 ],
 [
-"magic/magic-index.md",
-"2EE731208A6F9783",
-"Magic Follows the Tiers",
-"Magic"
+"magic/mystical-agriculture.md",
+"20F320BFE0D528FC",
+"The Green Revolution",
+"The Green Revolution"
 ],
 [
 "magic/mystical-agriculture.md",
-"058C573D8068FC3E",
+"61A8790D15706EBE",
 "Mystical Agriculture",
-"Magic"
+"The Green Revolution"
 ],
 [
 "magic/mystical-agriculture.md",
-"0D9431AA007A347D",
+"6EF037A57A700747",
 "Seed Synthesizer",
-"Magic"
+"The Green Revolution"
 ],
 [
 "multiblocks/alfheim_teleportation_array.md",
@@ -1365,7 +1383,7 @@
 "multiblocks/alfheim_teleportation_array.md",
 "72EA9D6F7117DED4",
 "Alfheim Teleportation Array",
-"Magic"
+"Flower Power"
 ],
 [
 "multiblocks/antimatter_generator.md",
@@ -1393,9 +1411,9 @@
 ],
 [
 "multiblocks/bloody_hell.md",
-"430F30070F4F41DC",
+"3D26F8F9C3447521",
 "Bloody Hell",
-"Magic"
+"Paying the Highest Price"
 ],
 [
 "multiblocks/bloody_hell.md",
@@ -1465,9 +1483,9 @@
 ],
 [
 "multiblocks/extreme_entity_crusher.md",
-"36D14EB296DBA493",
+"019484B8547C1E4A",
 "Extreme Entity Crusher",
-"AE2 and Automation"
+"Kill All the Things"
 ],
 [
 "multiblocks/fuel_refining_complex.md",
@@ -1507,9 +1525,9 @@
 ],
 [
 "multiblocks/library_of_ruina.md",
-"33704C21DACAB3FD",
+"15B0A5BF4449707A",
 "Library of Ruina",
-"Worlds and Space"
+"The Twilight Forest"
 ],
 [
 "multiblocks/lightning_spire.md",
@@ -1555,9 +1573,9 @@
 ],
 [
 "multiblocks/mystical_cultivation_array.md",
-"23DE5D4A1A4CA8CD",
+"1388D269070E7307",
 "Mystical Cultivation Array",
-"Magic"
+"The Green Revolution"
 ],
 [
 "multiblocks/mystical_cultivation_array.md",

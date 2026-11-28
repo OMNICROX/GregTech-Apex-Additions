@@ -21,9 +21,14 @@ navigation:
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="017D91A15521E3D9">Compact Fusion Computer MK-II</QuestLink> (Tier 7 - ZPM)
 * <QuestLink id="044343F05C24DBD2">Fusion Reactor MK II</QuestLink> (Tier 7 - ZPM)
-* <QuestLink id="09A84EE083C6F8CE">Fusion Reactor MK V</QuestLink> (The Endgame)
+* <QuestLink id="047F5DA7BDFD21CC">Compact Fusion Computer MK-III</QuestLink> (Tier 8 - UV)
+* <QuestLink id="09A745F5E168A230">Compact Fusion Computer MK-IV</QuestLink> (Tier 9 - UHV)
 * <QuestLink id="237E890482CC80F9">Fusion Reactor MK IV</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="5E1174DD38EB231E">Fusion Reactor MK V</QuestLink> (Tier 10 - UEV)
+* <QuestLink id="600F9450BB7AA6FE">Advanced Fusion Reactor</QuestLink> (Tier 6 - LuV)
 * <QuestLink id="6E0398DFD3102574">Fusion Reactor MK III</QuestLink> (Tier 8 - UV)
 * <QuestLink id="6FB228B99E29D490">Fusion Reactor MK I</QuestLink> (Tier 6 - LuV)
+* <QuestLink id="71178A70B20507AD">Compact Fusion Computer MK-V</QuestLink> (Tier 10 - UEV)
 * <QuestLink id="77F86F742034004D">Compact Fusion Computer</QuestLink> (Tier 6 - LuV)

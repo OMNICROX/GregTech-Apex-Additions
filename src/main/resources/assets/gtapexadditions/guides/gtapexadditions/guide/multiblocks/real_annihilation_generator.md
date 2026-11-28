@@ -33,4 +33,4 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="6740CF71306DCF25">Real Annihilation Generator</QuestLink> (The Endgame)
+* <QuestLink id="31B3429625E8CFC8">Real Annihilation Generator</QuestLink> (Tier 12 - UXV)

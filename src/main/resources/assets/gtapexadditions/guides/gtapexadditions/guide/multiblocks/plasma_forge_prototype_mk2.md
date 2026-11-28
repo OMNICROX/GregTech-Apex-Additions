@@ -33,4 +33,4 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="1A54F2B308018132">DTPF Prototype MK-II</QuestLink> (The Endgame)
+* <QuestLink id="0439F9201D209211">DTPF Prototype MK-II</QuestLink> (Tier 10 - UEV)

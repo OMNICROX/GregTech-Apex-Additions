@@ -33,5 +33,6 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
+* <QuestLink id="108642CA9F41E1A0">One Type per Cell</QuestLink> (Tier 9 - UHV)
 * <QuestLink id="59841907ECC75747">Singularity Data Hub</QuestLink> (AE2 and Automation)
 * <QuestLink id="737D7C701B1ECF89">Singularity Data Hub</QuestLink> (Tier 9 - UHV)

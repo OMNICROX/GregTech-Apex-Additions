@@ -34,3 +34,4 @@ list every block you need; the sliders under it pick a tier or show one layer at
 These quests cover this page. Click one to open it in the quest book.
 
 * <QuestLink id="03EECD4278ED6707">Nanochip Assembly Complex</QuestLink> (Tier 8 - UV)
+* <QuestLink id="671ADED46280F76C">Nanochip Modules</QuestLink> (Tier 8 - UV)

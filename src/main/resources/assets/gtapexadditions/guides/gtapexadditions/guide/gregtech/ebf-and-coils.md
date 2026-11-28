@@ -85,6 +85,7 @@ These quests cover this page. Click one to open it in the quest book.
 * <QuestLink id="074C2D87D3528D5C">Trinium Coils</QuestLink> (Tier 7 - ZPM)
 * <QuestLink id="0F297ECA9F2BA990">Nichrome Coils</QuestLink> (Tier 4 - EV)
 * <QuestLink id="156EC5914C56EBE7">Stainless Steel</QuestLink> (Tier 2 - MV)
+* <QuestLink id="24B8C3ED03DB89B9">Coils and Heat</QuestLink> (Tier 3 - HV)
 * <QuestLink id="420224800D523C8A">HSS-G Coils</QuestLink> (Tier 5 - IV)
 * <QuestLink id="53CA5ADEF4FFDC2D">Cupronickel Coils</QuestLink> (Tier 1 - LV)
 * <QuestLink id="75C8E59308A65961">Naquadah Coils</QuestLink> (Tier 6 - LuV)

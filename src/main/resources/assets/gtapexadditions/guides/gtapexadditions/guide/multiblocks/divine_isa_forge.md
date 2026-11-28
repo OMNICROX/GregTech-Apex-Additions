@@ -33,4 +33,4 @@ list every block you need; the sliders under it pick a tier or show one layer at
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="3F76ADA4B5B86DAD">Divine Isa Forge</QuestLink> (The Endgame)
+* <QuestLink id="4FE69376CBFD9BF2">Divine Isa Forge</QuestLink> (Tier 12 - UXV)

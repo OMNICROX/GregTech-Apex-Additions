@@ -18,5 +18,5 @@ navigation:
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="152C410C4F1076D7">Hostile Neural Networks</QuestLink> (AE2 and Automation)
-* <QuestLink id="5D04C5DDE505BEC5">Simulation Chamber</QuestLink> (AE2 and Automation)
+* <QuestLink id="2E406919BDB43999">Hostile Neural Networks</QuestLink> (Kill All the Things)
+* <QuestLink id="65469A19D67171D4">Simulation Chamber</QuestLink> (Kill All the Things)

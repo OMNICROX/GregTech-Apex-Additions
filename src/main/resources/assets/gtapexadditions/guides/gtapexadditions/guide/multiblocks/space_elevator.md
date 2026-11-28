@@ -34,7 +34,13 @@ list every block you need; the sliders under it pick a tier or show one layer at
 These quests cover this page. Click one to open it in the quest book.
 
 * <QuestLink id="0F10170FF2A436FD">Space Mining Module</QuestLink> (Tier 8 - UV)
+* <QuestLink id="3B0E297F7184F49C">Space Elevator Motor MK-II</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="40531365C60AE994">Space Elevator Motor MK-V</QuestLink> (Tier 12 - UXV)
+* <QuestLink id="439E6492F409C138">Space Elevator Motor MK-I</QuestLink> (Tier 8 - UV)
 * <QuestLink id="450D96AB634E7D8F">Space Elevator</QuestLink> (Tier 9 - UHV)
 * <QuestLink id="4976FBBD58869C49">Space Mining Module</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="5EB8113C323CFBD5">UIV Emitter and Sensor</QuestLink> (Tier 11 - UIV)
 * <QuestLink id="603DB9863686AE53">Space Pumping Module</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="680E31FFA2E82044">Space Elevator Motor MK-IV</QuestLink> (Tier 11 - UIV)
 * <QuestLink id="69625471E6F4B8E6">Space Assembler Module</QuestLink> (Tier 9 - UHV)
+* <QuestLink id="73F36F5D9B344821">Space Elevator Motor MK-III</QuestLink> (Tier 10 - UEV)

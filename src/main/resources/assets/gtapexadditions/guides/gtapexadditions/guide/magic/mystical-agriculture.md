@@ -17,5 +17,6 @@ navigation:
 
 These quests cover this page. Click one to open it in the quest book.
 
-* <QuestLink id="058C573D8068FC3E">Mystical Agriculture</QuestLink> (Magic)
-* <QuestLink id="0D9431AA007A347D">Seed Synthesizer</QuestLink> (Magic)
+* <QuestLink id="20F320BFE0D528FC">The Green Revolution</QuestLink> (The Green Revolution)
+* <QuestLink id="61A8790D15706EBE">Mystical Agriculture</QuestLink> (The Green Revolution)
+* <QuestLink id="6EF037A57A700747">Seed Synthesizer</QuestLink> (The Green Revolution)

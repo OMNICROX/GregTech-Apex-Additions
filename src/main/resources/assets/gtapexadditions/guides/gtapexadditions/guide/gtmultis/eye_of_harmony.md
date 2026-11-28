@@ -31,9 +31,3 @@ items and fluids out of it.
 
 
 <Color id="gray">Adapted from the GuideNH DefaultGuide (GT New Horizons) for Apex Ascension.</Color>
-
-## Quests
-
-These quests cover this page. Click one to open it in the quest book.
-
-* <QuestLink id="231582344DCCC75C">Eye of Harmony</QuestLink> (The Endgame)
